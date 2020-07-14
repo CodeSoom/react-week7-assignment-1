@@ -7,15 +7,15 @@ import {
   setRegions,
   setCategories,
   loadRestaurants,
-  loadRestaurant,
   setRestaurants,
+  getRestaurantById,
   setRestaurant,
 } from './actions';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-jest.mock('./services/api');
+jest.mock('../services/api');
 
 describe('actions', () => {
   let store;
@@ -86,18 +86,35 @@ describe('actions', () => {
     });
   });
 
-  describe('loadRestaurant', () => {
+  describe('getRestaurantById', () => {
     beforeEach(() => {
-      store = mockStore({});
+      store = mockStore({
+        restaurant: null,
+      });
     });
 
-    it('dispatchs setRestaurant', async () => {
-      await store.dispatch(loadRestaurant({restaurantId: 1}));
+    context('with restaurantId', () => {
+      const restaurantId = 1;
 
-      const actions = store.getActions();
+      it('runs setRestaurant', async () => {
+        await store.dispatch(getRestaurantById(restaurantId));
 
-      expect(actions[0]).toEqual(setRestaurant(null));
-      expect(actions[1]).toEqual(setRestaurant({}));
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setRestaurant({}));
+      });
+    });
+
+    context('with null', () => {
+      const restaurantId = null;
+
+      it('does\'nt run any actions', async () => {
+        await store.dispatch(getRestaurantById(restaurantId));
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
     });
   });
 });

@@ -1,4 +1,4 @@
-import { equal } from './utils';
+import { equal } from '../utils';
 
 const initialState = {
   regions: [],
@@ -7,6 +7,7 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  selectedRestaurant: null,
 };
 
 const reducers = {
@@ -31,13 +32,6 @@ const reducers = {
     };
   },
 
-  setRestaurant(state, { payload: { restaurant } }) {
-    return {
-      ...state,
-      restaurant,
-    };
-  },
-
   selectRegion(state, { payload: { regionId } }) {
     const { regions } = state;
     return {
@@ -53,6 +47,14 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
+
+  setRestaurant(state, { payload: { restaurant } }) {
+    return {
+      ...state,
+      restaurant,
+    };
+  },
+
 };
 
 function defaultReducer(state) {

@@ -1,8 +1,6 @@
 import React from 'react';
 
-import {
-  MemoryRouter,
-} from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import { render } from '@testing-library/react';
 
@@ -10,71 +8,58 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
-jest.mock('react-redux');
+import RESTAURANT from '../fixtures/restaurant';
 
 describe('App', () => {
   const dispatch = jest.fn();
 
-  beforeEach(() => {
-    dispatch.mockClear();
-
-    useDispatch.mockImplementation(() => dispatch);
-
-    useSelector.mockImplementation((selector) => selector({
-      regions: [
-        { id: 1, name: '서울' },
-      ],
-      categories: [],
-      restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' }
-    }));
-  });
-
-  function renderApp({ path }) {
-    return render(
+  function renderComponent({ path }) {
+    return render((
       <MemoryRouter initialEntries={[path]}>
         <App />
       </MemoryRouter>
-    );
+    ));
   }
 
-  context('with path /', () => {
-    it('renders the home page', () => {
-      const { container } = renderApp({ path: '/' });
+  beforeEach(() => {
+    dispatch.mockClear();
+    useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      regions: [],
+      categories: [],
+      restaurants: [],
+      restaurant: RESTAURANT,
+    }));
+  });
 
-      expect(container).toHaveTextContent('Home');
+  describe('with any page', () => {
+    it('has header', () => {
+      const { queryByText } = renderComponent({ path: '/' });
+      expect(queryByText('헤더')).not.toBeNull();
     });
   });
 
-  context('with path /about', () => {
-    it('renders the about page', () => {
-      const { container } = renderApp({ path: '/about' });
-
-      expect(container).toHaveTextContent('About 페이지');
+  describe('with path /', () => {
+    it('renders Home Page', () => {
+      renderComponent({ path: '/' });
     });
   });
 
-  context('with path /restaurants', () => {
-    it('renders the restaurants page', () => {
-      const { container } = renderApp({ path: '/restaurants' });
-
-      expect(container).toHaveTextContent('서울');
+  describe('with path /about', () => {
+    it('renders About Page', () => {
+      renderComponent({ path: '/about' });
     });
   });
 
-  context('with path /restaurants/:id', () => {
-    it('renders the restaurant page', () => {
-      const { container } = renderApp({ path: '/restaurants/1' });
-
-      expect(container).toHaveTextContent('마녀주방');
+  describe('with path /restaurants', () => {
+    it('renders Restaurant List Page', () => {
+      renderComponent({ path: '/restaurants' });
     });
   });
 
-  context('with invalid path', () => {
-    it('renders the not found page', () => {
-      const { container } = renderApp({ path: '/xxx' });
-
-      expect(container).toHaveTextContent('Not Found');
+  describe('with path /restaurant/1', () => {
+    it('renders Restaurant View Page', () => {
+      renderComponent({ path: '/restaurants/1' });
     });
   });
 });
