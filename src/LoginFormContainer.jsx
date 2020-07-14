@@ -30,7 +30,12 @@ export default function LoginFormContainer() {
         <label htmlFor="login-password">
           Password
         </label>
-        <input type="password" id="login-password" />
+        <input
+          type="password"
+          id="login-password"
+          name="password"
+          onChange={handleChange}
+        />
       </div>
     </>
   );
