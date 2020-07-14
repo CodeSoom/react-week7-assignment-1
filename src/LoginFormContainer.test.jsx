@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
@@ -22,10 +22,19 @@ describe('LoginFormContainer', () => {
   }
 
   it('renders the login form', () => {
-    const { getByLabelText } = renderLoginFormContainer();
+    const email = 'tester@example.com';
+    const password = 'password';
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: { email, password },
+    }));
+
+    const { container, getByLabelText } = renderLoginFormContainer();
 
     expect(getByLabelText('E-mail')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
+
+    expect(container).toHaveTextContent(email);
+    expect(container).toHaveTextContent(password);
   });
 
   it('listens form fields change event', () => {
