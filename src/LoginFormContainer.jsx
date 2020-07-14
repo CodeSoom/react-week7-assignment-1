@@ -8,7 +8,7 @@ import {
 
 import { get } from './utils';
 
-export default function LoginPage() {
+export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
   const { email, password } = useSelector(get('loginFields'));
