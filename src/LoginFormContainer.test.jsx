@@ -1,8 +1,12 @@
 import React from 'react';
 
+import { useDispatch } from 'react-redux';
+
 import { render, fireEvent } from '@testing-library/react';
 
 import LoginFormContainer from './LoginFormContainer';
+
+jest.mock('react-redux');
 
 function renderLoginFormContainer() {
   return render(
@@ -15,7 +19,7 @@ describe('LoginFormContainer', () => {
   beforeEach(() => {
     dispatch.mockClear();
 
-    dispatch.mockImplementation(() => dispatch);
+    useDispatch.mockImplementation(() => dispatch);
   });
 
   it('renders input controls', () => {
