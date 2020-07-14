@@ -17,11 +17,10 @@ describe('LoginPage', () => {
   });
 
   it('renders the login form', () => {
-    const { getByLabelText } = render((
+    const { container } = render((
       <LoginPage />
     ));
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    expect(container).toHaveTextContent('로그인');
   });
 });
