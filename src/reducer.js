@@ -4,6 +4,10 @@ const initialState = {
   regions: [],
   categories: [],
   restaurants: [],
+  loginFields: {
+    email: '',
+    password: '',
+  },
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
@@ -35,6 +39,16 @@ const reducers = {
     return {
       ...state,
       restaurant,
+    };
+  },
+
+  changeLoginFields(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      loginFields: {
+        ...state.loginFields,
+        [name]: value,
+      },
     };
   },
 
