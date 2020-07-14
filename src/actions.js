@@ -36,7 +36,7 @@ export function setRestaurant(restaurant) {
 
 export function setAccessToken(accessToken) {
   return {
-    type: 'setRestaurant',
+    type: 'setAccessToken',
     payload: { accessToken },
   };
 }
