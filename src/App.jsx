@@ -8,15 +8,10 @@ import {
 
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
+import LoginPage from './LoginPage';
 import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
-
-function LoginPage() {
-  return (
-    <p>Log in</p>
-  );
-}
 
 export default function App() {
   return (
