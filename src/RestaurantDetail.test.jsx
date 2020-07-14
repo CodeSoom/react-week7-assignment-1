@@ -12,9 +12,7 @@ describe('RestaurantDetail', () => {
   };
 
   it('renders name and address', () => {
-    const { container } = render(
-      <RestaurantDetail restaurant={restaurant} />
-    );
+    const { container } = render(<RestaurantDetail restaurant={restaurant} />);
 
     expect(container).toHaveTextContent('마법사주방');
     expect(container).toHaveTextContent('서울시');
