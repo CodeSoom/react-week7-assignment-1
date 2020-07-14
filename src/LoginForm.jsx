@@ -1,13 +1,13 @@
 import React from 'react';
 
-export default function LoginForm({ fields, onChange }) {
+export default function LoginForm({ fields, onChange, onSubmit }) {
   const { email, password } = fields;
 
   return (
     <div>
       <h2>Log In</h2>
 
-      <form action="">
+      <form onSubmit={onSubmit}>
         <div>
           <label htmlFor="Email">Email</label>
           <input

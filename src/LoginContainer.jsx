@@ -15,5 +15,15 @@ export default function LoginContainer() {
     });
   };
 
-  return <LoginForm fields={fields} onChange={handleChangeInput} />;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <LoginForm
+      fields={fields}
+      onChange={handleChangeInput}
+      onSubmit={handleSubmit}
+    />
+  );
 }
