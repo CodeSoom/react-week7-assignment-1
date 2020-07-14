@@ -13,18 +13,4 @@ describe('LoginPage', () => {
     expect(getByLabelText('E-mail')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
   });
-
-  it('listens form fields change event', () => {
-    const handleChange = jest.fn();
-
-    const { getByLabelText } = render((
-      <LoginPage onChange={handleChange} />
-    ));
-
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'tester@example.com' },
-    });
-
-    expect(handleChange).toBeCalled();
-  });
 });

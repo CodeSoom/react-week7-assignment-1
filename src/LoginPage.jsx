@@ -1,26 +1,9 @@
 import React from 'react';
 
-function LoginContainer({ onChange }) {
-  return (
-    <>
-      <div>
-        <label htmlFor="login-email">
-          E-mail
-        </label>
-        <input type="email" id="login-email" onChange={onChange} />
-      </div>
-      <div>
-        <label htmlFor="login-password">
-          Password
-        </label>
-        <input type="password" id="login-password" />
-      </div>
-    </>
-  );
-}
+import LoginFormContainer from './LoginFormContainer';
 
-export default function LoginPage({ onChange }) {
+export default function LoginPage() {
   return (
-    <LoginContainer onChange={onChange} />
+    <LoginFormContainer />
   );
 }
