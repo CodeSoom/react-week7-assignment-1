@@ -5,11 +5,14 @@ import { render } from '@testing-library/react';
 
 import LoginPage from './LoginPage';
 
-test('LoginPage', () => {
+describe('LoginPage', () => {
+  it('renders Log-in title', () => {
+    const { container } = render((
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>
+    ));
 
- render((
-    <MemoryRouter>
-      <LoginPage />
-    </MemoryRouter>
- ));
+    expect(container).toHaveTextContent('Log In')
+  })
 });
