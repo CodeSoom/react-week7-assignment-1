@@ -4,15 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { changeLoginFields } from './actions';
 
-export default function LoginFormContainer() {
-  const dispatch = useDispatch();
-
-  function handleChange(event) {
-    const { target: { name, value } } = event;
-
-    dispatch(changeLoginFields({ name, value }));
-  }
-
+function LoginForm({ onChange }) {
   return (
     <>
       <div>
@@ -23,7 +15,7 @@ export default function LoginFormContainer() {
           type="email"
           id="login-email"
           name="email"
-          onChange={handleChange}
+          onChange={onChange}
         />
       </div>
       <div>
@@ -34,9 +26,23 @@ export default function LoginFormContainer() {
           type="password"
           id="login-password"
           name="password"
-          onChange={handleChange}
+          onChange={onChange}
         />
       </div>
     </>
+  );
+}
+
+export default function LoginFormContainer() {
+  const dispatch = useDispatch();
+
+  function handleChange(event) {
+    const { target: { name, value } } = event;
+
+    dispatch(changeLoginFields({ name, value }));
+  }
+
+  return (
+    <LoginForm onChange={handleChange} />
   );
 }
