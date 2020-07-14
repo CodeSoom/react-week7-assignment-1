@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { render, fireEvent } from '@testing-library/react';
 
 import LoginFormContainer from './LoginFormContainer';
+
+import loginFields from '../fixtures/loginFields';
 
 jest.mock('react-redux');
 
@@ -20,13 +22,16 @@ describe('LoginFormContainer', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      loginFields,
+    }));
   });
 
   it('renders input controls', () => {
     const { getByLabelText } = renderLoginFormContainer();
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    expect(getByLabelText('E-mail').value).toBe(loginFields.email);
+    expect(getByLabelText('Password').value).toBe(loginFields.password);
   });
 
   context('when changes value', () => {
