@@ -51,4 +51,14 @@ describe('LoginFormContainer', () => {
 
     expect(getByText('Log In')).not.toBeNull();
   });
+
+  context('when click button', () => {
+    it('call dispatch', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalled();
+    });
+  });
 });
