@@ -2,18 +2,19 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { changeLoginField } from './actions';
+
 import { get } from './utils';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  const { email, password } = { email: '', password: '' };
+  const { email, password } = useSelector(get('loginFields'));
 
-  // TODO: useSelector(get('loginFields'));
+  function handleChange(event) {
+    const { target: { name, value } } = event;
 
-  function handleChange() {
-    dispatch(() => {});
-    // TODO: changeLoginField actions
+    dispatch(changeLoginField({ name, value }));
   }
 
   return (
