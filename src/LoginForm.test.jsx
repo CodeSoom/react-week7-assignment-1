@@ -14,10 +14,15 @@ describe('LoginForm', () => {
     password,
   };
   const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
   function renderLoginForm() {
     return render((
-      <LoginForm loginFields={loginFields} onChange={handleChange} />
+      <LoginForm
+        loginFields={loginFields}
+        onChange={handleChange}
+        onClick={handleSubmit}
+      />
     ));
   }
 
@@ -47,5 +52,13 @@ describe('LoginForm', () => {
 
       expect(handleChange).toBeCalledWith({ name, value });
     });
+  });
+
+  it('click login button', () => {
+    const { getByText } = renderLoginForm();
+
+    fireEvent.click(getByText('Log In'));
+
+    expect(handleSubmit).toBeCalled();
   });
 });
