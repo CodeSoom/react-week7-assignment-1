@@ -1,6 +1,8 @@
 import React from 'react';
 
-export default function LoginForm() {
+export default function LoginForm({ fields, onChange }) {
+  const { email, password } = fields;
+
   return (
     <div>
       <h2>Log In</h2>
@@ -11,8 +13,8 @@ export default function LoginForm() {
           type="email"
           name="email"
           id="Email"
-          value={''}
-          onChange={null}
+          value={email}
+          onChange={onChange}
         />
       </div>
       <div>
@@ -21,8 +23,8 @@ export default function LoginForm() {
           type="password"
           name="password"
           id="Password"
-          value={''}
-          onChange={null}
+          value={password}
+          onChange={onChange}
         />
       </div>
     </div>

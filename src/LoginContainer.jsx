@@ -8,12 +8,12 @@ export default function LoginContainer() {
     password: '',
   });
 
-  const handleChange = (e) => {
+  const handleChangeInput = (e) => {
     setFields({
       ...fields,
       [e.target.name]: e.target.value,
     });
   };
 
-  return <LoginForm />;
+  return <LoginForm fields={fields} onChange={handleChangeInput} />;
 }
