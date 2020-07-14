@@ -33,6 +33,13 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function changeLoginFields({ name, value }) {
+  return {
+    type: 'changeLoginFields',
+    payload: { name, value },
+  };
+}
+
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
