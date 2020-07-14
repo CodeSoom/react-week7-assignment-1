@@ -3,11 +3,16 @@ import React from 'react';
 export default function LoginForm({ fields, onChange, onSubmit }) {
   const { email, password } = fields;
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit();
+  };
+
   return (
     <div>
       <h2>Log In</h2>
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="Email">Email</label>
           <input

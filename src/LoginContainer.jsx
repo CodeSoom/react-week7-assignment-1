@@ -15,9 +15,7 @@ export default function LoginContainer() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const handleSubmit = () => {};
 
   return (
     <LoginForm
