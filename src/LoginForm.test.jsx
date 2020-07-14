@@ -16,7 +16,7 @@ describe('LoginForm', () => {
     <LoginForm fields={fields} onChange={onChange} onSubmit={onSubmit} />,
   );
 
-  afterAll(() => {
+  afterEach(() => {
     onChange.mockClear();
     onSubmit.mockClear();
   });
