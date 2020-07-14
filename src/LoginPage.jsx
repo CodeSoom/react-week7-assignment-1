@@ -1,13 +1,13 @@
 import React from 'react';
 
-function LoginContainer() {
+function LoginContainer({ onChange }) {
   return (
     <>
       <div>
         <label htmlFor="login-email">
           E-mail
         </label>
-        <input type="email" id="login-email" />
+        <input type="email" id="login-email" onChange={onChange} />
       </div>
       <div>
         <label htmlFor="login-password">
@@ -19,8 +19,8 @@ function LoginContainer() {
   );
 }
 
-export default function LoginPage() {
+export default function LoginPage({ onChange }) {
   return (
-    <LoginContainer />
+    <LoginContainer onChange={onChange} />
   );
 }
