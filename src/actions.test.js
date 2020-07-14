@@ -10,6 +10,8 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
+  setAccessToken,
 } from './actions';
 
 const middlewares = [thunk];
@@ -106,7 +108,7 @@ describe('actions', () => {
       store = mockStore({});
     });
 
-    it('dispatchs setRestaurant', async () => {
+    it('dispatchs setAccesstoken', async () => {
       await store.dispatch(
         requestLogin({
           email: 'test@test.com',
@@ -116,7 +118,7 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccesstoken({}));
+      expect(actions[0]).toEqual(setAccessToken({}));
     });
   });
 });

@@ -3,6 +3,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -59,10 +60,7 @@ export function loadInitialData() {
 
 export function loadRestaurants() {
   return async (dispatch, getState) => {
-    const {
-      selectedRegion: region,
-      selectedCategory: category,
-    } = getState();
+    const { selectedRegion: region, selectedCategory: category } = getState();
 
     if (!region || !category) {
       return;
@@ -83,5 +81,20 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function setAccessToken(token) {
+  return {
+    type: 'setAccessToken',
+    payload: { token },
+  };
+}
+
+export function requestLogin({ email, password }) {
+  return async (dispatch) => {
+    const token = await postLogin({ email, password });
+
+    dispatch(setAccessToken(token));
   };
 }
