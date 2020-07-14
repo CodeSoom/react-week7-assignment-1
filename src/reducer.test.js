@@ -5,6 +5,7 @@ import {
   setCategories,
   setRestaurants,
   setRestaurant,
+  changeLoginFields,
   selectRegion,
   selectCategory,
 } from './actions';
@@ -87,6 +88,50 @@ describe('reducer', () => {
 
       expect(state.restaurant.id).toBe(1);
       expect(state.restaurant.name).toBe('마법사주방');
+    });
+  });
+
+  describe('changeLoginFields', () => {
+    context('with email value', () => {
+      it('changes loginFields', () => {
+        const initialState = {
+          loginFields: {
+            email: '',
+            password: '1234',
+          },
+        };
+
+        const newValue = {
+          name: 'email',
+          value: 'tester@example.com',
+        };
+
+        const state = reducer(initialState, changeLoginFields(newValue));
+
+        expect(state.loginFields.email).toBe('tester@example.com');
+        expect(state.loginFields.password).toBe('1234');
+      });
+    });
+
+    context('with password value', () => {
+      it('changes loginFields', () => {
+        const initialState = {
+          loginFields: {
+            email: 'tester@example.com',
+            password: '',
+          },
+        };
+
+        const newValue = {
+          name: 'password',
+          value: '1234',
+        };
+
+        const state = reducer(initialState, changeLoginFields(newValue));
+
+        expect(state.loginFields.email).toBe('tester@example.com');
+        expect(state.loginFields.password).toBe('1234');
+      });
     });
   });
 
