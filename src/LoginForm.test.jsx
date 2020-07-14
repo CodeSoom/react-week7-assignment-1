@@ -11,8 +11,11 @@ describe('LoginForm', () => {
   };
   const onChange = jest.fn();
 
-  const renderLoginForm = () =>
-    render(<LoginForm fields={fields} onChange={onChange} />);
+  const renderLoginForm = () => render(<LoginForm fields={fields} onChange={onChange} />);
+
+  afterAll(() => {
+    onChange.mockClear();
+  });
 
   it('이메일과 비밀번호 폼이 있다.', () => {
     const { getByLabelText } = renderLoginForm();
@@ -29,5 +32,11 @@ describe('LoginForm', () => {
     });
 
     expect(onChange).toBeCalled();
+  });
+
+  it('폼전송 버튼이 있다.', () => {
+    const { getByText } = renderLoginForm();
+
+    expect(getByText('로그인')).not.toBeNull();
   });
 });
