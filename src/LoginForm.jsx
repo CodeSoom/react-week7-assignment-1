@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LoginForm({ loginFields, onChange }) {
+export default function LoginForm({ loginFields, onChange, onClick }) {
   const { email, password } = loginFields;
 
   function handleChange(event) {
@@ -37,6 +37,7 @@ export default function LoginForm({ loginFields, onChange }) {
       </div>
       <button
         type="button"
+        onClick={onClick}
       >
         Log In
       </button>
