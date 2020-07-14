@@ -11,8 +11,15 @@ jest.mock('react-redux');
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
+  const email = 'tester@example.com';
+  const password = 'password';
+
   beforeEach(() => {
     dispatch.mockClear();
+
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: { email, password },
+    }));
   });
 
   function renderLoginFormContainer() {
@@ -22,24 +29,15 @@ describe('LoginFormContainer', () => {
   }
 
   it('renders the login form', () => {
-    const email = 'tester@example.com';
-    const password = 'password';
-    useSelector.mockImplementation((selector) => selector({
-      loginFields: { email, password },
-    }));
+    const { getByLabelText } = renderLoginFormContainer();
 
-    const { container, getByLabelText } = renderLoginFormContainer();
-
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
-
-    expect(container).toHaveTextContent(email);
-    expect(container).toHaveTextContent(password);
+    expect(getByLabelText('E-mail').value).toBe(email);
+    expect(getByLabelText('Password').value).toBe(password);
   });
 
   it('listens form fields change event', () => {
-    const mockEmail = 'tester@example.com';
-    const mockPassword = 'password';
+    const mockEmail = 'mock@example.com';
+    const mockPassword = 'mockpassword';
     useDispatch.mockImplementation(() => dispatch);
 
     const { getByLabelText } = renderLoginFormContainer();

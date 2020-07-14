@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { changeLoginFields } from './actions';
 
-function LoginForm({ onChange }) {
+function LoginForm({ loginFields, onChange }) {
+  const { email, password } = loginFields;
+
   return (
     <>
       <div>
@@ -15,6 +17,7 @@ function LoginForm({ onChange }) {
           type="email"
           id="login-email"
           name="email"
+          value={email}
           onChange={onChange}
         />
       </div>
@@ -26,6 +29,7 @@ function LoginForm({ onChange }) {
           type="password"
           id="login-password"
           name="password"
+          value={password}
           onChange={onChange}
         />
       </div>
@@ -36,6 +40,10 @@ function LoginForm({ onChange }) {
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
+  const { loginFields } = useSelector((state) => ({
+    loginFields: state.loginFields,
+  }));
+
   function handleChange(event) {
     const { target: { name, value } } = event;
 
@@ -43,6 +51,6 @@ export default function LoginFormContainer() {
   }
 
   return (
-    <LoginForm onChange={handleChange} />
+    <LoginForm loginFields={loginFields} onChange={handleChange} />
   );
 }
