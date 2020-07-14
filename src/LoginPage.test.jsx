@@ -13,4 +13,12 @@ describe('LoginPage', () => {
     expect(getByLabelText('E-mail')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
   });
+
+  it('renders submit button', () => {
+    const { getByText } = render(
+      <LoginPage />,
+    );
+
+    expect(getByText('Log In')).not.toBeNull();
+  });
 });
