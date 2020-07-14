@@ -18,6 +18,9 @@ export default function LoginFormContainer() {
   }
 
   return (
-    <LoginForm loginFields={loginFields} onChange={handleChange} />
+    <LoginForm
+      loginFields={loginFields}
+      onChange={handleChange}
+    />
   );
 }

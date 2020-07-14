@@ -51,4 +51,13 @@ describe('LoginFormContainer', () => {
       });
     });
   });
+
+  it('click login button', () => {
+    const { getByText } = renderLoginFormContainer();
+    useDispatch.mockImplementation(() => dispatch);
+
+    fireEvent.click(getByText('Log In'));
+
+    expect(dispatch).toBeCalled();
+  });
 });
