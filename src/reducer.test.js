@@ -8,6 +8,7 @@ import {
   changeLoginFields,
   selectRegion,
   selectCategory,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -92,6 +93,20 @@ describe('reducer', () => {
 
       expect(state.restaurant.id).toBe(1);
       expect(state.restaurant.name).toBe('마법사주방');
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const token = 'ACCESS.TOKEN';
+
+      const state = reducer(initialState, setAccessToken(token));
+
+      expect(state.accessToken).toBe(token);
     });
   });
 
