@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export async function fetchRegions() {
   return [];
 }
@@ -15,5 +16,5 @@ export async function fetchRestaurant({ restaurantId }) {
 }
 
 export async function postLogin({ email, password }) {
-  return {};
+  return 'TOKEN';
 }
