@@ -13,3 +13,7 @@ export async function fetchRestaurants() {
 export async function fetchRestaurant({ restaurantId }) {
   return {};
 }
+
+export async function postLogin({ email, password }) {
+  return {};
+}

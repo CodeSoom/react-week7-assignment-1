@@ -105,7 +105,12 @@ describe('actions', () => {
 
   describe('requestLogin', () => {
     beforeEach(() => {
-      store = mockStore({});
+      store = mockStore({
+        loginFields: {
+          email: 'tester@exmaple.com',
+          password: 'test',
+        },
+      });
     });
 
     it('dispatchs setRestaurant', async () => {
