@@ -22,10 +22,11 @@ describe('LoginForm', () => {
   }
 
   it('renders the login form', () => {
-    const { getByLabelText } = renderLoginForm();
+    const { getByLabelText, getByText } = renderLoginForm();
 
     expect(getByLabelText('E-mail').value).toBe(email);
     expect(getByLabelText('Password').value).toBe(password);
+    expect(getByText('Log In')).not.toBeNull();
   });
 
   it('listens form fields change event', () => {
