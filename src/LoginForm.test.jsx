@@ -10,11 +10,15 @@ describe('LoginForm', () => {
     password: '',
   };
   const onChange = jest.fn();
+  const onSubmit = jest.fn();
 
-  const renderLoginForm = () => render(<LoginForm fields={fields} onChange={onChange} />);
+  const renderLoginForm = () => render(
+    <LoginForm fields={fields} onChange={onChange} onSubmit={onSubmit} />,
+  );
 
   afterAll(() => {
     onChange.mockClear();
+    onSubmit.mockClear();
   });
 
   it('이메일과 비밀번호 폼이 있다.', () => {
@@ -38,5 +42,13 @@ describe('LoginForm', () => {
     const { getByText } = renderLoginForm();
 
     expect(getByText('로그인')).not.toBeNull();
+  });
+
+  it('폼전송 버튼을 클릭하면 전송함수가 호출된다', () => {
+    const { getByText } = renderLoginForm();
+
+    fireEvent.click(getByText('로그인'));
+
+    expect(onSubmit).toBeCalled();
   });
 });
