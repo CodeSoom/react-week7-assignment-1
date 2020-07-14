@@ -28,13 +28,6 @@ describe('LoginFormContainer', () => {
     ));
   }
 
-  it('renders the login form', () => {
-    const { getByLabelText } = renderLoginFormContainer();
-
-    expect(getByLabelText('E-mail').value).toBe(email);
-    expect(getByLabelText('Password').value).toBe(password);
-  });
-
   it('listens form fields change event', () => {
     const mockEmail = 'mock@example.com';
     const mockPassword = 'mockPassword';

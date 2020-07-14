@@ -13,9 +13,7 @@ export default function LoginFormContainer() {
     loginFields: state.loginFields,
   }));
 
-  function handleChange(event) {
-    const { target: { name, value } } = event;
-
+  function handleChange({ name, value }) {
     dispatch(changeLoginFields({ name, value }));
   }
 
