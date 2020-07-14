@@ -2,13 +2,19 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
+import { useDispatch } from 'react-redux';
+
 import LoginFormContainer from './LoginFormContainer';
+
+jest.mock('react-redux');
 
 describe('LoginFormContainer', () => {
   const handleChange = jest.fn();
+  const dispatch = jest.fn();
 
   beforeEach(() => {
     handleChange.mockClear();
+    dispatch.mockClear();
   });
 
   function renderLoginFormContainer() {
@@ -25,12 +31,18 @@ describe('LoginFormContainer', () => {
   });
 
   it('listens form fields change event', () => {
+    const mockEmail = 'tester@example.com';
+    useDispatch.mockImplementation(() => dispatch);
+
     const { getByLabelText } = renderLoginFormContainer();
 
     fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'tester@example.com' },
+      target: { value: mockEmail },
     });
 
-    expect(handleChange).toBeCalled();
+    expect(dispatch).toBeCalledWith({
+      type: 'changeLoginFields',
+      payload: { name: 'email', value: mockEmail },
+    });
   });
 });
