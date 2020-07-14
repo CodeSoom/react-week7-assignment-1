@@ -30,6 +30,7 @@ describe('LoginFormContainer', () => {
 
   it('listens form fields change event', () => {
     const mockEmail = 'tester@example.com';
+    const mockPassword = 'password';
     useDispatch.mockImplementation(() => dispatch);
 
     const { getByLabelText } = renderLoginFormContainer();
@@ -41,6 +42,15 @@ describe('LoginFormContainer', () => {
     expect(dispatch).toBeCalledWith({
       type: 'changeLoginFields',
       payload: { name: 'email', value: mockEmail },
+    });
+
+    fireEvent.change(getByLabelText('Password'), {
+      target: { value: mockPassword },
+    });
+
+    expect(dispatch).toBeCalledWith({
+      type: 'changeLoginFields',
+      payload: { name: 'password', value: mockPassword },
     });
   });
 });
