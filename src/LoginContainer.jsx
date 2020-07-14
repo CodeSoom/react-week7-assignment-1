@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import LoginForm from './LoginForm';
+
 export default function LoginContainer() {
   const [fields, setFields] = useState({
     email: '',
@@ -13,30 +15,5 @@ export default function LoginContainer() {
     });
   };
 
-  return (
-    <div>
-      <h2>Log In</h2>
-
-      <div>
-        <label htmlFor="Email">Email</label>
-        <input
-          type="email"
-          name="email"
-          id="Email"
-          value={fields.email}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="Password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="Password"
-          value={fields.password}
-          onChange={handleChange}
-        />
-      </div>
-    </div>
-  );
+  return <LoginForm />;
 }

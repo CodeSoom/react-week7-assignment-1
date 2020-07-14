@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
@@ -12,31 +12,5 @@ describe('LoginForm', () => {
 
     expect(getByLabelText('Email')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
-  });
-
-  it('이메일과 비밀번호가 변경된다.', () => {
-    const fields = [
-      {
-        label: 'Email',
-        value: 'test@test.com',
-      },
-      {
-        label: 'Password',
-        value: '1234',
-      },
-    ];
-
-    const { getByLabelText } = renderLoginForm();
-
-    fields.forEach((field) => {
-      const { label, value } = field;
-      const input = getByLabelText(label);
-
-      fireEvent.change(input, {
-        target: { value },
-      });
-
-      expect(input.value).toBe(value);
-    });
   });
 });
