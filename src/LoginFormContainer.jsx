@@ -1,6 +1,21 @@
 import React from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
+
+import { get } from './utils';
+
 export default function LoginFormContainer() {
+  const dispatch = useDispatch();
+
+  const { email, password } = { email: '', password: '' };
+
+  // TODO: useSelector(get('loginFields'));
+
+  function handleChange() {
+    dispatch(() => {});
+    // TODO: changeLoginField actions
+  }
+
   return (
     <>
       <div>
@@ -9,8 +24,10 @@ export default function LoginFormContainer() {
         </label>
         <input
           type="email"
-          id="login-password"
+          id="login-email"
           name="email"
+          value={email}
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -21,6 +38,8 @@ export default function LoginFormContainer() {
           type="password"
           id="login-password"
           name="password"
+          value={password}
+          onChange={handleChange}
         />
       </div>
       <div>
