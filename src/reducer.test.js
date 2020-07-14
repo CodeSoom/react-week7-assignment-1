@@ -16,6 +16,10 @@ describe('reducer', () => {
       regions: [],
       categories: [],
       restaurants: [],
+      loginFields: {
+        email: '',
+        password: '',
+      },
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
