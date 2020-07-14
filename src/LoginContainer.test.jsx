@@ -14,23 +14,29 @@ describe('LoginContainer', () => {
     expect(getByLabelText('Password')).not.toBeNull();
   });
 
-  it('이메일이 변경된다.', () => {
+  it('이메일과 비밀번호가 변경된다.', () => {
+    const fields = [
+      {
+        label: 'Email',
+        value: 'test@test.com',
+      },
+      {
+        label: 'Password',
+        value: '1234',
+      },
+    ];
+
     const { getByLabelText } = renderLoginContainer();
 
-    fireEvent.change(getByLabelText('Email'), {
-      target: { value: 'test@test.com' },
+    fields.forEach((field) => {
+      const { label, value } = field;
+      const input = getByLabelText(label);
+
+      fireEvent.change(input, {
+        target: { value },
+      });
+
+      expect(input.value).toBe(value);
     });
-
-    expect(getByLabelText('Email').value).toBe('test@test.com');
-  });
-
-  it('비밀번호가 변경된다.', () => {
-    const { getByLabelText } = renderLoginContainer();
-
-    fireEvent.change(getByLabelText('Password'), {
-      target: { value: '1234' },
-    });
-
-    expect(getByLabelText('Password').value).toBe('1234');
   });
 });
