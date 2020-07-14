@@ -1,13 +1,17 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   changeLoginFields,
 } from './actions';
 
+import { get } from './utils';
+
 export default function LoginPage() {
   const dispatch = useDispatch();
+
+  const { email, password } = useSelector(get('loginFields'));
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -22,13 +26,25 @@ export default function LoginPage() {
         <label htmlFor="email">
           E-mail
         </label>
-        <input type="text" id="email" onChange={handleChange} />
+        <input
+          type="text"
+          id="email"
+          name="email"
+          onChange={handleChange}
+          value={email}
+        />
       </div>
       <div>
         <label htmlFor="password">
           Password
         </label>
-        <input type="text" id="password" onChange={handleChange} />
+        <input
+          type="text"
+          id="password"
+          name="password"
+          onChange={handleChange}
+          value={password}
+        />
       </div>
       <button
         type="button"
