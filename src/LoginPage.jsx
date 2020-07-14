@@ -16,6 +16,11 @@ export default function LoginPage() {
         </label>
         <input type="text" id="password" />
       </div>
+      <button
+        type="button"
+      >
+        Log In
+      </button>
     </>
   );
 }
