@@ -9,17 +9,15 @@ import LoginFormContainer from './LoginFormContainer';
 jest.mock('react-redux');
 
 describe('LoginFormContainer', () => {
-  const handleChange = jest.fn();
   const dispatch = jest.fn();
 
   beforeEach(() => {
-    handleChange.mockClear();
     dispatch.mockClear();
   });
 
   function renderLoginFormContainer() {
     return render((
-      <LoginFormContainer onChange={handleChange} />
+      <LoginFormContainer />
     ));
   }
 
