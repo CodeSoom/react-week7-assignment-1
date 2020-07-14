@@ -1,18 +1,50 @@
 import React from 'react';
 
-import { MemoryRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import LoginFormContainer from './LoginFormContainer';
 
+jest.mock('react-redux');
+
 describe('LoginFormContainer', () => {
+  const dispatch = jest.fn();
+
+  beforeEach(() => {
+    dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
+
+    useSelector((selector) => selector({
+      loginFields: {
+        email: 'test@test.com',
+        password: '1234',
+      },
+    }));
+  });
+
   const renderLoginFormContainer = () => render(
-    <MemoryRouter>
-      <LoginFormContainer />
-    </MemoryRouter>,
+    <LoginFormContainer />,
   );
 
+  context('when a form field is changed', () => {
+    it('occurs changeLoginField', () => {
+      const { getByLabelText } = renderLoginFormContainer();
+
+      const input = getByLabelText('E-mail');
+
+      const value = 'newemail@email.com';
+
+      fireEvent.change(input, {
+        target: { value },
+      });
+
+      expect(dispatch).toBeCalledTimes(1);
+    });
+  });
+
+  // TODO: Move the tests below to LoginForm.jsx later
   it('renders input controls', () => {
     const { container } = renderLoginFormContainer();
 
