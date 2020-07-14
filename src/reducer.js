@@ -11,6 +11,7 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  accessToken: null,
 };
 
 const reducers = {
@@ -39,6 +40,13 @@ const reducers = {
     return {
       ...state,
       restaurant,
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
     };
   },
 
