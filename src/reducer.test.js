@@ -24,6 +24,7 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      accessToken: null,
     };
 
     it('returns initialState', () => {
@@ -97,12 +98,12 @@ describe('reducer', () => {
   });
 
   describe('setAccessToken', () => {
-    it('changes accessToken', () => {
+    it('changes access token', () => {
       const initialState = {
-        accessToken: '',
+        accessToken: null,
       };
 
-      const token = 'ACCESS.TOKEN';
+      const token = 'TOKEN';
 
       const state = reducer(initialState, setAccessToken(token));
 
