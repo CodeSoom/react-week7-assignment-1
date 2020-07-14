@@ -92,3 +92,9 @@ export function changeLoginFields({ name, value }) {
     payload: { name, value },
   };
 }
+
+export function createToken() {
+  // TODO
+  // 1. 현재 로그인 폼 필드 상태를 기반으로 토큰 fetch 요청
+  // 2. 가져온 토큰을 로컬 스토리지에 저장
+}
