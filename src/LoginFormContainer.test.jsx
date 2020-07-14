@@ -16,9 +16,9 @@ describe('LoginFormContainer', () => {
 
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector((selector) => selector({
+    useSelector.mockImplementation((selector) => selector({
       loginFields: {
-        email: 'test@test.com',
+        email: 'test@test',
         password: '1234',
       },
     }));
