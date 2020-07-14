@@ -4,38 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { changeLoginFields } from './actions';
 
-function LoginForm({ loginFields, onChange }) {
-  const { email, password } = loginFields;
-
-  return (
-    <>
-      <div>
-        <label htmlFor="login-email">
-          E-mail
-        </label>
-        <input
-          type="email"
-          id="login-email"
-          name="email"
-          value={email}
-          onChange={onChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="login-password">
-          Password
-        </label>
-        <input
-          type="password"
-          id="login-password"
-          name="password"
-          value={password}
-          onChange={onChange}
-        />
-      </div>
-    </>
-  );
-}
+import LoginForm from './LoginForm';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
