@@ -142,19 +142,15 @@ describe('reducer', () => {
         },
       };
 
-      const loginFields = {
-        loginFields: {
-          email: 'email@email',
-          password: '',
-        },
-      };
+      const email = 'email@email';
 
       const state = reducer(initialState, changeLoginField({
         name: 'email',
-        value: 'email@email',
+        value: email,
       }));
 
-      expect(state.loginFields).toEqual(loginFields);
+      expect(state.loginFields.email).toEqual(email);
+      expect(state.loginFields.password).toEqual('');
     });
   });
 });
