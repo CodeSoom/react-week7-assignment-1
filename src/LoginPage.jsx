@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LoginPage() {
+function LoginContainer() {
   return (
     <>
       <div>
@@ -16,5 +16,11 @@ export default function LoginPage() {
         <input type="password" id="login-password" />
       </div>
     </>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <LoginContainer />
   );
 }
