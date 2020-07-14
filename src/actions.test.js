@@ -60,7 +60,7 @@ describe('actions', () => {
         });
       });
 
-      it('does\'nt run any actions', async () => {
+      it("does'nt run any actions", async () => {
         await store.dispatch(loadRestaurants());
 
         const actions = store.getActions();
@@ -76,7 +76,7 @@ describe('actions', () => {
         });
       });
 
-      it('does\'nt run any actions', async () => {
+      it("does'nt run any actions", async () => {
         await store.dispatch(loadRestaurants());
 
         const actions = store.getActions();
@@ -98,6 +98,25 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('dispatchs setRestaurant', async () => {
+      await store.dispatch(
+        requestLogin({
+          email: 'test@test.com',
+          password: '1234',
+        }),
+      );
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccesstoken({}));
     });
   });
 });
