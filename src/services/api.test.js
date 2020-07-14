@@ -76,10 +76,10 @@ describe('api', () => {
       mockFetch(ACCESS_TOKEN);
     });
 
-    it('returns accessToken', async () => {
+    it('returns access token', async () => {
       const accessToken = await postLogin(LOGIN_FIELDS);
 
-      expect(accessToken).toEqual(ACCESS_TOKEN);
+      expect(accessToken).toBe(ACCESS_TOKEN.accessToken);
     });
   });
 });

@@ -1,3 +1,1 @@
-const accessToken = 'ACCESS.TOKEN';
-
-export default accessToken;
+export default { accessToken: 'ACCESS.TOKEN' };
