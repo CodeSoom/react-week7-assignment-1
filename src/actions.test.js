@@ -8,6 +8,8 @@ import {
   setCategories,
   loadRestaurants,
   loadRestaurant,
+  requestLogin,
+  setAccessToken,
   setRestaurants,
   setRestaurant,
 } from './actions';
@@ -92,12 +94,26 @@ describe('actions', () => {
     });
 
     it('dispatchs setRestaurant', async () => {
-      await store.dispatch(loadRestaurant({restaurantId: 1}));
+      await store.dispatch(loadRestaurant({ restaurantId: 1 }));
 
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('dispatchs setRestaurant', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken({}));
     });
   });
 });
