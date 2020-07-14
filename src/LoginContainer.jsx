@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 
+import { useDispatch } from 'react-redux';
+
 import LoginForm from './LoginForm';
 
 export default function LoginContainer() {
+  const dispatch = useDispatch();
+
   const [fields, setFields] = useState({
     email: '',
     password: '',
@@ -15,7 +19,11 @@ export default function LoginContainer() {
     });
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    dispatch({
+      type: 'sample',
+    });
+  };
 
   return (
     <LoginForm
