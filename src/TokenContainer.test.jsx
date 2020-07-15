@@ -19,6 +19,14 @@ describe('TokenContainer', () => {
     dispatch.mockClear();
   });
 
+  it('renders the route page', () => {
+    const { container } = render((
+      <TokenContainer />
+    ));
+
+    expect(container).toHaveTextContent('헤더');
+  });
+
   context('with accessToken in localStorage', () => {
     it('update redux state', () => {
       const { accessToken } = accessTokenFixture;
