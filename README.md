@@ -93,12 +93,17 @@ npm run test:e2e
 ```
 
 ### Todo
-- [ ] Log In 페이지 구현
+- [X] Log In 페이지 구현
   - [X] ID, PW를 입력할 수 있다.
   - [X] ID, PW의 입력값 상태를 리덕스에서 관리한다.
   - [X] ID, PW의 입력값 상태를 렌더링 할 수 있다.
   - [X] 로그인 버튼을 눌러서 로그인을 시도할 수 있다.
   - [X] 로그인이 성공하면 리덕스에 accessToken 상태를 업데이트 한다.
   - [X] 로그인이 성공하면 로컬 스토리지에 accessToken을 저장한다.
-  - [ ] 리액트 라우터에서 Log In 페이지 경로를 설정한다.
-  - [ ] HomePage에서 Log In 페이지로 이동하는 기능을 구현한다.
+  - [X] 리액트 라우터에서 Log In 페이지 경로를 설정한다.
+  - [X] HomePage에서 Log In 페이지로 이동하는 기능을 구현한다.
+
+- [ ] TokenContainer 구현
+  - 처음 앱 실행시 localStorage의 accessToken 존재 여부에 따라 로그인 상태를 관리하는 컴포넌트
+  - [ ] localStorage에 accessToken이 있는 경우 리덕스의 accessToken 상태를 업데이트 한다.
+  - [ ] localStorage에 accessToken이 있는 경우 아무것도 하지 않는다.
