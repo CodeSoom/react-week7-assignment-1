@@ -23,6 +23,7 @@ describe('LoginFormContainer', () => {
     }));
   });
 
+  // TODO : control의 의미 파악 후 리팩토링 할 예정
   context('when change inputs', () => {
     it('change email input', () => {
       const { getByLabelText } = render(<LoginFormContainer />);
