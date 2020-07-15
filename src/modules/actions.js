@@ -85,3 +85,11 @@ export function loadRestaurant({ restaurantId }) {
     dispatch(setRestaurant(restaurant));
   };
 }
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    // TODO
+    // 1. HTTP 요청하기 POST https://eatgo-login-api.ahastudio.com/session
+    // 2. dispatch(setAccessToken)
+  };
+}
