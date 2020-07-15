@@ -1,11 +1,11 @@
 import React from 'react';
 
-import RoutePage from './RoutePage';
+import TokenContainer from './TokenContainer';
 
 export default function App() {
   return (
     <div>
-      <RoutePage />
+      <TokenContainer />
     </div>
   );
 }
