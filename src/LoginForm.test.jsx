@@ -19,14 +19,23 @@ describe('LoginForm', () => {
       <LoginForm onChange={handleChange} />,
     );
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    const controls = [
+      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
+      { label: 'Password', name: 'password', value: 'test' },
+    ];
 
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'tester@example.com' },
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
+
+      expect(input).not.toBeNull();
+
+      fireEvent.change(input, { target: { value } });
+
+      expect(handleChange).toBeCalledWith({ name, value });
     });
 
-    expect(handleChange).toBeCalled();
+    expect(getByLabelText('E-mail')).not.toBeNull();
+    expect(getByLabelText('Password')).not.toBeNull();
   });
 
   it('renders Log In button', () => {
