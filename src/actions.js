@@ -117,5 +117,7 @@ export function createToken() {
     dispatch(setAccessToken({ accessToken }));
     dispatch(changeLoginFields({ name: 'email', value: '' }));
     dispatch(changeLoginFields({ name: 'password', value: '' }));
+
+    localStorage.setItem('accessToken', accessToken);
   };
 }

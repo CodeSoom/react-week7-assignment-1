@@ -125,5 +125,13 @@ describe('actions', () => {
       expect(actions[1]).toEqual(changeLoginFields({ name: 'email', value: '' }));
       expect(actions[2]).toEqual(changeLoginFields({ name: 'password', value: '' }));
     });
+
+    it('set acessToken to local storage', async () => {
+      const accessToken = 'TESTACESSTOKEN';
+
+      await store.dispatch(createToken({ accessToken }));
+
+      expect(localStorage.getItem('accessToken')).toBe('TESTACESSTOKEN');
+    });
   });
 });
