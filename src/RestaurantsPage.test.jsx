@@ -13,8 +13,8 @@ const mockPush = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useHistory() {
-    return { push: mockPush }
-  }
+    return { push: mockPush };
+  },
 }));
 
 describe('RestaurantsPage', () => {
@@ -69,5 +69,5 @@ describe('RestaurantsPage', () => {
 
       expect(mockPush).toBeCalledWith('/restaurants/1');
     });
-  })
+  });
 });
