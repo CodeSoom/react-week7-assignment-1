@@ -11,7 +11,7 @@ import { get } from './utils';
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  const { email } = useSelector(get('loginFields')); // TODO : password 추가 예정
+  const { email, password } = useSelector(get('loginFields'));
 
   function handleChangeLoginField(event) {
     const { target: { name, value } } = event;
@@ -30,7 +30,7 @@ export default function LoginFormContainer() {
         <label htmlFor="login-password">
           Password
         </label>
-        <input type="password" id="login-password" onChange={handleChangeLoginField} />
+        <input type="password" id="login-password" onChange={handleChangeLoginField} name="password" value={password} />
       </div>
       <button type="button">LogIn</button>
     </>
