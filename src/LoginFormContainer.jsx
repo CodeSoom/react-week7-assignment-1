@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useDispatch } from 'react-redux';
 
+import LoginForm from './LoginForm';
+
 import { requestLogin } from './actions';
 
 export default function LoginFormContainer() {
@@ -13,20 +15,6 @@ export default function LoginFormContainer() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="email">
-          E-mail
-        </label>
-        <input id="email" type="email" />
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password
-        </label>
-        <input id="password" type="password" />
-      </div>
-      <button type="submit">Log In</button>
-    </form>
+    <LoginForm onSubmit={handleSubmit} />
   );
 }
