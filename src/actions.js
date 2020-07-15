@@ -3,6 +3,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  fetchAccessToken,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -104,7 +105,17 @@ export function setAccessToken({ accessToken }) {
 
 export function createToken() {
   // TODO
-  // 1. 현재 로그인 폼 필드 상태를 기반으로 토큰 fetch 요청
-  // 2. 가져온 토큰을 리덕스 상태에 업데이트
-  // 3. 가져온 토큰을 로컬 스토리지에 저장
+  // 1. 현재 로그인 폼 필드 상태를 기반으로 토큰 fetch 요청(구현 완료)
+  // 2. 가져온 토큰을 리덕스 상태에 업데이트 (구현 완료)
+  // 3. 갖고 있던 ID, PW 상태 초기화(구현 완료)
+  // 4. 가져온 토큰을 로컬 스토리지에 저장
+  return async (dispatch, getState) => {
+    const { loginFields: { email, password } } = getState();
+
+    const { accessToken } = await fetchAccessToken({ email, password });
+
+    dispatch(setAccessToken({ accessToken }));
+    dispatch(changeLoginFields({ name: 'email', value: '' }));
+    dispatch(changeLoginFields({ name: 'password', value: '' }));
+  };
 }
