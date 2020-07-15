@@ -93,6 +93,15 @@ export function changeLoginFields({ name, value }) {
   };
 }
 
+export function setAccessToken({ accessToken }) {
+  return {
+    type: 'setAccessToken',
+    payload: {
+      accessToken,
+    },
+  };
+}
+
 export function createToken() {
   // TODO
   // 1. 현재 로그인 폼 필드 상태를 기반으로 토큰 fetch 요청
