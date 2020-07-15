@@ -6,13 +6,15 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const handleOnChange = jest.fn();
+  const handleOnSubmit = jest.fn();
 
   const renderComponent = () => render((
-    <LoginForm onChange={handleOnChange} />
+    <LoginForm onChange={handleOnChange} onSubmit={handleOnSubmit} />
   ));
 
   beforeEach(() => {
     handleOnChange.mockClear();
+    handleOnSubmit.mockClear();
   });
 
   it('render Login Title', () => {
@@ -41,6 +43,17 @@ describe('LoginForm', () => {
       fireEvent.change(passwordInput, { target: { name: 'password', value: '비밀번호' } });
       // Then
       expect(handleOnChange).toBeCalledTimes(1);
+    });
+  });
+
+  context('when click submit-button', () => {
+    it('fires submit event', () => {
+      const { getByRole } = renderComponent();
+      // When
+      const submitButton = getByRole('button', { name: 'Submit' });
+      fireEvent.submit(submitButton);
+      // Then
+      expect(handleOnSubmit).toBeCalledTimes(1);
     });
   });
 });
