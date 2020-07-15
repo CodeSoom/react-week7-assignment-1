@@ -12,6 +12,23 @@ describe('LoginForm', () => {
     expect(getByLabelText('Password')).not.toBeNull();
   });
 
+  it('listen change events', () => {
+    const handleChange = jest.fn();
+
+    const { getByLabelText } = render(
+      <LoginForm onChange={handleChange} />,
+    );
+
+    expect(getByLabelText('E-mail')).not.toBeNull();
+    expect(getByLabelText('Password')).not.toBeNull();
+
+    fireEvent.change(getByLabelText('E-mail'), {
+      target: { value: 'tester@example.com' },
+    });
+
+    expect(handleChange).toBeCalled();
+  });
+
   it('renders Log In button', () => {
     const handleSubmit = jest.fn();
 
