@@ -24,4 +24,38 @@ describe('LoginForm', () => {
       expect(handleSubmit).toBeCalled();
     });
   });
+
+  context('when change the Email-Input-Value', () => {
+    it('changed input value', () => {
+      const handleChange = jest.fn();
+      const handleSubmit = jest.fn();
+
+      const { getByLabelText } = render(
+        <LoginForm onSubmit={handleSubmit} onChange={handleChange} />,
+      );
+
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'test@test.com' },
+      });
+
+      expect(handleChange).toBeCalled();
+    });
+  });
+
+  context('when change the Password-Input-Value', () => {
+    it('changed input value', () => {
+      const handleChange = jest.fn();
+      const handleSubmit = jest.fn();
+
+      const { getByLabelText } = render(
+        <LoginForm onSubmit={handleSubmit} onChange={handleChange} />,
+      );
+
+      fireEvent.change(getByLabelText('Password'), {
+        target: { value: 'password' },
+      });
+
+      expect(handleChange).toBeCalled();
+    });
+  });
 });
