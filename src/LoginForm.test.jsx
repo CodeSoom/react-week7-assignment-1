@@ -11,7 +11,7 @@ describe('LoginForm', () => {
   beforeEach(() => {
     handleChange.mockClear();
     handleSubmit.mockClear();
-  })
+  });
 
   function renderLoginForm({ email, password }) {
     return render((
@@ -23,29 +23,30 @@ describe('LoginForm', () => {
     ));
   }
   it('renders input controls and listens change events', () => {
-
     const email = 'test@test';
     const password = '1234';
 
     const { getByLabelText } = renderLoginForm({ email, password });
 
     const controls = [
-      { 
+      {
         label: 'E-mail',
         name: 'email',
         origin: email,
-        value: 'tester@example.com'
+        value: 'tester@example.com',
       },
-      { 
+      {
         label: 'Password',
         name: 'password',
         origin: password,
-        value: 'test'
+        value: 'test',
       },
     ];
 
-    controls.forEach(({label, name, origin, value}) => {
-      const input = getByLabelText(label)
+    controls.forEach(({
+      label, name, origin, value,
+    }) => {
+      const input = getByLabelText(label);
 
       expect(input.value).toBe(origin);
 
@@ -63,5 +64,5 @@ describe('LoginForm', () => {
     fireEvent.click(getByText('Log In'));
 
     expect(handleSubmit).toBeCalled();
-  })
+  });
 });

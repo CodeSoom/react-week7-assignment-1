@@ -89,9 +89,8 @@ export function loadRestaurant({ restaurantId }) {
 export function changeLoginField({ name, value }) {
   return {
     type: 'changeLoginField',
-    payload: { name, value }
-  }
-
+    payload: { name, value },
+  };
 }
 
 export function requestLogin() {
@@ -99,5 +98,5 @@ export function requestLogin() {
     // state = email, password
     // HTTP POST <- email, pasword
     // dipatch(setAccessToken(accessToken));
-  }
+  };
 }

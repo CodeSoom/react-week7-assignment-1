@@ -5,7 +5,7 @@ export default function LoginForm({ fields, onChange, onSubmit }) {
 
   function handleChange(event) {
     const { target: { name, value } } = event;
-    onChange({ name, value })
+    onChange({ name, value });
     // TODO:
   }
 
