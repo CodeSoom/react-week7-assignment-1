@@ -62,4 +62,10 @@ describe('App', () => {
       renderComponent({ path: '/restaurants/1' });
     });
   });
+
+  describe('with path /login', () => {
+    it('renders Login Page', () => {
+      renderComponent({ path: '/login' });
+    });
+  });
 });

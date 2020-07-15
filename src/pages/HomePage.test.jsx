@@ -15,4 +15,5 @@ test('HomePage', () => {
 
   expect(queryByText('About')).not.toBeNull();
   expect(queryByText('Restaurants')).not.toBeNull();
+  expect(queryByText('Login')).not.toBeNull();
 });
