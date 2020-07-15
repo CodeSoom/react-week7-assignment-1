@@ -7,6 +7,7 @@ import {
   selectRegion,
   selectCategory,
   setRestaurant,
+  setSessionInput,
 } from './actions';
 
 import CATEGORIES from '../../fixtures/categories';
@@ -24,6 +25,12 @@ describe('reducer', () => {
       selectedRegion: null,
       selectedCategory: null,
       selectedRestaurant: null,
+      session: {
+        input: {
+          email: '',
+          password: '',
+        },
+      },
     };
 
     it('returns initialState', () => {
@@ -108,6 +115,31 @@ describe('reducer', () => {
       const state = reducer(initialState, setRestaurant(RESTAURANT));
 
       expect(state.restaurant).toEqual(RESTAURANT);
+    });
+  });
+
+  describe('setSessionInput', () => {
+    it('changes session', () => {
+      const initialState = {
+        session: {
+          input: {
+            email: '',
+            password: '',
+          },
+        },
+      };
+
+      const input = {
+        email: '이메일',
+        password: '비밀번호',
+      };
+
+      let state = initialState;
+      Object.entries(input).forEach(([name, value]) => {
+        state = reducer(state, setSessionInput(name, value));
+      });
+
+      expect(state.session.input).toEqual(input);
     });
   });
 });

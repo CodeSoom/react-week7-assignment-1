@@ -8,6 +8,12 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   selectedRestaurant: null,
+  session: {
+    input: {
+      email: '',
+      password: '',
+    },
+  },
 };
 
 const reducers = {
@@ -55,6 +61,18 @@ const reducers = {
     };
   },
 
+  setSessionInput(state, { payload: { sessionInput } }) {
+    return {
+      ...state,
+      session: {
+        ...state.session,
+        input: {
+          ...state.session.input,
+          ...sessionInput,
+        },
+      },
+    };
+  },
 };
 
 function defaultReducer(state) {
