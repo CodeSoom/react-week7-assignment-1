@@ -86,9 +86,17 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
+export function changeLoginField({ name, value }) {
+  return {
+    type: 'changeLoginField',
+    payload: { name, value }
+  }
+
+}
+
 export function requestLogin() {
   return async (dispatch, getState) => {
-    // state = emai, password
+    // state = email, password
     // HTTP POST <- email, pasword
     // dipatch(setAccessToken(accessToken));
   }
