@@ -153,7 +153,7 @@ describe('reducer', () => {
   describe('setAccessToken', () => {
     it('changes AccessToken', () => {
       const initialState = {
-        accessToken: null,
+        accessToken: '',
       };
 
       const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
