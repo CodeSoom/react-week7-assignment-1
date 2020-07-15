@@ -93,4 +93,5 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
+// TO-DO: implement
 export function requestLogin() {}
