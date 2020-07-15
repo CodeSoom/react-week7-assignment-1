@@ -36,6 +36,8 @@ describe('TokenContainer', () => {
 
   context('without accessToken in localStorage', () => {
     it('do nothing', () => {
+      localStorage.removeItem('accessToken');
+
       render((
         <TokenContainer />
       ));

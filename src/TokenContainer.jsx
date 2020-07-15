@@ -9,7 +9,9 @@ export default function TokenContainer() {
 
   const accessToken = localStorage.getItem('accessToken');
 
-  dispatch(setAccessToken({ accessToken }));
+  if (accessToken) {
+    dispatch(setAccessToken({ accessToken }));
+  }
 
   return (
     <div>hello</div>
