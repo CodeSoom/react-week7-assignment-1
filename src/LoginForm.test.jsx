@@ -44,4 +44,17 @@ describe('LoginForm', () => {
       expect(handleChange).toBeCalledWith({ name, value });
     });
   });
+
+  it('renders "Log In" button', () => {
+    const handleSubmit = jest.fn();
+    const { getByText } = render((
+      <LoginForm 
+        onSubmit={handleSub}
+      />
+    ));
+
+    fireEvent.click(getByText('Log In'));
+
+    expect(handleSubmit).toBeCalled();
+  })
 });
