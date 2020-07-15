@@ -2,6 +2,10 @@ import React from 'react';
 
 import { useDispatch } from 'react-redux';
 
+import {
+  MemoryRouter,
+} from 'react-router-dom';
+
 import { render } from '@testing-library/react';
 
 import { setAccessToken } from './actions';
@@ -19,10 +23,16 @@ describe('TokenContainer', () => {
     dispatch.mockClear();
   });
 
-  it('renders the route page', () => {
-    const { container } = render((
-      <TokenContainer />
+  function renderTokenContainer() {
+    return render((
+      <MemoryRouter>
+        <TokenContainer />
+      </MemoryRouter>
     ));
+  }
+
+  it('renders the route page', () => {
+    const { container } = renderTokenContainer();
 
     expect(container).toHaveTextContent('헤더');
   });
@@ -34,9 +44,7 @@ describe('TokenContainer', () => {
       localStorage.setItem('accessToken', accessToken);
       useDispatch.mockImplementation(() => dispatch);
 
-      render((
-        <TokenContainer />
-      ));
+      renderTokenContainer();
 
       expect(dispatch).toBeCalledWith(setAccessToken({ accessToken }));
     });
@@ -46,9 +54,7 @@ describe('TokenContainer', () => {
     it('do nothing', () => {
       localStorage.removeItem('accessToken');
 
-      render((
-        <TokenContainer />
-      ));
+      renderTokenContainer();
 
       expect(dispatch).not.toBeCalled();
     });

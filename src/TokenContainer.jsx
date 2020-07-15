@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import { setAccessToken } from './actions';
 
+import RoutePage from './RoutePage';
+
 export default function TokenContainer() {
   const dispatch = useDispatch();
 
@@ -14,6 +16,6 @@ export default function TokenContainer() {
   }
 
   return (
-    <div>hello</div>
+    <RoutePage />
   );
 }
