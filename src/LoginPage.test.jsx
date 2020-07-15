@@ -6,13 +6,13 @@ import LoginPage from './LoginPage';
 
 describe('LoginPage', () => {
   it('renders LoginPage', () => {
-    const { container } = render(<LoginPage />);
+    const { container, getByLabelText, queryByRole } = render(<LoginPage />);
 
     expect(container).toHaveTextContent('로그인 페이지');
 
-    expect(container).toHaveTextContent('E-mail');
-    expect(container).toHaveTextContent('Password');
+    expect(getByLabelText('E-mail')).toHaveAttribute('type', 'email');
+    expect(getByLabelText('Password')).toHaveAttribute('type', 'password');
 
-    expect(container).toHaveTextContent('LogIn');
+    expect(queryByRole('button', { name: 'LogIn' })).toBeInTheDocument();
   });
 });
