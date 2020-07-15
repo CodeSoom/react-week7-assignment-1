@@ -53,6 +53,16 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
+
+  changeLoginField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      loginFields: {
+        ...state.loginFields,
+        [name]: value,
+      },
+    };
+  },
 };
 
 function defaultReducer(state) {
