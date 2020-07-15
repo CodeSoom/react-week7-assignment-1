@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
@@ -18,6 +18,13 @@ describe('LoginFormContainer', () => {
   beforeEach(() => {
     dispatch.mockClear();
     requestLogin.mockClear();
+
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: 'test@test.com',
+        password: 'password1',
+      },
+    }));
   });
 
   function renderLoginFormContainer() {
