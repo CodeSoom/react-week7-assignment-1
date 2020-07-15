@@ -37,18 +37,18 @@ describe('LoginFormContainer', () => {
       });
     });
 
-    // it('change password input', () => {
-    //   const { getByLabelText } = render(<LoginContainer />);
+    it('change password input', () => {
+      const { getByLabelText } = render(<LoginFormContainer />);
 
-    //   fireEvent.change(getByLabelText('Password'), {
-    //     targe: { value: 'newPassword' },
-    //   });
+      fireEvent.change(getByLabelText('Password'), {
+        target: { value: 'newPassword' },
+      });
 
-    //   expect(dispatch).toBeCalledWith({
-    //     type: 'changeLoginField',
-    //     payload: { name: 'password', value: 'newPassword' },
-    //   });
-    // });
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: { name: 'password', value: 'newPassword' },
+      });
+    });
   });
 
   // it('click [Login] button ', () => {
