@@ -24,6 +24,7 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
+      accessToken: '',
     };
 
     it('returns initialState', () => {
