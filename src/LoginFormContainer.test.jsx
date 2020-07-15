@@ -52,7 +52,13 @@ describe('LoginFormContainer', () => {
     });
   });
 
-  // it('click [Login] button ', () => {
-  //   expect(queryByRole('button', { name: 'LogIn' })).toBeInTheDocument();
-  // });
+  it('click [Login] button ', () => {
+    const { getByRole } = render(<LoginFormContainer />);
+
+    fireEvent.click(getByRole('button', { name: 'LogIn' }));
+
+    expect(dispatch).toBeCalledWith({
+      type: 'login',
+    });
+  });
 });
