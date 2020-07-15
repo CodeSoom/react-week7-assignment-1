@@ -26,7 +26,7 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' }
+      restaurant: { id: 1, name: '마녀주방' },
     }));
   });
 
@@ -34,7 +34,7 @@ describe('App', () => {
     return render(
       <MemoryRouter initialEntries={[path]}>
         <App />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
   }
 
