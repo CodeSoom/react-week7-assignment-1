@@ -156,22 +156,20 @@ describe('actions', () => {
   });
 
   describe('login', () => {
-    beforeEach(() => {
-      store = mockStore({
-        session: {
-          accessToken: null,
-        },
-      });
-    });
-
     context('with session input', () => {
-      const input = {
-        email: '이메일',
-        password: '비밀번호',
-      };
+      beforeEach(() => {
+        store = mockStore({
+          session: {
+            input: {
+              email: '이메일',
+              password: '비밀번호',
+            },
+          },
+        });
+      });
 
       it('runs setAccessToken', async () => {
-        await store.dispatch(login(input));
+        await store.dispatch(login());
 
         const actions = store.getActions();
 
@@ -180,13 +178,19 @@ describe('actions', () => {
     });
 
     context('without session input', () => {
-      const input = {
-        email: '',
-        password: '',
-      };
+      beforeEach(() => {
+        store = mockStore({
+          session: {
+            input: {
+              email: '',
+              password: '',
+            },
+          },
+        });
+      });
 
       it('does\'nt run any actions', async () => {
-        await store.dispatch(login(input));
+        await store.dispatch(login());
 
         const actions = store.getActions();
 

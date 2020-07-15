@@ -106,8 +106,10 @@ export function setAccessToken(accessToken) {
   };
 }
 
-export function login({ email, password }) {
-  return async (dispatch) => {
+export function login() {
+  return async (dispatch, getState) => {
+    const { session: { input: { email, password } } } = getState();
+
     if (!email || !password) {
       return;
     }
