@@ -15,6 +15,11 @@ export default function LoginFormContainer() {
   };
 
   return (
-    <LoginForm onSubmit={handleSubmit} />
+    <LoginForm
+      email={email}
+      password={password}
+      onChange={handleChange}
+      onSubmit={handleSubmit}
+    />
   );
 }

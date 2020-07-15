@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
-import { requestLogin } from './actions';
+import { requestLogin, changeLoginField } from './actions';
 
 jest.mock('react-redux');
 jest.mock('./actions');
@@ -24,11 +24,19 @@ describe('LoginFormContainer', () => {
     return render(<LoginFormContainer />);
   }
 
-  it('renders email and password input', () => {
+  it('input email and password', () => {
+    const inputElements = [
+      { label: 'E-mail', name: 'email', value: 'tester@test.com' },
+      { label: 'Password', name: 'password', value: 'password' },
+    ];
+
     const { getByLabelText } = renderLoginFormContainer();
 
-    expect(getByLabelText('E-mail')).toBeInTheDocument();
-    expect(getByLabelText('Password')).toBeInTheDocument();
+    inputElements.forEach(({ label, name, value }) => {
+      fireEvent.change(getByLabelText(label), { target: { value } });
+
+      expect(changeLoginField).toBeCalledWith({ name, value });
+    });
   });
 
   it('request login', () => {
