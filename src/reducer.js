@@ -11,6 +11,7 @@ const initialState = {
     email: '',
     password: '',
   },
+  accessToken: '',
 };
 
 const reducers = {
@@ -65,6 +66,13 @@ const reducers = {
         ...state.loginFields,
         [name]: value,
       },
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
     };
   },
 };
