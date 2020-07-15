@@ -6,13 +6,13 @@ import { render } from '@testing-library/react';
 import HomePage from './HomePage';
 
 describe('HomePage', () => {
-  const links = ['About', 'Restaurants'];
+  const links = ['About', 'Restaurants', 'Login'];
 
-  const renderHomePage = () => render(
+  const renderHomePage = () => render((
     <MemoryRouter>
       <HomePage />
     </MemoryRouter>
-  );
+  ));
 
   it('renders title', () => {
     const { container } = renderHomePage();
