@@ -1,11 +1,18 @@
 import React from 'react';
 
+import { useDispatch } from 'react-redux';
+
+import LoginForm from './LoginForm';
+
 export default function LoginFormContainer() {
+  const dispatch = useDispatch();
+
+  function handleSubmit() {
+    dispatch();
+    // TODO : dispatch(requestLogin)
+  }
+
   return (
-    <div>
-      <h2>Log In</h2>
-      <label htmlFor="login-email">E-mail</label>
-      <label htmlFor="login-password">Password</label>
-    </div>
+    <LoginForm onSubmit={handleSubmit} />
   );
 }
