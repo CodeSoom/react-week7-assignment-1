@@ -5,6 +5,23 @@ import { fireEvent, render } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
+  const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
+
+  function renderLoginForm() {
+    return render(
+      <LoginForm
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+      />,
+    );
+  }
+
+  beforeEach(() => {
+    handleChange.mockClear();
+    handleSubmit.mockClear();
+  });
+
   context('renders LoginForm', () => {
     const { getByLabelText, container } = render(<LoginForm />);
 
@@ -15,9 +32,7 @@ describe('LoginForm', () => {
 
   context('when click login button', () => {
     it('request login', () => {
-      const handleSubmit = jest.fn();
-
-      const { container } = render(<LoginForm onSubmit={handleSubmit} />);
+      const { container } = renderLoginForm();
 
       fireEvent.click(container.querySelector('button'));
 
@@ -27,35 +42,31 @@ describe('LoginForm', () => {
 
   context('when change the Email-Input-Value', () => {
     it('changed input value', () => {
-      const handleChange = jest.fn();
-      const handleSubmit = jest.fn();
-
-      const { getByLabelText } = render(
-        <LoginForm onSubmit={handleSubmit} onChange={handleChange} />,
-      );
+      const { getByLabelText } = renderLoginForm();
 
       fireEvent.change(getByLabelText('E-mail'), {
         target: { value: 'test@test.com' },
       });
 
-      expect(handleChange).toBeCalled();
+      expect(handleChange).toBeCalledWith({
+        name: 'email',
+        value: 'test@test.com',
+      });
     });
   });
 
   context('when change the Password-Input-Value', () => {
     it('changed input value', () => {
-      const handleChange = jest.fn();
-      const handleSubmit = jest.fn();
-
-      const { getByLabelText } = render(
-        <LoginForm onSubmit={handleSubmit} onChange={handleChange} />,
-      );
+      const { getByLabelText } = renderLoginForm();
 
       fireEvent.change(getByLabelText('Password'), {
-        target: { value: 'password' },
+        target: { value: '1234' },
       });
 
-      expect(handleChange).toBeCalled();
+      expect(handleChange).toBeCalledWith({
+        name: 'password',
+        value: '1234',
+      });
     });
   });
 });
