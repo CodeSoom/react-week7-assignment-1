@@ -21,14 +21,16 @@ describe('TokenContainer', () => {
 
   context('with accessToken in localStorage', () => {
     it('update redux state', () => {
-      localStorage.setItem('accessToken', accessTokenFixture);
+      const { accessToken } = accessTokenFixture;
+
+      localStorage.setItem('accessToken', accessToken);
       useDispatch.mockImplementation(() => dispatch);
 
       render((
         <TokenContainer />
       ));
 
-      expect(dispatch).toBeCalledWith(setAccessToken({ accessToken: accessTokenFixture }));
+      expect(dispatch).toBeCalledWith(setAccessToken({ accessToken }));
     });
   });
 });
