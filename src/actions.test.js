@@ -117,17 +117,17 @@ describe('actions', () => {
     });
 
     it('dispatches setAccessToken and setLoginFields', async () => {
-      await store.dispatch(createToken({ accessToken: accessTokenFixture }));
+      await store.dispatch(createToken(accessTokenFixture));
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken({ accessToken: accessTokenFixture }));
+      expect(actions[0]).toEqual(setAccessToken(accessTokenFixture));
       expect(actions[1]).toEqual(changeLoginFields({ name: 'email', value: '' }));
       expect(actions[2]).toEqual(changeLoginFields({ name: 'password', value: '' }));
     });
 
     it('set acessToken to local storage', async () => {
-      await store.dispatch(createToken({ accessToken: accessTokenFixture }));
+      await store.dispatch(createToken(accessTokenFixture));
 
       expect(localStorage.getItem('accessToken')).toBe('TESTACESSTOKEN');
     });

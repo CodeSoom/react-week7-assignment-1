@@ -17,5 +17,5 @@ export async function fetchRestaurant({ restaurantId }) {
 }
 
 export async function fetchAccessToken({ email, password }) {
-  return { accessToken };
+  return accessToken;
 }

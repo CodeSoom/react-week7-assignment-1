@@ -1,3 +1,5 @@
-const accessToken = 'TESTACESSTOKEN';
+const accessToken = {
+  accessToken: 'TESTACESSTOKEN',
+};
 
 export default accessToken;
