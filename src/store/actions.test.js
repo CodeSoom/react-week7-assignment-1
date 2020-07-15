@@ -10,6 +10,7 @@ import {
   setRestaurants,
   getRestaurantById,
   setRestaurant,
+  setSessionInput,
 } from './actions';
 
 const middlewares = [thunk];
@@ -114,6 +115,40 @@ describe('actions', () => {
         const actions = store.getActions();
 
         expect(actions).toHaveLength(0);
+      });
+    });
+  });
+
+  describe('setSessionInput', () => {
+    beforeEach(() => {
+      store = mockStore({
+        session: {
+          input: {
+            email: '',
+            password: '',
+          },
+        },
+      });
+    });
+
+    context('with email, password', () => {
+      const input = {
+        email: '이메일',
+        password: '비밀번호',
+      };
+
+      it('sets session-input ', async () => {
+        Object.entries(input).forEach(([name, value]) => {
+          // When
+          const action = store.dispatch(setSessionInput(name, value));
+          // Then
+          expect(action.type).toBe('setSessionInput');
+          expect(action.payload.sessionInput).toEqual({ [name]: value });
+        });
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(2);
       });
     });
   });

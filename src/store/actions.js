@@ -86,3 +86,14 @@ export function getRestaurantById(restaurantId) {
     dispatch(setRestaurant(restaurant));
   };
 }
+
+export function setSessionInput(name, value) {
+  return {
+    type: 'setSessionInput',
+    payload: {
+      sessionInput: {
+        [name]: value,
+      },
+    },
+  };
+}
