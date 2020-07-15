@@ -6,9 +6,13 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { getItemFromStorage } from './services/storage';
+
 import App from './App';
 
 import RESTAURANT from '../fixtures/restaurant';
+
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -69,6 +73,17 @@ describe('App', () => {
   describe('with path /login', () => {
     it('renders Login Page', () => {
       renderComponent({ path: '/login' });
+    });
+
+    context('when storage has access-token', () => {
+      beforeEach(() => {
+        getItemFromStorage.mockImplementation(() => 'ACCESS_TOKEN');
+      });
+
+      it('renders Login Page with Auto Login', () => {
+        renderComponent({ path: '/login' });
+        expect(dispatch).toBeCalledTimes(1);
+      });
     });
   });
 });

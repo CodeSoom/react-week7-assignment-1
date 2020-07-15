@@ -6,6 +6,8 @@ import {
   postSession,
 } from '../services/api';
 
+import { setItemToStorage } from '../services/storage';
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -114,7 +116,12 @@ export function login() {
       return;
     }
 
-    const { accessToken } = await postSession({ email, password });
-    dispatch(setAccessToken(accessToken));
+    try {
+      const { accessToken } = await postSession({ email, password });
+      dispatch(setAccessToken(accessToken));
+      setItemToStorage('accessToken', accessToken);
+    } catch (e) {
+      // todo: error action
+    }
   };
 }

@@ -2,6 +2,11 @@ import React from 'react';
 
 import { Switch, Route, Link } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+import { setAccessToken } from './store/actions';
+
+import { getItemFromStorage } from './services/storage';
+
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import RestaurantListPage from './pages/RestaurantListPage';
@@ -10,6 +15,13 @@ import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 export default function App() {
+  const dispatch = useDispatch();
+
+  const accessToken = getItemFromStorage('accessToken');
+  if (accessToken) {
+    dispatch(setAccessToken(accessToken));
+  }
+
   return (
     <div>
       <header>
