@@ -8,12 +8,14 @@ import {
   selectCategory,
   setRestaurant,
   setSessionInput,
+  setAccessToken,
 } from './actions';
 
 import CATEGORIES from '../../fixtures/categories';
 import REGIONS from '../../fixtures/regions';
 import RESTAURANTS from '../../fixtures/restaurants';
 import RESTAURANT from '../../fixtures/restaurant';
+import ACCESS_TOKEN from '../../fixtures/accessToken';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -30,6 +32,7 @@ describe('reducer', () => {
           email: '',
           password: '',
         },
+        accessToken: null,
       },
     };
 
@@ -140,6 +143,20 @@ describe('reducer', () => {
       });
 
       expect(state.session.input).toEqual(input);
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        session: {
+          accessToken: null,
+        },
+      };
+
+      const state = reducer(initialState, setAccessToken(ACCESS_TOKEN));
+
+      expect(state.session.accessToken).toEqual(ACCESS_TOKEN);
     });
   });
 });

@@ -13,6 +13,7 @@ const initialState = {
       email: '',
       password: '',
     },
+    accessToken: null,
   },
 };
 
@@ -70,6 +71,16 @@ const reducers = {
           ...state.session.input,
           ...sessionInput,
         },
+      },
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      session: {
+        ...state.session,
+        accessToken,
       },
     };
   },
