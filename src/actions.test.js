@@ -15,6 +15,8 @@ import {
   changeLoginFields,
 } from './actions';
 
+import accessTokenFixture from '../fixtures/accessToken';
+
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
@@ -115,21 +117,17 @@ describe('actions', () => {
     });
 
     it('dispatches setAccessToken and setLoginFields', async () => {
-      const accessToken = 'TESTACESSTOKEN';
-
-      await store.dispatch(createToken({ accessToken }));
+      await store.dispatch(createToken({ accessToken: accessTokenFixture }));
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken({ accessToken }));
+      expect(actions[0]).toEqual(setAccessToken({ accessToken: accessTokenFixture }));
       expect(actions[1]).toEqual(changeLoginFields({ name: 'email', value: '' }));
       expect(actions[2]).toEqual(changeLoginFields({ name: 'password', value: '' }));
     });
 
     it('set acessToken to local storage', async () => {
-      const accessToken = 'TESTACESSTOKEN';
-
-      await store.dispatch(createToken({ accessToken }));
+      await store.dispatch(createToken({ accessToken: accessTokenFixture }));
 
       expect(localStorage.getItem('accessToken')).toBe('TESTACESSTOKEN');
     });
