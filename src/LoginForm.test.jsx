@@ -49,7 +49,7 @@ describe('LoginForm', () => {
   it('renders login button', () => {
     const { getByText } = renderLoginForm('', '', handleSubmit, handleChange);
 
-    fireEvent.click(getByText('Log In'));
+    fireEvent.submit(getByText('Log In'));
 
     expect(handleSubmit).toBeCalled();
   });
