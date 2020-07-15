@@ -114,7 +114,7 @@ export function login() {
       return;
     }
 
-    const sessionToken = await postSession({ email, password });
-    dispatch(setAccessToken(sessionToken));
+    const { accessToken } = await postSession({ email, password });
+    dispatch(setAccessToken(accessToken));
   };
 }
