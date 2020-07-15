@@ -6,6 +6,10 @@ import { render, fireEvent } from '@testing-library/react';
 
 import LoginFormContainer from './LoginFormContainer';
 
+import {
+  login,
+} from './actions';
+
 jest.mock('react-redux');
 
 describe('LoginFormContainer', () => {
@@ -57,8 +61,6 @@ describe('LoginFormContainer', () => {
 
     fireEvent.click(getByRole('button', { name: 'LogIn' }));
 
-    expect(dispatch).toBeCalledWith({
-      type: 'login',
-    });
+    expect(dispatch).toBeCalledWith(login());
   });
 });
