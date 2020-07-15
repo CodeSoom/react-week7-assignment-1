@@ -33,4 +33,14 @@ describe('TokenContainer', () => {
       expect(dispatch).toBeCalledWith(setAccessToken({ accessToken }));
     });
   });
+
+  context('without accessToken in localStorage', () => {
+    it('do nothing', () => {
+      render((
+        <TokenContainer />
+      ));
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
 });
