@@ -3,6 +3,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postSession,
 } from '../services/api';
 
 export function setRegions(regions) {
@@ -95,5 +96,23 @@ export function setSessionInput(name, value) {
         [name]: value,
       },
     },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export function login({ email, password }) {
+  return async (dispatch) => {
+    if (!email || !password) {
+      return;
+    }
+
+    const sessionToken = await postSession({ email, password });
+    dispatch(setAccessToken(sessionToken));
   };
 }

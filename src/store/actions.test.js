@@ -11,6 +11,8 @@ import {
   getRestaurantById,
   setRestaurant,
   setSessionInput,
+  setAccessToken,
+  login,
 } from './actions';
 
 const middlewares = [thunk];
@@ -149,6 +151,46 @@ describe('actions', () => {
         const actions = store.getActions();
 
         expect(actions).toHaveLength(2);
+      });
+    });
+  });
+
+  describe('login', () => {
+    beforeEach(() => {
+      store = mockStore({
+        session: {
+          accessToken: null,
+        },
+      });
+    });
+
+    context('with session input', () => {
+      const input = {
+        email: '이메일',
+        password: '비밀번호',
+      };
+
+      it('runs setAccessToken', async () => {
+        await store.dispatch(login(input));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setAccessToken({}));
+      });
+    });
+
+    context('without session input', () => {
+      const input = {
+        email: '',
+        password: '',
+      };
+
+      it('does\'nt run any actions', async () => {
+        await store.dispatch(login(input));
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
       });
     });
   });
