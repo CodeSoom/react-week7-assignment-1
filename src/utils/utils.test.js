@@ -1,4 +1,4 @@
-import { get, equal } from './utils';
+import { get, equal } from './index';
 
 test('get', () => {
   const state = {
