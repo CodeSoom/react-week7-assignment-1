@@ -70,15 +70,18 @@ describe('api', () => {
     });
   });
 
-  describe('fetchAcessToken', async () => {
+  describe('fetchAcessToken', () => {
     beforeEach(() => {
       mockFetch(accessTokenFixture);
     });
-    const email = 'correctEmail@example.com';
-    const password = 'correctPassword';
 
-    const accessToken = await fetchAccessToken({ email, password });
+    it('returns accessToken', async () => {
+      const email = 'correctEmail@example.com';
+      const password = 'correctPassword';
 
-    expect(accessToken).toEqual(accessTokenFixture);
+      const accessToken = await fetchAccessToken({ email, password });
+
+      expect(accessToken).toEqual(accessTokenFixture);
+    });
   });
 });
