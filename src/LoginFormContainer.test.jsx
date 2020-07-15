@@ -2,14 +2,21 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
+import { useDispatch } from 'react-redux';
+
 import LoginFormContainer from './LoginFormContainer';
 
 import { requestLogin } from './actions';
 
+jest.mock('react-redux');
 jest.mock('./actions');
 
 describe('LoginFormContainer', () => {
+  const dispatch = jest.fn();
+  useDispatch.mockImplementation(() => dispatch);
+
   beforeEach(() => {
+    dispatch.mockClear();
     requestLogin.mockClear();
   });
 
@@ -27,7 +34,7 @@ describe('LoginFormContainer', () => {
   it('request login', () => {
     const { getByText } = renderLoginFormContainer();
 
-    fireEvent.click(getByText('Log In'));
+    fireEvent.submit(getByText('Log In'));
 
     expect(requestLogin).toBeCalled();
   });
