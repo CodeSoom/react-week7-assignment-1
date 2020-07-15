@@ -29,6 +29,9 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: RESTAURANT,
+      session: {
+        accessToken: null,
+      },
     }));
   });
 

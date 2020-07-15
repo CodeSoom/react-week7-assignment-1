@@ -1,12 +1,12 @@
 import React from 'react';
 
-import LoginFormContainer from '../containers/LoginFormContainer';
+import SessionContainer from '../containers/SessionContainer';
 
 export default function LoginPage() {
   return (
     <div>
       <h2>Log In</h2>
-      <LoginFormContainer />
+      <SessionContainer />
     </div>
   );
 }
