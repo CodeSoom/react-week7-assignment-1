@@ -5,22 +5,38 @@ import { render, fireEvent } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  it('renders input controls', () => {
-    const { getByLabelText, getByText } = render(<LoginForm />);
+  const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
-    expect(getByLabelText('Email')).toBeInTheDocument();
-    expect(getByLabelText('Password')).toBeInTheDocument();
+  beforeEach(() => {
+    handleChange.mockClear();
+    handleSubmit.mockClear();
+  });
+
+  function renderLoginForm({ email, password } = {}) {
+    return render((
+      <LoginForm
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+        fields={{ email, password }}
+      />
+    ));
+  }
+
+  it('renders input controls', () => {
+    const email = 'test@t.net';
+    const password = '1111';
+
+    const { getByLabelText, getByText } = renderLoginForm({ email, password });
+
+    expect(getByLabelText('Email').value).toBe('test@t.net');
+    expect(getByLabelText('Password').value).toBe('1111');
+
     expect(getByText('Login')).toBeInTheDocument();
   });
 
   it('listens change event', () => {
-    const handleChange = jest.fn();
-
-    const { getByLabelText } = render((
-      <LoginForm
-        onChange={handleChange}
-      />
-    ));
+    const { getByLabelText } = renderLoginForm();
 
     const controls = [
       { label: 'Email', value: 'test@test.com' },
@@ -37,13 +53,7 @@ describe('LoginForm', () => {
   });
 
   it('listens click event', () => {
-    const handleSubmit = jest.fn();
-
-    const { getByText } = render((
-      <LoginForm
-        onSubmit={handleSubmit}
-      />
-    ));
+    const { getByText } = renderLoginForm();
 
     fireEvent.click(getByText('Login'));
 
