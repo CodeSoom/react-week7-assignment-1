@@ -31,6 +31,7 @@ describe('App', () => {
         email: 'test@example.com',
         password: 'password',
       },
+      accessToken: '',
     }));
   });
 

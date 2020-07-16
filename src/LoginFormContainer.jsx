@@ -16,6 +16,10 @@ export default function LoginFormContainer() {
     loginFields: state.loginFields,
   }));
 
+  const { accessToken } = useSelector((state) => ({
+    accessToken: state.accessToken,
+  }));
+
   function handleChange({ name, value }) {
     dispatch(changeLoginFields({ name, value }));
   }
@@ -25,10 +29,14 @@ export default function LoginFormContainer() {
   }
 
   return (
-    <LoginForm
-      loginFields={loginFields}
-      onChange={handleChange}
-      onClick={handleClick}
-    />
+    (accessToken === '')
+      ? (
+        <LoginForm
+          loginFields={loginFields}
+          onChange={handleChange}
+          onClick={handleClick}
+        />
+      )
+      : <button type="button">Log out</button>
   );
 }
