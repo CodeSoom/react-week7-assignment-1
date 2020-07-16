@@ -104,21 +104,39 @@ describe('actions', () => {
   });
 
   describe('login', () => {
-    beforeEach(() => {
-      store = mockStore({
-        loginFields: {
-          email: 'newEmail@example.com',
-          password: 'newPassword',
-        },
+    context('with loginFields', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: 'newEmail@example.com',
+            password: 'newPassword',
+          },
+        });
+      });
+
+      it('dispatchs setAccessToken', async () => {
+        await store.dispatch(login());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setAccessToken(null));
       });
     });
 
-    it('dispatchs setAccessToken', async () => {
-      await store.dispatch(login());
+    context('without loginFields', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: null,
+        });
+      });
 
-      const actions = store.getActions();
+      it('does\'nt run any actions', async () => {
+        await store.dispatch(login());
 
-      expect(actions[0]).toEqual(setAccessToken(null));
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
     });
   });
 });
