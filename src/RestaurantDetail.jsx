@@ -4,6 +4,12 @@ import MenuItems from './MenuItems';
 
 import Reviews from './Reviews';
 
+function ReviewItem() {
+  return (
+    <p>리뷰작성</p>
+  )
+}
+
 export default function RestaurantDetail({ restaurant }) {
   const {
     name, address, menuItems, reviews,
@@ -19,7 +25,9 @@ export default function RestaurantDetail({ restaurant }) {
       </p>
       <h3>메뉴</h3>
       <MenuItems menuItems={menuItems} />
-      <h3>리뷰</h3>
+      <h3>리뷰 남기기</h3>
+      <ReviewItem />
+      <h3>리뷰 내용</h3>
       <Reviews reviews={reviews} />
     </div>
   );
