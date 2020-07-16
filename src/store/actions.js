@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postSession,
+  postReview,
 } from '../services/api';
 
 import {
@@ -132,4 +133,36 @@ export function login() {
 export function logout() {
   removeItemFromStorage('accessToken');
   return setAccessToken(null);
+}
+
+export function setReviewInput(name, value) {
+  return {
+    type: 'setReviewInput',
+    payload: {
+      reviewInput: {
+        [name]: value,
+      },
+    },
+  };
+}
+
+export function submitReview() {
+  return async (dispatch, getState) => {
+    const {
+      session: { accessToken },
+      restaurant: { id:restaurantId },
+      review: { input: { score, description } },
+    } = getState();
+
+    if (!score || !description) {
+      return;
+    }
+
+    try {
+      await postReview({ accessToken, restaurantId, score, description });
+      dispatch(getRestaurantById(restaurantId));
+    } catch (e) {
+      // todo: error action
+    }
+  };
 }

@@ -14,6 +14,8 @@ import {
   setAccessToken,
   login,
   logout,
+  setReviewInput,
+  submitReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -200,13 +202,105 @@ describe('actions', () => {
     });
   });
 
-  describe('login', () => {
+  describe('logout', () => {
     it('runs setAccessToken', async () => {
       await store.dispatch(logout());
 
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setAccessToken(null));
+    });
+  });
+
+  describe('setReviewInput', () => {
+    beforeEach(() => {
+      store = mockStore({
+        review: {
+          input: {
+            score: '',
+            description: '',
+          },
+        },
+      });
+    });
+
+    context('with score, description', () => {
+      const input = {
+        score: 5,
+        description: 'REVIEW_CONTENT',
+      };
+
+      it('sets review-input ', async () => {
+        Object.entries(input).forEach(([name, value]) => {
+          // When
+          const action = store.dispatch(setReviewInput(name, value));
+          // Then
+          expect(action.type).toBe('setReviewInput');
+          expect(action.payload.reviewInput).toEqual({ [name]: value });
+        });
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(2);
+      });
+    });
+  });
+
+  describe('submitReview', () => {
+    context('with review-input', () => {
+      beforeEach(() => {
+        store = mockStore({
+          session: {
+            accessToken: 'ACCESS_TOKEN'
+          },
+          restaurant: {
+            id: 'RESTAURANT_ID'
+          },
+          review: {
+            input: {
+              score: '5',
+              description: 'REVIEW_CONTENT',
+            },
+          },
+        });
+      });
+
+      it('runs getRestaurantById', async () => {
+        await store.dispatch(submitReview());
+
+        await store.dispatch(getRestaurantById('RESTAURANT_ID'));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(actions[1]);
+      });
+    });
+
+    context('without review input', () => {
+      beforeEach(() => {
+        store = mockStore({
+          session: {
+            accessToken: 'ACCESS_TOKEN'
+          },
+          restaurant: {
+            id: 'RESTAURANT_ID'
+          },
+          review: {
+            input: {
+              score: '',
+              description: '',
+            },
+          },
+        });
+      });
+
+      it('does\'nt run any actions', async () => {
+        await store.dispatch(submitReview());
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
     });
   });
 });
