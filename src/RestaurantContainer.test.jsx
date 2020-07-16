@@ -19,10 +19,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
-      reviewFields: {
-        score: '5',
-        description: 'Good!',
-      },
+      reviewFields: given.reviewFields,
     }));
   });
 
@@ -37,6 +34,10 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+    }));
+    given('reviewFields', () => ({
+      score: '',
+      description: '',
     }));
 
     it('renders name and address', () => {
@@ -64,6 +65,10 @@ describe('RestaurantContainer', () => {
         name: '마법사주방',
         address: '서울시 강남구',
       }));
+      given('reviewFields', () => ({
+        score: '5',
+        description: 'Good!',
+      }));
 
       const { queryByLabelText } = renderRestaurantContainer();
 
@@ -77,6 +82,10 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+    }));
+    given('reviewFields', () => ({
+      score: '',
+      description: '',
     }));
 
     const { queryByLabelText } = renderRestaurantContainer();
@@ -93,6 +102,10 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+    }));
+    given('reviewFields', () => ({
+      score: '',
+      description: '',
     }));
 
     const { queryByLabelText } = renderRestaurantContainer();
