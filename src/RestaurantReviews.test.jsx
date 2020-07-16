@@ -26,4 +26,18 @@ describe('RestaurantReviews', () => {
       expect(container).toHaveTextContent(reviews[0].description);
     });
   });
+
+  context('without reviews', () => {
+    it('renders no review message', () => {
+      const reviews = [];
+
+      const { container } = render(
+        <RestaurantReviews
+          reviews={reviews}
+        />,
+      );
+
+      expect(container).toHaveTextContent('리뷰가 없습니다.');
+    });
+  });
 });
