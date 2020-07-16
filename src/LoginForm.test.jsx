@@ -67,5 +67,15 @@ describe('LoginForm', () => {
 
       expect(getByText('Log out')).not.toBeNull();
     });
+
+    context('when “Log out” click event', () => {
+      it('listens click event', () => {
+        const { getByText } = renderLoginForm(ACCESS_TOKEN);
+
+        fireEvent.click(getByText('Log out'));
+
+        expect(onClick).toBeCalledWith('Log-out');
+      });
+    });
   });
 });
