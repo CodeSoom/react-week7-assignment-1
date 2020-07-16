@@ -6,8 +6,6 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getItemFromStorage } from './services/storage';
-
 import App from './App';
 
 import RESTAURANT from '../fixtures/restaurant';
@@ -16,8 +14,6 @@ jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
   useSelector: jest.fn(),
 }));
-
-jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -82,7 +78,7 @@ describe('App', () => {
 
     context('when storage has access-token', () => {
       beforeEach(() => {
-        getItemFromStorage.mockImplementation(() => 'ACCESS_TOKEN');
+        Storage.prototype.getItem = jest.fn(()=>'ACCESS_TOKEN');
       });
 
       it('renders Login Page with Auto Login', () => {
