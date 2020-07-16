@@ -27,6 +27,10 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      loginFields: {
+        email: 'test@test.com',
+        password: '1234',
+      },
     }));
   });
 
@@ -75,6 +79,16 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('with path /login', () => {
+    it('redners the login page', () => {
+      const { getByLabelText, container } = renderApp({ path: '/login' });
+
+      expect(getByLabelText('E-mail')).not.toBeNull();
+      expect(getByLabelText('Password')).not.toBeNull();
+      expect(container.querySelector('button')).toHaveTextContent('Log In');
     });
   });
 });
