@@ -121,4 +121,4 @@ npm run test:e2e
 - [X] 코드에 의도를 더 잘 드러내기 위해 logout을 처리하는 액션을 새로 생성하기(actions)
 - [X] accessToken과 관련된 로컬 스토리지를 다루는 서비스 추상화하기
 - [X] 로그인 버튼 클릭 테스트에 대해 더 구체적으로 정리하기(LoginFormContainer.test)
-- [ ] 테스트에 대한 정확한 설명 적기(LogoutButton.test)
+- [X] 중복되는 테스트 통합하기(LogoutButton.test)
