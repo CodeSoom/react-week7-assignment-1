@@ -102,4 +102,10 @@ export function loadRestaurant({ restaurantId }) {
 }
 
 // TO-DO: implement
-export function requestLogin() {}
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const { loginFields: { email, password } } = getState();
+    const accessToken = await login({ email, password });
+    dispatch(setAccessToken(accessToken));
+  };
+}
