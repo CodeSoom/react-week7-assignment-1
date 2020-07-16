@@ -14,13 +14,10 @@ import LogoutButton from './LogoutButton';
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  const { loginFields } = useSelector((state) => ({
-    loginFields: state.loginFields,
-  }));
-
-  const { accessToken } = useSelector((state) => ({
-    accessToken: state.accessToken,
-  }));
+  const {
+    loginFields,
+    accessToken,
+  } = useSelector((state) => (state));
 
   function handleChange({ name, value }) {
     dispatch(changeLoginFields({ name, value }));

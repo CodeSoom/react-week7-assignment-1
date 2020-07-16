@@ -116,7 +116,7 @@ npm run test:e2e
 - 코드의 목적이 무엇인지 다시 한번 생각해볼 것
   - ex. 기능상 로그인이 목적이고, 토큰 발급이 그에 대한 필요 행동이다. (반대가 아님)
 - [X] 테스트 실행하기 전에 상태 초기화하기(LoginForm.test)
-- [ ] useSelector를 더 간단하게 표현하기(LoginFormContainer)
+- [X] useSelector를 더 간단하게 표현하기(LoginFormContainer)
 - [ ] createToken 대신 의도가 더 잘 드러나도록 Login으로 이름 바꾸기(LoginFormContainer)
 - [ ] 코드에 의도를 더 잘 드러내기 위해 logout을 처리하는 액션을 새로 생성하기(actions)
 - [ ] 로컬 스토리지를 다루는 서비스 추상화하기
