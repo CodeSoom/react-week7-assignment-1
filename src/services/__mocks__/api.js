@@ -13,3 +13,7 @@ export async function fetchRestaurants() {
 export async function fetchRestaurant({ restaurantId }) {
   return {};
 }
+
+export async function fetchAccessToken(loginFields) {
+  return null;
+}
