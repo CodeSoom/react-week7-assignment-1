@@ -9,6 +9,7 @@ import {
   loadRestaurants,
   loadRestaurant,
   requestLogin,
+  sendReview,
   setAccessToken,
   setRestaurants,
   setRestaurant,
@@ -119,6 +120,27 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setAccessToken('TOKEN'));
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        reviewFields: {
+          score: '5',
+          description: 'Good!',
+        },
+        accessToken: 'TOKEN',
+      });
+    });
+
+    it('dispatchs loadRestaurant', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
 });
