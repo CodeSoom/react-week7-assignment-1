@@ -96,6 +96,15 @@ export function setLoginFields({ name, value }) {
   };
 }
 
+export function setLoginFieldsError(loginFieldsError) {
+  return {
+    type: 'setLoginFieldsError',
+    payload: {
+      loginFieldsError,
+    },
+  };
+}
+
 export function setAccessToken(accessToken = '') {
   return {
     type: 'setAccessToken',

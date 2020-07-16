@@ -9,6 +9,7 @@ import {
   selectCategory,
   setLoginFields,
   setAccessToken,
+  setLoginFieldsError,
 } from './actions';
 
 describe('reducer', () => {
@@ -173,6 +174,17 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
 
       expect(state.accessToken).toEqual('ACCESS_TOKEN');
+    });
+  });
+  describe('setLoginFieldsError', () => {
+    it('chagne loginFieldsError', () => {
+      const initialState = {
+        loginFieldsError: false,
+      };
+
+      const state = reducer(initialState, setLoginFieldsError(true));
+
+      expect(state.loginFieldsError).toBeTruthy();
     });
   });
 });
