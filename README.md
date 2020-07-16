@@ -122,3 +122,10 @@ npm run test:e2e
 - [X] accessToken과 관련된 로컬 스토리지를 다루는 서비스 추상화하기
 - [X] 로그인 버튼 클릭 테스트에 대해 더 구체적으로 정리하기(LoginFormContainer.test)
 - [X] 중복되는 테스트 통합하기(LogoutButton.test)
+
+### 2차 리뷰 반영
+- 테스트 코드 자체도 자세하게 접근하고 리팩토링 하기
+- [ ] 테스트의 입력과 출력을 좀 더 명확하게 표기하기(LoginForm.test)
+- [ ] 공통된 초기화 코드를 빼내기(LoginFormContainer.test)
+- [ ] 테스트 표현에 객체를 활용하기(Reviews.test)
+- [ ] 이름을 모듈에 맞게 바꾸기(RoutePage.test)
