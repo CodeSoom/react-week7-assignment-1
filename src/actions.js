@@ -48,6 +48,13 @@ export function changeLoginFields({ name, value }) {
   };
 }
 
+export function changeReviewFields({ name, value }) {
+  return {
+    type: 'changeReviewFields',
+    payload: { name, value },
+  };
+}
+
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',

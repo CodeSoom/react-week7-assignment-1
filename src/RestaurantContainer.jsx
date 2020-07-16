@@ -6,20 +6,40 @@ import RestaurantDetail from './RestaurantDetail';
 
 import {
   loadRestaurant,
+  changeReviewFields,
 } from './actions';
 
 import { get } from './utils';
 
-function ReviewForm() {
+function ReviewForm({ onChange }) {
+  function handleChange(event) {
+    const { name, value } = event.target;
+
+    onChange({ name, value });
+  }
   return (
     <>
       <div>
-        <label htmlFor="review-score">평점</label>
-        <input type="text" id="review-score" />
+        <label htmlFor="review-score">
+          평점
+        </label>
+        <input
+          type="text"
+          id="review-score"
+          name="score"
+          onChange={handleChange}
+        />
       </div>
       <div>
-        <label htmlFor="review-description">리뷰 내용</label>
-        <input type="text" id="review-description" />
+        <label htmlFor="review-description">
+          리뷰 내용
+        </label>
+        <input
+          type="text"
+          id="review-description"
+          name="description"
+          onChange={handleChange}
+        />
       </div>
     </>
   );
@@ -40,10 +60,16 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
+  function handleChange({ name, value }) {
+    dispatch(changeReviewFields({ name, value }));
+  }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm />
+      <ReviewForm
+        onChange={handleChange}
+      />
     </>
   );
 }
