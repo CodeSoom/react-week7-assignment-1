@@ -5,19 +5,31 @@ import { render, fireEvent } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  it('renders LoginForm', () => {
-    const loginFields = {
-      email: '',
-      password: '',
-    };
-    const handleChangeLoginField = jest.fn();
-    const handleSubmitLoginField = jest.fn();
+  const loginFields = {
+    email: '',
+    password: '',
+  };
 
-    const { getByLabelText, getByRole } = render(<LoginForm
-      loginFields={loginFields}
-      onChangeLoginField={handleChangeLoginField}
-      onSubmitLoginField={handleSubmitLoginField}
-    />);
+  const handleChangeLoginField = jest.fn();
+  const handleSubmitLoginField = jest.fn();
+
+  function renderLoginForm() {
+    return render(
+      <LoginForm
+        loginFields={loginFields}
+        onChangeLoginField={handleChangeLoginField}
+        onSubmitLoginField={handleSubmitLoginField}
+      />,
+    );
+  }
+
+  beforeEach(() => {
+    handleChangeLoginField.mockClear();
+    handleSubmitLoginField.mockClear();
+  });
+
+  it('renders LoginForm', () => {
+    const { getByLabelText, getByRole } = renderLoginForm();
 
     expect(getByLabelText('E-mail')).toHaveAttribute('type', 'email');
     expect(getByLabelText('Password')).toHaveAttribute('type', 'password');
@@ -26,19 +38,8 @@ describe('LoginForm', () => {
   });
 
   context('when change inputs', () => {
-    const loginFields = {
-      email: '',
-      password: '',
-    };
-    const handleChangeLoginField = jest.fn();
-    const handleSubmitLoginField = jest.fn();
-
     it('call ChangeLoginField', () => {
-      const { getByLabelText } = render(<LoginForm
-        loginFields={loginFields}
-        onChangeLoginField={handleChangeLoginField}
-        onSubmitLoginField={handleSubmitLoginField}
-      />);
+      const { getByLabelText } = renderLoginForm();
 
       fireEvent.change(getByLabelText('E-mail'), {
         target: { value: 'newEmail' },
@@ -55,19 +56,8 @@ describe('LoginForm', () => {
   });
 
   context('when click [Login] button', () => {
-    const loginFields = {
-      email: '',
-      password: '',
-    };
-    const handleChangeLoginField = jest.fn();
-    const handleSubmitLoginField = jest.fn();
-
     it('call SubmitLoginField', () => {
-      const { getByRole } = render(<LoginForm
-        loginFields={loginFields}
-        onChangeLoginField={handleChangeLoginField}
-        onSubmitLoginField={handleSubmitLoginField}
-      />);
+      const { getByRole } = renderLoginForm();
 
       fireEvent.click(getByRole('button', { name: 'LogIn' }));
 
