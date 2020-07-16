@@ -168,7 +168,7 @@ describe('reducer', () => {
         accessToken: '',
       };
 
-      const state = reducer(initialState, setAccessToken('Token'));
+      const state = reducer(initialState, setAccessToken({ accessToken: 'Token' }));
 
       expect(state.accessToken).toBe('Token');
     });
