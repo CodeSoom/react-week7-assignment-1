@@ -1,7 +1,18 @@
 import React from 'react';
 
-export default function ReviewInput() {
+export default function ReviewInput({
+  label, type = 'text', name, onChange, value,
+}) {
   return (
-    <label htmlFor="">평점</label>
-  )
+    <div>
+      <label htmlFor={`review-${name}`}>{label}</label>
+      <input
+        type={type}
+        name={name}
+        id={`review-${name}`}
+        onChange={onChange}
+        value={value}
+      />
+    </div>
+  );
 }
