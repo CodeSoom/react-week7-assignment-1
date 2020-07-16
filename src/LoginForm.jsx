@@ -38,7 +38,7 @@ export default function LoginForm({ fields, onChange, onSubmit }) {
       <div>
         <button
           type="button"
-          onSubmit={onSubmit}
+          onClick={onSubmit}
         >
           Log In
         </button>
