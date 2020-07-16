@@ -125,4 +125,19 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('changeLoginField', () => {
+    it('changes login fields', () => {
+      const initialState = {
+        loginFields: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, changeLoginField({ name: 'email', value: 'test@test.com' }));
+
+      expect(state.loginFields.email).toBe('test@test.com');
+    });
+  });
 });
