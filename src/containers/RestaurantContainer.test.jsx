@@ -34,8 +34,6 @@ describe('RestaurantContainer', () => {
       expect(getByLabelText('리뷰 내용').value).toBe('바보들앙 이거 리뷰 아니지롱~');
       expect(getByDisplayValue('리뷰 남기기')).not.toBeNull();
     });
-
-    // TODO 상태에 따라 바뀌는지 체크해보기
   });
 
   context('without logined', () => {
