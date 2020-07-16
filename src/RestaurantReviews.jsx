@@ -13,8 +13,17 @@ export default function RestaurantReviews({ reviews }) {
       <ul>
         {reviews.map((review) => (
           <li key={review.id}>
+            작성자:
+            {' '}
             {review.name}
+            <br />
+            점수:
+            {' '}
             {review.score}
+            점
+            <br />
+            내용:
+            {' '}
             {review.description}
           </li>
         ))}
