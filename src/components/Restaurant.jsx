@@ -1,6 +1,7 @@
 import React from 'react';
 
 import List from './List';
+import ReviewList from './ReviewList';
 
 export default function Restaurant({ restaurant }) {
   if (!restaurant) {
@@ -11,7 +12,7 @@ export default function Restaurant({ restaurant }) {
     );
   }
 
-  const { name, address, menuItems } = restaurant;
+  const { name, address, menuItems, reviews } = restaurant;
 
   return (
     <div>
@@ -22,6 +23,9 @@ export default function Restaurant({ restaurant }) {
 
       <h4>메뉴</h4>
       <List items={menuItems} />
+
+      <h4>리뷰</h4>
+      <ReviewList items={reviews} />
     </div>
   );
 }

@@ -17,6 +17,9 @@ describe('<Restaurant />', () => {
       expect(container).toHaveTextContent(RESTAURANT.name);
       expect(container).toHaveTextContent(RESTAURANT.address);
       expect(container).toHaveTextContent(RESTAURANT.menuItems[0].name);
+      expect(container).toHaveTextContent(RESTAURANT.reviews[0].name);
+      expect(container).toHaveTextContent(RESTAURANT.reviews[0].score);
+      expect(container).toHaveTextContent(RESTAURANT.reviews[0].description);
     });
   });
 
