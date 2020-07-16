@@ -8,12 +8,13 @@ describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
 
-  function renderLoginForm({ email, password } = { email: '', password: '' }) {
+  function renderLoginForm({ email, password, error } = { email: '', password: '', error: false }) {
     return render(
       <LoginForm
         onSubmit={handleSubmit}
         onChange={handleChange}
         fields={{ email, password }}
+        error={error}
       />,
     );
   }
@@ -70,6 +71,13 @@ describe('LoginForm', () => {
           value,
         });
       });
+    });
+  });
+  context('when login fail', () => {
+    it('renders error message', () => {
+      const { getByText } = renderLoginForm({ email: '', password: '', error: true });
+
+      expect(getByText(/로그인에 실패하였습니다/)).not.toBeNull();
     });
   });
 });
