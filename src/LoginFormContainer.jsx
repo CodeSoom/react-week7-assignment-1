@@ -9,10 +9,12 @@ import {
 
 import { get } from './utils';
 
+import LoginForm from './LoginForm';
+
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  const { email, password } = useSelector(get('loginFields'));
+  const loginFields = useSelector(get('loginFields'));
   const accessToken = useSelector(get('accessToken'));
 
   function handleChangeLoginField(event) {
@@ -26,19 +28,11 @@ export default function LoginFormContainer() {
 
   return (
     <>
-      <div>
-        <label htmlFor="login-email">
-          E-mail
-        </label>
-        <input type="email" id="login-email" onChange={handleChangeLoginField} name="email" value={email} />
-      </div>
-      <div>
-        <label htmlFor="login-password">
-          Password
-        </label>
-        <input type="password" id="login-password" onChange={handleChangeLoginField} name="password" value={password} />
-      </div>
-      <button type="button" onClick={handleSubmitLoginField}>LogIn</button>
+      <LoginForm
+        loginFields={loginFields}
+        ChangeLoginField={handleChangeLoginField}
+        SubmitLoginField={handleSubmitLoginField}
+      />
       <p>{accessToken}</p>
     </>
   );
