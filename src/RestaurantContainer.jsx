@@ -28,6 +28,14 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
+      <div>
+        <label htmlFor="review-score">평점</label>
+        <input type="text" id="review-score" />
+      </div>
+      <div>
+        <label htmlFor="review-description">리뷰 내용</label>
+        <input type="text" id="review-description" />
+      </div>
     </>
   );
 }
