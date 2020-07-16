@@ -108,5 +108,5 @@ npm run test:e2e
   - [X] localStorage에 accessToken이 있는 경우 리덕스의 accessToken 상태를 업데이트 한다.
   - [X] localStorage에 accessToken이 있는 경우 아무것도 하지 않는다.
 
-- [ ] Logout 기능 구현
-  - [ ] 이미 로그인된 상태에서는 로그인 폼 대신 로그아웃 버튼이 보인다.
+- [X] Logout 기능 구현
+  - [X] 이미 로그인된 상태에서는 로그인 폼 대신 로그아웃 버튼이 보인다.
