@@ -13,6 +13,7 @@ describe('InputField', () => {
 
     const { getByLabelText } = render((
       <InputField
+        label={label}
         name={name}
         value={value}
         onChange={handleChange}
