@@ -20,7 +20,7 @@ describe('RegionsContainer', () => {
       ],
       selectedRegion: { id: 1, name: '서울' },
     }));
-  })
+  });
 
   it('renders checked regions', () => {
     const { container, getByText } = render((

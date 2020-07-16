@@ -8,9 +8,9 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   loginFields: {
-    email:'',
-    password:'',
-  }
+    email: '',
+    password: '',
+  },
 };
 
 const reducers = {
@@ -58,7 +58,7 @@ const reducers = {
     };
   },
 
-  changeLoginFields(state, { payload : { name, value } }) {
+  changeLoginFields(state, { payload: { name, value } }) {
     return {
       ...state,
       loginFields: {

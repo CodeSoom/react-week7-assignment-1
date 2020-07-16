@@ -12,19 +12,17 @@ describe('LoginPageContainer.test', () => {
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
-        email:'',
-        password:'',
-      }
+        email: '',
+        password: '',
+      },
     }));
   });
 
   it('renders login button', () => {
-    const { container, getByText } = render((
+    const { container } = render((
       <LoginPageContainer />
     ));
-      
+
     expect(container).toHaveTextContent('ID');
-    //fireEvent.click(getByText('ID'));
-    //expect(dispatch).toBeCalled();
   });
 });

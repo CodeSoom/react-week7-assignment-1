@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
-
 import { render } from '@testing-library/react';
 
 import LoginPage from './LoginPage';
@@ -14,7 +12,7 @@ describe('LoginPage', () => {
 
   beforeEach(() => {
     handleChange.mockClear();
-    hanedleSubmit.mockClear()
+    hanedleSubmit.mockClear();
 
     // useSelector.mockImplementation((selector) => selector({
     //   loginFields: {
@@ -29,11 +27,11 @@ describe('LoginPage', () => {
     const password = 'testPassword';
 
     render((
-      <LoginPage 
+      <LoginPage
         fields={{ email, password }}
-        onChange={handleChange} 
-        onSubmit={hanedleSubmit} 
-      />  
-    ))
+        onChange={handleChange}
+        onSubmit={hanedleSubmit}
+      />
+    ));
   });
 });

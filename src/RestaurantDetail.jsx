@@ -5,7 +5,9 @@ import MenuItems from './MenuItems';
 import Reviews from './Reviews';
 
 export default function RestaurantDetail({ restaurant }) {
-  const { name, address, menuItems, reviews } = restaurant;
+  const {
+    name, address, menuItems, reviews,
+  } = restaurant;
 
   return (
     <div>

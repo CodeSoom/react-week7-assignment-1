@@ -11,7 +11,7 @@ describe('HomePage', () => {
   const renderHomePage = () => render(
     <MemoryRouter>
       <HomePage />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 
   it('renders title', () => {

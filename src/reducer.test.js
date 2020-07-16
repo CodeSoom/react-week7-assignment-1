@@ -19,9 +19,9 @@ describe('reducer', () => {
       selectedRegion: null,
       selectedCategory: null,
       loginFields: {
-        email:'',
-        password:'',
-      }
+        email: '',
+        password: '',
+      },
     };
 
     it('returns initialState', () => {

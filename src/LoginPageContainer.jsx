@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginPage from './LoginPage';
 
-import { 
+import {
   changeLoginFields,
   requestLogin,
 } from './actions';
@@ -17,7 +17,6 @@ export default function LoginPageContainer() {
   }));
 
   function handleChangeLoginFields({ name, value }) {
-    console.log({ name, value });
     dispatch(changeLoginFields({ name, value }));
   }
 
@@ -26,10 +25,10 @@ export default function LoginPageContainer() {
   }
 
   return (
-    <LoginPage 
+    <LoginPage
       fields={{ email, password }}
       onChange={handleChangeLoginFields}
       onClick={handleClickLoginButton}
     />
-  )
+  );
 }

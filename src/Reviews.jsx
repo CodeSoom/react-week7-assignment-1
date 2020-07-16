@@ -11,9 +11,18 @@ export default function Reviews({ reviews }) {
     <ul>
       {reviews.map((review) => (
         <li key={review.id}>
-          <p>이름 : {review.name}</p>
-          <p>점수 : {review.score}</p>
-          <p>리뷰 : {review.description}</p>
+          <p>
+            이름 :
+            {review.name}
+          </p>
+          <p>
+            점수 :
+            {review.score}
+          </p>
+          <p>
+            리뷰 :
+            {review.description}
+          </p>
         </li>
       ))}
     </ul>
