@@ -106,4 +106,15 @@ describe('RestaurantContainer', () => {
 
     expect(getByText('리뷰 남기기')).not.toBeNull();
   });
+
+  it('listens click event', () => {
+    given('restaurant', () => restaurant);
+    given('reviewFields', () => reviewFields);
+
+    const { getByText } = renderRestaurantContainer();
+
+    fireEvent.click(getByText('리뷰 남기기'));
+
+    expect(dispatch).toBeCalledTimes(2);
+  });
 });
