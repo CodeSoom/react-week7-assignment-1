@@ -53,4 +53,25 @@ describe('LoginForm', () => {
       expect(handleChangeLoginField).toBeCalledTimes(2);
     });
   });
+
+  context('when click [Login] button', () => {
+    const loginFields = {
+      email: '',
+      password: '',
+    };
+    const handleChangeLoginField = jest.fn();
+    const handleSubmitLoginField = jest.fn();
+
+    it('call SubmitLoginField', () => {
+      const { getByRole } = render(<LoginForm
+        loginFields={loginFields}
+        ChangeLoginField={handleChangeLoginField}
+        SubmitLoginField={handleSubmitLoginField}
+      />);
+
+      fireEvent.click(getByRole('button', { name: 'LogIn' }));
+
+      expect(handleSubmitLoginField).toBeCalledTimes(1);
+    });
+  });
 });
