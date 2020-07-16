@@ -3,6 +3,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  login,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -51,6 +52,13 @@ export function changeLoginField({ name, value }) {
   return {
     type: 'changeLoginField',
     payload: { name, value },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
   };
 }
 

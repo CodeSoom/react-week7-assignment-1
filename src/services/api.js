@@ -27,3 +27,7 @@ export async function fetchRestaurant({ restaurantId }) {
   const data = await response.json();
   return data;
 }
+
+export async function login() {
+  return null;
+}
