@@ -6,6 +6,8 @@ import { render, fireEvent } from '@testing-library/react';
 
 import LoginFormContainer from './LoginFormContainer';
 
+import { changeLoginField } from './actions';
+
 jest.mock('react-redux');
 
 describe('LoginFormContainer', () => {
@@ -34,27 +36,15 @@ describe('LoginFormContainer', () => {
 
       const input = getByLabelText('E-mail');
 
-      const value = 'newemail@email.com';
-
       fireEvent.change(input, {
-        target: { value },
+        target: { value: 'new email' },
       });
 
-      expect(dispatch).toBeCalledTimes(1);
+      expect(dispatch).toBeCalledWith(changeLoginField({
+        name: 'email', value: 'new email',
+      }));
     });
   });
 
-  // TODO: Move the tests below to LoginForm.jsx later
-  it('renders input controls', () => {
-    const { container } = renderLoginFormContainer();
-
-    expect(container).toHaveTextContent('E-mail');
-    expect(container).toHaveTextContent('Password');
-  });
-
-  it('renders "Log In" button', () => {
-    const { container } = renderLoginFormContainer();
-
-    expect(container).toHaveTextContent('Log In');
-  });
+  // TODO: when a submit button is clicked, occurs ... action
 });
