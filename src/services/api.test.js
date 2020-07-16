@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -80,6 +81,12 @@ describe('api', () => {
       const accessToken = await postLogin(LOGIN_FIELDS);
 
       expect(accessToken).toBe(ACCESS_TOKEN.accessToken);
+    });
+  });
+
+  describe('postReview', () => {
+    it('no return value', async () => {
+      await postReview({ restaurantId: 1 });
     });
   });
 });
