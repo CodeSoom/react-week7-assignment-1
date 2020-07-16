@@ -3,6 +3,10 @@ import React from 'react';
 export default function ReviewInput({
   label, type = 'text', name, onChange, value,
 }) {
+  function handleChange(event) {
+    onChange({ name, value: event.target.value });
+  }
+
   return (
     <div>
       <label htmlFor={`review-${name}`}>{label}</label>
@@ -10,7 +14,7 @@ export default function ReviewInput({
         type={type}
         name={name}
         id={`review-${name}`}
-        onChange={onChange}
+        onChange={handleChange}
         value={value}
       />
     </div>
