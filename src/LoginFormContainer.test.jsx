@@ -7,6 +7,7 @@ import { render, fireEvent } from '@testing-library/react';
 import LoginFormContainer from './LoginFormContainer';
 
 import loginFields from '../fixtures/loginFields';
+import accessToken from '../fixtures/accessToken';
 
 jest.mock('react-redux');
 
@@ -18,47 +19,80 @@ function renderLoginFormContainer() {
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
-  beforeEach(() => {
-    dispatch.mockClear();
+  context('without accessToken', () => {
+    beforeEach(() => {
+      dispatch.mockClear();
 
-    useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) => selector({
-      loginFields,
-    }));
-  });
+      useDispatch.mockImplementation(() => dispatch);
+      useSelector.mockImplementation((selector) => selector({
+        loginFields,
+      }));
+    });
 
-  it('renders input controls', () => {
-    const { getByLabelText } = renderLoginFormContainer();
-
-    expect(getByLabelText('E-mail').value).toBe(loginFields.email);
-    expect(getByLabelText('Password').value).toBe(loginFields.password);
-  });
-
-  context('when changes value', () => {
-    it('call dispatch', () => {
+    it('renders input controls', () => {
       const { getByLabelText } = renderLoginFormContainer();
 
-      fireEvent.change(getByLabelText('E-mail'), {
-        target: { value: 'tester@exmaple.com' },
-      });
+      expect(getByLabelText('E-mail').value).toBe(loginFields.email);
+      expect(getByLabelText('Password').value).toBe(loginFields.password);
+    });
 
-      expect(dispatch).toBeCalled();
+    context('when changes value', () => {
+      it('call dispatch', () => {
+        const { getByLabelText } = renderLoginFormContainer();
+
+        fireEvent.change(getByLabelText('E-mail'), {
+          target: { value: 'tester@exmaple.com' },
+        });
+
+        expect(dispatch).toBeCalled();
+      });
+    });
+
+    it('renders submit button', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      expect(getByText('Log In')).not.toBeNull();
+    });
+
+    context('when “Log in” click button', () => {
+      it('call dispatch', () => {
+        const { getByText } = renderLoginFormContainer();
+
+        fireEvent.click(getByText('Log In'));
+
+        expect(dispatch).toBeCalled();
+      });
     });
   });
 
-  it('renders submit button', () => {
-    const { getByText } = renderLoginFormContainer();
+  context('with accessToken', () => {
+    beforeEach(() => {
+      dispatch.mockClear();
 
-    expect(getByText('Log In')).not.toBeNull();
-  });
+      useDispatch.mockImplementation(() => dispatch);
+      useSelector.mockImplementation((selector) => selector({
+        loginFields,
+        accessToken,
+      }));
+    });
 
-  context('when click button', () => {
-    it('call dispatch', () => {
+    it('renders logout', () => {
       const { getByText } = renderLoginFormContainer();
 
-      fireEvent.click(getByText('Log In'));
+      expect(getByText('Log out')).not.toBeNull();
+    });
 
-      expect(dispatch).toBeCalled();
+    context('when “Log out” click event', () => {
+      it('call dispatch', () => {
+        const { getByText } = renderLoginFormContainer();
+
+        fireEvent.click(getByText('Log out'));
+
+        expect(dispatch).toBeCalledWith({
+          type: 'setAccessToken',
+          payload: { accessToken: null },
+        });
+      });
     });
   });
 });
