@@ -97,18 +97,36 @@ describe('App', () => {
     });
   });
 
-  context('check login', () => {
+  describe('check login', () => {
     beforeEach(() => {
       loadItem.mockClear();
-      loadItem.mockReturnValue('ACCESS_TOKEN');
       setAccessToken.mockClear();
     });
 
-    it('get accessToken', () => {
-      renderApp({ path: '/' });
+    context('when logged in', () => {
+      beforeEach(() => {
+        loadItem.mockReturnValue('ACCESS_TOKEN');
+      });
 
-      expect(loadItem).toBeCalledWith('accessToken');
-      expect(setAccessToken).toBeCalledWith('ACCESS_TOKEN');
+      it('set access token', () => {
+        renderApp({ path: '/' });
+
+        expect(loadItem).toBeCalledWith('accessToken');
+        expect(setAccessToken).toBeCalledWith('ACCESS_TOKEN');
+      });
+    });
+
+    context('when logged out', () => {
+      beforeEach(() => {
+        loadItem.mockReturnValue(null);
+      });
+
+      it('do not set access token', () => {
+        renderApp({ path: '/' });
+
+        expect(loadItem).toBeCalledWith('accessToken');
+        expect(setAccessToken).not.toBeCalled();
+      });
     });
   });
 });
