@@ -8,6 +8,11 @@ import RegionsContainer from './RegionsContainer';
 
 import REGIONS from '../../fixtures/regions';
 
+jest.mock('react-redux', () => ({
+  useDispatch: jest.fn(),
+  useSelector: jest.fn(),
+}));
+
 describe('RegionsContainer', () => {
   const dispatch = jest.fn();
 

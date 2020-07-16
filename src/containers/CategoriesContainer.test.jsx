@@ -8,6 +8,11 @@ import CategoriesContainer from './CategoriesContainer';
 
 import CATEGORIES from '../../fixtures/categories';
 
+jest.mock('react-redux', () => ({
+  useDispatch: jest.fn(),
+  useSelector: jest.fn(),
+}));
+
 describe('CategoriesContainer', () => {
   const dispatch = jest.fn();
 
