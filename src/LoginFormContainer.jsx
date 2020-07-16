@@ -22,7 +22,6 @@ export default function LoginFormContainer() {
 
   function handleSubmit() {
     dispatch(requestLogin());
-    console.log("submit button");
   }
 
   return (
