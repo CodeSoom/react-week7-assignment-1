@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
 import ReviewForm from './ReviewForm';
+import RestaurantReviews from './RestaurantReviews';
 
 import {
   loadRestaurant,
@@ -44,6 +45,9 @@ export default function RestaurantContainer({ restaurantId }) {
         reviewFields={reviewFields}
         onChange={handleChange}
         onClick={handleClick}
+      />
+      <RestaurantReviews
+        reviews={restaurant.reviews}
       />
     </>
   );
