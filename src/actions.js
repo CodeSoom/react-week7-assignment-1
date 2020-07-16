@@ -103,7 +103,7 @@ export function setAccessToken({ accessToken }) {
   };
 }
 
-export function createToken() {
+export function login() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
 

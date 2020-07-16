@@ -10,7 +10,7 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
-  createToken,
+  login,
   setAccessToken,
   changeLoginFields,
 } from './actions';
@@ -106,7 +106,7 @@ describe('actions', () => {
     });
   });
 
-  describe('createToken', () => {
+  describe('login', () => {
     beforeEach(() => {
       store = mockStore({
         loginFields: {
@@ -117,7 +117,7 @@ describe('actions', () => {
     });
 
     it('dispatches setAccessToken and setLoginFields', async () => {
-      await store.dispatch(createToken(accessTokenFixture));
+      await store.dispatch(login(accessTokenFixture));
 
       const actions = store.getActions();
 
@@ -127,7 +127,7 @@ describe('actions', () => {
     });
 
     it('set acessToken to local storage', async () => {
-      await store.dispatch(createToken(accessTokenFixture));
+      await store.dispatch(login(accessTokenFixture));
 
       expect(localStorage.getItem('accessToken')).toBe('TESTACESSTOKEN');
     });
