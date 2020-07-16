@@ -6,7 +6,10 @@ import { render, fireEvent } from '@testing-library/react';
 
 import LoginFormContainer from './LoginFormContainer';
 
-import { changeLoginField } from './actions';
+import {
+  changeLoginField,
+  requestLogin,
+} from './actions';
 
 jest.mock('react-redux');
 
@@ -46,5 +49,13 @@ describe('LoginFormContainer', () => {
     });
   });
 
-  // TODO: when a submit button is clicked, occurs ... action
+  context('when a submit button is clicked', () => {
+    it('occurs requestLogin', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalledWith(requestLogin());
+    });
+  });
 });
