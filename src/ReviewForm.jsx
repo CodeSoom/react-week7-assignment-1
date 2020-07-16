@@ -1,37 +1,29 @@
 import React from 'react';
 
-export default function ReviewForm({ reviewFields: { score, description }, onChange, onClick }) {
-  function handleChange(event) {
-    const { name, value } = event.target;
+import ReviewInput from './ReviewInput';
 
-    onChange({ name, value });
-  }
+export default function ReviewForm(
+  {
+    reviewFields: { score, description },
+    onChange,
+    onClick,
+  },
+) {
   return (
     <>
-      <div>
-        <label htmlFor="review-score">
-          평점
-        </label>
-        <input
-          type="number"
-          id="review-score"
-          name="score"
-          onChange={handleChange}
-          value={score}
-        />
-      </div>
-      <div>
-        <label htmlFor="review-description">
-          리뷰 내용
-        </label>
-        <input
-          type="text"
-          id="review-description"
-          name="description"
-          onChange={handleChange}
-          value={description}
-        />
-      </div>
+      <ReviewInput
+        label="평점"
+        type="number"
+        name="score"
+        onChange={onChange}
+        value={score}
+      />
+      <ReviewInput
+        label="리뷰 내용"
+        name="description"
+        onChange={onChange}
+        value={description}
+      />
       <button
         type="button"
         onClick={onClick}
