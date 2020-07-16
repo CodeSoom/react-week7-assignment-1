@@ -8,6 +8,8 @@ import {
   logout,
 } from './actions';
 
+import { deleteToken } from './services/accessTokenRepository';
+
 import LoginForm from './LoginForm';
 import LogoutButton from './LogoutButton';
 
@@ -29,7 +31,7 @@ export default function LoginFormContainer() {
 
   function handleLogout() {
     dispatch(logout());
-    localStorage.removeItem('accessToken');
+    deleteToken();
   }
 
   return (
