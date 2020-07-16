@@ -2,13 +2,20 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
 import { changeLoginField } from './actions';
 
 describe('LoginFormContainer', () => {
+  useSelector.mockImplementation((selector) => selector({
+    loginFields: {
+      email: '',
+      password: '',
+    },
+  }));
+
   it('renders input controls', () => {
     const { getByLabelText, getByText } = render((
       <LoginFormContainer />
