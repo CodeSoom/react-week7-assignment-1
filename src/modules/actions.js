@@ -118,15 +118,10 @@ export function requestLogin() {
   return async (dispatch, getState) => {
     const {
       loginFields: { email, password },
-      accessToken: token,
     } = getState();
 
     const { accessToken } = await fetchAccessToken({ email, password });
-
     dispatch(setAccessToken(accessToken));
-
-    if (!token) {
-      dispatch(setLoginFieldsError(true));
-    }
+    dispatch(setLoginFieldsError(!accessToken || Object.keys(accessToken).length === 0));
   };
 }
