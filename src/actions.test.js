@@ -11,10 +11,11 @@ import {
   setRestaurants,
   setRestaurant,
   login,
-  logout,
   setAccessToken,
   changeLoginFields,
 } from './actions';
+
+import { getToken } from './services/accessTokenRepository';
 
 import accessTokenFixture from '../fixtures/accessToken';
 
@@ -130,7 +131,7 @@ describe('actions', () => {
     it('set acessToken to local storage', async () => {
       await store.dispatch(login(accessTokenFixture));
 
-      expect(localStorage.getItem('accessToken')).toBe('TESTACESSTOKEN');
+      expect(getToken()).toBe('TESTACESSTOKEN');
     });
   });
 });

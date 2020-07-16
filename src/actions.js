@@ -6,6 +6,8 @@ import {
   fetchAccessToken,
 } from './services/api';
 
+import { saveToken } from './services/accessTokenRepository';
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -113,7 +115,7 @@ export function login() {
     dispatch(changeLoginFields({ name: 'email', value: '' }));
     dispatch(changeLoginFields({ name: 'password', value: '' }));
 
-    localStorage.setItem('accessToken', accessToken);
+    saveToken(accessToken);
   };
 }
 
