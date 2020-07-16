@@ -10,10 +10,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setAccessToken } from './actions';
 
+import { setItem, loadItem } from './services/storage';
+
 import App from './App';
 
 jest.mock('react-redux');
 jest.mock('./actions');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -96,14 +99,16 @@ describe('App', () => {
 
   context('check login', () => {
     beforeEach(() => {
-      jest.spyOn(Storage.prototype, 'getItem');
+      loadItem.mockClear();
+      loadItem.mockReturnValue('ACCESS_TOKEN');
       setAccessToken.mockClear();
     });
 
     it('get accessToken', () => {
       renderApp({ path: '/' });
 
-      expect(localStorage.getItem).toBeCalled();
+      expect(loadItem).toBeCalledWith('accessToken');
+      expect(setAccessToken).toBeCalledWith('ACCESS_TOKEN');
     });
   });
 });
