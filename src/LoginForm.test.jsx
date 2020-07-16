@@ -39,16 +39,16 @@ describe('LoginForm', () => {
     const { getByLabelText } = renderLoginForm();
 
     const controls = [
-      { label: 'Email', value: 'test@test.com' },
-      { label: 'Password', value: '1234' },
+      { label: 'Email', name: 'email', value: 'test@test.com' },
+      { label: 'Password', name: 'password', value: '1234' },
     ];
 
-    controls.forEach(({ label, value }) => {
+    controls.forEach(({ label, name, value }) => {
       const input = getByLabelText(label);
 
       fireEvent.change(input, { target: { value } });
 
-      expect(handleChange).toBeCalled();
+      expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 
