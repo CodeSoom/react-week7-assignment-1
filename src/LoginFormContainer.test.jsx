@@ -43,4 +43,18 @@ describe('LoginFormContainer', () => {
       expect(dispatch).toBeCalledWith(changeLoginField({ name, value }));
     });
   });
+
+  it('listens click event', () => {
+    const dispatch = jest.fn();
+
+    useDispatch.mockImplementation(() => dispatch);
+
+    const { getByText } = render((
+      <LoginFormContainer />
+    ));
+
+    fireEvent.click(getByText('Login'));
+
+    expect(dispatch).toBeCalled();
+  });
 });
