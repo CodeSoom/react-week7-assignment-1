@@ -8,9 +8,12 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { setAccessToken } from './actions';
+
 import App from './App';
 
 jest.mock('react-redux');
+jest.mock('./actions');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -31,6 +34,7 @@ describe('App', () => {
         email: 'test@test.com',
         password: 'password1',
       },
+      accessToken: '',
     }));
   });
 
@@ -87,6 +91,19 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('check login', () => {
+    beforeEach(() => {
+      jest.spyOn(Storage.prototype, 'getItem');
+      setAccessToken.mockClear();
+    });
+
+    it('get accessToken', () => {
+      renderApp({ path: '/' });
+
+      expect(localStorage.getItem).toBeCalled();
     });
   });
 });
