@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -118,8 +119,14 @@ export function requestLogin() {
   };
 }
 
-export function sendReview() {
+export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
-    // TODO: call postReview api
+    const { accessToken, reviewFields: { score, description } } = getState();
+
+    await postReview({
+      restaurantId, accessToken, score, description,
+    });
+
+    await dispatch(loadRestaurant({ restaurantId }));
   };
 }
