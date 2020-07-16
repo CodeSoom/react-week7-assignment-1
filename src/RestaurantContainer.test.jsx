@@ -19,6 +19,10 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviewFields: {
+        score: '5',
+        description: 'Good!',
+      },
     }));
   });
 
@@ -53,17 +57,19 @@ describe('RestaurantContainer', () => {
     });
   });
 
-  it('renders review write form', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
+  context('with review field values', () => {
+    it('renders review write form', () => {
+      given('restaurant', () => ({
+        id: 1,
+        name: '마법사주방',
+        address: '서울시 강남구',
+      }));
 
-    const { queryByLabelText } = renderRestaurantContainer();
+      const { queryByLabelText } = renderRestaurantContainer();
 
-    expect(queryByLabelText('평점')).not.toBeNull();
-    expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+      expect(queryByLabelText('평점').value).toBe('5');
+      expect(queryByLabelText('리뷰 내용').value).toBe('Good!');
+    });
   });
 
   it('listens score change event', () => {
