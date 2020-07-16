@@ -11,6 +11,7 @@ import {
   setRestaurants,
   setRestaurant,
   login,
+  logout,
   setAccessToken,
   changeLoginFields,
 } from './actions';

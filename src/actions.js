@@ -116,3 +116,12 @@ export function login() {
     localStorage.setItem('accessToken', accessToken);
   };
 }
+
+export function logout() {
+  return {
+    type: 'setAccessToken',
+    payload: {
+      accessToken: '',
+    },
+  };
+}
