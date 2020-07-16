@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setAccessToken } from './actions';
 
-import { setItem, loadItem } from './services/storage';
+import { loadItem } from './services/storage';
 
 import App from './App';
 

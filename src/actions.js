@@ -6,6 +6,8 @@ import {
   login,
 } from './services/api';
 
+import { saveItem } from './services/storage';
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -107,7 +109,7 @@ export function requestLogin() {
 
     const accessToken = await login({ email, password });
 
-    localStorage.setItem('accessToken', accessToken);
+    saveItem('accessToken', accessToken);
     dispatch(setAccessToken(accessToken));
   };
 }

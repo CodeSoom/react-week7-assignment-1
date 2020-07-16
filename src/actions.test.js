@@ -14,10 +14,13 @@ import {
   setAccessToken,
 } from './actions';
 
+import { saveItem } from './services/storage';
+
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/storage');
 
 describe('actions', () => {
   let store;
@@ -105,7 +108,7 @@ describe('actions', () => {
 
   describe('requestLogin', () => {
     beforeEach(() => {
-      jest.spyOn(Storage.prototype, 'setItem');
+      saveItem.mockClear();
       store = mockStore({
         loginFields: {
           email: 'test@test.com',
@@ -119,8 +122,8 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
+      expect(saveItem).toBeCalledWith('accessToken', '');
       expect(actions[0]).toEqual(setAccessToken(''));
-      expect(localStorage.setItem).toBeCalled();
     });
   });
 });
