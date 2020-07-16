@@ -110,3 +110,15 @@ npm run test:e2e
 
 - [X] Logout 기능 구현
   - [X] 이미 로그인된 상태에서는 로그인 폼 대신 로그아웃 버튼이 보인다.
+
+### 1차 리뷰 반영
+- 코드에 의도가 더 잘 드러나도록 개선하기
+- 코드의 목적이 무엇인지 다시 한번 생각해볼 것
+  - ex. 기능상 로그인이 목적이고, 토큰 발급이 그에 대한 필요 행동이다. (반대가 아님)
+- [ ] 테스트 실행하기 전에 필요한 상태 초기화하기(LoginForm.test)
+- [ ] useSelector를 더 간단하게 표현하기(LoginFormContainer)
+- [ ] createToken 대신 의도가 더 잘 드러나도록 Login으로 이름 바꾸기(LoginFormContainer)
+- [ ] 코드에 의도를 더 잘 드러내기 위해 logout을 처리하는 액션을 새로 생성하기(actions)
+- [ ] 로컬 스토리지를 다루는 서비스 추상화하기
+- [ ] 로그인 버튼 클릭 시 로컬 스토리지 관련 동작도 테스트 하기(LoginFormContainer.test)
+- [ ] 테스트에 대한 정확한 설명 적기(LogoutButton.test)
