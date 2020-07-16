@@ -104,7 +104,10 @@ export function loadRestaurant({ restaurantId }) {
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
+
     const accessToken = await login({ email, password });
+
+    localStorage.setItem('accessToken', accessToken);
     dispatch(setAccessToken(accessToken));
   };
 }

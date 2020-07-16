@@ -76,7 +76,7 @@ describe('api', () => {
     });
 
     it('requests login', async () => {
-      const accessToken = await login();
+      const accessToken = await login({ email: 'test@test.com', password: 'password' });
 
       expect(accessToken).toEqual(ACCESS_TOKEN);
     });

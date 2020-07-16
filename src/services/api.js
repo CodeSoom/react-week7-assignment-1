@@ -28,8 +28,8 @@ export async function fetchRestaurant({ restaurantId }) {
   return data;
 }
 
-export async function login(email, password) {
-  const url = 'https://eatgo-customer-api.ahastudio.com/session';
+export async function login({ email, password }) {
+  const url = 'https://eatgo-login-api.ahastudio.com/session';
   const response = await fetch(url, {
     method: 'POST',
     headers: {

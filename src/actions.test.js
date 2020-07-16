@@ -105,6 +105,7 @@ describe('actions', () => {
 
   describe('requestLogin', () => {
     beforeEach(() => {
+      jest.spyOn(Storage.prototype, 'setItem');
       store = mockStore({
         loginFields: {
           email: 'test@test.com',
@@ -119,6 +120,7 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setAccessToken(''));
+      expect(localStorage.setItem).toBeCalled();
     });
   });
 });
