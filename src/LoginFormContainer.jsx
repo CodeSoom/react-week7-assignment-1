@@ -25,7 +25,7 @@ export default function LoginFormContainer() {
     dispatch(changeLoginFields({ name, value }));
   }
 
-  function handleClick() {
+  function handleLogin() {
     dispatch(createToken());
   }
 
@@ -40,7 +40,7 @@ export default function LoginFormContainer() {
         <LoginForm
           loginFields={loginFields}
           onChange={handleChange}
-          onClick={handleClick}
+          onClick={handleLogin}
         />
       )
       : (
