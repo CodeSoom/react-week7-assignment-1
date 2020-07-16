@@ -13,43 +13,65 @@ describe('RestaurantContainer', () => {
     return render(<RestaurantContainer restaurantId="1" />);
   }
 
-  beforeEach(() => {
-    dispatch.mockClear();
-    useDispatch.mockImplementation(() => dispatch);
+  context('with logined', () => {
+    beforeEach(() => {
+      dispatch.mockClear();
+      useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation((selector) => selector({
-      restaurant: given.restaurant,
-    }));
-  });
+      useSelector.mockImplementation((selector) => selector({
+        restaurant: given.restaurant,
+        accessToken: 'ACCESS_TOKEN',
+      }));
+    });
+    it('renders review InputForm', () => {
+      const { getByLabelText, getByDisplayValue } = renderRestaurantContainer();
 
-  it('dispatches action', () => {
-    renderRestaurantContainer();
-
-    expect(dispatch).toBeCalled();
-  });
-
-  context('with restaurant', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
-
-    it('renders name and address', () => {
-      const { container } = renderRestaurantContainer();
-
-      expect(container).toHaveTextContent('마법사주방');
-      expect(container).toHaveTextContent('서울시');
+      expect(getByLabelText('평점')).not.toBeNull();
+      expect(getByLabelText('리뷰 내용')).not.toBeNull();
+      expect(getByDisplayValue('리뷰 남기기')).not.toBeNull();
     });
   });
 
-  context('without restaurant', () => {
-    given('restaurant', () => null);
+  context('without logined', () => {
+    beforeEach(() => {
+      dispatch.mockClear();
+      useDispatch.mockImplementation(() => dispatch);
 
-    it('renders loading', () => {
-      const { container } = renderRestaurantContainer();
+      useSelector.mockImplementation((selector) => selector({
+        restaurant: given.restaurant,
+        accessToken: '',
+      }));
+    });
 
-      expect(container).toHaveTextContent('Loading');
+    it('dispatches action', () => {
+      renderRestaurantContainer();
+
+      expect(dispatch).toBeCalled();
+    });
+
+    context('with restaurant', () => {
+      given('restaurant', () => ({
+        id: 1,
+        name: '마법사주방',
+        address: '서울시 강남구',
+      }));
+
+      it('renders name and address', () => {
+        const { container } = renderRestaurantContainer();
+
+        expect(container).toHaveTextContent('마법사주방');
+        expect(container).toHaveTextContent('서울시');
+      });
+    });
+
+    context('without restaurant', () => {
+      given('restaurant', () => null);
+
+      it('renders loading', () => {
+        const { container } = renderRestaurantContainer();
+
+        expect(container).toHaveTextContent('Loading');
+      });
     });
   });
 });
