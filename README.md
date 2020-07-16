@@ -103,7 +103,10 @@ npm run test:e2e
   - [X] 리액트 라우터에서 Log In 페이지 경로를 설정한다.
   - [X] HomePage에서 Log In 페이지로 이동하는 기능을 구현한다.
 
-- [ ] TokenContainer 구현
+- [X] TokenContainer 구현
   - 처음 앱 실행시 localStorage의 accessToken 존재 여부에 따라 로그인 상태를 관리하는 컴포넌트
-  - [ ] localStorage에 accessToken이 있는 경우 리덕스의 accessToken 상태를 업데이트 한다.
-  - [ ] localStorage에 accessToken이 있는 경우 아무것도 하지 않는다.
+  - [X] localStorage에 accessToken이 있는 경우 리덕스의 accessToken 상태를 업데이트 한다.
+  - [X] localStorage에 accessToken이 있는 경우 아무것도 하지 않는다.
+
+- [ ] Logout 기능 구현
+  - [ ] 이미 로그인된 상태에서는 로그인 폼 대신 로그아웃 버튼이 보인다.

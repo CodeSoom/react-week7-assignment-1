@@ -16,10 +16,6 @@ describe('LoginFormContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
-
-    useSelector.mockImplementation((selector) => selector({
-      loginFields: { email, password },
-    }));
   });
 
   function renderLoginFormContainer() {
@@ -28,36 +24,59 @@ describe('LoginFormContainer', () => {
     ));
   }
 
-  it('listens form fields change event', () => {
-    const mockEmail = 'mock@example.com';
-    const mockPassword = 'mockPassword';
-    useDispatch.mockImplementation(() => dispatch);
+  context('without logged in', () => {
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: { email, password },
+      accessToken: '',
+    }));
 
-    const { getByLabelText } = renderLoginFormContainer();
+    it('listens form fields change event', () => {
+      const mockEmail = 'mock@example.com';
+      const mockPassword = 'mockPassword';
+      useDispatch.mockImplementation(() => dispatch);
 
-    const controls = [
-      { label: 'E-mail', value: mockEmail, name: 'email' },
-      { label: 'Password', value: mockPassword, name: 'password' },
-    ];
+      const { getByLabelText } = renderLoginFormContainer();
 
-    controls.forEach(({ label, value, name }) => {
-      fireEvent.change(getByLabelText(label), {
-        target: { value },
+      const controls = [
+        { label: 'E-mail', value: mockEmail, name: 'email' },
+        { label: 'Password', value: mockPassword, name: 'password' },
+      ];
+
+      controls.forEach(({ label, value, name }) => {
+        fireEvent.change(getByLabelText(label), {
+          target: { value },
+        });
+
+        expect(dispatch).toBeCalledWith({
+          type: 'changeLoginFields',
+          payload: { name, value },
+        });
       });
+    });
 
-      expect(dispatch).toBeCalledWith({
-        type: 'changeLoginFields',
-        payload: { name, value },
-      });
+    it('click login button', () => {
+      const { getByText } = renderLoginFormContainer();
+      useDispatch.mockImplementation(() => dispatch);
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalled();
     });
   });
 
-  it('click login button', () => {
-    const { getByText } = renderLoginFormContainer();
-    useDispatch.mockImplementation(() => dispatch);
+  context('with logged in', () => {
+    it('renders the logout button', () => {
+      useSelector.mockImplementation((selector) => selector({
+        accessToken: 'testAccessToken',
+        loginFields: {
+          email: '',
+          password: '',
+        },
+      }));
 
-    fireEvent.click(getByText('Log In'));
+      const { getByText } = renderLoginFormContainer();
 
-    expect(dispatch).toBeCalled();
+      expect(getByText('Log out')).not.toBeNull();
+    });
   });
 });
