@@ -13,7 +13,7 @@ export default function LoginForm({
         ? (
           <button
             type="button"
-            onClick={onClick}
+            onClick={() => onClick('Log-out')}
           >
             Log out
           </button>

@@ -7,6 +7,7 @@ import LoginForm from './LoginForm';
 import {
   changeLoginFields,
   requestLogin,
+  setAccessToken,
 } from './actions';
 
 import { get } from './utils';
@@ -15,6 +16,7 @@ export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
   const loginFields = useSelector(get('loginFields'));
+  const accessToken = useSelector(get('accessToken'));
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -22,7 +24,11 @@ export default function LoginFormContainer() {
     dispatch(changeLoginFields({ name, value }));
   }
 
-  function handleClick() {
+  function handleClick(command) {
+    if (command === 'Log-out') {
+      dispatch(setAccessToken(null));
+      return;
+    }
     dispatch(requestLogin());
   }
 
@@ -31,6 +37,7 @@ export default function LoginFormContainer() {
       onChange={handleChange}
       onClick={handleClick}
       loginFields={loginFields}
+      accessToken={accessToken}
     />
   );
 }
