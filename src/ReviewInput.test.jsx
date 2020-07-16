@@ -7,30 +7,28 @@ import ReviewInput from './ReviewInput';
 describe('ReviewInput', () => {
   const handleChange = jest.fn();
 
-  it('renders label', () => {
-    const { container } = render(
-      <ReviewInput
-        label="평점"
-        type="number"
-        name="score"
-        onChange={handleChange}
-        value="5"
-      />,
+  function renderReviewInput() {
+    return (
+      render(
+        <ReviewInput
+          label="평점"
+          type="number"
+          name="score"
+          onChange={handleChange}
+          value="5"
+        />,
+      )
     );
+  }
+
+  it('renders label', () => {
+    const { container } = renderReviewInput();
 
     expect(container).toHaveTextContent('평점');
   });
 
   it('listens change event', () => {
-    const { queryByLabelText } = render(
-      <ReviewInput
-        label="평점"
-        type="number"
-        name="score"
-        onChange={handleChange}
-        value="5"
-      />,
-    );
+    const { queryByLabelText } = renderReviewInput();
 
     fireEvent.change(queryByLabelText('평점'), {
       target: { value: '3' },
