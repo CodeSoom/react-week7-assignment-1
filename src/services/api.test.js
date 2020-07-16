@@ -71,7 +71,9 @@ describe('api', () => {
 
   describe('postLogin', () => {
     beforeEach(() => {
-      mockFetch('access-token');
+      mockFetch({
+        accessToken: 'token',
+      });
     });
 
     it('returns restaurants', async () => {
@@ -79,7 +81,7 @@ describe('api', () => {
         email: 'test@test', password: '1234',
       });
 
-      expect(accessToken).toEqual('access-token');
+      expect(accessToken).toEqual('token');
     });
   });
 });
