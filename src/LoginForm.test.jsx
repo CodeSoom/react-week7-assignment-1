@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
@@ -8,7 +8,7 @@ describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
 
-  const renderLoginForm = ({ email, password }) => render(
+  const renderLoginForm = ({ email = '', password = '' }) => render(
     <LoginForm
       fields={{ email, password }}
       onChange={handleChange}
@@ -16,8 +16,10 @@ describe('LoginForm', () => {
     />,
   );
 
-  const email = 'test@test';
-  const password = '1234';
+  const controls = [
+    { label: 'E-mail', name: 'email', value: 'test@test' },
+    { label: 'Password', name: 'password', value: '1234' },
+  ];
 
   beforeEach(() => {
     handleChange.mockClear();
@@ -25,15 +27,44 @@ describe('LoginForm', () => {
   });
 
   it('renders input controls', () => {
-    const { getByLabelText } = renderLoginForm({ email, password });
+    const { getByLabelText } = renderLoginForm({});
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    controls.forEach(({ label }) => {
+      const input = getByLabelText(label);
+
+      expect(input.value).toBe('');
+    });
   });
 
   it('renders "Log In" button', () => {
-    const { container } = renderLoginForm({ email, password });
+    const { container } = renderLoginForm({});
 
     expect(container).toHaveTextContent('Log In');
+  });
+
+  context('when a form field value is changed', () => {
+    it('runs handleChange', () => {
+      const { getByLabelText } = renderLoginForm({});
+
+      controls.forEach(({ label, name, value }) => {
+        const input = getByLabelText(label);
+
+        fireEvent.change(input, {
+          target: { value },
+        });
+
+        expect(handleChange).toBeCalledWith({ name, value });
+      });
+    });
+  });
+
+  context('when a "Log In" button is clicked', () => {
+    it('runs handleSubmit', () => {
+      const { getByText } = renderLoginForm({});
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(handleSubmit).toBeCalled();
+    });
   });
 });
