@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
@@ -23,5 +23,34 @@ describe('LoginForm', () => {
     expect(getByLabelText('Password')).toHaveAttribute('type', 'password');
 
     expect(getByRole('button', { name: 'LogIn' })).toBeInTheDocument();
+  });
+
+  context('when change inputs', () => {
+    const loginFields = {
+      email: '',
+      password: '',
+    };
+    const handleChangeLoginField = jest.fn();
+    const handleSubmitLoginField = jest.fn();
+
+    it('call ChangeLoginField', () => {
+      const { getByLabelText } = render(<LoginForm
+        loginFields={loginFields}
+        ChangeLoginField={handleChangeLoginField}
+        SubmitLoginField={handleSubmitLoginField}
+      />);
+
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'newEmail' },
+      });
+
+      expect(handleChangeLoginField).toBeCalledTimes(1);
+
+      fireEvent.change(getByLabelText('Password'), {
+        target: { value: 'newPassword' },
+      });
+
+      expect(handleChangeLoginField).toBeCalledTimes(2);
+    });
   });
 });
