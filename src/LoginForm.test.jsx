@@ -6,11 +6,13 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
   const renderLoginForm = ({ email, password }) => render(
     <LoginForm
       fields={{ email, password }}
       onChange={handleChange}
+      onSubmit={handleSubmit}
     />,
   );
 
@@ -19,6 +21,7 @@ describe('LoginForm', () => {
 
   beforeEach(() => {
     handleChange.mockClear();
+    handleSubmit.mockClear();
   });
 
   it('renders input controls', () => {
