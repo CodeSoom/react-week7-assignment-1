@@ -13,6 +13,7 @@ import { setAccessToken } from './actions';
 import TokenContainer from './TokenContainer';
 
 import accessTokenFixture from '../fixtures/accessToken';
+import { saveToken, deleteToken } from './services/accessTokenRepository';
 
 jest.mock('react-redux');
 
@@ -37,11 +38,11 @@ describe('TokenContainer', () => {
     expect(container).toHaveTextContent('헤더');
   });
 
-  context('with accessToken in localStorage', () => {
+  context('with accessToken', () => {
     it('update redux state', () => {
       const { accessToken } = accessTokenFixture;
 
-      localStorage.setItem('accessToken', accessToken);
+      saveToken(accessToken);
       useDispatch.mockImplementation(() => dispatch);
 
       renderTokenContainer();
@@ -50,9 +51,9 @@ describe('TokenContainer', () => {
     });
   });
 
-  context('without accessToken in localStorage', () => {
+  context('without accessToken', () => {
     it('do nothing', () => {
-      localStorage.removeItem('accessToken');
+      deleteToken();
 
       renderTokenContainer();
 

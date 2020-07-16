@@ -4,12 +4,14 @@ import { useDispatch } from 'react-redux';
 
 import { setAccessToken } from './actions';
 
+import { getToken } from './services/accessTokenRepository';
+
 import RoutePage from './RoutePage';
 
 export default function TokenContainer() {
   const dispatch = useDispatch();
 
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = getToken();
 
   if (accessToken) {
     dispatch(setAccessToken({ accessToken }));
