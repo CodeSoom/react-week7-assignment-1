@@ -6,6 +6,7 @@ import {
   setRestaurants,
   setRestaurant,
   changeLoginFields,
+  changeReviewFields,
   selectRegion,
   selectCategory,
   setAccessToken,
@@ -20,6 +21,10 @@ describe('reducer', () => {
       loginFields: {
         email: '',
         password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
       },
       restaurant: null,
       selectedRegion: null,
@@ -151,6 +156,50 @@ describe('reducer', () => {
 
         expect(state.loginFields.email).toBe('tester@example.com');
         expect(state.loginFields.password).toBe('1234');
+      });
+    });
+  });
+
+  describe('changeReviewFields', () => {
+    context('with score value', () => {
+      it('changes reviewFields', () => {
+        const initialState = {
+          reviewFields: {
+            score: '',
+            description: 'Good!',
+          },
+        };
+
+        const newValue = {
+          name: 'score',
+          value: '5',
+        };
+
+        const state = reducer(initialState, changeReviewFields(newValue));
+
+        expect(state.reviewFields.score).toBe('5');
+        expect(state.reviewFields.description).toBe('Good!');
+      });
+    });
+
+    context('with description value', () => {
+      it('changes reviewFields', () => {
+        const initialState = {
+          reviewFields: {
+            score: '5',
+            description: '',
+          },
+        };
+
+        const newValue = {
+          name: 'description',
+          value: 'Good!',
+        };
+
+        const state = reducer(initialState, changeReviewFields(newValue));
+
+        expect(state.reviewFields.score).toBe('5');
+        expect(state.reviewFields.description).toBe('Good!');
       });
     });
   });
