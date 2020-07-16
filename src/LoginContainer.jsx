@@ -7,7 +7,7 @@ import LoginForm from './LoginForm';
 import { requestLogin, setLoginFields } from './actions';
 import { get } from './utils';
 
-export default function LoginFormContainer() {
+export default function LoginContainer() {
   const dispatch = useDispatch();
   const { email, password } = useSelector(get('loginFields'));
 

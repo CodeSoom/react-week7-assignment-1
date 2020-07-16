@@ -4,14 +4,14 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import LoginFormContainer from './LoginFormContainer';
+import LoginContainer from './LoginContainer';
 
 import { requestLogin, setLoginFields } from './actions';
 
 jest.mock('react-redux');
 jest.mock('./actions');
 
-describe('LoginFormContainer', () => {
+describe('LoginContainer', () => {
   const dispatch = jest.fn();
   useDispatch.mockImplementation(() => dispatch);
 
@@ -27,8 +27,8 @@ describe('LoginFormContainer', () => {
     }));
   });
 
-  function renderLoginFormContainer() {
-    return render(<LoginFormContainer />);
+  function renderLoginContainer() {
+    return render(<LoginContainer />);
   }
 
   it('input email and password', () => {
@@ -37,7 +37,7 @@ describe('LoginFormContainer', () => {
       { label: 'Password', name: 'password', value: 'password' },
     ];
 
-    const { getByLabelText } = renderLoginFormContainer();
+    const { getByLabelText } = renderLoginContainer();
 
     inputElements.forEach(({ label, name, value }) => {
       fireEvent.change(getByLabelText(label), { target: { value } });
@@ -47,7 +47,7 @@ describe('LoginFormContainer', () => {
   });
 
   it('request login', () => {
-    const { getByText } = renderLoginFormContainer();
+    const { getByText } = renderLoginContainer();
 
     fireEvent.submit(getByText('Log In'));
 

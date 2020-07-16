@@ -116,7 +116,7 @@ describe('App', () => {
       });
     });
 
-    context('when logged out', () => {
+    context('when not logged in', () => {
       beforeEach(() => {
         loadItem.mockReturnValue(null);
       });
