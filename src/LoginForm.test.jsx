@@ -13,41 +13,59 @@ describe('LoginForm', () => {
     handleChange.mockClear();
   });
 
-  function renderLoginForm(email, password, onSubmit, onChange) {
+  function renderLoginForm({ email = '', password = '' }) {
     return render(
       <LoginForm
         email={email}
         password={password}
-        onSubmit={onSubmit}
-        onChange={onChange}
+        onSubmit={handleSubmit}
+        onChange={handleChange}
       />,
     );
   }
 
-  it('renders email and password input', () => {
-    const inputElements = [
+  it('renders input controls', () => {
+    const controls = [
+      { label: 'E-mail', value: 'email@test.com' },
+      { label: 'Password', value: 'password' },
+    ];
+
+    const { getByLabelText } = renderLoginForm(
+      {
+        email: controls[0].value,
+        password: controls[1].value,
+      },
+    );
+
+    controls.forEach(({ label, value }) => {
+      const control = getByLabelText(label);
+      expect(control.value).toBe(value);
+    });
+  });
+
+  it('changes input controls', () => {
+    const controls = [
       { label: 'E-mail', name: 'email', values: { before: 'before@test.com', after: 'after@test.com' } },
       { label: 'Password', name: 'password', values: { before: 'beforePassword1', after: 'afterPassword1' } },
     ];
 
     const { getByLabelText } = renderLoginForm(
-      inputElements[0].values.before,
-      inputElements[1].values.before,
-      handleSubmit,
-      handleChange,
+      {
+        email: controls[0].values.before,
+        password: controls[1].values.before,
+      },
     );
 
-    inputElements.forEach(({ label, name, values: { before, after } }) => {
+    controls.forEach(({ label, name, values: { after } }) => {
       const inputElement = getByLabelText(label);
-      expect(inputElement.value).toBe(before);
-
       fireEvent.change(inputElement, { target: { value: after } });
+
       expect(handleChange).toBeCalledWith({ name, value: after });
     });
   });
 
   it('renders login button', () => {
-    const { getByText } = renderLoginForm('', '', handleSubmit, handleChange);
+    const { getByText } = renderLoginForm({});
 
     fireEvent.submit(getByText('Log In'));
 
