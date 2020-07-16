@@ -33,9 +33,9 @@ describe('LoginPage', () => {
   });
 
   it('renders input controls', () => {
-    const { container } = renderLoginPage();
+    const { getByLabelText } = renderLoginPage();
 
-    expect(container).toHaveTextContent('E-mail');
-    expect(container).toHaveTextContent('Password');
+    expect(getByLabelText('E-mail')).not.toBeNull();
+    expect(getByLabelText('Password')).not.toBeNull();
   });
 });
