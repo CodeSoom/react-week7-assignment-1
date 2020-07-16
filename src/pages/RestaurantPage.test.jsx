@@ -20,6 +20,10 @@ describe('RestaurantPage', () => {
         name: '마법사주방',
         address: '서울시 강남구',
       },
+      reviewFields: {
+        score: 5,
+        reviewContent: '바보들앙 이거 리뷰 아니지롱~',
+      },
     }));
   });
 
