@@ -21,15 +21,21 @@ describe('RestaurantContainer', () => {
       useSelector.mockImplementation((selector) => selector({
         restaurant: given.restaurant,
         accessToken: 'ACCESS_TOKEN',
+        reviewFields: {
+          score: 5,
+          reviewContent: '바보들앙 이거 리뷰 아니지롱~',
+        },
       }));
     });
-    it('renders review InputForm', () => {
+    it('renders review InputForm with value', () => {
       const { getByLabelText, getByDisplayValue } = renderRestaurantContainer();
 
-      expect(getByLabelText('평점')).not.toBeNull();
-      expect(getByLabelText('리뷰 내용')).not.toBeNull();
+      expect(getByLabelText('평점').value).toBe(5);
+      expect(getByLabelText('리뷰 내용').value).toBe('바보들앙 이거 리뷰 아니지롱~');
       expect(getByDisplayValue('리뷰 남기기')).not.toBeNull();
     });
+
+    // TODO 상태에 따라 바뀌는지 체크해보기
   });
 
   context('without logined', () => {
