@@ -28,6 +28,7 @@ function ReviewForm({ onChange }) {
           id="review-score"
           name="score"
           onChange={handleChange}
+          value="5"
         />
       </div>
       <div>
@@ -39,6 +40,7 @@ function ReviewForm({ onChange }) {
           id="review-description"
           name="description"
           onChange={handleChange}
+          value="Good!"
         />
       </div>
     </>
