@@ -116,4 +116,20 @@ describe('RestaurantContainer', () => {
 
     expect(dispatch).toBeCalledTimes(2);
   });
+
+  it('renders submit button', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
+    given('reviewFields', () => ({
+      score: '5',
+      description: 'Good!',
+    }));
+
+    const { getByText } = renderRestaurantContainer();
+
+    expect(getByText('리뷰 남기기')).not.toBeNull();
+  });
 });
