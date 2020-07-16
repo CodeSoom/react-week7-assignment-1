@@ -116,3 +116,11 @@ export function login() {
     dispatch(setAccessToken(accessToken));
   };
 }
+
+export function logout() {
+  localStorage.removeItem('accessToken');
+  return {
+    type: 'logout',
+    payload: { accessToken: '' },
+  };
+}
