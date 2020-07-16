@@ -1,13 +1,12 @@
 import React from 'react';
 
 import MenuItems from './MenuItems';
-import ReviewItems from './ReviewItems';
 
 export default function RestaurantDetail({
   restaurant, reviewField, onChangeReviewField, onSubmitReviewField,
 }) {
   const {
-    name, address, menuItems, reviews,
+    name, address, menuItems,
   } = restaurant;
 
   const {
@@ -53,10 +52,6 @@ export default function RestaurantDetail({
             리뷰 남기기
           </button>
         </div>
-      </div>
-      <div>
-        <h3>리뷰 목록</h3>
-        <ReviewItems reviewItems={reviews} />
       </div>
     </>
   );

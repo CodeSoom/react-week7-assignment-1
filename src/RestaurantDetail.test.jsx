@@ -36,9 +36,5 @@ describe('RestaurantDetail', () => {
     expect(getByLabelText('내용')).toHaveAttribute('type', 'text');
 
     expect(getByRole('button', { name: '리뷰 남기기' })).toBeInTheDocument();
-
-    expect(container).toHaveTextContent('테스터');
-    expect(container).toHaveTextContent('5');
-    expect(container).toHaveTextContent('완벽해요');
   });
 });
