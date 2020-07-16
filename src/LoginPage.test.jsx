@@ -10,4 +10,12 @@ describe('LoginPage', () => {
 
     expect(container).toContainHTML('<h2>Log in</h2>');
   });
+
+  it('renders input controls and \'Login\' button', () => {
+    const { getByLabelText, getByText } = render(<LoginPage />);
+
+    expect(getByLabelText('Email')).toBeInTheDocument();
+    expect(getByLabelText('Password')).toBeInTheDocument();
+    expect(getByText('Login')).toBeInTheDocument();
+  });
 });
