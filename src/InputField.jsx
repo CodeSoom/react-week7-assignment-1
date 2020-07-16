@@ -1,9 +1,15 @@
 import React from 'react';
 
 export default function InputField({
-  label, name, value, onChange,
+  label, type, name, value, onChange,
 }) {
   const id = `inputField-${name}`;
+
+  function handleChange(event) {
+    const { target: { value: changedValue } } = event;
+
+    onChange({ name, value: changedValue });
+  }
 
   return (
     <>
@@ -11,11 +17,11 @@ export default function InputField({
         {label}
       </label>
       <input
-        type="email"
+        type={type}
         id={id}
         name={name}
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
       />
     </>
   );
