@@ -30,8 +30,8 @@ export default function LoginFormContainer() {
     <>
       <LoginForm
         loginFields={loginFields}
-        ChangeLoginField={handleChangeLoginField}
-        SubmitLoginField={handleSubmitLoginField}
+        onChangeLoginField={handleChangeLoginField}
+        onSubmitLoginField={handleSubmitLoginField}
       />
       <p>{accessToken}</p>
     </>

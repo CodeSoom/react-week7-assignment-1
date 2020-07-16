@@ -15,8 +15,8 @@ describe('LoginForm', () => {
 
     const { getByLabelText, getByRole } = render(<LoginForm
       loginFields={loginFields}
-      ChangeLoginField={handleChangeLoginField}
-      SubmitLoginField={handleSubmitLoginField}
+      onChangeLoginField={handleChangeLoginField}
+      onSubmitLoginField={handleSubmitLoginField}
     />);
 
     expect(getByLabelText('E-mail')).toHaveAttribute('type', 'email');
@@ -36,8 +36,8 @@ describe('LoginForm', () => {
     it('call ChangeLoginField', () => {
       const { getByLabelText } = render(<LoginForm
         loginFields={loginFields}
-        ChangeLoginField={handleChangeLoginField}
-        SubmitLoginField={handleSubmitLoginField}
+        onChangeLoginField={handleChangeLoginField}
+        onSubmitLoginField={handleSubmitLoginField}
       />);
 
       fireEvent.change(getByLabelText('E-mail'), {
@@ -65,8 +65,8 @@ describe('LoginForm', () => {
     it('call SubmitLoginField', () => {
       const { getByRole } = render(<LoginForm
         loginFields={loginFields}
-        ChangeLoginField={handleChangeLoginField}
-        SubmitLoginField={handleSubmitLoginField}
+        onChangeLoginField={handleChangeLoginField}
+        onSubmitLoginField={handleSubmitLoginField}
       />);
 
       fireEvent.click(getByRole('button', { name: 'LogIn' }));
