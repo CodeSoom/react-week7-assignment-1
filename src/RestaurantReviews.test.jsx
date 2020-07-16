@@ -5,6 +5,16 @@ import { render } from '@testing-library/react';
 import RestaurantReviews from './RestaurantReviews';
 
 describe('RestaurantReviews', () => {
+  function renderRestaurantReviews(reviews) {
+    return (
+      render(
+        <RestaurantReviews
+          reviews={reviews}
+        />,
+      )
+    );
+  }
+
   context('with reviews', () => {
     it('renders reviews', () => {
       const reviews = [{
@@ -14,11 +24,7 @@ describe('RestaurantReviews', () => {
         description: '맛있어요!',
       }];
 
-      const { container } = render(
-        <RestaurantReviews
-          reviews={reviews}
-        />,
-      );
+      const { container } = renderRestaurantReviews(reviews);
 
       expect(container).toHaveTextContent('리뷰');
       expect(container).toHaveTextContent(reviews[0].name);
@@ -31,11 +37,7 @@ describe('RestaurantReviews', () => {
     it('renders no review message', () => {
       const reviews = [];
 
-      const { container } = render(
-        <RestaurantReviews
-          reviews={reviews}
-        />,
-      );
+      const { container } = renderRestaurantReviews(reviews);
 
       expect(container).toHaveTextContent('리뷰가 없습니다.');
     });
@@ -45,11 +47,7 @@ describe('RestaurantReviews', () => {
     it('renders no review message', () => {
       const reviews = null;
 
-      const { container } = render(
-        <RestaurantReviews
-          reviews={reviews}
-        />,
-      );
+      const { container } = renderRestaurantReviews(reviews);
 
       expect(container).toHaveTextContent('리뷰가 없습니다.');
     });
