@@ -19,3 +19,7 @@ export async function postSession() {
     accessToken: '',
   };
 }
+
+export async function postReview() {
+  return {};
+}

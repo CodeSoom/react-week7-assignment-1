@@ -1,5 +1,6 @@
 import {
-  fetchRegions, fetchCategories, fetchRestaurants, fetchRestaurant, postSession,
+  fetchRegions, fetchCategories, fetchRestaurants, fetchRestaurant,
+  postSession, postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -80,6 +81,21 @@ describe('api', () => {
       });
 
       expect(accessToken).toEqual(ACCESSTOKEN);
+    });
+  });
+
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch({});
+    });
+
+    it('returns empty object', async () => {
+      const response = await postReview({
+        score: 5,
+        description: '리뷰내용',
+      });
+
+      expect(response).toEqual({});
     });
   });
 });
