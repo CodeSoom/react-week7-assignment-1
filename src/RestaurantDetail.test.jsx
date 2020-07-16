@@ -8,7 +8,7 @@ import restaurant from '../fixtures/restaurant';
 
 describe('RestaurantDetail', () => {
   it('renders Restaurant info', () => {
-    const { container } = render(
+    const { container, getByLabelText, getByRole } = render(
       <RestaurantDetail restaurant={restaurant} />,
     );
 
@@ -19,10 +19,10 @@ describe('RestaurantDetail', () => {
     expect(container).toHaveTextContent('탕수육');
     expect(container).toHaveTextContent('팔보채');
 
-    // TODO : 리뷰 작성
-    // 평점
-    // 리뷰 내용
-    // 리뷰 남기기
+    expect(getByLabelText('평점')).toHaveAttribute('type', 'number');
+    expect(getByLabelText('내용')).toHaveAttribute('type', 'text');
+
+    expect(getByRole('button', { name: '리뷰 남기기' })).toBeInTheDocument();
 
     expect(container).toHaveTextContent('테스터');
     expect(container).toHaveTextContent('5');
