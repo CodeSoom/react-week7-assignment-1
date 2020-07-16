@@ -125,3 +125,12 @@ export function requestLogin() {
     dispatch(setLoginFieldsError(!accessToken || Object.keys(accessToken).length === 0));
   };
 }
+
+export function setReviewFields({ name, value }) {
+  return {
+    type: 'setReviewFields',
+    payload: {
+      name, value,
+    },
+  };
+}
