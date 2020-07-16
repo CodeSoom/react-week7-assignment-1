@@ -59,11 +59,13 @@ describe('LoginForm', () => {
     });
   });
 
-  it('click login button', () => {
-    const { getByText } = renderLoginForm();
+  describe('click login button', () => {
+    it('calls submit event', () => {
+      const { getByText } = renderLoginForm();
 
-    fireEvent.click(getByText('Log In'));
+      fireEvent.click(getByText('Log In'));
 
-    expect(handleSubmit).toBeCalled();
+      expect(handleSubmit).toBeCalled();
+    });
   });
 });
