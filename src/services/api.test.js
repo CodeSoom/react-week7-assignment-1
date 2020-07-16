@@ -72,7 +72,7 @@ describe('api', () => {
 
   describe('login', () => {
     beforeEach(() => {
-      mockFetch(ACCESS_TOKEN);
+      mockFetch({ accessToken: ACCESS_TOKEN });
     });
 
     it('requests login', async () => {

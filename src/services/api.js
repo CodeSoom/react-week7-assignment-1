@@ -37,6 +37,6 @@ export async function login({ email, password }) {
     },
     body: JSON.stringify({ email, password }),
   });
-  const accessToken = await response.json();
+  const { accessToken } = await response.json();
   return accessToken;
 }
