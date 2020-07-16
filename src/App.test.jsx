@@ -48,7 +48,7 @@ describe('App', () => {
 
   context('with path /about', () => {
     it('renders the about page', () => {
-      const { container } = renderApp({ path: '/about' });
+      const { container } = renderApp({ path: '/About' });
 
       expect(container).toHaveTextContent('About 페이지');
     });
@@ -59,6 +59,14 @@ describe('App', () => {
       const { container } = renderApp({ path: '/restaurants' });
 
       expect(container).toHaveTextContent('서울');
+    });
+  });
+
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('로그인');
     });
   });
 

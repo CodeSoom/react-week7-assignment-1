@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import HomePage from './HomePage';
+import LoginPage from './LoginPage';
 import AboutPage from './AboutPage';
 import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
@@ -23,6 +24,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
+        <Route path="/login" component={LoginPage} />
         <Route exact path="/restaurants" component={RestaurantsPage} />
         <Route path="/restaurants/:id" component={RestaurantPage} />
         <Route component={NotFoundPage} />
