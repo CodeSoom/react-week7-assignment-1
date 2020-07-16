@@ -21,6 +21,9 @@ test('RestaurantViewPage', () => {
   useDispatch.mockImplementation(() => dispatch);
 
   useSelector.mockImplementation((selector) => selector({
+    session: {
+      accessToken: 'ACCESS_TOKEN',
+    },
     restaurant: RESTAURANT,
   }));
 
