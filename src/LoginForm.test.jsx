@@ -37,16 +37,16 @@ describe('LoginForm', () => {
   });
 
   it('listens click event', () => {
-    const handleClick = jest.fn();
+    const handleSubmit = jest.fn();
 
     const { getByText } = render((
       <LoginForm
-        onClick={handleClick}
+        onSubmit={handleSubmit}
       />
     ));
 
     fireEvent.click(getByText('Login'));
 
-    expect(handleClick).toBeCalled();
+    expect(handleSubmit).toBeCalled();
   });
 });
