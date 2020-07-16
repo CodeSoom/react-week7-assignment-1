@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setAccessToken } from '../store/actions';
+import { logout } from '../store/actions';
 
 import LoginFormContainer from './LoginFormContainer';
 
@@ -16,7 +16,7 @@ export default function SessionContainer() {
   const dispatch = useDispatch();
 
   function handleLogout() {
-    dispatch(setAccessToken(null));
+    dispatch(logout());
   }
 
   return (

@@ -6,7 +6,9 @@ import {
   postSession,
 } from '../services/api';
 
-import { setItemToStorage } from '../services/storage';
+import {
+  setItemToStorage,
+ } from '../services/storage';
 
 export function setRegions(regions) {
   return {
@@ -124,4 +126,8 @@ export function login() {
       // todo: error action
     }
   };
+}
+
+export function logout() {
+  return setAccessToken(null);
 }

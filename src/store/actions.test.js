@@ -13,6 +13,7 @@ import {
   setSessionInput,
   setAccessToken,
   login,
+  logout,
 } from './actions';
 
 const middlewares = [thunk];
@@ -196,6 +197,16 @@ describe('actions', () => {
 
         expect(actions).toHaveLength(0);
       });
+    });
+  });
+
+  describe('login', () => {
+    it('runs setAccessToken', async () => {
+      await store.dispatch(logout());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken(null));
     });
   });
 });
