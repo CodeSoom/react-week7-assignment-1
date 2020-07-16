@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
+import { changeLoginField } from './actions';
+
 describe('LoginFormContainer', () => {
   it('renders input controls', () => {
     const { getByLabelText, getByText } = render((
@@ -26,10 +28,19 @@ describe('LoginFormContainer', () => {
       <LoginFormContainer />
     ));
 
-    fireEvent.change(getByLabelText('Email'), {
-      target: { value: '1234' },
-    });
+    const controls = [
+      { label: 'Email', name: 'email', value: 'tester@ex.com' },
+      { label: 'Password', name: 'password', value: '5432' },
+    ];
 
-    expect(dispatch).toBeCalled();
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
+
+      fireEvent.change(input, {
+        target: { value },
+      });
+
+      expect(dispatch).toBeCalledWith(changeLoginField({ name, value }));
+    });
   });
 });
