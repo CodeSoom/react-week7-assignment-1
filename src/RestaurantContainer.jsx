@@ -43,6 +43,11 @@ function ReviewForm({ reviewFields: { score, description }, onChange }) {
           value={description}
         />
       </div>
+      <button
+        type="button"
+      >
+        리뷰 남기기
+      </button>
     </>
   );
 }
