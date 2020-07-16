@@ -73,6 +73,12 @@ const reducers = {
       accessToken,
     };
   },
+  setLoginFieldsError(state, { payload: { loginFieldsError } }) {
+    return {
+      ...state,
+      loginFieldsError,
+    };
+  },
 };
 
 function defaultReducer(state) {
