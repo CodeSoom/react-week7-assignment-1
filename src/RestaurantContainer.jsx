@@ -7,11 +7,12 @@ import RestaurantDetail from './RestaurantDetail';
 import {
   loadRestaurant,
   changeReviewFields,
+  sendReview,
 } from './actions';
 
 import { get } from './utils';
 
-function ReviewForm({ reviewFields: { score, description }, onChange }) {
+function ReviewForm({ reviewFields: { score, description }, onChange, onClick }) {
   function handleChange(event) {
     const { name, value } = event.target;
 
@@ -45,6 +46,7 @@ function ReviewForm({ reviewFields: { score, description }, onChange }) {
       </div>
       <button
         type="button"
+        onClick={onClick}
       >
         리뷰 남기기
       </button>
@@ -72,12 +74,17 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(changeReviewFields({ name, value }));
   }
 
+  function handleClick() {
+    dispatch(sendReview({ restaurantId }));
+  }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
       <ReviewForm
         reviewFields={reviewFields}
         onChange={handleChange}
+        onClick={handleClick}
       />
     </>
   );
