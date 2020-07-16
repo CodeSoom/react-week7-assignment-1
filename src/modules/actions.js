@@ -3,6 +3,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  fetchAccessToken,
 } from '../services/api';
 
 export function setRegions(regions) {
@@ -95,10 +96,21 @@ export function setLoginFields({ name, value }) {
   };
 }
 
+export function setAccessToken(accessToken = '') {
+  return {
+    type: 'setAccessToken',
+    payload: {
+      accessToken,
+    },
+  };
+}
+
 export function requestLogin() {
   return async (dispatch, getState) => {
-    // TODO
-    // 1. HTTP 요청하기 POST https://eatgo-login-api.ahastudio.com/session
-    // 2. dispatch(setAccessToken)
+    const { loginFields: { email, password } } = getState();
+
+    const { accessToken } = await fetchAccessToken({ email, password });
+
+    dispatch(setAccessToken(accessToken));
   };
 }
