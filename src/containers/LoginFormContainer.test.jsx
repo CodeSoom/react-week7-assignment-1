@@ -22,12 +22,16 @@ describe('LoginFormContainer', () => {
         accessToken: 'ACCESS_TOKEN',
       }));
     });
-    it('renders "Log out" button', () => {
+    it('renders "Log out" button and listens "Log out" button click event', () => {
       const { queryByText } = render(
         <LoginFormContainer />,
       );
 
       expect(queryByText('Log Out')).not.toBeNull();
+
+      fireEvent.click(queryByText('Log Out'));
+
+      expect(dispatch).toBeCalled();
     });
   });
 
