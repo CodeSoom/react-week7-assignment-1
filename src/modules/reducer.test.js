@@ -10,6 +10,7 @@ import {
   setLoginFields,
   setAccessToken,
   setLoginFieldsError,
+  setReviewFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -186,6 +187,37 @@ describe('reducer', () => {
       const state = reducer(initialState, setLoginFieldsError(true));
 
       expect(state.loginFieldsError).toBeTruthy();
+    });
+  });
+  describe('setReviewFields', () => {
+    it('change score field', () => {
+      const initialState = {
+        reviewFields: {
+          score: 0,
+          reviewContent: '',
+        },
+      };
+      const name = 'score';
+      const value = 5;
+
+      const state = reducer(initialState, setReviewFields({ name, value }));
+
+      expect(state.reviewFields.score).toBe(value);
+    });
+
+    it('change reviewContent field', () => {
+      const initialState = {
+        reviewFields: {
+          score: 0,
+          reviewContent: '',
+        },
+      };
+      const name = 'reviewContent';
+      const value = '바보들앙 이거 리뷰 아니지롱~';
+
+      const state = reducer(initialState, setReviewFields({ name, value }));
+
+      expect(state.reviewFields.reviewContent).toBe(value);
     });
   });
 });
