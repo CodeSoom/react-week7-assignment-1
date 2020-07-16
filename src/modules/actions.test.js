@@ -100,4 +100,9 @@ describe('actions', () => {
       expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
+
+  describe('requestLogin', () => {
+    // TODO
+    // dispatch(setAccessToken)
+  });
 });
