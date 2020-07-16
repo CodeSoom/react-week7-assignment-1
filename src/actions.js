@@ -92,3 +92,18 @@ export function changeLoginField({ name, value }) {
     payload: { name, value },
   };
 }
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch) => {
+    const accessToken = 'exampleToken';
+
+    dispatch(setAccessToken(accessToken));
+  };
+}
