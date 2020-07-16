@@ -10,12 +10,14 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  setAccessToken,
+  requestLogin,
 } from './actions';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-jest.mock('../services/api');
+jest.mock('../services/api.js');
 
 describe('actions', () => {
   let store;
@@ -102,7 +104,22 @@ describe('actions', () => {
   });
 
   describe('requestLogin', () => {
-    // TODO
-    // dispatch(setAccessToken)
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: '',
+        loginFields: {
+          email: 'test@test.com',
+          password: '1234',
+        },
+      });
+    });
+
+    it('dispatchs setAccessToken', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken(''));
+    });
   });
 });
