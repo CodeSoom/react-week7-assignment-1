@@ -112,8 +112,10 @@ export function login() {
     }
 
     const accessToken = await fetchAccessToken(loginFields);
-    localStorage.setItem('accessToken', accessToken);
-    dispatch(setAccessToken(accessToken));
+    if (accessToken !== undefined) {
+      localStorage.setItem('accessToken', accessToken);
+      dispatch(setAccessToken(accessToken));
+    }
   };
 }
 
