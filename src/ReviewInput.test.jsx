@@ -9,6 +9,7 @@ describe('ReviewInput', () => {
     const { container } = render(
       <ReviewInput
         label="평점"
+        type="number"
         name="score"
         onChange={jest.fn()}
         value="5"
