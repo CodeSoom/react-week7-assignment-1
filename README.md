@@ -119,6 +119,6 @@ npm run test:e2e
 - [X] useSelector를 더 간단하게 표현하기(LoginFormContainer)
 - [X] createToken 대신 의도가 더 잘 드러나도록 Login으로 이름 바꾸기(LoginFormContainer, actions)
 - [X] 코드에 의도를 더 잘 드러내기 위해 logout을 처리하는 액션을 새로 생성하기(actions)
-- [ ] 로컬 스토리지를 다루는 서비스 추상화하기
+- [ ] accessToken과 관련된 로컬 스토리지를 다루는 서비스 추상화하기
 - [ ] 로그인 버튼 클릭 시 로컬 스토리지 관련 동작도 테스트 하기(LoginFormContainer.test)
 - [ ] 테스트에 대한 정확한 설명 적기(LogoutButton.test)

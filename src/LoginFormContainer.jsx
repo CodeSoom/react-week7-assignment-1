@@ -6,7 +6,6 @@ import {
   changeLoginFields,
   login,
   logout,
-  setAccessToken,
 } from './actions';
 
 import LoginForm from './LoginForm';
