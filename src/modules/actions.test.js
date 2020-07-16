@@ -116,25 +116,7 @@ describe('actions', () => {
         });
       });
 
-      it('dispatchs setAccessToken', async () => {
-        await store.dispatch(requestLogin());
-
-        const actions = store.getActions();
-
-        expect(actions[0]).toEqual(setAccessToken(''));
-      });
-    });
-    context('without accessToken', () => {
-      beforeEach(() => {
-        store = mockStore({
-          accessToken: '',
-          loginFields: {
-            email: 'test@test.com',
-            password: '1234',
-          },
-        });
-      });
-      it('dispatchs setAccessToken', async () => {
+      it('dispatchs setAccessToken and setLoginFieldsError', async () => {
         await store.dispatch(requestLogin());
 
         const actions = store.getActions();
