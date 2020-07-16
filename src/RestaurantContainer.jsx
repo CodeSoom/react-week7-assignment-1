@@ -10,6 +10,8 @@ import {
 
 import { get } from './utils';
 
+import Reviews from './Reviews';
+
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
@@ -18,6 +20,8 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
+
+  const { reviews } = restaurant;
 
   if (!restaurant) {
     return (
@@ -28,6 +32,7 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
+      <Reviews reviews={reviews} />
     </>
   );
 }
