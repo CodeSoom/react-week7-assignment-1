@@ -24,7 +24,7 @@ function ReviewForm({ reviewFields: { score, description }, onChange }) {
           평점
         </label>
         <input
-          type="text"
+          type="number"
           id="review-score"
           name="score"
           onChange={handleChange}
