@@ -7,9 +7,22 @@ import RestaurantDetail from './RestaurantDetail';
 import restaurant from '../fixtures/restaurant';
 
 describe('RestaurantDetail', () => {
+  const handleChangeReviewField = jest.fn();
+  const handleSubmitReviewField = jest.fn();
+
+  const reviewField = {
+    score: '',
+    description: '',
+  };
+
   it('renders Restaurant info', () => {
     const { container, getByLabelText, getByRole } = render(
-      <RestaurantDetail restaurant={restaurant} />,
+      <RestaurantDetail
+        restaurant={restaurant}
+        reviewField={reviewField}
+        onChangeReviewField={handleChangeReviewField}
+        onSubmitReviewField={handleSubmitReviewField}
+      />,
     );
 
     expect(container).toHaveTextContent('양천주가');
