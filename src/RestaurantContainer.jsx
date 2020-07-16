@@ -11,7 +11,7 @@ import {
 
 import { get } from './utils';
 
-function ReviewForm({ onChange }) {
+function ReviewForm({ reviewFields: { score, description }, onChange }) {
   function handleChange(event) {
     const { name, value } = event.target;
 
@@ -28,7 +28,7 @@ function ReviewForm({ onChange }) {
           id="review-score"
           name="score"
           onChange={handleChange}
-          value="5"
+          value={score}
         />
       </div>
       <div>
@@ -40,7 +40,7 @@ function ReviewForm({ onChange }) {
           id="review-description"
           name="description"
           onChange={handleChange}
-          value="Good!"
+          value={description}
         />
       </div>
     </>
@@ -55,6 +55,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
+  const reviewFields = useSelector(get('reviewFields'));
 
   if (!restaurant) {
     return (
@@ -70,6 +71,7 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail restaurant={restaurant} />
       <ReviewForm
+        reviewFields={reviewFields}
         onChange={handleChange}
       />
     </>
