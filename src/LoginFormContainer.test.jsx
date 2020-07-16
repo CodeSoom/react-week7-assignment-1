@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
-import { requestLogin, changeLoginField } from './actions';
+import { requestLogin, setLoginFields } from './actions';
 
 jest.mock('react-redux');
 jest.mock('./actions');
@@ -42,7 +42,7 @@ describe('LoginFormContainer', () => {
     inputElements.forEach(({ label, name, value }) => {
       fireEvent.change(getByLabelText(label), { target: { value } });
 
-      expect(changeLoginField).toBeCalledWith({ name, value });
+      expect(setLoginFields).toBeCalledWith({ name, value });
     });
   });
 

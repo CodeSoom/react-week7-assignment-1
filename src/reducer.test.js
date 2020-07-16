@@ -7,7 +7,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
-  changeLoginField,
+  setLoginFields,
   setAccessToken,
 } from './actions';
 
@@ -132,7 +132,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('changeLoginField', () => {
+  describe('setLoginFields', () => {
     it('changes login field', () => {
       const initialState = {
         loginFields: {
@@ -141,7 +141,7 @@ describe('reducer', () => {
         },
       };
 
-      const state = reducer(initialState, changeLoginField({ name: 'email', value: 'test@test.com' }));
+      const state = reducer(initialState, setLoginFields({ name: 'email', value: 'test@test.com' }));
 
       expect(state.loginFields.email).toBe('test@test.com');
     });

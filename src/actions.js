@@ -48,9 +48,9 @@ export function selectCategory(categoryId) {
   };
 }
 
-export function changeLoginField({ name, value }) {
+export function setLoginFields({ name, value }) {
   return {
-    type: 'changeLoginField',
+    type: 'setLoginFields',
     payload: { name, value },
   };
 }
