@@ -12,6 +12,7 @@ describe('LoginPage', () => {
       email: '',
       password: '',
     },
+    accessToken: '',
   }));
 
   it('renders login title', () => {

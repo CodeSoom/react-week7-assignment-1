@@ -14,6 +14,7 @@ describe('LoginFormContainer', () => {
       email: '',
       password: '',
     },
+    accessToken: '',
   }));
 
   it('renders input controls', () => {
