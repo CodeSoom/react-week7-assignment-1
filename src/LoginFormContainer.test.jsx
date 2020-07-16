@@ -16,6 +16,8 @@ describe('LoginFormContainer', () => {
   const email = 'tester@example.com';
   const password = 'password';
 
+  useDispatch.mockImplementation(() => dispatch);
+
   beforeEach(() => {
     dispatch.mockClear();
   });
@@ -33,15 +35,14 @@ describe('LoginFormContainer', () => {
     }));
 
     it('listens form fields change event', () => {
-      const mockEmail = 'mock@example.com';
-      const mockPassword = 'mockPassword';
-      useDispatch.mockImplementation(() => dispatch);
+      const newEmail = 'mock@example.com';
+      const newPassword = 'mockPassword';
 
       const { getByLabelText } = renderLoginFormContainer();
 
       const controls = [
-        { label: 'E-mail', value: mockEmail, name: 'email' },
-        { label: 'Password', value: mockPassword, name: 'password' },
+        { label: 'E-mail', value: newEmail, name: 'email' },
+        { label: 'Password', value: newPassword, name: 'password' },
       ];
 
       controls.forEach(({ label, value, name }) => {
