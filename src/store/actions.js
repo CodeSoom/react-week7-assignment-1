@@ -8,6 +8,7 @@ import {
 
 import {
   setItemToStorage,
+  removeItemFromStorage,
  } from '../services/storage';
 
 export function setRegions(regions) {
@@ -129,5 +130,6 @@ export function login() {
 }
 
 export function logout() {
+  removeItemFromStorage('accessToken');
   return setAccessToken(null);
 }
