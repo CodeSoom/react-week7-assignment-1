@@ -12,6 +12,7 @@ const initialState = {
     password: '',
   },
   accessToken: '',
+  loginFieldsError: false,
 };
 
 const reducers = {

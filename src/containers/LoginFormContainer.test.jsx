@@ -69,4 +69,26 @@ describe('LoginFormContainer', () => {
       expect(dispatch).toBeCalled();
     });
   });
+
+  context('when loginFieldsError is true', () => {
+    beforeEach(() => {
+      dispatch.mockClear();
+      useDispatch.mockImplementation(() => dispatch);
+      useSelector.mockImplementation((selector) => selector({
+        loginFields: {
+          email: 'test@test.com',
+          password: '1234',
+        },
+        accessToken: '',
+        loginFieldsError: true,
+      }));
+    });
+    it('renders error message', () => {
+      const { getByText } = render(
+        <LoginFormContainer />,
+      );
+
+      expect(getByText(/로그인에 실패하였습니다/)).not.toBeNull();
+    });
+  });
 });

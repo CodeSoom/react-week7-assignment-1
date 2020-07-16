@@ -26,6 +26,7 @@ describe('reducer', () => {
         password: '',
       },
       accessToken: '',
+      loginFieldsError: false,
     };
 
     it('returns initialState', () => {
