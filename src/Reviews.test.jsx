@@ -20,10 +20,11 @@ describe('Reviews', () => {
         <Reviews reviews={reviews} />
       ));
 
-      expect(container).toHaveTextContent('리뷰');
-      expect(container).toHaveTextContent('홍길동');
-      expect(container).toHaveTextContent('4');
-      expect(container).toHaveTextContent('동에번쩍 서에번쩍 할 맛');
+      reviews.forEach(({
+        name, score, description,
+      }) => {
+        expect(container).toHaveTextContent(name, score, description);
+      });
     });
   });
 

@@ -127,6 +127,6 @@ npm run test:e2e
 - 테스트 코드 자체도 자세하게 접근하고 리팩토링 하기
 - [X] 테스트의 입력과 출력을 좀 더 명확하게 표기하기(LoginForm.test)
 - [X] 공통된 초기화 코드를 빼내기(LoginFormContainer.test)
-- [ ] 테스트 표현에 객체를 활용하기(Reviews.test)
+- [X] 테스트 표현에 객체를 활용하기(Reviews.test)
 - [ ] 이름을 모듈에 맞게 바꾸기(RoutePage.test)
 - [ ] accessTokenRepository 사용해서 테스트하는 부분을 모킹하기
