@@ -101,7 +101,6 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
-// TO-DO: implement
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
