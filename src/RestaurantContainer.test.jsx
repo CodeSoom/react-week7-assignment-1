@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
+import restaurant from '../fixtures/restaurant';
+import reviewFields from '../fixtures/reviewFields';
+
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
@@ -30,21 +33,14 @@ describe('RestaurantContainer', () => {
   });
 
   context('with restaurant', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
-    given('reviewFields', () => ({
-      score: '',
-      description: '',
-    }));
+    given('restaurant', () => restaurant);
+    given('reviewFields', () => reviewFields);
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
 
-      expect(container).toHaveTextContent('마법사주방');
-      expect(container).toHaveTextContent('서울시');
+      expect(container).toHaveTextContent(restaurant.name);
+      expect(container).toHaveTextContent(restaurant.address);
     });
   });
 
@@ -60,15 +56,8 @@ describe('RestaurantContainer', () => {
 
   context('with review field values', () => {
     it('renders review write form', () => {
-      given('restaurant', () => ({
-        id: 1,
-        name: '마법사주방',
-        address: '서울시 강남구',
-      }));
-      given('reviewFields', () => ({
-        score: '5',
-        description: 'Good!',
-      }));
+      given('restaurant', () => restaurant);
+      given('reviewFields', () => reviewFields);
 
       const { queryByLabelText } = renderRestaurantContainer();
 
@@ -78,14 +67,10 @@ describe('RestaurantContainer', () => {
   });
 
   it('listens score change event', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
+    given('restaurant', () => restaurant);
     given('reviewFields', () => ({
       score: '',
-      description: '',
+      description: 'Good!',
     }));
 
     const { queryByLabelText } = renderRestaurantContainer();
@@ -98,13 +83,9 @@ describe('RestaurantContainer', () => {
   });
 
   it('listens description change event', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
+    given('restaurant', () => restaurant);
     given('reviewFields', () => ({
-      score: '',
+      score: '5',
       description: '',
     }));
 
@@ -118,15 +99,8 @@ describe('RestaurantContainer', () => {
   });
 
   it('renders submit button', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
-    given('reviewFields', () => ({
-      score: '5',
-      description: 'Good!',
-    }));
+    given('restaurant', () => restaurant);
+    given('reviewFields', () => reviewFields);
 
     const { getByText } = renderRestaurantContainer();
 
