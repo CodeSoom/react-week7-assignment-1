@@ -15,7 +15,7 @@ import {
   changeLoginFields,
 } from './actions';
 
-import { getToken } from './services/accessTokenRepository';
+import { saveToken } from './services/accessTokenRepository';
 
 import accessTokenFixture from '../fixtures/accessToken';
 
@@ -23,6 +23,7 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/accessTokenRepository');
 
 describe('actions', () => {
   let store;
@@ -129,9 +130,11 @@ describe('actions', () => {
     });
 
     it('set acessToken to local storage', async () => {
+      const { accessToken } = accessTokenFixture;
+
       await store.dispatch(login(accessTokenFixture));
 
-      expect(getToken()).toBe('TESTACESSTOKEN');
+      expect(saveToken).toBeCalledWith(accessToken);
     });
   });
 });
