@@ -12,4 +12,11 @@ describe('LogoutPage', () => {
 
     expect(queryByRole('button', { name: 'LogOut' })).toBeInTheDocument();
   });
+
+  // TODO : 로그아웃 버튼 클릭시, 메인화면으로 넘어가기
+  // it('click [LogOut] button ', () => {
+  //   const { getByRole } = render(<LogoutPage />);
+
+  //   fireEvent.click(getByRole('button', { name: 'LogOut' }));
+  // });
 });
