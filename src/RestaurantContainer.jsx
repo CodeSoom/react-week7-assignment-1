@@ -22,8 +22,6 @@ export default function RestaurantContainer({ restaurantId }) {
   const restaurant = useSelector(get('restaurant'));
   const reviewField = useSelector(get('reviewField'));
 
-  const { reviews } = restaurant;
-
   if (!restaurant) {
     return (
       <p>Loading...</p>
@@ -46,7 +44,7 @@ export default function RestaurantContainer({ restaurantId }) {
         onChangeReviewField={handleChangeReviewField}
         onSubmitReviewField={handleSubmitReviewField}
       />
-      <Reviews reviews={reviews} />
+      <Reviews reviews={restaurant.reviews} />
     </>
   );
 }
