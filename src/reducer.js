@@ -5,6 +5,7 @@ const initialState = {
   categories: [],
   restaurants: [],
   restaurant: null,
+  accessToken: null,
   selectedRegion: null,
   selectedCategory: null,
   loginFields: {
@@ -39,6 +40,13 @@ const reducers = {
     return {
       ...state,
       restaurant,
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
     };
   },
 
