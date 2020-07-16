@@ -5,7 +5,6 @@ import { render, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
-import { setAccessToken } from './actions';
 
 jest.mock('react-redux');
 
@@ -81,11 +80,18 @@ describe('LoginFormContainer', () => {
     });
 
     it('click the logout button', () => {
+      localStorage.setItem('accessToken', 'TESTACCESSTOKEN');
+
       const { getByText } = renderLoginFormContainer();
 
       fireEvent.click(getByText('Log out'));
 
-      expect(dispatch).toBeCalledWith(setAccessToken(''));
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: {
+          accessToken: '',
+        },
+      });
 
       const accessToken = localStorage.getItem('accessToken');
       expect(accessToken).toBeNull();

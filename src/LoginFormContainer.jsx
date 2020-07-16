@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   changeLoginFields,
   createToken,
+  setAccessToken,
 } from './actions';
 
 import LoginForm from './LoginForm';
@@ -28,6 +29,11 @@ export default function LoginFormContainer() {
     dispatch(createToken());
   }
 
+  function handleLogout() {
+    dispatch(setAccessToken({ accessToken: '' }));
+    localStorage.removeItem('accessToken');
+  }
+
   return (
     (accessToken === '')
       ? (
@@ -37,6 +43,13 @@ export default function LoginFormContainer() {
           onClick={handleClick}
         />
       )
-      : <button type="button">Log out</button>
+      : (
+        <button
+          type="button"
+          onClick={handleLogout}
+        >
+          Log out
+        </button>
+      )
   );
 }
