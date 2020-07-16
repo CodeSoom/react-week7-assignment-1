@@ -24,6 +24,7 @@ import NotFoundPage from './NotFoundPage';
 export default function App() {
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem('accessToken');
+
   if (accessToken) {
     dispatch(setAccessToken(accessToken));
   }

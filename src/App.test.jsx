@@ -77,4 +77,6 @@ describe('App', () => {
       expect(container).toHaveTextContent('Not Found');
     });
   });
+
+  // TODO : accessToken 있을 경우에 대한 테스트 추가하기
 });
