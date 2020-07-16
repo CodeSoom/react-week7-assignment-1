@@ -123,6 +123,10 @@ export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
 
+    if (!accessToken) {
+      return;
+    }
+
     await postReview({
       restaurantId, accessToken, score, description,
     });
