@@ -12,6 +12,7 @@ import {
   setRestaurant,
   setAccessToken,
   requestLogin,
+  setLoginFieldsError,
 } from './actions';
 
 const middlewares = [thunk];
@@ -104,22 +105,43 @@ describe('actions', () => {
   });
 
   describe('requestLogin', () => {
-    beforeEach(() => {
-      store = mockStore({
-        accessToken: '',
-        loginFields: {
-          email: 'test@test.com',
-          password: '1234',
-        },
+    context('with accessToken', () => {
+      beforeEach(() => {
+        store = mockStore({
+          accessToken: 'ACCESS_TOKEN',
+          loginFields: {
+            email: 'test@test.com',
+            password: '1234',
+          },
+        });
+      });
+
+      it('dispatchs setAccessToken', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setAccessToken(''));
       });
     });
+    context('without accessToken', () => {
+      beforeEach(() => {
+        store = mockStore({
+          accessToken: '',
+          loginFields: {
+            email: 'test@test.com',
+            password: '1234',
+          },
+        });
+      });
+      it('dispatchs setAccessToken', async () => {
+        await store.dispatch(requestLogin());
 
-    it('dispatchs setAccessToken', async () => {
-      await store.dispatch(requestLogin());
+        const actions = store.getActions();
 
-      const actions = store.getActions();
-
-      expect(actions[0]).toEqual(setAccessToken(''));
+        expect(actions[0]).toEqual(setAccessToken(''));
+        expect(actions[1]).toEqual(setLoginFieldsError(true));
+      });
     });
   });
 });
