@@ -8,6 +8,7 @@ import {
   selectRegion,
   selectCategory,
   changeLoginField,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -143,6 +144,18 @@ describe('reducer', () => {
       const state = reducer(initialState, changeLoginField({ name: 'email', value: 'test@test.com' }));
 
       expect(state.loginFields.email).toBe('test@test.com');
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
+
+      expect(state.accessToken).toBe('ACCESS_TOKEN');
     });
   });
 });
