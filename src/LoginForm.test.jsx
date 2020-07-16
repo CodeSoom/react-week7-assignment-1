@@ -16,9 +16,11 @@ describe('LoginForm', () => {
   it('listens change event', () => {
     const handleChange = jest.fn();
 
-    const { getByLabelText } = render(<LoginForm />);
+    const { getByLabelText } = render(<LoginForm onChange={handleChange} />);
 
-    fireEvent.click(getByLabelText('Email'));
+    fireEvent.change(getByLabelText('Email'), {
+      target: { value: 'test@test.com' },
+    });
 
     expect(handleChange).toBeCalled();
   });
