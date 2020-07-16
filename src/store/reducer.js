@@ -15,6 +15,12 @@ const initialState = {
     },
     accessToken: null,
   },
+  review: {
+    input: {
+      score: null,
+      description: null,
+    },
+  },
 };
 
 const reducers = {
@@ -81,6 +87,19 @@ const reducers = {
       session: {
         ...state.session,
         accessToken,
+      },
+    };
+  },
+
+  setReviewInput(state, { payload: { reviewInput } }) {
+    return {
+      ...state,
+      review: {
+        ...state.review,
+        input: {
+          ...state.review.input,
+          ...reviewInput,
+        },
       },
     };
   },

@@ -9,6 +9,7 @@ import {
   setRestaurant,
   setSessionInput,
   setAccessToken,
+  setReviewInput,
 } from './actions';
 
 import CATEGORIES from '../../fixtures/categories';
@@ -33,6 +34,12 @@ describe('reducer', () => {
           password: '',
         },
         accessToken: null,
+      },
+      review: {
+        input: {
+          score: null,
+          description: null,
+        },
       },
     };
 
@@ -157,6 +164,31 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken(ACCESS_TOKEN));
 
       expect(state.session.accessToken).toEqual(ACCESS_TOKEN);
+    });
+  });
+
+  describe('setReviewInput', () => {
+    it('changes review', () => {
+      const initialState = {
+        review: {
+          input: {
+            score: '',
+            description: '',
+          },
+        },
+      };
+
+      const input = {
+        score: '5',
+        description: 'REVIEW_CONTENT',
+      };
+
+      let state = initialState;
+      Object.entries(input).forEach(([name, value]) => {
+        state = reducer(state, setReviewInput(name, value));
+      });
+
+      expect(state.review.input).toEqual(input);
     });
   });
 });
