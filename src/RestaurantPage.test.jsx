@@ -13,37 +13,59 @@ describe('RestaurantPage', () => {
     const dispatch = jest.fn();
 
     useDispatch.mockImplementation(() => dispatch);
-
-    useSelector.mockImplementation((state) => state({
-      restaurant: {
-        id: 1,
-        name: '마법사주방',
-        address: '서울시 강남구',
-      },
-    }));
   });
 
   context('with params props', () => {
+    beforeEach(() => {
+      useSelector.mockImplementation((state) => state({
+        restaurant: {
+          id: 1,
+          name: '마법사주방',
+          address: '서울시 강남구',
+          reviews: [],
+        },
+        reviewField: {
+          score: '',
+          description: '',
+        },
+      }));
+    });
+
     it('renders name', () => {
       const params = { id: '1' };
 
       const { container } = render(
-        <RestaurantPage params={params} />
+        <RestaurantPage params={params} />,
       );
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  })
+  });
 
   context('without params props', () => {
+    beforeEach(() => {
+      useSelector.mockImplementation((state) => state({
+        restaurant: {
+          id: 1,
+          name: '마법사주방',
+          address: '서울시 강남구',
+          reviews: [],
+        },
+        reviewField: {
+          score: '',
+          description: '',
+        },
+      }));
+    });
+
     it('renders name', () => {
       const { container } = render(
         <MemoryRouter initialEntries={['/restaurants/1']}>
           <RestaurantPage />
-        </MemoryRouter>
+        </MemoryRouter>,
       );
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  })
+  });
 });
