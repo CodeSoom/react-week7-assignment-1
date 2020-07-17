@@ -1,11 +1,25 @@
 import React from 'react';
 
 export default function ReviewForm({
-  reviewField, onChangeReviewField, onSubmitReviewField,
+  reviewField, accessToken, onChangeReviewField, onSubmitReviewField,
 }) {
   const {
     score, description,
   } = reviewField;
+
+  if (accessToken === '' || accessToken === undefined) {
+    return (
+      <>
+        <h3>리뷰 작성</h3>
+        <p>
+          <a href="/login">로그인</a>
+          {' '}
+          후 이용해주세요
+        </p>
+
+      </>
+    );
+  }
 
   return (
     <>

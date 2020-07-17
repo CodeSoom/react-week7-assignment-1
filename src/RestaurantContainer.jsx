@@ -9,6 +9,7 @@ import Reviews from './Reviews';
 import {
   loadRestaurant,
   changeReviewField,
+  setAccessToken,
 } from './actions';
 
 import { get } from './utils';
@@ -22,6 +23,12 @@ export default function RestaurantContainer({ restaurantId }) {
 
   const restaurant = useSelector(get('restaurant'));
   const reviewField = useSelector(get('reviewField'));
+  const accessToken = useSelector(get('accessToken'));
+  const accessToken2 = localStorage.getItem('accessToken');
+
+  if (accessToken2) {
+    dispatch(setAccessToken(accessToken));
+  }
 
   if (!restaurant) {
     return (
@@ -43,6 +50,7 @@ export default function RestaurantContainer({ restaurantId }) {
       <RestaurantDetail restaurant={restaurant} />
       <ReviewForm
         reviewField={reviewField}
+        accessToken={accessToken}
         onChangeReviewField={handleChangeReviewField}
         onSubmitReviewField={handleSubmitReviewField}
       />
