@@ -11,10 +11,11 @@ import {
   setRestaurants,
   setRestaurant,
   requestLogin,
+  requestLogout,
   setAccessToken,
 } from './actions';
 
-import { saveItem } from './services/storage';
+import { saveItem, removeItem } from './services/storage';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -123,6 +124,24 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(saveItem).toBeCalledWith('accessToken', '');
+      expect(actions[0]).toEqual(setAccessToken(''));
+    });
+  });
+
+  describe('requestLogout', () => {
+    beforeEach(() => {
+      removeItem.mockClear();
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+      });
+    });
+
+    it('requests logout', async () => {
+      await store.dispatch(requestLogout());
+
+      const actions = store.getActions();
+
+      expect(removeItem).toBeCalledWith('accessToken');
       expect(actions[0]).toEqual(setAccessToken(''));
     });
   });
