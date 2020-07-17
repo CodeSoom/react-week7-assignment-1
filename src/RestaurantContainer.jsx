@@ -35,7 +35,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   function handleSubmitReviewField() {
-
+    // TODO : 강의 듣고 진행하기
   }
 
   return (
