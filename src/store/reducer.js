@@ -17,8 +17,8 @@ const initialState = {
   },
   review: {
     input: {
-      score: null,
-      description: null,
+      score: '',
+      description: '',
     },
   },
 };

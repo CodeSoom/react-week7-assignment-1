@@ -37,8 +37,8 @@ describe('reducer', () => {
       },
       review: {
         input: {
-          score: null,
-          description: null,
+          score: '',
+          description: '',
         },
       },
     };

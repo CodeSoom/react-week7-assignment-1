@@ -266,15 +266,12 @@ describe('actions', () => {
       });
 
       it('runs setReviewInput twice', async () => {
-
-        console.log(store.getActions());
-
         await store.dispatch(submitReview());
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(setReviewInput('score', null));
-        expect(actions[1]).toEqual(setReviewInput('description', null));
+        expect(actions[0]).toEqual(setReviewInput('score', ''));
+        expect(actions[1]).toEqual(setReviewInput('description', ''));
       });
     });
 
