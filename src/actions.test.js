@@ -13,6 +13,7 @@ import {
   login,
   setAccessToken,
   changeLoginFields,
+  sendReview,
 } from './actions';
 
 import { saveToken } from './services/accessTokenRepository';
@@ -135,6 +136,23 @@ describe('actions', () => {
       await store.dispatch(login(accessTokenFixture));
 
       expect(saveToken).toBeCalledWith(accessToken);
+    });
+  });
+
+  describe('sendReview', () => {
+    const accessToken = 'TESTACESSTOKEN';
+    const score = '5';
+    const description = '끼요오오오옷';
+
+    beforeEach(() => {
+      store = mockStore({
+        accessToken,
+        reviewFields: { score, description },
+      });
+    });
+
+    it('post review to api server', () => {
+      store.dispatch(sendReview);
     });
   });
 });
