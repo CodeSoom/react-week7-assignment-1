@@ -8,6 +8,7 @@ import Reviews from './Reviews';
 
 import {
   loadRestaurant,
+  changeReviewField,
 } from './actions';
 
 import { get } from './utils';
@@ -28,8 +29,9 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
-  function handleChangeReviewField() {
-
+  function handleChangeReviewField(event) {
+    const { target: { name, value } } = event;
+    dispatch(changeReviewField({ name, value }));
   }
 
   function handleSubmitReviewField() {
