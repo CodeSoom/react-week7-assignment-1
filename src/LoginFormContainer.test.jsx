@@ -6,51 +6,67 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
-import { requestLogin, setLoginFields } from './actions';
-
 jest.mock('react-redux');
-jest.mock('./actions');
 
 describe('LoginFormContainer', () => {
+  function renderLoginFormContainer() {
+    return render(<LoginFormContainer />);
+  }
+
   const dispatch = jest.fn();
   useDispatch.mockImplementation(() => dispatch);
 
   beforeEach(() => {
     dispatch.mockClear();
-    requestLogin.mockClear();
 
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
         email: 'test@test.com',
         password: 'password1',
       },
+      accessToken: given.accessToken,
     }));
   });
 
-  function renderLoginFormContainer() {
-    return render(<LoginFormContainer />);
-  }
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-  it('input email and password', () => {
-    const controls = [
-      { label: 'E-mail', name: 'email', value: 'tester@test.com' },
-      { label: 'Password', name: 'password', value: 'password' },
-    ];
+    it('renders logout button', () => {
+      const { getByRole } = renderLoginFormContainer();
 
-    const { getByLabelText } = renderLoginFormContainer();
+      fireEvent.submit(getByRole('button', { name: 'Log out' }));
 
-    controls.forEach(({ label, name, value }) => {
-      fireEvent.change(getByLabelText(label), { target: { value } });
-
-      expect(setLoginFields).toBeCalledWith({ name, value });
+      expect(dispatch).toBeCalledWith({ type: 'logout' });
     });
   });
 
-  it('request login', () => {
-    const { getByText } = renderLoginFormContainer();
+  context('when not logged in', () => {
+    given('accessToken', () => '');
 
-    fireEvent.submit(getByText('Log In'));
+    it('renders controls', () => {
+      const controls = [
+        { label: 'E-mail', name: 'email', value: 'tester@test.com' },
+        { label: 'Password', name: 'password', value: 'password' },
+      ];
 
-    expect(requestLogin).toBeCalled();
+      const { getByLabelText } = renderLoginFormContainer();
+
+      controls.forEach(({ label, name, value }) => {
+        fireEvent.change(getByLabelText(label), { target: { value } });
+
+        expect(dispatch).toBeCalledWith({
+          type: 'setLoginFields',
+          payload: { name, value },
+        });
+      });
+    });
+
+    it('request login', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.submit(getByText('Log In'));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 });
