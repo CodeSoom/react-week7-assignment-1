@@ -57,7 +57,6 @@ export default function LoginFormContainer() {
             onChange={handleChange}
             onClick={handleClick}
             loginFields={loginFields}
-            accessToken={accessToken}
           />
         )}
     </>
