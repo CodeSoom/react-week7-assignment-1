@@ -40,16 +40,30 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('서울시');
     });
 
-    it('renders review form', () => {
-      const { container } = renderRestaurantContainer();
-
-      expect(container).toHaveTextContent('리뷰 남기기');
-    });
-
     it('renders review', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('맛있어요');
+    });
+
+    context('when logged in', () => {
+      given('accessToken', () => 'ACCESS_TOKEN');
+
+      it('renders review form', () => {
+        const { container } = renderRestaurantContainer();
+
+        expect(container).toHaveTextContent('리뷰 남기기');
+      });
+    });
+
+    context('when not logged in', () => {
+      given('accessToken', () => '');
+
+      it('do not renders review form', () => {
+        const { queryByText } = renderRestaurantContainer();
+
+        expect(queryByText('리뷰 남기기')).toBeNull();
+      });
     });
   });
 
