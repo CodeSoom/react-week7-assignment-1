@@ -136,16 +136,6 @@ export function changeReviewFields({ name, value }) {
   };
 }
 
-export function clearReviewFields() {
-  return {
-    type: 'changeReviewFields',
-    payload: {
-      score: '',
-      description: '',
-    },
-  };
-}
-
 export function sendReview(restaurantId) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
@@ -157,6 +147,7 @@ export function sendReview(restaurantId) {
       description,
     });
 
-    dispatch(clearReviewFields());
+    dispatch(changeReviewFields({ name: 'score', value: '' }));
+    dispatch(changeReviewFields({ name: 'description', value: '' }));
   };
 }
