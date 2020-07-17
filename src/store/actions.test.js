@@ -265,14 +265,16 @@ describe('actions', () => {
         });
       });
 
-      it('runs getRestaurantById', async () => {
-        await store.dispatch(submitReview());
+      it('runs setReviewInput twice', async () => {
 
-        await store.dispatch(getRestaurantById('RESTAURANT_ID'));
+        console.log(store.getActions());
+
+        await store.dispatch(submitReview());
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(actions[1]);
+        expect(actions[0]).toEqual(setReviewInput('score', null));
+        expect(actions[1]).toEqual(setReviewInput('description', null));
       });
     });
 

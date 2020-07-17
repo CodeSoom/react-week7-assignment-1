@@ -160,7 +160,8 @@ export function submitReview() {
 
     try {
       await postReview({ accessToken, restaurantId, score, description });
-      dispatch(getRestaurantById(restaurantId));
+      dispatch(setReviewInput('score', null));
+      dispatch(setReviewInput('description', null));
     } catch (e) {
       // todo: error action
     }
