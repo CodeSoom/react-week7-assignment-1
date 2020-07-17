@@ -17,7 +17,7 @@ export default function LoginForm({ loginFields, onChangeLoginField, onSubmitLog
         </label>
         <input type="password" id="login-password" onChange={onChangeLoginField} name="password" value={password} />
       </div>
-      <button type="button" onClick={onSubmitLoginField}>LogIn</button>
+      <button type="button" onClick={onSubmitLoginField}>Log In</button>
     </>
   );
 }
