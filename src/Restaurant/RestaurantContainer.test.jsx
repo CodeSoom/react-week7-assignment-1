@@ -6,18 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
-describe('RestaurantContainer', () => {
-  const restaurant = {
-    id: 1,
-    name: '양천주가',
-    address: '서울시',
-    reviews: [{
-      id: 1, restaurantId: 1, name: '테스터', score: 5, description: '훌륭하다 훌륭하다 지구인놈들',
-    }, {
-      id: 3, restaurantId: 1, name: '테스터', score: 3, description: 'Hi!',
-    }],
-  };
+import restaurant from '../../fixtures/restaurant';
 
+describe('RestaurantContainer', () => {
   const reviewField = {
     score: '',
     description: '',
@@ -65,7 +56,7 @@ describe('RestaurantContainer', () => {
       const { container, getByLabelText, getByRole } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('양천주가');
-      expect(container).toHaveTextContent('서울시');
+      expect(container).toHaveTextContent('서울 강남구');
 
       expect(getByLabelText('평점')).toHaveAttribute('type', 'number');
       expect(getByLabelText('내용')).toHaveAttribute('type', 'text');
@@ -88,7 +79,6 @@ describe('RestaurantContainer', () => {
     });
   });
 
-  // TODO : control의 의미 파악 후 리팩토링 할 예정
   context('when change inputs', () => {
     beforeEach(() => {
       given('restaurant', () => (restaurant));
@@ -96,29 +86,25 @@ describe('RestaurantContainer', () => {
       given('accessToken', () => (accessToken));
     });
 
-    it('change score input', () => {
+    it('change inputs', () => {
       const { getByLabelText } = renderRestaurantContainer();
 
-      fireEvent.change(getByLabelText('평점'), {
-        target: { value: '3' },
-      });
+      const controls = [
+        { label: '평점', name: 'score', value: '3' },
+        { label: '내용', name: 'description', value: 'newDescription' },
 
-      expect(dispatch).toBeCalledWith({
-        type: 'changeReviewField',
-        payload: { name: 'score', value: '3' },
-      });
-    });
+      ];
 
-    it('change description input', () => {
-      const { getByLabelText } = renderRestaurantContainer();
+      controls.forEach((control) => {
+        const { label, name, value } = control;
+        fireEvent.change(getByLabelText(label), {
+          target: { value },
+        });
 
-      fireEvent.change(getByLabelText('내용'), {
-        target: { value: 'newDescription' },
-      });
-
-      expect(dispatch).toBeCalledWith({
-        type: 'changeReviewField',
-        payload: { name: 'description', value: 'newDescription' },
+        expect(dispatch).toBeCalledWith({
+          type: 'changeReviewField',
+          payload: { name, value },
+        });
       });
     });
   });
