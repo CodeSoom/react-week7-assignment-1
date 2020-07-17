@@ -17,7 +17,7 @@ import AboutPage from './About/AboutPage';
 import LoginPage from './Login/LoginPage';
 import LogoutPage from './Logout/LogoutPage';
 
-import RestaurantsPage from './RestaurantsPage';
+import RestaurantsPage from './Restaurants/RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
 
