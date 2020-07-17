@@ -32,14 +32,14 @@ describe('LoginFormContainer', () => {
   }
 
   it('input email and password', () => {
-    const inputElements = [
+    const controls = [
       { label: 'E-mail', name: 'email', value: 'tester@test.com' },
       { label: 'Password', name: 'password', value: 'password' },
     ];
 
     const { getByLabelText } = renderLoginFormContainer();
 
-    inputElements.forEach(({ label, name, value }) => {
+    controls.forEach(({ label, name, value }) => {
       fireEvent.change(getByLabelText(label), { target: { value } });
 
       expect(setLoginFields).toBeCalledWith({ name, value });

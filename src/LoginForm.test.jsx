@@ -57,8 +57,8 @@ describe('LoginForm', () => {
     );
 
     controls.forEach(({ label, name, values: { after } }) => {
-      const inputElement = getByLabelText(label);
-      fireEvent.change(inputElement, { target: { value: after } });
+      const control = getByLabelText(label);
+      fireEvent.change(control, { target: { value: after } });
 
       expect(handleChange).toBeCalledWith({ name, value: after });
     });
