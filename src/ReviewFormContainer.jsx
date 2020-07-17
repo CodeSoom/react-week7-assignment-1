@@ -2,7 +2,11 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { changeReviewFields, sendReview } from './actions';
+import {
+  changeReviewFields,
+  sendReview,
+  loadRestaurant,
+} from './actions';
 
 import ReviewForm from './ReviewForm';
 
@@ -19,6 +23,7 @@ export default function ReviewFormContainer({ restaurantId }) {
 
   function handleSubmit() {
     dispatch(sendReview(restaurantId));
+    dispatch(loadRestaurant(restaurantId));
   }
 
   return (

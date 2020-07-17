@@ -55,7 +55,7 @@ describe('ReviewFormContainer', () => {
       const sendReviewButton = getByText('리뷰 남기기');
 
       fireEvent.click(sendReviewButton);
-      expect(dispatch).toBeCalled();
+      expect(dispatch).toBeCalledTimes(2);
     });
   });
 });
