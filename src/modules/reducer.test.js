@@ -142,6 +142,9 @@ describe('reducer', () => {
 
   describe('setLoginFormField', () => {
     context('when change loginForm of email', () => {
+      const name = 'email';
+      const value = 'test@test.com';
+
       it('changed email', () => {
         const initialState = {
           loginFields: {
@@ -150,13 +153,16 @@ describe('reducer', () => {
           },
         };
 
-        const state = reducer(initialState, setLoginFields({ name: 'email', value: 'test@test.com' }));
+        const state = reducer(initialState, setLoginFields({ name, value }));
 
-        expect(state.loginFields.email).toBe('test@test.com');
+        expect(state.loginFields[name]).toBe(value);
       });
     });
 
     context('when change loginForm of password', () => {
+      const name = 'password';
+      const value = '1234';
+
       it('changed password', () => {
         const initialState = {
           loginFields: {
@@ -165,9 +171,9 @@ describe('reducer', () => {
           },
         };
 
-        const state = reducer(initialState, setLoginFields({ name: 'password', value: '1234' }));
+        const state = reducer(initialState, setLoginFields({ name, value }));
 
-        expect(state.loginFields.password).toBe('1234');
+        expect(state.loginFields[name]).toBe(value);
       });
     });
   });
@@ -209,7 +215,7 @@ describe('reducer', () => {
 
       const state = reducer(initialState, setReviewFields({ name, value }));
 
-      expect(state.reviewFields.score).toBe(value);
+      expect(state.reviewFields[name]).toBe(value);
     });
 
     it('change reviewContent field', () => {
@@ -224,7 +230,7 @@ describe('reducer', () => {
 
       const state = reducer(initialState, setReviewFields({ name, value }));
 
-      expect(state.reviewFields.reviewContent).toBe(value);
+      expect(state.reviewFields[name]).toBe(value);
     });
   });
 });
