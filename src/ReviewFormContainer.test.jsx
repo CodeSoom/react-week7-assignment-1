@@ -42,4 +42,17 @@ describe('ReviewFormContainer', () => {
       });
     });
   });
+
+  describe('click submit button', () => {
+    it('submit new review', () => {
+      const { getByText } = render((
+        <ReviewFormContainer />
+      ));
+
+      const sendReviewButton = getByText('리뷰 남기기');
+
+      fireEvent.click(sendReviewButton);
+      expect(dispatch).toBeCalled();
+    });
+  });
 });
