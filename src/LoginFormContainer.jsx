@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './LoginForm';
 
+import LogoutForm from './LogoutForm';
+
 import {
   changeLoginField,
   requestLogin,
@@ -24,13 +26,24 @@ export default function LoginFormContainer() {
     dispatch(requestLogin());
   }
 
+  function handleClickLogout() {
+    // TODO: dispatch(logout())
+  }
+
   return (
     <>
-      <LoginForm
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      />
-      { accessToken }
+      { accessToken
+        ? (
+          <LoginForm
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+          />
+        )
+        : (
+          <LogoutForm
+            onClick={handleClickLogout}
+          />
+        )}
     </>
   );
 }
