@@ -37,6 +37,13 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
@@ -48,6 +55,20 @@ export function selectCategory(categoryId) {
   return {
     type: 'selectCategory',
     payload: { categoryId },
+  };
+}
+
+export function changeLoginField({ name, value }) {
+  return {
+    type: 'changeLoginField',
+    payload: { name, value },
+  };
+}
+
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: { name, value },
   };
 }
 
@@ -77,13 +98,6 @@ export function loadRestaurants() {
   };
 }
 
-export function setAccessToken(accessToken) {
-  return {
-    type: 'setAccessToken',
-    payload: { accessToken },
-  };
-}
-
 export function loadRestaurant({ restaurantId }) {
   return async (dispatch) => {
     dispatch(setRestaurant(null));
@@ -95,13 +109,6 @@ export function loadRestaurant({ restaurantId }) {
       dispatch(setAccessToken(accessToken));
     }
     dispatch(setRestaurant(restaurant));
-  };
-}
-
-export function changeLoginField({ name, value }) {
-  return {
-    type: 'changeLoginField',
-    payload: { name, value },
   };
 }
 
@@ -125,13 +132,6 @@ export function logout() {
   return {
     type: 'logout',
     payload: { accessToken: '' },
-  };
-}
-
-export function changeReviewField({ name, value }) {
-  return {
-    type: 'changeReviewField',
-    payload: { name, value },
   };
 }
 
