@@ -12,7 +12,9 @@ export default function Reviews({ reviews }) {
       {reviews.map((review) => (
         <li key={review.id}>
           {review.name}
+          <br />
           {`${review.score}점`}
+          <br />
           {review.description}
         </li>
       ))}
