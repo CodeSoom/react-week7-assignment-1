@@ -40,3 +40,7 @@ export async function fetchAccessToken({ email, password }) {
   const data = await response.json();
   return data;
 }
+
+export async function postReview() {
+  return null;
+}

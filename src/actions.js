@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   fetchAccessToken,
+  postReview,
 } from './services/api';
 
 import { saveToken } from './services/accessTokenRepository';
@@ -135,6 +136,8 @@ export function changeReviewFields({ name, value }) {
   };
 }
 
-export function sendReview() {
-  // TODO
+export function sendReview(restaurantId) {
+  return async (dispatch) => {
+    postReview();
+  };
 }

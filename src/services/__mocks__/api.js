@@ -19,3 +19,5 @@ export async function fetchRestaurant({ restaurantId }) {
 export async function fetchAccessToken({ email, password }) {
   return accessToken;
 }
+
+export const postReview = jest.fn();

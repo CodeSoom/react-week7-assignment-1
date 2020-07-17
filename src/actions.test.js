@@ -19,6 +19,7 @@ import {
 import { saveToken } from './services/accessTokenRepository';
 
 import accessTokenFixture from '../fixtures/accessToken';
+import { postReview } from './services/api';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -140,6 +141,7 @@ describe('actions', () => {
   });
 
   describe('sendReview', () => {
+    const restaurantId = 1;
     const accessToken = 'TESTACESSTOKEN';
     const score = '5';
     const description = '끼요오오오옷';
@@ -152,7 +154,9 @@ describe('actions', () => {
     });
 
     it('post review to api server', () => {
-      store.dispatch(sendReview);
+      store.dispatch(sendReview(restaurantId));
+
+      expect(postReview).toBeCalledWith();
     });
   });
 });
