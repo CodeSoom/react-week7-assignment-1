@@ -2,7 +2,7 @@ import React from 'react';
 
 import InputField from './InputField';
 
-export default function ReviewForm({ reviewFields, onChange }) {
+export default function ReviewForm({ reviewFields, onChange, onClick }) {
   const { score, description } = reviewFields;
 
   return (
@@ -21,6 +21,12 @@ export default function ReviewForm({ reviewFields, onChange }) {
         value={description}
         onChange={onChange}
       />
+      <button
+        type="button"
+        onClick={onClick}
+      >
+        리뷰 남기기
+      </button>
     </div>
   );
 }

@@ -10,6 +10,7 @@ describe('ReviewForm', () => {
     description: '',
   };
   const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
   beforeEach(() => {
     handleChange.mockClear();
@@ -17,7 +18,11 @@ describe('ReviewForm', () => {
 
   function renderReviewForm() {
     return render(
-      <ReviewForm reviewFields={reviewFields} onChange={handleChange} />,
+      <ReviewForm
+        reviewFields={reviewFields}
+        onChange={handleChange}
+        onClick={handleSubmit}
+      />,
     );
   }
 
@@ -26,6 +31,16 @@ describe('ReviewForm', () => {
 
     expect(getByLabelText('평점')).not.toBeNull();
     expect(getByLabelText('리뷰 내용')).not.toBeNull();
+  });
+
+  it('renders the review submit button', () => {
+    const { getByText } = renderReviewForm();
+    const reviewSubmitButton = getByText('리뷰 남기기');
+
+    expect(reviewSubmitButton).not.toBeNull();
+
+    fireEvent.click(reviewSubmitButton);
+    expect(handleSubmit).toBeCalled();
   });
 
   it('listens the reviewFields change event', () => {
