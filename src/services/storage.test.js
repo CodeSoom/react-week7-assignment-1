@@ -1,8 +1,8 @@
 import { saveItem, loadItem } from './storage';
 
-import ACCESS_TOKEN from '../../fixtures/accessToken';
-
 describe('storage', () => {
+  const ACCESS_TOKEN = 'ACCESS_TOKEN';
+
   beforeEach(() => {
     Storage.prototype.setItem = jest.fn();
     Storage.prototype.getItem = jest.fn().mockReturnValue(ACCESS_TOKEN);
