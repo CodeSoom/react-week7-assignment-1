@@ -2,9 +2,9 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { logout } from './actions';
+import { logout } from '../actions';
 
-import { get } from './utils';
+import { get } from '../utils';
 
 export default function LogoutPage() {
   const dispatch = useDispatch();
