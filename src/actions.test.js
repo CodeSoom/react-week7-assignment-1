@@ -143,15 +143,41 @@ describe('actions', () => {
 
   describe('addReview', () => {
     beforeEach(() => {
-      store = mockStore({});
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+        restaurantId: '1',
+        reviewField: {},
+      });
     });
 
-    it('dispatchs setRestaurant', async () => {
-      await store.dispatch(addReview({ restaurantId: 1 }));
+    context('with restaurantId', () => {
+      beforeEach(() => {
+        store = mockStore({});
+      });
 
-      const actions = store.getActions();
+      it('dispatchs setRestaurant', async () => {
+        await store.dispatch(addReview({ restaurantId: 1 }));
 
-      expect(actions[0]).toEqual(setRestaurant(null));
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setRestaurant(null));
+      });
+    });
+
+    context('without restaurantId', () => {
+      beforeEach(() => {
+        store = mockStore({
+          restaurantId: undefined,
+        });
+      });
+
+      it('does\'nt run any actions', async () => {
+        await store.dispatch(addReview({ restaurantId: undefined }));
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
     });
   });
 });
