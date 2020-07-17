@@ -14,6 +14,7 @@ import {
   setAccessToken,
   changeLoginFields,
   sendReview,
+  clearReviewField,
 } from './actions';
 
 import { saveToken } from './services/accessTokenRepository';
@@ -162,6 +163,14 @@ describe('actions', () => {
         score,
         description,
       });
+    });
+
+    it('clear review fields', () => {
+      store.dispatch(sendReview(restaurantId));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(clearReviewField());
     });
   });
 });
