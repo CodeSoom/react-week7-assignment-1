@@ -30,6 +30,11 @@ export default function LoginForm({ fields, onChange }) {
           onChange={handleChange}
         />
       </div>
+      <button
+        type="button"
+      >
+        Log In
+      </button>
     </>
   );
 }
