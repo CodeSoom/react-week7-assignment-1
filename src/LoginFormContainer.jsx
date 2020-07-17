@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import Logout from './Logout';
 import LoginForm from './LoginForm';
 
 import {
@@ -11,17 +12,6 @@ import {
 } from './actions';
 
 import { get } from './utils';
-
-function Logout({ onClick }) {
-  return (
-    <button
-      type="button"
-      onClick={() => onClick('Log-out')}
-    >
-      Log out
-    </button>
-  );
-}
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
