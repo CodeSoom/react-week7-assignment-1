@@ -10,6 +10,7 @@ import {
   selectRegion,
   selectCategory,
   changeLoginField,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -25,6 +26,10 @@ describe('reducer', () => {
       loginFields: {
         email: '',
         password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
       },
     };
 
@@ -160,8 +165,6 @@ describe('reducer', () => {
 
   describe('changeLoginField', () => {
     it('changes loginFields', () => {
-      // TODO: Refactor to remove redundancy
-
       const initialState = {
         loginFields: {
           email: '',
@@ -169,15 +172,32 @@ describe('reducer', () => {
         },
       };
 
-      const email = 'email@email';
-
       const state = reducer(initialState, changeLoginField({
         name: 'email',
-        value: email,
+        value: 'tester@example.com',
       }));
 
-      expect(state.loginFields.email).toEqual(email);
+      expect(state.loginFields.email).toEqual('tester@example.com');
       expect(state.loginFields.password).toEqual('');
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('changes reviewFields', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(initialState, changeReviewField({
+        name: 'description',
+        value: '별로',
+      }));
+
+      expect(state.reviewFields.score).toEqual('');
+      expect(state.reviewFields.description).toEqual('별로');
     });
   });
 });
