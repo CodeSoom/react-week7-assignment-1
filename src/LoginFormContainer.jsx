@@ -25,11 +25,11 @@ export default function LoginFormContainer() {
     dispatch(changeLoginFields({ name, value }));
   }
 
-  function handleClick(command) {
-    if (command === 'Log-out') {
-      dispatch(setAccessToken(null));
-      return;
-    }
+  function handleClickLogout() {
+    dispatch(setAccessToken(null));
+  }
+
+  function handleClickLogin() {
     dispatch(requestLogin());
   }
 
@@ -39,13 +39,13 @@ export default function LoginFormContainer() {
       {accessToken
         ? (
           <Logout
-            onClick={handleClick}
+            onClick={handleClickLogout}
           />
         )
         : (
           <LoginForm
             onChange={handleChange}
-            onClick={handleClick}
+            onClick={handleClickLogin}
             loginFields={loginFields}
           />
         )}
