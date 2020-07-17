@@ -7,11 +7,7 @@ import {
   postReview,
 } from './services/api';
 
-import {
-  loadItem,
-  saveItem,
-  removeItem,
-} from './services/storage';
+import { loadItem, saveItem, removeItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -118,10 +114,9 @@ export function login() {
     }
 
     const accessToken = await fetchAccessToken(loginFields);
-    if (accessToken !== undefined) {
-      saveItem('accessToken', accessToken);
-      dispatch(setAccessToken(accessToken));
-    }
+
+    saveItem('accessToken', accessToken);
+    dispatch(setAccessToken(accessToken));
   };
 }
 

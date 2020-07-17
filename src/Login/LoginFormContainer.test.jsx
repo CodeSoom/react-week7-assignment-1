@@ -55,7 +55,7 @@ describe('LoginFormContainer', () => {
   it('click [Login] button ', () => {
     const { getByRole } = render(<LoginFormContainer />);
 
-    fireEvent.click(getByRole('button', { name: 'LogIn' }));
+    fireEvent.click(getByRole('button', { name: 'Log In' }));
 
     expect(dispatch).toBeCalledTimes(1);
   });

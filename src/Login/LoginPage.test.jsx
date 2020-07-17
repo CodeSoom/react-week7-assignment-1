@@ -24,6 +24,6 @@ describe('LoginPage', () => {
     expect(getByLabelText('E-mail')).toHaveAttribute('type', 'email');
     expect(getByLabelText('Password')).toHaveAttribute('type', 'password');
 
-    expect(queryByRole('button', { name: 'LogIn' })).toBeInTheDocument();
+    expect(queryByRole('button', { name: 'Log In' })).toBeInTheDocument();
   });
 });

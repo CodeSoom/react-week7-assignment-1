@@ -34,7 +34,7 @@ describe('LoginForm', () => {
     expect(getByLabelText('E-mail')).toHaveAttribute('type', 'email');
     expect(getByLabelText('Password')).toHaveAttribute('type', 'password');
 
-    expect(getByRole('button', { name: 'LogIn' })).toBeInTheDocument();
+    expect(getByRole('button', { name: 'Log In' })).toBeInTheDocument();
   });
 
   context('when change inputs', () => {
@@ -59,7 +59,7 @@ describe('LoginForm', () => {
     it('call SubmitLoginField', () => {
       const { getByRole } = renderLoginForm();
 
-      fireEvent.click(getByRole('button', { name: 'LogIn' }));
+      fireEvent.click(getByRole('button', { name: 'Log In' }));
 
       expect(handleSubmitLoginField).toBeCalledTimes(1);
     });
