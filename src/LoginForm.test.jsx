@@ -10,9 +10,10 @@ describe('LoginForm', () => {
     handleChange.mockClear();
   });
 
-  function renderLoginForm() {
+  function renderLoginForm({ email, password } = {}) {
     return render((
       <LoginForm
+        fields={{ email, password }}
         onChange={handleChange}
       />
     ));
@@ -27,15 +28,31 @@ describe('LoginForm', () => {
 
   context('when change input text', () => {
     it('should call handleChange', () => {
-      const { getByLabelText } = renderLoginForm();
+      const email = 'test';
+      const password = '12';
+
+      const { getByLabelText } = renderLoginForm({ email, password });
 
       const controls = [
-        { label: 'E-mail', name: 'email', value: 'test@exam' },
-        { label: 'Password', name: 'password', value: '1234' },
+        {
+          label: 'E-mail',
+          name: 'email',
+          origin: email,
+          value: 'test@exam',
+        },
+        {
+          label: 'Password',
+          name: 'password',
+          origin: password,
+          value: '1234',
+        },
       ];
 
-      controls.forEach(({ label, name, value }) => {
+      controls.forEach(({
+        label, name, origin, value,
+      }) => {
         const input = getByLabelText(label);
+        expect(input.value).toBe(origin);
 
         fireEvent.change(input, { target: { value } });
         expect(handleChange).toBeCalledWith({ name, value });
