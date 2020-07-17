@@ -28,6 +28,12 @@ describe('RestaurantDetail', () => {
     expect(container).toHaveTextContent('떡볶이');
   });
 
+  it('renders review form', () => {
+    const { container } = renderRestaurantDetail();
+
+    expect(container).toHaveTextContent('리뷰 남기기');
+  });
+
   it('renders review', () => {
     const { container } = renderRestaurantDetail();
 
