@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail/RestaurantDetail';
-import ReviewForm from './ReviewForm';
-import Reviews from './Reviews';
+import ReviewForm from './Review/ReviewForm';
+import Reviews from './Review/Reviews';
 
 import {
   loadRestaurant,

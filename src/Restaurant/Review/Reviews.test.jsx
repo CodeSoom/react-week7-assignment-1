@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 
 import Reviews from './Reviews';
 
-import restaurant from '../../fixtures/restaurant';
+import restaurant from '../../../fixtures/restaurant';
 
 describe('Reviews', () => {
   context('with review items', () => {
