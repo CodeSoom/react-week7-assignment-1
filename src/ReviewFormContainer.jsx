@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { changeReviewFields } from './actions';
+import { changeReviewFields, sendReview } from './actions';
 
 import ReviewForm from './ReviewForm';
 
@@ -17,10 +17,15 @@ export default function ReviewFormContainer() {
     dispatch(changeReviewFields({ name, value }));
   }
 
+  function handleSubmit() {
+    dispatch(sendReview());
+  }
+
   return (
     <ReviewForm
       reviewFields={reviewFields}
       onChange={handleChange}
+      onClick={handleSubmit}
     />
   );
 }

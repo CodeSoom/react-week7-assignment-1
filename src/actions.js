@@ -134,3 +134,7 @@ export function changeReviewFields({ name, value }) {
     payload: { name, value },
   };
 }
+
+export function sendReview() {
+  // TODO
+}
