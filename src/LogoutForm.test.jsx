@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import LogoutForm from './LogoutForm';
 
@@ -9,7 +9,8 @@ describe('LogoutForm', () => {
     const handleSubmit = jest.fn();
 
     render(<LogoutForm onSubmit={handleSubmit} />);
+    fireEvent.submit(screen.getByRole('button', { name: 'Log out' }));
 
-    expect(screen.getByRole('button', { name: 'Log out' })).toBeInTheDocument();
+    expect(handleSubmit).toBeCalled();
   });
 });
