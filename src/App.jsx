@@ -12,7 +12,7 @@ import {
   setAccessToken,
 } from './actions';
 
-import HomePage from './HomePage';
+import HomePage from './Home/HomePage';
 import AboutPage from './About/AboutPage';
 import LoginPage from './LoginPage';
 import LogoutPage from './LogoutPage';
