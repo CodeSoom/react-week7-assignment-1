@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   changeReviewFields,
   sendReview,
-  loadRestaurant,
 } from './actions';
 
 import ReviewForm from './ReviewForm';
