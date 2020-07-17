@@ -67,10 +67,15 @@ describe('RestaurantContainer', () => {
     });
 
     it('renders name and address', () => {
-      const { container } = renderRestaurantContainer();
+      const { container, getByLabelText, getByRole } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+
+      expect(getByLabelText('평점')).toHaveAttribute('type', 'number');
+      expect(getByLabelText('내용')).toHaveAttribute('type', 'text');
+
+      expect(getByRole('button', { name: '리뷰 남기기' })).toBeInTheDocument();
     });
   });
 
@@ -90,16 +95,34 @@ describe('RestaurantContainer', () => {
 
   // TODO : control의 의미 파악 후 리팩토링 할 예정
   context('when change inputs', () => {
+    beforeEach(() => {
+      given('restaurant', () => ({
+        id: 1,
+        name: '마법사주방',
+        address: '서울시 강남구',
+        reviews: [{
+          id: 1, restaurantId: 1, name: '테스터', score: 5, description: '훌륭하다 훌륭하다 지구인놈들',
+        }, {
+          id: 3, restaurantId: 1, name: '테스터', score: 3, description: 'Hi!',
+        }],
+      }));
+
+      given('reviewField', () => ({
+        score: '',
+        description: '',
+      }));
+    });
+
     it('change score input', () => {
       const { getByLabelText } = renderRestaurantContainer();
 
       fireEvent.change(getByLabelText('평점'), {
-        target: { value: 'newCore' },
+        target: { value: '3' },
       });
 
       expect(dispatch).toBeCalledWith({
         type: 'changeReviewField',
-        payload: { name: 'score', value: 'newCore' },
+        payload: { name: 'score', value: '3' },
       });
     });
 
