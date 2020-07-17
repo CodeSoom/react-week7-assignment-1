@@ -17,19 +17,19 @@ import { get } from '../utils';
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(loadRestaurant({ restaurantId }));
-  }, []);
-
   const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
   const { score, reviewContent } = useSelector(get('reviewFields'));
 
-  const handleSubmit = () => {
-    dispatch(requestAddReview(restaurantId));
-    dispatch(setReviewFields({ name: 'score', value: '' }));
-    dispatch(setReviewFields({ name: 'reviewContent', value: '' }));
+  useEffect(() => {
     dispatch(loadRestaurant({ restaurantId }));
+  }, []);
+
+  const handleSubmit = async () => {
+    await dispatch(requestAddReview(restaurantId));
+    await dispatch(setReviewFields({ name: 'score', value: '' }));
+    await dispatch(setReviewFields({ name: 'reviewContent', value: '' }));
+    await dispatch(loadRestaurant({ restaurantId }));
   };
 
   const handleChange = ({ name, value }) => {
