@@ -12,6 +12,17 @@ import {
 
 import { get } from './utils';
 
+function Logout({ onClick }) {
+  return (
+    <button
+      type="button"
+      onClick={() => onClick('Log-out')}
+    >
+      Log out
+    </button>
+  );
+}
+
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
@@ -33,11 +44,22 @@ export default function LoginFormContainer() {
   }
 
   return (
-    <LoginForm
-      onChange={handleChange}
-      onClick={handleClick}
-      loginFields={loginFields}
-      accessToken={accessToken}
-    />
+    <>
+      <h2>Log in</h2>
+      {accessToken
+        ? (
+          <Logout
+            onClick={handleClick}
+          />
+        )
+        : (
+          <LoginForm
+            onChange={handleChange}
+            onClick={handleClick}
+            loginFields={loginFields}
+            accessToken={accessToken}
+          />
+        )}
+    </>
   );
 }

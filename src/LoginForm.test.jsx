@@ -61,21 +61,21 @@ describe('LoginForm', () => {
     });
   });
 
-  context('with accessToken', () => {
-    it('renders logout', () => {
-      const { getByText } = renderLoginForm(ACCESS_TOKEN);
+  // context('with accessToken', () => {
+  //   it('renders logout', () => {
+  //     const { getByText } = renderLoginForm(ACCESS_TOKEN);
 
-      expect(getByText('Log out')).not.toBeNull();
-    });
+  //     expect(getByText('Log out')).not.toBeNull();
+  //   });
 
-    context('when “Log out” click event', () => {
-      it('listens click event', () => {
-        const { getByText } = renderLoginForm(ACCESS_TOKEN);
+  //   context('when “Log out” click event', () => {
+  //     it('listens click event', () => {
+  //       const { getByText } = renderLoginForm(ACCESS_TOKEN);
 
-        fireEvent.click(getByText('Log out'));
+  //       fireEvent.click(getByText('Log out'));
 
-        expect(handleClick).toBeCalledWith('Log-out');
-      });
-    });
-  });
+  //       expect(handleClick).toBeCalledWith('Log-out');
+  //     });
+  //   });
+  // });
 });

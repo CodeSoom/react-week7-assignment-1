@@ -8,16 +8,6 @@ export default function LoginForm({
 }) {
   return (
     <>
-      <h2>Log in</h2>
-      {accessToken
-         && (
-           <button
-             type="button"
-             onClick={() => onClick('Log-out')}
-           >
-             Log out
-           </button>
-         )}
       {!accessToken && (
         <>
           <div>
