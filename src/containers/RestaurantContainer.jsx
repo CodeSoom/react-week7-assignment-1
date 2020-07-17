@@ -8,6 +8,7 @@ import RestaurantReviewForm from '../components/RestaurantReviewForm';
 import {
   loadRestaurant,
   setReviewFields,
+  requestAddReview,
 } from '../modules/actions';
 
 import { get } from '../utils';
@@ -24,8 +25,11 @@ export default function RestaurantContainer({ restaurantId }) {
   const { score, reviewContent } = useSelector(get('reviewFields'));
 
   const handleSubmit = () => {
-    // TODO: dispatch(requestAddReview());
+    dispatch(requestAddReview(restaurantId));
+    dispatch(setReviewFields({ name: 'score', value: '' }));
+    dispatch(setReviewFields({ name: 'reviewContent', value: '' }));
   };
+
   const handleChange = ({ name, value }) => {
     dispatch(setReviewFields({ name, value }));
   };

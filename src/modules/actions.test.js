@@ -126,4 +126,8 @@ describe('actions', () => {
       });
     });
   });
+
+  describe('requestAddReview', () => {
+    // TODO 나중에 리뷰 남기고 리뷰 리스트 갱신할 때
+  });
 });
