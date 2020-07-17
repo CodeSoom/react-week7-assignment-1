@@ -111,8 +111,8 @@ describe('RestaurantContainer', () => {
       it('fires submit event', () => {
         const { getByRole } = renderComponent();
         // When
-        const submitButton = getByRole('button', { name: 'Submit' });
-        fireEvent.submit(submitButton);
+        const submitButton = getByRole('button', { name: '리뷰 남기기' });
+        fireEvent.click(submitButton);
         // Then
         expect(dispatch).toBeCalledTimes(1);
       });

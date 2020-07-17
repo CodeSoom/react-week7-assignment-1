@@ -65,8 +65,8 @@ describe('LoginFormContainer', () => {
       it('fires submit event', () => {
         const { getByRole } = renderComponent();
         // When
-        const submitButton = getByRole('button', { name: 'Submit' });
-        fireEvent.submit(submitButton);
+        const submitButton = getByRole('button', { name: '로그인' });
+        fireEvent.click(submitButton);
         // Then
         expect(dispatch).toBeCalledTimes(1);
       });

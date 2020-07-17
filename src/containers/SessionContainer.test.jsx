@@ -69,7 +69,7 @@ describe('SessionContainer', () => {
       const { getByLabelText, getByRole } = renderComponent();
       expect(getByLabelText('E-Mail')).not.toBeNull();
       expect(getByLabelText('Password')).not.toBeNull();
-      expect(getByRole('button', { name: 'Submit' })).not.toBeNull();
+      expect(getByRole('button', { name: '로그인' })).not.toBeNull();
     });
   });
 });
