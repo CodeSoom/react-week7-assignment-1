@@ -128,20 +128,42 @@ describe('reducer', () => {
   });
 
   describe('changeLoginFields', () => {
-    it('changes loginFields', () => {
-      const initialState = {
-        loginFields: {
-          email: '',
-          password: '',
-        },
-      };
+    context('when email is changed', () => {
+      it('changes email', () => {
+        const initialState = {
+          loginFields: {
+            email: 'test',
+            password: '1234',
+          },
+        };
 
-      const state = reducer(initialState, changeLoginFields({
-        name: 'email',
-        value: 'tester@example.com',
-      }));
+        const state = reducer(initialState, changeLoginFields({
+          name: 'email',
+          value: 'tester@example.com',
+        }));
 
-      expect(state.loginFields.email).toBe('tester@example.com');
+        expect(state.loginFields.email).toBe('tester@example.com');
+        expect(state.loginFields.password).toBe('1234');
+      });
+    });
+
+    context('when password is changed', () => {
+      it('changes password', () => {
+        const initialState = {
+          loginFields: {
+            email: 'test',
+            password: '1234',
+          },
+        };
+
+        const state = reducer(initialState, changeLoginFields({
+          name: 'password',
+          value: 'test1234',
+        }));
+
+        expect(state.loginFields.email).toBe('test');
+        expect(state.loginFields.password).toBe('test1234');
+      });
     });
   });
 });
