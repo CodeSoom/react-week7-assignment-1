@@ -14,6 +14,8 @@ import {
   requestLogin,
 } from './actions';
 
+import loginFields from '../fixtures/loginFields';
+
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
@@ -106,19 +108,11 @@ describe('actions', () => {
   describe('requestLogin', () => {
     context('with loginFields', () => {
       beforeEach(() => {
-        store = mockStore({
-          loginFields: {
-            email: 'tester@example.com',
-            password: 'test',
-          },
-        });
+        store = mockStore({ loginFields });
       });
 
       it('runs setAccessToken', async () => {
-        await store.dispatch(requestLogin({
-          email: 'tester@example.com',
-          password: 'test',
-        }));
+        await store.dispatch(requestLogin(loginFields));
 
         const actions = store.getActions();
 
