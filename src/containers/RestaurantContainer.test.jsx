@@ -25,6 +25,7 @@ describe('RestaurantContainer', () => {
         score: 5,
         reviewContent: '바보들앙 이거 리뷰 아니지롱~',
       },
+      reviews: given.reviews,
     }));
   });
 
@@ -93,5 +94,38 @@ describe('RestaurantContainer', () => {
         expect(container).toHaveTextContent('Loading');
       });
     });
+
+    context('with reviews', () => {
+      const reviewMock = [{
+        id: 1,
+        restaurantId: 1,
+        name: '테스터',
+        score: 5,
+        description: '테스트다',
+      }, {
+        id: 2,
+        restaurantId: 1,
+        name: '테스터',
+        score: 2,
+        description: '테스트다2',
+      },
+      ];
+
+      given('reviews', () => reviewMock);
+
+      it('renders review title and reviews list', () => {
+        const { getByText, getAllByText } = renderRestaurantContainer();
+
+        expect(getAllByText('테스터')).toHaveLength(2);
+        expect(getByText('2')).not.toBeNull();
+        expect(getByText('5')).not.toBeNull();
+        expect(getByText('테스트다')).not.toBeNull();
+        expect(getByText('테스트다2')).not.toBeNull();
+      });
+    });
+
+    // context('without reviews', () => {
+    //   given('reviews', () => null
+    // });
   });
 });
