@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { render, fireEvent } from '@testing-library/react';
 
@@ -10,6 +10,16 @@ describe('ReviewFormContainer', () => {
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
+  useSelector.mockImplementation((selector) => selector({
+    reviewFields: {
+      score: '',
+      description: '',
+    },
+  }));
+
+  beforeEach(() => {
+    dispatch.mockClear();
+  });
 
   it('listens the review fields change event', () => {
     const { getByLabelText } = render((

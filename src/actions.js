@@ -127,3 +127,10 @@ export function logout() {
     },
   };
 }
+
+export function changeReviewFields({ name, value }) {
+  return {
+    type: 'changeReviewFields',
+    payload: { name, value },
+  };
+}
