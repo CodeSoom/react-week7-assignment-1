@@ -8,14 +8,11 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setAccessToken } from './actions';
-
 import { loadItem } from './services/storage';
 
 import App from './App';
 
 jest.mock('react-redux');
-jest.mock('./actions');
 jest.mock('./services/storage');
 
 describe('App', () => {
@@ -100,7 +97,6 @@ describe('App', () => {
   describe('check login', () => {
     beforeEach(() => {
       loadItem.mockClear();
-      setAccessToken.mockClear();
     });
 
     context('when logged in', () => {
@@ -112,7 +108,7 @@ describe('App', () => {
         renderApp({ path: '/' });
 
         expect(loadItem).toBeCalledWith('accessToken');
-        expect(setAccessToken).toBeCalledWith('ACCESS_TOKEN');
+        expect(dispatch).toBeCalled();
       });
     });
 
@@ -125,7 +121,7 @@ describe('App', () => {
         renderApp({ path: '/' });
 
         expect(loadItem).toBeCalledWith('accessToken');
-        expect(setAccessToken).not.toBeCalled();
+        expect(dispatch).not.toBeCalled();
       });
     });
   });
