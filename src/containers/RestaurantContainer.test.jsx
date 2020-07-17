@@ -46,14 +46,14 @@ describe('RestaurantContainer', () => {
     });
 
     context('when "리뷰 남기기" button click', () => {
-      it('called submit dispatch event and clear "평점", "리뷰 내용" value', () => {
+      it('called submit dispatch event and clear "평점", "리뷰 내용" value and loading restaurant', () => {
+        given('restaurantId', () => 1);
+
         const { getByText } = renderRestaurantContainer();
 
         fireEvent.click(getByText('리뷰 남기기'));
 
-        expect(dispatch).toBeCalledWith(requestAddReview());
-        expect(dispatch).toBeCalledWith(setReviewFields({ name: 'score', value: '' }));
-        expect(dispatch).toBeCalledWith(setReviewFields({ name: 'reviewContent', value: '' }));
+        expect(dispatch).toBeCalledTimes(4);
       });
     });
   });
