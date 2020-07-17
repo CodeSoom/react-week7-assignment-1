@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setReviewInput, submitReview } from '../store/actions';
+import { setReviewInput, submitReview, getRestaurantById } from '../store/actions';
 
 import Restaurant from '../components/Restaurant';
 import ReviewForm from '../components/ReviewForm';
@@ -24,6 +24,7 @@ export default function RestaurantContainer() {
   function handleSubmitForm(ev) {
     ev.preventDefault();
     dispatch(submitReview());
+    dispatch(getRestaurantById(restaurant.id));
   }
 
   return (
