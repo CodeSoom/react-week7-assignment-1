@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { render, fireEvent } from '@testing-library/react';
+import {
+  render, fireEvent,
+} from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -27,8 +29,8 @@ describe('LoginFormContainer', () => {
   it('renders input control', () => {
     const { getByLabelText } = render(<LoginFormContainer />);
 
-    // expect(getByLabelText('E-mail')).toBe('test@test');
-    // expect(getByLabelText('Password')).toBe('123');
+    expect(getByLabelText('E-mail')).not.toBeNull();
+    expect(getByLabelText('Password')).not.toBeNull();
   });
 
   it('renders Log In button', () => {
@@ -39,5 +41,37 @@ describe('LoginFormContainer', () => {
     fireEvent.click(getByText('Log In'));
 
     expect(dispatch).toBeCalled();
+  });
+
+  context('when input modified', () => {
+    it('changes email', () => {
+      const { getByLabelText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'new@email' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: { name: 'email', value: 'new@email' },
+      });
+    });
+
+    it('changes password', () => {
+      const { getByLabelText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.change(getByLabelText('Password'), {
+        target: { value: 'newPassword' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: { name: 'password', value: 'newPassword' },
+      });
+    });
   });
 });

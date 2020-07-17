@@ -11,6 +11,7 @@ import {
   setRestaurants,
   setRestaurant,
   requestLogin,
+  setAccessToken,
 } from './actions';
 
 const middlewares = [thunk];
@@ -103,14 +104,22 @@ describe('actions', () => {
   });
 
   describe('requestLogin', () => {
-    beforeEach(() => {
-      store = mockStore({});
-    });
+    context('with login fields', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: 'test@email.com',
+            password: '123',
+          },
+        });
+      });
 
-    it('requests Login', async () => {
-      // await store.dispatch(requestLogin({ email: 'test', password: 'test' }));
+      it('requests Login', async () => {
+        await store.dispatch(requestLogin());
 
-      // const actions = store.getActions();
+        const actions = store.getActions();
+        expect(actions[0]).toEqual(setAccessToken({}));
+      });
     });
   });
 });
