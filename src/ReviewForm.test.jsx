@@ -17,6 +17,7 @@ describe('ReviewForm', () => {
     const { getByLabelText, getByRole } = render(
       <ReviewForm
         reviewField={reviewField}
+        accessToken="ACCESS_TOKEN"
         onChangeReviewField={handleChangeReviewField}
         onSubmitReviewField={handleSubmitReviewField}
       />,
