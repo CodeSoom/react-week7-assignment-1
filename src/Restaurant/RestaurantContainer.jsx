@@ -10,6 +10,7 @@ import {
   loadRestaurant,
   changeReviewField,
   setAccessToken,
+  addReview,
 } from '../actions';
 
 import { get } from '../utils';
@@ -42,7 +43,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   function handleSubmitReviewField() {
-    // TODO : 강의 듣고 진행하기
+    dispatch(addReview({ restaurantId }));
   }
 
   return (

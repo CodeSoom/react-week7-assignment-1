@@ -147,30 +147,30 @@ describe('RestaurantContainer', () => {
     });
   });
 
-  // it('click button ', () => {
-  //   beforeEach(() => {
-  //     given('restaurant', () => ({
-  //       id: 1,
-  //       name: '마법사주방',
-  //       address: '서울시 강남구',
-  //       reviews: [{
-  //         id: 1, restaurantId: 1, name: '테스터', score: 5, description: '훌륭하다 훌륭하다 지구인놈들',
-  //       }, {
-  //         id: 3, restaurantId: 1, name: '테스터', score: 3, description: 'Hi!',
-  //       }],
-  //     }));
+  it('click button ', () => {
+    beforeEach(() => {
+      given('restaurant', () => ({
+        id: 1,
+        name: '마법사주방',
+        address: '서울시 강남구',
+        reviews: [{
+          id: 1, restaurantId: 1, name: '테스터', score: 5, description: '훌륭하다 훌륭하다 지구인놈들',
+        }, {
+          id: 3, restaurantId: 1, name: '테스터', score: 3, description: 'Hi!',
+        }],
+      }));
 
-  //     given('reviewField', () => ({
-  //       score: '',
-  //       description: '',
-  //     }));
-  //     given('accessToken', () => ('ACCESS_TOKEN'));
-  //   });
+      given('reviewField', () => ({
+        score: '',
+        description: '',
+      }));
+      given('accessToken', () => ('ACCESS_TOKEN'));
+    });
 
-  //   const { getByRole } = renderRestaurantContainer();
+    const { getByRole } = renderRestaurantContainer();
 
-  //   fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
+    fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
 
-  //   expect(dispatch).toBeCalledTimes(2); // TODO : 현재 테스트 깨짐. 강의 듣고 해결할 예정
-  // });
+    expect(dispatch).toBeCalledTimes(2); // TODO : 현재 테스트 깨짐. 강의 듣고 해결할 예정
+  });
 });
