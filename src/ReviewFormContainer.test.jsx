@@ -30,6 +30,7 @@ describe('ReviewFormContainer', () => {
       { label: '평점', name: 'score', value: '5' },
       { label: '리뷰 내용', name: 'description', value: '끼요옷' },
     ];
+
     controls.forEach(({ label, name, value }) => {
       fireEvent.change(getByLabelText(label), {
         target: { value },
