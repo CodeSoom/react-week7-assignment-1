@@ -6,8 +6,10 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
   beforeEach(() => {
     handleChange.mockClear();
+    handleSubmit.mockClear();
   });
 
   function renderLoginForm({ email, password } = {}) {
@@ -15,6 +17,7 @@ describe('LoginForm', () => {
       <LoginForm
         fields={{ email, password }}
         onChange={handleChange}
+        onSubmit={handleSubmit}
       />
     ));
   }
@@ -30,6 +33,16 @@ describe('LoginForm', () => {
     const { getByText } = renderLoginForm();
 
     expect(getByText('Log In')).toHaveAttribute('type', 'button');
+  });
+
+  context('when click "Log In" button', () => {
+    it('should called handleSubmit', () => {
+      const { getByText } = renderLoginForm();
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(handleSubmit).toBeCalled();
+    });
   });
 
   context('when change input text', () => {
