@@ -136,6 +136,10 @@ export function changeReviewFields({ name, value }) {
   };
 }
 
+export function clearReviewFields() {
+
+}
+
 export function sendReview(restaurantId) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
@@ -146,5 +150,7 @@ export function sendReview(restaurantId) {
       score,
       description,
     });
+
+    dispatch(clearReviewFields());
   };
 }

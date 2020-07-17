@@ -14,7 +14,7 @@ import {
   setAccessToken,
   changeLoginFields,
   sendReview,
-  clearReviewField,
+  clearReviewFields,
 } from './actions';
 
 import { saveToken } from './services/accessTokenRepository';
@@ -170,7 +170,7 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(clearReviewField());
+      expect(actions[0]).toEqual(clearReviewFields());
     });
   });
 });
