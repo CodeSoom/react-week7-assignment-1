@@ -137,7 +137,14 @@ export function changeReviewFields({ name, value }) {
 }
 
 export function sendReview(restaurantId) {
-  return async (dispatch) => {
-    postReview();
+  return async (dispatch, getState) => {
+    const { accessToken, reviewFields: { score, description } } = getState();
+
+    postReview({
+      restaurantId,
+      accessToken,
+      score,
+      description,
+    });
   };
 }

@@ -41,6 +41,9 @@ export async function fetchAccessToken({ email, password }) {
   return data;
 }
 
-export async function postReview() {
+export async function postReview({
+  restaurantId, accessToken, score, description,
+}) {
+  // TODO
   return null;
 }

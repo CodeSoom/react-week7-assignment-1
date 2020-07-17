@@ -156,7 +156,12 @@ describe('actions', () => {
     it('post review to api server', () => {
       store.dispatch(sendReview(restaurantId));
 
-      expect(postReview).toBeCalledWith();
+      expect(postReview).toBeCalledWith({
+        restaurantId,
+        accessToken,
+        score,
+        description,
+      });
     });
   });
 });
