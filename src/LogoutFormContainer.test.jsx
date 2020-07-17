@@ -1,30 +1,29 @@
 import React from 'react';
 
-import LogoutFormContainer from './LogoutFormContainer';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { render, fireEvent } from '@testing-library/react';
-
+import LogoutFormContainer from './LogoutFormContainer';
 
 jest.mock('react-redux');
 
-describe('LogoutFormContainer', ()=> {
+describe('LogoutFormContainer', () => {
   const dispatch = jest.fn();
-  
+
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
-        email: 'testEmail@email.com'
-      }
+        email: 'testEmail@email.com',
+      },
     }));
   });
 
-  it('renders LogoutFormContainer', ()=> {
+  it('renders LogoutFormContainer', () => {
     const { container } = render((
-      <LogoutFormContainer /> 
+      <LogoutFormContainer />
     ));
 
     expect(container).toHaveTextContent('testEmail@email.com');
@@ -32,9 +31,9 @@ describe('LogoutFormContainer', ()=> {
     expect(container).toHaveTextContent('로그아웃');
   });
 
-  it('click logout button', ()=> {
+  it('click logout button', () => {
     const { getByText } = render((
-      <LogoutFormContainer /> 
+      <LogoutFormContainer />
     ));
 
     fireEvent.click(getByText('로그아웃'));

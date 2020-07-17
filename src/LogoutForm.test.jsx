@@ -1,17 +1,16 @@
 import React from 'react';
 
-import LogoutForm from './LogoutForm';
-
 import { render, fireEvent } from '@testing-library/react';
 
+import LogoutForm from './LogoutForm';
 
-describe('LogoutForm', ()=> {
-  context('login success', ()=> {
-    it('renders Logout form', ()=> {
+describe('LogoutForm', () => {
+  context('login success', () => {
+    it('renders Logout form', () => {
       const email = 'test@email.com';
 
       const { container } = render((
-        <LogoutForm 
+        <LogoutForm
           email={email}
         />
       ));
@@ -19,11 +18,11 @@ describe('LogoutForm', ()=> {
       expect(container).toHaveTextContent('test@email.com');
     });
 
-    it('clicks Logout button', ()=> {
+    it('clicks Logout button', () => {
       const handleClick = jest.fn();
 
       const { getByText } = render((
-        <LogoutForm 
+        <LogoutForm
           onClick={handleClick}
         />
       ));

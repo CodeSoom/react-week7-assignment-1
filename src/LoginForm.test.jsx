@@ -14,22 +14,22 @@ describe('LoginForm', () => {
 
   const email = 'testEmail';
   const password = 'testPassword';
-  
+
   beforeEach(() => {
     handleChange.mockClear();
     handleSubmit.mockClear();
 
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
-        email:'',
-        password:'',
+        email: '',
+        password: '',
       },
-      accessToken:'',
+      accessToken: '',
     }));
   });
 
   it('renders login page', () => {
-    const { getByLabelText }= render((
+    const { getByLabelText } = render((
       <LoginForm
         fields={{ email, password }}
       />
@@ -40,7 +40,7 @@ describe('LoginForm', () => {
   });
 
   it('clicks login button', () => {
-    const { getByText }= render((
+    const { getByText } = render((
       <LoginForm
         fields={{ email, password }}
         onClick={handleSubmit}
@@ -52,7 +52,7 @@ describe('LoginForm', () => {
   });
 
   it('change login fields data', () => {
-    const { getByLabelText }= render((
+    const { getByLabelText } = render((
       <LoginForm
         fields={{ email, password }}
         onChange={handleChange}
@@ -60,7 +60,7 @@ describe('LoginForm', () => {
     ));
 
     fireEvent.change(getByLabelText('ID'), {
-      target: { value : 'email test data' },    
+      target: { value: 'email test data' },
     });
 
     expect(handleChange).toBeCalledWith({

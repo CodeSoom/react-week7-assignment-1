@@ -65,7 +65,7 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
-  
+
   changeLoginFields(state, { payload: { name, value } }) {
     return {
       ...state,

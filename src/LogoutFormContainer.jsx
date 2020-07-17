@@ -9,7 +9,7 @@ import { setAccessToken } from './actions';
 export default function LogoutFormContainer() {
   const dispatch = useDispatch();
 
-  const { loginFields: { email }} = useSelector((state) => ({
+  const { loginFields: { email } } = useSelector((state) => ({
     loginFields: state.loginFields,
   }));
 
@@ -18,9 +18,9 @@ export default function LogoutFormContainer() {
   }
 
   return (
-    <LogoutForm 
-      email={email} 
+    <LogoutForm
+      email={email}
       onClick={handleClick}
     />
-  )
+  );
 }

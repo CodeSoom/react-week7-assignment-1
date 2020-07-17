@@ -123,9 +123,9 @@ describe('reducer', () => {
         ],
         selectedCategory: null,
       };
-      
+
       const state = reducer(initialState, selectCategory(1));
-      
+
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
@@ -137,8 +137,8 @@ describe('reducer', () => {
     it('change LoginFields data', () => {
       const initialState = {
         loginFields: {
-          email:'',
-          password:'',
+          email: '',
+          password: '',
         },
       };
 
