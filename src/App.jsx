@@ -12,6 +12,8 @@ import {
   setAccessToken,
 } from './actions';
 
+import { loadItem } from './services/storage';
+
 import HomePage from './Home/HomePage';
 import AboutPage from './About/AboutPage';
 import LoginPage from './Login/LoginPage';
@@ -23,7 +25,7 @@ import NotFoundPage from './NotFound/NotFoundPage';
 
 export default function App() {
   const dispatch = useDispatch();
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = loadItem('accessToken');
 
   if (accessToken) {
     dispatch(setAccessToken(accessToken));
