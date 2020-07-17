@@ -32,6 +32,10 @@ describe('App', () => {
         password: 'password',
       },
       accessToken: '',
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     }));
   });
 
