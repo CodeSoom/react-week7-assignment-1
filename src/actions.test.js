@@ -173,6 +173,8 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(changeReviewFields({ name: 'score', value: '' }));
       expect(actions[1]).toEqual(changeReviewFields({ name: 'description', value: '' }));
+      expect(actions[2]).toEqual(setRestaurant(null));
+      expect(actions[3]).toEqual(setRestaurant({}));
     });
   });
 });

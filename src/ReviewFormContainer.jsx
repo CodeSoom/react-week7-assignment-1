@@ -23,7 +23,6 @@ export default function ReviewFormContainer({ restaurantId }) {
 
   function handleSubmit() {
     dispatch(sendReview(restaurantId));
-    dispatch(loadRestaurant({ restaurantId }));
   }
 
   return (
