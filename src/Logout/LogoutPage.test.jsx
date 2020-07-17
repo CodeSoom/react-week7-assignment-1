@@ -6,7 +6,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import LogoutPage from './LogoutPage';
 
-import { logout } from '../actions';
+import { logout } from '../store/actions';
 
 jest.mock('react-redux');
 

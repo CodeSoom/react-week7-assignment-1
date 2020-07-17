@@ -10,7 +10,7 @@ import {
 
 import {
   setAccessToken,
-} from './actions';
+} from './store/actions';
 
 import { loadItem } from './services/storage';
 

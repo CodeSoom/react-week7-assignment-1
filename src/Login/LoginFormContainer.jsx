@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   changeLoginField,
   login,
-} from '../actions';
+} from '../store/actions';
 
 import { get } from '../utils';
 

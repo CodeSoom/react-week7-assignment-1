@@ -11,7 +11,7 @@ import {
   setAccessToken,
   logout,
   changeReviewField,
-} from './actions';
+} from './store/actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {

@@ -5,9 +5,9 @@ import {
   fetchRestaurant,
   fetchAccessToken,
   postReview,
-} from './services/api';
+} from '../services/api';
 
-import { loadItem, saveItem, removeItem } from './services/storage';
+import { loadItem, saveItem, removeItem } from '../services/storage';
 
 export function setRegions(regions) {
   return {
