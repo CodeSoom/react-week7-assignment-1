@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
+import { requestAddReview, setReviewFields } from '../modules/actions';
+
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
@@ -49,7 +51,9 @@ describe('RestaurantContainer', () => {
 
         fireEvent.click(getByText('리뷰 남기기'));
 
-        expect(dispatch).toBeCalledTimes(3);
+        expect(dispatch).toBeCalledWith(requestAddReview());
+        expect(dispatch).toBeCalledWith(setReviewFields({ name: 'score', value: '' }));
+        expect(dispatch).toBeCalledWith(setReviewFields({ name: 'reviewContent', value: '' }));
       });
     });
   });
