@@ -13,9 +13,10 @@ import { setAccessToken } from './actions';
 import TokenContainer from './TokenContainer';
 
 import accessTokenFixture from '../fixtures/accessToken';
-import { saveToken, deleteToken } from './services/accessTokenRepository';
+import { getToken } from './services/accessTokenRepository';
 
 jest.mock('react-redux');
+jest.mock('./services/accessTokenRepository');
 
 describe('TokenContainer', () => {
   const dispatch = jest.fn();
@@ -41,8 +42,8 @@ describe('TokenContainer', () => {
   context('with accessToken', () => {
     it('update redux state', () => {
       const { accessToken } = accessTokenFixture;
+      getToken.mockImplementation(() => (accessToken));
 
-      saveToken(accessToken);
       useDispatch.mockImplementation(() => dispatch);
 
       renderTokenContainer();
@@ -53,7 +54,7 @@ describe('TokenContainer', () => {
 
   context('without accessToken', () => {
     it('do nothing', () => {
-      deleteToken();
+      getToken.mockImplementation(() => (''));
 
       renderTokenContainer();
 

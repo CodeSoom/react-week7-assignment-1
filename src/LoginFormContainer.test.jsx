@@ -6,9 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
-import { saveToken, getToken } from './services/accessTokenRepository';
+import { deleteToken } from './services/accessTokenRepository';
 
 jest.mock('react-redux');
+jest.mock('./services/accessTokenRepository');
 
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
@@ -85,8 +86,6 @@ describe('LoginFormContainer', () => {
     });
 
     it('click the logout button', () => {
-      saveToken('TESTACCESSTOKEN');
-
       const { getByText } = renderLoginFormContainer();
 
       fireEvent.click(getByText('Log out'));
@@ -98,8 +97,7 @@ describe('LoginFormContainer', () => {
         },
       });
 
-      const accessToken = getToken();
-      expect(accessToken).toBeNull();
+      expect(deleteToken).toBeCalled();
     });
   });
 });
