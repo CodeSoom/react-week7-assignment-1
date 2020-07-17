@@ -6,9 +6,9 @@ import LogoutForm from './LogoutForm';
 
 describe('LogoutForm', () => {
   it('renders logout button', () => {
-    const handleClick = jest.fn();
+    const handleSubmit = jest.fn();
 
-    render(<LogoutForm onClick={handleClick} />);
+    render(<LogoutForm onSubmit={handleSubmit} />);
 
     expect(screen.getByRole('button', { name: 'Log out' })).toBeInTheDocument();
   });
