@@ -22,7 +22,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
-  const { reviews } = restaurant;
+  const { reviews } = restaurant || [];
   const accessToken = useSelector(get('accessToken'));
 
   function handleChange({ name, value }) {
