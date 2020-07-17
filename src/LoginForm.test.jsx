@@ -8,9 +8,8 @@ describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
 
-  const renderLoginForm = ({ email = '', password = '' }) => render(
+  const renderLoginForm = () => render(
     <LoginForm
-      fields={{ email, password }}
       onChange={handleChange}
       onSubmit={handleSubmit}
     />,
@@ -27,7 +26,7 @@ describe('LoginForm', () => {
   });
 
   it('renders input controls', () => {
-    const { getByLabelText } = renderLoginForm({});
+    const { getByLabelText } = renderLoginForm();
 
     controls.forEach(({ label }) => {
       const input = getByLabelText(label);
@@ -37,14 +36,14 @@ describe('LoginForm', () => {
   });
 
   it('renders "Log In" button', () => {
-    const { container } = renderLoginForm({});
+    const { container } = renderLoginForm();
 
     expect(container).toHaveTextContent('Log In');
   });
 
   context('when a form field value is changed', () => {
     it('runs handleChange', () => {
-      const { getByLabelText } = renderLoginForm({});
+      const { getByLabelText } = renderLoginForm();
 
       controls.forEach(({ label, name, value }) => {
         const input = getByLabelText(label);
@@ -60,7 +59,7 @@ describe('LoginForm', () => {
 
   context('when a "Log In" button is clicked', () => {
     it('runs handleSubmit', () => {
-      const { getByText } = renderLoginForm({});
+      const { getByText } = renderLoginForm();
 
       fireEvent.click(getByText('Log In'));
 
