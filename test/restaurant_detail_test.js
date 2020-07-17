@@ -29,6 +29,8 @@ Scenario('로그인을 했으면 리뷰를 남길 수 있다.', (I) => {
 
   I.click('Log In', 'button');
 
+  I.see('eyJh');
+
   I.amOnPage('/restaurants/1');
 
   I.fillField('score', '1');
