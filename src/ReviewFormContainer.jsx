@@ -6,7 +6,7 @@ import { changeReviewFields, sendReview } from './actions';
 
 import ReviewForm from './ReviewForm';
 
-export default function ReviewFormContainer() {
+export default function ReviewFormContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
   const { reviewFields } = useSelector((state) => ({
@@ -18,7 +18,7 @@ export default function ReviewFormContainer() {
   }
 
   function handleSubmit() {
-    dispatch(sendReview());
+    dispatch(sendReview(restaurantId));
   }
 
   return (
