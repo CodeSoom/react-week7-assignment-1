@@ -22,10 +22,12 @@ export default function LoginFormContainer() {
   }
 
   return (
-    <LoginForm
-      fields={loginFields}
-      onChange={handleChange}
-      onSubmit={handleSubmit}
-    />
+    <>
+      <LoginForm
+        fields={loginFields}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
+    </>
   );
 }
