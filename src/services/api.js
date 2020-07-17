@@ -40,3 +40,7 @@ export async function login({ email, password }) {
   const { accessToken } = await response.json();
   return accessToken;
 }
+
+export async function postReview({ accessToken, score, description }) {
+  return null;
+}
