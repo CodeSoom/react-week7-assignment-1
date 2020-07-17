@@ -5,6 +5,11 @@ import { render, fireEvent } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
+  const handleChange = jest.fn();
+  beforeEach(() => {
+    handleChange.mockClear();
+  });
+
   it('render input controls', () => {
     const { getByLabelText } = render((
       <LoginForm />
@@ -16,15 +21,21 @@ describe('LoginForm', () => {
 
   context('when change input text', () => {
     it('should call handleChange', () => {
-      const handleChange = jest.fn();
       const { getByLabelText } = render((
         <LoginForm onChange={handleChange} />
       ));
 
-      fireEvent.change(getByLabelText('E-mail'), {
-        target: { value: 'test@exam' },
+      const controls = [
+        { label: 'E-mail', value: 'test@exam' },
+        { label: 'Password', value: '1234' },
+      ];
+
+      controls.forEach(({ label, value }) => {
+        const input = getByLabelText(label);
+        fireEvent.change(input, { target: { value } });
+        expect(handleChange).toBeCalled();
+        handleChange.mockClear();
       });
-      expect(handleChange).toBeCalled();
     });
   });
 });
