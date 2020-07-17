@@ -35,6 +35,7 @@ describe('ReviewFormContainer', () => {
       fireEvent.change(getByLabelText(label), {
         target: { value },
       });
+
       expect(dispatch).toBeCalledWith({
         type: 'changeReviewFields',
         payload: { name, value },
