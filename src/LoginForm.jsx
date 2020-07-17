@@ -1,11 +1,15 @@
 import React from 'react';
 
-export default function LoginForm() {
+export default function LoginForm({ onChange }) {
   return (
     <>
       <div>
         <label htmlFor="login-email">E-mail</label>
-        <input type="email" id="login-email" />
+        <input
+          type="email"
+          id="login-email"
+          onChange={onChange}
+        />
       </div>
       <div>
         <label htmlFor="login-password">Password</label>
