@@ -6,7 +6,7 @@ import {
   login,
 } from './services/api';
 
-import { saveItem } from './services/storage';
+import { saveItem, removeItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -115,5 +115,8 @@ export function requestLogin() {
 }
 
 export function requestLogout() {
-  return null;
+  return async (dispatch) => {
+    removeItem('accessToken');
+    dispatch(setAccessToken(''));
+  };
 }
