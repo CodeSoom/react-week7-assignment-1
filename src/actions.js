@@ -137,7 +137,13 @@ export function changeReviewFields({ name, value }) {
 }
 
 export function clearReviewFields() {
-
+  return {
+    type: 'changeReviewFields',
+    payload: {
+      score: '',
+      description: '',
+    },
+  };
 }
 
 export function sendReview(restaurantId) {
