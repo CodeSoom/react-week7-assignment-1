@@ -9,7 +9,7 @@ import RestaurantsContainer from './RestaurantsContainer';
 test('RestaurantsContainer', () => {
   useSelector.mockImplementation((selector) => selector({
     restaurants: [
-      { id: 1, name: '마법사주방' },
+      { id: 1, name: '양천주가' },
     ],
   }));
 
@@ -19,9 +19,9 @@ test('RestaurantsContainer', () => {
     <RestaurantsContainer onClickRestaurant={handleClick} />,
   );
 
-  expect(container).toHaveTextContent('마법사주방');
+  expect(container).toHaveTextContent('양천주가');
 
-  fireEvent.click(getByText('마법사주방'));
+  fireEvent.click(getByText('양천주가'));
 
-  expect(handleClick).toBeCalledWith({ id: 1, name: '마법사주방' });
+  expect(handleClick).toBeCalledWith({ id: 1, name: '양천주가' });
 });

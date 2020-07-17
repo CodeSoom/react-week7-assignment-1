@@ -8,11 +8,29 @@ import { render } from '@testing-library/react';
 
 import RestaurantPage from './RestaurantPage';
 
+import REGIONS from '../../fixtures/regions';
+import CATEGORIES from '../../fixtures/categories';
+import RESTAURANTS from '../../fixtures/restaurants';
+import RESTAURANT from '../../fixtures/restaurant';
+
 describe('RestaurantPage', () => {
   beforeEach(() => {
     const dispatch = jest.fn();
 
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((state) => state({
+      restaurant: {
+        id: 1,
+        name: '양천주가',
+        address: '서울 강남구',
+        reviews: [],
+      },
+      reviewField: {
+        score: '',
+        description: '',
+      },
+    }));
   });
 
   context('with params props', () => {
@@ -20,8 +38,8 @@ describe('RestaurantPage', () => {
       useSelector.mockImplementation((state) => state({
         restaurant: {
           id: 1,
-          name: '마법사주방',
-          address: '서울시 강남구',
+          name: '양천주가',
+          address: '서울 강남구',
           reviews: [],
         },
         reviewField: {
@@ -38,7 +56,7 @@ describe('RestaurantPage', () => {
         <RestaurantPage params={params} />,
       );
 
-      expect(container).toHaveTextContent('마법사주방');
+      expect(container).toHaveTextContent('양천주가');
     });
   });
 
@@ -47,8 +65,8 @@ describe('RestaurantPage', () => {
       useSelector.mockImplementation((state) => state({
         restaurant: {
           id: 1,
-          name: '마법사주방',
-          address: '서울시 강남구',
+          name: '양천주가',
+          address: '서울 강남구',
           reviews: [],
         },
         reviewField: {
@@ -65,7 +83,7 @@ describe('RestaurantPage', () => {
         </MemoryRouter>,
       );
 
-      expect(container).toHaveTextContent('마법사주방');
+      expect(container).toHaveTextContent('양천주가');
     });
   });
 });

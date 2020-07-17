@@ -33,7 +33,7 @@ describe('RestaurantsPage', () => {
         { id: 1, name: '한식' },
       ],
       restaurants: [
-        { id: 1, name: '마법사주방' },
+        { id: 1, name: '양천주가' },
       ],
     }));
   });
@@ -65,7 +65,7 @@ describe('RestaurantsPage', () => {
     it('occurs handle event', () => {
       const { getByText } = renderRestaurantsPage();
 
-      fireEvent.click(getByText('마법사주방'));
+      fireEvent.click(getByText('양천주가'));
 
       expect(mockPush).toBeCalledWith('/restaurants/1');
     });

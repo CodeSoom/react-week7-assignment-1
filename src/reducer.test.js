@@ -79,7 +79,7 @@ describe('reducer', () => {
       };
 
       const restaurants = [
-        { id: 1, name: '마법사주방' },
+        { id: 1, name: '양천주가' },
       ];
 
       const state = reducer(initialState, setRestaurants(restaurants));
@@ -94,12 +94,12 @@ describe('reducer', () => {
         restaurant: null,
       };
 
-      const restaurant = { id: 1, name: '마법사주방' };
+      const restaurant = { id: 1, name: '양천주가' };
 
       const state = reducer(initialState, setRestaurant(restaurant));
 
       expect(state.restaurant.id).toBe(1);
-      expect(state.restaurant.name).toBe('마법사주방');
+      expect(state.restaurant.name).toBe('양천주가');
     });
   });
 

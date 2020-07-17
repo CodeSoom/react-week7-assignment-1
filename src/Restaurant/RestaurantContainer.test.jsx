@@ -9,7 +9,7 @@ import RestaurantContainer from './RestaurantContainer';
 describe('RestaurantContainer', () => {
   const restaurant = {
     id: 1,
-    name: '마법사주방',
+    name: '양천주가',
     address: '서울시',
     reviews: [{
       id: 1, restaurantId: 1, name: '테스터', score: 5, description: '훌륭하다 훌륭하다 지구인놈들',
@@ -64,7 +64,7 @@ describe('RestaurantContainer', () => {
     it('renders name and address', () => {
       const { container, getByLabelText, getByRole } = renderRestaurantContainer();
 
-      expect(container).toHaveTextContent('마법사주방');
+      expect(container).toHaveTextContent('양천주가');
       expect(container).toHaveTextContent('서울시');
 
       expect(getByLabelText('평점')).toHaveAttribute('type', 'number');
