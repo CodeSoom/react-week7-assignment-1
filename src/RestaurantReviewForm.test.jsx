@@ -2,9 +2,9 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
-import ReviewForm from './ReviewForm';
+import RestaurantReviewForm from './RestaurantReviewForm';
 
-describe('ReviewForm', () => {
+describe('RestaurantReviewForm', () => {
   const handleSubmit = jest.fn();
   const handleChange = jest.fn();
 
@@ -15,7 +15,7 @@ describe('ReviewForm', () => {
 
   function renderReviewForm({ score = '', description = '' }) {
     return render(
-      <ReviewForm
+      <RestaurantReviewForm
         score={score}
         description={description}
         onSubmit={handleSubmit}

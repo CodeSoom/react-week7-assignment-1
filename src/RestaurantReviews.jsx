@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Reviews({ reviews }) {
+export default function RestaurantReviews({ reviews }) {
   if (!(reviews || []).length) {
     return (
       <p>리뷰가 없어요!</p>

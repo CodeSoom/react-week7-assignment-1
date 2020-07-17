@@ -1,7 +1,8 @@
 import React from 'react';
 
 import MenuItems from './MenuItems';
-import Reviews from './Reviews';
+import RestaurantReviews from './RestaurantReviews';
+import RestaurantReviewForm from './RestaurantReviewForm';
 
 export default function RestaurantDetail({ restaurant }) {
   const {
@@ -18,8 +19,9 @@ export default function RestaurantDetail({ restaurant }) {
       </p>
       <h3>메뉴</h3>
       <MenuItems menuItems={menuItems} />
+      <RestaurantReviewForm />
       <h3>리뷰</h3>
-      <Reviews reviews={reviews} />
+      <RestaurantReviews reviews={reviews} />
     </div>
   );
 }

@@ -2,9 +2,9 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
-import Reviews from './Reviews';
+import RestaurantReviews from './RestaurantReviews';
 
-describe('Reviews', () => {
+describe('RestaurantReviews', () => {
   context('with reviews', () => {
     it('renders reviews', () => {
       const reviews = [
@@ -15,7 +15,7 @@ describe('Reviews', () => {
           id: 2, restaurantId: 1, name: '주방장', score: 5, description: '정말 맛있어요.',
         },
       ];
-      const { container } = render(<Reviews reviews={reviews} />);
+      const { container } = render(<RestaurantReviews reviews={reviews} />);
 
       expect(container).toHaveTextContent('손님');
       expect(container).toHaveTextContent('3점');
@@ -26,7 +26,7 @@ describe('Reviews', () => {
   context('without reviews', () => {
     it('renders no reviews message', () => {
       [[], null, undefined].forEach((reviews) => {
-        const { container } = render(<Reviews reviews={reviews} />);
+        const { container } = render(<RestaurantReviews reviews={reviews} />);
 
         expect(container).toHaveTextContent('리뷰가 없어요');
       });
