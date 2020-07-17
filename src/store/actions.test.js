@@ -251,10 +251,10 @@ describe('actions', () => {
       beforeEach(() => {
         store = mockStore({
           session: {
-            accessToken: 'ACCESS_TOKEN'
+            accessToken: 'ACCESS_TOKEN',
           },
           restaurant: {
-            id: 'RESTAURANT_ID'
+            id: 'RESTAURANT_ID',
           },
           review: {
             input: {
@@ -279,10 +279,10 @@ describe('actions', () => {
       beforeEach(() => {
         store = mockStore({
           session: {
-            accessToken: 'ACCESS_TOKEN'
+            accessToken: 'ACCESS_TOKEN',
           },
           restaurant: {
-            id: 'RESTAURANT_ID'
+            id: 'RESTAURANT_ID',
           },
           review: {
             input: {

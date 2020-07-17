@@ -6,13 +6,13 @@ export default function LoginForm({ onChange, onSubmit }) {
       <div>
         <label>
           E-Mail
-          <input type="email" name="email"  onChange={onChange} />
+          <input type="email" name="email" onChange={onChange} />
         </label>
       </div>
       <div>
         <label>
           Password
-          <input type="password" name="password"  onChange={onChange} />
+          <input type="password" name="password" onChange={onChange} />
         </label>
       </div>
       <button type="submit" onClick={onSubmit}>로그인</button>

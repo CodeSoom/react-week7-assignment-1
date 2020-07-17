@@ -12,7 +12,7 @@ import { get } from '../utils';
 export default function RestaurantContainer() {
   const restaurant = useSelector(get('restaurant'));
 
-  const { input:{score, description}} = useSelector(get('review'));
+  const { input: { score, description } } = useSelector(get('review'));
 
   const { accessToken } = useSelector(get('session'));
 
@@ -33,13 +33,15 @@ export default function RestaurantContainer() {
     <>
       <Restaurant restaurant={restaurant} />
       {
-        accessToken &&
-        <ReviewForm
-          score={score}
-          description={description}
-          onChange={handleChangeInput}
-          onSubmit={handleSubmitForm}
-        />
+        accessToken
+        && (
+          <ReviewForm
+            score={score}
+            description={description}
+            onChange={handleChangeInput}
+            onSubmit={handleSubmitForm}
+          />
+        )
       }
     </>
   );

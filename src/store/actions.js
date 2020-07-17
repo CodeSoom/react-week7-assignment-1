@@ -10,7 +10,7 @@ import {
 import {
   setItemToStorage,
   removeItemFromStorage,
- } from '../services/storage';
+} from '../services/storage';
 
 export function setRegions(regions) {
   return {
@@ -150,7 +150,7 @@ export function submitReview() {
   return async (dispatch, getState) => {
     const {
       session: { accessToken },
-      restaurant: { id:restaurantId },
+      restaurant: { id: restaurantId },
       review: { input: { score, description } },
     } = getState();
 
@@ -159,7 +159,9 @@ export function submitReview() {
     }
 
     try {
-      await postReview({ accessToken, restaurantId, score, description });
+      await postReview({
+        accessToken, restaurantId, score, description,
+      });
       dispatch(setReviewInput('score', ''));
       dispatch(setReviewInput('description', ''));
     } catch (e) {

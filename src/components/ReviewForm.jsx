@@ -1,6 +1,8 @@
 import React from 'react';
 
-export default function ReviewForm({ score, description, onChange, onSubmit }) {
+export default function ReviewForm({
+  score, description, onChange, onSubmit,
+}) {
   return (
     <div>
       <div>

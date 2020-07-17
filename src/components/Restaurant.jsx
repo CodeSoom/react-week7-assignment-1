@@ -12,7 +12,9 @@ export default function Restaurant({ restaurant }) {
     );
   }
 
-  const { name, address, menuItems, reviews } = restaurant;
+  const {
+    name, address, menuItems, reviews,
+  } = restaurant;
 
   return (
     <div>

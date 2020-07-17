@@ -26,7 +26,7 @@ test('RestaurantViewPage', () => {
     },
     restaurant: RESTAURANT,
     review: {
-      input: {}
+      input: {},
     },
   }));
 

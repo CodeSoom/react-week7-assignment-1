@@ -38,7 +38,7 @@ describe('App', () => {
         accessToken: null,
       },
       review: {
-        input: {}
+        input: {},
       },
     }));
   });
@@ -81,7 +81,7 @@ describe('App', () => {
 
     context('when storage has access-token', () => {
       beforeEach(() => {
-        Storage.prototype.getItem = jest.fn(()=>'ACCESS_TOKEN');
+        Storage.prototype.getItem = jest.fn(() => 'ACCESS_TOKEN');
       });
 
       it('renders Login Page with Auto Login', () => {

@@ -65,7 +65,7 @@ describe('RestaurantContainer', () => {
       }));
     });
 
-    it('display review-form', ()=>{
+    it('display review-form', () => {
       const { getByLabelText } = renderComponent();
 
       expect(getByLabelText('평점')).not.toBeNull();
@@ -77,7 +77,7 @@ describe('RestaurantContainer', () => {
     beforeEach(() => {
       useSelector.mockImplementation((selector) => selector({
         session: {
-          accessToken: 'ACCESS_TOKEN'
+          accessToken: 'ACCESS_TOKEN',
         },
         restaurant: RESTAURANT,
         review: {
@@ -107,7 +107,7 @@ describe('RestaurantContainer', () => {
     beforeEach(() => {
       useSelector.mockImplementation((selector) => selector({
         session: {
-          accessToken: 'ACCESS_TOKEN'
+          accessToken: 'ACCESS_TOKEN',
         },
         restaurant: RESTAURANT,
         review: {

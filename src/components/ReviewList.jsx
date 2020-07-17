@@ -7,9 +7,9 @@ export default function ReviewList({ listId = 'reviewList', items }) {
         items.map((item) => (
           <li key={item.id}>
             {item.name}
-            <br/>
+            <br />
             {item.score}
-            <br/>
+            <br />
             {item.description}
           </li>
         ))
