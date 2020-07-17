@@ -23,31 +23,26 @@ describe('LoginFormContainer', () => {
     }));
   });
 
-  // TODO : control의 의미 파악 후 리팩토링 할 예정
   context('when change inputs', () => {
-    it('change email input', () => {
+    it('change inputs', () => {
       const { getByLabelText } = render(<LoginFormContainer />);
 
-      fireEvent.change(getByLabelText('E-mail'), {
-        target: { value: 'newEmail' },
-      });
+      const controls = [
+        { label: 'E-mail', name: 'email', value: 'newEmail' },
+        { label: 'Password', name: 'password', value: 'newPassword' },
 
-      expect(dispatch).toBeCalledWith({
-        type: 'changeLoginField',
-        payload: { name: 'email', value: 'newEmail' },
-      });
-    });
+      ];
 
-    it('change password input', () => {
-      const { getByLabelText } = render(<LoginFormContainer />);
+      controls.forEach((control) => {
+        const { label, name, value } = control;
+        fireEvent.change(getByLabelText(label), {
+          target: { value },
+        });
 
-      fireEvent.change(getByLabelText('Password'), {
-        target: { value: 'newPassword' },
-      });
-
-      expect(dispatch).toBeCalledWith({
-        type: 'changeLoginField',
-        payload: { name: 'password', value: 'newPassword' },
+        expect(dispatch).toBeCalledWith({
+          type: 'changeLoginField',
+          payload: { name, value },
+        });
       });
     });
   });
