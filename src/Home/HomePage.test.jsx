@@ -9,6 +9,12 @@ import { render } from '@testing-library/react';
 import HomePage from './HomePage';
 
 describe('HomePage', () => {
+  beforeEach(() => {
+    useSelector.mockImplementation((selector) => selector({
+      accessToken: given.accessToken,
+    }));
+  });
+
   const links = ['About', 'Restaurants'];
 
   const renderHomePage = () => render(
@@ -24,11 +30,7 @@ describe('HomePage', () => {
   });
 
   context('without accessToken', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        accessToken: null,
-      }));
-    });
+    given('accessToken', () => '');
 
     it('renders Login Link', () => {
       const { container } = renderHomePage();
@@ -38,11 +40,7 @@ describe('HomePage', () => {
   });
 
   context('with accessToken', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        accessToken: 'ACCESS_TOKEN',
-      }));
-    });
+    given('accessToken', () => 'ACCESS_TOKEN');
 
     it('renders Logout Link', () => {
       const { container } = renderHomePage();
