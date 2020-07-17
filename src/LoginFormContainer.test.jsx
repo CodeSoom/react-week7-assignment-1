@@ -36,8 +36,18 @@ describe('LoginFormContainer', () => {
     expect(getByLabelText('Password').value).toBe('1234');
   });
 
+  context('when click "Log In" button', () => {
+    it('should called dispatch', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalled();
+    });
+  });
+
   context('when input value changed', () => {
-    it('should dispatch called', () => {
+    it('should called dispatch', () => {
       const { getByLabelText } = renderLoginFormContainer();
 
       fireEvent.change(getByLabelText('E-mail'), {
