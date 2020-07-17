@@ -26,6 +26,12 @@ describe('LoginForm', () => {
     expect(getByLabelText('Password')).not.toBeNull();
   });
 
+  it('render "Log In" button', () => {
+    const { getByText } = renderLoginForm();
+
+    expect(getByText('Log In')).toHaveAttribute('type', 'button');
+  });
+
   context('when change input text', () => {
     it('should call handleChange', () => {
       const email = 'test';
