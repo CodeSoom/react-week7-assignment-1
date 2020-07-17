@@ -32,7 +32,7 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewFormContainer />
+      <ReviewFormContainer restaurantId={restaurantId} />
       <Reviews reviews={reviews} />
     </>
   );
