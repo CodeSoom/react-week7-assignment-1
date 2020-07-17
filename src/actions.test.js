@@ -172,5 +172,13 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(clearReviewFields());
     });
+
+    it('load updated restaurant detail info', async () => {
+      await store.dispatch(sendReview(restaurantId));
+
+      const actions = store.getActions();
+
+      expect(actions[1]).toEqual(loadRestaurant(restaurantId));
+    });
   });
 });
