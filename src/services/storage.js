@@ -1,5 +1,5 @@
 export function saveItem(key, value) {
-  localStorage.saveItem(key, value);
+  localStorage.setItem(key, value);
 }
 
 export function loadItem(key) {
