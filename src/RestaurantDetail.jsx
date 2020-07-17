@@ -7,7 +7,7 @@ import Reviews from './Reviews';
 function ReviewItem() {
   return (
     <p>리뷰작성</p>
-  )
+  );
 }
 
 export default function RestaurantDetail({ restaurant }) {

@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 
 import { render } from '@testing-library/react';
 
-import LoginPageContainer from './LoginPageContainer';
+import LoginFormContainer from './LoginFormContainer';
 
 jest.mock('react-redux');
 
-describe('LoginPageContainer.test', () => {
+describe('LoginFormContainer.test', () => {
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
@@ -20,7 +20,7 @@ describe('LoginPageContainer.test', () => {
 
   it('renders login button', () => {
     const { container } = render((
-      <LoginPageContainer />
+      <LoginFormContainer />
     ));
 
     expect(container).toHaveTextContent('ID');

@@ -48,7 +48,7 @@ describe('App', () => {
 
   context('with path /about', () => {
     it('renders the about page', () => {
-      const { container } = renderApp({ path: '/About' });
+      const { container } = renderApp({ path: '/about' });
 
       expect(container).toHaveTextContent('About 페이지');
     });

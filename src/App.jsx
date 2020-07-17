@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import HomePage from './HomePage';
-import LoginPage from './LoginPageContainer';
+import LoginPage from './LoginPage';
 import AboutPage from './AboutPage';
 import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';

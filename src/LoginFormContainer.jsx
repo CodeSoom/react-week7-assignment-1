@@ -2,14 +2,14 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import LoginPage from './LoginPage';
+import LoginForm from './LoginForm';
 
 import {
   changeLoginFields,
   requestLogin,
 } from './actions';
 
-export default function LoginPageContainer() {
+export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
   const { email, password } = useSelector((state) => ({
@@ -25,7 +25,7 @@ export default function LoginPageContainer() {
   }
 
   return (
-    <LoginPage
+    <LoginForm
       fields={{ email, password }}
       onChange={handleChangeLoginFields}
       onClick={handleClickLoginButton}
