@@ -16,9 +16,9 @@ export default function HomePage() {
         <li><Link to="/about">About</Link></li>
         <li>
           {
-            !accessToken
-              ? <Link to="/login">Login</Link>
-              : <Link to="/logout">Logout</Link>
+            accessToken
+              ? <Link to="/logout">Logout</Link>
+              : <Link to="/login">Login</Link>
           }
         </li>
         <li><Link to="/restaurants">Restaurants</Link></li>
