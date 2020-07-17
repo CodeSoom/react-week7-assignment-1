@@ -13,19 +13,22 @@ describe('RestaurantContainer', () => {
     return render(<RestaurantContainer restaurantId="1" />);
   }
 
+  beforeEach(() => {
+    dispatch.mockClear();
+    useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      restaurant: given.restaurant,
+      accessToken: given.accessToken,
+      reviewFields: {
+        score: 5,
+        reviewContent: '바보들앙 이거 리뷰 아니지롱~',
+      },
+    }));
+  });
+
   context('with logined', () => {
     beforeEach(() => {
-      dispatch.mockClear();
-      useDispatch.mockImplementation(() => dispatch);
-
-      useSelector.mockImplementation((selector) => selector({
-        restaurant: given.restaurant,
-        accessToken: 'ACCESS_TOKEN',
-        reviewFields: {
-          score: 5,
-          reviewContent: '바보들앙 이거 리뷰 아니지롱~',
-        },
-      }));
+      given('accessToken', () => 'ACCEST_TOKEN');
     });
     it('renders review InputForm with value', () => {
       given('restaurant', () => ({
@@ -44,17 +47,7 @@ describe('RestaurantContainer', () => {
 
   context('without logined', () => {
     beforeEach(() => {
-      dispatch.mockClear();
-      useDispatch.mockImplementation(() => dispatch);
-
-      useSelector.mockImplementation((selector) => selector({
-        restaurant: given.restaurant,
-        accessToken: '',
-        reviewFields: {
-          score: 5,
-          reviewContent: '바보들앙 이거 리뷰 아니지롱~',
-        },
-      }));
+      given('accessToken', () => '');
     });
 
     it('dispatches action', () => {
