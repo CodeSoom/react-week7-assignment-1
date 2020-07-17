@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
-import { requestAddReview, setReviewFields } from '../modules/actions';
+import reviews from '../../fixtures/reviews';
 
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
@@ -96,22 +96,12 @@ describe('RestaurantContainer', () => {
     });
 
     context('with reviews', () => {
-      const reviewMock = [{
+      given('reviews', () => reviews);
+      given('restaurant', () => ({
         id: 1,
-        restaurantId: 1,
-        name: '테스터',
-        score: 5,
-        description: '테스트다',
-      }, {
-        id: 2,
-        restaurantId: 1,
-        name: '테스터',
-        score: 2,
-        description: '테스트다2',
-      },
-      ];
-
-      given('reviews', () => reviewMock);
+        name: '마법사주방',
+        address: '서울시 강남구',
+      }));
 
       it('renders review title and reviews list', () => {
         const { getByText, getAllByText } = renderRestaurantContainer();
@@ -123,9 +113,5 @@ describe('RestaurantContainer', () => {
         expect(getByText('테스트다2')).not.toBeNull();
       });
     });
-
-    // context('without reviews', () => {
-    //   given('reviews', () => null
-    // });
   });
 });
