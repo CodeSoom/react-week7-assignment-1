@@ -87,6 +87,13 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
+export function setAccessToken({ accessToken }) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
 export function changeLoginFields({ name, value }) {
   return {
     type: 'changeLoginFields',
