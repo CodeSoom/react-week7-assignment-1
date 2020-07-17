@@ -14,7 +14,7 @@ import {
 
 import HomePage from './Home/HomePage';
 import AboutPage from './About/AboutPage';
-import LoginPage from './LoginPage';
+import LoginPage from './Login/LoginPage';
 import LogoutPage from './LogoutPage';
 
 import RestaurantsPage from './RestaurantsPage';

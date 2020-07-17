@@ -5,9 +5,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   changeLoginField,
   login,
-} from './actions';
+} from '../actions';
 
-import { get } from './utils';
+import { get } from '../utils';
 
 import LoginForm from './LoginForm';
 
