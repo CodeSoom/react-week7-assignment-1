@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -26,26 +26,35 @@ describe('RestaurantContainer', () => {
     }));
   });
 
-  context('with logined', () => {
+  describe('with logined', () => {
     beforeEach(() => {
       given('accessToken', () => 'ACCEST_TOKEN');
-    });
-    it('renders review InputForm with value', () => {
       given('restaurant', () => ({
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
       }));
-
+    });
+    it('renders review InputForm with value', () => {
       const { getByLabelText, getByText } = renderRestaurantContainer();
 
       expect(getByLabelText('평점').value).toBe('5');
       expect(getByLabelText('리뷰 내용').value).toBe('바보들앙 이거 리뷰 아니지롱~');
       expect(getByText('리뷰 남기기')).not.toBeNull();
     });
+
+    context('when "리뷰 남기기" button click', () => {
+      it('called submit dispatch event and clear "평점", "리뷰 내용" value', () => {
+        const { getByText } = renderRestaurantContainer();
+
+        fireEvent.click(getByText('리뷰 남기기'));
+
+        expect(dispatch).toBeCalledTimes(3);
+      });
+    });
   });
 
-  context('without logined', () => {
+  describe('without logined', () => {
     beforeEach(() => {
       given('accessToken', () => '');
     });
