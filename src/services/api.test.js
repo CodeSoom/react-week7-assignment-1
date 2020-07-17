@@ -110,7 +110,7 @@ describe('api', () => {
       description: 'Good!',
     };
 
-    it('returns restaurants', async () => {
+    it('return nothing', async () => {
       await postReview({ accessToken, restaurantId, reviewField });
     });
   });
