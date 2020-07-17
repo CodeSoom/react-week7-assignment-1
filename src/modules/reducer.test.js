@@ -171,6 +171,7 @@ describe('reducer', () => {
       });
     });
   });
+
   describe('setAcceessToken', () => {
     it('changes acceessToken', () => {
       const initialState = {
@@ -182,6 +183,7 @@ describe('reducer', () => {
       expect(state.accessToken).toEqual('ACCESS_TOKEN');
     });
   });
+
   describe('setLoginFieldsError', () => {
     it('chagne loginFieldsError', () => {
       const initialState = {
@@ -193,6 +195,7 @@ describe('reducer', () => {
       expect(state.loginFieldsError).toBeTruthy();
     });
   });
+
   describe('setReviewFields', () => {
     it('change score field', () => {
       const initialState = {

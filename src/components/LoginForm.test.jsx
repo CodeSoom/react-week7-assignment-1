@@ -33,7 +33,7 @@ describe('LoginForm', () => {
   });
 
   context('when click login button', () => {
-    it('request login', () => {
+    it('called login button click event', () => {
       const { container } = renderLoginForm();
 
       fireEvent.click(container.querySelector('button'));
@@ -73,6 +73,7 @@ describe('LoginForm', () => {
       });
     });
   });
+
   context('when login fail', () => {
     it('renders error message', () => {
       const { getByText } = renderLoginForm({ email: '', password: '', error: true });

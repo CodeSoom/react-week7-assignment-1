@@ -22,6 +22,7 @@ describe('LoginFormContainer', () => {
         accessToken: 'ACCESS_TOKEN',
       }));
     });
+
     it('renders "Log out" button and listens "Log out" button click event', () => {
       const { queryByText } = render(
         <LoginFormContainer />,
@@ -47,6 +48,7 @@ describe('LoginFormContainer', () => {
         accessToken: '',
       }));
     });
+
     it('renders input element', () => {
       const { getByLabelText } = render(
         <LoginFormContainer />,
@@ -83,6 +85,7 @@ describe('LoginFormContainer', () => {
         loginFieldsError: true,
       }));
     });
+
     it('renders error message', () => {
       const { getByText } = render(
         <LoginFormContainer />,

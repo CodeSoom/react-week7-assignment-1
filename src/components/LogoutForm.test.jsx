@@ -26,7 +26,7 @@ describe('LogoutForm', () => {
   });
 
   context('when click logout button', () => {
-    it('request logout', () => {
+    it('called logout button click event', () => {
       const { container } = renderLogoutForm();
 
       fireEvent.click(container.querySelector('button'));
