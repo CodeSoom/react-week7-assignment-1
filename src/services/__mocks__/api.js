@@ -17,3 +17,7 @@ export async function fetchRestaurant({ restaurantId }) {
 export async function fetchAccessToken(loginFields) {
   return null;
 }
+
+export async function postReview({ accessToken, restaurantId, reviewField }) {
+  return null;
+}
