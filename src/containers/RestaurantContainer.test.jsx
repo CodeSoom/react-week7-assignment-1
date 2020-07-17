@@ -32,6 +32,12 @@ describe('RestaurantContainer', () => {
           accessToken: 'ACCESS_TOKEN',
         },
         restaurant: RESTAURANT,
+        review: {
+          input: {
+            score: '',
+            description: '',
+          },
+        },
       }));
     });
     it('renders restuarant-info', () => {
@@ -50,6 +56,12 @@ describe('RestaurantContainer', () => {
           accessToken: 'ACCESS_TOKEN',
         },
         restaurant: RESTAURANT,
+        review: {
+          input: {
+            score: '',
+            description: '',
+          },
+        },
       }));
     });
 

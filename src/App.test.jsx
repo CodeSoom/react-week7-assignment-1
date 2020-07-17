@@ -37,6 +37,9 @@ describe('App', () => {
       session: {
         accessToken: null,
       },
+      review: {
+        input: {}
+      },
     }));
   });
 

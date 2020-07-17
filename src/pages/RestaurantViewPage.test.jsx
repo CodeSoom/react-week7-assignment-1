@@ -25,6 +25,9 @@ test('RestaurantViewPage', () => {
       accessToken: 'ACCESS_TOKEN',
     },
     restaurant: RESTAURANT,
+    review: {
+      input: {}
+    },
   }));
 
   const { queryByText } = render((

@@ -12,6 +12,8 @@ import { get } from '../utils';
 export default function RestaurantContainer() {
   const restaurant = useSelector(get('restaurant'));
 
+  const { input:{score, description}} = useSelector(get('review'));
+
   const { accessToken } = useSelector(get('session'));
 
   const dispatch = useDispatch();
@@ -33,6 +35,8 @@ export default function RestaurantContainer() {
       {
         accessToken &&
         <ReviewForm
+          score={score}
+          description={description}
           onChange={handleChangeInput}
           onSubmit={handleSubmitForm}
         />
