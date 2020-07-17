@@ -140,11 +140,11 @@ describe('RestaurantContainer', () => {
     });
   });
 
-  // it('click button ', () => {
-  //   const { getByRole } = renderRestaurantContainer();;
+  it('click button ', () => {
+    const { getByRole } = renderRestaurantContainer();
 
-  //   fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
+    fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
 
-  //   expect(dispatch).toBeCalledTimes(1);
-  // });
+    expect(dispatch).toBeCalledTimes(2);
+  });
 });
