@@ -27,6 +27,10 @@ describe('reducer', () => {
         password: '',
       },
       accessToken: '',
+      reviewField: {
+        email: '',
+        password: '',
+      },
     };
 
     it('returns initialState', () => {
