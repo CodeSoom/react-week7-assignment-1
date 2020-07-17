@@ -2,16 +2,16 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
-import Reviews from './Reviews';
+import ReviewItems from './ReviewItems';
 
-import restaurant from '../fixtures/restaurant';
+import restaurant from '../../fixtures/restaurant';
 
-describe('Reviews', () => {
+describe('ReviewItems', () => {
   context('with review items', () => {
     it('renders review items', () => {
       const { reviews } = restaurant;
 
-      const { container } = render(<Reviews reviews={reviews} />);
+      const { container } = render(<ReviewItems reviewItems={reviews} />);
 
       expect(container).toHaveTextContent('테스터');
     });
@@ -19,8 +19,8 @@ describe('Reviews', () => {
 
   context('without review item', () => {
     it('renders no items message', () => {
-      [[], null, undefined].forEach((item) => {
-        const { container } = render(<Reviews reviews={item} />);
+      [[], null, undefined].forEach((reviews) => {
+        const { container } = render(<ReviewItems reviewItems={reviews} />);
 
         expect(container).toHaveTextContent('리뷰가 없어요');
       });

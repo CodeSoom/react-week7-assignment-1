@@ -18,7 +18,7 @@ import LoginPage from './Login/LoginPage';
 import LogoutPage from './Logout/LogoutPage';
 
 import RestaurantsPage from './Restaurants/RestaurantsPage';
-import RestaurantPage from './RestaurantPage';
+import RestaurantPage from './Restaurant/RestaurantPage';
 import NotFoundPage from './NotFoundPage';
 
 export default function App() {
