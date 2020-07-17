@@ -25,10 +25,10 @@ describe('LoginFormContainer', () => {
   });
 
   it('renders input control', () => {
-    const { getByText } = render(<LoginFormContainer />);
+    const { getByLabelText } = render(<LoginFormContainer />);
 
-    expect(getByText('E-mail')).not.toBeNull();
-    expect(getByText('Password')).not.toBeNull();
+    // expect(getByLabelText('E-mail')).toBe('test@test');
+    // expect(getByLabelText('Password')).toBe('123');
   });
 
   it('renders Log In button', () => {

@@ -18,6 +18,7 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: { email: '', password: '' },
     };
 
     it('returns initialState', () => {
@@ -124,5 +125,9 @@ describe('reducer', () => {
         name: '한식',
       });
     });
+  });
+
+  describe('changeLoginFields', () => {
+
   });
 });
