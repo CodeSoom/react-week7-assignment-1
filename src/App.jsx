@@ -19,7 +19,7 @@ import LogoutPage from './Logout/LogoutPage';
 
 import RestaurantsPage from './Restaurants/RestaurantsPage';
 import RestaurantPage from './Restaurant/RestaurantPage';
-import NotFoundPage from './NotFoundPage';
+import NotFoundPage from './NotFound/NotFoundPage';
 
 export default function App() {
   const dispatch = useDispatch();
