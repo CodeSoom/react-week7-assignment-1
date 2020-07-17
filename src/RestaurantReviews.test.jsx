@@ -6,12 +6,10 @@ import RestaurantReviews from './RestaurantReviews';
 
 describe('RestaurantReviews', () => {
   function renderRestaurantReviews(reviews) {
-    return (
-      render(
-        <RestaurantReviews
-          reviews={reviews}
-        />,
-      )
+    return render(
+      <RestaurantReviews
+        reviews={reviews}
+      />,
     );
   }
 
@@ -27,6 +25,7 @@ describe('RestaurantReviews', () => {
       const { container } = renderRestaurantReviews(reviews);
 
       expect(container).toHaveTextContent('리뷰');
+
       expect(container).toHaveTextContent(reviews[0].name);
       expect(container).toHaveTextContent(reviews[0].score);
       expect(container).toHaveTextContent(reviews[0].description);

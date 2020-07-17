@@ -10,14 +10,14 @@ import ACCESS_TOKEN from '../fixtures/accessToken';
 jest.mock('react-redux');
 
 describe('LoginForm', () => {
-  const onChange = jest.fn();
-  const onClick = jest.fn();
+  const handleChange = jest.fn();
+  const handleClick = jest.fn();
 
   function renderLoginForm(accessToken) {
     return render(
       <LoginForm
-        onChange={onChange}
-        onClick={onClick}
+        onChange={handleChange}
+        onClick={handleClick}
         loginFields={loginFields}
         accessToken={accessToken}
       />,
@@ -28,8 +28,8 @@ describe('LoginForm', () => {
     it('renders input controls', () => {
       const { getByLabelText } = renderLoginForm(null);
 
-      expect(getByLabelText('E-mail').value).toBe(loginFields.email);
-      expect(getByLabelText('Password').value).toBe(loginFields.password);
+      expect(getByLabelText('E-mail')).toHaveValue(loginFields.email);
+      expect(getByLabelText('Password')).toHaveValue(loginFields.password);
     });
 
     context('when changes value', () => {
@@ -40,7 +40,7 @@ describe('LoginForm', () => {
           target: { value: 'tester@exmaple.com' },
         });
 
-        expect(onChange).toBeCalled();
+        expect(handleChange).toBeCalled();
       });
     });
 
@@ -56,7 +56,7 @@ describe('LoginForm', () => {
 
         fireEvent.click(getByText('Log In'));
 
-        expect(onClick).toBeCalled();
+        expect(handleClick).toBeCalled();
       });
     });
   });
@@ -74,7 +74,7 @@ describe('LoginForm', () => {
 
         fireEvent.click(getByText('Log out'));
 
-        expect(onClick).toBeCalledWith('Log-out');
+        expect(handleClick).toBeCalledWith('Log-out');
       });
     });
   });

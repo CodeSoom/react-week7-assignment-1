@@ -126,12 +126,12 @@ describe('reducer', () => {
           },
         };
 
-        const newValue = {
+        const loginFields = {
           name: 'email',
           value: 'tester@example.com',
         };
 
-        const state = reducer(initialState, changeLoginFields(newValue));
+        const state = reducer(initialState, changeLoginFields(loginFields));
 
         expect(state.loginFields.email).toBe('tester@example.com');
         expect(state.loginFields.password).toBe('1234');
@@ -147,12 +147,12 @@ describe('reducer', () => {
           },
         };
 
-        const newValue = {
+        const loginFields = {
           name: 'password',
           value: '1234',
         };
 
-        const state = reducer(initialState, changeLoginFields(newValue));
+        const state = reducer(initialState, changeLoginFields(loginFields));
 
         expect(state.loginFields.email).toBe('tester@example.com');
         expect(state.loginFields.password).toBe('1234');
@@ -170,12 +170,12 @@ describe('reducer', () => {
           },
         };
 
-        const newValue = {
+        const reviewFields = {
           name: 'score',
           value: '5',
         };
 
-        const state = reducer(initialState, changeReviewFields(newValue));
+        const state = reducer(initialState, changeReviewFields(reviewFields));
 
         expect(state.reviewFields.score).toBe('5');
         expect(state.reviewFields.description).toBe('Good!');
@@ -191,12 +191,12 @@ describe('reducer', () => {
           },
         };
 
-        const newValue = {
+        const reviewFields = {
           name: 'description',
           value: 'Good!',
         };
 
-        const state = reducer(initialState, changeReviewFields(newValue));
+        const state = reducer(initialState, changeReviewFields(reviewFields));
 
         expect(state.reviewFields.score).toBe('5');
         expect(state.reviewFields.description).toBe('Good!');

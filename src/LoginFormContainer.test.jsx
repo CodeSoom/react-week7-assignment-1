@@ -11,23 +11,27 @@ import accessToken from '../fixtures/accessToken';
 
 jest.mock('react-redux');
 
-function renderLoginFormContainer() {
-  return render(
-    <LoginFormContainer />,
-  );
-}
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
-  context('without accessToken', () => {
-    beforeEach(() => {
-      dispatch.mockClear();
+  function renderLoginFormContainer() {
+    return render(
+      <LoginFormContainer />,
+    );
+  }
 
-      useDispatch.mockImplementation(() => dispatch);
-      useSelector.mockImplementation((selector) => selector({
-        loginFields,
-      }));
-    });
+  beforeEach(() => {
+    dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      loginFields,
+      accessToken: given.accessToken,
+    }));
+  });
+
+  context('without accessToken', () => {
+    given('accessToken', () => '');
 
     it('renders input controls', () => {
       const { getByLabelText } = renderLoginFormContainer();
@@ -66,15 +70,7 @@ describe('LoginFormContainer', () => {
   });
 
   context('with accessToken', () => {
-    beforeEach(() => {
-      dispatch.mockClear();
-
-      useDispatch.mockImplementation(() => dispatch);
-      useSelector.mockImplementation((selector) => selector({
-        loginFields,
-        accessToken,
-      }));
-    });
+    given('accessToken', () => accessToken);
 
     it('renders logout', () => {
       const { getByText } = renderLoginFormContainer();
