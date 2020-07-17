@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, fireEvent } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
@@ -50,10 +50,30 @@ describe('RestaurantContainer', () => {
     context('when logged in', () => {
       given('accessToken', () => 'ACCESS_TOKEN');
 
-      it('renders review form', () => {
-        const { container } = renderRestaurantContainer();
+      it('renders controls', () => {
+        const controls = [
+          { label: '평점', name: 'score', value: '3' },
+          { label: '리뷰 내용', name: 'description', value: '맛있어요.' },
+        ];
 
-        expect(container).toHaveTextContent('리뷰 남기기');
+        const { getByLabelText } = renderRestaurantContainer();
+
+        controls.forEach(({ label, name, value }) => {
+          fireEvent.change(getByLabelText(label), { target: { value } });
+
+          expect(dispatch).toBeCalledWith({
+            type: 'setReviewFields',
+            payload: { name, value },
+          });
+        });
+      });
+
+      it('request registering for review', () => {
+        const { getByText } = renderRestaurantContainer();
+
+        fireEvent.submit(getByText('리뷰 남기기'));
+
+        expect(dispatch).toBeCalled();
       });
     });
 
