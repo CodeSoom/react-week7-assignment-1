@@ -23,10 +23,10 @@ export default function RestaurantContainer() {
     dispatch(setReviewInput(name, value));
   }
 
-  function handleSubmitForm(ev) {
+  async function handleSubmitForm(ev) {
     ev.preventDefault();
-    dispatch(submitReview());
-    dispatch(getRestaurantById(restaurant.id));
+    await dispatch(submitReview());
+    await dispatch(getRestaurantById(restaurant.id));
   }
 
   return (

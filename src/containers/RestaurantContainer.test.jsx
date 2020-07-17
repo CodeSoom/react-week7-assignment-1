@@ -126,7 +126,7 @@ describe('RestaurantContainer', () => {
         const submitButton = getByRole('button', { name: '리뷰 남기기' });
         fireEvent.click(submitButton);
         // Then
-        expect(dispatch).toBeCalledTimes(2);
+        expect(dispatch).toBeCalledTimes(1);
       });
     });
   });
