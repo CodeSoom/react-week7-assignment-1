@@ -10,10 +10,14 @@ describe('LoginForm', () => {
     handleChange.mockClear();
   });
 
-  it('render input controls', () => {
-    const { getByLabelText } = render((
-      <LoginForm />
+  function renderLoginForm() {
+    return render((
+      <LoginForm onChange={handleChange} />
     ));
+  }
+
+  it('render input controls', () => {
+    const { getByLabelText } = renderLoginForm();
 
     expect(getByLabelText('E-mail')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
@@ -21,9 +25,7 @@ describe('LoginForm', () => {
 
   context('when change input text', () => {
     it('should call handleChange', () => {
-      const { getByLabelText } = render((
-        <LoginForm onChange={handleChange} />
-      ));
+      const { getByLabelText } = renderLoginForm();
 
       const controls = [
         { label: 'E-mail', value: 'test@exam' },
