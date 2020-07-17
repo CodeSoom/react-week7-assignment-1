@@ -1,4 +1,4 @@
-import { saveItem, loadItem } from './storage';
+import { saveItem, loadItem, removeItem } from './storage';
 
 describe('storage', () => {
   const ACCESS_TOKEN = 'ACCESS_TOKEN';
@@ -6,6 +6,7 @@ describe('storage', () => {
   beforeEach(() => {
     Storage.prototype.setItem = jest.fn();
     Storage.prototype.getItem = jest.fn().mockReturnValue(ACCESS_TOKEN);
+    Storage.prototype.removeItem = jest.fn();
   });
 
   it('save item', () => {
@@ -19,5 +20,11 @@ describe('storage', () => {
 
     expect(accessToken).toBe(ACCESS_TOKEN);
     expect(localStorage.getItem).toBeCalledWith('accessToken');
+  });
+
+  it('remove item', () => {
+    removeItem('accessToken');
+
+    expect(localStorage.removeItem).toBeCalledWith('accessToken');
   });
 });
