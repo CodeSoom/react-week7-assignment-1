@@ -14,10 +14,15 @@ import {
   setAccessToken,
 } from './actions';
 
+import {
+  saveItem,
+} from './services/storage';
+
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/storage');
 
 describe('actions', () => {
   let store;
@@ -108,10 +113,14 @@ describe('actions', () => {
       store = mockStore({
         loginFields: { email: 'email@email', password: '1234' },
       });
+
+      saveItem.mockImplementation(() => null);
     });
 
     it('dispatches postLogin', async () => {
       await store.dispatch(requestLogin());
+
+      expect(saveItem).toBeCalled();
 
       const actions = store.getActions();
 
