@@ -154,8 +154,8 @@ describe('actions', () => {
       });
     });
 
-    it('post review to api server', () => {
-      store.dispatch(sendReview(restaurantId));
+    it('post review to api server', async () => {
+      await store.dispatch(sendReview(restaurantId));
 
       expect(postReview).toBeCalledWith({
         restaurantId,
@@ -165,8 +165,8 @@ describe('actions', () => {
       });
     });
 
-    it('clear review fields', () => {
-      store.dispatch(sendReview(restaurantId));
+    it('clear review fields', async () => {
+      await store.dispatch(sendReview(restaurantId));
 
       const actions = store.getActions();
 
