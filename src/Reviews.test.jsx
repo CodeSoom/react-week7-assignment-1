@@ -5,8 +5,19 @@ import { render } from '@testing-library/react';
 import Reviews from './Reviews';
 
 test('Reviews', () => {
+  const reviews = [
+    {
+      id: 1,
+      name: '테스터',
+      score: 3,
+      description: '오오',
+    },
+  ];
+
   const { getByText } = render((
-    <Reviews />
+    <Reviews
+      reviews={reviews}
+    />
   ));
 
   expect(getByText(/리뷰/)).not.toBeNull();
