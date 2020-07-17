@@ -13,7 +13,7 @@ import {
 } from './actions';
 
 import HomePage from './HomePage';
-import AboutPage from './AboutPage';
+import AboutPage from './About/AboutPage';
 import LoginPage from './LoginPage';
 import LogoutPage from './LogoutPage';
 
