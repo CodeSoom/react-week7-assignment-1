@@ -179,9 +179,7 @@ describe('reducer', () => {
         accessToken: '',
       };
 
-      const state = reducer(initialState, setAccessToken({
-        accessToken: 'TOKEN',
-      }));
+      const state = reducer(initialState, setAccessToken('TOKEN'));
 
       expect(state.accessToken).toBe('TOKEN');
     });
