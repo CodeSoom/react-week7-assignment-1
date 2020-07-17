@@ -2,15 +2,7 @@ import React from 'react';
 
 import TextField from './TextField';
 
-export default function LoginForm({ fields, onChange, onSubmit }) {
-  // const { email, password } = fields;
-
-  // function handleChange(event) {
-  //   const { target: { name, value } } = event;
-
-  //   onChange({ name, value });
-  // }
-
+export default function LoginForm({ onChange, onSubmit }) {
   return (
     <>
       <TextField
