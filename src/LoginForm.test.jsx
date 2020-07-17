@@ -12,7 +12,9 @@ describe('LoginForm', () => {
 
   function renderLoginForm() {
     return render((
-      <LoginForm onChange={handleChange} />
+      <LoginForm
+        onChange={handleChange}
+      />
     ));
   }
 
@@ -28,14 +30,15 @@ describe('LoginForm', () => {
       const { getByLabelText } = renderLoginForm();
 
       const controls = [
-        { label: 'E-mail', value: 'test@exam' },
-        { label: 'Password', value: '1234' },
+        { label: 'E-mail', name: 'email', value: 'test@exam' },
+        { label: 'Password', name: 'password', value: '1234' },
       ];
 
-      controls.forEach(({ label, value }) => {
+      controls.forEach(({ label, name, value }) => {
         const input = getByLabelText(label);
+
         fireEvent.change(input, { target: { value } });
-        expect(handleChange).toBeCalled();
+        expect(handleChange).toBeCalledWith({ name, value });
         handleChange.mockClear();
       });
     });
