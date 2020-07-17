@@ -20,6 +20,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
+  const accessToken = useSelector(get('accessToken'));
 
   if (!restaurant) {
     return (
@@ -30,7 +31,7 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <RestaurantReviewForm />
+      {accessToken ? <RestaurantReviewForm /> : null}
       <h3>리뷰</h3>
       <RestaurantReviews reviews={restaurant.reviews} />
     </>
