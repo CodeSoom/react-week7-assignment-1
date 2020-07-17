@@ -1,28 +1,63 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent, getByText } from '@testing-library/react';
 
 import LoginFormContainer from './LoginFormContainer';
 
 jest.mock('react-redux');
 
 describe('LoginFormContainer.test', () => {
+  const dispatch = jest.fn();
+
   beforeEach(() => {
+    dispatch.mockClear(); 
+    useDispatch.mockImplementation(() => dispatch);
+    
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
-        email: '',
-        password: '',
+        email: 'emailData',
+        password: 'passwordData',
       },
     }));
   });
 
   it('renders login button', () => {
-    const { container } = render((
+    const { container, getByText } = render((
       <LoginFormContainer />
     ));
+    
+    expect(container).toHaveTextContent('로그인');
 
-    expect(container).toHaveTextContent('ID');
+    fireEvent.click(getByText('로그인'));
+    expect(dispatch).toBeCalledTimes(1);
+  });
+
+  it('renders loginFields data', () => {
+    const { getByLabelText } = render((
+      <LoginFormContainer />
+    ));
+    
+    expect(getByLabelText('ID')).not.toBe('emailData');
+    expect(getByLabelText('PW')).not.toBe('passwordData');
+  });
+
+  it('change login field', () => {
+    const { getByLabelText } = render((
+      <LoginFormContainer />
+    ));
+    
+    fireEvent.change(getByLabelText('ID'), {
+      target: { value: 'tester@example.com' },
+    });
+    
+    expect(dispatch).toBeCalledWith({
+      type: 'changeLoginFields',
+      payload: {
+        name:  'email',
+        value: 'tester@example.com',
+      },
+    });
   });
 });

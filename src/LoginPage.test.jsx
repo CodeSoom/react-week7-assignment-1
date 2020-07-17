@@ -13,16 +13,31 @@ describe('LoginPage', () => {
         email: '',
         password: '',
       },
+      accessToken: '',
     }));
   });
 
-  it('renders name and address', () => {
-    const { container } = render((
-      <LoginPage />
-    ));
+  context('login', () => {
+    it('renders name and address', () => {
+      const { accessToken } = 'aaaa';
+      const { container } = render((
+        <LoginPage />
+      ));
 
-    expect(container).toHaveTextContent('ID');
-    expect(container).toHaveTextContent('PW');
-    expect(container).toHaveTextContent('로그인');
+      //expect(container).toHaveTextContent('로그인 성공');
+    });
+  });
+
+  context('logout', () => {
+    it('renders name and address', () => {
+      const { accessToken } = '';
+      const { container } = render((
+        <LoginPage />
+      ));
+
+      expect(container).toHaveTextContent('ID');
+      expect(container).toHaveTextContent('PW');
+      expect(container).toHaveTextContent('로그인');
+    });
   });
 });
