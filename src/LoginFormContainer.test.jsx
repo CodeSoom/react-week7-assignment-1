@@ -10,9 +10,17 @@ jest.mock('react-redux');
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
+  function renderLoginFormContainer() {
+    return render((
+      <LoginFormContainer />
+    ));
+  }
+
   beforeEach(() => {
     dispatch.mockClear();
+
     useDispatch.mockImplementation(() => dispatch);
+
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
         email: 'test@test',
@@ -22,9 +30,7 @@ describe('LoginFormContainer', () => {
   });
 
   it('render input controls', () => {
-    const { getByLabelText } = render((
-      <LoginFormContainer />
-    ));
+    const { getByLabelText } = renderLoginFormContainer();
 
     expect(getByLabelText('E-mail').value).toBe('test@test');
     expect(getByLabelText('Password').value).toBe('1234');
@@ -32,9 +38,7 @@ describe('LoginFormContainer', () => {
 
   context('when input value changed', () => {
     it('should dispatch called', () => {
-      const { getByLabelText } = render((
-        <LoginFormContainer />
-      ));
+      const { getByLabelText } = renderLoginFormContainer();
 
       fireEvent.change(getByLabelText('E-mail'), {
         target: { value: 'new email' },
