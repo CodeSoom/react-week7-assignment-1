@@ -16,7 +16,7 @@ export default function ReviewForm({
           type="number"
           id="review-score"
           onChange={onChangeReviewField}
-          name="number"
+          name="score"
           value={score}
         />
       </div>
@@ -26,7 +26,7 @@ export default function ReviewForm({
           type="text"
           id="review-description"
           onChange={onChangeReviewField}
-          name="text"
+          name="description"
           value={description}
         />
       </div>
