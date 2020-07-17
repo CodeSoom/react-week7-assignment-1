@@ -171,6 +171,6 @@ describe('RestaurantContainer', () => {
 
     fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
 
-    expect(dispatch).toBeCalledTimes(2); // TODO : 현재 테스트 깨짐. 강의 듣고 해결할 예정
+    expect(dispatch).toBeCalledTimes(2);
   });
 });
