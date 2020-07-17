@@ -6,7 +6,10 @@ import { render, fireEvent } from '@testing-library/react';
 
 import LoginFormContainer from './LoginFormContainer';
 
-import { changeLoginField } from './actions';
+import {
+  changeLoginField,
+  logout,
+} from './actions';
 
 jest.mock('react-redux');
 
@@ -17,66 +20,90 @@ describe('LoginFormContainer', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
-
-    useSelector.mockImplementation((selector) => selector({
-      loginFields: {
-        email: 'test@test',
-        password: '1234',
-      },
-      accessToken: 'TOKEN',
-    }));
   });
 
   const renderLoginFormContainer = () => render(
     <LoginFormContainer />,
   );
 
-  const controls = [
-    { label: 'E-mail', name: 'email', value: 'test@test' },
-    { label: 'Password', name: 'password', value: '1234' },
-  ];
+  context('when logged out', () => {
+    const controls = [
+      { label: 'E-mail', name: 'email', value: 'test@test' },
+      { label: 'Password', name: 'password', value: '1234' },
+    ];
 
-  it('renders input controls', () => {
-    const { getByLabelText } = renderLoginFormContainer();
-
-    controls.forEach(({ label }) => {
-      const input = getByLabelText(label);
-
-      expect(input).not.toBeNull();
+    beforeEach(() => {
+      useSelector.mockImplementation((selector) => selector({
+        accessToken: '',
+      }));
     });
-  });
 
-  it('renders login button', () => {
-    const { getByText } = renderLoginFormContainer();
-
-    expect(getByText('Log In')).not.toBeNull();
-  });
-
-  context('when a form field is changed', () => {
-    it('occurs changeLoginField', () => {
+    it('renders input controls', () => {
       const { getByLabelText } = renderLoginFormContainer();
 
-      controls.forEach(({ label, name, value }) => {
+      controls.forEach(({ label }) => {
         const input = getByLabelText(label);
 
-        fireEvent.change(input, {
-          target: { value },
-        });
+        expect(input).not.toBeNull();
+      });
+    });
 
-        expect(dispatch).toBeCalledWith(changeLoginField({
-          name, value,
-        }));
+    it('renders login button', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      expect(getByText('Log In')).not.toBeNull();
+    });
+
+    context('when a form field is changed', () => {
+      it('occurs changeLoginField', () => {
+        const { getByLabelText } = renderLoginFormContainer();
+
+        controls.forEach(({ label, name, value }) => {
+          const input = getByLabelText(label);
+
+          fireEvent.change(input, {
+            target: { value },
+          });
+
+          expect(dispatch).toBeCalledWith(changeLoginField({
+            name, value,
+          }));
+        });
+      });
+    });
+
+    context('when a "Log In" button is clicked', () => {
+      it('occurs requestLogin', () => {
+        const { getByText } = renderLoginFormContainer();
+
+        fireEvent.click(getByText('Log In'));
+
+        expect(dispatch).toBeCalled();
       });
     });
   });
 
-  context('when a "Log In" button is clicked', () => {
-    it('occurs requestLogin', () => {
+  context('when logged in', () => {
+    beforeEach(() => {
+      useSelector.mockImplementation((selector) => selector({
+        accessToken: 'TOKEN',
+      }));
+    });
+
+    it('renders "log out" button', () => {
       const { getByText } = renderLoginFormContainer();
 
-      fireEvent.click(getByText('Log In'));
+      expect(getByText('Log out')).not.toBeNull();
+    });
 
-      expect(dispatch).toBeCalled();
+    context('when a "Log out" button is clicked', () => {
+      it('occurs logout', () => {
+        const { getByText } = renderLoginFormContainer();
+
+        fireEvent.click(getByText('Log out'));
+
+        expect(dispatch).toBeCalledWith(logout());
+      });
     });
   });
 });
