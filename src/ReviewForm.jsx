@@ -3,6 +3,11 @@ import React from 'react';
 export default function ReviewForm({
   score, description, onSubmit, onChange,
 }) {
+  const handleChange = (e) => {
+    const { target: { name, value } } = e;
+    onChange({ name, value });
+  };
+
   return (
     <form onSubmit={onSubmit}>
       <div>
@@ -16,7 +21,7 @@ export default function ReviewForm({
           min="1"
           max="5"
           value={score}
-          onChange={onChange}
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -28,7 +33,7 @@ export default function ReviewForm({
           name="description"
           type="description"
           value={description}
-          onChange={onChange}
+          onChange={handleChange}
         />
       </div>
       <button type="submit">리뷰 남기기</button>
