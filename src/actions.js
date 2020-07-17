@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
 
 import {
@@ -127,5 +128,20 @@ export function requestLogin() {
     saveItem('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const {
+      accessToken,
+      reviewFields: { score, description },
+    } = getState();
+
+    postReview({
+      accessToken, restaurantId, score, description,
+    });
+
+    // TODO: dispatch(loadReview)
   };
 }
