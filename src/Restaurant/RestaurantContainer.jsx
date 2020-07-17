@@ -9,7 +9,6 @@ import Reviews from './Review/Reviews';
 import {
   loadRestaurant,
   changeReviewField,
-  setAccessToken,
   addReview,
 } from '../actions';
 
@@ -25,11 +24,6 @@ export default function RestaurantContainer({ restaurantId }) {
   const restaurant = useSelector(get('restaurant'));
   const reviewField = useSelector(get('reviewField'));
   const accessToken = useSelector(get('accessToken'));
-  const accessToken2 = localStorage.getItem('accessToken');
-
-  if (accessToken2) {
-    dispatch(setAccessToken(accessToken));
-  }
 
   if (!restaurant) {
     return (

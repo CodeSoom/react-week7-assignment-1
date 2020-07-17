@@ -7,6 +7,12 @@ import {
   postReview,
 } from './services/api';
 
+import {
+  loadItem,
+  saveItem,
+  removeItem,
+} from './services/storage';
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -75,12 +81,23 @@ export function loadRestaurants() {
   };
 }
 
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
 export function loadRestaurant({ restaurantId }) {
   return async (dispatch) => {
     dispatch(setRestaurant(null));
 
     const restaurant = await fetchRestaurant({ restaurantId });
+    const accessToken = loadItem('accessToken');
 
+    if (accessToken) {
+      dispatch(setAccessToken(accessToken));
+    }
     dispatch(setRestaurant(restaurant));
   };
 }
@@ -89,13 +106,6 @@ export function changeLoginField({ name, value }) {
   return {
     type: 'changeLoginField',
     payload: { name, value },
-  };
-}
-
-export function setAccessToken(accessToken) {
-  return {
-    type: 'setAccessToken',
-    payload: { accessToken },
   };
 }
 
@@ -109,14 +119,14 @@ export function login() {
 
     const accessToken = await fetchAccessToken(loginFields);
     if (accessToken !== undefined) {
-      localStorage.setItem('accessToken', accessToken);
+      saveItem('accessToken', accessToken);
       dispatch(setAccessToken(accessToken));
     }
   };
 }
 
 export function logout() {
-  localStorage.removeItem('accessToken');
+  removeItem('accessToken');
   return {
     type: 'logout',
     payload: { accessToken: '' },
