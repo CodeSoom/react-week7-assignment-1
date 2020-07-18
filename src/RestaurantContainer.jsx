@@ -38,6 +38,7 @@ export default function RestaurantContainer({ restaurantId }) {
         <ReviewForm
           onChange={handleChange}
         />
+        // <Reviews/>
       ) : null}
     </>
   );
