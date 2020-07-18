@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import ReviewForm from './ReviewForm';
 
@@ -12,5 +12,21 @@ describe('ReviewForm', () => {
     expect(getByLabelText('리뷰 내용')).toBeInTheDocument();
 
     expect(getByText('리뷰 남기기')).toBeInTheDocument();
+  });
+
+  it('listens change events', () => {
+    const handleChange = jest.fn();
+
+    const { getByLabelText } = render((
+      <ReviewForm
+        onChange={handleChange}
+      />
+    ));
+
+    fireEvent.change(getByLabelText('평점'), {
+      target: { value: '5' },
+    });
+
+    expect(handleChange).toBeCalledWith({ name: '평점', value: '5' });
   });
 });
