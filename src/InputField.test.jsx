@@ -11,21 +11,22 @@ describe('InputField', () => {
     handleChange.mockClear();
   });
 
+  function renderInputField({ label, type = 'text', name }) {
+    return render((
+      <InputField
+        label={label}
+        type={type}
+        name={name}
+        onChange={handleChange}
+      />
+    ));
+  }
+
   context('without type', () => {
-    function renderInputField({ label, name }) {
-      return render((
-        <InputField
-          label={label}
-          name={name}
-          onChange={handleChange}
-        />
-      ));
-    }
+    const label = '리뷰 내용';
+    const name = 'description';
 
     it('renders input fields', () => {
-      const label = '리뷰 내용';
-      const name = 'description';
-
       const { getByLabelText } = renderInputField({ label, name });
 
       const attributes = [
@@ -40,9 +41,6 @@ describe('InputField', () => {
     });
 
     it('listens change events', () => {
-      const label = '리뷰 내용';
-      const name = 'description';
-
       const { getByLabelText } = renderInputField({ label, name });
 
       fireEvent.change(getByLabelText(label), {
@@ -54,22 +52,11 @@ describe('InputField', () => {
   });
 
   context('with type', () => {
-    function renderInputField({ label, type, name }) {
-      return render((
-        <InputField
-          label={label}
-          type={type}
-          name={name}
-          onChange={handleChange}
-        />
-      ));
-    }
+    const label = '평점';
+    const type = 'number';
+    const name = 'score';
 
     it('renders input fields', () => {
-      const label = '평점';
-      const type = 'number';
-      const name = 'score';
-
       const { getByLabelText } = renderInputField({ label, type, name });
 
       const attributes = [
@@ -84,10 +71,6 @@ describe('InputField', () => {
     });
 
     it('listens change events', () => {
-      const label = '평점';
-      const type = 'number';
-      const name = 'score';
-
       const { getByLabelText } = renderInputField({ label, type, name });
 
       fireEvent.change(getByLabelText(label), {

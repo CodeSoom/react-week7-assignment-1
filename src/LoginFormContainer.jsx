@@ -29,15 +29,17 @@ export default function LoginFormContainer() {
 
   return (
     <>
-      {accessToken ? (
-        <LogoutForm
-          onClick={handleClickLogout}
-        />
-      ) : (
+      {!accessToken && (
         <LoginForm
           fields={{ email, password }}
           onChange={handleChange}
           onSubmit={handleSubmit}
+        />
+      )}
+
+      {accessToken && (
+        <LogoutForm
+          onClick={handleClickLogout}
         />
       )}
     </>

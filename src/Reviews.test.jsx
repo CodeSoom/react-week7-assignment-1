@@ -33,7 +33,7 @@ describe('Reviews', () => {
 
   context('without reviews', () => {
     it('renders "리뷰가 없어요!" message', () => {
-      const { container } = render(<Reviews reviews={{}} />);
+      const { container } = render(<Reviews reviews={[]} />);
 
       expect(container).toHaveTextContent('리뷰가 없어요!');
     });

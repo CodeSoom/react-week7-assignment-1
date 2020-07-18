@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function InputField({
-  label, type, name, field, onChange,
+  label, type = 'text', name, field, onChange,
 }) {
   const id = `input-${name}`;
 
@@ -16,7 +16,7 @@ export default function InputField({
         {label}
       </label>
       <input
-        type={type || 'text'}
+        type={type}
         id={id}
         name={name}
         onChange={handleChange}
