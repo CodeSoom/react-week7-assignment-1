@@ -41,14 +41,14 @@ describe('SessionContainer', () => {
 
     it('display logout-button', () => {
       const { getByRole } = renderComponent();
-      expect(getByRole('button', { name: '로그아웃' })).not.toBeNull();
+      expect(getByRole('button', { name: 'Log out' })).not.toBeNull();
     });
 
     context('when click logout-button', () => {
       it('fires submit event', () => {
         const { getByRole } = renderComponent();
         // When
-        const logoutButton = getByRole('button', { name: '로그아웃' });
+        const logoutButton = getByRole('button', { name: 'Log out' });
         fireEvent.click(logoutButton);
         // Then
         expect(dispatch).toBeCalledTimes(1);
@@ -69,7 +69,7 @@ describe('SessionContainer', () => {
       const { getByLabelText, getByRole } = renderComponent();
       expect(getByLabelText('E-Mail')).not.toBeNull();
       expect(getByLabelText('Password')).not.toBeNull();
-      expect(getByRole('button', { name: '로그인' })).not.toBeNull();
+      expect(getByRole('button', { name: 'Log In' })).not.toBeNull();
     });
   });
 });

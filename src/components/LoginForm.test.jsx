@@ -50,7 +50,7 @@ describe('LoginForm', () => {
     it('fires submit event', () => {
       const { getByRole } = renderComponent();
       // When
-      const submitButton = getByRole('button', { name: '로그인' });
+      const submitButton = getByRole('button', { name: 'Log In' });
       fireEvent.click(submitButton);
       // Then
       expect(handleOnSubmit).toBeCalledTimes(1);

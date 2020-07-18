@@ -15,7 +15,7 @@ export default function LoginForm({ onChange, onSubmit }) {
           <input type="password" name="password" onChange={onChange} />
         </label>
       </div>
-      <button type="submit" onClick={onSubmit}>로그인</button>
+      <button type="submit" onClick={onSubmit}>Log In</button>
     </div>
   );
 }

@@ -24,7 +24,7 @@ export default function SessionContainer() {
       ? (
         <>
           <Session accessToken={accessToken} />
-          <Button name="로그아웃" onClick={handleLogout} />
+          <Button name="Log out" onClick={handleLogout} />
         </>
       )
       : <LoginFormContainer />
