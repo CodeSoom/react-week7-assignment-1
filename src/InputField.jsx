@@ -1,16 +1,25 @@
 import React from 'react';
 
-export default function InputField({ label, name, onChange }) {
+export default function InputField({
+  label, type, name, onChange,
+}) {
+  const id = `input-${name}`;
+
+  function handleChange(event) {
+    const { target: { value } } = event;
+    onChange({ name, value });
+  }
+
   return (
     <div>
-      <label
-        htmlFor="input-score"
-      >
+      <label htmlFor={id}>
         평점
       </label>
       <input
-        type="number"
-        id="input-score"
+        type={type || 'text'}
+        id={id}
+        name={name}
+        onChange={handleChange}
       />
     </div>
   );
