@@ -34,6 +34,10 @@ describe('App', () => {
         email: 'test@test.com',
         password: 'password1',
       },
+      reviewFields: {
+        score: 0,
+        description: '',
+      },
       accessToken: '',
     }));
   });

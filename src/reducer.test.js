@@ -9,6 +9,7 @@ import {
   selectCategory,
   setLoginFields,
   setAccessToken,
+  setReviewFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -24,6 +25,11 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
+      reviewFields: {
+        score: 0,
+        description: '',
+      },
+      accessToken: '',
     };
 
     it('returns initialState', () => {
@@ -156,6 +162,21 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
 
       expect(state.accessToken).toBe('ACCESS_TOKEN');
+    });
+  });
+
+  describe('setReviewFields', () => {
+    it('changes review field', () => {
+      const initialState = {
+        reviewFields: {
+          score: 0,
+          description: '',
+        },
+      };
+
+      const state = reducer(initialState, setReviewFields({ name: 'score', value: 4 }));
+
+      expect(state.reviewFields.score).toBe(4);
     });
   });
 });

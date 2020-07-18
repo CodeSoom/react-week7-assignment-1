@@ -7,20 +7,29 @@ import RestaurantReviewForm from './RestaurantReviewForm';
 import RestaurantReviews from './RestaurantReviews';
 
 import {
-  loadRestaurant,
+  loadRestaurant, setReviewFields, registerReview,
 } from './actions';
 
 import { get } from './utils';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
+  const restaurant = useSelector(get('restaurant'));
+  const accessToken = useSelector(get('accessToken'));
+  const { score, description } = useSelector(get('reviewFields'));
+
+  const handleChange = ({ name, value }) => {
+    dispatch(setReviewFields({ name, value }));
+  };
+
+  const handleSubmitReview = (e) => {
+    e.preventDefault();
+    dispatch(registerReview());
+  };
 
   useEffect(() => {
     dispatch(loadRestaurant({ restaurantId }));
   }, []);
-
-  const restaurant = useSelector(get('restaurant'));
-  const accessToken = useSelector(get('accessToken'));
 
   if (!restaurant) {
     return (
@@ -30,10 +39,21 @@ export default function RestaurantContainer({ restaurantId }) {
 
   return (
     <>
-      <RestaurantDetail restaurant={restaurant} />
-      {accessToken ? <RestaurantReviewForm /> : null}
+      <RestaurantDetail
+        restaurant={restaurant}
+      />
+      {accessToken ? (
+        <RestaurantReviewForm
+          score={score}
+          description={description}
+          onSubmit={handleSubmitReview}
+          onChange={handleChange}
+        />
+      ) : null}
       <h3>리뷰</h3>
-      <RestaurantReviews reviews={restaurant.reviews} />
+      <RestaurantReviews
+        reviews={restaurant.reviews}
+      />
     </>
   );
 }

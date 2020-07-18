@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
-import { useDispatch, useSelector, fireEvent } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
@@ -22,6 +22,10 @@ describe('RestaurantContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
       accessToken: given.accessToken,
+      reviewFields: {
+        score: 5,
+        description: '맛있어요.',
+      },
     }));
   });
 
@@ -53,7 +57,7 @@ describe('RestaurantContainer', () => {
       it('renders controls', () => {
         const controls = [
           { label: '평점', name: 'score', value: '3' },
-          { label: '리뷰 내용', name: 'description', value: '맛있어요.' },
+          { label: '리뷰 내용', name: 'description', value: '맛있어요' },
         ];
 
         const { getByLabelText } = renderRestaurantContainer();

@@ -64,6 +64,13 @@ export function setAccessToken(accessToken) {
   };
 }
 
+export function setReviewFields({ name, value }) {
+  return {
+    type: 'setReviewFields',
+    payload: { name, value },
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();
@@ -119,4 +126,8 @@ export function requestLogout() {
     removeItem('accessToken');
     dispatch(setAccessToken(''));
   };
+}
+
+export function registerReview() {
+  return null;
 }
