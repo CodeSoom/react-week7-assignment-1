@@ -13,7 +13,7 @@ export default function InputField({
   return (
     <div>
       <label htmlFor={id}>
-        평점
+        {label}
       </label>
       <input
         type={type || 'text'}
