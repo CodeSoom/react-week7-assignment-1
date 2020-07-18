@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -50,6 +50,16 @@ describe('RestaurantContainer', () => {
         const { container } = renderRestaurantContainer();
 
         expect(container).toHaveTextContent('평점');
+      });
+
+      it('listens change events', () => {
+        const { getByLabelText } = renderRestaurantContainer();
+
+        fireEvent.change(getByLabelText('평점'), {
+          target: { value: '5' },
+        });
+
+        expect(dispatch).toBeCalled();
       });
     });
   });
