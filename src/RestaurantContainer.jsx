@@ -35,7 +35,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   function handleSubmit() {
-    dispatch(requestReview());
+    dispatch(requestReview(restaurantId));
   }
 
   return (

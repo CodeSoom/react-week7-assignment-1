@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
 
 import { deleteItem, saveItem } from './services/storage';
@@ -134,13 +135,15 @@ export function addReview({ score, description }) {
   };
 }
 
-export function requestReview() {
+export function requestReview(restaurantId) {
   return async (dispatch, getState) => {
-    const { reviewFields: { score, description } } = getState();
-    const result = await postReview({ score, description });
+    const { accessToken, reviewFields: { score, description } } = getState();
 
-    // show addedReview..
-    if (result) {
+    const { status } = await postReview({
+      accessToken, score, description, restaurantId,
+    });
+
+    if (status === '201') {
       dispatch(addReview({ score, description }));
     }
   };

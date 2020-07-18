@@ -88,9 +88,9 @@ describe('api', () => {
     });
 
     it('returns accessToken', async () => {
-      const response = await postReview({ email: 'test@test.com', password: '1111' });
+      const response = await postReview({ score: '5', description: 'Great!' });
 
-      expect(response).toBeUndefined();
+      expect(response).toEqual({});
     });
   });
 });
