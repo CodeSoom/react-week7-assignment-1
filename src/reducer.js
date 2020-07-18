@@ -89,8 +89,6 @@ const reducers = {
       },
     };
   },
-
-  registerReview: () => {},
 };
 
 function defaultReducer(state) {
