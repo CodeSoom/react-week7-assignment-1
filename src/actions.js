@@ -6,7 +6,7 @@ import {
   postLogin,
 } from './services/api';
 
-import { saveItem } from './services/storeage';
+import { saveItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
