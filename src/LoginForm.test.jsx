@@ -25,17 +25,14 @@ describe('LoginForm', () => {
   }
 
   it('renders input controls', () => {
+    const email = 'eamil@test.com';
+    const password = 'password1';
     const controls = [
-      { label: 'E-mail', value: 'email@test.com' },
-      { label: 'Password', value: 'password' },
+      { label: 'E-mail', value: email },
+      { label: 'Password', value: password },
     ];
 
-    const { getByLabelText } = renderLoginForm(
-      {
-        email: controls[0].value,
-        password: controls[1].value,
-      },
-    );
+    const { getByLabelText } = renderLoginForm({ email, password });
 
     controls.forEach(({ label, value }) => {
       const control = getByLabelText(label);

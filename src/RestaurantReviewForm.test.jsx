@@ -25,17 +25,14 @@ describe('RestaurantReviewForm', () => {
   }
 
   it('renders input controls', () => {
+    const score = '3';
+    const description = '맛있어요.';
     const controls = [
-      { label: '평점', value: '3' },
-      { label: '리뷰 내용', value: '맛있어요.' },
+      { label: '평점', value: score },
+      { label: '리뷰 내용', value: description },
     ];
 
-    const { getByLabelText } = renderReviewForm(
-      {
-        score: controls[0].value,
-        description: controls[1].value,
-      },
-    );
+    const { getByLabelText } = renderReviewForm({ score, description });
 
     controls.forEach(({ label, value }) => {
       const control = getByLabelText(label);
