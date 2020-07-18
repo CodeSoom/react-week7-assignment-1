@@ -8,6 +8,7 @@ import ReviewForm from './ReviewForm';
 
 import {
   loadRestaurant,
+  changeReviewFields,
 } from './actions';
 
 import { get } from './utils';
@@ -15,8 +16,8 @@ import { get } from './utils';
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
-  function handleChange() {
-    // TODO : dispatch를 이용해 review의 score, description 저장.
+  function handleChange({ name, value }) {
+    dispatch(changeReviewFields({ name, value }));
   }
 
   useEffect(() => {

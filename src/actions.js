@@ -101,6 +101,13 @@ export function changeLoginFields({ name, value }) {
   };
 }
 
+export function changeReviewFields({ name, value }) {
+  return {
+    type: 'changeReviewFields',
+    payload: { name, value },
+  };
+}
+
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
