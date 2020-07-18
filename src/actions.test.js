@@ -3,20 +3,23 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 
 import {
-  loadInitialData,
   setRegions,
   setCategories,
-  loadRestaurants,
-  loadRestaurant,
   setRestaurants,
   setRestaurant,
-  requestLogin,
   setAccessToken,
+  loadInitialData,
+  loadRestaurants,
+  loadRestaurant,
+  requestLogin,
+  sendReview,
 } from './actions';
 
 import {
   saveItem,
 } from './services/storage';
+
+import restaurant from '../fixtures/restaurant';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -125,6 +128,25 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setAccessToken(''));
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'ACCESS-TOKEN',
+        reviewFields: { score: '5', description: '노맛' },
+        restaurant,
+      });
+    });
+
+    it('dispatches postReview', async () => {
+      await store.dispatch(sendReview(1));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
 });
