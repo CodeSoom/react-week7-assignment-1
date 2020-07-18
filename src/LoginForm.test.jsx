@@ -41,11 +41,9 @@ describe('LoginForm', () => {
   });
 
   it('changes input controls', () => {
-    const email = 'eamil@test.com';
-    const password = 'password1';
     const controls = [
-      { label: 'E-mail', name: 'email', value: email },
-      { label: 'Password', name: 'password', value: password },
+      { label: 'E-mail', name: 'email', value: 'email@test.com' },
+      { label: 'Password', name: 'password', value: 'password1' },
     ];
 
     const { getByLabelText } = renderLoginForm();

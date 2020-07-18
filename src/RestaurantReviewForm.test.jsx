@@ -41,11 +41,9 @@ describe('RestaurantReviewForm', () => {
   });
 
   it('changes input controls', () => {
-    const score = '3';
-    const description = '맛있어요.';
     const controls = [
-      { label: '평점', name: 'score', value: score },
-      { label: '리뷰 내용', name: 'description', value: description },
+      { label: '평점', name: 'score', value: '3' },
+      { label: '리뷰 내용', name: 'description', value: '맛있어요.' },
     ];
 
     const { getByLabelText } = renderReviewForm();
