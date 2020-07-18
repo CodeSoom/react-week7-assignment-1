@@ -9,6 +9,7 @@ import {
 } from './actions';
 
 import { get } from './utils';
+import ReviewForm from './ReviewForm';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail restaurant={restaurant} />
       {accessToken ? (
-        <p>평점</p>
+        <ReviewForm />
       ) : null}
     </>
   );
