@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import RestaurantDetail from './RestaurantDetail';
 
 import {
-  loadRestaurant
+  loadRestaurant, changeReviewField,
 } from './actions';
 
 import { get } from './utils';
@@ -27,8 +27,8 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
-  function handleChange() {
-    dispatch();
+  function handleChange({ name, value }) {
+    dispatch(changeReviewField({ name, value }));
   }
 
   return (
