@@ -7,8 +7,11 @@ import Restaurant from './Restaurant';
 import RESTAURANT from '../../fixtures/restaurant';
 
 describe('<Restaurant />', () => {
-  const renderComponent = ({ restaurant }) => render((
-    <Restaurant restaurant={restaurant} />
+  const renderComponent = ({ restaurant, reviewForm }) => render((
+    <Restaurant
+      restaurant={restaurant}
+      reviewForm={reviewForm}
+    />
   ));
 
   context('with restaurant', () => {
@@ -27,6 +30,16 @@ describe('<Restaurant />', () => {
     it('display No Restaurant Info', () => {
       const { container } = renderComponent({ restaurant: undefined });
       expect(container).toHaveTextContent('no-restaurant-info');
+    });
+  });
+
+  context('with review-form', () => {
+    it('display review-form', () => {
+      const { getByRole } = renderComponent({
+        restaurant: RESTAURANT,
+        reviewForm: <form aria-label="form"><input type="text" /></form>,
+      });
+      expect(getByRole('form')).not.toBeNull();
     });
   });
 });

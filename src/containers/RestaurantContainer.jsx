@@ -31,18 +31,20 @@ export default function RestaurantContainer() {
 
   return (
     <>
-      <Restaurant restaurant={restaurant} />
-      {
-        accessToken
-        && (
-          <ReviewForm
-            score={score}
-            description={description}
-            onChange={handleChangeInput}
-            onSubmit={handleSubmitForm}
-          />
-        )
-      }
+      <Restaurant
+        restaurant={restaurant}
+        reviewForm={
+          accessToken
+          && (
+            <ReviewForm
+              score={score}
+              description={description}
+              onChange={handleChangeInput}
+              onSubmit={handleSubmitForm}
+            />
+          )
+        }
+      />
     </>
   );
 }
