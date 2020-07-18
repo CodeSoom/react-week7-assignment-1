@@ -126,3 +126,22 @@ export function changeReviewField({ name, value }) {
     payload: { name, value },
   };
 }
+
+export function addReview({ score, description }) {
+  return {
+    type: 'addReview',
+    payload: { score, description },
+  };
+}
+
+export function requestReview() {
+  return async (dispatch, getState) => {
+    const { reviewFields: { score, description } } = getState();
+    const result = await postReview({ score, description });
+
+    // show addedReview..
+    if (result) {
+      dispatch(addReview({ score, description }));
+    }
+  };
+}

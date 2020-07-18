@@ -230,4 +230,28 @@ describe('reducer', () => {
       expect(state.reviewFields.description).toBe('good!');
     });
   });
+
+  describe('addReview', () => {
+    it('add review to restaurant', () => {
+      const initialState = {
+        restaurant: {
+          id: 1,
+          name: '김밥제국',
+          category: '분식',
+          address: '서울시 강남구 역삼동',
+          reviews: [{
+            id: 12,
+            restaurantId: 3,
+            name: '테스터',
+            score: 5,
+            description: '맛잇어요',
+          }],
+        },
+      };
+
+      const state = reducer(initialState, changeReviewField({ name: 'description', value: 'good!' }));
+
+      expect(state.restaurant.reviews).toHaveLength(2);
+    });
+  });
 });

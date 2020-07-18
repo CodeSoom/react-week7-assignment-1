@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import RestaurantDetail from './RestaurantDetail';
 
 import {
-  loadRestaurant, changeReviewField,
+  loadRestaurant, changeReviewField, requestReview,
 } from './actions';
 
 import { get } from './utils';
@@ -35,7 +35,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   function handleSubmit() {
-    dispatch();
+    dispatch(requestReview());
   }
 
   return (
