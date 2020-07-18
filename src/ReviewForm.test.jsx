@@ -13,8 +13,17 @@ describe('ReviewForm', () => {
     handleSubmit.mockClear();
   });
 
+  function renderReviewForm() {
+    return render((
+      <ReviewForm
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
+    ));
+  }
+
   it('renders review input form and submit button', () => {
-    const { getByLabelText, getByText } = render(<ReviewForm />);
+    const { getByLabelText, getByText } = renderReviewForm();
 
     expect(getByLabelText('평점')).toBeInTheDocument();
     expect(getByLabelText('리뷰 내용')).toBeInTheDocument();
@@ -23,11 +32,7 @@ describe('ReviewForm', () => {
   });
 
   it('listens change events', () => {
-    const { getByLabelText } = render((
-      <ReviewForm
-        onChange={handleChange}
-      />
-    ));
+    const { getByLabelText } = renderReviewForm();
 
     const controls = [
       { label: '평점', name: 'score', value: '5' },
@@ -44,11 +49,7 @@ describe('ReviewForm', () => {
   });
 
   it('listens click events', () => {
-    const { getByText } = render((
-      <ReviewForm
-        onSubmit={handleSubmit}
-      />
-    ));
+    const { getByText } = renderReviewForm();
 
     fireEvent.click(getByText('리뷰 남기기'));
 
