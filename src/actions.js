@@ -138,10 +138,10 @@ export function sendReview({ restaurantId }) {
       reviewFields: { score, description },
     } = getState();
 
-    postReview({
+    await postReview({
       accessToken, restaurantId, score, description,
     });
 
-    // TODO: dispatch(loadReview)
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }
