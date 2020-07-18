@@ -4,13 +4,15 @@ import { render, fireEvent } from '@testing-library/react';
 
 import TextField from './TextField';
 
-// TODO: Remove redundancy
-
 describe('TextField', () => {
+  const handleChange = jest.fn();
+
+  beforeEach(() => {
+    handleChange.mockClear();
+  });
+
   context('with input type', () => {
     it('renders label and input control', () => {
-      const handleChange = jest.fn();
-
       const { queryByLabelText, container } = render((
         <TextField
           label="평점"
@@ -28,8 +30,6 @@ describe('TextField', () => {
 
   context('without input type', () => {
     it('renders label and "text" input control', () => {
-      const handleChange = jest.fn();
-
       const { queryByLabelText, container } = render((
         <TextField
           label="리뷰 설명"
@@ -46,8 +46,6 @@ describe('TextField', () => {
 
   context('when a form field value is changed', () => {
     it('runs handleChange', () => {
-      const handleChange = jest.fn();
-
       const name = 'score';
       const value = '5';
 
