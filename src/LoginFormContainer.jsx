@@ -7,6 +7,7 @@ import LoginForm from './LoginForm';
 import { changeLoginField, requestLogin } from './actions';
 
 import { get } from './utils';
+import LogoutForm from './LogoutForm';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ export default function LoginFormContainer() {
           onChange={handleChange}
           onSubmit={handleSubmit}
         />
-      ) : (<button type="button">logout</button>)}
+      ) : (<LogoutForm />)}
     </>
   );
 }
