@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function InputControl({
+export default function TextField({
   label, name, type, value, onChange,
 }) {
   const id = `input-control-${name}`;

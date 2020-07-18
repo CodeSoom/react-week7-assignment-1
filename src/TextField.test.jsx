@@ -2,9 +2,9 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
-import InputControl from './InputControl';
+import TextField from './TextField';
 
-describe('InputControl', () => {
+describe('TextField', () => {
   const control = {
     label: '평점', name: 'score', type: 'number', value: '5',
   };
@@ -16,7 +16,7 @@ describe('InputControl', () => {
 
   function renderInputControl() {
     return render(
-      <InputControl
+      <TextField
         label={control.label}
         name={control.name}
         type={control.type}

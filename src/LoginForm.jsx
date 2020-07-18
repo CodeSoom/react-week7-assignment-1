@@ -1,20 +1,20 @@
 import React from 'react';
 
-import InputControl from './InputControl';
+import TextField from './TextField';
 
 export default function LoginForm({
   email, password, onSubmit, onChange,
 }) {
   return (
     <form onSubmit={onSubmit}>
-      <InputControl
+      <TextField
         label="E-mail"
         name="email"
         type="email"
         value={email}
         onChange={onChange}
       />
-      <InputControl
+      <TextField
         label="Password"
         name="password"
         type="password"

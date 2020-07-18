@@ -1,20 +1,20 @@
 import React from 'react';
 
-import InputControl from './InputControl';
+import TextField from './TextField';
 
 export default function RestaurantReviewForm({
   score, description, onSubmit, onChange,
 }) {
   return (
     <form onSubmit={onSubmit}>
-      <InputControl
+      <TextField
         label="평점"
         name="score"
         type="number"
         value={score}
         onChange={onChange}
       />
-      <InputControl
+      <TextField
         label="리뷰 내용"
         name="description"
         type="text"
