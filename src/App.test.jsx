@@ -8,9 +8,11 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import App from './App';
+
 import { loadItem } from './services/storage';
 
-import App from './App';
+import { setAccessToken } from './actions';
 
 jest.mock('react-redux');
 jest.mock('./services/storage');
@@ -30,7 +32,6 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
-      accessToken: '',
     }));
   });
 
@@ -88,10 +89,23 @@ describe('App', () => {
     });
 
     it('doesn\'t call dispatch', () => {
+      renderApp({ path: '/' });
+
       expect(dispatch).not.toBeCalled();
     });
   });
 
   context('with logged in', () => {
+    const accessToken = 'ACCESS_TOKEN';
+
+    beforeEach(() => {
+      loadItem.mockImplementation(() => accessToken);
+    });
+
+    it('call dispatch with setAccessToken action', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith(setAccessToken({ accessToken }));
+    });
   });
 });
