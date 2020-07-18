@@ -69,6 +69,16 @@ const reducers = {
     };
   },
 
+  changeReviewFields(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewFields: {
+        ...state.reviewFields,
+        [name]: value,
+      },
+    };
+  },
+
   setAccessToken(state, { payload: { accessToken } }) {
     return {
       ...state,
