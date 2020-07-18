@@ -23,13 +23,14 @@ export default function LoginFormContainer() {
   }
 
   return (
-    <div>
-      <LoginForm
-        fields={{ email, password }}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      />
-      <p>{accessToken}</p>
-    </div>
+    <>
+      {accessToken ? (
+        <LoginForm
+          fields={{ email, password }}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
+      ) : (<button type="button">logout</button>)}
+    </>
   );
 }
