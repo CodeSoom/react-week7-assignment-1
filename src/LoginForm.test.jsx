@@ -1,15 +1,20 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  it('renders input controls', () => {
-    const { getByLabelText } = render((
-      <LoginForm />
+  it('renders Login button', () => {
+    const handleSubmit = jest.fn();
+
+    const { getByText } = render((
+      <LoginForm
+        onSubmit={handleSubmit}
+      />
     ));
 
-    expect(getByLabelText('Email')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    fireEvent.click(getByText('Login'));
+
+    expect(handleSubmit).toBeCalled();
   });
 });
