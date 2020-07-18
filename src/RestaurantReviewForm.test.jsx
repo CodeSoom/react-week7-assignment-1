@@ -41,23 +41,19 @@ describe('RestaurantReviewForm', () => {
   });
 
   it('changes input controls', () => {
+    const score = '3';
+    const description = '맛있어요.';
     const controls = [
-      { label: '평점', name: 'score', values: { before: '0', after: '5' } },
-      { label: '리뷰 내용', name: 'description', values: { before: '별로예요.', after: '맛있어요.' } },
+      { label: '평점', name: 'score', value: score },
+      { label: '리뷰 내용', name: 'description', value: description },
     ];
 
-    const { getByLabelText } = renderReviewForm(
-      {
-        score: controls[0].values.before,
-        description: controls[1].values.before,
-      },
-    );
+    const { getByLabelText } = renderReviewForm();
 
-    controls.forEach(({ label, name, values: { after } }) => {
+    controls.forEach(({ label, name, value }) => {
       const control = getByLabelText(label);
-      fireEvent.change(control, { target: { value: after } });
-
-      expect(handleChange).toBeCalledWith({ name, value: after });
+      fireEvent.change(control, { target: { value } });
+      expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 

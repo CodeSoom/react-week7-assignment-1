@@ -41,23 +41,20 @@ describe('LoginForm', () => {
   });
 
   it('changes input controls', () => {
+    const email = 'eamil@test.com';
+    const password = 'password1';
     const controls = [
-      { label: 'E-mail', name: 'email', values: { before: 'before@test.com', after: 'after@test.com' } },
-      { label: 'Password', name: 'password', values: { before: 'beforePassword1', after: 'afterPassword1' } },
+      { label: 'E-mail', name: 'email', value: email },
+      { label: 'Password', name: 'password', value: password },
     ];
 
-    const { getByLabelText } = renderLoginForm(
-      {
-        email: controls[0].values.before,
-        password: controls[1].values.before,
-      },
-    );
+    const { getByLabelText } = renderLoginForm();
 
-    controls.forEach(({ label, name, values: { after } }) => {
+    controls.forEach(({ label, name, value }) => {
       const control = getByLabelText(label);
-      fireEvent.change(control, { target: { value: after } });
+      fireEvent.change(control, { target: { value } });
 
-      expect(handleChange).toBeCalledWith({ name, value: after });
+      expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 
