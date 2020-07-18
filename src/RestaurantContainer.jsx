@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
+import ReviewForm from './ReviewForm';
 
 import {
   loadRestaurant,
@@ -11,44 +12,6 @@ import {
 import { get } from './utils';
 
 export default function RestaurantContainer({ restaurantId }) {
-  function ReviewForm() {
-    return (
-      <>
-        <div>
-          <label htmlFor="review-score">평점</label>
-          <input
-            type="number"
-            id="review-score"
-            name="score"
-          // value={score}
-          // onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="review-description">리뷰 내용</label>
-          <input
-            type="text"
-            id="review-description"
-            name="description"
-          // value={description}
-          // onChange={handleChange}
-          />
-        </div>
-        <div>
-          <button
-            type="button"
-            id="review-post"
-            name="post"
-            // value={post}
-            // onChange={handleChange}
-          >
-            리뷰 남기기
-          </button>
-        </div>
-      </>
-    );
-  }
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -56,6 +19,15 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
+  const reviewField = useSelector(get('reviewField'));
+
+  function handleReviewSubmit() {
+
+  }
+
+  function handleReviewChange() {
+
+  }
 
   if (!restaurant) {
     return (
@@ -66,7 +38,11 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm />
+      <ReviewForm
+        fields={reviewField}
+        onChange={handleReviewChange}
+        onSubmit={handleReviewSubmit}
+      />
     </>
   );
 }

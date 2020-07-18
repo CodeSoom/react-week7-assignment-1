@@ -31,6 +31,10 @@ describe('App', () => {
         email: 'test@email.com',
         password: '1234',
       },
+      reviewField: {
+        score: '5',
+        describe: '맛 좋',
+      },
     }));
   });
 

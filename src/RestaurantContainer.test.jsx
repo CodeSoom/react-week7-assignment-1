@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,6 +19,10 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviewField: {
+        score: '5',
+        describe: '맛 좋',
+      },
     }));
   });
 
@@ -43,11 +47,11 @@ describe('RestaurantContainer', () => {
     });
 
     it('renders review form', () => {
-      const { container } = renderRestaurantContainer();
+      const { getByLabelText } = renderRestaurantContainer();
 
-      expect(container).toHaveTextContent('평점');
-      expect(container).toHaveTextContent('리뷰 내용');
-      expect(container).toHaveTextContent('리뷰 남기기');
+      expect(getByLabelText('평점')).toHaveAttribute('type', 'number');
+      expect(getByLabelText('리뷰 내용')).toHaveAttribute('type', 'text');
+      // expect(getByLabelText).toHaveTextContent('리뷰 남기기');
     });
   });
 
@@ -58,6 +62,27 @@ describe('RestaurantContainer', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('Loading');
+    });
+  });
+
+  context('when review input changes', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
+
+    it('changes score', () => {
+      const { getByLabelText } = renderRestaurantContainer();
+
+      fireEvent.change(getByLabelText('평점'), {
+        target: { value: '5' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeReviewField',
+        payload: { name: 'score', value: '5' },
+      });
     });
   });
 });
