@@ -44,7 +44,6 @@ describe('ReviewForm', () => {
   });
 
   it('listens click events', () => {
-
     const { getByText } = render((
       <ReviewForm
         onSubmit={handleSubmit}

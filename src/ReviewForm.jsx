@@ -1,7 +1,7 @@
 import React from 'react';
 import InputField from './InputField';
 
-export default function ReviewForm({ onChange }) {
+export default function ReviewForm({ onChange, onSubmit }) {
   return (
     <>
       <InputField
@@ -15,7 +15,7 @@ export default function ReviewForm({ onChange }) {
         name="description"
         onChange={onChange}
       />
-      <button type="button">리뷰 남기기</button>
+      <button type="button" onClick={onSubmit}>리뷰 남기기</button>
     </>
   );
 }
