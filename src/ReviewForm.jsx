@@ -10,10 +10,11 @@ export default function ReviewForm({ onChange }) {
         name="score"
         onChange={onChange}
       />
-      <div>
-        <label htmlFor="input-description">리뷰 내용</label>
-        <input type="text" id="input-description" />
-      </div>
+      <InputField
+        label="리뷰 내용"
+        name="description"
+        onChange={onChange}
+      />
       <button type="button">리뷰 남기기</button>
     </>
   );

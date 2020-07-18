@@ -27,6 +27,10 @@ describe('reducer', () => {
         password: '',
       },
       accessToken: '',
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -194,7 +198,25 @@ describe('reducer', () => {
   });
 
   describe('changeReviewField', () => {
-    it('changes review fields', () => {
+    context('when score field is changed', () => {
+      it('changes score field and remain description field', () => {
+        const initialState = {
+          reviewFields: {
+            score: '',
+            description: '',
+          },
+        };
+
+        const state = reducer(initialState, changeReviewField({ name: 'score', value: '5' }));
+
+        expect(state.reviewFields.score).toBe('5');
+        expect(state.reviewFields.description).toBe('');
+      });
+    });
+  });
+
+  context('when description field is changed', () => {
+    it('changes description field and remain score field', () => {
       const initialState = {
         reviewFields: {
           score: '',
@@ -202,9 +224,10 @@ describe('reducer', () => {
         },
       };
 
-      const state = reducer(initialState, changeReviewField({ name: 'score', value: '5' }));
+      const state = reducer(initialState, changeReviewField({ name: 'description', value: 'good!' }));
 
-      expect(state.reviewFields.score).toBe('5');
+      expect(state.reviewFields.score).toBe('');
+      expect(state.reviewFields.description).toBe('good!');
     });
   });
 });
