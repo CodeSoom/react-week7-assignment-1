@@ -11,6 +11,7 @@ import {
   setAccessToken,
   logout,
   changeReviewField,
+  addReview,
 } from './actions';
 
 describe('reducer', () => {
@@ -249,7 +250,7 @@ describe('reducer', () => {
         },
       };
 
-      const state = reducer(initialState, changeReviewField({ name: 'description', value: 'good!' }));
+      const state = reducer(initialState, addReview({ name: 'description', value: 'good!' }));
 
       expect(state.restaurant.reviews).toHaveLength(2);
     });
