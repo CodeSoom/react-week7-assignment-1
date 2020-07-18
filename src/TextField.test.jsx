@@ -11,6 +11,5 @@ describe('TextField', () => {
     ));
 
     expect(queryByLabelText('평점')).not.toBeNull();
-    expect(queryByLabelText('리뷰 내용')).not.toBeNull();
   });
 });
