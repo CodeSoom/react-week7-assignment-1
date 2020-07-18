@@ -83,9 +83,11 @@ describe('App', () => {
 
   context('with logged in', () => {
     const accessToken = 'ACCESS_TOKEN';
+
     beforeEach(() => {
       loadItem.mockImplementation(() => accessToken);
     });
+
     it('dispatchs call with setAccessToken', () => {
       renderApp({ path: '/' });
 
@@ -93,6 +95,18 @@ describe('App', () => {
         type: 'setAccessToken',
         payload: { accessToken },
       });
+    });
+  });
+
+  context('with logged out', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it('doesn\'t call dispatch', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
     });
   });
 });
