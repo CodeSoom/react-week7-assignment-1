@@ -8,9 +8,12 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { loadItem } from './services/storage';
+
 import App from './App';
 
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -26,7 +29,8 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' }
+      restaurant: { id: 1, name: '마녀주방' },
+      accessToken: '',
     }));
   });
 
@@ -76,5 +80,18 @@ describe('App', () => {
 
       expect(container).toHaveTextContent('Not Found');
     });
+  });
+
+  context('with logged out', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => '');
+    });
+
+    it('doesn\'t call dispatch', () => {
+      expect(dispatch).not.toBeCalled();
+    });
+  });
+
+  context('with logged in', () => {
   });
 });
