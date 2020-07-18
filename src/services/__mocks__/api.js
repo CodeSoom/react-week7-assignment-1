@@ -21,5 +21,7 @@ export async function postLogin({ email, password }) {
 export async function postReview({
   accessToken, restaurantId, score, description,
 }) {
-
+  return {
+    accessToken, restaurantId, score, description,
+  };
 }
