@@ -150,6 +150,7 @@ describe('actions', () => {
   describe('registerReview', () => {
     beforeEach(() => {
       store = mockStore({
+        restaurant: { id: 1 },
         reviewFields: {
           score: '5',
           description: '맛있어요',
@@ -163,7 +164,8 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(loadRestaurant());
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
 });
