@@ -13,7 +13,7 @@ describe('LoginForm', () => {
     handleChange.mockClear();
   });
 
-  function renderLoginForm({ email = '', password = '' }) {
+  function renderLoginForm({ email, password } = {}) {
     return render(
       <LoginForm
         email={email}

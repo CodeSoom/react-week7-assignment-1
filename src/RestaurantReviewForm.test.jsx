@@ -13,7 +13,7 @@ describe('RestaurantReviewForm', () => {
     handleChange.mockClear();
   });
 
-  function renderReviewForm({ score = '', description = '' }) {
+  function renderReviewForm({ score, description } = {}) {
     return render(
       <RestaurantReviewForm
         score={score}
