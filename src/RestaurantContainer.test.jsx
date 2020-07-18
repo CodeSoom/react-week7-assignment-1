@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -47,6 +47,22 @@ describe('RestaurantContainer', () => {
 
       expect(queryByLabelText('평점')).not.toBeNull();
       expect(queryByLabelText('리뷰 남기기')).not.toBeNull();
+    });
+
+    it('listens change event', () => {
+      const { getByLabelText } = renderRestaurantContainer();
+
+      fireEvent.change(getByLabelText('평점'), {
+        target: { value: '5' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeReviewFields',
+        payload: {
+          name: 'score',
+          value: '5',
+        },
+      });
     });
   });
 
