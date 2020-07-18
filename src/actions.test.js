@@ -14,8 +14,6 @@ import {
   requestLogin,
 } from './actions';
 
-import loginFields from '../fixtures/loginFields';
-
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
@@ -107,6 +105,11 @@ describe('actions', () => {
 
   describe('requestLogin', () => {
     context('with loginFields', () => {
+      const loginFields = {
+        email: 'tester@example.com',
+        password: 'test',
+      };
+
       beforeEach(() => {
         store = mockStore({ loginFields });
       });
