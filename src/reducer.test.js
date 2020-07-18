@@ -135,7 +135,7 @@ describe('reducer', () => {
 
   describe('changeLoginFields', () => {
     context('when email is changed', () => {
-      it('changes email', () => {
+      it('changes only email field', () => {
         const initialState = {
           loginFields: {
             email: 'test',
@@ -154,7 +154,7 @@ describe('reducer', () => {
     });
 
     context('when password is changed', () => {
-      it('changes password', () => {
+      it('changes only password field', () => {
         const initialState = {
           loginFields: {
             email: 'test',
