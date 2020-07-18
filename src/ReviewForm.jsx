@@ -12,7 +12,6 @@ export default function ReviewForm({ onChange, onSubmit }) {
       />
       <TextField
         label="리뷰 내용"
-        type="text"
         name="description"
         onChange={onChange}
       />
