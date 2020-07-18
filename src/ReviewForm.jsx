@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ReviewForm({ onChange }) {
+export default function ReviewForm({ onChange, onSubmit }) {
   function handleChange(event) {
     const { target: { name, value } } = event;
     onChange({ name, value });
@@ -32,6 +32,7 @@ export default function ReviewForm({ onChange }) {
       </div>
       <button
         type="button"
+        onClick={onSubmit}
       >
         리뷰 남기기
       </button>
