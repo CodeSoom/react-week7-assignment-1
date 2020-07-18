@@ -10,6 +10,7 @@ import {
   selectRegion,
   selectCategory,
   setAccessToken,
+  logout,
 } from './actions';
 
 describe('reducer', () => {
@@ -113,6 +114,18 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken(token));
 
       expect(state.accessToken).toBe(token);
+    });
+  });
+
+  describe('logout', () => {
+    it('changes access token', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+      };
+
+      const state = reducer(initialState, logout());
+
+      expect(state.accessToken).toBeNull();
     });
   });
 
