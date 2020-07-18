@@ -54,6 +54,13 @@ const reducers = {
     };
   },
 
+  logout(state) {
+    return {
+      ...state,
+      accessToken: null,
+    };
+  },
+
   changeLoginFields(state, { payload: { name, value } }) {
     return {
       ...state,
