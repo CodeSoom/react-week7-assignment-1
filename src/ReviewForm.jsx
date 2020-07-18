@@ -30,6 +30,11 @@ export default function ReviewForm({ onChange }) {
           onChange={handleChange}
         />
       </div>
+      <button
+        type="button"
+      >
+        리뷰 남기기
+      </button>
     </>
   );
 }
