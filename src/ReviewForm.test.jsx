@@ -27,6 +27,6 @@ describe('ReviewForm', () => {
       target: { value: '5' },
     });
 
-    expect(handleChange).toBeCalledWith({ name: '평점', value: '5' });
+    expect(handleChange).toBeCalledWith({ name: 'score', value: '5' });
   });
 });

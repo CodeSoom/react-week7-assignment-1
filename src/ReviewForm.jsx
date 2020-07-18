@@ -1,12 +1,15 @@
 import React from 'react';
+import InputField from './InputField';
 
-export default function ReviewForm() {
+export default function ReviewForm({ onChange }) {
   return (
     <>
-      <div>
-        <label htmlFor="input-score">평점</label>
-        <input type="number" id="input-score" />
-      </div>
+      <InputField
+        label="평점"
+        type="number"
+        name="score"
+        onChange={onChange}
+      />
       <div>
         <label htmlFor="input-description">리뷰 내용</label>
         <input type="text" id="input-description" />

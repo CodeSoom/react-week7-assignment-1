@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import RestaurantDetail from './RestaurantDetail';
 
 import {
-  loadRestaurant,
+  loadRestaurant
 } from './actions';
 
 import { get } from './utils';
@@ -27,11 +27,17 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
+  function handleChange() {
+    dispatch();
+  }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
       {accessToken ? (
-        <ReviewForm />
+        <ReviewForm
+          onChange={handleChange}
+        />
       ) : null}
     </>
   );
