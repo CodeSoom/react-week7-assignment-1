@@ -4,33 +4,20 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
 
+import ReviewForm from './ReviewForm';
+
 import {
   loadRestaurant,
 } from './actions';
 
 import { get } from './utils';
 
-function ReviewForm() {
-  return (
-    <>
-      <div>
-        <label htmlFor="review-score">
-          평점
-        </label>
-        <input type="number" id="review-score" />
-      </div>
-      <div>
-        <label htmlFor="review-description">
-          리뷰 남기기
-        </label>
-        <input type="text" id="review-description" />
-      </div>
-    </>
-  );
-}
-
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
+
+  function handleChange() {
+    // TODO : dispatch를 이용해 review의 score, description 저장.
+  }
 
   useEffect(() => {
     dispatch(loadRestaurant({ restaurantId }));
@@ -47,7 +34,7 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm />
+      <ReviewForm onChange={handleChange} />
     </>
   );
 }
