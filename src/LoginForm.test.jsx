@@ -23,7 +23,7 @@ describe('LoginForm', () => {
   }
 
   it('renders input controls', () => {
-    const { getByLabelText } = renderLoginForm(null);
+    const { getByLabelText } = renderLoginForm();
 
     expect(getByLabelText('E-mail')).toHaveValue(loginFields.email);
     expect(getByLabelText('Password')).toHaveValue(loginFields.password);
@@ -31,7 +31,7 @@ describe('LoginForm', () => {
 
   context('when changes value', () => {
     it('call onChange', () => {
-      const { getByLabelText } = renderLoginForm(null);
+      const { getByLabelText } = renderLoginForm();
 
       fireEvent.change(getByLabelText('E-mail'), {
         target: { value: 'tester@exmaple.com' },
@@ -42,7 +42,7 @@ describe('LoginForm', () => {
   });
 
   it('renders submit button', () => {
-    const { getByText } = renderLoginForm(null);
+    const { getByText } = renderLoginForm();
 
     expect(getByText('Log In')).not.toBeNull();
   });
