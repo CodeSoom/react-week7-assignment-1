@@ -59,13 +59,36 @@ describe('LoginForm', () => {
       />
     ));
 
-    fireEvent.change(getByLabelText('ID'), {
-      target: { value: 'email test data' },
-    });
+    const controls = [
+      { label: 'ID', name: 'email', value: email },
+      { label: 'PW', name: 'password', value: password },
+    ];
 
-    expect(handleChange).toBeCalledWith({
-      name: 'email',
-      value: 'email test data',
+    controls.forEach(({ label, value }) => {
+      const input = getByLabelText(label);
+      expect(input.value).toBe(value);
+    });
+  });
+
+  it('login field event', () => {
+    const { getByLabelText } = render((
+      <LoginForm
+        fields={{ email, password }}
+        onChange={handleChange}
+      />
+    ));
+
+    const controls = [
+      { label: 'ID', name: 'email', value: 'eeee' },
+      { label: 'PW', name: 'password', value: 'ppppp' },
+    ];
+
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
+
+      fireEvent.change(input, { target: { value } });
+
+      expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 });

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
-import { loadItem, saveItem } from './services/storage';
+import { loadItem } from './services/storage';
 
 jest.mock('react-redux');
 jest.mock('./services/storage');
@@ -103,7 +103,7 @@ describe('App', () => {
 
   context('Login', () => {
     beforeEach(() => {
-      const accessToken = "ACCESS_TOKEN"
+      const accessToken = 'ACCESS_TOKEN';
       loadItem.mockImplementation(() => accessToken);
     });
 

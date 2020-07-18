@@ -21,10 +21,10 @@ import { loadItem } from './services/storage';
 
 export default function App() {
   const dispatch = useDispatch();
-  
+
   const accessToken = loadItem('accessToken');
 
-  if(accessToken) {
+  if (accessToken) {
     dispatch(setAccessToken(accessToken));
   }
 
