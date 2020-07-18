@@ -115,3 +115,9 @@ export function requestLogin() {
     dispatch(setAccessToken(accessToken));
   };
 }
+
+export function postReview() {
+  return async (dispatch, getState) => {
+    // TODO: ...
+  };
+}
