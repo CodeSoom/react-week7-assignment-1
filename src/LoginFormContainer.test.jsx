@@ -29,6 +29,16 @@ describe('LoginFormContainer', () => {
     ));
 
     expect(getByLabelText('Email').value).toBe('test@email.com');
+
+    fireEvent.change(getByLabelText('Email'), {
+      target: { value: 'new email' },
+    });
+
+    expect(dispatch).toBeCalledWith({
+      type: 'changeLoginField',
+      payload: { name: 'email', value: 'new email' },
+    });
+
     expect(getByLabelText('Password').value).toBe('1234');
   });
 
