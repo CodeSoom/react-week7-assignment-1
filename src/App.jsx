@@ -22,7 +22,7 @@ import { setAccessToken } from './actions';
 export default function App() {
   const dispatch = useDispatch();
 
-  const accessToken = loadItem('accessToken');
+  const accessToken = loadItem({ key: 'accessToken' });
 
   if (accessToken) {
     dispatch(setAccessToken({ accessToken }));

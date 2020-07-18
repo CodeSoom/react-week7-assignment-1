@@ -26,7 +26,7 @@ describe('LoginFormContainer', () => {
   });
 
   context('without logged in', () => {
-    given('accessToken', () => 'ACCESS_TOKEN');
+    given('accessToken', () => '');
 
     it('renders input controls', () => {
       const { getByLabelText, getByText } = render((
@@ -70,8 +70,8 @@ describe('LoginFormContainer', () => {
     });
   });
 
-  context('without logged in', () => {
-    given('accessToken', () => '');
+  context('with logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
     it('renders logout button', () => {
       const { getByText } = render((

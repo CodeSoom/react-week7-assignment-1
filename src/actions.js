@@ -107,13 +107,13 @@ export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
     const { accessToken } = await postLogin({ email, password });
-    saveItem('accessToken');
+    saveItem({ key: 'accessToken', value: accessToken });
     dispatch(setAccessToken({ accessToken }));
   };
 }
 
 export function logout() {
-  deleteItem('accessToken');
+  deleteItem({ key: 'accessToken' });
 
   return {
     type: 'logout',
