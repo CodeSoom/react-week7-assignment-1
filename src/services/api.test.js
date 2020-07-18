@@ -80,4 +80,16 @@ describe('api', () => {
       expect(accessToken).toEqual({ accessToken: 'hdruig356erhd' });
     });
   });
+
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch({});
+    });
+
+    it('returns accessToken', async () => {
+      const response = await postReview({ email: 'test@test.com', password: '1111' });
+
+      expect(response).toBeUndefined();
+    });
+  });
 });
