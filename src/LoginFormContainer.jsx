@@ -23,6 +23,10 @@ export default function LoginFormContainer() {
     dispatch(requestLogin());
   }
 
+  function handleClickLogout() {
+    dispatch();
+  }
+
   return (
     <>
       {accessToken ? (
@@ -31,7 +35,7 @@ export default function LoginFormContainer() {
           onChange={handleChange}
           onSubmit={handleSubmit}
         />
-      ) : (<LogoutForm />)}
+      ) : (<LogoutForm onClick={handleClickLogout} />)}
     </>
   );
 }
