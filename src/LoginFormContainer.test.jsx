@@ -14,55 +14,71 @@ describe('LoginFormContainer', () => {
       email: '',
       password: '',
     },
-    accessToken: '',
+    accessToken: given.accessToken,
   }));
 
-  it('renders input controls', () => {
-    const { getByLabelText, getByText } = render((
-      <LoginFormContainer />
-    ));
+  context('without logged in', () => {
+    given('accessToken', () => '');
 
-    expect(getByLabelText('Email')).toBeInTheDocument();
-    expect(getByLabelText('Password')).toBeInTheDocument();
-    expect(getByText('Login')).toBeInTheDocument();
-  });
+    it('renders input controls', () => {
+      const { getByLabelText, getByText } = render((
+        <LoginFormContainer />
+      ));
 
-  it('listens change events', () => {
-    const dispatch = jest.fn();
+      expect(getByLabelText('Email')).toBeInTheDocument();
+      expect(getByLabelText('Password')).toBeInTheDocument();
+      expect(getByText('Login')).toBeInTheDocument();
+    });
 
-    useDispatch.mockImplementation(() => dispatch);
+    it('listens change events', () => {
+      const dispatch = jest.fn();
 
-    const { getByLabelText } = render((
-      <LoginFormContainer />
-    ));
+      useDispatch.mockImplementation(() => dispatch);
 
-    const controls = [
-      { label: 'Email', name: 'email', value: 'tester@ex.com' },
-      { label: 'Password', name: 'password', value: '5432' },
-    ];
+      const { getByLabelText } = render((
+        <LoginFormContainer />
+      ));
 
-    controls.forEach(({ label, name, value }) => {
-      const input = getByLabelText(label);
+      const controls = [
+        { label: 'Email', name: 'email', value: 'tester@ex.com' },
+        { label: 'Password', name: 'password', value: '5432' },
+      ];
 
-      fireEvent.change(input, {
-        target: { value },
+      controls.forEach(({ label, name, value }) => {
+        const input = getByLabelText(label);
+
+        fireEvent.change(input, {
+          target: { value },
+        });
+
+        expect(dispatch).toBeCalledWith(changeLoginField({ name, value }));
       });
+    });
 
-      expect(dispatch).toBeCalledWith(changeLoginField({ name, value }));
+    it('listens click event', () => {
+      const dispatch = jest.fn();
+
+      useDispatch.mockImplementation(() => dispatch);
+
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.click(getByText('Login'));
+
+      expect(dispatch).toBeCalled();
     });
   });
 
-  it('listens click event', () => {
-    const dispatch = jest.fn();
+  context('without logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
+    
+    it('renders logout button', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
 
-    useDispatch.mockImplementation(() => dispatch);
-
-    const { getByText } = render((
-      <LoginFormContainer />
-    ));
-
-    fireEvent.click(getByText('Login'));
-
-    expect(dispatch).toBeCalled();
+      expect(getByText('logout')).toBeInTheDocument();
+    });
   });
 });
