@@ -85,6 +85,15 @@ const reducers = {
       accessToken: '',
     };
   },
+
+  changeReviewField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewFields: {
+        [name]: value,
+      },
+    };
+  },
 };
 
 function defaultReducer(state) {
