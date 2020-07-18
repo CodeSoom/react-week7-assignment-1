@@ -18,6 +18,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
+  const accessToken = useSelector(get('accessToken'));
 
   if (!restaurant) {
     return (
@@ -28,6 +29,9 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
+      {accessToken ? (
+        <p>평점</p>
+      ) : null}
     </>
   );
 }

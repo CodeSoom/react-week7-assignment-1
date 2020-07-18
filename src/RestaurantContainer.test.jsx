@@ -19,6 +19,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      accessToken: given.accessToken,
     }));
   });
 
@@ -43,6 +44,8 @@ describe('RestaurantContainer', () => {
     });
 
     context('with logged in', () => {
+      given('accessToken', () => 'ACCESS_TOKEN');
+
       it('renders review input form', () => {
         const { container } = renderRestaurantContainer();
 
