@@ -8,7 +8,7 @@ import LoginForm from './LoginForm';
 import {
   changeLoginFields,
   requestLogin,
-  setAccessToken,
+  logout,
 } from './actions';
 
 import { get } from './utils';
@@ -26,7 +26,7 @@ export default function LoginFormContainer() {
   }
 
   function handleClickLogout() {
-    dispatch(setAccessToken(null));
+    dispatch(logout(null));
   }
 
   function handleClickLogin() {

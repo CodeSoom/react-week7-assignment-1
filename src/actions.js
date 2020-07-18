@@ -42,6 +42,12 @@ export function setAccessToken(accessToken) {
   };
 }
 
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}
+
 export function changeLoginFields({ name, value }) {
   return {
     type: 'changeLoginFields',
