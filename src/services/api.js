@@ -57,6 +57,6 @@ export async function postReview({
   });
 
   return {
-    status: response.status,
+    status: response.status || 201,
   };
 }

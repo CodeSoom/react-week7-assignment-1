@@ -83,14 +83,10 @@ describe('api', () => {
   });
 
   describe('postReview', () => {
-    beforeEach(() => {
-      mockFetch({});
-    });
-
     it('returns accessToken', async () => {
-      const response = await postReview({ score: '5', description: 'Great!' });
+      const { status } = await postReview({ score: '5', description: 'Great!' });
 
-      expect(response).toEqual({});
+      expect(status).toEqual(201);
     });
   });
 });

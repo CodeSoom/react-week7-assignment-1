@@ -107,8 +107,13 @@ export function setAccessToken({ accessToken }) {
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
+
+    if (!email || !password) return;
+
     const { accessToken } = await postLogin({ email, password });
+
     saveItem({ key: 'accessToken', value: accessToken });
+
     dispatch(setAccessToken({ accessToken }));
   };
 }
@@ -138,6 +143,8 @@ export function addReview({ score, description }) {
 export function requestReview(restaurantId) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
+
+    if (!score || !description) return;
 
     const { status } = await postReview({
       accessToken, score, description, restaurantId,

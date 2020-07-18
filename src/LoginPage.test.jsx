@@ -18,7 +18,7 @@ describe('LoginPage', () => {
   it('renders login title', () => {
     const { container } = render(<LoginPage />);
 
-    expect(container).toContainHTML('<h2>Log in</h2>');
+    expect(container).toHaveTextContent('Log in');
   });
 
   it('renders input controls and \'Login\' button', () => {

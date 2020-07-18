@@ -175,14 +175,28 @@ describe('reducer', () => {
   });
 
   describe('setAccessToken', () => {
-    it('changes accessToken', () => {
-      const initialState = {
-        accessToken: '',
-      };
+    context('without accessToken', () => {
+      it('doesn\'t change accessToken', () => {
+        const initialState = {
+          accessToken: '',
+        };
 
-      const state = reducer(initialState, setAccessToken({ accessToken: 'Token' }));
+        const state = reducer(initialState, setAccessToken({ accessToken: '' }));
 
-      expect(state.accessToken).toBe('Token');
+        expect(state.accessToken).toBe('');
+      });
+    });
+
+    context('with accessToken', () => {
+      it('changes accessToken', () => {
+        const initialState = {
+          accessToken: '',
+        };
+
+        const state = reducer(initialState, setAccessToken({ accessToken: 'Token' }));
+
+        expect(state.accessToken).toBe('Token');
+      });
     });
   });
 

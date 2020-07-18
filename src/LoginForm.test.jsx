@@ -29,8 +29,8 @@ describe('LoginForm', () => {
 
     const { getByLabelText, getByText } = renderLoginForm({ email, password });
 
-    expect(getByLabelText('Email').value).toBe('test@t.net');
-    expect(getByLabelText('Password').value).toBe('1111');
+    expect(getByLabelText('Email')).toHaveValue(email);
+    expect(getByLabelText('Password')).toHaveValue(password);
 
     expect(getByText('Login')).toBeInTheDocument();
   });
