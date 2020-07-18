@@ -35,35 +35,25 @@ describe('LoginForm', () => {
     });
   });
 
-  it('renders "Log In" button', () => {
-    const { container } = renderLoginForm();
+  it('listens change events', () => {
+    const { getByLabelText } = renderLoginForm();
 
-    expect(container).toHaveTextContent('Log In');
-  });
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
 
-  context('when a form field value is changed', () => {
-    it('runs handleChange', () => {
-      const { getByLabelText } = renderLoginForm();
-
-      controls.forEach(({ label, name, value }) => {
-        const input = getByLabelText(label);
-
-        fireEvent.change(input, {
-          target: { value },
-        });
-
-        expect(handleChange).toBeCalledWith({ name, value });
+      fireEvent.change(input, {
+        target: { value },
       });
+
+      expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 
-  context('when a "Log In" button is clicked', () => {
-    it('runs handleSubmit', () => {
-      const { getByText } = renderLoginForm();
+  it('runs handleSubmit', () => {
+    const { getByText } = renderLoginForm();
 
-      fireEvent.click(getByText('Log In'));
+    fireEvent.click(getByText('Log In'));
 
-      expect(handleSubmit).toBeCalled();
-    });
+    expect(handleSubmit).toBeCalled();
   });
 });

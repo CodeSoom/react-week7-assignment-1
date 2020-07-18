@@ -35,35 +35,25 @@ describe('ReviewForm', () => {
     });
   });
 
-  it('renders "Submit Review" button', () => {
-    const { container } = renderLoginForm();
+  it('listens change events', () => {
+    const { getByLabelText } = renderLoginForm();
 
-    expect(container).toHaveTextContent('리뷰 남기기');
-  });
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
 
-  context('when a form field value is changed', () => {
-    it('runs handleChange', () => {
-      const { getByLabelText } = renderLoginForm();
-
-      controls.forEach(({ label, name, value }) => {
-        const input = getByLabelText(label);
-
-        fireEvent.change(input, {
-          target: { value },
-        });
-
-        expect(handleChange).toBeCalledWith({ name, value });
+      fireEvent.change(input, {
+        target: { value },
       });
+
+      expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 
-  context('when a "Submit Review" button is clicked', () => {
-    it('runs handleSubmit', () => {
-      const { getByText } = renderLoginForm();
+  it('runs handleSubmit', () => {
+    const { getByText } = renderLoginForm();
 
-      fireEvent.click(getByText('리뷰 남기기'));
+    fireEvent.click(getByText('리뷰 남기기'));
 
-      expect(handleSubmit).toBeCalled();
-    });
+    expect(handleSubmit).toBeCalled();
   });
 });
