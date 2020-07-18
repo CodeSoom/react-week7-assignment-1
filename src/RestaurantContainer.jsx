@@ -9,7 +9,7 @@ import ReviewForm from './ReviewForm';
 import {
   loadRestaurant,
   changeReviewFields,
-  postReview,
+  sendReview,
 } from './actions';
 
 import { get } from './utils';
@@ -22,7 +22,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   function handleSubmit() {
-    dispatch(postReview());
+    dispatch(sendReview());
   }
 
   useEffect(() => {

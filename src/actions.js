@@ -116,7 +116,7 @@ export function requestLogin() {
   };
 }
 
-export function postReview() {
+export function sendReview() {
   return async (dispatch, getState) => {
     // TODO: ...
   };

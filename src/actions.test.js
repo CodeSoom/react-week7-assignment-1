@@ -114,7 +114,7 @@ describe('actions', () => {
         store = mockStore({ loginFields });
       });
 
-      it('runs setAccessToken', async () => {
+      it('dispatchs setAccessToken', async () => {
         await store.dispatch(requestLogin(loginFields));
 
         const actions = store.getActions();
