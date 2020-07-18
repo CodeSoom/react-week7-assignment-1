@@ -143,7 +143,7 @@ export function requestReview(restaurantId) {
       accessToken, score, description, restaurantId,
     });
 
-    if (status === '201') {
+    if (status === 201) {
       dispatch(addReview({ score, description }));
     }
   };

@@ -13,11 +13,12 @@ describe('ReviewForm', () => {
     handleSubmit.mockClear();
   });
 
-  function renderReviewForm() {
+  function renderReviewForm({ score, description } = {}) {
     return render((
       <ReviewForm
         onChange={handleChange}
         onSubmit={handleSubmit}
+        fields={{ score, description }}
       />
     ));
   }

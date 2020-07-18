@@ -259,5 +259,35 @@ describe('reducer', () => {
       expect(reversedReviews.score).toBe('10');
       expect(reversedReviews.description).toBe('10점 만점에 10점!');
     });
+
+    it('set empty value in review fields', () => {
+      const score = '9';
+      const description = '대단한 맛이네요~';
+
+      const initialState = {
+        restaurant: {
+          id: 1,
+          name: '김밥제국',
+          category: '분식',
+          address: '서울시 강남구 역삼동',
+          reviews: [{
+            id: 12,
+            restaurantId: 3,
+            name: '테스터',
+            score: 5,
+            description: '맛잇어요',
+          }],
+        },
+        reviewFields: {
+          score,
+          description,
+        },
+      };
+
+      const state = reducer(initialState, addReview({ score, description }));
+
+      expect(state.reviewFields.score).toBe('');
+      expect(state.reviewFields.description).toBe('');
+    });
   });
 });

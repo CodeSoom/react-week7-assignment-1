@@ -8,7 +8,7 @@ export default function Reviews({ reviews }) {
         ? (<p>리뷰가 없어요!</p>)
         : (
           <ul>
-            {reviews.map((review) => (
+            {[...reviews].reverse().map((review) => (
               <li key={review.id}>
                 {review.name}
                 <br />

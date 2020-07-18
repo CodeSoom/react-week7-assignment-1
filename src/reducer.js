@@ -121,6 +121,10 @@ const reducers = {
         ...restaurant,
         reviews: [...reviews, newReview],
       },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
   },
 };
