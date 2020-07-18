@@ -143,4 +143,14 @@ describe('reducer', () => {
 
     expect(state.loginFields.email).toBe('test');
   });
+
+  describe('setAccessToken', () => {
+    const initialState = {
+      accessToken: '',
+    };
+
+    const state = reducer(initialState, setAccessToken('TOKEN'));
+
+    expect(state.accessToken).toBe('TOKEN');
+  });
 });
