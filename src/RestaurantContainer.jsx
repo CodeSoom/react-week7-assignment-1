@@ -22,7 +22,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   function handleSubmit() {
-    dispatch(sendReview());
+    dispatch(sendReview({ restaurantId }));
   }
 
   useEffect(() => {
