@@ -250,9 +250,14 @@ describe('reducer', () => {
         },
       };
 
-      const state = reducer(initialState, addReview({ name: 'description', value: 'good!' }));
+      const state = reducer(initialState, addReview({ score: '10', description: '10점 만점에 10점!' }));
+
+      const reversedReviews = [...state.restaurant.reviews].reverse()[0];
 
       expect(state.restaurant.reviews).toHaveLength(2);
+
+      expect(reversedReviews.score).toBe('10');
+      expect(reversedReviews.description).toBe('10점 만점에 10점!');
     });
   });
 });
