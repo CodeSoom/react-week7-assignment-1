@@ -9,13 +9,21 @@ import LoginFormContainer from './LoginFormContainer';
 import { changeLoginField } from './actions';
 
 describe('LoginFormContainer', () => {
-  useSelector.mockImplementation((selector) => selector({
-    loginFields: {
-      email: '',
-      password: '',
-    },
-    accessToken: given.accessToken,
-  }));
+  const dispatch = jest.fn();
+
+  beforeEach(() => {
+    dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      accessToken: given.accessToken,
+    }));
+  });
 
   context('without logged in', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
@@ -31,10 +39,6 @@ describe('LoginFormContainer', () => {
     });
 
     it('listens change events', () => {
-      const dispatch = jest.fn();
-
-      useDispatch.mockImplementation(() => dispatch);
-
       const { getByLabelText } = render((
         <LoginFormContainer />
       ));
@@ -56,10 +60,6 @@ describe('LoginFormContainer', () => {
     });
 
     it('listens click event', () => {
-      const dispatch = jest.fn();
-
-      useDispatch.mockImplementation(() => dispatch);
-
       const { getByText } = render((
         <LoginFormContainer />
       ));
@@ -79,6 +79,16 @@ describe('LoginFormContainer', () => {
       ));
 
       expect(getByText('logout')).toBeInTheDocument();
+    });
+
+    it('listens click event', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.click(getByText('logout'));
+
+      expect(dispatch).toBeCalled();
     });
   });
 });
