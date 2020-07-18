@@ -10,6 +10,7 @@ import {
 
 import { get } from './utils';
 import ReviewForm from './ReviewForm';
+import Reviews from './Reviews';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -27,6 +28,8 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
+  const { reviews } = restaurant;
+
   function handleChange({ name, value }) {
     dispatch(changeReviewField({ name, value }));
   }
@@ -35,10 +38,12 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail restaurant={restaurant} />
       {accessToken ? (
-        <ReviewForm
-          onChange={handleChange}
-        />
-        // <Reviews/>
+        <>
+          <ReviewForm
+            onChange={handleChange}
+          />
+          <Reviews reviews={reviews} />
+        </>
       ) : null}
     </>
   );
