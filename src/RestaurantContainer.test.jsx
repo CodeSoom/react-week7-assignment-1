@@ -1,10 +1,14 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
+
+import { changeReviewField } from './actions';
+
+import restaurant from '../fixtures/restaurant';
 
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
@@ -19,6 +23,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      accessToken: given.accessToken,
     }));
   });
 
@@ -29,25 +34,13 @@ describe('RestaurantContainer', () => {
   });
 
   context('with restaurant', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-      reviews: [
-        {
-          id: 1,
-          name: '테스터',
-          score: 3,
-          description: '오오',
-        },
-      ],
-    }));
+    given('restaurant', () => (restaurant));
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
 
-      expect(container).toHaveTextContent('마법사주방');
-      expect(container).toHaveTextContent('서울시');
+      expect(container).toHaveTextContent('마녀주방');
+      expect(container).toHaveTextContent('서울시 강남구');
     });
   });
 
@@ -58,6 +51,45 @@ describe('RestaurantContainer', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('Loading');
+    });
+  });
+
+  context('with an access token', () => {
+    given('accessToken', () => 'TOKEN');
+    given('restaurant', () => (restaurant));
+
+    context('when input fields are changed', () => {
+      it('dispatches changeReviewField action', () => {
+        const { getByLabelText } = renderRestaurantContainer();
+
+        fireEvent.change(getByLabelText('리뷰 내용'), {
+          target: { value: '노맛' },
+        });
+
+        expect(dispatch).toBeCalledWith(changeReviewField({
+          name: 'description', value: '노맛',
+        }));
+      });
+    });
+
+    context('when "리뷰 남기기" is clicked', () => {
+      it('dispatches sendReview action', () => {
+        const { getByText } = renderRestaurantContainer();
+
+        fireEvent.click(getByText('리뷰 남기기'));
+
+        expect(dispatch).toBeCalledTimes(2);
+      });
+    });
+  });
+
+  context('without an access token', () => {
+    given('accessToken', () => null);
+
+    it('does not render a review form', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).not.toHaveTextContent('리뷰');
     });
   });
 });
