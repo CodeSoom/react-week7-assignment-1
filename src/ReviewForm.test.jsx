@@ -21,7 +21,7 @@ describe('ReviewForm', () => {
     const { queryByLabelText } = renderReviewForm();
 
     expect(queryByLabelText('평점')).not.toBeNull();
-    expect(queryByLabelText('리뷰 남기기')).not.toBeNull();
+    expect(queryByLabelText('리뷰 내용')).not.toBeNull();
   });
 
   it('listens change event', () => {
@@ -29,7 +29,7 @@ describe('ReviewForm', () => {
 
     const controls = [
       { label: '평점', name: 'score', value: '5' },
-      { label: '리뷰 남기기', name: 'description', value: '증말 조아용!' },
+      { label: '리뷰 내용', name: 'description', value: '증말 조아용!' },
     ];
 
     controls.forEach(({ label, name, value }) => {

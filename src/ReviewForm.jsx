@@ -21,7 +21,7 @@ export default function ReviewForm({ onChange }) {
       </div>
       <div>
         <label htmlFor="review-description">
-          리뷰 남기기
+          리뷰 내용
         </label>
         <input
           type="text"
