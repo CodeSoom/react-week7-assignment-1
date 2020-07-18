@@ -9,6 +9,7 @@ import {
   selectCategory,
   changeLoginField,
   setAccessToken,
+  logout,
 } from './actions';
 
 describe('reducer', () => {
@@ -176,6 +177,18 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken({ accessToken: 'Token' }));
 
       expect(state.accessToken).toBe('Token');
+    });
+  });
+
+  describe('logout', () => {
+    it('changes accessToken\'s value to empty string', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+      };
+
+      const state = reducer(initialState, logout());
+
+      expect(state.accessToken).toBe('');
     });
   });
 });
