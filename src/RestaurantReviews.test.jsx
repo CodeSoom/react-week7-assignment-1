@@ -9,10 +9,10 @@ describe('RestaurantReviews', () => {
     it('renders reviews', () => {
       const reviews = [
         {
-          id: 1, restaurantId: 1, name: '손님', score: 3, description: '그저 그래요.',
+          id: 1, restaurantId: 1, name: '손님', score: '3', description: '그저 그래요.',
         },
         {
-          id: 2, restaurantId: 1, name: '주방장', score: 5, description: '정말 맛있어요.',
+          id: 2, restaurantId: 1, name: '주방장', score: '5', description: '정말 맛있어요.',
         },
       ];
       const { container } = render(<RestaurantReviews reviews={reviews} />);

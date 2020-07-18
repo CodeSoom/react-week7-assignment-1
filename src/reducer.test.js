@@ -26,7 +26,7 @@ describe('reducer', () => {
         password: '',
       },
       reviewFields: {
-        score: 0,
+        score: '0',
         description: '',
       },
       accessToken: '',
@@ -169,7 +169,7 @@ describe('reducer', () => {
     it('changes review field', () => {
       const initialState = {
         reviewFields: {
-          score: 0,
+          score: '0',
           description: '',
         },
       };

@@ -12,7 +12,7 @@ const initialState = {
     password: '',
   },
   reviewFields: {
-    score: 0,
+    score: '0',
     description: '',
   },
   accessToken: '',

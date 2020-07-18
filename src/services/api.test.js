@@ -88,7 +88,7 @@ describe('api', () => {
     });
 
     it('posts review', async () => {
-      const response = await postReview({ accessToken: 'ACCESS_TOKEN', score: 5, description: '맛있어서 행복해요.' });
+      const response = await postReview({ accessToken: 'ACCESS_TOKEN', score: '5', description: '맛있어서 행복해요.' });
 
       expect(response).toEqual({});
     });

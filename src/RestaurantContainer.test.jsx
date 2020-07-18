@@ -23,7 +23,7 @@ describe('RestaurantContainer', () => {
       restaurant: given.restaurant,
       accessToken: given.accessToken,
       reviewFields: {
-        score: 5,
+        score: '5',
         description: '맛있어요.',
       },
     }));

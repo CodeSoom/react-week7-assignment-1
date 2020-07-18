@@ -13,6 +13,7 @@ import {
   requestLogin,
   requestLogout,
   setAccessToken,
+  registerReview,
 } from './actions';
 
 import { saveItem, removeItem } from './services/storage';
@@ -143,6 +144,26 @@ describe('actions', () => {
 
       expect(removeItem).toBeCalledWith('accessToken');
       expect(actions[0]).toEqual(setAccessToken(''));
+    });
+  });
+
+  describe('registerReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        reviewFields: {
+          score: '5',
+          description: '맛있어요',
+        },
+        accessToken: 'ACCESS_TOKEN',
+      });
+    });
+
+    it('register review', async () => {
+      await store.dispatch(registerReview());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(loadRestaurant());
     });
   });
 });

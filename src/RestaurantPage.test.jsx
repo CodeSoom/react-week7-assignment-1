@@ -21,7 +21,7 @@ describe('RestaurantPage', () => {
         address: '서울시 강남구',
       },
       reviewFields: {
-        score: 0,
+        score: '0',
         description: '',
       },
     }));
