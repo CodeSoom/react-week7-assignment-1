@@ -12,6 +12,7 @@ import {
   setRestaurant,
   setAccessToken,
   requestLogin,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -120,6 +121,31 @@ describe('actions', () => {
         const actions = store.getActions();
 
         expect(actions[0]).toEqual(setAccessToken(''));
+      });
+    });
+  });
+
+  describe('sendReview', () => {
+    context('with reviewFields, accessToken and restaurantId', () => {
+      const reviewFields = {
+        score: '5',
+        description: 'Good!',
+      };
+
+      const accessToken = 'ACCESS_TOKEN';
+      const restaurantId = 1;
+
+      beforeEach(() => {
+        store = mockStore({
+          reviewFields,
+          accessToken,
+          restaurantId,
+        });
+      });
+
+      it('runs postReview', async () => {
+        await store.dispatch(sendReview({ restaurantId }));
+        // TODO: postReview가 실행된걸 어떻게 알 수 있는가.
       });
     });
   });
