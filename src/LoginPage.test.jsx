@@ -18,7 +18,7 @@ describe('LoginPage', () => {
   it('renders login title', () => {
     const { container } = render(<LoginPage />);
 
-    expect(container).toHaveTextContent('Log in');
+    expect(container).toHaveTextContent('Log In');
   });
 
   it('renders input controls and \'Login\' button', () => {
@@ -26,6 +26,6 @@ describe('LoginPage', () => {
 
     expect(getByLabelText('Email')).toBeInTheDocument();
     expect(getByLabelText('Password')).toBeInTheDocument();
-    expect(getByText('Login')).toBeInTheDocument();
+    expect(getByText('Log In')).toBeInTheDocument();
   });
 });

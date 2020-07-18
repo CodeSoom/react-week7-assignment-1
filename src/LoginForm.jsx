@@ -30,7 +30,7 @@ export default function LoginForm({ onChange, onSubmit, fields }) {
           value={password}
         />
       </div>
-      <button type="button" onClick={onSubmit}>Login</button>
+      <button type="button" onClick={onSubmit}>Log In</button>
     </>
   );
 }

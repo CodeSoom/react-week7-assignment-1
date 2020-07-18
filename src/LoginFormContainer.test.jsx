@@ -35,7 +35,7 @@ describe('LoginFormContainer', () => {
 
       expect(getByLabelText('Email')).toBeInTheDocument();
       expect(getByLabelText('Password')).toBeInTheDocument();
-      expect(getByText('Login')).toBeInTheDocument();
+      expect(getByText('Log In')).toBeInTheDocument();
     });
 
     it('listens change events', () => {
@@ -64,7 +64,7 @@ describe('LoginFormContainer', () => {
         <LoginFormContainer />
       ));
 
-      fireEvent.click(getByText('Login'));
+      fireEvent.click(getByText('Log In'));
 
       expect(dispatch).toBeCalled();
     });
@@ -78,7 +78,7 @@ describe('LoginFormContainer', () => {
         <LoginFormContainer />
       ));
 
-      expect(getByText('logout')).toBeInTheDocument();
+      expect(getByText('Log out')).toBeInTheDocument();
     });
 
     it('listens click event', () => {
@@ -86,7 +86,7 @@ describe('LoginFormContainer', () => {
         <LoginFormContainer />
       ));
 
-      fireEvent.click(getByText('logout'));
+      fireEvent.click(getByText('Log out'));
 
       expect(dispatch).toBeCalled();
     });

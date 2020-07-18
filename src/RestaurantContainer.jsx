@@ -49,9 +49,9 @@ export default function RestaurantContainer({ restaurantId }) {
             onSubmit={handleSubmit}
             fields={{ score, description }}
           />
-          <Reviews reviews={reviews} />
         </>
       ) : null}
+      <Reviews reviews={reviews} />
     </>
   );
 }

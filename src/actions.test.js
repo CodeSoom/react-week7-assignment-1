@@ -15,7 +15,6 @@ import {
   requestReview,
   addReview,
 } from './actions';
-import { saveItem } from './services/storage';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);

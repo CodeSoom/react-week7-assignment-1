@@ -84,9 +84,7 @@ describe('api', () => {
 
   describe('postReview', () => {
     it('returns accessToken', async () => {
-      const { status } = await postReview({ score: '5', description: 'Great!' });
-
-      expect(status).toEqual(201);
+      await postReview({ score: '5', description: 'Great!' });
     });
   });
 });

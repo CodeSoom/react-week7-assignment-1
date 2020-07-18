@@ -32,7 +32,7 @@ describe('LoginForm', () => {
     expect(getByLabelText('Email')).toHaveValue(email);
     expect(getByLabelText('Password')).toHaveValue(password);
 
-    expect(getByText('Login')).toBeInTheDocument();
+    expect(getByText('Log In')).toBeInTheDocument();
   });
 
   it('listens change event', () => {
@@ -55,7 +55,7 @@ describe('LoginForm', () => {
   it('listens click event', () => {
     const { getByText } = renderLoginForm();
 
-    fireEvent.click(getByText('Login'));
+    fireEvent.click(getByText('Log In'));
 
     expect(handleSubmit).toBeCalled();
   });

@@ -5,10 +5,10 @@ import { render, fireEvent } from '@testing-library/react';
 import LogoutForm from './LogoutForm';
 
 describe('LogoutForm', () => {
-  it('renders "logout" button', () => {
+  it('renders "Log out" button', () => {
     const { getByText } = render(<LogoutForm />);
 
-    expect(getByText('logout')).toBeInTheDocument();
+    expect(getByText('Log out')).toBeInTheDocument();
   });
 
   it('listens click event', () => {
@@ -20,7 +20,7 @@ describe('LogoutForm', () => {
       />
     ));
 
-    fireEvent.click(getByText('logout'));
+    fireEvent.click(getByText('Log out'));
 
     expect(handleClickLogout).toBeCalled();
   });

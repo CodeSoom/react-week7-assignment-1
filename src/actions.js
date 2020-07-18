@@ -146,12 +146,10 @@ export function requestReview(restaurantId) {
 
     if (!score || !description) return;
 
-    const { status } = await postReview({
+    await postReview({
       accessToken, score, description, restaurantId,
     });
 
-    if (status === 201) {
-      dispatch(addReview({ score, description }));
-    }
+    dispatch(addReview({ score, description }));
   };
 }

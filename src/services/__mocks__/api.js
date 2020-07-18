@@ -32,6 +32,5 @@ export async function postReview({
     score,
     description,
     restaurantId,
-    status: 201,
   };
 }
