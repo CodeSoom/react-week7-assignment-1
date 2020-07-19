@@ -30,6 +30,7 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      reviewFields: given.reviewFields,
     }));
   });
 
@@ -67,6 +68,10 @@ describe('App', () => {
 
   context('with path /restaurants/:id', () => {
     it('renders the restaurant page', () => {
+      given('reviewFields', () => ({
+        score: '5',
+        description: '정말 좋아요',
+      }));
       const { container } = renderApp({ path: '/restaurants/1' });
 
       expect(container).toHaveTextContent('마녀주방');

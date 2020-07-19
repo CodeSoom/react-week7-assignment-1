@@ -20,6 +20,10 @@ describe('RestaurantContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
       accessToken: given.accessToken,
+      reviewFields: {
+        score: '5',
+        description: '정말 좋아요',
+      },
     }));
   });
 
