@@ -12,11 +12,12 @@ describe('RestaurantDetail', () => {
       <RestaurantDetail restaurant={restaurant} />,
     );
 
-    expect(container).toHaveTextContent('양천주가');
+    expect(container).toHaveTextContent(restaurant.name);
 
-    expect(container).toHaveTextContent('서울 강남구');
+    expect(container).toHaveTextContent(restaurant.address);
 
-    expect(container).toHaveTextContent('탕수육');
-    expect(container).toHaveTextContent('팔보채');
+    restaurant.menuItems.forEach((menuItem) => {
+      expect(container).toHaveTextContent(menuItem.name);
+    })
   });
 });
