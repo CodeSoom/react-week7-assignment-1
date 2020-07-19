@@ -4,7 +4,11 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { changeReviewField } from './actions';
+
 import RestaurantContainer from './RestaurantContainer';
+
+import restaurant from '../fixtures/restaurants';
 
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
@@ -65,22 +69,25 @@ describe('RestaurantContainer', () => {
   });
 
   context('when review input changes', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
+    given('restaurant', () => (restaurant));
 
     it('changes score', () => {
       const { getByLabelText } = renderRestaurantContainer();
 
-      fireEvent.change(getByLabelText('평점'), {
-        target: { value: '5' },
-      });
+      const controls = [
+        { label: '평점', name: 'score', value: '3' },
+        { label: '리뷰 내용', name: 'description', value: '맛 좋' },
+      ];
 
-      expect(dispatch).toBeCalledWith({
-        type: 'changeReviewField',
-        payload: { name: 'score', value: '5' },
+      controls.forEach(({ label, name, value }) => {
+        fireEvent.change(getByLabelText(label), {
+          target: { value },
+        });
+
+        expect(dispatch).toBeCalledWith({
+          type: 'changeReviewField',
+          payload: { name, value },
+        });
       });
     });
   });

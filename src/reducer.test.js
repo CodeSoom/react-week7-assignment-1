@@ -23,6 +23,7 @@ describe('reducer', () => {
       selectedCategory: null,
       loginFields: { email: '', password: '' },
       accessToken: null,
+      reviewFields: { score: '', description: '' },
     };
 
     it('returns initialState', () => {
