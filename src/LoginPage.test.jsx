@@ -17,6 +17,7 @@ describe('LoginPage', () => {
         email: '',
         password: '',
       },
+      accessToken: given.accessToken,
     }));
   });
 
@@ -34,10 +35,24 @@ describe('LoginPage', () => {
     expect(container).toHaveTextContent('Log In');
   });
 
-  it('render input controls', () => {
-    const { getByLabelText } = renderLoginPage();
+  context('when logged out', () => {
+    given('accessToken', () => null);
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    it('render input controls', () => {
+      const { getByLabelText } = renderLoginPage();
+
+      expect(getByLabelText('E-mail')).not.toBeNull();
+      expect(getByLabelText('Password')).not.toBeNull();
+    });
+  });
+
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
+
+    it('render "Log out" button', () => {
+      const { getByText } = renderLoginPage();
+
+      expect(getByText('Log out')).toBeInTheDocument();
+    });
   });
 });
