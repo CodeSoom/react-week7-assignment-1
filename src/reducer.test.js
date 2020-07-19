@@ -9,19 +9,24 @@ import {
   selectCategory,
   changeLoginField,
   setAccessToken,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      accessToken: '',
+      loginFields: { email: '', password: '' },
       regions: [],
       categories: [],
       restaurants: [],
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
-      loginFields: { email: '', password: '' },
-      accessToken: '',
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -172,7 +177,7 @@ describe('reducer', () => {
     });
   });
 
-  describe(' setAccessToken', () => {
+  describe('setAccessToken', () => {
     const initialState = {
       accessToken: '',
     };
@@ -180,5 +185,21 @@ describe('reducer', () => {
     const state = reducer(initialState, setAccessToken('USERTOKEN'));
 
     expect(state.accessToken).toBe('USERTOKEN');
+  });
+
+  describe('changeReviewField', () => {
+    const initialState = {
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+    };
+
+    const state = reducer(
+      initialState,
+      changeReviewField({ name: 'score', value: '5' }),
+    );
+
+    expect(state.reviewFields.score).toBe('5');
   });
 });
