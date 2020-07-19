@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function TextField({
-  label, type = 'text', name, onChange,
+  label, type = 'text', name, inputValue, onChange,
 }) {
   const id = `review-${name}`;
 
@@ -20,6 +20,7 @@ export default function TextField({
           type={type}
           id={id}
           name={name}
+          value={inputValue}
           onChange={handleChange}
         />
       </div>
