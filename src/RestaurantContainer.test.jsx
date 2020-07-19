@@ -27,6 +27,7 @@ describe('RestaurantContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
       reviewFields,
+      accessToken: given.accessToken,
     }));
   });
 
@@ -36,7 +37,8 @@ describe('RestaurantContainer', () => {
     expect(dispatch).toBeCalled();
   });
 
-  context('with restaurant', () => {
+  context('with restaurant and logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
     given('restaurant', () => ({
       id: 1,
       name: '마법사주방',
@@ -69,6 +71,7 @@ describe('RestaurantContainer', () => {
   });
 
   context('when review input changes', () => {
+    given('accessToken', () => 'ACCCES_TOKEN');
     given('restaurant', () => (restaurant));
 
     it('changes score, description', () => {
@@ -92,13 +95,28 @@ describe('RestaurantContainer', () => {
     });
   });
 
-  it('click post review button', () => {
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCCES_TOKEN');
     given('restaurant', () => (restaurant));
 
-    const { getByText } = renderRestaurantContainer();
+    it('click post review button', () => {
+      const { getByText } = renderRestaurantContainer();
 
-    fireEvent.click(getByText('리뷰 남기기'));
+      fireEvent.click(getByText('리뷰 남기기'));
 
-    expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toBeCalledTimes(2);
+    });
+  });
+
+  context('without logging in', () => {
+    given('restaurant', () => (restaurant));
+    given('accessToken', () => '');
+
+    it('renders no review form', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).not.toHaveTextContent('평점');
+      expect(container).not.toHaveTextContent('리뷰 내용');
+    });
   });
 });
