@@ -20,6 +20,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviewFields: given.reviewFields,
     }));
   });
 
@@ -34,6 +35,11 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+    }));
+
+    given('reviewFields', () => ({
+      score: '',
+      description: '',
     }));
 
     it('renders name and address', () => {
@@ -63,6 +69,16 @@ describe('RestaurantContainer', () => {
           payload: { name, value },
         });
       });
+    });
+
+    it('renders 리뷰 버튼', () => {
+      const { getByText } = render((
+        <RestaurantContainer restaurantId="1" />
+      ));
+
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(dispatch).toBeCalledTimes(2);
     });
   });
 
