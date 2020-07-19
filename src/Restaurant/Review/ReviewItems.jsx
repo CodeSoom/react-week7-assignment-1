@@ -1,7 +1,9 @@
 import React from 'react';
 
 export default function ReviewItems({ reviewItems }) {
-  if (!(reviewItems || []).length) {
+  const isEmpty = (arr) => arr.length === 0;
+
+  if (isEmpty(reviewItems || [])) {
     return (
       <p>리뷰가 없어요!</p>
     );
