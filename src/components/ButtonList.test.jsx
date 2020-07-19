@@ -9,7 +9,7 @@ import ITEMS from '../../fixtures/items';
 describe('<ButtonList />', () => {
   const handleClickItem = jest.fn();
 
-  const renderComponent = (items, selectedItem = null) => render((
+  const renderComponent = ({ items, selectedItem = null }) => render((
     <ButtonList
       items={items}
       selectedItem={selectedItem}
@@ -19,7 +19,7 @@ describe('<ButtonList />', () => {
 
   context('without items', () => {
     it('display no buttons', () => {
-      const { container } = renderComponent([]);
+      const { container } = renderComponent({ items: [] });
       const buttons = container.querySelector('#button-list').children;
       expect(buttons.length).toEqual(0);
     });
@@ -27,14 +27,14 @@ describe('<ButtonList />', () => {
 
   context('with items', () => {
     it('display buttons', () => {
-      const { container } = renderComponent(ITEMS);
+      const { container } = renderComponent({ items: ITEMS });
       const buttons = container.querySelector('#button-list').children;
       expect(buttons.length).toEqual(ITEMS.length);
     });
 
     context('when click button', () => {
       it('fires click event', () => {
-        const { getAllByRole } = renderComponent(ITEMS);
+        const { getAllByRole } = renderComponent({ items: ITEMS });
         // When
         const buttons = getAllByRole('button');
         buttons.forEach((button) => fireEvent.click(button));
@@ -45,7 +45,7 @@ describe('<ButtonList />', () => {
 
     context('when select button', () => {
       it('selected-button contains checked-string', () => {
-        const { getAllByRole } = renderComponent(ITEMS, ITEMS[0]);
+        const { getAllByRole } = renderComponent({ items: ITEMS, selectedItem: ITEMS[0] });
         // When
         const buttons = getAllByRole('button');
         // Then
