@@ -12,7 +12,9 @@ export default function LoginPage() {
 
   return (
     <>
-      {accessToken ? (<LogoutFormContainer />) : (<LoginFormContainer />)}
+      {accessToken
+        ? (<LogoutFormContainer />)
+        : (<LoginFormContainer />)}
     </>
   );
 }
