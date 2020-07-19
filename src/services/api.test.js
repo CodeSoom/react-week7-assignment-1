@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -83,6 +84,23 @@ describe('api', () => {
       });
 
       expect(accessToken).toEqual('eyJhbGciOiJIUzI1NiJ9');
+    });
+  });
+
+  describe('review', () => {
+    beforeEach(() => {
+      mockFetch({});
+    });
+
+    it('requests login', async () => {
+      const review = await postReview({
+        accessToken: 'eyJhbGciOiJIUzI1NiJ9',
+        restaurantId: '1',
+        score: '5',
+        description: '리뷰 내용',
+      });
+
+      expect(review).toEqual({});
     });
   });
 });
