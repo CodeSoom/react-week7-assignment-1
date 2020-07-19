@@ -12,6 +12,8 @@ import {
   setRestaurant,
   setAccessToken,
   requestLogin,
+  changeLoginField,
+  changeReviewField,
 } from './actions';
 
 const middlewares = [thunk];
@@ -119,6 +121,28 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setAccessToken(''));
+    });
+  });
+
+  describe('change input values', () => {
+    it('change login field', () => {
+      const name = 'email';
+      const value = 'tester@example.com';
+
+      const action = changeLoginField({ name, value });
+
+      expect(action.type).toBe('changeLoginField');
+      expect(action.payload).toEqual({ name, value });
+    });
+
+    it('change review field', () => {
+      const name = 'score';
+      const value = '5'
+
+      const action = changeReviewField({ name, value });
+
+      expect(action.type).toBe('changeReviewField');
+      expect(action.payload).toEqual({ name, value });
     });
   });
 });
