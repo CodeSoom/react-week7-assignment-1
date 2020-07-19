@@ -1,6 +1,12 @@
 import React from 'react';
 
 export default function ReviewList({ reviews }) {
+  if (!(reviews || []).length) {
+    return (
+      <p>리뷰가 없어요!</p>
+    );
+  }
+
   return (
     <div>
       <h3>리뷰</h3>

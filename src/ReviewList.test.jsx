@@ -18,4 +18,14 @@ describe('ReviewList', () => {
       });
     });
   });
+
+  context('without reviews', () => {
+    it('renders no reviews message', () => {
+      [[], null, undefined].forEach((noReviews) => {
+        const { container } = render(<ReviewList reviews={noReviews} />);
+
+        expect(container).toHaveTextContent('리뷰가 없어요');
+      });
+    });
+  });
 });
