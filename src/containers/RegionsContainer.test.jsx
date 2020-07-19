@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
+import given from 'given2';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,46 +14,35 @@ jest.mock('react-redux');
 describe('RegionsContainer', () => {
   const dispatch = jest.fn();
 
-  const SEOUL = REGIONS[0];
-
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      regions: REGIONS,
+      selectedRegion: given.selectedRegion,
+    }));
   });
 
   context('with selectedRegion', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        regions: REGIONS,
-        selectedRegion: SEOUL,
-      }));
-    });
+    given('selectedRegion', () => REGIONS[0]);
 
     it('renders regions with selected region', () => {
       const { container } = render((
         <RegionsContainer />
       ));
-
-      expect(container).toHaveTextContent(`${SEOUL.name}(V)`);
+      expect(container).toHaveTextContent(`${REGIONS[0].name}(V)`);
     });
   });
 
   context('without selectedRegion', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        regions: REGIONS,
-      }));
-    });
+    given('selectedRegion', () => null);
 
     it('renders regions', () => {
       const { container, getByText } = render((
         <RegionsContainer />
       ));
-
-      expect(container).toHaveTextContent(SEOUL.name);
-
-      fireEvent.click(getByText(SEOUL.name));
-
+      expect(container).toHaveTextContent(REGIONS[0].name);
+      fireEvent.click(getByText(REGIONS[0].name));
       expect(dispatch).toBeCalled();
     });
   });

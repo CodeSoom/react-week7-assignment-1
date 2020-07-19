@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
+import given from 'given2';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,19 +21,15 @@ describe('LoginFormContainer', () => {
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      session: {
+        input: given.sessionInput,
+      },
+    }));
   });
 
   context('without session-input', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        session: {
-          input: {
-            email: '',
-            password: '',
-          },
-        },
-      }));
-    });
+    given('sessionInput', () => ({ email: '', password: '' }));
 
     context('when input email, password', () => {
       it('fires change event', () => {
@@ -49,14 +46,7 @@ describe('LoginFormContainer', () => {
   });
 
   context('with session-input', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        session: {
-          input: SESSION_INPUT,
-          accessToken: null,
-        },
-      }));
-    });
+    given('sessionInput', () => SESSION_INPUT);
 
     context('when click submit-button', () => {
       it('fires submit event', () => {

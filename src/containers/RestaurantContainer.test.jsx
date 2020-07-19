@@ -1,11 +1,13 @@
 import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
+import given from 'given2';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
+import ACCESS_TOKEN from '../../fixtures/accessToken';
 import RESTAURANT from '../../fixtures/restaurant';
 
 jest.mock('react-redux');
@@ -20,71 +22,31 @@ describe('RestaurantContainer', () => {
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      session: {
+        accessToken: ACCESS_TOKEN,
+      },
+      restaurant: given.restaurant,
+      review: {
+        input: given.reviewInput,
+      },
+    }));
   });
 
-  context('with restuarant', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        session: {
-          accessToken: 'ACCESS_TOKEN',
-        },
-        restaurant: RESTAURANT,
-        review: {
-          input: {
-            score: '',
-            description: '',
-          },
-        },
-      }));
-    });
-    it('renders restuarant-info', () => {
-      const { container } = renderComponent();
-
-      expect(container).toHaveTextContent(RESTAURANT.name);
-      expect(container).toHaveTextContent(RESTAURANT.address);
-      expect(container).toHaveTextContent(RESTAURANT.menuItems[0].name);
-    });
-  });
-
-  context('with session-token', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        session: {
-          accessToken: 'ACCESS_TOKEN',
-        },
-        restaurant: RESTAURANT,
-        review: {
-          input: {
-            score: '',
-            description: '',
-          },
-        },
-      }));
-    });
+  context('with restaurant', () => {
+    given('restaurant', () => RESTAURANT);
+    given('reviewInput', () => ({ score: '', description: '' }));
 
     it('display review-form', () => {
       const { getByLabelText } = renderComponent();
-
       expect(getByLabelText('평점')).not.toBeNull();
       expect(getByLabelText('리뷰 내용')).not.toBeNull();
     });
   });
 
   context('without review-input', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        session: {
-          accessToken: 'ACCESS_TOKEN',
-        },
-        restaurant: RESTAURANT,
-        review: {
-          input: {
-            score: '',
-            description: '',
-          },
-        },
-      }));
-    });
+    given('restaurant', () => RESTAURANT);
+    given('reviewInput', () => ({ score: '', description: '' }));
 
     context('when input score, description', () => {
       it('fires change event', () => {
@@ -101,20 +63,8 @@ describe('RestaurantContainer', () => {
   });
 
   context('with review-input', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        session: {
-          accessToken: 'ACCESS_TOKEN',
-        },
-        restaurant: RESTAURANT,
-        review: {
-          input: {
-            score: '5',
-            description: 'REVIEW_CONTENT',
-          },
-        },
-      }));
-    });
+    given('restaurant', () => RESTAURANT);
+    given('reviewInput', () => ({ score: '5', description: 'REVIEW_CONTENT' }));
 
     context('when click submit-button', () => {
       it('fires submit event', () => {

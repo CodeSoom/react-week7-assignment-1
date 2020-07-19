@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
+import given from 'given2';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,16 +21,15 @@ describe('SessionContainer', () => {
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      session: {
+        accessToken: given.accessToken,
+      },
+    }));
   });
 
   context('with access-token', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        session: {
-          accessToken: ACCESS_TOKEN,
-        },
-      }));
-    });
+    given('accessToken', () => ACCESS_TOKEN);
 
     it('display access-token', () => {
       const { container } = renderComponent();
@@ -54,13 +54,7 @@ describe('SessionContainer', () => {
   });
 
   context('without access-token', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        session: {
-          accessToken: null,
-        },
-      }));
-    });
+    given('accessToken', () => null);
 
     it('display login-form', () => {
       const { getByLabelText, getByRole } = renderComponent();
