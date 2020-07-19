@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import TextField from './TextField';
 
@@ -56,20 +56,24 @@ describe('TextField', () => {
     });
   });
 
-  // it('listen change events', () => {
-  //   const { getByLabelText } = render((
-  //     <TextField onChange={handleChange} />
-  //   ));
+  it('listen change events', () => {
+    const name = 'score';
+    const value = '5';
 
-  //   const controls = [
-  //     { label: '평점', name: 'score', value: '5' },
-  //     { label: '리뷰 내용', name: 'description', value: '진짜진짜진짜진짜맛있는집이에요' },
-  //   ];
+    function renderTextField() {
+      return render((
+        <TextField
+          label="평점"
+          name={name}
+          onChange={handleChange}
+        />
+      ));
+    }
 
-  //   controls.forEach(({ label, name, value }) => {
-  //     fireEvent.change(getByLabelText(label), { target: { value } });
+    const { getByLabelText } = renderTextField();
 
-  //     expect(handleChange).toBeCalledWith({ name, value });
-  //   });
-  // });
+    fireEvent.change(getByLabelText('평점'), { target: { value } });
+
+    expect(handleChange).toBeCalledWith({ name, value });
+  });
 });
