@@ -74,5 +74,15 @@ describe('LoginFormContainer', () => {
 
       expect(getByText('Log out')).toBeInTheDocument();
     });
+
+    it('listens click event and call dispatch', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('Log out'));
+
+      expect(dispatch).toBeCalledWith({
+        type: 'logout',
+      });
+    });
   });
 });
