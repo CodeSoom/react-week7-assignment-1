@@ -21,7 +21,7 @@ export default function LogoutPage() {
       { accessToken && (
         <button type="button" onClick={handleClickLogout}>
           LogOut
-      </button>
+        </button>
       )}
       { !accessToken && <p>LogOut 되었습니다.</p>}
       {/* {accessToken ? (

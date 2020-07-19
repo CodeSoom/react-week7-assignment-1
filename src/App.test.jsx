@@ -21,19 +21,17 @@ describe('App', () => {
 
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation((selector) =>
-      selector({
-        regions: [{ id: 1, name: '서울' }],
-        categories: [],
-        restaurants: [],
-        restaurant: { id: 1, name: '마녀주방', reviews: [] },
-        reviewField: {
-          score: '',
-          description: '',
-        },
-        accessToken: 'ACCESS_TOKEN',
-      }),
-    );
+    useSelector.mockImplementation((selector) => selector({
+      regions: [{ id: 1, name: '서울' }],
+      categories: [],
+      restaurants: [],
+      restaurant: { id: 1, name: '마녀주방', reviews: [] },
+      reviewField: {
+        score: '',
+        description: '',
+      },
+      accessToken: 'ACCESS_TOKEN',
+    }));
   });
 
   function renderApp({ path }) {
@@ -91,7 +89,7 @@ describe('App', () => {
 
     it('occurs dispatch', () => {
       renderApp({ path: '/' });
-      
+
       expect(dispatch).toBeCalledWith({
         type: 'setAccessToken',
         payload: { accessToken: 'ACCESS_TOKEN' },

@@ -1,26 +1,22 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { useSelector } from 'react-redux';
 
 import { get } from '../utils';
 
-export default function RestaurantsContainer({ onClickRestaurant }) {
+export default function RestaurantsContainer() {
   const restaurants = useSelector(get('restaurants'));
-
-  function handleClick(restaurant) {
-    return (event) => {
-      event.preventDefault();
-      onClickRestaurant(restaurant);
-    };
-  }
 
   return (
     <ul>
       {restaurants.map((restaurant) => (
         <li key={restaurant.id}>
-          <a href="" onClick={handleClick(restaurant)}>
+          <Link to={`/restaurants/${restaurant.id}`}>
             {restaurant.name}
-          </a>
+            {' '}
+          </Link>
         </li>
       ))}
     </ul>

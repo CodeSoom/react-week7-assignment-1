@@ -2,7 +2,7 @@ import React from 'react';
 
 import { MemoryRouter } from 'react-router-dom';
 
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -59,15 +59,5 @@ describe('RestaurantsPage', () => {
     const { container } = renderRestaurantsPage();
 
     expect(container.innerHTML).toContain('<a href="');
-  });
-
-  context('when click restaurant', () => {
-    it('occurs handle event', () => {
-      const { getByText } = renderRestaurantsPage();
-
-      fireEvent.click(getByText('양천주가'));
-
-      expect(mockPush).toBeCalledWith('/restaurants/1');
-    });
   });
 });

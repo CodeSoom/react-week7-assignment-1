@@ -18,6 +18,6 @@ describe('RestaurantDetail', () => {
 
     restaurant.menuItems.forEach((menuItem) => {
       expect(container).toHaveTextContent(menuItem.name);
-    })
+    });
   });
 });
