@@ -28,7 +28,6 @@ export default function Reviews({ reviews }) {
           </li>
         ))}
       </ul>
-
     </>
   );
 }

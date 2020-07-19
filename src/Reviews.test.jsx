@@ -5,7 +5,7 @@ import { render } from '@testing-library/react';
 import Reviews from './Reviews';
 
 describe('Reviews', () => {
-  context('with reviews', () => {
+  context('when reviews are existed', () => {
     it('renders review list', () => {
       const name = '테스터';
       const score = '5';
@@ -31,7 +31,7 @@ describe('Reviews', () => {
     });
   });
 
-  context('without reviews', () => {
+  context('when review is empty', () => {
     it('renders "리뷰가 없어요!" message', () => {
       const { container } = render(<Reviews reviews={[]} />);
 

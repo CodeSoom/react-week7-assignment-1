@@ -42,7 +42,7 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      {accessToken ? (
+      {accessToken && (
         <>
           <ReviewForm
             onChange={handleChange}
@@ -50,7 +50,7 @@ export default function RestaurantContainer({ restaurantId }) {
             fields={{ score, description }}
           />
         </>
-      ) : null}
+      )}
       <Reviews reviews={reviews} />
     </>
   );

@@ -150,6 +150,8 @@ export function requestReview(restaurantId) {
       accessToken, score, description, restaurantId,
     });
 
-    dispatch(addReview({ score, description }));
+    const restaurant = await fetchRestaurant({ restaurantId });
+
+    dispatch(setRestaurant(restaurant));
   };
 }

@@ -178,11 +178,11 @@ describe('actions', () => {
     });
 
     it('dispatchs setAccessToken', async () => {
-      await store.dispatch(requestReview());
+      await store.dispatch(requestReview(1));
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(addReview({ score: '5', description: 'Nice!' }));
+      expect(actions[0]).toEqual(setRestaurant({ restaurantId: 1 }));
     });
   });
 });

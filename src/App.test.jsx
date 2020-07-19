@@ -87,7 +87,7 @@ describe('App', () => {
     });
   });
 
-  context('with logged out', () => {
+  context('when logged out', () => {
     beforeEach(() => {
       loadItem.mockImplementation(() => '');
     });
@@ -99,7 +99,7 @@ describe('App', () => {
     });
   });
 
-  context('with logged in', () => {
+  context('when logged in', () => {
     const accessToken = 'ACCESS_TOKEN';
 
     beforeEach(() => {
