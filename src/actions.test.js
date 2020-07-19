@@ -14,6 +14,7 @@ import {
   requestLogin,
   changeLoginField,
   changeReviewField,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -120,7 +121,10 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken(''));
+      expect(actions[0]).toEqual(setAccessToken({
+        email: 'test@test.com',
+        password: 'password!',
+      }));
     });
   });
 
@@ -143,6 +147,28 @@ describe('actions', () => {
 
       expect(action.type).toBe('changeReviewField');
       expect(action.payload).toEqual({ name, value });
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'd',
+        restaurantId: '1',
+        reviewFields: {
+          score: '5',
+          description: '리뷰 내용',
+        },
+      });
+    });
+
+    it('dispatchs setAccessToken', async () => {
+      await store.dispatch(sendReview({ restaurantId: '1' }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
 });
