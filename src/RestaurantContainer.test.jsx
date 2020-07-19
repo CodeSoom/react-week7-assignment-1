@@ -9,7 +9,7 @@ import RestaurantContainer from './RestaurantContainer';
 import restaurant from '../fixtures/restaurants';
 
 describe('RestaurantContainer', () => {
-  const reviewField = {
+  const reviewFields = {
     score: '',
     describe: '',
   };
@@ -26,7 +26,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
-      reviewField,
+      reviewFields,
     }));
   });
 

@@ -31,7 +31,7 @@ describe('App', () => {
         email: 'test@email.com',
         password: '1234',
       },
-      reviewField: {
+      reviewFields: {
         score: '5',
         describe: '맛 좋',
       },

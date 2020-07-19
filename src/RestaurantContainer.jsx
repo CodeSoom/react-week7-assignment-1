@@ -20,7 +20,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
-  const reviewField = useSelector(get('reviewField'));
+  const reviewFields = useSelector(get('reviewFields'));
 
   function handleReviewSubmit() {
 
@@ -40,7 +40,7 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail restaurant={restaurant} />
       <ReviewForm
-        fields={reviewField}
+        fields={reviewFields}
         onChange={handleReviewChange}
         onSubmit={handleReviewSubmit}
       />
