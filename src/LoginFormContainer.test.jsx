@@ -20,35 +20,57 @@ describe('LoginFormContainer', () => {
         email: 'test@email.com',
         password: '1234',
       },
+      accessToken: given.accessToken,
     }));
   });
 
-  it('renders input controls', () => {
-    const { getByLabelText } = render((
-      <LoginFormContainer />
-    ));
+  context('when logged-in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-    expect(getByLabelText('Email').value).toBe('test@email.com');
+    it('renders logout button', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
 
-    fireEvent.change(getByLabelText('Email'), {
-      target: { value: 'new email' },
+      fireEvent.click(getByText('Logout'));
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: { accessToken: '' },
+      });
     });
-
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: { name: 'email', value: 'new email' },
-    });
-
-    expect(getByLabelText('Password').value).toBe('1234');
   });
 
-  it('renders Login button', () => {
-    const { getByText } = render((
-      <LoginFormContainer />
-    ));
+  context('when logged-out', () => {
+    given('accessToken', () => '');
 
-    fireEvent.click(getByText('Login'));
+    it('renders input controls', () => {
+      const { getByLabelText } = render((
+        <LoginFormContainer />
+      ));
 
-    expect(dispatch).toBeCalled();
+      expect(getByLabelText('Email').value).toBe('test@email.com');
+
+      fireEvent.change(getByLabelText('Email'), {
+        target: { value: 'new email' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: { name: 'email', value: 'new email' },
+      });
+
+      expect(getByLabelText('Password').value).toBe('1234');
+    });
+
+    it('renders Login button', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.click(getByText('Login'));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 });
