@@ -5,35 +5,56 @@ import { render, fireEvent } from '@testing-library/react';
 import TextField from './TextField';
 
 describe('TextField', () => {
-  it('renders label and input control', () => {
-    const handleChange = jest.fn();
+  const handleChange = jest.fn();
 
-    const { container, queryByLabelText } = render((
+  beforeEach(() => {
+    handleChange.mockClear();
+  });
+
+  function renderTextField({ label, type, name }) {
+    return render((
       <TextField
-        label="평점"
-        type="number"
-        name="score"
+        label={label}
+        type={type}
+        name={name}
         onChange={handleChange}
       />
     ));
+  }
 
-    expect(queryByLabelText('평점')).not.toBeNull();
-    expect(container).toContainHTML('type="number"');
+  context('with type', () => {
+    it('renders label and input control', () => {
+      const { container, queryByLabelText } = renderTextField({
+        label: '평점',
+        type: 'number',
+        name: 'score',
+      });
+
+      expect(queryByLabelText('평점')).not.toBeNull();
+      expect(container).toContainHTML('type="number"');
+    });
+  });
+
+  context('without type', () => {
+    it('renders label and input control', () => {
+      const { container, queryByLabelText } = renderTextField({
+        label: '리뷰 설명',
+        name: 'description',
+      });
+
+      expect(queryByLabelText('리뷰 설명')).not.toBeNull();
+      expect(container).toContainHTML('type="text');
+    });
   });
 
   it('renders review write fields', () => {
     const name = 'score';
     const value = '5';
 
-    const handleChange = jest.fn();
-
-    const { getByLabelText } = render((
-      <TextField
-        label="평점"
-        name={name}
-        onChange={handleChange}
-      />
-    ));
+    const { getByLabelText } = renderTextField({
+      label: '평점',
+      name,
+    });
 
     fireEvent.change(
       getByLabelText('평점'),
