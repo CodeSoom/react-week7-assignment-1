@@ -1,4 +1,4 @@
-import { saveItem, loadItem } from './storage';
+import { saveItem, loadItem, deleteItem } from './storage';
 
 describe('localStorage', () => {
   const KEY = 'accessToken';
@@ -8,15 +8,21 @@ describe('localStorage', () => {
     localStorage.clear();
   });
 
-  it('should save to localStorage', () => {
+  it('save to localStorage', () => {
     saveItem(KEY, VALUE);
 
     expect(localStorage.setItem).toHaveBeenLastCalledWith(KEY, VALUE);
   });
 
-  it('should load to localStorage', () => {
+  it('load to localStorage', () => {
     loadItem(KEY);
 
     expect(localStorage.getItem).toHaveBeenLastCalledWith(KEY);
+  });
+
+  it('delete to localStorage', () => {
+    deleteItem(KEY);
+
+    expect(localStorage.removeItem).toHaveBeenLastCalledWith(KEY);
   });
 });
