@@ -91,4 +91,14 @@ describe('RestaurantContainer', () => {
       });
     });
   });
+
+  it('click post review button', () => {
+    given('restaurant', () => (restaurant));
+
+    const { getByText } = renderRestaurantContainer();
+
+    fireEvent.click(getByText('리뷰 남기기'));
+
+    expect(dispatch).toBeCalledTimes(2);
+  });
 });
