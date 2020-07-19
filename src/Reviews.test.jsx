@@ -3,14 +3,15 @@ import React from 'react';
 import { render } from '@testing-library/react';
 
 import Reviews from './Reviews';
-import restaurant from '../fixtures/restaurants';
+
+import restaurant from '../fixtures/restaurant';
 
 describe('Reviews', () => {
   context('with reviews', () => {
     it('renders menu items', () => {
-      const { reviewItems } = restaurant;
+      const { reviews } = restaurant;
 
-      const { container } = render(<Reviews reviewItems={reviewItems} />);
+      const { container } = render(<Reviews reviewItems={reviews} />);
 
       expect(container).toHaveTextContent('테스터');
     });
