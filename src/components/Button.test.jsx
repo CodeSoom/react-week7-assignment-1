@@ -7,7 +7,7 @@ import Button from './Button';
 describe('<Button />', () => {
   const handleOnClick = jest.fn();
 
-  const renderComponent = ({ name }) => render((
+  const renderComponent = ({ name = 'NAME' }) => render((
     <Button name={name} onClick={handleOnClick} />
   ));
 
@@ -16,13 +16,13 @@ describe('<Button />', () => {
   });
 
   it('display button', () => {
-    const { getByRole } = renderComponent({ name: '이름' });
+    const { getByRole } = renderComponent({});
     expect(getByRole('button')).not.toBeNull();
   });
 
   context('when click button', () => {
     it('fires click event', () => {
-      const { getByRole } = renderComponent({ name: '이름' });
+      const { getByRole } = renderComponent({});
       // When
       const button = getByRole('button');
       fireEvent.click(button);
