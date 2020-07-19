@@ -85,3 +85,11 @@ export function loadRestaurant({ restaurantId }) {
     dispatch(setRestaurant(restaurant));
   };
 }
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    // TODO
+    // HTTP POST <- email, password
+    // dispatch
+  };
+}
