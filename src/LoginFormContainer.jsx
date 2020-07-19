@@ -7,17 +7,12 @@ import { get } from './utils';
 import {
   changeLoginFields,
   requestLogin,
+  logout,
 } from './actions';
 
 import LoginForm from './LoginForm';
 
 import LogoutForm from './LogoutForm';
-
-function logout() {
-  return {
-    type: 'logout',
-  };
-}
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
