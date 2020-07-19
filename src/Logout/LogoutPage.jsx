@@ -18,13 +18,19 @@ export default function LogoutPage() {
   return (
     <>
       <h2>LogOut 페이지</h2>
-      {accessToken ? (
+      { accessToken && (
+        <button type="button" onClick={handleClickLogout}>
+          LogOut
+      </button>
+      )}
+      { !accessToken && <p>LogOut 되었습니다.</p>}
+      {/* {accessToken ? (
         <button type="button" onClick={handleClickLogout}>
           LogOut
         </button>
       ) : (
         <p>LogOut 되었습니다.</p>
-      )}
+      )} */}
     </>
   );
 }
