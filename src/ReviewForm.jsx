@@ -23,7 +23,7 @@ export default function ReviewForm({ id }) {
     <>
       <div>
         <label htmlFor="score">점수</label>
-        <input 
+        <input
           id="input-score"
           name="score"
           type="number"
@@ -32,7 +32,7 @@ export default function ReviewForm({ id }) {
       </div>
       <div>
         <label htmlFor="description">내용</label>
-        <input 
+        <input
           id="description-score"
           name="description"
           type="text"
