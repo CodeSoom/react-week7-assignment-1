@@ -28,22 +28,32 @@ describe('RestaurantPage', () => {
       const params = { id: '1' };
 
       const { container } = render(
-        <RestaurantPage params={params} />
+        <RestaurantPage params={params} />,
       );
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  })
+  });
 
   context('without params props', () => {
     it('renders name', () => {
       const { container } = render(
         <MemoryRouter initialEntries={['/restaurants/1']}>
           <RestaurantPage />
-        </MemoryRouter>
+        </MemoryRouter>,
       );
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  })
+  });
+
+  it('renders review form', () => {
+    const params = { id: '1' };
+
+    const { queryByLabelText } = render(
+      <RestaurantPage params={params} />,
+    );
+
+    expect(queryByLabelText('평점')).not.toBeNull();
+  });
 });
