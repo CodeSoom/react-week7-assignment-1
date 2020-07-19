@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useSelector } from 'react-redux';
 
-import { get } from './utils';
+import { get } from '../utils';
 
 export default function RestaurantsContainer({ onClickRestaurant }) {
   const restaurants = useSelector(get('restaurants'));
@@ -18,7 +18,10 @@ export default function RestaurantsContainer({ onClickRestaurant }) {
     <ul>
       {restaurants.map((restaurant) => (
         <li key={restaurant.id}>
-          <a href="" onClick={handleClick(restaurant)}>
+          <a
+            href={`/restaurants/${restaurant.id}`}
+            onClick={handleClick(restaurant)}
+          >
             {restaurant.name}
           </a>
         </li>

@@ -10,7 +10,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import { setAccessToken } from './actions';
+
+import { loadItem } from './services/storage';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -26,7 +31,23 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' }
+      restaurant: {
+        id: 1,
+        name: '마녀주방',
+        reviews: [
+          {
+            id: 1,
+            name: '테스터',
+            score: 3,
+            description: '오오',
+          },
+        ],
+      },
+      loginFields: {
+        email: 'test@test.com',
+        password: '1234',
+      },
+      accessToken: 'TOKEN',
     }));
   });
 
@@ -34,7 +55,7 @@ describe('App', () => {
     return render(
       <MemoryRouter initialEntries={[path]}>
         <App />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
   }
 
@@ -51,6 +72,14 @@ describe('App', () => {
       const { container } = renderApp({ path: '/about' });
 
       expect(container).toHaveTextContent('About 페이지');
+    });
+  });
+
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
     });
   });
 
@@ -75,6 +104,32 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('without an access token in local storage', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it('does not call dispatch with setAccessToken', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
+
+  context('with an access token in local storage', () => {
+    const accessToken = 'ACCESS_TOKEN';
+
+    beforeEach(() => {
+      loadItem.mockImplementation(() => accessToken);
+    });
+
+    it('call dispatch with setAccessToken', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith(setAccessToken(accessToken));
     });
   });
 });

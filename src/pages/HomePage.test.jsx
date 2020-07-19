@@ -6,12 +6,12 @@ import { render } from '@testing-library/react';
 import HomePage from './HomePage';
 
 describe('HomePage', () => {
-  const links = ['About', 'Restaurants'];
+  const links = ['About', 'Restaurants', 'Log in'];
 
   const renderHomePage = () => render(
     <MemoryRouter>
       <HomePage />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 
   it('renders title', () => {
