@@ -7,7 +7,7 @@ export default function ReviewForm({
     score, description,
   } = reviewField;
 
-  if (accessToken === '' || accessToken === undefined) {
+  if(!accessToken) {
     return (
       <>
         <h3>리뷰 작성</h3>
