@@ -111,3 +111,13 @@ export function requestLogin() {
     dispatch(setAccessToken(accessToken));
   };
 }
+
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: {
+      name,
+      value,
+    },
+  };
+}

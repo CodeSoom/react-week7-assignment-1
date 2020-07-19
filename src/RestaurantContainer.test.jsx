@@ -51,7 +51,6 @@ describe('RestaurantContainer', () => {
 
       expect(getByLabelText('평점')).toHaveAttribute('type', 'number');
       expect(getByLabelText('리뷰 내용')).toHaveAttribute('type', 'text');
-      // expect(getByLabelText).toHaveTextContent('리뷰 남기기');
     });
   });
 
