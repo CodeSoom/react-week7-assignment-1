@@ -11,6 +11,8 @@ import {
 
 import LoginForm from './LoginForm';
 
+import LogoutForm from './LogoutForm';
+
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
@@ -27,12 +29,15 @@ export default function LoginFormContainer() {
 
   return (
     <>
-      <LoginForm
-        fields={{ email, password }}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      />
-      <p>{accessToken}</p>
+      {accessToken ? (
+        <LogoutForm onClick={() => {}} />
+      ) : (
+        <LoginForm
+          fields={{ email, password }}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
+      )}
     </>
   );
 }
