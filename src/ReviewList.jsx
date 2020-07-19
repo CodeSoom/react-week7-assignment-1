@@ -9,7 +9,9 @@ export default function ReviewList({ reviews }) {
         }) => (
           <li key={id}>
             {name}
+            <br />
             {score}
+            <br />
             {description}
           </li>
         ))}
