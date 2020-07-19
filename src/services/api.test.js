@@ -96,6 +96,8 @@ describe('api', () => {
       });
     });
 
+    const accessToken = 'ACCESS_TOKEN';
+
     const reviewFields = {
       score: '5',
       description: '맛 좋',
@@ -104,9 +106,7 @@ describe('api', () => {
     const restaurantId = '1';
 
     it('returns nothing', async () => {
-      const response = await postReview({ restaurantId, reviewFields });
-
-      expect(response).toEqual('');
+      await postReview({ accessToken, restaurantId, reviewFields });
     });
   });
 });
