@@ -1,18 +1,22 @@
 import React from 'react';
 import TextField from './TextField';
 
-export default function ReviewForm({ onChange, onSubmit }) {
+export default function ReviewForm({ fields, onChange, onSubmit }) {
+  const { score, description } = fields;
+
   return (
     <>
       <TextField
         label="평점"
         type="number"
         name="score"
+        inputValue={score}
         onChange={onChange}
       />
       <TextField
         label="리뷰 내용"
         name="description"
+        inputValue={description}
         onChange={onChange}
       />
       <button
