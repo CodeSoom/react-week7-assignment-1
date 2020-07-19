@@ -10,54 +10,60 @@ describe('TextField', () => {
     onChange.mockClear();
   });
 
-  context('with type', () => {
-    function renderTextField() {
-      const handleChange = jest.fn();
-      return render((
-        <TextField
-          label="평점"
-          type="number"
-          name="score"
-          onChange={handleChange}
-        />
-      ));
-    }
+  describe('ReviewForm', () => {
+    context('with type', () => {
+      function renderTextField({ inputValue } = {}) {
+        const handleChange = jest.fn();
+        return render((
+          <TextField
+            label="평점"
+            type="number"
+            name="score"
+            inputValue={inputValue}
+            onChange={handleChange}
+          />
+        ));
+      }
 
-    it('renders label and input control', () => {
-      const { queryByLabelText } = renderTextField();
+      it('renders label and input control', () => {
+        const inputValue = '4';
+        const { queryByLabelText } = renderTextField({ inputValue });
 
-      expect(queryByLabelText('평점')).not.toBeNull();
+        expect(queryByLabelText('평점').value).toBe('4');
+      });
+
+      it('renders "number" input control', () => {
+        const { container } = renderTextField();
+
+        expect(container).toContainHTML('type="number"');
+      });
     });
 
-    it('renders "number" input control', () => {
-      const { container } = renderTextField();
+    context('without type', () => {
+      function renderTextField({ inputValue } = {}) {
+        const handleChange = jest.fn();
+        return render((
+          <TextField
+            label="리뷰 내용"
+            name="description"
+            inputValue={inputValue}
+            onChange={handleChange}
+          />
+        ));
+      }
 
-      expect(container).toContainHTML('type="number"');
-    });
-  });
+      it('renders label and input control', () => {
+        const inputValue = '';
+        const { queryByLabelText } = renderTextField({ inputValue });
 
-  context('without type', () => {
-    function renderTextField() {
-      const handleChange = jest.fn();
-      return render((
-        <TextField
-          label="리뷰 내용"
-          name="description"
-          onChange={handleChange}
-        />
-      ));
-    }
+        expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+      });
 
-    it('renders label and input control', () => {
-      const { queryByLabelText } = renderTextField();
+      it('renders "text" input control', () => {
+        const { container } = renderTextField();
 
-      expect(queryByLabelText('리뷰 내용')).not.toBeNull();
-    });
-
-    it('renders "text" input control', () => {
-      const { container } = renderTextField();
-
-      expect(container).toContainHTML('type="text"');
+        expect(container).toContainHTML('type="text"');
+      });
     });
   });
 });
