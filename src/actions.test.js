@@ -145,7 +145,11 @@ describe('actions', () => {
 
       it('runs postReview', async () => {
         await store.dispatch(sendReview({ restaurantId }));
-        // TODO: postReview가 실행된걸 어떻게 알 수 있는가.
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setRestaurant(null));
+        expect(actions[1]).toEqual(setRestaurant({}));
       });
     });
   });
