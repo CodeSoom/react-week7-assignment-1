@@ -13,6 +13,12 @@ import LoginForm from './LoginForm';
 
 import LogoutForm from './LogoutForm';
 
+function logout() {
+  return {
+    type: 'logout',
+  };
+}
+
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
@@ -27,10 +33,14 @@ export default function LoginFormContainer() {
     dispatch(requestLogin());
   }
 
+  function handleClickLogout() {
+    dispatch(logout());
+  }
+
   return (
     <>
       {accessToken ? (
-        <LogoutForm onClick={() => {}} />
+        <LogoutForm onClick={handleClickLogout} />
       ) : (
         <LoginForm
           fields={{ email, password }}
