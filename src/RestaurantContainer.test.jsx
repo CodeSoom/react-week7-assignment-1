@@ -46,7 +46,7 @@ describe('RestaurantContainer', () => {
     it('renders review write form and listens event', () => {
       const { getByLabelText } = render((
         <RestaurantContainer
-          restaurantId = '1'
+          restaurantId="1"
         />
       ));
 

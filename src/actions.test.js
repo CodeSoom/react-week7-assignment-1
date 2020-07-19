@@ -137,7 +137,7 @@ describe('actions', () => {
 
     it('change review field', () => {
       const name = 'score';
-      const value = '5'
+      const value = '5';
 
       const action = changeReviewField({ name, value });
 
