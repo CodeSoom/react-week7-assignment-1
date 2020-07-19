@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
+import reviews from '../fixtures/reviews';
+
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
@@ -38,6 +40,7 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews,
     }));
 
     it('renders name and address', () => {
@@ -83,6 +86,16 @@ describe('RestaurantContainer', () => {
         fireEvent.click(getByText('리뷰 남기기'));
 
         expect(dispatch).toBeCalledTimes(2);
+      });
+
+      context('with reviews', () => {
+        it('render reviews', () => {
+          const { container } = renderRestaurantContainer();
+
+          reviews.forEach(({ name, score, description }) => {
+            expect(container).toHaveTextContent(`${name}${score}${description}`);
+          });
+        });
       });
     });
 
