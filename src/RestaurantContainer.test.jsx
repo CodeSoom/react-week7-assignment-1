@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,6 +19,11 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+      accessToken: given.accessToken,
     }));
   });
 
@@ -50,6 +55,35 @@ describe('RestaurantContainer', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('Loading');
+    });
+  });
+
+  context('when not logged in', () => {
+    it('renders no review write fields', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
+
+      expect(queryByLabelText('평점')).toBeNull();
+      expect(queryByLabelText('리뷰 내용')).toBeNull();
+    });
+  });
+
+  context('when logged in', () => {
+    // TODO: accessToken 세팅
+    given('accessToken', () => 'ACCESS_TOKEN');
+
+    it('renders review write fields', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
+
+      expect(queryByLabelText('평점')).not.toBeNull();
+      expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+    });
+
+    it('renders "리뷰 남기기" button', () => {
+      const { getByText } = renderRestaurantContainer();
+
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(dispatch).toBeCalledTimes(2);
     });
   });
 });
