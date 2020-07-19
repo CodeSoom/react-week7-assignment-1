@@ -12,6 +12,7 @@ import {
 } from './actions';
 
 import { get } from './utils';
+import RestaurantReviews from './RestaurantReviews';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -46,6 +47,9 @@ export default function RestaurantContainer({ restaurantId }) {
           onSubmit={handleSubmit}
         />
       ) : null}
+      <RestaurantReviews
+        reviews={restaurant.reviews}
+      />
     </>
   );
 }

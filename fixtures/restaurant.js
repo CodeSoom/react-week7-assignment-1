@@ -5,4 +5,13 @@ export default {
   menuItems: [
     { id: 1, name: '떡볶이' },
   ],
+  reviews: [
+    {
+      id: 1,
+      restaurantId: 1,
+      name: '테스터',
+      score: '5',
+      description: 'test',
+    },
+  ],
 };
