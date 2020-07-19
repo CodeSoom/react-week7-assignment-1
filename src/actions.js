@@ -127,6 +127,8 @@ export function sendReview({ restaurantId }) {
     await postReview({
       accessToken, restaurantId, score, description,
     });
+
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }
 
