@@ -4,13 +4,16 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeReviewField } from './actions';
-
 import RestaurantContainer from './RestaurantContainer';
 
 import restaurant from '../fixtures/restaurants';
 
 describe('RestaurantContainer', () => {
+  const reviewField = {
+    score: '',
+    describe: '',
+  };
+
   const dispatch = jest.fn();
 
   function renderRestaurantContainer() {
@@ -23,10 +26,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
-      reviewField: {
-        score: '5',
-        describe: '맛 좋',
-      },
+      reviewField,
     }));
   });
 
@@ -71,7 +71,7 @@ describe('RestaurantContainer', () => {
   context('when review input changes', () => {
     given('restaurant', () => (restaurant));
 
-    it('changes score', () => {
+    it('changes score, description', () => {
       const { getByLabelText } = renderRestaurantContainer();
 
       const controls = [
