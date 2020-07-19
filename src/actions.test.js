@@ -13,7 +13,6 @@ import {
   requestLogin,
   setAccessToken,
   requestReview,
-  addReview,
 } from './actions';
 
 const middlewares = [thunk];
