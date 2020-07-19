@@ -1,3 +1,1 @@
-export default {
-  accessToken: '엑세스토큰',
-};
+export default 'ACCESS_TOKEN';

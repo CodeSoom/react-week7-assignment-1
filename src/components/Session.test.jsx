@@ -13,8 +13,8 @@ describe('<Session />', () => {
 
   context('with access-token', () => {
     it('display Access Token', () => {
-      const { container } = renderComponent({ accessToken: ACCESS_TOKEN.accessToken });
-      expect(container).toHaveTextContent(ACCESS_TOKEN.accessToken);
+      const { container } = renderComponent({ accessToken: ACCESS_TOKEN });
+      expect(container).toHaveTextContent(ACCESS_TOKEN);
     });
   });
 

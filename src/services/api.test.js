@@ -7,7 +7,7 @@ import REGIONS from '../../fixtures/regions';
 import CATEGORIES from '../../fixtures/categories';
 import RESTAURANTS from '../../fixtures/restaurants';
 import RESTAURANT from '../../fixtures/restaurant';
-import ACCESSTOKEN from '../../fixtures/accessToken';
+import ACCESS_TOKEN from '../../fixtures/accessToken';
 
 describe('api', () => {
   const mockFetch = (data) => {
@@ -71,7 +71,7 @@ describe('api', () => {
 
   describe('postSession', () => {
     beforeEach(() => {
-      mockFetch(ACCESSTOKEN);
+      mockFetch(ACCESS_TOKEN);
     });
 
     it('returns access-token', async () => {
@@ -80,7 +80,7 @@ describe('api', () => {
         password: '비밀번호',
       });
 
-      expect(accessToken).toEqual(ACCESSTOKEN);
+      expect(accessToken).toEqual(ACCESS_TOKEN);
     });
   });
 

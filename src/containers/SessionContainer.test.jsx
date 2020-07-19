@@ -26,14 +26,14 @@ describe('SessionContainer', () => {
     beforeEach(() => {
       useSelector.mockImplementation((selector) => selector({
         session: {
-          accessToken: ACCESS_TOKEN.accessToken,
+          accessToken: ACCESS_TOKEN,
         },
       }));
     });
 
     it('display access-token', () => {
       const { container } = renderComponent();
-      expect(container).toHaveTextContent(ACCESS_TOKEN.accessToken);
+      expect(container).toHaveTextContent(ACCESS_TOKEN);
     });
 
     it('display logout-button', () => {
