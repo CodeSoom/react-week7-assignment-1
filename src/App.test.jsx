@@ -10,10 +10,7 @@ import App from './App';
 
 import RESTAURANT from '../fixtures/restaurant';
 
-jest.mock('react-redux', () => ({
-  useDispatch: jest.fn(),
-  useSelector: jest.fn(),
-}));
+jest.mock('react-redux');
 
 describe('App', () => {
   const dispatch = jest.fn();

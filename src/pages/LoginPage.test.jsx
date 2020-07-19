@@ -6,10 +6,7 @@ import { useSelector } from 'react-redux';
 
 import LoginPage from './LoginPage';
 
-jest.mock('react-redux', () => ({
-  useDispatch: jest.fn(),
-  useSelector: jest.fn(),
-}));
+jest.mock('react-redux');
 
 describe('LoginPage', () => {
   useSelector.mockImplementation((selector) => selector({

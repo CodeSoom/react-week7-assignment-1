@@ -10,10 +10,7 @@ import RestaurantsContainer from './RestaurantsContainer';
 
 import RESTAURANTS from '../../fixtures/restaurants';
 
-jest.mock('react-redux', () => ({
-  useDispatch: jest.fn(),
-  useSelector: jest.fn(),
-}));
+jest.mock('react-redux');
 
 test('RestaurantsContainer', () => {
   useSelector.mockImplementation((selector) => selector({

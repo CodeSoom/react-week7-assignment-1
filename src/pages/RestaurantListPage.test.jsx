@@ -8,10 +8,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import RestaurantListPage from './RestaurantListPage';
 
-jest.mock('react-redux', () => ({
-  useDispatch: jest.fn(),
-  useSelector: jest.fn(),
-}));
+jest.mock('react-redux');
 
 test('RestaurantListPage', () => {
   const dispatch = jest.fn();

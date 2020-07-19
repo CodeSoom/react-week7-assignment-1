@@ -8,10 +8,7 @@ import SessionContainer from './SessionContainer';
 
 import ACCESS_TOKEN from '../../fixtures/accessToken';
 
-jest.mock('react-redux', () => ({
-  useDispatch: jest.fn(),
-  useSelector: jest.fn(),
-}));
+jest.mock('react-redux');
 
 describe('SessionContainer', () => {
   const dispatch = jest.fn();

@@ -10,10 +10,7 @@ import RestaurantViewPage from './RestaurantViewPage';
 
 import RESTAURANT from '../../fixtures/restaurant';
 
-jest.mock('react-redux', () => ({
-  useDispatch: jest.fn(),
-  useSelector: jest.fn(),
-}));
+jest.mock('react-redux');
 
 test('RestaurantViewPage', () => {
   const dispatch = jest.fn();

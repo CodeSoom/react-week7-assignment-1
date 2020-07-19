@@ -8,10 +8,7 @@ import LoginFormContainer from './LoginFormContainer';
 
 import SESSION_INPUT from '../../fixtures/sessionInput';
 
-jest.mock('react-redux', () => ({
-  useDispatch: jest.fn(),
-  useSelector: jest.fn(),
-}));
+jest.mock('react-redux');
 
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
