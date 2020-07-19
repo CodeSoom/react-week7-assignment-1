@@ -7,6 +7,7 @@ export default function ReviewForm({ fields, onChange, onSubmit }) {
   return (
     <>
       <TextField
+        id="review-score"
         label="평점"
         type="number"
         name="score"
@@ -14,6 +15,7 @@ export default function ReviewForm({ fields, onChange, onSubmit }) {
         onChange={onChange}
       />
       <TextField
+        id="review-description"
         label="리뷰 내용"
         name="description"
         inputValue={description}

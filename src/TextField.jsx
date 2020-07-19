@@ -1,10 +1,8 @@
 import React from 'react';
 
 export default function TextField({
-  label, type = 'text', name, inputValue, onChange,
+  label, id, type = 'text', name, inputValue, onChange,
 }) {
-  const id = `review-${name}`;
-
   function handleChange(event) {
     const { target: { value } } = event;
     onChange({ name, value });

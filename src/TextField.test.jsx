@@ -16,6 +16,7 @@ describe('TextField', () => {
         const handleChange = jest.fn();
         return render((
           <TextField
+            id="review-score"
             label="평점"
             type="number"
             name="score"
@@ -44,6 +45,7 @@ describe('TextField', () => {
         const handleChange = jest.fn();
         return render((
           <TextField
+            id="review-description"
             label="리뷰 내용"
             name="description"
             inputValue={inputValue}
