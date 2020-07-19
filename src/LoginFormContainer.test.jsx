@@ -32,7 +32,7 @@ describe('LoginFormContainer', () => {
         <LoginFormContainer />
       ));
 
-      fireEvent.click(getByText('Logout'));
+      fireEvent.click(getByText('Log out'));
 
       expect(dispatch).toBeCalledWith({
         type: 'setAccessToken',
@@ -68,7 +68,7 @@ describe('LoginFormContainer', () => {
         <LoginFormContainer />
       ));
 
-      fireEvent.click(getByText('Login'));
+      fireEvent.click(getByText('Log In'));
 
       expect(dispatch).toBeCalled();
     });

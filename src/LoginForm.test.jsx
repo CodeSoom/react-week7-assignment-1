@@ -60,7 +60,7 @@ describe('LoginForm', () => {
   it('renders Login button', () => {
     const { getByText } = renderLoginForm({});
 
-    fireEvent.click(getByText('Login'));
+    fireEvent.click(getByText('Log In'));
 
     expect(handleSubmit).toBeCalled();
   });

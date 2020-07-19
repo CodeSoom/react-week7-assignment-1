@@ -18,7 +18,7 @@ describe('LogoutForm', () => {
       />
     ));
 
-    expect(container).toHaveTextContent('Logout');
+    expect(container).toHaveTextContent('Log out');
   });
 
   it('listens logout click event', () => {
@@ -28,7 +28,7 @@ describe('LogoutForm', () => {
       />
     ));
 
-    fireEvent.click(getByText('Logout'));
+    fireEvent.click(getByText('Log out'));
 
     expect(handleClick).toBeCalled();
   });

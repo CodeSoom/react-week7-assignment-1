@@ -7,7 +7,7 @@ export default function LogoutForm({ onClick }) {
         type="submit"
         onClick={onClick}
       >
-        Logout
+        Log out
       </button>
     </>
   );
