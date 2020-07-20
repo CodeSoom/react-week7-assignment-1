@@ -10,7 +10,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import { loadItem } from './services/storage';
+
+import reviews from '../fixtures/reviews';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -26,7 +31,8 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' }
+      restaurant: { id: 1, name: '마녀주방', reviews },
+      reviewFields: given.reviewFields,
     }));
   });
 
@@ -34,7 +40,7 @@ describe('App', () => {
     return render(
       <MemoryRouter initialEntries={[path]}>
         <App />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
   }
 
@@ -64,6 +70,10 @@ describe('App', () => {
 
   context('with path /restaurants/:id', () => {
     it('renders the restaurant page', () => {
+      given('reviewFields', () => ({
+        score: '5',
+        description: '정말 좋아요',
+      }));
       const { container } = renderApp({ path: '/restaurants/1' });
 
       expect(container).toHaveTextContent('마녀주방');
@@ -75,6 +85,35 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('with logged in', () => {
+    const accessToken = 'ACCESS_TOKEN';
+
+    beforeEach(() => {
+      loadItem.mockImplementation(() => accessToken);
+    });
+
+    it('dispatchs call with setAccessToken', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: { accessToken },
+      });
+    });
+  });
+
+  context('with logged out', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it('doesn\'t call dispatch', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
     });
   });
 });

@@ -8,6 +8,8 @@ import { render } from '@testing-library/react';
 
 import RestaurantPage from './RestaurantPage';
 
+import reviews from '../fixtures/reviews';
+
 describe('RestaurantPage', () => {
   beforeEach(() => {
     const dispatch = jest.fn();
@@ -19,6 +21,11 @@ describe('RestaurantPage', () => {
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
+        reviews,
+      },
+      reviewFields: {
+        score: '5',
+        description: '정말 좋아요',
       },
     }));
   });
@@ -28,22 +35,22 @@ describe('RestaurantPage', () => {
       const params = { id: '1' };
 
       const { container } = render(
-        <RestaurantPage params={params} />
+        <RestaurantPage params={params} />,
       );
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  })
+  });
 
   context('without params props', () => {
     it('renders name', () => {
       const { container } = render(
         <MemoryRouter initialEntries={['/restaurants/1']}>
           <RestaurantPage />
-        </MemoryRouter>
+        </MemoryRouter>,
       );
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  })
+  });
 });

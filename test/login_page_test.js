@@ -1,4 +1,3 @@
-
 Feature('LoginPage');
 
 Scenario('로그인과 로그아웃', (I) => {
