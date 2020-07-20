@@ -12,6 +12,7 @@ import {
   logout,
   changeReviewField,
   addReview,
+  setReviews,
 } from "./actions";
 
 describe("reducer", () => {
@@ -328,13 +329,15 @@ describe("reducer", () => {
         },
       };
 
-      const reviews = [
-        { score: "5", description: "Great!" },
-      ];
+      const newReviews = [{ score: "5", description: "Great!" }];
 
-      const state = reducer(initialState, setReviews(reviews));
+      const state = reducer(initialState, setReviews(newReviews));
 
-      expect(state.restaurant.reviews).toHaveLength(1);
+      const { restaurant: { reviews } } = state;
+
+      expect(reviews).toHaveLength(newReviews.length);
+
+      expect(reviews).toEqual(newReviews);
     });
   });
 });

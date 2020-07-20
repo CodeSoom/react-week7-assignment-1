@@ -1,4 +1,4 @@
-import { equal } from './utils';
+import { equal } from "./utils";
 
 const initialState = {
   regions: [],
@@ -8,13 +8,13 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   loginFields: {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   },
-  accessToken: '',
+  accessToken: "",
   reviewFields: {
-    score: '',
-    description: '',
+    score: "",
+    description: "",
   },
 };
 
@@ -51,7 +51,7 @@ const reducers = {
     const { regions } = state;
     return {
       ...state,
-      selectedRegion: regions.find(equal('id', regionId)),
+      selectedRegion: regions.find(equal("id", regionId)),
     };
   },
 
@@ -59,7 +59,7 @@ const reducers = {
     const { categories } = state;
     return {
       ...state,
-      selectedCategory: categories.find(equal('id', categoryId)),
+      selectedCategory: categories.find(equal("id", categoryId)),
     };
   },
 
@@ -86,7 +86,7 @@ const reducers = {
   logout(state) {
     return {
       ...state,
-      accessToken: '',
+      accessToken: "",
     };
   },
 
@@ -103,14 +103,20 @@ const reducers = {
   },
 
   addReview(state, { payload: { score, description } }) {
-    const { restaurant, restaurant: { reviews, id: { restaurantId } } } = state;
+    const {
+      restaurant,
+      restaurant: {
+        reviews,
+        id: { restaurantId },
+      },
+    } = state;
 
     const lastId = [...reviews].reverse()[0].id;
 
     const newReview = {
       id: lastId + 1,
       restaurantId,
-      name: '테스터',
+      name: "테스터",
       score,
       description,
     };
@@ -122,8 +128,20 @@ const reducers = {
         reviews: [...reviews, newReview],
       },
       reviewFields: {
-        score: '',
-        description: '',
+        score: "",
+        description: "",
+      },
+    };
+  },
+
+  setReviews(state, { payload: { reviews } }) {
+    const { restaurant } = state;
+
+    return {
+      ...state,
+      restaurant: {
+        ...restaurant,
+        reviews,
       },
     };
   },
