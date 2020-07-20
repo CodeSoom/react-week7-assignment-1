@@ -1,6 +1,7 @@
 import { equal } from './utils';
 
 const initialState = {
+  accessToken: '',
   loginFields: {
     email: '',
     password: '',
@@ -66,6 +67,13 @@ const reducers = {
         ...loginFields,
         [name]: value,
       },
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
     };
   },
 };

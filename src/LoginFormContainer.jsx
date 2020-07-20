@@ -8,6 +8,7 @@ import { get } from './utils';
 
 import {
   changeLoginFields,
+  requestLogin,
 } from './actions';
 
 export default function LoginFormContainer() {
@@ -17,11 +18,16 @@ export default function LoginFormContainer() {
   function handleChange({ name, value }) {
     dispatch(changeLoginFields({ name, value }));
   }
+
+  function handleSubmit() {
+    dispatch(requestLogin());
+  }
   return (
     <div>
       <LoginForm
         fields={{ email, password }}
         onChange={handleChange}
+        onSubmit={handleSubmit}
       />
     </div>
   );

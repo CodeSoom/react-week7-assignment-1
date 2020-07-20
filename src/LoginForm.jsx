@@ -1,14 +1,19 @@
 import React from 'react';
 
-export default function LoginForm({ fields, onChange }) {
+export default function LoginForm({ fields, onChange, onSubmit }) {
   const { email, password } = fields;
   function handleChange(event) {
     const { target: { name, value } } = event;
     onChange({ name, value });
   }
+  function handleSubmit(event) {
+    event.preventDefault();
+    onSubmit();
+  }
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="email_field">E-mail</label>
         <input
           id="email_field"
