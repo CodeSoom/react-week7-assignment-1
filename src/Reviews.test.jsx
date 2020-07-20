@@ -8,7 +8,7 @@ import restaurant from '../fixtures/restaurant';
 
 describe('Reviews', () => {
   context('with reviews', () => {
-    it('renders menu items', () => {
+    it('renders review items', () => {
       const { reviews } = restaurant;
 
       const { container } = render(<Reviews reviewItems={reviews} />);
@@ -17,13 +17,12 @@ describe('Reviews', () => {
     });
   });
 
-  context('without menu item', () => {
+  context('without reviews', () => {
     it('renders no items message', () => {
-      [[], null, undefined].forEach((reviewItem) => {
-        const { container } = render(<Reviews reviewItems={reviewItem} />);
+      const reviews = [];
+      const { container } = render(<Reviews reviewItems={reviews} />);
 
-        expect(container).toHaveTextContent('리뷰가 없어요');
-      });
+      expect(container).toHaveTextContent('리뷰가 없어요');
     });
   });
 });

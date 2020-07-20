@@ -11,6 +11,7 @@ import {
   setAccessToken,
   changeReviewField,
   logout,
+  setReviews,
 } from './actions';
 
 describe('reducer', () => {
@@ -196,6 +197,28 @@ describe('reducer', () => {
       expect(state.reviewFields).toEqual({
         score: '5',
       });
+    });
+  });
+
+  describe('setReviews', () => {
+    it('changes reviews of current restaurant', () => {
+      const initialState = {
+        restaurant: {
+          reviews: [],
+        },
+      };
+
+      const reviews = [
+        {
+          id: 1, name: '테스터', description: 'Good', score: 1.0,
+        },
+      ];
+
+      const state = reducer(initialState, setReviews(
+        reviews,
+      ));
+
+      expect(state.restaurant.reviews).toHaveLength(reviews.length);
     });
   });
 });

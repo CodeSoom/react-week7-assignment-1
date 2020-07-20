@@ -14,6 +14,8 @@ import {
   setAccessToken,
   sendReview,
   logout,
+  changeReviewField,
+  loadReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -139,6 +141,9 @@ describe('actions', () => {
         await store.dispatch(sendReview({ restaurantId: 1 }));
 
         const actions = store.getActions();
+
+        expect(actions[0]).toEqual(changeReviewField({ name: 'score', value: '' }));
+        expect(actions[1]).toEqual(changeReviewField({ name: 'description', value: '' }));
       });
     });
   });

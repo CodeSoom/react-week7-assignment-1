@@ -7,9 +7,11 @@ export default function ReviewItems({ reviewItems }) {
     );
   }
 
+  const sortedReviews = [...reviewItems].sort((a, b) => b.id - a.id);
+
   return (
     <ul>
-      {reviewItems.map((reviewItem) => (
+      {sortedReviews.map((reviewItem) => (
         <li key={reviewItem.id}>
           <h4>
             리뷰어 :

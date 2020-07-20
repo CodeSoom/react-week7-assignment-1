@@ -123,13 +123,31 @@ export function changeReviewField({ name, value }) {
   };
 }
 
+export function setReviews(reviews) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
+
+export function loadReview({ restaurantId }) {
+  return async (dispatch) => {
+    const restaurant = await fetchRestaurant({ restaurantId });
+
+    dispatch(setReviews(restaurant.reviews));
+  };
+}
+
 export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields } = getState();
 
     await postReview({ accessToken, restaurantId, reviewFields });
 
-    // TODO dispatch(loadReviews)
+    dispatch(changeReviewField({ name: 'score', value: '' }));
+    dispatch(changeReviewField({ name: 'description', value: '' }));
+
+    dispatch(loadReview({ restaurantId }));
   };
 }
 
