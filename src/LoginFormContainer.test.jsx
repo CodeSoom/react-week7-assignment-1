@@ -23,6 +23,7 @@ describe('LoginFormContainer', () => {
         email: 'test@test',
         password: '123',
       },
+      accessToken: given.accessToken,
     }));
   });
 
@@ -72,6 +73,32 @@ describe('LoginFormContainer', () => {
         type: 'changeLoginField',
         payload: { name: 'password', value: 'newPassword' },
       });
+    });
+  });
+
+  context('with access token', () => {
+    it('renders logout button and listen event', () => {
+      given('accessToken', () => 'ACCESS_TOKEN');
+
+      const { getByText } = render(<LoginFormContainer />);
+
+      expect(getByText('Log out')).not.toBeNull();
+
+      fireEvent.click(getByText('Log out'));
+
+      expect(dispatch).toBeCalledWith({
+        type: 'logout',
+      });
+    });
+  });
+
+  context('without access token', () => {
+    it('renders login button', () => {
+      given('accessToken', () => '');
+
+      const { getByText } = render(<LoginFormContainer />);
+
+      expect(getByText('Log In')).not.toBeNull();
     });
   });
 });

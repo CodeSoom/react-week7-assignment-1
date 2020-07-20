@@ -13,6 +13,7 @@ import {
   requestLogin,
   setAccessToken,
   sendReview,
+  logout,
 } from './actions';
 
 const middlewares = [thunk];
@@ -139,6 +140,21 @@ describe('actions', () => {
 
         const actions = store.getActions();
       });
+    });
+  });
+
+  describe('logout', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+      });
+    });
+
+    it('requests logout', async () => {
+      await store.dispatch(logout());
+
+      const actions = store.getActions();
+      expect(actions[0]).toEqual(logout());
     });
   });
 });
