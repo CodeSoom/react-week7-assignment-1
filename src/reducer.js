@@ -102,38 +102,6 @@ const reducers = {
     };
   },
 
-  addReview(state, { payload: { score, description } }) {
-    const {
-      restaurant,
-      restaurant: {
-        reviews,
-        id: { restaurantId },
-      },
-    } = state;
-
-    const lastId = [...reviews].reverse()[0].id;
-
-    const newReview = {
-      id: lastId + 1,
-      restaurantId,
-      name: "테스터",
-      score,
-      description,
-    };
-
-    return {
-      ...state,
-      restaurant: {
-        ...restaurant,
-        reviews: [...reviews, newReview],
-      },
-      reviewFields: {
-        score: "",
-        description: "",
-      },
-    };
-  },
-
   setReviews(state, { payload: { reviews } }) {
     const { restaurant } = state;
 

@@ -162,8 +162,8 @@ export function requestReview(restaurantId) {
       restaurantId,
     });
 
-    const restaurant = await fetchRestaurant({ restaurantId });
+    const { reviews } = await fetchRestaurant({ restaurantId });
 
-    dispatch(setRestaurant(restaurant));
+    dispatch(setReviews(reviews));
   };
 }

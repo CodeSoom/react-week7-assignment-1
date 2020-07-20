@@ -13,6 +13,7 @@ import {
   requestLogin,
   setAccessToken,
   requestReview,
+  setReviews,
 } from './actions';
 
 const middlewares = [thunk];
@@ -140,7 +141,7 @@ describe('actions', () => {
       await store.dispatch(requestLogin());
 
       const actions = store.getActions();
-
+    
       expect(actions[0]).toEqual(setAccessToken({ accessToken: 'ACCESS_TOKEN' }));
     });
   });
@@ -181,7 +182,7 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurant({ restaurantId: 1 }));
+      expect(actions[0]).toEqual(setReviews());
     });
   });
 });
