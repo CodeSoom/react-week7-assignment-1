@@ -33,6 +33,16 @@ describe('RestaurantContainer', () => {
     expect(dispatch).toBeCalled();
   });
 
+  context('without restaurant', () => {
+    given('restaurant', () => null);
+
+    it('renders loading', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('Loading');
+    });
+  });
+
   context('with restaurant', () => {
     given('restaurant', () => ({
       id: 1,
@@ -46,44 +56,34 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
     });
-  });
 
-  context('without restaurant', () => {
-    given('restaurant', () => null);
+    context('when logged in', () => {
+      // TODO: accessToken 세팅
+      given('accessToken', () => 'ACCESS_TOKEN');
 
-    it('renders loading', () => {
-      const { container } = renderRestaurantContainer();
+      it('renders review write fields', () => {
+        const { queryByLabelText } = renderRestaurantContainer();
 
-      expect(container).toHaveTextContent('Loading');
-    });
-  });
+        expect(queryByLabelText('평점')).not.toBeNull();
+        expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+      });
 
-  context('when not logged in', () => {
-    it('renders no review write fields', () => {
-      const { queryByLabelText } = renderRestaurantContainer();
+      it('renders "리뷰 남기기" button', () => {
+        const { getByText } = renderRestaurantContainer();
 
-      expect(queryByLabelText('평점')).toBeNull();
-      expect(queryByLabelText('리뷰 내용')).toBeNull();
-    });
-  });
+        fireEvent.click(getByText('리뷰 남기기'));
 
-  context('when logged in', () => {
-    // TODO: accessToken 세팅
-    given('accessToken', () => 'ACCESS_TOKEN');
-
-    it('renders review write fields', () => {
-      const { queryByLabelText } = renderRestaurantContainer();
-
-      expect(queryByLabelText('평점')).not.toBeNull();
-      expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+        expect(dispatch).toBeCalledTimes(2);
+      });
     });
 
-    it('renders "리뷰 남기기" button', () => {
-      const { getByText } = renderRestaurantContainer();
+    context('when not logged in', () => {
+      it('renders no review write fields', () => {
+        const { queryByLabelText } = renderRestaurantContainer();
 
-      fireEvent.click(getByText('리뷰 남기기'));
-
-      expect(dispatch).toBeCalledTimes(2);
+        expect(queryByLabelText('평점')).toBeNull();
+        expect(queryByLabelText('리뷰 내용')).toBeNull();
+      });
     });
   });
 });
