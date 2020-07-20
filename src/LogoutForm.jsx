@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LogoutPage({ onClick }) {
+export default function LogoutForm({ onClick }) {
   return (
     <div>
       <button
