@@ -3,6 +3,10 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 
 import {
+  requestLogin,
+  setAccessToken,
+  logout,
+  sendReview,
   loadInitialData,
   setRegions,
   setCategories,
@@ -12,10 +16,13 @@ import {
   setRestaurant,
 } from './actions';
 
+import { saveItem, removeItem } from './services/storage';
+
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/storage');
 
 describe('actions', () => {
   let store;
@@ -98,6 +105,49 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    const loginFields = {
+      email: 'tester@exmaple.com',
+      password: 'test',
+    };
+
+    beforeEach(() => {
+      store = mockStore({ loginFields });
+
+      saveItem.mockImplementation(() => null);
+    });
+
+    it('dispatchs setAccessToken', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken('US3R_T@KEN'));
+
+      expect(saveItem).toBeCalledTimes(1);
+    });
+  });
+
+  describe('logout', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'US3R_T@KEN',
+      });
+
+      // removeItem.mockClear();
+    });
+
+    it('requests logout', async () => {
+      await store.dispatch(logout());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken(''));
+
+      // expect(removeItem).toBeCalledWith('accessToken');
     });
   });
 });
