@@ -7,11 +7,16 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginFields,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      loginFields: {
+        email: '',
+        password: '',
+      },
       regions: [],
       categories: [],
       restaurants: [],
@@ -122,6 +127,38 @@ describe('reducer', () => {
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
+      });
+    });
+  });
+
+  describe('changeLoginFields', () => {
+    context('when email changed', () => {
+      it('changes Login Field', () => {
+        const initialState = {
+          loginFields: {
+            email: 'email',
+            password: 'password',
+          },
+        };
+
+        const state = reducer(initialState, changeLoginFields({ name: 'email', value: 'test' }));
+        expect(state.loginFields.email).toBe('test');
+        expect(state.loginFields.password).toBe('password');
+      });
+    });
+
+    context('when password changed', () => {
+      it('changes Login Field', () => {
+        const initialState = {
+          loginFields: {
+            email: 'email',
+            password: 'password',
+          },
+        };
+
+        const state = reducer(initialState, changeLoginFields({ name: 'password', value: 'test' }));
+        expect(state.loginFields.email).toBe('email');
+        expect(state.loginFields.password).toBe('test');
       });
     });
   });

@@ -47,6 +47,13 @@ export function selectCategory(categoryId) {
   };
 }
 
+export function changeLoginFields({ name, value }) {
+  return {
+    type: 'changeLoginFields',
+    payload: { name, value },
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();
