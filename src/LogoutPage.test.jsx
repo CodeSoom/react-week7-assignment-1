@@ -7,10 +7,8 @@ import LogoutPage from './LogoutPage';
 jest.mock('react-redux');
 
 describe('LogoutPage', () => {
-  beforeEach(() => {
-  });
-
-  const renderLogoutPage = () => render(<LogoutPage />);
+  const handleClick = jest.fn();
+  const renderLogoutPage = () => render(<LogoutPage onClick={handleClick} />);
 
   it('renders log out', () => {
     const { container } = renderLogoutPage();
