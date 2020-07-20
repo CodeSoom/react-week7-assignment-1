@@ -3,6 +3,7 @@ module.exports = {
     'given2/setup',
     'jest-plugin-context/setup',
     './jest.setup',
+    'jest-localstorage-mock',
   ],
   coverageThreshold: {
     global: {
