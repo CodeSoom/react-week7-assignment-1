@@ -27,3 +27,35 @@ export async function fetchRestaurant({ restaurantId }) {
   const data = await response.json();
   return data;
 }
+
+export async function fetchAccessToken({ email, password }) {
+  const url = 'https://eatgo-login-api.ahastudio.com/session';
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  });
+  const data = await response.json();
+  return data;
+}
+
+export async function postReview({
+  restaurantId, accessToken, score, description,
+}) {
+  const url = `https://eatgo-customer-api.ahastudio.com/restaurants/${restaurantId}/reviews`;
+  const headers = new Headers({
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${accessToken}`,
+  });
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({ score, description }),
+  });
+
+  const data = await response.json();
+  return data;
+}

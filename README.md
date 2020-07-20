@@ -91,3 +91,42 @@ npm run coverage
 ```bash
 npm run test:e2e
 ```
+
+### Todo
+- [X] Log In 페이지 구현
+  - [X] ID, PW를 입력할 수 있다.
+  - [X] ID, PW의 입력값 상태를 리덕스에서 관리한다.
+  - [X] ID, PW의 입력값 상태를 렌더링 할 수 있다.
+  - [X] 로그인 버튼을 눌러서 로그인을 시도할 수 있다.
+  - [X] 로그인이 성공하면 리덕스에 accessToken 상태를 업데이트 한다.
+  - [X] 로그인이 성공하면 로컬 스토리지에 accessToken을 저장한다.
+  - [X] 리액트 라우터에서 Log In 페이지 경로를 설정한다.
+  - [X] HomePage에서 Log In 페이지로 이동하는 기능을 구현한다.
+
+- [X] TokenContainer 구현
+  - 처음 앱 실행시 localStorage의 accessToken 존재 여부에 따라 로그인 상태를 관리하는 컴포넌트
+  - [X] localStorage에 accessToken이 있는 경우 리덕스의 accessToken 상태를 업데이트 한다.
+  - [X] localStorage에 accessToken이 있는 경우 아무것도 하지 않는다.
+
+- [X] Logout 기능 구현
+  - [X] 이미 로그인된 상태에서는 로그인 폼 대신 로그아웃 버튼이 보인다.
+
+### 1차 리뷰 반영
+- 코드에 의도가 더 잘 드러나도록 개선하기
+- 코드의 목적이 무엇인지 다시 한번 생각해볼 것
+  - ex. 기능상 로그인이 목적이고, 토큰 발급이 그에 대한 필요 행동이다. (반대가 아님)
+- [X] 테스트 실행하기 전에 상태 초기화하기(LoginForm.test)
+- [X] useSelector를 더 간단하게 표현하기(LoginFormContainer)
+- [X] createToken 대신 의도가 더 잘 드러나도록 Login으로 이름 바꾸기(LoginFormContainer, actions)
+- [X] 코드에 의도를 더 잘 드러내기 위해 logout을 처리하는 액션을 새로 생성하기(actions)
+- [X] accessToken과 관련된 로컬 스토리지를 다루는 서비스 추상화하기
+- [X] 로그인 버튼 클릭 테스트에 대해 더 구체적으로 정리하기(LoginFormContainer.test)
+- [X] 중복되는 테스트 통합하기(LogoutButton.test)
+
+### 2차 리뷰 반영
+- 테스트 코드 자체도 자세하게 접근하고 리팩토링 하기
+- [X] 테스트의 입력과 출력을 좀 더 명확하게 표기하기(LoginForm.test)
+- [X] 공통된 초기화 코드를 빼내기(LoginFormContainer.test)
+- [X] 테스트 표현에 객체를 활용하기(Reviews.test)
+- [X] 이름을 모듈에 맞게 바꾸기(RoutePage.test)
+- [X] accessTokenRepository 사용해서 테스트하는 부분을 모킹하기

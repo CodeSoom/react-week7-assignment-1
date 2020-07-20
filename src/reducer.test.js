@@ -7,6 +7,9 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginFields,
+  setAccessToken,
+  changeReviewFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +21,15 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      accessToken: '',
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -124,5 +136,63 @@ describe('reducer', () => {
         name: '한식',
       });
     });
+  });
+
+  describe('changeLoginFields', () => {
+    it('change loginFields email state', () => {
+      const name = 'email';
+      const value = 'tester@example.com';
+      const initialState = {
+        loginFields: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, changeLoginFields({ name, value }));
+
+      expect(state.loginFields.email).toBe(value);
+    });
+
+    it('change loginFields password state', () => {
+      const name = 'password';
+      const value = 'password';
+      const initialState = {
+        loginFields: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, changeLoginFields({ name, value }));
+
+      expect(state.loginFields.password).toBe(value);
+    });
+  });
+
+  describe('setAccessToken', () => {
+    const initialState = {
+      accessToken: '',
+    };
+    const accessToken = 'TESTACCESSTOKEN';
+
+    const state = reducer(initialState, setAccessToken({ accessToken }));
+
+    expect(state.accessToken).toBe(accessToken);
+  });
+
+  describe('changeReviewFields', () => {
+    const initialState = {
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+    };
+    const name = 'score';
+    const value = '5';
+
+    const state = reducer(initialState, changeReviewFields({ name, value }));
+
+    expect(state.reviewFields.score).toBe(value);
   });
 });

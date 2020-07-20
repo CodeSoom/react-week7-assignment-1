@@ -1,3 +1,5 @@
+import accessToken from '../../../fixtures/accessToken';
+
 export async function fetchRegions() {
   return [];
 }
@@ -13,3 +15,9 @@ export async function fetchRestaurants() {
 export async function fetchRestaurant({ restaurantId }) {
   return {};
 }
+
+export async function fetchAccessToken({ email, password }) {
+  return accessToken;
+}
+
+export const postReview = jest.fn();

@@ -19,6 +19,10 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     }));
   });
 
@@ -41,7 +45,19 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
     });
-  })
+
+    it('renders the reviews', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('리뷰');
+    });
+
+    it('renders the review submit form', () => {
+      const { getByLabelText } = renderRestaurantContainer();
+
+      expect(getByLabelText('평점')).not.toBeNull();
+    });
+  });
 
   context('without restaurant', () => {
     given('restaurant', () => null);
