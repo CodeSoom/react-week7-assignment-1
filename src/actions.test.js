@@ -15,7 +15,6 @@ import {
   sendReview,
   logout,
   changeReviewField,
-  loadReview,
 } from './actions';
 
 const middlewares = [thunk];

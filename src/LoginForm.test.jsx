@@ -23,7 +23,7 @@ describe('LoginForm', () => {
     }));
   });
 
-  function renderLoginForm({ email = '', password = '' }) {
+  function renderLoginForm({ email, password } = {}) {
     return render((
       <LoginForm
         fields={{ email, password }}
@@ -33,11 +33,15 @@ describe('LoginForm', () => {
     ));
   }
 
-  it('renders input control', () => {
-    const { getByLabelText } = renderLoginForm({});
+  it('renders input control and button', () => {
+    const { getByLabelText, getByText } = renderLoginForm({});
 
     expect(getByLabelText('E-mail')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
+
+    fireEvent.click(getByText('Log In'));
+
+    expect(handleSubmit).toBeCalled();
   });
 
   it('listen change events', () => {
@@ -75,13 +79,5 @@ describe('LoginForm', () => {
 
     expect(getByLabelText('E-mail')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
-  });
-
-  it('renders Log In button', () => {
-    const { getByText } = renderLoginForm({});
-
-    fireEvent.click(getByText('Log In'));
-
-    expect(handleSubmit).toBeCalled();
   });
 });
