@@ -39,22 +39,29 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [
+        {
+          id: 1, name: 'Tester', score: '5', description: 'Best!',
+        },
+      ],
     }));
 
-    it('renders name and address', () => {
+    it('renders name and address and reviews', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+      expect(container).toHaveTextContent('Best!');
     });
 
-    context('with logged in', () => {
+    context('when logged in', () => {
       given('accessToken', () => 'ACCESS_TOKEN');
 
       it('renders review input form', () => {
         const { container } = renderRestaurantContainer();
 
         expect(container).toHaveTextContent('평점');
+        expect(container).toHaveTextContent('리뷰 내용');
       });
 
       it('listens change events', () => {
@@ -81,6 +88,17 @@ describe('RestaurantContainer', () => {
 
         expect(dispatch).toBeCalledTimes(2);
       });
+    });
+  });
+
+  context('when logged out', () => {
+    given('accessToken', () => '');
+
+    it('doesn\'t render review input form', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).not.toHaveTextContent('평점');
+      expect(container).not.toHaveTextContent('리뷰 내용');
     });
   });
 

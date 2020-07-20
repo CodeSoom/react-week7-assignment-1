@@ -132,17 +132,17 @@ export function changeReviewField({ name, value }) {
   };
 }
 
-export function addReview({ score, description }) {
-  return {
-    type: 'addReview',
-    payload: { score, description },
-  };
-}
-
 export function setReviews(reviews) {
   return {
     type: 'setReviews',
     payload: { reviews },
+  };
+}
+
+export function loadReviews(restaurantId) {
+  return async (dispatch) => {
+    const { reviews } = await fetchRestaurant({ restaurantId });
+    dispatch(setReviews(reviews));
   };
 }
 
@@ -168,8 +168,7 @@ export function requestReview(restaurantId) {
       restaurantId,
     });
 
-    const { reviews } = await fetchRestaurant({ restaurantId });
-
-    dispatch(setReviews(reviews));
+    dispatch(loadReviews(restaurantId));
+    dispatch(clearReviewFields);
   };
 }

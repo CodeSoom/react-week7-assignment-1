@@ -141,7 +141,7 @@ describe('actions', () => {
       await store.dispatch(requestLogin());
 
       const actions = store.getActions();
-    
+
       expect(actions[0]).toEqual(setAccessToken({ accessToken: 'ACCESS_TOKEN' }));
     });
   });

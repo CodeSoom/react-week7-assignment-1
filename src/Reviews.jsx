@@ -7,12 +7,14 @@ export default function Reviews({ reviews }) {
     return <p>리뷰가 없어요!</p>;
   }
 
+  const reversedReviews = [...reviews].reverse();
+
   return (
     <>
       <h2>리뷰</h2>
 
       <ul>
-        {[...reviews].reverse().map((review) => (
+        {reversedReviews.map((review) => (
           <li key={review.id}>
             {review.name}
             <br />

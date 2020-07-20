@@ -1,13 +1,13 @@
 import React from 'react';
 
 export default function InputField({
-  label, type = 'text', name, field, onChange,
+  label, type = 'text', name, value = '', onChange,
 }) {
   const id = `input-${name}`;
 
   function handleChange(event) {
-    const { target: { value } } = event;
-    onChange({ name, value });
+    const { target } = event;
+    onChange({ name, value: target.value });
   }
 
   return (
@@ -20,7 +20,7 @@ export default function InputField({
         id={id}
         name={name}
         onChange={handleChange}
-        value={field}
+        value={value}
       />
     </div>
   );

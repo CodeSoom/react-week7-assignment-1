@@ -11,13 +11,13 @@ export default function ReviewForm({ onChange, onSubmit, fields }) {
         label="평점"
         type="number"
         name="score"
-        field={score}
+        value={score}
         onChange={onChange}
       />
       <InputField
         label="리뷰 내용"
         name="description"
-        field={description}
+        value={description}
         onChange={onChange}
       />
       <button type="button" onClick={onSubmit}>리뷰 남기기</button>

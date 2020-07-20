@@ -11,18 +11,44 @@ describe('InputField', () => {
     handleChange.mockClear();
   });
 
-  function renderInputField({ label, type = 'text', name }) {
+  function renderInputField({
+    label, type = 'text', name, value = '',
+  }) {
     return render((
       <InputField
         label={label}
         type={type}
         name={name}
         onChange={handleChange}
+        value={value}
       />
     ));
   }
 
-  context('without type', () => {
+  context('when value is empty', () => {
+    const label = '리뷰 내용';
+    const name = 'description';
+
+    it('renders empty field', () => {
+      const { getByLabelText } = renderInputField({ label, name });
+
+      expect(getByLabelText(label)).toHaveValue('');
+    });
+  });
+
+  context('when value is existed', () => {
+    const label = '리뷰 내용';
+    const name = 'description';
+    const value = 'good';
+
+    it('renders value of field', () => {
+      const { getByLabelText } = renderInputField({ label, name, value });
+
+      expect(getByLabelText(label)).toHaveValue(value);
+    });
+  });
+
+  context('when type is empty', () => {
     const label = '리뷰 내용';
     const name = 'description';
 
@@ -51,7 +77,7 @@ describe('InputField', () => {
     });
   });
 
-  context('with type', () => {
+  context('when type is existed', () => {
     const label = '평점';
     const type = 'number';
     const name = 'score';
