@@ -48,15 +48,19 @@ describe('LoginForm', () => {
     ];
 
     controls.forEach(({ label, name, value }) => {
-      const input = getByLabelText(label);
-
-      fireEvent.change(input, { target: { value } });
+      fireEvent.change(getByLabelText(label), { target: { value } });
 
       expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 
   it('renders "Login" Button', () => {
+    const { container } = renderLoginForm({ email: '', password: '' });
+
+    expect(container).toHaveTextContent('Login');
+  });
+
+  it('listens "Login" Button click event', () => {
     const { getByText } = renderLoginForm({ email: '', password: '' });
 
     fireEvent.click(getByText('Login'));
