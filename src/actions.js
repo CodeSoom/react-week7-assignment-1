@@ -7,6 +7,8 @@ import {
   postReview,
 } from './services/api';
 
+import { saveItem } from './services/storage';
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -105,8 +107,16 @@ export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
     // TODO: try-catch로 에러처리
+    // try {
     const accessToken = await postLogin({ email, password });
+
+    saveItem('accessToken', accessToken);
+
     dispatch(setAccessToken(accessToken));
+
+    // } catch (e) {
+    //   console.error(e);
+    // }
   };
 }
 
@@ -129,5 +139,11 @@ export function sendReview({ restaurantId }) {
       accessToken, restaurantId, score, descritpion,
     });
     dispatch(loadRestaurant(loadedRestaurant));
+  };
+}
+
+export function logout() {
+  return {
+    type: 'logout',
   };
 }
