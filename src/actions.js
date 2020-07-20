@@ -131,12 +131,12 @@ export function changeReviewField({ name, value }) {
   };
 }
 
-export function sendReview({ id }) {
+export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
 
     await postReview({
-      accessToken, id, score, description,
+      accessToken, restaurantId, score, description,
     });
   };
 }

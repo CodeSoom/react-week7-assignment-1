@@ -42,11 +42,10 @@ export async function postLogin({ email, password }) {
 }
 
 export async function postReview({
-  accessToken, id, score, description,
-}) {
-  console.log("1");
+  accessToken, restaurantId, score, description,
+}) {  
   const url = 'https://eatgo-customer-api.ahastudio.com/'
-  + `restaurants/${id}/reviews`;
+  + `restaurants/${restaurantId}/reviews`;
 
   console.log(url);
   const response = await fetch(url, {

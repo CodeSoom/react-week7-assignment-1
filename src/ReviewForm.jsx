@@ -7,7 +7,7 @@ import {
   sendReview,
 } from './actions';
 
-export default function ReviewForm({ id }) {
+export default function ReviewForm({ restaurantId }) {
   const dispatch = useDispatch();
 
   function handleChange(event) {
@@ -16,7 +16,7 @@ export default function ReviewForm({ id }) {
   }
 
   function handleClick() {
-    dispatch(sendReview({ id }));
+    dispatch(sendReview({ restaurantId }));
   }
 
   return (
