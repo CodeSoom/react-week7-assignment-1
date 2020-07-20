@@ -8,11 +8,11 @@ import HomePage from './HomePage';
 describe('HomePage', () => {
   const links = ['About', 'Restaurants'];
 
-  const renderHomePage = () => render(
+  const renderHomePage = () => render((
     <MemoryRouter>
       <HomePage />
     </MemoryRouter>
-  );
+  ));
 
   it('renders title', () => {
     const { container } = renderHomePage();

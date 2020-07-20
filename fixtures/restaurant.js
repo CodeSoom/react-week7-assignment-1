@@ -3,6 +3,6 @@ export default {
   name: '마녀주방',
   address: '서울시 강남구',
   menuItems: [
-    { id: 1, name: '떡볶이'}
+    { id: 1, name: '떡볶이' },
   ],
-}
+};
