@@ -6,6 +6,7 @@ const initialState = {
     email: '',
     password: '',
   },
+  // loginError:''
   regions: [],
   categories: [],
   restaurants: [],
@@ -76,6 +77,13 @@ const reducers = {
     return {
       ...state,
       accessToken,
+    };
+  },
+
+  logout(state) {
+    return {
+      ...state,
+      accessToken: '',
     };
   },
 
