@@ -5,48 +5,48 @@ import {
   fetchRestaurant,
   postLogin,
   postReview,
-} from "./services/api";
+} from './services/api';
 
-import { deleteItem, saveItem } from "./services/storage";
+import { deleteItem, saveItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
-    type: "setRegions",
+    type: 'setRegions',
     payload: { regions },
   };
 }
 
 export function setCategories(categories) {
   return {
-    type: "setCategories",
+    type: 'setCategories',
     payload: { categories },
   };
 }
 
 export function setRestaurants(restaurants) {
   return {
-    type: "setRestaurants",
+    type: 'setRestaurants',
     payload: { restaurants },
   };
 }
 
 export function setRestaurant(restaurant) {
   return {
-    type: "setRestaurant",
+    type: 'setRestaurant',
     payload: { restaurant },
   };
 }
 
 export function selectRegion(regionId) {
   return {
-    type: "selectRegion",
+    type: 'selectRegion',
     payload: { regionId },
   };
 }
 
 export function selectCategory(categoryId) {
   return {
-    type: "selectCategory",
+    type: 'selectCategory',
     payload: { categoryId },
   };
 }
@@ -89,14 +89,14 @@ export function loadRestaurant({ restaurantId }) {
 
 export function changeLoginField({ name, value }) {
   return {
-    type: "changeLoginField",
+    type: 'changeLoginField',
     payload: { name, value },
   };
 }
 
 export function setAccessToken({ accessToken }) {
   return {
-    type: "setAccessToken",
+    type: 'setAccessToken',
     payload: { accessToken },
   };
 }
@@ -111,38 +111,44 @@ export function requestLogin() {
 
     const { accessToken } = await postLogin({ email, password });
 
-    saveItem({ key: "accessToken", value: accessToken });
+    saveItem({ key: 'accessToken', value: accessToken });
 
     dispatch(setAccessToken({ accessToken }));
   };
 }
 
 export function logout() {
-  deleteItem({ key: "accessToken" });
+  deleteItem({ key: 'accessToken' });
 
   return {
-    type: "logout",
+    type: 'logout',
   };
 }
 
 export function changeReviewField({ name, value }) {
   return {
-    type: "changeReviewField",
+    type: 'changeReviewField',
     payload: { name, value },
   };
 }
 
 export function addReview({ score, description }) {
   return {
-    type: "addReview",
+    type: 'addReview',
     payload: { score, description },
   };
 }
 
 export function setReviews(reviews) {
   return {
-    type: "setReviews",
+    type: 'setReviews',
     payload: { reviews },
+  };
+}
+
+export function clearReviewFields() {
+  return {
+    type: 'clearReviewFields',
   };
 }
 

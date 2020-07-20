@@ -11,8 +11,8 @@ import {
   setAccessToken,
   logout,
   changeReviewField,
-  addReview,
   setReviews,
+  clearReviewFields,
 } from './actions';
 
 describe('reducer', () => {

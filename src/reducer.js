@@ -1,4 +1,9 @@
-import { equal } from "./utils";
+import { equal } from './utils';
+
+const initialReviewFields = {
+  score: '',
+  description: '',
+};
 
 const initialState = {
   regions: [],
@@ -8,13 +13,12 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   loginFields: {
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   },
-  accessToken: "",
+  accessToken: '',
   reviewFields: {
-    score: "",
-    description: "",
+    ...initialReviewFields,
   },
 };
 
@@ -51,7 +55,7 @@ const reducers = {
     const { regions } = state;
     return {
       ...state,
-      selectedRegion: regions.find(equal("id", regionId)),
+      selectedRegion: regions.find(equal('id', regionId)),
     };
   },
 
@@ -59,7 +63,7 @@ const reducers = {
     const { categories } = state;
     return {
       ...state,
-      selectedCategory: categories.find(equal("id", categoryId)),
+      selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
 
@@ -86,7 +90,7 @@ const reducers = {
   logout(state) {
     return {
       ...state,
-      accessToken: "",
+      accessToken: '',
     };
   },
 
@@ -110,6 +114,15 @@ const reducers = {
       restaurant: {
         ...restaurant,
         reviews,
+      },
+    };
+  },
+
+  clearReviewFields(state) {
+    return {
+      ...state,
+      reviewFields: {
+        ...initialReviewFields,
       },
     };
   },
