@@ -11,7 +11,7 @@ describe('RestaurantDetail', () => {
     address: '서울시 강남구',
   };
 
-  it('renders name and address', () => {
+  it('renders Restaurant detail data', () => {
     const { container } = render(
       <RestaurantDetail restaurant={restaurant} />,
     );

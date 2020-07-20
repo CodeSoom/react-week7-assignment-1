@@ -22,7 +22,7 @@ export default function ReviewForm({ restaurantId }) {
   return (
     <>
       <div>
-        <label htmlFor="score">점수</label>
+        <label htmlFor="input-score">점수</label>
         <input
           id="input-score"
           name="score"
@@ -31,9 +31,9 @@ export default function ReviewForm({ restaurantId }) {
         />
       </div>
       <div>
-        <label htmlFor="description">내용</label>
+        <label htmlFor="input-description">내용</label>
         <input
-          id="description-score"
+          id="input-description"
           name="description"
           type="text"
           onChange={handleChange}
