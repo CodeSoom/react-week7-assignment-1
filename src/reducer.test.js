@@ -8,7 +8,9 @@ import {
   selectRegion,
   selectCategory,
   changeLoginFields,
+  changeReviewFields,
   setAccessToken,
+  logout,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +20,10 @@ describe('reducer', () => {
       loginFields: {
         email: '',
         password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
       },
       regions: [],
       categories: [],
@@ -165,6 +171,38 @@ describe('reducer', () => {
     });
   });
 
+  describe('changeReviewFields', () => {
+    context('when score changed', () => {
+      it('changes Review Field', () => {
+        const initialState = {
+          reviewFields: {
+            score: '',
+            description: '',
+          },
+        };
+
+        const state = reducer(initialState, changeReviewFields({ name: 'score', value: '5' }));
+        expect(state.reviewFields.score).toBe('5');
+        expect(state.reviewFields.description).toBe('');
+      });
+    });
+
+    context('when description changed', () => {
+      it('changes Review Field', () => {
+        const initialState = {
+          reviewFields: {
+            score: '5',
+            description: '',
+          },
+        };
+
+        const state = reducer(initialState, changeReviewFields({ name: 'description', value: '맛있어요' }));
+        expect(state.reviewFields.score).toBe('5');
+        expect(state.reviewFields.description).toBe('맛있어요');
+      });
+    });
+  });
+
   describe('setAccessToken', () => {
     it('changes selected category', () => {
       const initialState = {
@@ -174,6 +212,18 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken('TOKEN'));
 
       expect(state.accessToken).toBe('TOKEN');
+    });
+  });
+
+  describe('logout', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+      };
+
+      const state = reducer(initialState, logout());
+
+      expect(state.accessToken).toBe('');
     });
   });
 });

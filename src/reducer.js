@@ -6,6 +6,10 @@ const initialState = {
     email: '',
     password: '',
   },
+  reviewFields: {
+    score: '',
+    description: '',
+  },
   regions: [],
   categories: [],
   restaurants: [],
@@ -70,10 +74,28 @@ const reducers = {
     };
   },
 
+  changeReviewFields(state, { payload: { name, value } }) {
+    const { reviewFields } = state;
+    return {
+      ...state,
+      reviewFields: {
+        ...reviewFields,
+        [name]: value,
+      },
+    };
+  },
+
   setAccessToken(state, { payload: { accessToken } }) {
     return {
       ...state,
       accessToken,
+    };
+  },
+
+  logout(state) {
+    return {
+      ...state,
+      accessToken: '',
     };
   },
 };

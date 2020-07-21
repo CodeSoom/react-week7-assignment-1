@@ -15,10 +15,15 @@ describe('RestaurantPage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((state) => state({
+      accessToken: 'ACCESS_TOKEN',
       restaurant: {
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
       },
     }));
   });
@@ -27,23 +32,32 @@ describe('RestaurantPage', () => {
     it('renders name', () => {
       const params = { id: '1' };
 
-      const { container } = render(
+      const { container } = render((
         <RestaurantPage params={params} />
-      );
+      ));
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  })
+
+    it('renders review write form', () => {
+      const params = { id: '1' };
+      const { queryByLabelText } = render((
+        <RestaurantPage params={params} />
+      ));
+
+      expect(queryByLabelText('평점')).not.toBeNull();
+    });
+  });
 
   context('without params props', () => {
     it('renders name', () => {
-      const { container } = render(
+      const { container } = render((
         <MemoryRouter initialEntries={['/restaurants/1']}>
           <RestaurantPage />
         </MemoryRouter>
-      );
+      ));
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  })
+  });
 });
