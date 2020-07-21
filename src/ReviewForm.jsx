@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function ReviewForm({ fields, onChange, onClick }) {
   const { score, description } = fields;
-  
+
   return (
     <>
       <div>

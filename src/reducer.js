@@ -60,7 +60,7 @@ const reducers = {
       restaurant: {
         ...state.restaurant,
         reviews,
-      }
+      },
     };
   },
 

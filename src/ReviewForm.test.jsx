@@ -4,21 +4,20 @@ import { render, fireEvent } from '@testing-library/react';
 
 import ReviewForm from './ReviewForm';
 
-const handleChange=jest.fn();
-const handleClick=jest.fn();
-  
-function renderReviewForm({ score, description } = {} ) {
+const handleChange = jest.fn();
+const handleClick = jest.fn();
+
+function renderReviewForm({ score, description } = {}) {
   return render((
-    <ReviewForm 
+    <ReviewForm
       fields={{ score, description }}
-      onChange={handleChange} 
+      onChange={handleChange}
       onClick={handleClick}
     />
   ));
-}  
+}
 
 describe('ReviewForm', () => {
-  
   it('redners ReviewForm', () => {
     const { container } = renderReviewForm();
 
@@ -28,9 +27,9 @@ describe('ReviewForm', () => {
 
   it('change input change', () => {
     const { getByLabelText } = renderReviewForm();
-    
-    fireEvent.change(getByLabelText('점수'),{
-      target : { value : '5' },
+
+    fireEvent.change(getByLabelText('점수'), {
+      target: { value: '5' },
     });
 
     // expect(dispatch).toBeCalledWith({
@@ -45,7 +44,6 @@ describe('ReviewForm', () => {
 
   it('click postReview button', () => {
     const { getByText } = renderReviewForm();
-
 
     fireEvent.click(getByText('의견남기기'));
     expect(handleClick).toBeCalled();

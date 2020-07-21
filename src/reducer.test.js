@@ -179,7 +179,7 @@ describe('reducer', () => {
           description: '',
         },
       };
-      
+
       const state = reducer(initialState, changeReviewField({ name: 'score', value: '5' }));
 
       expect(state.reviewFields.score).toBe('5');
@@ -195,7 +195,7 @@ describe('reducer', () => {
       const reviews = [
         { id: 1, score: '5', description: '맛있어요' },
       ];
-      
+
       const state = reducer(initialState, setReviews(reviews));
 
       expect(state.restaurant.reviews).toHaveLength(1);

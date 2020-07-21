@@ -26,11 +26,11 @@ export default function ReviewFormContainer({ restaurantId }) {
   function handleClick() {
     dispatch(sendReview({ restaurantId }));
   }
-  
+
   return (
-    <ReviewForm 
+    <ReviewForm
       fields={{ score, description }}
-      onChange={handleChange} 
+      onChange={handleChange}
       onClick={handleClick}
     />
   );
