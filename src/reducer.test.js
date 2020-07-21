@@ -10,6 +10,7 @@ import {
   changeLoginFields,
   setAccessToken,
   changeReviewField,
+  setReviews,
 } from './actions';
 
 describe('reducer', () => {
@@ -182,6 +183,23 @@ describe('reducer', () => {
       const state = reducer(initialState, changeReviewField({ name: 'score', value: '5' }));
 
       expect(state.reviewFields.score).toBe('5');
+    });
+  });
+
+  describe('setReviews', () => {
+    it('reload reviews after posting review', () => {
+      const initialState = {
+        restaurant: [],
+      };
+
+      const reviews = [
+        { id: 1, score: '5', description: '맛있어요' },
+      ];
+      
+      const state = reducer(initialState, setReviews(reviews));
+
+      expect(state.restaurant.reviews).toHaveLength(1);
+      expect(state.restaurant.reviews[0]).toEqual(reviews[0]);
     });
   });
 });

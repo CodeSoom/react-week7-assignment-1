@@ -3,7 +3,7 @@ import React from 'react';
 import MenuItems from './MenuItems';
 
 import Reviews from './Reviews';
-import ReviewForm from './ReviewForm';
+import ReviewFormContainer from './ReviewFormContainer';
 
 export default function RestaurantDetail({ restaurant }) {
   const {
@@ -21,7 +21,7 @@ export default function RestaurantDetail({ restaurant }) {
       <h3>메뉴</h3>
       <MenuItems menuItems={menuItems} />
       <h3>리뷰 남기기</h3>
-      <ReviewForm restaurantId={id} />
+      <ReviewFormContainer restaurantId={id} />
       <h3>리뷰 내용</h3>
       <Reviews reviews={reviews} />
     </div>

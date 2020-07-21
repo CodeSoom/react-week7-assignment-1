@@ -33,6 +33,10 @@ describe('App', () => {
         id: 1,
         name: '마녀주방',
       },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     }));
   });
 

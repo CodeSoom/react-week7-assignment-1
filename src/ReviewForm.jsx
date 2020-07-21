@@ -1,24 +1,8 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
-
-import {
-  changeReviewField,
-  sendReview,
-} from './actions';
-
-export default function ReviewForm({ restaurantId }) {
-  const dispatch = useDispatch();
-
-  function handleChange(event) {
-    const { target: { name, value } } = event;
-    dispatch(changeReviewField({ name, value }));
-  }
-
-  function handleClick() {
-    dispatch(sendReview({ restaurantId }));
-  }
-
+export default function ReviewForm({ fields, onChange, onClick }) {
+  const { score, description } = fields;
+  
   return (
     <>
       <div>
@@ -27,7 +11,8 @@ export default function ReviewForm({ restaurantId }) {
           id="input-score"
           name="score"
           type="number"
-          onChange={handleChange}
+          value={score}
+          onChange={onChange}
         />
       </div>
       <div>
@@ -36,12 +21,13 @@ export default function ReviewForm({ restaurantId }) {
           id="input-description"
           name="description"
           type="text"
-          onChange={handleChange}
+          value={description}
+          onChange={onChange}
         />
       </div>
       <button
         type="button"
-        onClick={handleClick}
+        onClick={onClick}
       >
         의견남기기
       </button>
