@@ -1,14 +1,13 @@
 import {
-  fetchRegions,
-  fetchCategories,
-  fetchRestaurants,
-  fetchRestaurant,
+  fetchRegions, fetchCategories, fetchRestaurants, fetchRestaurant,
+  postSession, postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
 import CATEGORIES from '../../fixtures/categories';
 import RESTAURANTS from '../../fixtures/restaurants';
 import RESTAURANT from '../../fixtures/restaurant';
+import ACCESS_TOKEN from '../../fixtures/accessToken';
 
 describe('api', () => {
   const mockFetch = (data) => {
@@ -61,10 +60,42 @@ describe('api', () => {
       mockFetch(RESTAURANT);
     });
 
-    it('returns restaurants', async () => {
-      const restaurant = await fetchRestaurant({ restaurantId: 1 });
+    it('returns restaurant', async () => {
+      const restaurant = await fetchRestaurant({
+        restaurant: 1,
+      });
 
       expect(restaurant).toEqual(RESTAURANT);
+    });
+  });
+
+  describe('postSession', () => {
+    beforeEach(() => {
+      mockFetch(ACCESS_TOKEN);
+    });
+
+    it('returns access-token', async () => {
+      const accessToken = await postSession({
+        email: '이메일',
+        password: '비밀번호',
+      });
+
+      expect(accessToken).toEqual(ACCESS_TOKEN);
+    });
+  });
+
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch({});
+    });
+
+    it('returns empty object', async () => {
+      const response = await postReview({
+        score: 5,
+        description: '리뷰내용',
+      });
+
+      expect(response).toEqual({});
     });
   });
 });
