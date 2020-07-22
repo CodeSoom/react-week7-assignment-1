@@ -29,16 +29,20 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' }
+      restaurant: { id: 1, name: '마녀주방' },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     }));
   });
 
   function renderApp({ path }) {
-    return render(
+    return render((
       <MemoryRouter initialEntries={[path]}>
         <App />
       </MemoryRouter>
-    );
+    ));
   }
 
   context('with path /', () => {
@@ -82,7 +86,6 @@ describe('App', () => {
   });
 
   context('without access token', () => {
-
     beforeEach(() => {
       loadItem.mockImplementation(() => null);
     });

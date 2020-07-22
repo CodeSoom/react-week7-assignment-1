@@ -135,6 +135,8 @@ export function sendReview({ restaurantId }) {
       score,
       description,
     });
-    //dispatch(loadRestaurant)
+    changeLoginFields({ name: 'score', value: '' });
+    changeLoginFields({ name: 'descripton', value: '' });
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }

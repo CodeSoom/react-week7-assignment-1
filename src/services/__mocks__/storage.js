@@ -4,4 +4,4 @@ const loadItem = jest.fn();
 export {
   saveItem,
   loadItem,
-}
+};

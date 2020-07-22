@@ -38,7 +38,7 @@ describe('LoginForm', () => {
       const input = getByLabelText(label);
       expect(input.value).toBe(value);
     });
-  
+
     expect(getByText('Log In')).not.toBeNull();
   });
 
