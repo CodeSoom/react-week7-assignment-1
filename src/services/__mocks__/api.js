@@ -13,14 +13,12 @@ export async function fetchRestaurants() {
 export async function fetchRestaurant({ restaurantId }) {
   return {
     id: restaurantId,
+    reviews: [],
   };
 }
 
-export async function postLogin({ email, password }) {
-  return {
-    email,
-    password,
-  };
+export async function postLogin() {
+  return 'ACCESSTOKEN';
 }
 
 export async function postReview({

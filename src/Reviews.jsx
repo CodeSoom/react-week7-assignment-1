@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { sort } from './utils';
+
 export default function Reviews({ reviews }) {
   if (!(reviews || []).length) {
     return (
@@ -7,7 +9,7 @@ export default function Reviews({ reviews }) {
     );
   }
 
-  const sortedReviews = [...reviews].sort((a, b) => b.id - a.id);
+  const sortedReviews = sort(reviews);
   return (
     <ul>
       {sortedReviews.map((review) => (
