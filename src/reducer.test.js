@@ -11,6 +11,8 @@ import {
   changeReviewFields,
   setAccessToken,
   logout,
+  setReviews,
+  clearReviewFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -203,6 +205,21 @@ describe('reducer', () => {
     });
   });
 
+  describe('clearReviewFields', () => {
+    it('clears review fields', () => {
+      const initialState = {
+        reviewFields: {
+          score: 5,
+          description: '맛있어요',
+        },
+      };
+
+      const state = reducer(initialState, clearReviewFields());
+      expect(state.reviewFields.score).toBe('');
+      expect(state.reviewFields.description).toBe('');
+    });
+  });
+
   describe('setAccessToken', () => {
     it('changes selected category', () => {
       const initialState = {
@@ -224,6 +241,28 @@ describe('reducer', () => {
       const state = reducer(initialState, logout());
 
       expect(state.accessToken).toBe('');
+    });
+  });
+
+  describe('setReviews', () => {
+    it('changes reviews of current restaurant', () => {
+      const reviews = [
+        {
+          id: 1,
+          name: '테스터',
+          score: 5,
+          description: '맛있어요',
+        },
+      ];
+      const initialState = {
+        restaurant: {
+          reviews: [],
+        },
+      };
+
+      const state = reducer(initialState, setReviews(reviews));
+
+      expect(state.restaurant.reviews).toHaveLength(reviews.length);
     });
   });
 });

@@ -65,6 +65,12 @@ export function changeReviewFields({ name, value }) {
   };
 }
 
+export function clearReviewFields() {
+  return {
+    type: 'clearReviewFields',
+  };
+}
+
 export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',
@@ -75,6 +81,13 @@ export function setAccessToken(accessToken) {
 export function logout() {
   return {
     type: 'logout',
+  };
+}
+
+export function setReviews(reviews) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
   };
 }
 
@@ -126,6 +139,14 @@ export function requestLogin() {
   };
 }
 
+export function loadReview({ restaurantId }) {
+  return async (dispatch) => {
+    const restaurant = await fetchRestaurant({ restaurantId });
+
+    dispatch(setReviews(restaurant.reviews));
+  };
+}
+
 export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
@@ -135,8 +156,7 @@ export function sendReview({ restaurantId }) {
       score,
       description,
     });
-    changeLoginFields({ name: 'score', value: '' });
-    changeLoginFields({ name: 'descripton', value: '' });
-    dispatch(loadRestaurant({ restaurantId }));
+    dispatch(loadReview({ restaurantId }));
+    dispatch(clearReviewFields());
   };
 }

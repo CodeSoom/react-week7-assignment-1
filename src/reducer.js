@@ -1,5 +1,10 @@
 import { equal } from './utils';
 
+const initialReviewFields = {
+  score: '',
+  description: '',
+};
+
 const initialState = {
   accessToken: '',
   loginFields: {
@@ -7,8 +12,7 @@ const initialState = {
     password: '',
   },
   reviewFields: {
-    score: '',
-    description: '',
+    ...initialReviewFields,
   },
   regions: [],
   categories: [],
@@ -85,6 +89,15 @@ const reducers = {
     };
   },
 
+  clearReviewFields(state) {
+    return {
+      ...state,
+      reviewFields: {
+        ...initialReviewFields,
+      },
+    };
+  },
+
   setAccessToken(state, { payload: { accessToken } }) {
     return {
       ...state,
@@ -96,6 +109,17 @@ const reducers = {
     return {
       ...state,
       accessToken: '',
+    };
+  },
+
+  setReviews(state, { payload: { reviews } }) {
+    const { restaurant } = state;
+    return {
+      ...state,
+      restaurant: {
+        ...restaurant,
+        reviews,
+      },
     };
   },
 };

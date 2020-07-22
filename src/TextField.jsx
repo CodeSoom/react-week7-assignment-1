@@ -16,10 +16,10 @@ export default function TextField({
     <>
       <label htmlFor={id}>{ label }</label>
       <input
+        id={id}
         type={type}
         name={name}
         value={value}
-        id={id}
         onChange={handleChange}
       />
     </>
