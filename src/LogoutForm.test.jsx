@@ -16,7 +16,7 @@ describe('LogoutForm', () => {
       <LogoutForm onClick={handleClick} />
     ));
 
-    expect(getByText('Log Out')).not.toBeNull();
+    expect(getByText('Log out')).not.toBeNull();
   });
 
   it('listens click event', () => {
@@ -24,7 +24,7 @@ describe('LogoutForm', () => {
       <LogoutForm onClick={handleClick} />
     ));
 
-    fireEvent.click(getByText('Log Out'));
+    fireEvent.click(getByText('Log out'));
     expect(handleClick).toBeCalled();
   });
 });

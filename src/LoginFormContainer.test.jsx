@@ -68,7 +68,7 @@ describe('LoginFormContainer', () => {
         <LoginFormContainer />
       ));
 
-      expect(container).toHaveTextContent('Log Out');
+      expect(container).toHaveTextContent('Log out');
     });
 
     it('listens click event', () => {
@@ -76,7 +76,7 @@ describe('LoginFormContainer', () => {
         <LoginFormContainer />
       ));
 
-      fireEvent.click(getByText('Log Out'));
+      fireEvent.click(getByText('Log out'));
 
       expect(dispatch).toBeCalledWith({ type: 'logout' });
     });
