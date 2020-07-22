@@ -1,18 +1,36 @@
 import React from 'react';
 
+import { useDispatch } from 'react-redux';
+
 import {
   Switch,
   Route,
   Link,
 } from 'react-router-dom';
 
-import HomePage from './HomePage';
-import AboutPage from './AboutPage';
-import RestaurantsPage from './RestaurantsPage';
-import RestaurantPage from './RestaurantPage';
-import NotFoundPage from './NotFoundPage';
+import {
+  setAccessToken,
+} from './store/actions';
+
+import { loadItem } from './services/storage';
+
+import HomePage from './Home/HomePage';
+import AboutPage from './About/AboutPage';
+import LoginPage from './Login/LoginPage';
+import LogoutPage from './Logout/LogoutPage';
+
+import RestaurantsPage from './Restaurants/RestaurantsPage';
+import RestaurantPage from './Restaurant/RestaurantPage';
+import NotFoundPage from './NotFound/NotFoundPage';
 
 export default function App() {
+  const dispatch = useDispatch();
+  const accessToken = loadItem('accessToken');
+
+  if (accessToken) {
+    dispatch(setAccessToken(accessToken));
+  }
+
   return (
     <div>
       <header>
@@ -23,6 +41,8 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/logout" component={LogoutPage} />
         <Route exact path="/restaurants" component={RestaurantsPage} />
         <Route path="/restaurants/:id" component={RestaurantPage} />
         <Route component={NotFoundPage} />

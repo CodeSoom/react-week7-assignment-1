@@ -10,6 +10,14 @@ export async function fetchRestaurants() {
   return [];
 }
 
-export async function fetchRestaurant({ restaurantId }) {
+export async function fetchRestaurant() {
   return {};
+}
+
+export async function fetchAccessToken() {
+  return null;
+}
+
+export async function postReview() {
+  return null;
 }

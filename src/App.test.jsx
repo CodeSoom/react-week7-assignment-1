@@ -1,16 +1,17 @@
 import React from 'react';
 
-import {
-  MemoryRouter,
-} from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { loadItem } from './services/storage';
+
 import App from './App';
 
 jest.mock('react-redux');
+jest.mock('./services/storage.js');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -21,12 +22,15 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      regions: [
-        { id: 1, name: '서울' },
-      ],
+      regions: [{ id: 1, name: '서울' }],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' }
+      restaurant: { id: 1, name: '마녀주방', reviews: [] },
+      reviewField: {
+        score: '',
+        description: '',
+      },
+      accessToken: 'ACCESS_TOKEN',
     }));
   });
 
@@ -34,7 +38,7 @@ describe('App', () => {
     return render(
       <MemoryRouter initialEntries={[path]}>
         <App />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
   }
 
@@ -75,6 +79,21 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('with accessToken', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => 'ACCESS_TOKEN');
+    });
+
+    it('occurs dispatch', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: { accessToken: 'ACCESS_TOKEN' },
+      });
     });
   });
 });

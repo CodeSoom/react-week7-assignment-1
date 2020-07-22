@@ -35,13 +35,14 @@
     "jest-plugin-context": "^2.9.0",
     "puppeteer": "^5.0.0",
     "redux-mock-store": "^1.5.4",
-    "start-server-and-test": "^1.11.2",
+    "start-server-and-test": "^1.11.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "@codeceptjs/configure": "^0.5.2",
+    "html-webpack-plugin": "^4.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
