@@ -11,5 +11,26 @@ export async function fetchRestaurants() {
 }
 
 export async function fetchRestaurant({ restaurantId }) {
-  return {};
+  return {
+    restaurantId,
+  };
+}
+
+export async function postLogin({ email, password }) {
+  return {
+    email,
+    password,
+    accessToken: 'ACCESS_TOKEN',
+  };
+}
+
+export async function postReview({
+  accessToken, score, description, restaurantId,
+}) {
+  return {
+    accessToken,
+    score,
+    description,
+    restaurantId,
+  };
 }

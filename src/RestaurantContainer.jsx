@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import RestaurantDetail from './RestaurantDetail';
 
 import {
-  loadRestaurant,
+  loadRestaurant, changeReviewField, requestReview,
 } from './actions';
 
 import { get } from './utils';
+import ReviewForm from './ReviewForm';
+import Reviews from './Reviews';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -18,6 +20,8 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
+  const accessToken = useSelector(get('accessToken'));
+  const { score, description } = useSelector(get('reviewFields'));
 
   if (!restaurant) {
     return (
@@ -25,9 +29,29 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
+  const { reviews } = restaurant;
+
+  function handleChange({ name, value }) {
+    dispatch(changeReviewField({ name, value }));
+  }
+
+  function handleSubmit() {
+    dispatch(requestReview(restaurantId));
+  }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
+      {accessToken && (
+        <>
+          <ReviewForm
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+            fields={{ score, description }}
+          />
+        </>
+      )}
+      <Reviews reviews={reviews} />
     </>
   );
 }
