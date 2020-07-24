@@ -3,7 +3,11 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
+  postReview,
 } from './services/api';
+
+import { saveItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -47,6 +51,46 @@ export function selectCategory(categoryId) {
   };
 }
 
+export function changeLoginFields({ name, value }) {
+  return {
+    type: 'changeLoginFields',
+    payload: { name, value },
+  };
+}
+
+export function changeReviewFields({ name, value }) {
+  return {
+    type: 'changeReviewFields',
+    payload: { name, value },
+  };
+}
+
+export function clearReviewFields() {
+  return {
+    type: 'clearReviewFields',
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}
+
+export function setReviews(reviews) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();
@@ -83,5 +127,36 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const { loginFields: { email, password } } = getState();
+    const accessToken = await postLogin({ email, password });
+    saveItem('accessToken', accessToken);
+    dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function loadReview({ restaurantId }) {
+  return async (dispatch) => {
+    const restaurant = await fetchRestaurant({ restaurantId });
+
+    dispatch(setReviews(restaurant.reviews));
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { accessToken, reviewFields: { score, description } } = getState();
+    await postReview({
+      accessToken,
+      restaurantId,
+      score,
+      description,
+    });
+    dispatch(loadReview({ restaurantId }));
+    dispatch(clearReviewFields());
   };
 }

@@ -1,4 +1,4 @@
-import { get, equal } from './utils';
+import { get, equal, sort } from './utils';
 
 test('get', () => {
   const state = {
@@ -22,4 +22,20 @@ test('equal', () => {
 
   expect(f(state)).toBeTruthy();
   expect(g(state)).toBeFalsy();
+});
+
+test('sort', () => {
+  const state = [
+    { id: 2 },
+    { id: 3 },
+    { id: 1 },
+  ];
+
+  expect(sort(state)).toEqual(
+    [
+      { id: 3 },
+      { id: 2 },
+      { id: 1 },
+    ],
+  );
 });

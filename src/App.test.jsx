@@ -10,7 +10,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import { loadItem } from './services/storage';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -26,16 +29,20 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' }
+      restaurant: { id: 1, name: '마녀주방' },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     }));
   });
 
   function renderApp({ path }) {
-    return render(
+    return render((
       <MemoryRouter initialEntries={[path]}>
         <App />
       </MemoryRouter>
-    );
+    ));
   }
 
   context('with path /', () => {
@@ -75,6 +82,31 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('without access token', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it('does not call dispatch with setAccessToken action', () => {
+      renderApp({ path: '/' });
+      expect(dispatch).not.toBeCalled();
+    });
+  });
+
+  context('with access token', () => {
+    const accessToken = 'ACCESS_TOEKN';
+    beforeEach(() => {
+      loadItem.mockImplementation(() => accessToken);
+    });
+    it('calls dispatch with setAccessToken action', () => {
+      renderApp({ path: '' });
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: { accessToken },
+      });
     });
   });
 });

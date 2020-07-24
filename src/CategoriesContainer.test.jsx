@@ -20,7 +20,7 @@ describe('CategoriesContainer', () => {
       ],
       selectedCategory: { id: 1, name: '한식' },
     }));
-  })
+  });
 
   it('renders regions and checked symbol', () => {
     const { container, getByText } = render((

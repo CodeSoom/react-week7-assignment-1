@@ -4,6 +4,7 @@ module.exports = {
     'jest-plugin-context/setup',
     './jest.setup',
   ],
+  setupFiles: ['jest-localstorage-mock'],
   coverageThreshold: {
     global: {
       branches: 100,

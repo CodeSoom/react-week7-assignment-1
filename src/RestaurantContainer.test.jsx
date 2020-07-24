@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,7 +18,20 @@ describe('RestaurantContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      accessToken: given.accessToken,
       restaurant: given.restaurant,
+      reviews: [
+        {
+          id: 1,
+          name: '테스터',
+          score: 5,
+          description: '맛있어요',
+        },
+      ],
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     }));
   });
 
@@ -33,6 +46,14 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [
+        {
+          id: 1,
+          name: '테스터',
+          score: 5,
+          description: '맛있어요',
+        },
+      ],
     }));
 
     it('renders name and address', () => {
@@ -41,7 +62,56 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
     });
-  })
+
+    it('renders reviews', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('맛있어요');
+      expect(container).toHaveTextContent('5');
+    });
+
+    context('without accessToken', () => {
+      it('do not renders review write form', () => {
+        const { queryByLabelText } = renderRestaurantContainer();
+
+        expect(queryByLabelText('평점')).toBeNull();
+        expect(queryByLabelText('리뷰 내용')).toBeNull();
+      });
+    });
+
+    context('with accessToken', () => {
+      given('accessToken', () => 'ACCESS_TOKEN');
+      it('renders review write form', () => {
+        const { queryByLabelText } = renderRestaurantContainer();
+
+        expect(queryByLabelText('평점')).not.toBeNull();
+        expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+      });
+
+      it('listens change events', () => {
+        const { getByLabelText } = renderRestaurantContainer();
+
+        const controls = [
+          { label: '평점', name: 'score', value: '5' },
+          { label: '리뷰 내용', name: 'description', value: '최고' },
+        ];
+
+        controls.forEach(({ label, name, value }) => {
+          fireEvent.change(getByLabelText(label), { target: { value } });
+          expect(dispatch).toBeCalledWith({
+            type: 'changeReviewFields',
+            payload: { name, value },
+          });
+        });
+      });
+
+      it('renders 리뷰남기기 button', () => {
+        const { getByText } = renderRestaurantContainer();
+        fireEvent.click(getByText('리뷰 남기기'));
+        expect(dispatch).toBeCalled();
+      });
+    });
+  });
 
   context('without restaurant', () => {
     given('restaurant', () => null);
