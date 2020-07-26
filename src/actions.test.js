@@ -10,6 +10,11 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  setAccessToken,
+  requestLogin,
+  changeLoginField,
+  changeReviewField,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -92,7 +97,73 @@ describe('actions', () => {
     });
 
     it('dispatchs setRestaurant', async () => {
-      await store.dispatch(loadRestaurant({restaurantId: 1}));
+      await store.dispatch(loadRestaurant({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginFields: {
+          email: 'test@test.com',
+          password: 'password!',
+        },
+      });
+    });
+
+    it('dispatchs setAccessToken', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken({
+        email: 'test@test.com',
+        password: 'password!',
+      }));
+    });
+  });
+
+  describe('change input values', () => {
+    it('change login field', () => {
+      const name = 'email';
+      const value = 'tester@example.com';
+
+      const action = changeLoginField({ name, value });
+
+      expect(action.type).toBe('changeLoginField');
+      expect(action.payload).toEqual({ name, value });
+    });
+
+    it('change review field', () => {
+      const name = 'score';
+      const value = '5';
+
+      const action = changeReviewField({ name, value });
+
+      expect(action.type).toBe('changeReviewField');
+      expect(action.payload).toEqual({ name, value });
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'd',
+        restaurantId: '1',
+        reviewFields: {
+          score: '5',
+          description: '리뷰 내용',
+        },
+      });
+    });
+
+    it('dispatchs setAccessToken', async () => {
+      await store.dispatch(sendReview({ restaurantId: '1' }));
 
       const actions = store.getActions();
 
