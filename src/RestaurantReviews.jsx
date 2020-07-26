@@ -11,11 +11,15 @@ export default function RestaurantReviews({ reviews }) {
     <ul>
       {reviews.map((review) => (
         <li key={review.id}>
-          {review.name}
-          <br />
-          {`${review.score}점`}
-          <br />
-          {review.description}
+          <div>
+            {review.name}
+          </div>
+          <div>
+            {`${review.score}점`}
+          </div>
+          <div>
+            {review.description}
+          </div>
         </li>
       ))}
     </ul>

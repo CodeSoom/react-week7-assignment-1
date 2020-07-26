@@ -13,7 +13,7 @@ describe('LoginForm', () => {
     handleSubmit.mockClear();
   });
 
-  function renderLoginForm({ email, password }) {
+  function renderLoginForm({ email, password } = {}) {
     return render((
       <LoginForm
         fields={{ email, password }}
@@ -23,7 +23,7 @@ describe('LoginForm', () => {
     ));
   }
 
-  it('renders input controls and listens change events', () => {
+  it('renders input controls', () => {
     const email = 'test@email.com';
     const password = '1234';
 
@@ -32,24 +32,39 @@ describe('LoginForm', () => {
     const controls = [
       {
         label: 'Email',
+        value: email,
+      },
+      {
+        label: 'Password',
+        value: password,
+      },
+    ];
+
+    controls.forEach(({ label, value }) => {
+      const input = getByLabelText(label);
+
+      expect(input.value).toBe(value);
+    });
+  });
+
+  it('listens change events', () => {
+    const { getByLabelText } = renderLoginForm();
+
+    const controls = [
+      {
+        label: 'Email',
         name: 'email',
-        origin: email,
-        value: 'test@example.com',
+        value: 'tester@example.com',
       },
       {
         label: 'Password',
         name: 'password',
-        origin: password,
         value: 'test',
       },
     ];
 
-    controls.forEach(({
-      label, name, origin, value,
-    }) => {
+    controls.forEach(({ label, name, value }) => {
       const input = getByLabelText(label);
-
-      expect(input.value).toBe(origin);
 
       fireEvent.change(input, { target: { value } });
 
