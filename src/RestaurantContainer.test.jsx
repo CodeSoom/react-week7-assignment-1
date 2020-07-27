@@ -75,6 +75,24 @@ describe('RestaurantContainer', () => {
 
         expect(dispatch).toBeCalledTimes(2);
       });
+
+      it('listens input change events', () => {
+        const { getByLabelText } = renderRestaurantContainer();
+
+        const controls = [
+          { label: '평점', name: 'score', value: '1' },
+          { label: '리뷰 내용', name: 'description', value: '여기절대가지마세요노맛;' },
+        ];
+
+        controls.forEach(({ label, name, value }) => {
+          fireEvent.change(getByLabelText(label), { target: { value } });
+
+          expect(dispatch).toBeCalledWith({
+            type: 'changeReviewField',
+            payload: { name, value },
+          });
+        });
+      });
     });
 
     context('when not logged in', () => {

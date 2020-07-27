@@ -32,6 +32,7 @@ export default function RestaurantContainer({ restaurantId }) {
   function handleChange({ name, value }) {
     dispatch(changeReviewField({ name, value }));
   }
+
   function handleSubmit() {
     dispatch(sendReview({ restaurantId }));
   }
@@ -40,12 +41,12 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail restaurant={restaurant} />
       {/* 로그인했을 때만 리뷰가 보인다. */}
-      {accessToken ? (
+      {accessToken && (
         <ReviewForm
           onChange={handleChange}
           onSubmit={handleSubmit}
         />
-      ) : null}
+      ) }
 
     </>
   );
