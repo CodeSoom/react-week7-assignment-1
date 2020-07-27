@@ -18,6 +18,8 @@ import {
 
 import { saveItem, removeItem } from './services/storage';
 
+import accessToken from '../fixtures/accessToken';
+
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
@@ -121,11 +123,11 @@ describe('actions', () => {
     });
 
     it('dispatchs setAccessToken', async () => {
-      await store.dispatch(requestLogin());
+      await store.dispatch(requestLogin(accessToken));
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken('US3R_T@KEN'));
+      expect(actions[0]).toEqual(setAccessToken(accessToken));
 
       expect(saveItem).toBeCalledTimes(1);
     });
@@ -137,7 +139,7 @@ describe('actions', () => {
         accessToken: 'US3R_T@KEN',
       });
 
-      // removeItem.mockClear();
+      removeItem.mockClear();
     });
 
     it('requests logout', async () => {
@@ -145,9 +147,9 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken(''));
+      expect(actions[0]).toEqual({ type: 'logout' });
 
-      // expect(removeItem).toBeCalledWith('accessToken');
+      expect(removeItem).toBeCalledWith('accessToken');
     });
   });
 });

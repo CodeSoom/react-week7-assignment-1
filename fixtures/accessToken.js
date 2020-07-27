@@ -1,1 +1,1 @@
-export default { ACCESSTOKEN: 'I/AM_T@KEN' };
+export default 'I/AMT@KEN';

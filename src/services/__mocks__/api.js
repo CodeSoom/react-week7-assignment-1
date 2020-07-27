@@ -1,3 +1,5 @@
+import AccessToken from '../../../fixtures/accessToken';
+
 export async function fetchRegions() {
   return [];
 }
@@ -18,10 +20,7 @@ export async function fetchRestaurant({ restaurantId }) {
 }
 
 export async function postLogin({ email, password }) {
-  return {
-    email, password,
-    // TODO: ...
-  };
+  return AccessToken;
 }
 
 export async function postReview({
