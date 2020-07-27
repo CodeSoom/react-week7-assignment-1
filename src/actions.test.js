@@ -14,6 +14,7 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  changeReviewField,
 } from './actions';
 
 import { saveItem, removeItem } from './services/storage';
@@ -150,6 +151,31 @@ describe('actions', () => {
       expect(actions[0]).toEqual({ type: 'logout' });
 
       expect(removeItem).toBeCalledWith('accessToken');
+    });
+  });
+
+  describe('sendReview', () => {
+    const reviewData = {
+      restaurantId: 100,
+      accessToken: 'US3R_T@KEN',
+      reviewFields: {
+        score: 5,
+        description: '숨은맛집을찾아버렸다아',
+      },
+    };
+
+    beforeEach(() => {
+      store = mockStore(reviewData);
+    });
+
+    it('post review', async () => {
+      await store.dispatch(sendReview({ restaurantId: 100 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(changeReviewField({ name: 'score', value: '' }));
+      expect(actions[2]).toEqual(changeReviewField({ name: 'description', value: '' }));
     });
   });
 });
