@@ -135,10 +135,13 @@ export function sendReview({ restaurantId }) {
     } = getState();
 
     // TODO: try-catch로 에러처리
-    const loadedRestaurant = await postReview({
+    await postReview({
       accessToken, restaurantId, score, descritpion,
     });
-    dispatch(loadRestaurant(loadedRestaurant));
+
+    dispatch(loadRestaurant({ restaurantId }));
+    dispatch(changeReviewField({ name: 'score', value: '' }));
+    dispatch(changeReviewField({ name: 'description', value: '' }));
   };
 }
 
