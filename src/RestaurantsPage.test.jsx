@@ -13,8 +13,8 @@ const mockPush = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useHistory() {
-    return { push: mockPush }
-  }
+    return { push: mockPush };
+  },
 }));
 
 describe('RestaurantsPage', () => {
@@ -58,7 +58,7 @@ describe('RestaurantsPage', () => {
   it('renders links of restaurants', () => {
     const { container } = renderRestaurantsPage();
 
-    expect(container.innerHTML).toContain('<a href="');
+    expect(container.innerHTML).toContain('<button');
   });
 
   context('when click restaurant', () => {
@@ -69,5 +69,5 @@ describe('RestaurantsPage', () => {
 
       expect(mockPush).toBeCalledWith('/restaurants/1');
     });
-  })
+  });
 });
