@@ -26,7 +26,15 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' }
+      restaurant: { id: 1, name: '마녀주방' },
+      loginFields: {
+        email: 'test@test.com',
+        password: '1234',
+      },
+      reviewFields: {
+        score: 5,
+        reviewContent: '바보들앙 이거 리뷰 아니지롱~',
+      },
     }));
   });
 
@@ -34,7 +42,7 @@ describe('App', () => {
     return render(
       <MemoryRouter initialEntries={[path]}>
         <App />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
   }
 
@@ -75,6 +83,16 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('with path /login', () => {
+    it('redners the login page', () => {
+      const { getByLabelText, container } = renderApp({ path: '/login' });
+
+      expect(getByLabelText('E-mail')).not.toBeNull();
+      expect(getByLabelText('Password')).not.toBeNull();
+      expect(container.querySelector('button')).toHaveTextContent('Log In');
     });
   });
 });

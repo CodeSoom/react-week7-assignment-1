@@ -3,12 +3,15 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  fetchAccessToken,
+  fetchAddReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
 import CATEGORIES from '../../fixtures/categories';
 import RESTAURANTS from '../../fixtures/restaurants';
 import RESTAURANT from '../../fixtures/restaurant';
+import accessTokenMock from '../../fixtures/accessToken';
 
 describe('api', () => {
   const mockFetch = (data) => {
@@ -65,6 +68,33 @@ describe('api', () => {
       const restaurant = await fetchRestaurant({ restaurantId: 1 });
 
       expect(restaurant).toEqual(RESTAURANT);
+    });
+  });
+
+  describe('setAccessToken', () => {
+    beforeEach(() => {
+      mockFetch(accessTokenMock);
+    });
+
+    it('returns accessToken', async () => {
+      const email = 'test@test.com';
+      const password = '1234';
+
+      const accessToken = await fetchAccessToken({ email, password });
+
+      expect(accessToken).toEqual(accessTokenMock);
+    });
+  });
+
+  describe('fetchAddReview', () => {
+    beforeEach(() => {
+      mockFetch('');
+    });
+
+    it('returns empty value', async () => {
+      const restaurant = await fetchAddReview(1);
+
+      expect(restaurant).toEqual('');
     });
   });
 });
