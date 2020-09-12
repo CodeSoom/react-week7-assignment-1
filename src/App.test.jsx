@@ -26,16 +26,16 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' }
+      restaurant: { id: 1, name: '마녀주방' },
     }));
   });
 
   function renderApp({ path }) {
-    return render(
+    return render((
       <MemoryRouter initialEntries={[path]}>
         <App />
       </MemoryRouter>
-    );
+    ));
   }
 
   context('with path /', () => {

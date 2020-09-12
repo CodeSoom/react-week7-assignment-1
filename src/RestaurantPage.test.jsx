@@ -27,23 +27,23 @@ describe('RestaurantPage', () => {
     it('renders name', () => {
       const params = { id: '1' };
 
-      const { container } = render(
+      const { container } = render((
         <RestaurantPage params={params} />
-      );
+      ));
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  })
+  });
 
   context('without params props', () => {
     it('renders name', () => {
-      const { container } = render(
+      const { container } = render((
         <MemoryRouter initialEntries={['/restaurants/1']}>
           <RestaurantPage />
         </MemoryRouter>
-      );
+      ));
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  })
+  });
 });
