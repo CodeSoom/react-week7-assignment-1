@@ -3,8 +3,12 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
+  postReview,
 } from './api';
 
+import ACCESSTOKEN from '../../fixtures/accessToken';
+import LOGINFIELDS from '../../fixtures/loginFields';
 import REGIONS from '../../fixtures/regions';
 import CATEGORIES from '../../fixtures/categories';
 import RESTAURANTS from '../../fixtures/restaurants';
@@ -16,6 +20,33 @@ describe('api', () => {
       async json() { return data; },
     });
   };
+
+  describe('postLogin', () => {
+    beforeEach(() => {
+      mockFetch(ACCESSTOKEN);
+    });
+
+    it('returns accessToken', async () => {
+      const accessToken = await postLogin(LOGINFIELDS);
+
+      expect(accessToken).toBe(ACCESSTOKEN.accessToken);
+    });
+  });
+
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch({});
+    });
+
+    it('posts review', async () => {
+      await postReview({
+        restaurantId: 1,
+        accessToken: ACCESSTOKEN,
+        score: '3',
+        description: '으으으으음저는그냥그렇네요ㅜㅜ',
+      });
+    });
+  });
 
   describe('fetchRegions', () => {
     beforeEach(() => {

@@ -3,7 +3,11 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
+  postReview,
 } from './services/api';
+
+import { saveItem, removeItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -83,5 +87,69 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+export function changeLoginField({ name, value }) {
+  return {
+    type: 'changeLoginField',
+    payload: { name, value },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const { loginFields: { email, password } } = getState();
+    // TODO: try-catch로 에러처리
+    // try {
+    const accessToken = await postLogin({ email, password });
+
+    saveItem('accessToken', accessToken);
+
+    dispatch(setAccessToken(accessToken));
+
+    // } catch (e) {
+    //   console.error(e);
+    // }
+  };
+}
+
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: { name, value },
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const {
+      accessToken,
+      reviewFields: { score, descritpion },
+    } = getState();
+
+    // TODO: try-catch로 에러처리
+    await postReview({
+      accessToken, restaurantId, score, descritpion,
+    });
+
+    dispatch(loadRestaurant({ restaurantId }));
+    dispatch(changeReviewField({ name: 'score', value: '' }));
+    dispatch(changeReviewField({ name: 'description', value: '' }));
+  };
+}
+
+// TODO:
+export function logout() {
+  removeItem('accessToken');
+
+  return {
+    type: 'logout',
   };
 }
