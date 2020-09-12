@@ -10,6 +10,11 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
+  setAccessToken,
+  sendReview,
+  logout,
+  changeReviewField,
 } from './actions';
 
 const middlewares = [thunk];
@@ -92,12 +97,68 @@ describe('actions', () => {
     });
 
     it('dispatchs setRestaurant', async () => {
-      await store.dispatch(loadRestaurant({restaurantId: 1}));
+      await store.dispatch(loadRestaurant({ restaurantId: 1 }));
 
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    context('with login fields', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: 'test@email.com',
+            password: '123',
+          },
+        });
+      });
+
+      it('requests Login', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+        expect(actions[0]).toEqual(setAccessToken({}));
+      });
+    });
+  });
+
+  describe('sendReview', () => {
+    context('with restaurant id', () => {
+      beforeEach(() => {
+        store = mockStore({
+          restaurantId: '1,',
+          reviewFields: {},
+          accessToken: 'ACCESS_TOKEN',
+        });
+      });
+
+      it('load reviews', async () => {
+        await store.dispatch(sendReview({ restaurantId: 1 }));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(changeReviewField({ name: 'score', value: '' }));
+        expect(actions[1]).toEqual(changeReviewField({ name: 'description', value: '' }));
+      });
+    });
+  });
+
+  describe('logout', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+      });
+    });
+
+    it('requests logout', async () => {
+      await store.dispatch(logout());
+
+      const actions = store.getActions();
+      expect(actions[0]).toEqual(logout());
     });
   });
 });

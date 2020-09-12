@@ -20,6 +20,10 @@ describe('RestaurantPage', () => {
         name: '마법사주방',
         address: '서울시 강남구',
       },
+      reviewFields: {
+        score: '5',
+        describe: '맛 좋',
+      },
     }));
   });
 
@@ -28,22 +32,22 @@ describe('RestaurantPage', () => {
       const params = { id: '1' };
 
       const { container } = render(
-        <RestaurantPage params={params} />
+        <RestaurantPage params={params} />,
       );
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  })
+  });
 
   context('without params props', () => {
     it('renders name', () => {
       const { container } = render(
         <MemoryRouter initialEntries={['/restaurants/1']}>
           <RestaurantPage />
-        </MemoryRouter>
+        </MemoryRouter>,
       );
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  })
+  });
 });

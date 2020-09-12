@@ -7,6 +7,11 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginField,
+  setAccessToken,
+  changeReviewField,
+  logout,
+  setReviews,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +23,9 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: { email: '', password: '' },
+      accessToken: null,
+      reviewFields: { score: '', description: '' },
     };
 
     it('returns initialState', () => {
@@ -123,6 +131,94 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('changeLoginFields', () => {
+    it('changes login field', () => {
+      const initialState = {
+        loginFields: {},
+      };
+
+      const loginFields = {
+        name: 'email',
+        value: 'test@test',
+      };
+
+      const state = reducer(initialState, changeLoginField(
+        loginFields,
+      ));
+
+      expect(state.loginFields).toEqual({
+        email: 'test@test',
+      });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('sets accessToken', () => {
+      const initialState = {
+        accessToken: null,
+      };
+
+      const state = reducer(initialState, setAccessToken('TOKEN'));
+
+      expect(state.accessToken).toBe('TOKEN');
+    });
+  });
+
+  describe('logout', () => {
+    it('request logout', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+      };
+
+      const state = reducer(initialState, logout());
+
+      expect(state.accessToken).toBe('');
+    });
+  });
+
+  describe('changeReviewFields', () => {
+    it('changes review field', () => {
+      const initialState = {
+        reviewFields: {},
+      };
+
+      const reviewFields = {
+        name: 'score',
+        value: '5',
+      };
+
+      const state = reducer(initialState, changeReviewField(
+        reviewFields,
+      ));
+
+      expect(state.reviewFields).toEqual({
+        score: '5',
+      });
+    });
+  });
+
+  describe('setReviews', () => {
+    it('changes reviews of current restaurant', () => {
+      const initialState = {
+        restaurant: {
+          reviews: [],
+        },
+      };
+
+      const reviews = [
+        {
+          id: 1, name: '테스터', description: 'Good', score: 1.0,
+        },
+      ];
+
+      const state = reducer(initialState, setReviews(
+        reviews,
+      ));
+
+      expect(state.restaurant.reviews).toHaveLength(reviews.length);
     });
   });
 });
