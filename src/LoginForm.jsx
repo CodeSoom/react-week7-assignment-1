@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function LoginForm({ fields, onClick, onChange }) {
-  const {email, password} = fields;
+  const { email, password } = fields;
 
   return (
     <div>
