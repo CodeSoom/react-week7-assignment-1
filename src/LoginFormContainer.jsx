@@ -1,6 +1,10 @@
 import React from 'react';
 
-export default function LoginPage() {
+export default function LoginFormContainer() {
+  function handleClick() {
+    // TODO: form dispatch 작성
+  }
+
   return (
     <>
       <div>
@@ -10,6 +14,14 @@ export default function LoginPage() {
       <div>
         <label htmlFor="login-password">Password</label>
         <input type="password" id="login-password" />
+      </div>
+      <div>
+        <button
+          type="button"
+          onClick={handleClick}
+        >
+          Log In
+        </button>
       </div>
     </>
   );
