@@ -53,9 +53,10 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
-  setAccessTocken() {
+  setAccessTocken(state, { payload: { accessTocken } }) {
     return {
-      accessTocken: 'qwer!!',
+      ...state,
+      accessTocken,
     };
   },
 };
