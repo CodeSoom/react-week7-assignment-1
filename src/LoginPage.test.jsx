@@ -12,9 +12,9 @@ describe('LoginPage', () => {
   });
 
   it('renders labels of email and password', () => {
-    const { container } = render(<LoginPage />);
+    const { getByLabelText } = render(<LoginPage />);
 
-    expect(container).toHaveTextContent(/E-mail/);
-    expect(container).toHaveTextContent(/password/);
+    expect(getByLabelText('E-mail')).not.toBeNull();
+    expect(getByLabelText('password')).not.toBeNull();
   });
 });
