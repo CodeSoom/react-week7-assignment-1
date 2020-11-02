@@ -13,7 +13,14 @@ export default function LoginFormContainer() {
     dispatch(requestLogin());
   }
 
+  function handleChange() {
+    //
+  }
+
   return (
-    <LoginForm onClick={handleClick} />
+    <LoginForm
+      onClick={handleClick}
+      onChange={handleChange}
+    />
   );
 }
