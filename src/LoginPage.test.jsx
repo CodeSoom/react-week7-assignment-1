@@ -10,4 +10,5 @@ test('LoginPAge', () => {
   expect(container).toHaveTextContent('Log In');
 
   expect(getByLabelText('E-mail')).not.toBeNull();
+  expect(getByLabelText('Password')).not.toBeNull();
 });
