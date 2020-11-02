@@ -1,6 +1,9 @@
 import React from 'react';
 
 export default function LoginForm({ onClick, onChange }) {
+  const email = 'test@test';
+  const password = '1234';
+
   return (
     <div>
       <div>
@@ -10,6 +13,7 @@ export default function LoginForm({ onClick, onChange }) {
         <input
           type="text"
           id="email-input"
+          value={email}
           onChange={onChange}
         />
       </div>
@@ -20,6 +24,7 @@ export default function LoginForm({ onClick, onChange }) {
         <input
           type="text"
           id="password-input"
+          value={password}
           onChange={onChange}
         />
       </div>
