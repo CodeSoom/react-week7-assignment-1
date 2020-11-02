@@ -13,12 +13,13 @@ describe('LoginFormContainer', () => {
 
   beforeEach(() => {
     useDispatch.mockImplementation(() => dispatch);
+
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
         email: '',
         password: '',
-      }
-    }))
+      },
+    }));
   });
 
   it('renders input controls', () => {
