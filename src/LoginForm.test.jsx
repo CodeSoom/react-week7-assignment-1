@@ -8,25 +8,35 @@ describe('LoginForm', () => {
   const handleSubmit = jest.fn();
   const handleChange = jest.fn();
 
-  const renderLoginPage = () => render((
+  const renderLoginForm = ({ email, password }) => render((
     <LoginForm
+      fields={{ email, password }}
       onSubmit={handleSubmit}
       onChange={handleChange}
     />
   ));
 
   it('renders input controls and listens change events', () => {
-    const { getByLabelText } = renderLoginPage();
+    const email = 'tester@example.com';
+    const password = 'test';
+
+    const { getByLabelText } = renderLoginForm({ email, password });
 
     const controls = [
-      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
-      { label: 'Password', name: 'password', value: 'test' },
+      {
+        label: 'E-mail', name: 'email', origin: email, value: 'testers@example.com',
+      },
+      {
+        label: 'Password', name: 'password', origin: password, value: 'tests',
+      },
     ];
 
-    controls.forEach(({ label, value, name }) => {
+    controls.forEach(({
+      label, value, name, origin,
+    }) => {
       const input = getByLabelText(label);
 
-      expect(input).not.toBeNull();
+      expect(input.value).toBe(origin);
 
       fireEvent.change(input, {
         target: { value, name },
@@ -37,7 +47,7 @@ describe('LoginForm', () => {
   });
 
   it('renders "Log In" button', () => {
-    const { getByText } = renderLoginPage();
+    const { getByText } = renderLoginForm({});
 
     fireEvent.click(getByText('Log In'));
 
