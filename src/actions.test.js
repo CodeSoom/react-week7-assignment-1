@@ -11,6 +11,7 @@ import {
   setRestaurants,
   setRestaurant,
   requestLogin,
+  setAccessTocken,
 } from './actions';
 
 const middlewares = [thunk];
@@ -112,10 +113,7 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual({
-        type: 'setAccessTocken',
-        payload: {},
-      });
+      expect(actions[0]).toEqual(setAccessTocken({}));
     });
   });
 });

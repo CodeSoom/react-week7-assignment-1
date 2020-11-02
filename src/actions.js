@@ -33,6 +33,13 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function setAccessTocken(accessTocken) {
+  return {
+    type: 'setAccessTocken',
+    payload: { accessTocken },
+  };
+}
+
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
@@ -90,9 +97,6 @@ export function requestLogin() {
   return async (dispatch, getState) => {
     // TODO : getState로 {email, password} 받아오기
     // Fetch({email, password})으로 accessTocken 얻기.
-    dispatch({
-      type: 'setAccessTocken',
-      payload: {},
-    });
+    dispatch(setAccessTocken({}));
   };
 }
