@@ -21,6 +21,9 @@ export default function LoginFormContainer() {
           id="password-input"
         />
       </div>
+      <button type="button">
+      로그인
+      </button>
     </div>
   );
 }
