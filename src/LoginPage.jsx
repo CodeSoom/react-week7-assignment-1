@@ -8,9 +8,16 @@ export default function LoginPage() {
         E-mail
       </label>
       <input
-      type="text"
-      id="email-input"
+        type="text"
+        id="email-input"
       />
+      <label htmlFor="password-input">
+      Password
+    </label>
+    <input
+      type="text"
+      id="password-input"
+    />
     </div>
   );
 }
