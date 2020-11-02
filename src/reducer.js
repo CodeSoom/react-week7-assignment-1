@@ -53,6 +53,11 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
+  setAccessTocken() {
+    return {
+      accessTocken: 'qwer!!',
+    };
+  },
 };
 
 function defaultReducer(state) {
