@@ -7,6 +7,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  setAccessTocken,
 } from './actions';
 
 describe('reducer', () => {
@@ -124,5 +125,19 @@ describe('reducer', () => {
         name: '한식',
       });
     });
+  });
+});
+
+describe('setAccessTocken', () => {
+  it('changes accessTocken', () => {
+    const initialState = {
+      accessTocken: null,
+    };
+
+    const accessTocken = 'qwer!!';
+
+    const state = reducer(initialState, setAccessTocken(accessTocken));
+
+    expect(state.accessTocken).toBe(accessTocken);
   });
 });
