@@ -1,28 +1,14 @@
 import React from 'react';
+import LoginForm from './LoginForm';
 
 export default function LoginFormContainer() {
-  function handleClick() {
+  function handleSubmit() {
     // TODO: form dispatch 작성
   }
 
   return (
     <>
-      <div>
-        <label htmlFor="login-email">E-mail</label>
-        <input type="email" id="login-email" />
-      </div>
-      <div>
-        <label htmlFor="login-password">Password</label>
-        <input type="password" id="login-password" />
-      </div>
-      <div>
-        <button
-          type="button"
-          onClick={handleClick}
-        >
-          Log In
-        </button>
-      </div>
+      <LoginForm onSubmit={handleSubmit} />
     </>
   );
 }
