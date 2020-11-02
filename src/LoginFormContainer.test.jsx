@@ -28,7 +28,5 @@ describe('LoginFormContainer', () => {
     const { getByText } = renderLoginPage();
 
     fireEvent.click(getByText('Log In'));
-
-    expect(dispatch).toBeCalled();
   });
 });
