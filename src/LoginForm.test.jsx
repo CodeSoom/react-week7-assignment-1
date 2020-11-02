@@ -1,26 +1,46 @@
 import React from 'react';
 
-import { fireEvent, render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
 jest.mock('react-redux');
 
 describe('LoginForm', () => {
-  const hadleClick = jest.fn();
+  const handleClick = jest.fn();
+
+  function renderLoginForm() {
+    return render(<LoginForm onClick={handleClick} />);
+  }
 
   it('renders input controls', () => {
-    const { getByLabelText } = render(<LoginForm onClick={hadleClick} />);
+    const { getByLabelText } = renderLoginForm();
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    const controls = [
+      {
+        label: 'E-mail',
+        name: 'email',
+        value: '',
+      },
+      {
+        label: 'Password',
+        name: 'password',
+        value: '',
+      },
+    ];
+
+    controls.forEach(({ label }) => {
+      const input = getByLabelText(label);
+
+      expect(input).not.toBeNull();
+    });
   });
 
   it('renders "Log In" button', () => {
-    const { getByText } = render(<LoginForm onClick={hadleClick} />);
+    const { getByText } = renderLoginForm();
 
     fireEvent.click(getByText('로그인'));
 
-    expect(hadleClick).toBeCalled();
+    expect(handleClick).toBeCalled();
   });
 });
