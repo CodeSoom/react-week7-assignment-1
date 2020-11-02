@@ -8,9 +8,20 @@ jest.mock('react-redux');
 
 describe('LoginForm', () => {
   const handleClick = jest.fn();
+  const handleChange = jest.fn();
+
+  beforeEach(() => {
+    handleClick.mockClear();
+    handleChange.mockClear();
+  })
 
   function renderLoginForm() {
-    return render(<LoginForm onClick={handleClick} />);
+    return render(
+      <LoginForm
+        onClick={handleClick}
+        onChange={handleChange}
+      />,
+    );
   }
 
   it('renders input controls', () => {
@@ -33,6 +44,10 @@ describe('LoginForm', () => {
       const input = getByLabelText(label);
 
       expect(input).not.toBeNull();
+
+      fireEvent.change(input, { target: { value: 'test' } });
+
+      expect(handleChange).toBeCalled();
     });
   });
 
