@@ -7,7 +7,7 @@ import LoginPage from './LoginPage';
 describe('LoginPage', () => {
   const renderLoginPage = () => render(<LoginPage />);
 
-  it('renders tags', () => {
+  it('renders input controls', () => {
     const { container } = renderLoginPage();
 
     expect(container).toHaveTextContent('Log In');
