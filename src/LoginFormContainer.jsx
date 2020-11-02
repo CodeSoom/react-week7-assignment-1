@@ -16,9 +16,11 @@ export default function LoginFormContainer() {
   function handleChange() {
     //
   }
+  const fields = { email: '', password: '' };
 
   return (
     <LoginForm
+      fields={fields}
       onClick={handleClick}
       onChange={handleChange}
     />
