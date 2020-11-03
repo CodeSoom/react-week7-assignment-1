@@ -13,4 +13,12 @@ describe('LoginForm', () => {
     expect(queryByLabelText('E-mail')).not.toBeNull();
     expect(queryByLabelText('Password')).not.toBeNull();
   });
+
+  it('renders "Log In" button', () => {
+    const { queryByText } = render(
+      <LoginForm />,
+    );
+
+    expect(queryByText('Log In')).not.toBeNull();
+  });
 });
