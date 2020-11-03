@@ -14,6 +14,7 @@ test('LoginPAge', () => {
       email: '',
       password: '',
     },
+    accessToken: '',
   }));
 
   const { container, getByLabelText } = render(<LoginPage />);

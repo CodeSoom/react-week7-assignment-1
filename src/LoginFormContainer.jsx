@@ -20,6 +20,17 @@ export default function LoginFormContainer() {
   }
 
   const fields = useSelector(get('loginFields'));
+  const accessToken = useSelector(get('accessToken'));
+
+  if (accessToken) {
+    return (
+      <button
+        type="button"
+      >
+        Log out
+      </button>
+    );
+  }
 
   return (
     <LoginForm
