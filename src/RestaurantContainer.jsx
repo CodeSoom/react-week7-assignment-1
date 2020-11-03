@@ -31,10 +31,17 @@ export default function RestaurantContainer({ restaurantId }) {
       <label htmlFor="input-score">
         평점
       </label>
-      <input 
-      type="score" 
-      id="input-score"
+      <input
+        type="score"
+        id="input-score"
       />
+      <label htmlFor="input-description">
+      리뷰 내용
+    </label>
+    <input
+      type="text"
+      id="input-description"
+    />
     </>
   );
 }
