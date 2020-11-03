@@ -6,13 +6,18 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const handleSubmit = jest.fn();
+  const handleChange = jest.fn();
 
   beforeEach(() => {
     handleSubmit.mockClear();
+    handleChange.mockClear();
   });
 
   const renderLoginForm = () => render(
-    <LoginForm onSubmit={handleSubmit} />,
+    <LoginForm
+      onChange={handleChange}
+      onSubmit={handleSubmit}
+    />,
   );
 
   it('renders input controls', () => {
@@ -29,6 +34,18 @@ describe('LoginForm', () => {
       fireEvent.click(getByText('Log In'));
 
       expect(handleSubmit).toBeCalled();
+    });
+  });
+
+  context('when E-mail is changed', () => {
+    it('called handleChange', () => {
+      const { getByLabelText } = renderLoginForm();
+
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'tester@example.com' },
+      });
+
+      expect(handleChange).toBeCalled();
     });
   });
 });
