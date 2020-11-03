@@ -30,6 +30,12 @@ describe('LoginForm', () => {
       });
     });
 
+    it('have given value on each', () => {
+      const { getByLabelText } = renderLoginForm();
+
+      expect(getByLabelText('E-mail')).toHaveValue('origin@example.com');
+    });
+
     it('listen change events', () => {
       const { getByLabelText } = renderLoginForm();
 
