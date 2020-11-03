@@ -6,15 +6,20 @@ import LoginInput from './LoginInput';
 describe('LoginInput', () => {
   const handleChange = jest.fn();
 
-  const renderLoginInput = ({ value, placeholder } = {}) => render(
-    <LoginInput value={value} placeholder={placeholder} onChange={handleChange} />,
+  const renderLoginInput = ({ type, value, placeholder } = {}) => render(
+    <LoginInput
+      type={type}
+      value={value}
+      placeholder={placeholder}
+      onChange={handleChange}
+    />,
   );
 
   context('with value', () => {
     it('renders green', () => {
       renderLoginInput({ value: 'value' });
 
-      expect(screen.getByText('green')).toBeInTheDocument();
+      expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid', 'false');
     });
   });
 
@@ -28,7 +33,7 @@ describe('LoginInput', () => {
     it('renders red', () => {
       renderLoginInput();
 
-      expect(screen.getByText('red')).toBeInTheDocument();
+      expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid', 'true');
     });
   });
 
