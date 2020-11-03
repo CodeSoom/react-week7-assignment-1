@@ -8,11 +8,11 @@ describe('LoginForm', () => {
   const handleClick = jest.fn();
   const handleChange = jest.fn();
 
-  const renderLoginForm = ({ email = '', password = '' }) => render(
+  const renderLoginForm = (loginFields = {}) => render(
     <LoginForm
       onClick={handleClick}
       onChange={handleChange}
-      loginFields={{ email, password }}
+      loginFields={loginFields}
     />,
   );
 
@@ -27,7 +27,7 @@ describe('LoginForm', () => {
     ];
 
     it('are rendered', () => {
-      const { queryByLabelText } = renderLoginForm({});
+      const { queryByLabelText } = renderLoginForm();
 
       inputControls.forEach(({ label }) => {
         expect(queryByLabelText(label)).not.toBeNull();
@@ -48,7 +48,7 @@ describe('LoginForm', () => {
     });
 
     it('listen change events', () => {
-      const { getByLabelText } = renderLoginForm({});
+      const { getByLabelText } = renderLoginForm();
 
       inputControls.forEach(({ label, name, value }) => {
         fireEvent.change(getByLabelText(label), {
@@ -64,13 +64,13 @@ describe('LoginForm', () => {
     const loginButton = 'Log In';
 
     it('is rendered', () => {
-      const { queryByText } = renderLoginForm({});
+      const { queryByText } = renderLoginForm();
 
       expect(queryByText(loginButton)).not.toBeNull();
     });
 
     it('listens click event', () => {
-      const { getByText } = renderLoginForm({});
+      const { getByText } = renderLoginForm();
 
       expect(handleClick).not.toBeCalled();
 
