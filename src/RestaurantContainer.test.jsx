@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -45,7 +45,22 @@ describe('RestaurantContainer', () => {
     it('renders review write form', () => {
       const { getByLabelText } = renderRestaurantContainer();
 
-      expect(getByLabelText('평점')).not.toBeNull();
+      const controls = [
+        {
+          label: '평점',
+          name: 'score',
+          value: '5',
+        },
+      ];
+
+      controls.forEach(({ label, name, value }) => {
+        const input = getByLabelText(label);
+        
+        fireEvent.change(input, { target: { value } });
+
+        expect(dispatch).toBeCalled();
+      });
+
       expect(getByLabelText('리뷰 내용')).not.toBeNull();
     });
   });
