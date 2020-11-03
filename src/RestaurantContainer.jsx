@@ -10,12 +10,21 @@ import {
 
 import { get } from './utils';
 
-function ReviewForm({ onChange }) {
+function ReviewForm({ onChange, onSubmit }) {
   function handleChange(event) {
     const { name, value } = event.target;
 
     onChange({ name, value });
   }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const { name, value } = event.target;
+
+    onSubmit({ name, value });
+  }
+
   return (
     <>
       <label htmlFor="input-score">
@@ -36,7 +45,10 @@ function ReviewForm({ onChange }) {
         name="description"
         onChange={handleChange}
       />
-      <button type="submit">
+      <button
+        type="submit"
+        onSubmit={handleSubmit}
+      >
         리뷰 남기기
       </button>
     </>
@@ -62,10 +74,17 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(changeReviewField({ name, value }));
   }
 
+  function handleSubmit({ name, value }) {
+    dispatch();
+  }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm onChange={handleChange} />
+      <ReviewForm
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
     </>
   );
 }
