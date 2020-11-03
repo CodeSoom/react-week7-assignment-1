@@ -35,31 +35,32 @@ describe('LoginForm', () => {
       {
         label: 'E-mail',
         name: 'email',
-        value: email,
+        origin: email,
+        value: 'test',
       },
       {
         label: 'Password',
         name: 'password',
-        value: password,
+        origin: password,
+        value: 'test',
       },
     ];
 
-    controls.forEach(({ label, value }) => {
+    controls.forEach(({
+      label, name, origin, value,
+    }) => {
       const input = getByLabelText(label);
 
-      expect(input.value).toBe(value);
+      expect(input.value).toBe(origin);
 
-      fireEvent.change(input, { target: { value: 'test' } });
+      fireEvent.change(input, { target: { value } });
 
-      expect(handleChange).toBeCalled();
+      expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 
   it('renders "Log In" button', () => {
-    const email = 'test@test';
-    const password = '1234';
-
-    const { getByText } = renderLoginForm({ email, password });
+    const { getByText } = renderLoginForm({});
 
     fireEvent.click(getByText('로그인'));
 
