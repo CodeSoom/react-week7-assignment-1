@@ -17,34 +17,32 @@ describe('LoginFormContainer', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      accessToken: given.accessToken,
+    }));
   });
 
   context('with accessToken', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        accessToken: 'qwer',
-      }));
-    });
+    given('accessToken', () => ({
+      accessToken: 'qwer',
+    }));
 
     it('render log out button', () => {
       const { getByText } = render(<LoginFormContainer />);
 
       fireEvent.click(getByText('Log out'));
 
-      expect(dispatch).toBeCalledWith(setAccessToken(''));
+      expect(dispatch).toBeCalledWith(setAccessToken(null));
     });
   });
 
   context('without accessToken', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        loginFields: {
-          email: '',
-          password: '',
-        },
-        accessToken: '',
-      }));
-    });
+    given('accessToken', () => null);
 
     it('renders input controls', () => {
       const { getByLabelText } = render(<LoginFormContainer />);

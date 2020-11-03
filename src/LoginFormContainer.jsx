@@ -20,7 +20,7 @@ export default function LoginFormContainer() {
   }
 
   function handleClick() {
-    dispatch(setAccessToken(''));
+    dispatch(setAccessToken(null));
   }
 
   const fields = useSelector(get('loginFields'));
