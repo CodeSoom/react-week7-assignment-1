@@ -10,6 +10,27 @@ import {
 
 import { get } from './utils';
 
+function ReviewForm() {
+  return (
+    <>
+      <label htmlFor="input-score">
+        평점
+      </label>
+      <input
+        type="score"
+        id="input-score"
+      />
+      <label htmlFor="input-description">
+        리뷰 내용
+      </label>
+      <input
+        type="text"
+        id="input-description"
+      />
+    </>
+  );
+}
+
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
@@ -28,20 +49,7 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <label htmlFor="input-score">
-        평점
-      </label>
-      <input
-        type="score"
-        id="input-score"
-      />
-      <label htmlFor="input-description">
-      리뷰 내용
-    </label>
-    <input
-      type="text"
-      id="input-description"
-    />
+      <ReviewForm />
     </>
   );
 }
