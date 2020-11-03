@@ -7,6 +7,8 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginField,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +20,8 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: { email: '', password: '' },
+      accessToken: '',
     };
 
     it('returns initialState', () => {
@@ -123,6 +127,46 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('changeLoginField', () => {
+    context('email이 바뀌는 경우', () => {
+      const initialState = {
+        loginFields: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, changeLoginField({ name: 'email', value: 'test' }));
+
+      expect(state.loginFields.email).toBe('test');
+    });
+
+    context('password가 바뀌는 경우', () => {
+      const initialState = {
+        loginFields: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, changeLoginField({ name: 'password', value: '123123' }));
+
+      expect(state.loginFields.password).toBe('123123');
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('AccessToken을 설정합니다.', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, setAccessToken('TOKEN'));
+
+      expect(state.accessToken).toBe('TOKEN');
     });
   });
 });
