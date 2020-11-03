@@ -52,4 +52,5 @@ module.exports = {
     'react/prop-types': 'off',
     'linebreak-style': 'off',
   },
+  "settings": { "import/resolver": "webpack" }
 };
