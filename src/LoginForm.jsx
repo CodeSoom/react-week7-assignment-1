@@ -13,15 +13,20 @@ export default function LoginForm({ onClick, onChange }) {
         <label htmlFor="login-email">
           E-mail
           <input
-            type="email"
             id="login-email"
+            type="email"
             name="email"
             onChange={handleChange}
           />
         </label>
         <label htmlFor="login-password">
           Password
-          <input type="password" id="login-password" />
+          <input
+            id="login-password"
+            type="password"
+            name="password"
+            onChange={handleChange}
+          />
         </label>
       </div>
       <button type="button" onClick={onClick}>

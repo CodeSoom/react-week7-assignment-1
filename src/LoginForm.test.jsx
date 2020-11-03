@@ -13,26 +13,33 @@ describe('LoginForm', () => {
   );
 
   beforeEach(() => {
-    handleClick.mockClear();
+    jest.clearAllMocks();
   });
 
-  it('renders input-controls', () => {
-    const { queryByLabelText } = renderLoginForm();
+  describe('input-controls', () => {
+    const inputControls = [
+      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
+      { label: 'Password', name: 'password', value: 'test' },
+    ];
 
-    expect(queryByLabelText('E-mail')).not.toBeNull();
-    expect(queryByLabelText('Password')).not.toBeNull();
-  });
+    it('are rendered', () => {
+      const { queryByLabelText } = renderLoginForm();
 
-  it('listens change events', () => {
-    const { getByLabelText } = renderLoginForm();
-
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'tester@example.com' },
+      inputControls.forEach(({ label }) => {
+        expect(queryByLabelText(label)).not.toBeNull();
+      });
     });
 
-    expect(handleChange).toBeCalledWith({
-      name: 'email',
-      value: 'tester@example.com',
+    it('listen change events', () => {
+      const { getByLabelText } = renderLoginForm();
+
+      inputControls.forEach(({ label, name, value }) => {
+        fireEvent.change(getByLabelText(label), {
+          target: { value },
+        });
+
+        expect(handleChange).toBeCalledWith({ name, value });
+      });
     });
   });
 
