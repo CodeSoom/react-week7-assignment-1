@@ -12,7 +12,6 @@ import RestaurantsPage from './pages/RestaurantsPage';
 import RestaurantPage from './pages/RestaurantPage';
 import NotFoundPage from './pages/NotFoundPage';
 
-// 로그인 컴포넌트 구현
 // 로그인 컨테이너 구현
 // 로그인 서비스 구현
 /*
