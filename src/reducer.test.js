@@ -131,18 +131,20 @@ describe('reducer', () => {
       });
     });
   });
-});
 
-describe('setAccessTocken', () => {
-  it('changes accessTocken', () => {
-    const initialState = {
-      accessTocken: null,
-    };
-
-    const accessTocken = 'qwer!!';
-
-    const state = reducer(initialState, setAccessTocken(accessTocken));
-
-    expect(state.accessTocken).toBe(accessTocken);
+  describe('setAccessTocken', () => {
+    it('changes accessTocken', () => {
+      const initialState = {
+        accessTocken: null,
+      };
+  
+      const accessTocken = 'qwer!!';
+  
+      const state = reducer(initialState, setAccessTocken(accessTocken));
+  
+      expect(state.accessTocken).toBe(accessTocken);
+    });
   });
+  
 });
+
