@@ -73,6 +73,14 @@ const reducers = {
       },
     };
   },
+  changeReviewField() {
+    return {
+      reviewField: {
+        score: '5',
+        description: '',
+      },
+    };
+  },
 };
 
 function defaultReducer(state) {
