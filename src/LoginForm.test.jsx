@@ -6,9 +6,10 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const handleClick = jest.fn();
+  const handleChange = jest.fn();
 
   const renderLoginForm = () => render(
-    <LoginForm onClick={handleClick} />,
+    <LoginForm onClick={handleClick} onChange={handleChange} />,
   );
 
   beforeEach(() => {
