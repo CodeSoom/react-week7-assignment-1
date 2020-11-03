@@ -46,6 +46,7 @@ describe('RestaurantContainer', () => {
       const { getByLabelText } = renderRestaurantContainer();
 
       expect(getByLabelText('평점')).not.toBeNull();
+      expect(getByLabelText('리뷰 내용')).not.toBeNull();
     });
   });
 
