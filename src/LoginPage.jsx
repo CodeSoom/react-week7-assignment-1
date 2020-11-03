@@ -1,21 +1,19 @@
 import React from 'react';
 
+import InputField from './InputField';
+
 export default function LoginPage() {
   return (
     <>
-      <label htmlFor="login-email">
-        E-mail
-      </label>
-      <input
-        id="login-email"
+      <InputField
+        id="email"
+        label="E-mail"
         type="email"
         name="email"
       />
-      <label htmlFor="login-password">
-        Password
-      </label>
-      <input
-        id="login-password"
+      <InputField
+        id="password"
+        label="Password"
         type="password"
         name="password"
       />
