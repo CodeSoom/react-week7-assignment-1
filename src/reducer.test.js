@@ -134,7 +134,9 @@ describe('reducer', () => {
   describe('changeLoginField', () => {
     it('changes email', () => {
       const initialState = {
-        loginFields: { email: '' },
+        loginFields: {
+          email: '',
+        },
       };
 
       const state = reducer(initialState, changeLoginField({
@@ -147,7 +149,9 @@ describe('reducer', () => {
 
     it('changes password', () => {
       const initialState = {
-        loginFields: { password: '' },
+        loginFields: {
+          password: '',
+        },
       };
 
       const state = reducer(initialState, changeLoginField({
