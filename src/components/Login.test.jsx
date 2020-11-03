@@ -1,7 +1,11 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import Login from './Login';
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
 
 describe('Login', () => {
   const handleChange = jest.fn();
@@ -45,6 +49,21 @@ describe('Login', () => {
         expect(input).toHaveAttribute('aria-invalid', 'true');
       });
       expect(screen.getByRole('button', { name: 'Log in' })).toBeDisabled();
+    });
+  });
+
+  context('when change input', () => {
+    it('called onChange', () => {
+      renderLogin({});
+
+      expect(handleChange).not.toBeCalled();
+
+      fireEvent.change(
+        screen.getAllByRole('textbox')[0],
+        { target: { value: 'id' } },
+      );
+
+      expect(handleChange).toBeCalled();
     });
   });
 });
