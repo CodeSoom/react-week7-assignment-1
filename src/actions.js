@@ -102,8 +102,10 @@ export function loadRestaurant({ restaurantId }) {
 
 export function requestLogin() {
   return async (dispatch, getState) => {
-    // TODO : getState로 {email, password} 받아오기
-    // Fetch({email, password})으로 accessTocken 얻기.
-    dispatch(setAccessTocken({}));
+    const { loginFields: { email, password } } = getState();
+
+    const accessTocken = '';
+
+    dispatch(setAccessTocken(accessTocken));
   };
 }
