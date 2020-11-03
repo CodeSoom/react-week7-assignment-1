@@ -8,6 +8,7 @@ import {
   selectRegion,
   selectCategory,
   setAccessTocken,
+  changeLoginFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -137,14 +138,30 @@ describe('reducer', () => {
       const initialState = {
         accessTocken: null,
       };
-  
+
       const accessTocken = 'qwer!!';
-  
+
       const state = reducer(initialState, setAccessTocken(accessTocken));
-  
+
       expect(state.accessTocken).toBe(accessTocken);
     });
   });
-  
-});
 
+  describe('changeLoginFields', () => {
+    const initialState = {
+      loginFields: {
+        email: '',
+        password: '',
+      },
+    };
+
+    const newloginFields = { name: 'email', value: 'test@test' };
+
+    const state = reducer(initialState, changeLoginFields(newloginFields));
+
+    expect(state.loginFields).toEqual({
+      email: 'test@test',
+      password: '',
+    });
+  });
+});
