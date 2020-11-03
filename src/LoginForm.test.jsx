@@ -18,7 +18,7 @@ describe('LoginForm', () => {
     const handleSubmit = jest.fn();
 
     const { getByText } = render((
-      <LoginForm />
+      <LoginForm onSubmit={handleSubmit} />
     ));
 
     fireEvent.click(getByText('Log In'));
