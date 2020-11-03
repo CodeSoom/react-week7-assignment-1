@@ -150,18 +150,33 @@ describe('reducer', () => {
   describe('changeLoginFields', () => {
     const initialState = {
       loginFields: {
-        email: '',
-        password: '',
+        email: 'email',
+        password: 'password',
       },
     };
 
-    const newloginFields = { name: 'email', value: 'test@test' };
+    context('when email is changed', () => {
+      const state = reducer(
+        initialState,
+        changeLoginFields({ name: 'email', value: 'test@test' }),
+      );
 
-    const state = reducer(initialState, changeLoginFields(newloginFields));
+      expect(state.loginFields).toEqual({
+        email: 'test@test',
+        password: 'password',
+      });
+    });
 
-    expect(state.loginFields).toEqual({
-      email: 'test@test',
-      password: '',
+    context('when password is changed', () => {
+      const state = reducer(
+        initialState,
+        changeLoginFields({ name: 'password', value: 'test' }),
+      );
+
+      expect(state.loginFields).toEqual({
+        email: 'email',
+        password: 'test',
+      });
     });
   });
 });
