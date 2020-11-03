@@ -11,11 +11,11 @@ import {
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  function handleClick() {
+  function handleSubmit() {
     dispatch(requestLogin());
   }
 
   return (
-    <LoginForm onSubmit={handleClick} />
+    <LoginForm onSubmit={handleSubmit} />
   );
 }
