@@ -61,6 +61,15 @@ export function changeLoginFields({ name, value }) {
     payload: { [name]: value },
   };
 }
+export function changeReviewField() {
+  return {
+    type: 'changeReviewField',
+    payload: {
+      name: 'score',
+      value: '5',
+    },
+  }
+}
 
 export function loadInitialData() {
   return async (dispatch) => {
