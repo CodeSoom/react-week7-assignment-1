@@ -18,7 +18,7 @@ describe('Login', () => {
       renderLogin({ id: 'id', password: 'passowrd' });
 
       expect(screen.getAllByText('green')).toHaveLength(2);
-      expect(screen.getByRole('button')).toBeEnabled();
+      expect(screen.getByRole('button', { name: 'Log in' })).toBeEnabled();
     });
   });
 
@@ -28,7 +28,7 @@ describe('Login', () => {
 
       expect(screen.getByText('green')).toBeInTheDocument();
       expect(screen.getByText('red')).toBeInTheDocument();
-      expect(screen.getByRole('button')).toBeDisabled();
+      expect(screen.getByRole('button', { name: 'Log in' })).toBeDisabled();
     });
   });
 
@@ -38,7 +38,7 @@ describe('Login', () => {
 
       expect(screen.getByText('green')).toBeInTheDocument();
       expect(screen.getByText('red')).toBeInTheDocument();
-      expect(screen.getByRole('button')).toBeDisabled();
+      expect(screen.getByRole('button', { name: 'Log in' })).toBeDisabled();
     });
   });
 
@@ -47,7 +47,7 @@ describe('Login', () => {
       renderLogin({});
 
       expect(screen.getAllByText('red')).toHaveLength(2);
-      expect(screen.getByRole('button')).toBeDisabled();
+      expect(screen.getByRole('button', { name: 'Log in' })).toBeDisabled();
     });
   });
 });
