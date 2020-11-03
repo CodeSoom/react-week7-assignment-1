@@ -45,7 +45,7 @@ describe('RestaurantContainer', () => {
     });
 
     it('renders review write form', () => {
-      const { getByLabelText } = renderRestaurantContainer();
+      const { getByLabelText, getByText } = renderRestaurantContainer();
 
       const controls = [
         {
@@ -67,6 +67,8 @@ describe('RestaurantContainer', () => {
 
         expect(dispatch).toBeCalledWith(changeReviewField({ name, value }));
       });
+
+      expect(getByText('리뷰 남기기')).not.toBeNull();
     });
   });
 
