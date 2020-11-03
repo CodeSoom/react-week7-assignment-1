@@ -7,7 +7,7 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
-  accessTocken: '',
+  accessToken: '',
   loginFields: {
     email: '',
     password: '',
@@ -58,10 +58,10 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
-  setAccessTocken(state, { payload: { accessTocken } }) {
+  setAccessToken(state, { payload: { accessToken } }) {
     return {
       ...state,
-      accessTocken,
+      accessToken,
     };
   },
   changeLoginFields(state, { payload }) {
