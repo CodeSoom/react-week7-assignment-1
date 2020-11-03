@@ -64,11 +64,12 @@ const reducers = {
       accessTocken,
     };
   },
-  changeLoginFields() {
+  changeLoginFields(state, { payload }) {
     return {
+      ...state,
       loginFields: {
-        email: 'test@test',
-        password: '',
+        ...state.loginFields,
+        ...payload,
       },
     };
   },
