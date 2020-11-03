@@ -13,7 +13,13 @@ export default function LoginFormContainer() {
   };
 
   const handleChange = () => {
-    dispatch();
+    dispatch({
+      type: 'loginFieldChange',
+      payload: {
+        name: 'email',
+        value: 'tester@example.com',
+      },
+    });
   };
 
   return (
