@@ -17,45 +17,64 @@ describe('LoginFormContainer', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
-
-    useSelector.mockImplementation((selector) => selector({
-      loginFields: {
-        email: '',
-        password: '',
-      },
-    }));
   });
 
-  it('renders input controls', () => {
-    const { getByLabelText } = render(<LoginFormContainer />);
+  context('with accessToken', () => {
+    beforeEach(() => {
+      useSelector.mockImplementation((selector) => selector({
+        accessToken: 'qwer',
+      }));
+    });
 
-    const controls = [
-      {
-        label: 'E-mail',
-        name: 'email',
-        value: 'test',
-      },
-      {
-        label: 'Password',
-        name: 'password',
-        value: 'test',
-      },
-    ];
+    it('render log out button', () => {
+      const { getByText } = render(<LoginFormContainer />);
 
-    controls.forEach(({ label, name, value }) => {
-      const input = getByLabelText(label);
-
-      fireEvent.change(input, { target: { value } });
-
-      expect(dispatch).toBeCalledWith(changeLoginFields({ name, value }));
+      expect(getByText('Log out')).not.toBeNull();
     });
   });
 
-  it('renders "Log In" button', () => {
-    const { getByText } = render(<LoginFormContainer />);
+  context('without accessToken', () => {
+    beforeEach(() => {
+      useSelector.mockImplementation((selector) => selector({
+        loginFields: {
+          email: '',
+          password: '',
+        },
+        accessToken: '',
+      }));
+    });
 
-    fireEvent.click(getByText('로그인'));
+    it('renders input controls', () => {
+      const { getByLabelText } = render(<LoginFormContainer />);
 
-    expect(dispatch).toBeCalled();
+      const controls = [
+        {
+          label: 'E-mail',
+          name: 'email',
+          value: 'test',
+        },
+        {
+          label: 'Password',
+          name: 'password',
+          value: 'test',
+        },
+      ];
+
+      controls.forEach(({ label, name, value }) => {
+        const input = getByLabelText(label);
+
+        fireEvent.change(input, { target: { value } });
+
+        expect(dispatch).toBeCalledWith(changeLoginFields({ name, value }));
+      });
+    });
+
+    it('renders "Log In" button', () => {
+      const { getByText } = render(<LoginFormContainer />);
+
+      fireEvent.click(getByText('로그인'));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 });
