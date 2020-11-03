@@ -11,5 +11,6 @@ describe('LoginFormContainer', () => {
     );
 
     expect(queryByLabelText('E-mail')).not.toBeNull();
+    expect(queryByLabelText('Password')).not.toBeNull();
   });
 });
