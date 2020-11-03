@@ -58,7 +58,7 @@ export function selectCategory(categoryId) {
 export function changeLoginFields({ name, value }) {
   return {
     type: 'changeLoginFields',
-    payload: { [name]: value },
+    payload: { name, value },
   };
 }
 
