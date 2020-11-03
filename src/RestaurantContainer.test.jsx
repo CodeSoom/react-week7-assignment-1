@@ -53,6 +53,11 @@ describe('RestaurantContainer', () => {
           name: 'score',
           value: '5',
         },
+        {
+          label: '리뷰 내용',
+          name: 'description',
+          value: '구름이 두둥실 떠다니는 맛!',
+        },
       ];
 
       controls.forEach(({ label, name, value }) => {
@@ -62,8 +67,6 @@ describe('RestaurantContainer', () => {
 
         expect(dispatch).toBeCalledWith(changeReviewField({ name, value }));
       });
-
-      expect(getByLabelText('리뷰 내용')).not.toBeNull();
     });
   });
 
