@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './LoginForm';
 
-import { changeLoginField } from './actions';
+import {
+  login,
+  changeLoginField,
+} from './actions';
 
 import { get } from './utils';
 
@@ -14,8 +17,7 @@ export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    // TODO: fetch login() action
-    dispatch();
+    dispatch(login());
   };
 
   const handleChange = ({ name, value }) => {
