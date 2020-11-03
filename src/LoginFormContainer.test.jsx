@@ -25,7 +25,13 @@ describe('LoginFormContainer', () => {
   it('renders input controls', () => {
     const { getByLabelText } = render(<LoginFormContainer />);
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
+    fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test' } });
+
+    expect(dispatch).toBeCalledWith({
+      type: 'changeLoginFields',
+      payload: { email: 'test' },
+    });
+
     expect(getByLabelText('Password')).not.toBeNull();
   });
 
