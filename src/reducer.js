@@ -64,6 +64,14 @@ const reducers = {
       accessTocken,
     };
   },
+  changeLoginFields() {
+    return {
+      loginFields: {
+        email: 'test@test',
+        password: '',
+      },
+    };
+  },
 };
 
 function defaultReducer(state) {
