@@ -5,12 +5,12 @@ import { fireEvent, render } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  const handleClick = jest.fn();
+  const handleSubmit = jest.fn();
   const handleChange = jest.fn();
 
   const renderLoginForm = (loginFields = {}) => render(
     <LoginForm
-      onClick={handleClick}
+      onSubmit={handleSubmit}
       onChange={handleChange}
       loginFields={loginFields}
     />,
@@ -72,11 +72,11 @@ describe('LoginForm', () => {
     it('listens click event', () => {
       const { getByText } = renderLoginForm();
 
-      expect(handleClick).not.toBeCalled();
+      expect(handleSubmit).not.toBeCalled();
 
       fireEvent.click(getByText(loginButton));
 
-      expect(handleClick).toBeCalledTimes(1);
+      expect(handleSubmit).toBeCalledTimes(1);
     });
   });
 });

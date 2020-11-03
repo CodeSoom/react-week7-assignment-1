@@ -13,7 +13,7 @@ export default function LoginFormContainer() {
 
   const dispatch = useDispatch();
 
-  const handleClick = () => {
+  const handleSubmit = () => {
     // TODO: fetch login() action
     dispatch();
   };
@@ -25,7 +25,7 @@ export default function LoginFormContainer() {
   return (
     <LoginForm
       loginFields={loginFields}
-      onClick={handleClick}
+      onSubmit={handleSubmit}
       onChange={handleChange}
     />
   );
