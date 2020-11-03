@@ -22,19 +22,23 @@ describe('LoginForm', () => {
     expect(queryByLabelText('Password')).not.toBeNull();
   });
 
-  it('renders "Log In" button', () => {
-    const { queryByText } = renderLoginForm();
+  describe('"Log In" button', () => {
+    const loginButton = 'Log In';
 
-    expect(queryByText('Log In')).not.toBeNull();
-  });
+    it('is rendered', () => {
+      const { queryByText } = renderLoginForm();
 
-  it('listens click event on "Log In" button', () => {
-    const { getByText } = renderLoginForm();
+      expect(queryByText(loginButton)).not.toBeNull();
+    });
 
-    expect(handleClick).not.toBeCalled();
+    it('listens click event', () => {
+      const { getByText } = renderLoginForm();
 
-    fireEvent.click(getByText('Log In'));
+      expect(handleClick).not.toBeCalled();
 
-    expect(handleClick).toBeCalledTimes(1);
+      fireEvent.click(getByText(loginButton));
+
+      expect(handleClick).toBeCalledTimes(1);
+    });
   });
 });
