@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LoginForm({ onClick, onChange }) {
+export default function LoginForm({ email, onClick, onChange }) {
   const handleChange = (event) => {
     const { target: { name, value } } = event;
 
@@ -16,6 +16,7 @@ export default function LoginForm({ onClick, onChange }) {
             id="login-email"
             type="email"
             name="email"
+            value={email}
             onChange={handleChange}
           />
         </label>

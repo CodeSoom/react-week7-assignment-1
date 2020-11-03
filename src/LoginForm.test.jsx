@@ -8,8 +8,8 @@ describe('LoginForm', () => {
   const handleClick = jest.fn();
   const handleChange = jest.fn();
 
-  const renderLoginForm = () => render(
-    <LoginForm onClick={handleClick} onChange={handleChange} />,
+  const renderLoginForm = ({ email = '' }) => render(
+    <LoginForm onClick={handleClick} onChange={handleChange} email={email} />,
   );
 
   beforeEach(() => {
@@ -23,7 +23,7 @@ describe('LoginForm', () => {
     ];
 
     it('are rendered', () => {
-      const { queryByLabelText } = renderLoginForm();
+      const { queryByLabelText } = renderLoginForm({});
 
       inputControls.forEach(({ label }) => {
         expect(queryByLabelText(label)).not.toBeNull();
@@ -31,13 +31,15 @@ describe('LoginForm', () => {
     });
 
     it('have given value on each', () => {
-      const { getByLabelText } = renderLoginForm();
+      const { getByLabelText } = renderLoginForm({
+        email: 'origin@example.com',
+      });
 
       expect(getByLabelText('E-mail')).toHaveValue('origin@example.com');
     });
 
     it('listen change events', () => {
-      const { getByLabelText } = renderLoginForm();
+      const { getByLabelText } = renderLoginForm({});
 
       inputControls.forEach(({ label, name, value }) => {
         fireEvent.change(getByLabelText(label), {
@@ -53,13 +55,13 @@ describe('LoginForm', () => {
     const loginButton = 'Log In';
 
     it('is rendered', () => {
-      const { queryByText } = renderLoginForm();
+      const { queryByText } = renderLoginForm({});
 
       expect(queryByText(loginButton)).not.toBeNull();
     });
 
     it('listens click event', () => {
-      const { getByText } = renderLoginForm();
+      const { getByText } = renderLoginForm({});
 
       expect(handleClick).not.toBeCalled();
 
