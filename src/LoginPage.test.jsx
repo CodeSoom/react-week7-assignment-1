@@ -12,4 +12,12 @@ describe('LoginPage', () => {
 
     expect(container).toHaveTextContent('Log In');
   });
+
+  it('renders login-form', () => {
+    const { queryByLabelText } = render(
+      <LoginPage />,
+    );
+
+    expect(queryByLabelText('E-mail')).not.toBeNull();
+  });
 });
