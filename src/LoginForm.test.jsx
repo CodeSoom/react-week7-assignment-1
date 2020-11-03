@@ -30,7 +30,10 @@ describe('LoginForm', () => {
       target: { value: 'tester@example.com' },
     });
 
-    expect(handleChange).toBeCalled();
+    expect(handleChange).toBeCalledWith({
+      name: 'email',
+      value: 'tester@example.com',
+    });
   });
 
   describe('"Log In" button', () => {
