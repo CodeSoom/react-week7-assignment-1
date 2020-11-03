@@ -6,19 +6,25 @@ import LoginInput from './LoginInput';
 describe('LoginInput', () => {
   const handleChange = jest.fn();
 
-  const renderLoginInput = (value) => render(
-    <LoginInput value={value} onChange={handleChange} />,
+  const renderLoginInput = ({ value, placeholder } = {}) => render(
+    <LoginInput value={value} placeholder={placeholder} onChange={handleChange} />,
   );
 
   context('with value', () => {
     it('renders green', () => {
-      renderLoginInput('value');
+      renderLoginInput({ value: 'value' });
 
       expect(screen.getByText('green')).toBeInTheDocument();
     });
   });
 
   context('without field', () => {
+    it('renders placeholder "ID"', () => {
+      renderLoginInput({ placeholder: 'ID' });
+
+      expect(screen.getByPlaceholderText('ID')).toBeInTheDocument();
+    });
+
     it('renders red', () => {
       renderLoginInput();
 

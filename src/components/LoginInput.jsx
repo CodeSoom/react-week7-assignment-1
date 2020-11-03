@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function LoginInput({ value, onChange }) {
+export default function LoginInput({ placeholder, value, onChange }) {
   return (
     <>
-      <input type="text" value={value} onChange={onChange} />
+      <input type="text" placeholder={placeholder} value={value} onChange={onChange} />
       <p>{value ? 'green' : 'red'}</p>
     </>
   );
