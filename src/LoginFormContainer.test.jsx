@@ -2,13 +2,15 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
-import LoginPage from './LoginPage';
+import LoginFormContainer from './LoginFormContainer';
 
-test('LoginPage', () => {
-  const { getByLabelText } = render((
-    <LoginPage />
-  ));
+describe('LoginFormContainer', () => {
+  it('renders input controls', () => {
+    const { getByLabelText } = render((
+      <LoginFormContainer />
+    ));
 
-  expect(getByLabelText('Username')).not.toBeNull();
-  expect(getByLabelText('Password')).not.toBeNull();
+    expect(getByLabelText('E-mail')).not.toBeNull();
+    expect(getByLabelText('Password')).not.toBeNull();
+  });
 });
