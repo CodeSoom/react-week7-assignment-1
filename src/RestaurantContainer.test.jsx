@@ -68,7 +68,9 @@ describe('RestaurantContainer', () => {
         expect(dispatch).toBeCalledWith(changeReviewField({ name, value }));
       });
 
-      expect(getByText('리뷰 남기기')).not.toBeNull();
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(dispatch).toBeCalled();
     });
   });
 
