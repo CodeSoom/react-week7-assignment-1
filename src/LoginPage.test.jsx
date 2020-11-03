@@ -10,6 +10,6 @@ describe('LoginPage', () => {
       <LoginPage />,
     );
 
-    expect(container).toHaveTextContent('Home');
+    expect(container).toHaveTextContent('Log In');
   });
 });
