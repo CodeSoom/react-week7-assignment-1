@@ -27,11 +27,26 @@ describe('LoginFormContainer', () => {
   it('renders input controls', () => {
     const { getByLabelText } = render(<LoginFormContainer />);
 
-    fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test' } });
+    const controls = [
+      {
+        label: 'E-mail',
+        name: 'email',
+        value: 'test',
+      },
+      {
+        label: 'Password',
+        name: 'password',
+        value: 'test',
+      },
+    ];
 
-    expect(dispatch).toBeCalledWith(changeLoginFields({}));
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
 
-    expect(getByLabelText('Password')).not.toBeNull();
+      fireEvent.change(input, { target: { value } });
+
+      expect(dispatch).toBeCalledWith(changeLoginFields({ name, value }));
+    });
   });
 
   it('renders "Log In" button', () => {
