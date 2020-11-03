@@ -144,5 +144,18 @@ describe('reducer', () => {
 
       expect(state.loginFields.email).toBe('new@new.new');
     });
+
+    it('changes password', () => {
+      const initialState = {
+        loginFields: { password: '' },
+      };
+
+      const state = reducer(initialState, changeLoginField({
+        name: 'password',
+        value: 'new',
+      }));
+
+      expect(state.loginFields.password).toBe('new');
+    });
   });
 });
