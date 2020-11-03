@@ -7,7 +7,7 @@ import LoginForm from './LoginForm';
 describe('LoginForm', () => {
   const handleClick = jest.fn();
 
-  const renderHomePage = () => render(<LoginForm onClick={handleClick} />);
+  const renderHomePage = () => render(<LoginForm onSubmit={handleClick} />);
 
   it('render user name and password ', () => {
     const { getByLabelText } = renderHomePage();

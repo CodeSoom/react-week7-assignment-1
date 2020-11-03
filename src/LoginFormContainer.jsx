@@ -9,11 +9,11 @@ import { requestLogin } from './actions';
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  function handleClick() {
+  function handleSubmit() {
     dispatch(requestLogin());
   }
 
   return (
-    <LoginForm onClick={handleClick} />
+    <LoginForm onSubmit={handleSubmit} />
   );
 }
