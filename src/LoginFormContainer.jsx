@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useDispatch } from 'react-redux';
 
+import { requestLogin } from './actions';
+
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
