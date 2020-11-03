@@ -8,11 +8,11 @@ describe('LoginForm', () => {
   const handleClick = jest.fn();
   const handleChange = jest.fn();
 
-  const renderLoginForm = ({ email = '' }) => render(
+  const renderLoginForm = ({ email = '', password = '' }) => render(
     <LoginForm
       onClick={handleClick}
       onChange={handleChange}
-      loginFields={{ email }}
+      loginFields={{ email, password }}
     />,
   );
 
@@ -35,11 +35,16 @@ describe('LoginForm', () => {
     });
 
     it('have given value on each', () => {
-      const { getByLabelText } = renderLoginForm({
+      const loginFields = {
         email: 'origin@example.com',
-      });
+        password: 'origin',
+      };
 
-      expect(getByLabelText('E-mail')).toHaveValue('origin@example.com');
+      const { getByLabelText } = renderLoginForm(loginFields);
+
+      inputControls.forEach(({ label, name }) => {
+        expect(getByLabelText(label)).toHaveValue(loginFields[name]);
+      });
     });
 
     it('listen change events', () => {

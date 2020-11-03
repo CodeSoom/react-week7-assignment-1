@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function LoginForm({ loginFields, onClick, onChange }) {
-  const { email } = loginFields;
+  const { email, password } = loginFields;
 
   const handleChange = (event) => {
     const { target: { name, value } } = event;
@@ -28,6 +28,7 @@ export default function LoginForm({ loginFields, onClick, onChange }) {
             id="login-password"
             type="password"
             name="password"
+            value={password}
             onChange={handleChange}
           />
         </label>
