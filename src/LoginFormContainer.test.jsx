@@ -7,9 +7,10 @@ import LoginFormContainer from './LoginFormContainer';
 describe('LoginFormContainer', () => {
   const renderHomePage = () => render(<LoginFormContainer />);
 
-  it('renders title', () => {
-    const { container } = renderHomePage();
+  it('render user name and password ', () => {
+    const { getByLabelText } = renderHomePage();
 
-    expect(container).toHaveTextContent('Form');
+    expect(getByLabelText('Username')).not.toBeNull();
+    expect(getByLabelText('Password')).not.toBeNull();
   });
 });
