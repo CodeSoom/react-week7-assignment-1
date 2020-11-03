@@ -9,28 +9,44 @@ beforeEach(() => {
 
 describe('Login', () => {
   const handleChange = jest.fn();
+  const handleClick = jest.fn();
 
   const renderLogin = ({ id, password }) => render(
     <Login
       id={id}
       password={password}
       onChange={handleChange}
+      onClick={handleClick}
     />,
   );
   context('with all fields', () => {
+    const renderFullField = () => renderLogin({ id: 'id', password: 'passowrd' });
+
     it('all valid and clickable button', () => {
-      renderLogin({ id: 'id', password: 'passowrd' });
+      renderFullField();
 
       screen.getAllByRole('textbox').forEach((input) => {
         expect(input).toHaveAttribute('aria-invalid', 'false');
       });
       expect(screen.getByRole('button', { name: 'Log in' })).toBeEnabled();
     });
+
+    it('can click login button', () => {
+      renderFullField();
+
+      expect(handleClick).not.toBeCalled();
+
+      fireEvent.click(screen.getByRole('button'));
+
+      expect(handleClick).toBeCalled();
+    });
   });
 
   context('without one field', () => {
+    const renderOnlyIdField = () => renderLogin({ id: 'id' });
+
     it('password field is invalid. disabled button', () => {
-      renderLogin({ id: 'id' });
+      renderOnlyIdField();
 
       expect(screen.getByDisplayValue('id'))
         .toHaveAttribute('aria-invalid', 'false');
@@ -38,6 +54,16 @@ describe('Login', () => {
         .toHaveAttribute('aria-invalid', 'true');
       expect(screen.getByRole('button', { name: 'Log in' }))
         .toBeDisabled();
+    });
+
+    it('can not click login button', () => {
+      renderOnlyIdField();
+
+      expect(handleClick).not.toBeCalled();
+
+      fireEvent.click(screen.getByRole('button'));
+
+      expect(handleClick).not.toBeCalled();
     });
   });
 

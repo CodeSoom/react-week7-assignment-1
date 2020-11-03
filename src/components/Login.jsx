@@ -2,7 +2,9 @@ import React from 'react';
 
 import LoginInput from './LoginInput';
 
-export default function Login({ id, password, onChange }) {
+export default function Login({
+  id, password, onChange, onClick,
+}) {
   const loginAble = id && password;
 
   return (
@@ -22,6 +24,7 @@ export default function Login({ id, password, onChange }) {
       <button
         type="button"
         disabled={!loginAble}
+        onClick={onClick}
       >
         Log in
       </button>
