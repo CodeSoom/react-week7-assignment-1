@@ -54,6 +54,13 @@ export function selectCategory(categoryId) {
   };
 }
 
+export function changeLoginFields() {
+  return {
+    type: 'changeLoginFields',
+    payload: { email: 'test' },
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();
