@@ -7,11 +7,11 @@ import LoginForm from './LoginForm';
 jest.mock('react-redux');
 
 describe('LoginForm', () => {
-  const handleClick = jest.fn();
+  const handleSubmit = jest.fn();
   const handleChange = jest.fn();
 
   beforeEach(() => {
-    handleClick.mockClear();
+    handleSubmit.mockClear();
     handleChange.mockClear();
   });
 
@@ -19,7 +19,7 @@ describe('LoginForm', () => {
     return render(
       <LoginForm
         fields={{ email, password }}
-        onClick={handleClick}
+        onSubmit={handleSubmit}
         onChange={handleChange}
       />,
     );
@@ -63,6 +63,6 @@ describe('LoginForm', () => {
 
     fireEvent.click(getByText('로그인'));
 
-    expect(handleClick).toBeCalled();
+    expect(handleSubmit).toBeCalled();
   });
 });

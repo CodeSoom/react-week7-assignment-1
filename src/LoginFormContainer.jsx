@@ -11,7 +11,7 @@ import LoginForm from './LoginForm';
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  function handleClick() {
+  function handleSubmit() {
     dispatch(requestLogin());
   }
 
@@ -24,7 +24,7 @@ export default function LoginFormContainer() {
   return (
     <LoginForm
       fields={fields}
-      onClick={handleClick}
+      onSubmit={handleSubmit}
       onChange={handleChange}
     />
   );
