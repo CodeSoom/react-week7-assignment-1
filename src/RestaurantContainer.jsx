@@ -11,15 +11,20 @@ import {
 import { get } from './utils';
 
 function ReviewForm({ onChange }) {
+  function handleChange(event) {
+    const { name, value } = event.target;
+    onChange({ name, value });
+  }
   return (
     <>
       <label htmlFor="input-score">
         평점
       </label>
       <input
-        type="score"
+        type="number"
         id="input-score"
-        onChange={onChange}
+        name="score"
+        onChange={handleChange}
       />
       <label htmlFor="input-description">
         리뷰 내용
@@ -27,7 +32,8 @@ function ReviewForm({ onChange }) {
       <input
         type="text"
         id="input-description"
-        onChange={onChange}
+        name="description"
+        onChange={handleChange}
 
       />
     </>
@@ -49,9 +55,10 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
-  function handleChange() {
-    dispatch(changeReviewField());
+  function handleChange({ name, value }) {
+    dispatch(changeReviewField({ name, value }));
   }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
