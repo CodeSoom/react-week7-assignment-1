@@ -1,5 +1,10 @@
 import { equal } from './utils';
 
+const initialLoginFields = {
+  email: '',
+  password: '',
+};
+
 const initialState = {
   regions: [],
   categories: [],
@@ -7,6 +12,7 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginFields: initialLoginFields,
 };
 
 const reducers = {
@@ -51,6 +57,17 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  changeLoginField(state, { payload: { name, value } }) {
+    const { loginFields } = state;
+    return {
+      ...state,
+      loginFields: {
+        ...loginFields,
+        [name]: value,
+      },
     };
   },
 };
