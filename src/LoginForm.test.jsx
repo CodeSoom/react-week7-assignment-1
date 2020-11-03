@@ -5,7 +5,9 @@ import { render, fireEvent } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  const renderHomePage = () => render(<LoginForm />);
+  const handleClick = jest.fn();
+
+  const renderHomePage = () => render(<LoginForm onClick={handleClick} />);
 
   it('render user name and password ', () => {
     const { getByLabelText } = renderHomePage();
@@ -20,8 +22,8 @@ describe('LoginForm', () => {
     const loginButton = getByText('Login');
     expect(loginButton).not.toBeNull();
 
-    fireEvent.click(getByText('Login'));
+    fireEvent.click(loginButton);
 
-    expect(loginButton).toBeCalledTimes(1);
+    expect(handleClick).toBeCalledTimes(1);
   });
 });

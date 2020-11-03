@@ -88,6 +88,7 @@ export function loadRestaurant({ restaurantId }) {
 
 export function requestLogin() {
   return async (dispatch, getState) => {
+    // state = email, password
     // HTTP POST
     // dispatch(setAccesToken(accessToken))
   };
