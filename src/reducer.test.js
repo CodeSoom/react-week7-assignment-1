@@ -200,5 +200,17 @@ describe('reducer', () => {
         description: '',
       });
     });
+
+    context('when description is changed', () => {
+      const state = reducer(initialState, changeReviewField({
+        name: 'description',
+        value: '맛점 장소로 최고!',
+      }));
+
+      expect(state.reviewField).toEqual({
+        score: '',
+        description: '맛점 장소로 최고!',
+      });
+    });
   });
 });
