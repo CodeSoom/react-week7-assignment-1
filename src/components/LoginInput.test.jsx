@@ -1,11 +1,13 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import LoginInput from './LoginInput';
 
 describe('LoginInput', () => {
+  const handleChange = jest.fn();
+
   const renderLoginInput = (value) => render(
-    <LoginInput value={value} />,
+    <LoginInput value={value} onChange={handleChange} />,
   );
 
   context('with value', () => {
@@ -21,6 +23,21 @@ describe('LoginInput', () => {
       renderLoginInput();
 
       expect(screen.getByText('red')).toBeInTheDocument();
+    });
+  });
+
+  context('when value is changed', () => {
+    it('called onChange', () => {
+      renderLoginInput();
+
+      expect(handleChange).not.toBeCalled();
+
+      fireEvent.change(
+        screen.getByRole('textbox'),
+        { target: { value: 'value' } },
+      );
+
+      expect(handleChange).toBeCalled();
     });
   });
 });
