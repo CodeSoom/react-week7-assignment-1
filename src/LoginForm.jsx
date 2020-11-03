@@ -23,7 +23,12 @@ export default function LoginForm({ onChange, onSubmit }) {
         <label htmlFor="login-password">
           password
         </label>
-        <input type="text" id="login-password" />
+        <input
+          type="text"
+          id="login-password"
+          name="password"
+          onChange={handleChange}
+        />
       </div>
       <button
         type="button"
