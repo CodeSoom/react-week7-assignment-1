@@ -7,6 +7,10 @@ export default function LoginPage() {
         E-mail
         <input type="email" id="login-email" />
       </label>
+      <label htmlFor="login-password">
+        Password
+        <input type="password" id="login-password" />
+      </label>
     </div>
   );
 }
