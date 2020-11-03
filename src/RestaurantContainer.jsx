@@ -50,7 +50,11 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   function handleChange() {
-    dispatch();
+    dispatch({
+      type: 'changeReviewField',
+      payload: { name: 'score',
+       value: '5' },
+    });
   }
   return (
     <>
