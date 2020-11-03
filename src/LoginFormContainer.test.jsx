@@ -4,7 +4,7 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeLoginFields } from './actions';
+import { changeLoginFields, setAccessToken } from './actions';
 
 import LoginFormContainer from './LoginFormContainer';
 
@@ -29,7 +29,9 @@ describe('LoginFormContainer', () => {
     it('render log out button', () => {
       const { getByText } = render(<LoginFormContainer />);
 
-      expect(getByText('Log out')).not.toBeNull();
+      fireEvent.click(getByText('Log out'));
+
+      expect(dispatch).toBeCalledWith(setAccessToken(''));
     });
   });
 
