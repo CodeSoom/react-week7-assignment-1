@@ -32,11 +32,11 @@ describe('LoginForm', () => {
     const { getByLabelText } = renderHomePage();
 
     controls.forEach(({ label, name, value }) => {
-      expect(getByLabelText(label)).not.toBeNull();
+      const input = getByLabelText(label);
 
-      fireEvent.change(getByLabelText(label), {
-        target: { value },
-      });
+      expect(input).not.toBeNull();
+
+      fireEvent.change(input, { target: { value } });
 
       expect(handleChange).toBeCalledWith({ name, value });
     });
