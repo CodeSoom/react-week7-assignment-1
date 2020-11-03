@@ -51,4 +51,19 @@ describe('LoginForm', () => {
       });
     });
   });
+
+  context('when password is changed', () => {
+    it('called handleChange', () => {
+      const { getByLabelText } = renderLoginForm();
+
+      fireEvent.change(getByLabelText('password'), {
+        target: { value: '1234' },
+      });
+
+      expect(handleChange).toBeCalledWith({
+        name: 'password',
+        value: '1234',
+      });
+    });
+  });
 });
