@@ -12,7 +12,11 @@ export default function LoginFormContainer() {
     dispatch();
   };
 
+  const handleChange = () => {
+    dispatch();
+  };
+
   return (
-    <LoginForm onClick={handleClick} />
+    <LoginForm onClick={handleClick} onChange={handleChange} />
   );
 }
