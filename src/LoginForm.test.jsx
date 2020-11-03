@@ -11,8 +11,12 @@ describe('LoginForm', () => {
     handleSubmit.mockClear();
   });
 
+  const renderLoginForm = () => render(
+    <LoginForm onSubmit={handleSubmit} />,
+  );
+
   it('renders input controls', () => {
-    const { getByLabelText } = render(<LoginForm onSubmit={handleSubmit} />);
+    const { getByLabelText } = renderLoginForm();
 
     expect(getByLabelText('E-mail')).not.toBeNull();
     expect(getByLabelText('password')).not.toBeNull();
@@ -20,7 +24,7 @@ describe('LoginForm', () => {
 
   context('with "Log In" button is clicked', () => {
     it('called handleSubmit', () => {
-      const { getByText } = render(<LoginForm onSubmit={handleSubmit} />);
+      const { getByText } = renderLoginForm();
 
       fireEvent.click(getByText('Log In'));
 
