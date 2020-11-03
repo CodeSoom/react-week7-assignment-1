@@ -7,8 +7,18 @@ export default function Login({ id, password, onChange }) {
 
   return (
     <form>
-      <LoginInput placeholder="ID" value={id} onChange={onChange} />
-      <LoginInput placeholder="PASSWORD" value={password} onChange={onChange} />
+      <LoginInput
+        type="text"
+        placeholder="ID"
+        value={id}
+        onChange={onChange}
+      />
+      <LoginInput
+        type="password"
+        placeholder="PASSWORD"
+        value={password}
+        onChange={onChange}
+      />
       <button
         type="button"
         disabled={!loginAble}

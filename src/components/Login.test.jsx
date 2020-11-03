@@ -17,28 +17,23 @@ describe('Login', () => {
     it('all green and clickable button', () => {
       renderLogin({ id: 'id', password: 'passowrd' });
 
-      expect(screen.getAllByText('green')).toHaveLength(2);
+      screen.getAllByRole('textbox').forEach((input) => {
+        expect(input).toHaveAttribute('aria-invalid', 'false');
+      });
       expect(screen.getByRole('button', { name: 'Log in' })).toBeEnabled();
     });
   });
 
-  context('without id', () => {
-    it('id field is red. disabled button', () => {
+  context('without one field', () => {
+    it('password field is red. disabled button', () => {
       renderLogin({ id: 'id' });
 
-      expect(screen.getByText('green')).toBeInTheDocument();
-      expect(screen.getByText('red')).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'Log in' })).toBeDisabled();
-    });
-  });
-
-  context('without password', () => {
-    it('password field is red. disabled button', () => {
-      renderLogin({ password: 'password' });
-
-      expect(screen.getByText('green')).toBeInTheDocument();
-      expect(screen.getByText('red')).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'Log in' })).toBeDisabled();
+      expect(screen.getByDisplayValue('id'))
+        .toHaveAttribute('aria-invalid', 'false');
+      expect(screen.getByPlaceholderText('PASSWORD'))
+        .toHaveAttribute('aria-invalid', 'true');
+      expect(screen.getByRole('button', { name: 'Log in' }))
+        .toBeDisabled();
     });
   });
 
@@ -46,7 +41,9 @@ describe('Login', () => {
     it('all field is red. disabled button', () => {
       renderLogin({});
 
-      expect(screen.getAllByText('red')).toHaveLength(2);
+      screen.getAllByRole('textbox').forEach((input) => {
+        expect(input).toHaveAttribute('aria-invalid', 'true');
+      });
       expect(screen.getByRole('button', { name: 'Log in' })).toBeDisabled();
     });
   });
