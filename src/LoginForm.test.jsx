@@ -27,8 +27,8 @@ describe('LoginForm', () => {
     expect(getByLabelText('password')).not.toBeNull();
   });
 
-  context('with "Log In" button is clicked', () => {
-    it('called handleSubmit', () => {
+  context('with login button is clicked', () => {
+    it('calls handleSubmit', () => {
       const { getByText } = renderLoginForm();
 
       fireEvent.click(getByText('Log In'));
@@ -37,8 +37,8 @@ describe('LoginForm', () => {
     });
   });
 
-  context('input controls is changed', () => {
-    it('called handleChange', () => {
+  context('when input controls is changed', () => {
+    it('calls handleChange', () => {
       const inputs = [
         { label: 'E-mail', name: 'email', value: 'tester@example.com' },
         { label: 'password', name: 'password', value: 'test' },

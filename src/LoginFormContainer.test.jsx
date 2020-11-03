@@ -37,14 +37,14 @@ describe('LoginFormContainer', () => {
     expect(getByLabelText('password')).not.toBeNull();
   });
 
-  it('renders "Log In" button', () => {
+  it('renders login button', () => {
     const { container } = renderLoginFormContainer();
 
     expect(container).toHaveTextContent('Log In');
   });
 
-  context('when "Log In" button is clicked', () => {
-    it('called dispatch', () => {
+  context('when login button is clicked', () => {
+    it('calls dispatch', () => {
       const { getByText } = renderLoginFormContainer();
 
       fireEvent.click(getByText('Log In'));
