@@ -27,6 +27,10 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      loginFields: {
+        email: '',
+        password: '',
+      },
     }));
   });
 
@@ -67,6 +71,14 @@ describe('App', () => {
       const { container } = renderApp({ path: '/restaurants/1' });
 
       expect(container).toHaveTextContent('마녀주방');
+    });
+  });
+
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
     });
   });
 
