@@ -3,6 +3,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -65,6 +66,18 @@ describe('api', () => {
       const restaurant = await fetchRestaurant({ restaurantId: 1 });
 
       expect(restaurant).toEqual(RESTAURANT);
+    });
+  });
+
+  describe('postLogin', () => {
+    beforeEach(() => {
+      mockFetch('qwer!!');
+    });
+
+    it('returns accessTocken', async () => {
+      const accessTocken = await postLogin({ email: 'test@test', password: '1234' });
+
+      expect(accessTocken).toEqual('qwer!!');
     });
   });
 });
