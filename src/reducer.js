@@ -73,11 +73,12 @@ const reducers = {
       },
     };
   },
-  changeReviewField() {
+  changeReviewField(state, { payload: { name, value } }) {
     return {
+      ...state,
       reviewField: {
-        score: '5',
-        description: '',
+        ...state.reviewField,
+        [name]: value,
       },
     };
   },
