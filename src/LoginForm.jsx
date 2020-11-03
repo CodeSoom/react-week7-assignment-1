@@ -14,14 +14,16 @@ export default function LoginForm({ onChange, onSubmit }) {
       <input
         type="email"
         id="login-email"
+        name="email"
         onChange={handleChage}
       />
       <label htmlFor="login-password">
         Password
       </label>
       <input
-        type="email"
+        type="password"
         id="login-password"
+        name="password"
         onChange={handleChage}
       />
       <button

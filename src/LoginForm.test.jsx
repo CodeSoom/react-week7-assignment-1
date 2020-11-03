@@ -5,30 +5,48 @@ import { render, fireEvent } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
+  const handleChange = jest.fn();
   const handleClick = jest.fn();
 
-  const renderHomePage = () => render(<LoginForm onSubmit={handleClick} />);
+  const renderHomePage = () => render((
+    <LoginForm
+      onChange={handleChange}
+      onSubmit={handleClick}
+    />
+  ));
+
+  const controls = [
+    { label: 'E-mail', name: 'email', value: 'tester@example.com' },
+    { label: 'Password', name: 'password', value: 'test' },
+  ];
 
   it('render user name and password ', () => {
     const { getByLabelText } = renderHomePage();
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    controls.forEach((control) => {
+      expect(getByLabelText(control.label)).not.toBeNull();
+    });
   });
 
   it('change user name and password ', () => {
     const { getByLabelText } = renderHomePage();
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
+    controls.forEach((control) => {
+      expect(getByLabelText(control.label)).not.toBeNull();
 
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'tester@example.com' },
+      fireEvent.change(getByLabelText(control.label), {
+        target: { value: control.value },
+      });
+
+      expect(handleChange).toBeCalledWith({
+        name: control.name,
+        value: control.value,
+      });
     });
 
-    expect(getByLabelText('Password')).not.toBeNull();
-
-    fireEvent.change(getByLabelText('Password'), {
-      target: { value: 'test' },
+    expect(handleChange).toBeCalledWith({
+      name: 'password',
+      value: 'test',
     });
   });
 
