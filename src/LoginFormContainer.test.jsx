@@ -16,38 +16,59 @@ describe('LoginFormContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      loginFields: {
-        email: 'tester@example.com',
-        password: 'test',
-      },
+      loginFields: given.loginFields,
     }));
   });
 
   const renderLoginPage = () => render(<LoginFormContainer />);
 
-  it('renders input controls', () => {
-    const { getByLabelText } = renderLoginPage();
+  context('without error', () => {
+    given('loginFields', () => ({
+      email: 'tester@example.com',
+      password: 'test',
+    }));
 
-    expect(getByLabelText('E-mail').value).toBe('tester@example.com');
-    expect(getByLabelText('Password').value).toBe('test');
-  });
+    it('renders input controls', () => {
+      const { getByLabelText } = renderLoginPage();
 
-  it('listens change event input controls', () => {
-    const { getByLabelText } = renderLoginPage();
-
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'new email' },
+      expect(getByLabelText('E-mail').value).toBe('tester@example.com');
+      expect(getByLabelText('Password').value).toBe('test');
     });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: { name: 'email', value: 'new email' },
+    it('listens change event input controls', () => {
+      const { getByLabelText } = renderLoginPage();
+
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'new email' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: { name: 'email', value: 'new email' },
+      });
+    });
+
+    it('renders "Log In" button', () => {
+      const { getByText } = renderLoginPage();
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalledTimes(1);
     });
   });
 
-  it('renders "Log In" button', () => {
-    const { getByText } = renderLoginPage();
+  context('with error', () => {
+    given('loginFields', () => ({
+      email: '',
+      password: 'test',
+    }));
 
-    fireEvent.click(getByText('Log In'));
+    it('Click "Log In" button nothing happen', () => {
+      const { getByText } = renderLoginPage();
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).not.toBeCalled();
+    });
   });
 });
