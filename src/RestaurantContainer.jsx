@@ -10,7 +10,7 @@ import {
 
 import { get } from './utils';
 
-function ReviewForm() {
+function ReviewForm({ onChange }) {
   return (
     <>
       <label htmlFor="input-score">
@@ -19,6 +19,7 @@ function ReviewForm() {
       <input
         type="score"
         id="input-score"
+        onChange={onChange}
       />
       <label htmlFor="input-description">
         리뷰 내용
@@ -26,6 +27,8 @@ function ReviewForm() {
       <input
         type="text"
         id="input-description"
+        onChange={onChange}
+
       />
     </>
   );
@@ -46,10 +49,13 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
+  function handleChange() {
+    dispatch();
+  }
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm />
+      <ReviewForm onChange={handleChange} />
     </>
   );
 }
