@@ -5,6 +5,12 @@ import { fireEvent, render } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
+  const handleClick = jest.fn();
+
+  beforeEach(() => {
+    handleClick.mockClear();
+  });
+
   it('renders input-controls', () => {
     const { queryByLabelText } = render(
       <LoginForm />,
@@ -24,7 +30,7 @@ describe('LoginForm', () => {
 
   it('listens click event on "Log In" button', () => {
     const { getByText } = render(
-      <LoginForm />,
+      <LoginForm onClick={handleClick} />,
     );
 
     expect(handleClick).not.toBeCalled();

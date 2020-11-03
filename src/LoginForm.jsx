@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LoginForm() {
+export default function LoginForm({ onClick }) {
   return (
     <>
       <div>
@@ -13,7 +13,7 @@ export default function LoginForm() {
           <input type="password" id="login-password" />
         </label>
       </div>
-      <button type="button">
+      <button type="button" onClick={onClick}>
         Log In
       </button>
     </>
