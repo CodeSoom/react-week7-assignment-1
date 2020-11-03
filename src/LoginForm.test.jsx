@@ -9,7 +9,11 @@ describe('LoginForm', () => {
   const handleChange = jest.fn();
 
   const renderLoginForm = ({ email = '' }) => render(
-    <LoginForm onClick={handleClick} onChange={handleChange} email={email} />,
+    <LoginForm
+      onClick={handleClick}
+      onChange={handleChange}
+      loginFields={{ email }}
+    />,
   );
 
   beforeEach(() => {
