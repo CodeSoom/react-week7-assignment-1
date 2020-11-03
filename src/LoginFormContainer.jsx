@@ -1,12 +1,16 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './LoginForm';
 
 import { changeLoginField } from './actions';
 
+import { get } from './utils';
+
 export default function LoginFormContainer() {
+  const loginFields = useSelector(get('loginFields'));
+
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -19,6 +23,10 @@ export default function LoginFormContainer() {
   };
 
   return (
-    <LoginForm onClick={handleClick} onChange={handleChange} />
+    <LoginForm
+      loginFields={loginFields}
+      onClick={handleClick}
+      onChange={handleChange}
+    />
   );
 }
