@@ -16,7 +16,7 @@ describe('LoginInput', () => {
   );
 
   context('with value', () => {
-    it('renders green', () => {
+    it('renders valid', () => {
       renderLoginInput({ value: 'value' });
 
       expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid', 'false');
@@ -30,7 +30,7 @@ describe('LoginInput', () => {
       expect(screen.getByPlaceholderText('ID')).toBeInTheDocument();
     });
 
-    it('renders red', () => {
+    it('renders invalid', () => {
       renderLoginInput();
 
       expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid', 'true');

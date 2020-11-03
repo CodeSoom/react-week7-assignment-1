@@ -14,7 +14,7 @@ describe('Login', () => {
     />,
   );
   context('with all fields', () => {
-    it('all green and clickable button', () => {
+    it('all valid and clickable button', () => {
       renderLogin({ id: 'id', password: 'passowrd' });
 
       screen.getAllByRole('textbox').forEach((input) => {
@@ -25,7 +25,7 @@ describe('Login', () => {
   });
 
   context('without one field', () => {
-    it('password field is red. disabled button', () => {
+    it('password field is invalid. disabled button', () => {
       renderLogin({ id: 'id' });
 
       expect(screen.getByDisplayValue('id'))
@@ -38,7 +38,7 @@ describe('Login', () => {
   });
 
   context('without all fields', () => {
-    it('all field is red. disabled button', () => {
+    it('all field is invalid. disabled button', () => {
       renderLogin({});
 
       screen.getAllByRole('textbox').forEach((input) => {
