@@ -11,7 +11,7 @@ describe('LoginPage', () => {
     expect(container).toHaveTextContent('Log In');
   });
 
-  it('renders labels of email and password', () => {
+  it('renders input controls', () => {
     const { getByLabelText } = render(<LoginPage />);
 
     expect(getByLabelText('E-mail')).not.toBeNull();
