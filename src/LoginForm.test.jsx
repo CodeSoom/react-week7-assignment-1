@@ -22,6 +22,16 @@ describe('LoginForm', () => {
     expect(queryByLabelText('Password')).not.toBeNull();
   });
 
+  it('listens change events', () => {
+    const { getByLabelText } = renderLoginForm();
+
+    fireEvent.change(getByLabelText('E-mail'), {
+      target: { value: 'tester@example.com' },
+    });
+
+    expect(handleChange).toBeCalled();
+  });
+
   describe('"Log In" button', () => {
     const loginButton = 'Log In';
 
