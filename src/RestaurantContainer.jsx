@@ -28,6 +28,13 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
+      <label htmlFor="input-score">
+        평점
+      </label>
+      <input 
+      type="score" 
+      id="input-score"
+      />
     </>
   );
 }
