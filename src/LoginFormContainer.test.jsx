@@ -32,6 +32,19 @@ describe('LoginFormContainer', () => {
     expect(getByLabelText('Password').value).toBe('test');
   });
 
+  it('listens change event input controls', () => {
+    const { getByLabelText } = renderLoginPage();
+
+    fireEvent.change(getByLabelText('E-mail'), {
+      target: { value: 'new email' },
+    });
+
+    expect(dispatch).toBeCalledWith({
+      type: 'changeLoginField',
+      payload: { name: 'email', value: 'new email' },
+    });
+  });
+
   it('renders "Log In" button', () => {
     const { getByText } = renderLoginPage();
 
