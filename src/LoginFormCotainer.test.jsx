@@ -26,7 +26,13 @@ describe('LoginFormContainer', () => {
       target: { value: 'tester@example.com' },
     });
 
-    expect(dispatch).toBeCalled();
+    expect(dispatch).toBeCalledWith({
+      type: 'loginFieldChange',
+      payload: {
+        name: 'email',
+        value: 'tester@example.com',
+      },
+    });
   });
 
   it('renders "Log In" button', () => {
