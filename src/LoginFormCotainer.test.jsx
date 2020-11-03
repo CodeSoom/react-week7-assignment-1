@@ -27,7 +27,7 @@ describe('LoginFormContainer', () => {
     });
 
     expect(dispatch).toBeCalledWith({
-      type: 'loginFieldChange',
+      type: 'changeLoginField',
       payload: {
         name: 'email',
         value: 'tester@example.com',
