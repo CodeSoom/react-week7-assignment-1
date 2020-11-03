@@ -16,6 +16,22 @@ describe('LoginForm', () => {
     expect(getByLabelText('Password')).not.toBeNull();
   });
 
+  it('change user name and password ', () => {
+    const { getByLabelText } = renderHomePage();
+
+    expect(getByLabelText('E-mail')).not.toBeNull();
+
+    fireEvent.change(getByLabelText('E-mail'), {
+      target: { value: 'tester@example.com' },
+    });
+
+    expect(getByLabelText('Password')).not.toBeNull();
+
+    fireEvent.change(getByLabelText('Password'), {
+      target: { value: 'test' },
+    });
+  });
+
   it('click login button', () => {
     const { getByText } = renderHomePage();
 
