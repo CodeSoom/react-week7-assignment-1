@@ -8,6 +8,10 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   accessTocken: '',
+  loginFields: {
+    email: '',
+    password: '',
+  },
 };
 
 const reducers = {

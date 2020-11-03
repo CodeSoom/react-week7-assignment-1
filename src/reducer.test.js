@@ -20,6 +20,10 @@ describe('reducer', () => {
       selectedRegion: null,
       selectedCategory: null,
       accessTocken: '',
+      loginFields: {
+        email: '',
+        password: '',
+      },
     };
 
     it('returns initialState', () => {
