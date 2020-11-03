@@ -55,10 +55,13 @@ describe('RestaurantContainer', () => {
 
       controls.forEach(({ label, name, value }) => {
         const input = getByLabelText(label);
-        
+
         fireEvent.change(input, { target: { value } });
 
-        expect(dispatch).toBeCalled();
+        expect(dispatch).toBeCalledWith({
+          type: 'changeReviewField',
+          payload: { name, value },
+        });
       });
 
       expect(getByLabelText('리뷰 내용')).not.toBeNull();
