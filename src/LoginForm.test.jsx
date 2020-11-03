@@ -31,17 +31,14 @@ describe('LoginForm', () => {
   it('change user name and password ', () => {
     const { getByLabelText } = renderHomePage();
 
-    controls.forEach((control) => {
-      expect(getByLabelText(control.label)).not.toBeNull();
+    controls.forEach(({ label, name, value }) => {
+      expect(getByLabelText(label)).not.toBeNull();
 
-      fireEvent.change(getByLabelText(control.label), {
-        target: { value: control.value },
+      fireEvent.change(getByLabelText(label), {
+        target: { value },
       });
 
-      expect(handleChange).toBeCalledWith({
-        name: control.name,
-        value: control.value,
-      });
+      expect(handleChange).toBeCalledWith({ name, value });
     });
 
     expect(handleChange).toBeCalledWith({
