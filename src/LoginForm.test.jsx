@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
@@ -20,5 +20,17 @@ describe('LoginForm', () => {
     );
 
     expect(queryByText('Log In')).not.toBeNull();
+  });
+
+  it('listens click event on "Log In" button', () => {
+    const { getByText } = render(
+      <LoginForm />,
+    );
+
+    expect(handleClick).not.toBeCalled();
+
+    fireEvent.click(getByText('Log In'));
+
+    expect(handleClick).toBeCalledTimes(1);
   });
 });
