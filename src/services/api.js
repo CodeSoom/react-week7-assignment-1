@@ -29,5 +29,5 @@ export async function fetchRestaurant({ restaurantId }) {
 }
 
 export async function postLogin() {
-  return '';
+  return 'qwer!!';
 }
