@@ -16,12 +16,17 @@ describe('LoginFormContainer', () => {
   });
 
   it('renders input-controls', () => {
-    const { queryByLabelText } = render(
+    const { queryByLabelText, getByLabelText } = render(
       <LoginFormContainer />,
     );
 
     expect(queryByLabelText('E-mail')).not.toBeNull();
-    expect(queryByLabelText('Password')).not.toBeNull();
+
+    fireEvent.change(getByLabelText('E-mail'), {
+      target: { value: 'tester@example.com' },
+    });
+
+    expect(dispatch).toBeCalled();
   });
 
   it('renders "Log In" button', () => {
