@@ -13,6 +13,7 @@ import { get } from './utils';
 function ReviewForm({ onChange }) {
   function handleChange(event) {
     const { name, value } = event.target;
+
     onChange({ name, value });
   }
   return (
@@ -34,8 +35,10 @@ function ReviewForm({ onChange }) {
         id="input-description"
         name="description"
         onChange={handleChange}
-
       />
+      <button type="submit">
+        리뷰 남기기
+      </button>
     </>
   );
 }
