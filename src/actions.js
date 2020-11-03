@@ -91,3 +91,10 @@ export function requestLogin() {
     //
   };
 }
+
+export function changeLoginField({ name, value }) {
+  return {
+    type: 'changeLoginField',
+    payload: { name, value },
+  };
+}
