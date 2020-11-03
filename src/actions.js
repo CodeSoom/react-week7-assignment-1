@@ -54,10 +54,10 @@ export function selectCategory(categoryId) {
   };
 }
 
-export function changeLoginFields() {
+export function changeLoginFields({ name, value }) {
   return {
     type: 'changeLoginFields',
-    payload: { email: 'test' },
+    payload: { [name]: value },
   };
 }
 

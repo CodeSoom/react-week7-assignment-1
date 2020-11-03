@@ -4,6 +4,8 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { changeLoginFields } from './actions';
+
 import LoginFormContainer from './LoginFormContainer';
 
 jest.mock('react-redux');
@@ -27,10 +29,7 @@ describe('LoginFormContainer', () => {
 
     fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test' } });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginFields',
-      payload: { email: 'test' },
-    });
+    expect(dispatch).toBeCalledWith(changeLoginFields({}));
 
     expect(getByLabelText('Password')).not.toBeNull();
   });

@@ -16,7 +16,7 @@ export default function LoginFormContainer() {
   }
 
   function handleChange({ name, value }) {
-    dispatch(changeLoginFields());
+    dispatch(changeLoginFields({ name, value }));
   }
 
   const fields = useSelector(get('loginFields'));
