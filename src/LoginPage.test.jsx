@@ -13,8 +13,9 @@ describe('LoginPage', () => {
   );
 
   it('renders input field', () => {
-    const { getByLabelText } = renderLoginPage();
+    const { container, getByLabelText } = renderLoginPage();
 
+    expect(container).toHaveTextContent('Log In');
     expect(getByLabelText('E-mail')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
   });
