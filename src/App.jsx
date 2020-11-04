@@ -24,7 +24,9 @@ export default function App() {
 
   const accessToken = loadItem('accessToken');
 
-  dispatch(setAccessToken(accessToken));
+  if (accessToken) {
+    dispatch(setAccessToken(accessToken));
+  }
 
   return (
     <div>
