@@ -1,6 +1,10 @@
 import { equal } from './utils';
 
 const initialState = {
+  loginFields: {
+    email: '',
+    password: '',
+  },
   regions: [],
   categories: [],
   restaurants: [],
@@ -10,6 +14,13 @@ const initialState = {
 };
 
 const reducers = {
+  setLoginFields(state, { payload: { loginFields } }) {
+    return {
+      ...state,
+      loginFields,
+    };
+  },
+
   setRegions(state, { payload: { regions } }) {
     return {
       ...state,
