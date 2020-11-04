@@ -3,7 +3,7 @@ import React from 'react';
 import LoginInput from './LoginInput';
 
 export default function LoginForm({
-  id, password, onChange, onClick,
+  id, password, onChangeId, onChangePassword, onClick,
 }) {
   const loginAble = id && password;
 
@@ -13,13 +13,13 @@ export default function LoginForm({
         type="text"
         placeholder="ID"
         value={id}
-        onChange={onChange}
+        onChange={onChangeId}
       />
       <LoginInput
         type="password"
         placeholder="PASSWORD"
         value={password}
-        onChange={onChange}
+        onChange={onChangePassword}
       />
       <button
         type="button"

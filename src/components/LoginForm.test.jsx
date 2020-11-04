@@ -8,14 +8,16 @@ beforeEach(() => {
 });
 
 describe('LoginForm', () => {
-  const handleChange = jest.fn();
+  const handleChangeId = jest.fn();
+  const handleChangePassword = jest.fn();
   const handleClick = jest.fn();
 
   const renderLogin = ({ id, password }) => render(
     <LoginForm
       id={id}
       password={password}
-      onChange={handleChange}
+      onChangeId={handleChangeId}
+      onChangePassword={handleChangePassword}
       onClick={handleClick}
     />,
   );
@@ -79,17 +81,30 @@ describe('LoginForm', () => {
   });
 
   context('when change input', () => {
-    it('called onChange', () => {
+    it('called onChangeId', () => {
       renderLogin({});
 
-      expect(handleChange).not.toBeCalled();
+      expect(handleChangeId).not.toBeCalled();
 
       fireEvent.change(
-        screen.getAllByRole('textbox')[0],
+        screen.getByPlaceholderText('ID'),
         { target: { value: 'id' } },
       );
 
-      expect(handleChange).toBeCalled();
+      expect(handleChangeId).toBeCalled();
+    });
+
+    it('called onChangeId', () => {
+      renderLogin({});
+
+      expect(handleChangePassword).not.toBeCalled();
+
+      fireEvent.change(
+        screen.getByPlaceholderText('PASSWORD'),
+        { target: { value: 'password' } },
+      );
+
+      expect(handleChangePassword).toBeCalled();
     });
   });
 });
