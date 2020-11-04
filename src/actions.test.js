@@ -10,6 +10,7 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  setAccessToken,
   login,
 } from './actions';
 
@@ -104,7 +105,12 @@ describe('actions', () => {
 
   describe('login', () => {
     beforeEach(() => {
-      store = mockStore({});
+      store = mockStore({
+        loginFields: {
+          email: 'tester@example.com',
+          password: 'test',
+        },
+      });
     });
 
     it('dispatched setAccessToken', async () => {
@@ -112,7 +118,7 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken('123123'));
+      expect(actions[0]).toEqual(setAccessToken(''));
     });
   });
 });
