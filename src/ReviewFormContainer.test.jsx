@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import ReviewFormContainer from './ReviewFormContainer';
 
@@ -37,15 +37,15 @@ describe('ReviewFormContainer', () => {
     // });
   });
 
-  // it('renders login button', () => {
-  //   const { queryByText, getByText } = render(
-  //     <ReviewFormContainer />,
-  //   );
+  it('renders login button', () => {
+    const { queryByText, getByText } = render(
+      <ReviewFormContainer />,
+    );
 
-  //   expect(queryByText('Log In')).not.toBeNull();
+    expect(queryByText('Log In')).not.toBeNull();
 
-  //   fireEvent.click(getByText('Log In'));
+    fireEvent.click(getByText('Log In'));
 
-  //   expect(dispatch).toBeCalled();
-  // });
+    // expect(dispatch).toBeCalled();
+  });
 });
