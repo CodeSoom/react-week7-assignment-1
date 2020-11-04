@@ -15,7 +15,7 @@ export default function LoginForm({ fields, onChange, onSubmit }) {
           E-mail
         </label>
         <input
-          type="text"
+          type="email"
           id="login-email"
           name="email"
           value={email}
@@ -27,7 +27,7 @@ export default function LoginForm({ fields, onChange, onSubmit }) {
           password
         </label>
         <input
-          type="text"
+          type="password"
           id="login-password"
           name="password"
           value={password}
