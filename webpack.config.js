@@ -15,7 +15,7 @@ module.exports = {
     alias: {
       container: path.resolve(__dirname, 'src/container/'),
       presentational: path.resolve(__dirname, 'src/presentational/'),
-      redux: path.resolve(__dirname, 'src/redux/'),
+      state: path.resolve(__dirname, 'src/state/'),
       services: path.resolve(__dirname, 'src/services/'),
     },
     extensions: ['.js', '.jsx'],

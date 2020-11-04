@@ -17,7 +17,7 @@ module.exports = {
   moduleNameMapper: {
     '^container/(.*)': '<rootDir>/src/container/$1',
     '^presentational/(.*)': '<rootDir>/src/presentational/$1',
-    '^redux/(.*)': '<rootDir>/src/redux/$1',
+    '^state/(.*)': '<rootDir>/src/state/$1',
     '^services/(.*)': '<rootDir>/src/services/$1',
   },
 };

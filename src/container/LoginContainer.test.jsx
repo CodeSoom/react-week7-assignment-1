@@ -2,7 +2,7 @@ import React from 'react';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginContainer from './LoginContainer';
 
@@ -13,6 +13,12 @@ describe('LoginContainer', () => {
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
+  useSelector.mockImplementation((selector) => selector({
+    loginField: {
+      email: '',
+      password: '',
+    },
+  }));
 
   function renderLoginContainer() {
     return render((
@@ -22,6 +28,7 @@ describe('LoginContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
+    jest.clearAllMocks();
   });
 
   it('render login form ', () => {
@@ -33,14 +40,18 @@ describe('LoginContainer', () => {
   });
 
   context('when login fields change', () => {
-    it('render changed value in input', () => {
+    it('render changed value in input from state', () => {
+      useSelector.mockImplementation((selector) => selector({
+        loginField: {
+          email: 'tester@example.com',
+          password: 'test',
+        },
+      }));
+
       const { getByLabelText } = renderLoginContainer();
 
       const emailInput = getByLabelText('E-mail');
       const passwordInput = getByLabelText('Password');
-
-      fireEvent.change(emailInput, { target: { value: 'tester@example.com' } });
-      fireEvent.change(passwordInput, { target: { value: 'test' } });
 
       expect(emailInput.value).toBe('tester@example.com');
       expect(passwordInput.value).toBe('test');
@@ -48,7 +59,7 @@ describe('LoginContainer', () => {
 
     it('calls field change action', () => {
       const { getByLabelText } = renderLoginContainer();
-      const value = 'test';
+      const value = 'contents';
 
       inputLabels.forEach((label) => {
         fireEvent.change(getByLabelText(label), { target: { value } });

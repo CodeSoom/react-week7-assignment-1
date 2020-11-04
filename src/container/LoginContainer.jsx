@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   changeLoginField,
-} from 'redux/actions';
+} from 'state/actions';
 
 export default function LoginContainer() {
   const dispatch = useDispatch();
+
+  const { loginField: { email, password } } = useSelector((state) => ({
+    loginField: state.loginField,
+  }));
 
   function handleChangeLoginFields(event) {
     const { name, value } = event;
@@ -23,6 +27,7 @@ export default function LoginContainer() {
           name="email"
           id="login-email"
           onChange={handleChangeLoginFields}
+          value={email}
         />
       </div>
 
@@ -33,6 +38,7 @@ export default function LoginContainer() {
           name="password"
           id="login-password"
           onChange={handleChangeLoginFields}
+          value={password}
         />
       </div>
 

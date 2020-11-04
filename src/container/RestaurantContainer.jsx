@@ -6,7 +6,7 @@ import RestaurantDetail from 'presentational/RestaurantDetail';
 
 import {
   loadRestaurant,
-} from 'redux/actions';
+} from 'state/actions';
 
 import { get } from '../utils';
 
