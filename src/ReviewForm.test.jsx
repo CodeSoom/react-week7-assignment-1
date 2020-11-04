@@ -36,8 +36,8 @@ describe('ReviewForm', () => {
 
     it('show values', () => {
       const fields = {
-        email: 'origin@example.com',
-        password: 'origin',
+        rate: '3',
+        description: '적당하네요',
       };
 
       const { getByLabelText } = renderReviewForm(fields);
