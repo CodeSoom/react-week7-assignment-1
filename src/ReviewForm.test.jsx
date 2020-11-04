@@ -34,18 +34,18 @@ describe('ReviewForm', () => {
       });
     });
 
-    // it('show values', () => {
-    //   const fields = {
-    //     email: 'origin@example.com',
-    //     password: 'origin',
-    //   };
+    it('show values', () => {
+      const fields = {
+        email: 'origin@example.com',
+        password: 'origin',
+      };
 
-    //   const { getByLabelText } = renderReviewForm(fields);
+      const { getByLabelText } = renderReviewForm(fields);
 
-    //   inputControls.forEach(({ label, name }) => {
-    //     expect(getByLabelText(label)).toHaveValue(fields[name]);
-    //   });
-    // });
+      inputControls.forEach(({ label, name }) => {
+        expect(getByLabelText(label)).toHaveValue(fields[name]);
+      });
+    });
 
     it('listen change events', () => {
       const { getByLabelText } = renderReviewForm();
