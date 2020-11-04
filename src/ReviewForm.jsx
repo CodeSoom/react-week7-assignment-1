@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ReviewForm({ onChange, onSubmit }) {
+export default function ReviewForm({ fields, onChange, onSubmit }) {
   function handleChange(event) {
     const { name, value } = event.target;
 
