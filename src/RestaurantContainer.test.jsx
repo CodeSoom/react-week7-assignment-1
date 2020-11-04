@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -40,6 +40,32 @@ describe('RestaurantContainer', () => {
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+    });
+
+    it('score change 이벤트가 발생하면 dispatch가 호출된다.', () => {
+      const { getByLabelText } = renderRestaurantContainer();
+
+      fireEvent.change(getByLabelText('평점'), {
+        target: { value: '5' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeReviewField',
+        payload: { name: 'score', value: '5' },
+      });
+    });
+
+    it('description change 이벤트가 발생하면 dispatch가 호출된다.', () => {
+      const { getByLabelText } = renderRestaurantContainer();
+
+      fireEvent.change(getByLabelText('리뷰 내용'), {
+        target: { value: '정말 최고 :)' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeReviewField',
+        payload: { name: 'description', value: '정말 최고 :)' },
+      });
     });
   });
 
