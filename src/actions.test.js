@@ -142,8 +142,14 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurant(null));
-      expect(actions[1]).toEqual(setRestaurant({}));
+      expect(actions[0]).toEqual({
+        type: 'setRestaurant',
+        payload: { restaurant: null },
+      });
+      expect(actions[1]).toEqual({
+        type: 'setRestaurant',
+        payload: { restaurant: {} },
+      });
     });
   });
 });
