@@ -50,4 +50,25 @@ describe('LoginFormContainer', () => {
       expect(dispatch).toBeCalled();
     });
   });
+
+  context('when input controls is changed', () => {
+    it('calls dispatch', () => {
+      const inputs = [
+        { label: 'E-mail', value: 'test@test.com' },
+        { label: 'password', value: '1234' },
+      ];
+
+      const { getByLabelText } = renderLoginFormContainer();
+
+      inputs.forEach(({ label, value }) => {
+        const input = getByLabelText(label);
+
+        fireEvent.change(input, {
+          target: { value },
+        });
+      });
+
+      expect(dispatch).toBeCalledTimes(inputs.length);
+    });
+  });
 });
