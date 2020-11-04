@@ -1,33 +1,35 @@
 import React from 'react';
 
-export default function Reviews({ reviews }) {
+function ReviewItems({ reviews }) {
   if (reviews.length === 0) {
     return (
-      <>
-        <h2>리뷰</h2>
-        <p>리뷰가 없어요!</p>
-      </>
+      <p>리뷰가 없어요!</p>
     );
   }
 
   return (
+    <ul>
+      {reviews.map(({
+        id, name, score, description,
+      }) => (
+        <li key={id}>
+          <p>{name}</p>
+          <p>
+            {score}
+            점
+          </p>
+          <p>{description}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export default function Reviews({ reviews }) {
+  return (
     <>
       <h2>리뷰</h2>
-      {}
-      <ul>
-        {reviews.map(({
-          id, name, score, description,
-        }) => (
-          <li key={id}>
-            <p>{name}</p>
-            <p>
-              {score}
-              점
-            </p>
-            <p>{description}</p>
-          </li>
-        ))}
-      </ul>
+      <ReviewItems reviews={reviews} />
     </>
   );
 }
