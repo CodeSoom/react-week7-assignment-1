@@ -5,9 +5,10 @@ import { fireEvent, render } from '@testing-library/react';
 import TextField from './TextField';
 
 describe('TextField', () => {
-  const renderTextField = ({ label }) => render(
+  const renderTextField = ({ label, value }) => render(
     <TextField
       label={label}
+      value={value}
     />,
   );
 
@@ -23,18 +24,14 @@ describe('TextField', () => {
     expect(queryByLabelText('E-mail')).not.toBeNull();
   });
 
-  // it('show values', () => {
-  //   const fields = {
-  //     email: 'origin@example.com',
-  //     password: 'origin',
-  //   };
+  it('show value', () => {
+    const { getByLabelText } = renderTextField({
+      label: 'E-mail',
+      value: 'tester@example.com',
+    });
 
-  //   const { getByLabelText } = renderTextField(fields);
-
-  //   inputControls.forEach(({ label, name }) => {
-  //     expect(getByLabelText(label)).toHaveValue(fields[name]);
-  //   });
-  // });
+    expect(getByLabelText('E-mail')).toHaveValue('tester@example.com');
+  });
 
   // it('listen change events', () => {
   //   const { getByLabelText } = renderTextField();
