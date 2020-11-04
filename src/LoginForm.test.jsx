@@ -17,7 +17,7 @@ describe('LoginForm', () => {
     />
   ));
 
-  context('without error', () => {
+  context('without isError', () => {
     const error = false;
 
     it('renders input controls', () => {
@@ -56,7 +56,7 @@ describe('LoginForm', () => {
       });
     });
 
-    it('renders "Log In" button', () => {
+    it('called at the click of a button', () => {
       const { getByText } = renderLoginForm({ error });
 
       fireEvent.click(getByText('Log In'));
@@ -71,7 +71,7 @@ describe('LoginForm', () => {
     });
   });
 
-  context('with error', () => {
+  context('with isError', () => {
     const error = true;
 
     it('renders Error message', () => {
