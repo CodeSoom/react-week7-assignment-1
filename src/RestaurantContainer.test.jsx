@@ -65,9 +65,7 @@ describe('RestaurantContainer', () => {
     });
 
     context('when logged in', () => {
-      given('accessToken', () => ({
-        accessToken: 'qwer!',
-      }));
+      given('accessToken', () => 'ACCESSTOKEN');
 
       const controls = [
         {
