@@ -113,7 +113,7 @@ describe('App', () => {
       loadItem.mockImplementation(() => null);
     });
 
-    it("doesn't dispatch any action", () => {
+    it("doesn't dispatch any actions", () => {
       renderApp({ path: '/' });
 
       expect(dispatch).not.toBeCalled();
