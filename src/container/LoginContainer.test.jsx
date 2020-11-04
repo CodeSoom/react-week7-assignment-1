@@ -9,6 +9,7 @@ import LoginContainer from './LoginContainer';
 jest.mock('react-redux');
 
 describe('LoginContainer', () => {
+  const inputLabels = ['E-mail', 'Password'];
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
@@ -25,17 +26,35 @@ describe('LoginContainer', () => {
 
   it('render login form ', () => {
     const { getByLabelText } = renderLoginContainer();
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+
+    inputLabels.forEach((label) => {
+      expect(getByLabelText(label)).not.toBeNull();
+    });
   });
 
   context('when login fields change', () => {
-    it('calls field change action', () => {
+    it('render changed value in input', () => {
       const { getByLabelText } = renderLoginContainer();
 
-      fireEvent.change(getByLabelText('E-mail'), { target: { value: 'tester@example.com' } });
+      const emailInput = getByLabelText('E-mail');
+      const passwordInput = getByLabelText('Password');
 
-      expect(dispatch).toBeCalled();
+      fireEvent.change(emailInput, { target: { value: 'tester@example.com' } });
+      fireEvent.change(passwordInput, { target: { value: 'test' } });
+
+      expect(emailInput.value).toBe('tester@example.com');
+      expect(passwordInput.value).toBe('test');
+    });
+
+    it('calls field change action', () => {
+      const { getByLabelText } = renderLoginContainer();
+      const value = 'test';
+
+      inputLabels.forEach((label) => {
+        fireEvent.change(getByLabelText(label), { target: { value } });
+      });
+
+      expect(dispatch).toBeCalledTimes(2);
     });
   });
 

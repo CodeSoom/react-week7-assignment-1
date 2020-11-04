@@ -145,5 +145,19 @@ describe('reducer', () => {
 
       expect(email).toEqual(value);
     });
+
+    it('changes password loginField', () => {
+      const value = 'test';
+      const initialState = {
+        loginField: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const { loginField: { password } } = reducer(initialState, changeLoginField({ name: 'password', value }));
+
+      expect(password).toEqual(value);
+    });
   });
 });
