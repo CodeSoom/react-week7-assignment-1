@@ -5,6 +5,13 @@ import {
   fetchRestaurant,
 } from './services/api';
 
+export function setLoginFields(loginFields) {
+  return {
+    type: 'setLoginFields',
+    payload: { loginFields },
+  };
+}
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
