@@ -11,9 +11,6 @@ jest.mock('react-redux');
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
-  const handleChange = jest.fn();
-  const handleSubmit = jest.fn();
-
   beforeEach(() => {
     jest.clearAllMocks();
 
@@ -28,10 +25,7 @@ describe('LoginFormContainer', () => {
   });
 
   const renderLoginFormContainer = () => render(
-    <LoginFormContainer
-      onChange={handleChange}
-      onSubmit={handleSubmit}
-    />,
+    <LoginFormContainer />,
   );
 
   it('renders input controls', () => {
