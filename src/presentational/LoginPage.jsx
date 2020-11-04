@@ -1,22 +1,11 @@
 import React from 'react';
 
+import LoginContainer from 'container/LoginContainer';
+
 export default function LoginPage() {
   return (
-    <div>
-
-      <form>
-        <div>
-          <label htmlFor="login-email">E-mail</label>
-          <input type="email" name="email" id="login-email" />
-        </div>
-
-        <div>
-          <label htmlFor="login-password">Password</label>
-          <input type="password" name="password" id="login-password" />
-        </div>
-
-        <button type="button">Log In</button>
-      </form>
-    </div>
+    <>
+      <LoginContainer />
+    </>
   );
 }
