@@ -4,6 +4,8 @@ import { render, fireEvent } from '@testing-library/react';
 
 import ReviewForm from './ReviewForm';
 
+jest.mock('react-redux');
+
 describe('ReviewForm', () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
@@ -42,7 +44,9 @@ describe('ReviewForm', () => {
       },
     ];
 
-    controls.forEach(({ label, name, value }) => {
+    controls.forEach(({
+      label, name, value,
+    }) => {
       const input = getByLabelText(label);
 
       fireEvent.change(input, { target: { value } });
@@ -52,10 +56,7 @@ describe('ReviewForm', () => {
   });
 
   it('renders review submit button', () => {
-    const score = '5';
-    const description = '맛있어요!';
-
-    const { getByText } = renderReviewForm({ score, description });
+    const { getByText } = renderReviewForm({});
 
     fireEvent.click(getByText('리뷰 남기기'));
 
