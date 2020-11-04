@@ -41,3 +41,7 @@ export async function postLogin({ email, password }) {
 
   return accessToken;
 }
+
+export async function postReview() {
+  return '';
+}
