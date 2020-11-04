@@ -10,6 +10,12 @@ import {
 } from './actions';
 
 export default function LoginFormContainer() {
+  // TDDO: delete this!
+  const fields = {
+    email: 'test@test.com',
+    password: '1234',
+  };
+
   const dispatch = useDispatch();
 
   function handleChange({ name, value }) {
@@ -22,6 +28,7 @@ export default function LoginFormContainer() {
 
   return (
     <LoginForm
+      fields={fields}
       onChange={handleChange}
       onSubmit={handleSubmit}
     />
