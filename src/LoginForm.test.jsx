@@ -34,16 +34,16 @@ describe('LoginForm', () => {
       });
     });
 
-    it('have given value on each', () => {
-      const loginFields = {
+    it('show values', () => {
+      const fields = {
         email: 'origin@example.com',
         password: 'origin',
       };
 
-      const { getByLabelText } = renderLoginForm(loginFields);
+      const { getByLabelText } = renderLoginForm(fields);
 
       inputControls.forEach(({ label, name }) => {
-        expect(getByLabelText(label)).toHaveValue(loginFields[name]);
+        expect(getByLabelText(label)).toHaveValue(fields[name]);
       });
     });
 
@@ -60,7 +60,7 @@ describe('LoginForm', () => {
     });
   });
 
-  describe('"Log In" button', () => {
+  describe('login button', () => {
     const loginButton = 'Log In';
 
     it('is rendered', () => {

@@ -39,7 +39,7 @@ describe('LoginFormContainer', () => {
     });
   });
 
-  it('renders "Log In" button', () => {
+  it('renders login button', () => {
     const { queryByText, getByText } = render(
       <LoginFormContainer />,
     );

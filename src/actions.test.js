@@ -102,7 +102,7 @@ describe('actions', () => {
     });
   });
 
-  describe('login', () => {
+  describe('requestLogin', () => {
     beforeEach(() => {
       store = mockStore({
         loginFields: { email: 'email', password: 'password' },
