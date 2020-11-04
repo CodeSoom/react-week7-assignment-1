@@ -9,11 +9,13 @@ import {
   selectCategory,
   changeLoginField,
   setAccessToken,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      accessToken: '',
       regions: [],
       categories: [],
       restaurants: [],
@@ -24,7 +26,10 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
-      accessToken: '',
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -134,14 +139,13 @@ describe('reducer', () => {
   });
 
   describe('changeLoginField', () => {
+    const initialState = {
+      loginFields: {
+        email: 'email',
+        password: 'password',
+      },
+    };
     context('when email is changed', () => {
-      const initialState = {
-        loginFields: {
-          email: 'email',
-          password: 'password',
-        },
-      };
-
       const state = reducer(
         initialState,
         changeLoginField({ name: 'email', value: 'tester@example.com' }),
@@ -152,13 +156,6 @@ describe('reducer', () => {
     });
 
     context('when password is changed', () => {
-      const initialState = {
-        loginFields: {
-          email: 'email',
-          password: 'password',
-        },
-      };
-
       const state = reducer(
         initialState,
         changeLoginField({ name: 'password', value: 'test' }),
@@ -177,5 +174,28 @@ describe('reducer', () => {
     const state = reducer(initialState, setAccessToken('TOKEN'));
 
     expect(state.accessToken).toBe('TOKEN');
+  });
+
+  describe('changeReviewField', () => {
+    const initialState = {
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+    };
+
+    const reviewInput = [
+      { name: 'score', value: '5' },
+      { name: 'description', value: 'Good!' },
+    ];
+
+    reviewInput.forEach(({ name, value }) => {
+      const state = reducer(
+        initialState,
+        changeReviewField({ name, value }),
+      );
+
+      expect(state.reviewFields[name]).toBe(value);
+    });
   });
 });
