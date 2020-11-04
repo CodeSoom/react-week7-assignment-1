@@ -4,10 +4,11 @@ import { fireEvent, render } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
-describe('LoginFormContainer', () => {
+describe('LoginForm', () => {
   const handleSubmit = jest.fn();
+
   const renderLoginForm = () => render(
-    <LoginForm />,
+    <LoginForm onSubmit={handleSubmit} />,
   );
 
   it('renders input fields and Log In button', () => {

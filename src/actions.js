@@ -86,6 +86,8 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
-export function requestLogin({ email, password }) {
+export function requestLogin() {
+  return async (dispatch) => {
 
+  };
 }
