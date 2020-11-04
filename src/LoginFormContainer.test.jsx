@@ -59,17 +59,11 @@ describe('LoginFormContainer', () => {
       },
     ];
 
-    it('renders input controls', () => {
-      const { getByLabelText } = render(<LoginFormContainer />);
+    it('renders log in form', () => {
+      const { getByLabelText, getByText } = render(<LoginFormContainer />);
 
-      controls.forEach(({ label }) => {
-        expect(getByLabelText(label)).not.toBeNull();
-      });
-    });
-
-    it('renders "Log In" button', () => {
-      const { getByText } = render(<LoginFormContainer />);
-
+      expect(getByLabelText('E-mail')).not.toBeNull();
+      expect(getByLabelText('Password')).not.toBeNull();
       expect(getByText('로그인')).not.toBeNull();
     });
 
