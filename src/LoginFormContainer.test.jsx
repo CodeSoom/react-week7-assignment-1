@@ -15,10 +15,7 @@ describe('LoginFormContainer', () => {
   const handleSubmit = jest.fn();
 
   beforeEach(() => {
-    dispatch.mockClear();
-
-    handleChange.mockClear();
-    handleSubmit.mockClear();
+    jest.clearAllMocks();
 
     useDispatch.mockImplementation(() => dispatch);
   });
