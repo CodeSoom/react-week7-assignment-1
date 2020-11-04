@@ -17,11 +17,13 @@ describe('Reviews', () => {
     it('renders reviews', () => {
       const reviews = [
         {
+          id: 2,
           name: '테스터',
           score: 5,
           description: '훌륭하다 훌륭하다 지구인놈들',
         },
         {
+          id: 5,
           name: '테스터',
           score: 3,
           description: '맛있네요!',
