@@ -91,3 +91,13 @@ export function requestLogin() {
 
   };
 }
+
+export function changeLoginFields({ name, value }) {
+  return {
+    type: 'changeLoginFields',
+    payload: {
+      name,
+      value,
+    },
+  };
+}

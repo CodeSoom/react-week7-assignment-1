@@ -8,8 +8,15 @@ describe('LoginForm', () => {
   const handleSubmit = jest.fn();
   const handleChange = jest.fn();
 
+  const loginFields = {
+    email: '',
+    password: '',
+  };
+
   const renderLoginForm = () => render(
+
     <LoginForm
+      loginFields={loginFields}
       onSubmit={handleSubmit}
       onChange={handleChange}
     />,

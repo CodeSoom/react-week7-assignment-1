@@ -50,7 +50,7 @@ describe('LoginFormContainer', () => {
     const { getByDisplayValue } = renderLoginFormContainer();
 
     fireEvent.change(getByDisplayValue('tester'), {
-      target: { value: 'tester@example' },
+      target: { value: 'tester@example.com' },
     });
 
     expect(dispatch).toBeCalledWith({
