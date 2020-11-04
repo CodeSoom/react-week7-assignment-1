@@ -29,8 +29,8 @@ describe('LoginFormContainer', () => {
   it('render user name and password ', () => {
     const { getByLabelText } = renderHomePage();
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    expect(getByLabelText('E-mail').value).toBe('test@test.co.kr');
+    expect(getByLabelText('Password').value).toBe('test');
   });
 
   it('renders login button', () => {

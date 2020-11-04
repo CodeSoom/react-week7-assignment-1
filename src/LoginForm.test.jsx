@@ -8,20 +8,41 @@ describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleClick = jest.fn();
 
-  const renderHomePage = () => render((
-    <LoginForm
-      onChange={handleChange}
-      onSubmit={handleClick}
-    />
-  ));
+  beforeEach(() => {
+    handleChange.mockClear();
+    handleClick.mockClear();
+  });
 
-  const controls = [
-    { label: 'E-mail', name: 'email', value: 'tester@example.com' },
-    { label: 'Password', name: 'password', value: 'test' },
-  ];
+  function renderLoginForm({ email, password }) {
+    return render((
+      <LoginForm
+        fields={{ email, password }}
+        onChange={handleChange}
+        onSubmit={handleClick}
+      />
+    ));
+  }
 
   it('render user name and password ', () => {
-    const { getByLabelText } = renderHomePage();
+    const email = 'test@test.co.kr';
+    const password = '1234';
+
+    const { getByLabelText } = renderLoginForm({ email, password });
+
+    const controls = [
+      {
+        label: 'E-mail',
+        name: 'email',
+        origin: email,
+        value: 'tester@example.com',
+      },
+      {
+        label: 'Password',
+        name: 'password',
+        origin: password,
+        value: 'test',
+      },
+    ];
 
     controls.forEach((control) => {
       expect(getByLabelText(control.label)).not.toBeNull();
@@ -29,12 +50,14 @@ describe('LoginForm', () => {
   });
 
   it('change user name and password ', () => {
-    const { getByLabelText } = renderHomePage();
+    const { getByLabelText } = renderLoginForm();
 
-    controls.forEach(({ label, name, value }) => {
+    controls.forEach(({
+      label, name, origin, value,
+    }) => {
       const input = getByLabelText(label);
 
-      expect(input).not.toBeNull();
+      expect(input.value).toBe(origin);
 
       fireEvent.change(input, { target: { value } });
 
@@ -48,10 +71,9 @@ describe('LoginForm', () => {
   });
 
   it('click login button', () => {
-    const { getByText } = renderHomePage();
+    const { getByText } = renderLoginForm({});
 
     const loginButton = getByText('Login');
-    expect(loginButton).not.toBeNull();
 
     fireEvent.click(loginButton);
 
