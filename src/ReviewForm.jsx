@@ -2,6 +2,7 @@ import React from 'react';
 
 export default function ReviewForm({ fields, onChange, onSubmit }) {
   const { score, description } = fields;
+
   function handleChange(event) {
     const { name, value } = event.target;
 
@@ -34,7 +35,6 @@ export default function ReviewForm({ fields, onChange, onSubmit }) {
         id="input-description"
         name="description"
         value={description}
-
         onChange={handleChange}
       />
       <button
