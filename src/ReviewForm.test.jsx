@@ -36,7 +36,7 @@ describe('ReviewForm', () => {
 
     it('show values', () => {
       const fields = {
-        rate: '3',
+        rate: 3,
         description: '적당하네요',
       };
 

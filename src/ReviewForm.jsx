@@ -1,6 +1,8 @@
 import React from 'react';
 
-export default function LoginForm({ onChange, onSubmit }) {
+export default function LoginForm({ fields, onChange, onSubmit }) {
+  const { rate, description } = fields;
+
   const handleChange = (event) => {
     const { target: { name, value } } = event;
 
@@ -14,6 +16,7 @@ export default function LoginForm({ onChange, onSubmit }) {
           평점
           <input
             id="review-rate"
+            value={rate}
             type="number"
             name="rate"
             onChange={handleChange}
@@ -23,6 +26,7 @@ export default function LoginForm({ onChange, onSubmit }) {
           리뷰 내용
           <input
             id="review-description"
+            value={description}
             type="text"
             name="description"
             onChange={handleChange}
