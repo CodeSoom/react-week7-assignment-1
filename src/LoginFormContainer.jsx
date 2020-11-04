@@ -7,6 +7,7 @@ import { requestLogin, changeLoginFields, setAccessToken } from './actions';
 import { get } from './utils';
 
 import LoginForm from './LoginForm';
+import LogoutForm from './LogoutForm';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
@@ -26,22 +27,17 @@ export default function LoginFormContainer() {
   const fields = useSelector(get('loginFields'));
   const accessToken = useSelector(get('accessToken'));
 
-  if (accessToken) {
-    return (
-      <button
-        type="button"
-        onClick={handleClick}
-      >
-        Log out
-      </button>
-    );
-  }
-
   return (
-    <LoginForm
-      fields={fields}
-      onSubmit={handleSubmit}
-      onChange={handleChange}
-    />
+    <>
+      { accessToken
+        ? (<LogoutForm onClick={handleClick} />)
+        : (
+          <LoginForm
+            fields={fields}
+            onSubmit={handleSubmit}
+            onChange={handleChange}
+          />
+        )}
+    </>
   );
 }
