@@ -27,7 +27,6 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   const handleChange = ({ name, value }) => {
-    // TODO: changeReviewField
     dispatch(changeReviewField({ name, value }));
   };
 
