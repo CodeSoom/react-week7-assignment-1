@@ -12,6 +12,10 @@ import {
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      loginFields: {
+        email: '',
+        password: '',
+      },
       regions: [],
       categories: [],
       restaurants: [],
@@ -24,6 +28,32 @@ describe('reducer', () => {
       const state = reducer(undefined, { type: 'action' });
 
       expect(state).toEqual(initialState);
+    });
+  });
+
+  describe('setLoginFields', () => {
+    it('changes login fields value', () => {
+      const initialState = {
+        loginFields: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const loginFields = {
+        email: 'test@test.com',
+        password: 'test',
+      };
+
+      const state = reducer(initialState, {
+        type: 'setLoginFields',
+        payload: { loginFields },
+      });
+
+      expect(state.loginFields).toEqual({
+        email: 'test@test.com',
+        password: 'test',
+      });
     });
   });
 
