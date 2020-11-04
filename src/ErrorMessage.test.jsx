@@ -6,10 +6,10 @@ import ErrorMessage from './ErrorMessage';
 
 describe('ErrorMessage', () => {
   it('renders Error Message', () => {
-    const message = '입력이 안된 사항이 있습니다.';
+    const ERROR_MESSAGE = '입력이 안된 사항이 있습니다.';
 
-    const { container } = render(<ErrorMessage message={message} />);
+    const { container } = render(<ErrorMessage message={ERROR_MESSAGE} />);
 
-    expect(container).toHaveTextContent('입력이 안된 사항이 있습니다.');
+    expect(container).toHaveTextContent(ERROR_MESSAGE);
   });
 });

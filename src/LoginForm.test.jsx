@@ -75,9 +75,9 @@ describe('LoginForm', () => {
     const error = true;
 
     it('renders Error message', () => {
-      const { getByText } = renderLoginForm({ error });
+      const { container } = renderLoginForm({ error });
 
-      expect(getByText('입력이 안된 사항이 있습니다.')).not.toBeNull();
+      expect(container).toHaveTextContent('입력이 안된 사항이 있습니다.');
     });
   });
 });
