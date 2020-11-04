@@ -22,7 +22,7 @@ describe('ReviewForm', () => {
 
   describe('input-controls', () => {
     const inputControls = [
-      { label: '평점', name: 'rate', value: 5 },
+      { label: '평점', name: 'rate', value: '5' },
       { label: '리뷰 내용', name: 'description', value: '맛있어요' },
     ];
 

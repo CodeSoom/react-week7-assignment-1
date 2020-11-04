@@ -1,6 +1,12 @@
 import React from 'react';
 
-export default function LoginForm() {
+export default function LoginForm({ onChange }) {
+  const handleChange = (event) => {
+    const { target: { name, value } } = event;
+
+    onChange({ name, value });
+  };
+
   return (
     <>
       <div>
@@ -10,6 +16,7 @@ export default function LoginForm() {
             id="review-rate"
             type="number"
             name="rate"
+            onChange={handleChange}
           />
         </label>
         <label htmlFor="review-description">
@@ -18,6 +25,7 @@ export default function LoginForm() {
             id="review-description"
             type="text"
             name="description"
+            onChange={handleChange}
           />
         </label>
       </div>
