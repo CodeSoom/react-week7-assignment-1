@@ -5,6 +5,14 @@ import { render } from '@testing-library/react';
 import Reviews from './Reviews';
 
 describe('Reviews', () => {
+  it('renders title', () => {
+    const reviews = [];
+
+    const { container } = render(<Reviews reviews={reviews}/>);
+
+    expect(container).toHaveTextContent('리뷰');
+  });
+
   context('with reviews', () => {
     it('renders reviews', () => {
       const reviews = [
@@ -21,7 +29,6 @@ describe('Reviews', () => {
       ];
 
       const { container } = render(<Reviews reviews={reviews} />);
-      expect(container).toHaveTextContent('리뷰');
 
       reviews.forEach(({ name, score, description }) => {
         expect(container).toHaveTextContent(name);
@@ -36,7 +43,6 @@ describe('Reviews', () => {
       const reviews = [];
 
       const { container } = render(<Reviews reviews={reviews} />);
-      expect(container).toHaveTextContent('리뷰');
 
       expect(container).toHaveTextContent('리뷰가 없어요!');
     });
