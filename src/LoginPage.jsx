@@ -4,6 +4,9 @@ import LoginFormContainer from './LoginFormContainer';
 
 export default function LoginPage() {
   return (
-    <LoginFormContainer />
+    <>
+      <h2>Log In</h2>
+      <LoginFormContainer />
+    </>
   );
 }
