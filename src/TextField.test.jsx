@@ -5,11 +5,9 @@ import { fireEvent, render } from '@testing-library/react';
 import TextField from './TextField';
 
 describe('TextField', () => {
-  const handleChange = jest.fn();
-
-  const renderTextField = () => render(
+  const renderTextField = ({ label }) => render(
     <TextField
-      onChange={handleChange}
+      label={label}
     />,
   );
 
@@ -18,11 +16,11 @@ describe('TextField', () => {
   });
 
   it('renders label', () => {
-    const label = 'E-mail';
+    const { queryByLabelText } = renderTextField({
+      label: 'E-mail',
+    });
 
-    const { queryByLabelText } = renderTextField();
-
-    expect(queryByLabelText(label)).not.toBeNull();
+    expect(queryByLabelText('E-mail')).not.toBeNull();
   });
 
   // it('show values', () => {
