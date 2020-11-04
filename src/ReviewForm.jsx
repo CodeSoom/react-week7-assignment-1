@@ -12,6 +12,14 @@ export default function LoginForm() {
             name="rate"
           />
         </label>
+        <label htmlFor="review-description">
+          리뷰 내용
+          <input
+            id="review-description"
+            type="text"
+            name="description"
+          />
+        </label>
       </div>
       <button type="button">
         리뷰 남기기

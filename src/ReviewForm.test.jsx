@@ -23,7 +23,7 @@ describe('ReviewForm', () => {
   describe('input-controls', () => {
     const inputControls = [
       { label: '평점', name: 'rate' },
-      { label: '리뷰내용', name: 'description' },
+      { label: '리뷰 내용', name: 'description' },
     ];
 
     it('are rendered', () => {
@@ -60,23 +60,23 @@ describe('ReviewForm', () => {
     // });
   });
 
-  describe('login button', () => {
-    const loginButton = 'Log In';
+  // describe('login button', () => {
+  //   const loginButton = 'Log In';
 
-    it('is rendered', () => {
-      const { queryByText } = renderReviewForm();
+  //   it('is rendered', () => {
+  //     const { queryByText } = renderReviewForm();
 
-      expect(queryByText(loginButton)).not.toBeNull();
-    });
+  //     expect(queryByText(loginButton)).not.toBeNull();
+  //   });
 
-    it('listens click event', () => {
-      const { getByText } = renderReviewForm();
+  //   it('listens click event', () => {
+  //     const { getByText } = renderReviewForm();
 
-      expect(handleSubmit).not.toBeCalled();
+  //     expect(handleSubmit).not.toBeCalled();
 
-      fireEvent.click(getByText(loginButton));
+  //     fireEvent.click(getByText(loginButton));
 
-      expect(handleSubmit).toBeCalledTimes(1);
-    });
-  });
+  //     expect(handleSubmit).toBeCalledTimes(1);
+  //   });
+  // });
 });
