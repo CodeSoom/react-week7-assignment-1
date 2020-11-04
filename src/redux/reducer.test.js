@@ -125,4 +125,20 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('changeLoginField', () => {
+    it('changes email loginField', () => {
+      const value = 'tester@example.com';
+      const initialState = {
+        loginField: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const { loginField: { email } } = reducer(initialState, changeLoginField({ name: 'email', value }));
+
+      expect(email).toEqual(value);
+    });
+  });
 });
