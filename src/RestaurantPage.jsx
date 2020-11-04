@@ -6,10 +6,12 @@ import RestaurantContainer from './RestaurantContainer';
 
 function ReviewForm() {
   return (
-    <label>
-      평점
-      <input type="number" />
-    </label>
+    <div>
+      <label htmlFor="review-rate">
+        평점
+        <input type="number" id="review-rate" />
+      </label>
+    </div>
   );
 }
 
