@@ -4,8 +4,6 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeReviewField } from './actions';
-
 import RestaurantContainer from './RestaurantContainer';
 
 describe('RestaurantContainer', () => {
@@ -62,34 +60,49 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('훌륭하다 훌륭하다 지구인놈들');
     });
 
-    context('with accessToken', () => {
+    context('when logged in', () => {
       given('accessToken', () => ({
         accessToken: 'qwer!',
       }));
 
+      const controls = [
+        {
+          label: '평점',
+          name: 'score',
+          value: '5',
+        },
+        {
+          label: '리뷰 내용',
+          name: 'description',
+          value: '구름이 두둥실 떠다니는 맛!',
+        },
+      ];
+
       it('renders review write form', () => {
         const { getByLabelText, getByText } = renderRestaurantContainer();
 
-        const controls = [
-          {
-            label: '평점',
-            name: 'score',
-            value: '5',
-          },
-          {
-            label: '리뷰 내용',
-            name: 'description',
-            value: '구름이 두둥실 떠다니는 맛!',
-          },
-        ];
+        expect(getByLabelText('평점')).not.toBeNull();
+        expect(getByLabelText('리뷰 내용')).not.toBeNull();
+        expect(getByText('리뷰 남기기')).not.toBeNull();
+      });
+
+      it('listens change events', () => {
+        const { getByLabelText } = renderRestaurantContainer();
 
         controls.forEach(({ label, name, value }) => {
           const input = getByLabelText(label);
 
           fireEvent.change(input, { target: { value } });
 
-          expect(dispatch).toBeCalledWith(changeReviewField({ name, value }));
+          expect(dispatch).toBeCalledWith({
+            type: 'changeReviewField',
+            payload: { name, value },
+          });
         });
+      });
+
+      it('listens click event', () => {
+        const { getByText } = renderRestaurantContainer();
 
         fireEvent.click(getByText('리뷰 남기기'));
 
@@ -97,7 +110,7 @@ describe('RestaurantContainer', () => {
       });
     });
 
-    context('without accessToken', () => {
+    context('when logged out', () => {
       given('accessToken', () => null);
 
       it('renders no review write form', () => {
