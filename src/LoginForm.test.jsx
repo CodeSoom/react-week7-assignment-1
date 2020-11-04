@@ -8,10 +8,6 @@ describe('LoginForm', () => {
   const handleSubmit = jest.fn();
   const handleChange = jest.fn();
 
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
   const fields = {
     email: 'test@test.com',
     password: '1234',
@@ -24,6 +20,10 @@ describe('LoginForm', () => {
       onSubmit={handleSubmit}
     />,
   );
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
   it('renders input controls', () => {
     const { getByLabelText } = renderLoginForm();

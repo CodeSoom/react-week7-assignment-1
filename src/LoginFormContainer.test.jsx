@@ -11,6 +11,10 @@ jest.mock('react-redux');
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
+  const renderLoginFormContainer = () => render(
+    <LoginFormContainer />,
+  );
+
   beforeEach(() => {
     jest.clearAllMocks();
 
@@ -23,10 +27,6 @@ describe('LoginFormContainer', () => {
       },
     }));
   });
-
-  const renderLoginFormContainer = () => render(
-    <LoginFormContainer />,
-  );
 
   it('renders input controls', () => {
     const { getByLabelText } = renderLoginFormContainer();
