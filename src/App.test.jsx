@@ -98,7 +98,7 @@ describe('App', () => {
       loadItem.mockImplementation(() => 'ACCESSTOKEN');
     });
 
-    it('dispatches setAccessToken action', () => {
+    it('dispatches "setAccessToken" action', () => {
       renderApp({ path: '/' });
 
       expect(dispatch).toBeCalledWith({
@@ -113,7 +113,7 @@ describe('App', () => {
       loadItem.mockImplementation(() => null);
     });
 
-    it('dispatches setAccessToken action', () => {
+    it("doesn't dispatch any action", () => {
       renderApp({ path: '/' });
 
       expect(dispatch).not.toBeCalled();
