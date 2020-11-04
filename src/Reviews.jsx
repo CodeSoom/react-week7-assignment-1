@@ -5,17 +5,16 @@ export default function Reviews({ reviews }) {
     <>
       <h2>리뷰</h2>
       <ul>
-        {reviews.map(({ name, score, description }) => (
-          <li>
-            {name}
-            {' '}
-            <br />
-            {' '}
-            {score}
-            점
-            <br />
-            {' '}
-            {description}
+        {reviews.map(({
+          id, name, score, description,
+        }) => (
+          <li key={id}>
+            <p>{name}</p>
+            <p>
+              {score}
+              점
+            </p>
+            <p>{description}</p>
           </li>
         ))}
       </ul>
