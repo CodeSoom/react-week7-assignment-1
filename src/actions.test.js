@@ -10,7 +10,7 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
-  login,
+  requestLogin,
 } from './actions';
 
 const middlewares = [thunk];
@@ -105,15 +105,12 @@ describe('actions', () => {
   describe('login', () => {
     beforeEach(() => {
       store = mockStore({
-        loginFields: {
-          email: 'tester@example.com',
-          password: 'test',
-        },
+        loginFields: { email: 'email', password: 'password' },
       });
     });
 
-    it('dispatched setAccessToken', async () => {
-      await store.dispatch(login());
+    it('dispatches setAccessToken', async () => {
+      await store.dispatch(requestLogin());
 
       const actions = store.getActions();
 

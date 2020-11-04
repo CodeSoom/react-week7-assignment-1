@@ -101,12 +101,12 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
-export function login() {
+export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
 
-    const token = await fetchAccessToken({ email, password });
+    const accessToken = await fetchAccessToken({ email, password });
 
-    dispatch(setAccessToken(token));
+    dispatch(setAccessToken(accessToken));
   };
 }
