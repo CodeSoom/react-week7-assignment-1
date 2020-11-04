@@ -36,6 +36,19 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(sendReview({ restaurantId }));
   }
 
+  const reviews = [
+    {
+      name: '테스터',
+      score: 5,
+      description: '훌륭하다 훌륭하다 지구인놈들',
+    },
+    {
+      name: '테스터',
+      score: 3,
+      description: '맛있네요!',
+    },
+  ];
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
@@ -45,7 +58,7 @@ export default function RestaurantContainer({ restaurantId }) {
           onSubmit={handleSubmit}
         />
       ) : ''}
-      <Reviews />
+      <Reviews reviews={reviews} />
     </>
   );
 }
