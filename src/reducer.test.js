@@ -1,6 +1,7 @@
 import reducer from './reducer';
 
 import {
+  logout,
   setRegions,
   setCategories,
   setRestaurants,
@@ -149,6 +150,18 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken(accessToken));
 
       expect(state.accessToken).toBe(accessToken);
+    });
+  });
+
+  describe('logout', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+      };
+
+      const state = reducer(initialState, logout());
+
+      expect(state.accessToken).toBe('');
     });
   });
 
