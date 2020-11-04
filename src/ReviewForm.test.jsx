@@ -24,9 +24,9 @@ describe('ReviewForm', () => {
       { label: '리뷰 내용', name: 'description', value: 'Good!' },
     ];
 
-    const { getByLabelText } = renderReviewForm();
-
     reviewInput.forEach(({ label, name, value }) => {
+      const { getByLabelText } = renderReviewForm();
+
       fireEvent.change(getByLabelText(label), {
         target: { value },
       });
