@@ -25,12 +25,14 @@ describe('TextField', () => {
   });
 
   it('show value', () => {
+    const label = 'E-mail';
+
     const { getByLabelText } = renderTextField({
-      label: 'E-mail',
+      label,
       value: 'tester@example.com',
     });
 
-    expect(getByLabelText('E-mail')).toHaveValue('tester@example.com');
+    expect(getByLabelText(label)).toHaveValue('tester@example.com');
   });
 
   // it('listen change events', () => {

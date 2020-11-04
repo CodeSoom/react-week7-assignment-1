@@ -1,7 +1,6 @@
 import React from 'react';
 
-export default function TextField({ label }) {
-
+export default function TextField({ label, value }) {
   // const handleChange = (event) => {
   //   const { target: { name, value } } = event;
 
@@ -11,7 +10,7 @@ export default function TextField({ label }) {
   return (
     <label>
       { label }
-      <input />
+      <input value={value} />
     </label>
   );
 }
