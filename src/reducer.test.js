@@ -24,6 +24,7 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
+      accessToken: '',
     };
 
     it('returns initialState', () => {
@@ -162,7 +163,7 @@ describe('reducer', () => {
   });
 
   describe('setAccessToken', () => {
-    it('changes selected category', () => {
+    it('changes the accessToken', () => {
       const initialState = {
         accessToken: '',
       };
