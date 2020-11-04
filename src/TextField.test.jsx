@@ -5,13 +5,19 @@ import { fireEvent, render } from '@testing-library/react';
 import TextField from './TextField';
 
 describe('TextField', () => {
+  const field = {
+    name: 'email',
+    text: 'tester@example.com',
+    label: 'E-mail',
+  };
+
   const handleChange = jest.fn();
 
-  const renderTextField = ({ label, text, name }) => render(
+  const renderTextField = () => render(
     <TextField
-      name={name}
-      label={label}
-      text={text}
+      name={field.name}
+      label={field.label}
+      text={field.text}
       onChange={handleChange}
     />,
   );
@@ -20,42 +26,28 @@ describe('TextField', () => {
     handleChange.mockClear();
   });
 
-  it('renders label', () => {
-    const { queryByLabelText } = renderTextField({
-      label: 'E-mail',
-    });
+  it('renders filed label', () => {
+    const { queryByLabelText } = renderTextField();
 
-    expect(queryByLabelText('E-mail')).not.toBeNull();
+    expect(queryByLabelText(field.label)).not.toBeNull();
   });
 
-  it('shows text', () => {
-    const label = 'E-mail';
+  it('shows field text', () => {
+    const { getByLabelText } = renderTextField();
 
-    const { getByLabelText } = renderTextField({
-      label,
-      text: 'tester@example.com',
-    });
-
-    expect(getByLabelText(label)).toHaveValue('tester@example.com');
+    expect(getByLabelText(field.label)).toHaveValue(field.text);
   });
 
-  it('listens change events', () => {
-    const label = 'E-mail';
-    const name = 'email';
-    const text = 'tester@example.com';
+  it('listens change event', () => {
+    const { getByLabelText } = renderTextField();
 
-    const value = 'new@example.com';
-
-    const { getByLabelText } = renderTextField({
-      label,
-      name,
-      text,
+    fireEvent.change(getByLabelText(field.label), {
+      target: { value: 'new@example.com' },
     });
 
-    fireEvent.change(getByLabelText(label), {
-      target: { value },
+    expect(handleChange).toBeCalledWith({
+      name: field.name,
+      value: 'new@example.com',
     });
-
-    expect(handleChange).toBeCalledWith({ name, value });
   });
 });
