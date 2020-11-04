@@ -23,6 +23,7 @@ describe('ReviewItems', () => {
 
     const { container } = render(<ReviewItems reviews={reviews} />);
 
+    // TODO: 순서대로 정렬됐다는 것 테스트.
     reviews.forEach(({
       name, score, description,
     }) => {
