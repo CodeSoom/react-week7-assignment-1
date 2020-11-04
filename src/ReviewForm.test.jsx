@@ -22,8 +22,8 @@ describe('ReviewForm', () => {
 
   describe('input-controls', () => {
     const inputControls = [
-      { label: '평점', name: 'rate' },
-      { label: '리뷰 내용', name: 'description' },
+      { label: '평점', name: 'rate', value: 5 },
+      { label: '리뷰 내용', name: 'description', value: '맛있어요' },
     ];
 
     it('are rendered', () => {
@@ -47,17 +47,17 @@ describe('ReviewForm', () => {
     //   });
     // });
 
-    // it('listen change events', () => {
-    //   const { getByLabelText } = renderReviewForm();
+    it('listen change events', () => {
+      const { getByLabelText } = renderReviewForm();
 
-    //   inputControls.forEach(({ label, name, value }) => {
-    //     fireEvent.change(getByLabelText(label), {
-    //       target: { value },
-    //     });
+      inputControls.forEach(({ label, name, value }) => {
+        fireEvent.change(getByLabelText(label), {
+          target: { value },
+        });
 
-    //     expect(handleChange).toBeCalledWith({ name, value });
-    //   });
-    // });
+        expect(handleChange).toBeCalledWith({ name, value });
+      });
+    });
   });
 
   describe('review-submit button', () => {
