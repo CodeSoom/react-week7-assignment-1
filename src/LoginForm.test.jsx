@@ -12,8 +12,14 @@ describe('LoginForm', () => {
     jest.clearAllMocks();
   });
 
+  const fields = {
+    email: 'test@test.com',
+    password: '1234',
+  };
+
   const renderLoginForm = () => render(
     <LoginForm
+      fields={fields}
       onChange={handleChange}
       onSubmit={handleSubmit}
     />,
@@ -22,8 +28,8 @@ describe('LoginForm', () => {
   it('renders input controls', () => {
     const { getByLabelText } = renderLoginForm();
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('password')).not.toBeNull();
+    expect(getByLabelText('E-mail').value).toBe(fields.email);
+    expect(getByLabelText('password').value).toBe(fields.password);
   });
 
   context('with login button is clicked', () => {
