@@ -17,6 +17,7 @@ export default function LoginPage() {
         type="password"
         name="password"
       />
+      <button type="button">Log In</button>
     </>
   );
 }
