@@ -14,7 +14,7 @@ export default function LoginContainer() {
   }));
 
   function handleChangeLoginFields(event) {
-    const { name, value } = event;
+    const { name, value } = event.target;
     dispatch(changeLoginField({ name, value }));
   }
 
