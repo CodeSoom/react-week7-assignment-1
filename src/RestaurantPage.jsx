@@ -3,17 +3,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import RestaurantContainer from './RestaurantContainer';
-
-function ReviewForm() {
-  return (
-    <div>
-      <label htmlFor="review-rate">
-        평점
-        <input type="number" id="review-rate" />
-      </label>
-    </div>
-  );
-}
+import ReviewFormContainer from './ReviewFormContainer';
 
 export default function RestaurantPage({ params }) {
   const { id } = params || useParams();
@@ -21,7 +11,7 @@ export default function RestaurantPage({ params }) {
   return (
     <>
       <RestaurantContainer restaurantId={id} />
-      <ReviewForm />
+      <ReviewFormContainer />
     </>
   );
 }
