@@ -13,4 +13,12 @@ describe('<LoginPage />', () => {
     expect(getByLabelText('E-mail')).toBeInTheDocument();
     expect(getByLabelText('Password')).toBeInTheDocument();
   });
+
+  it('renders log in button', () => {
+    // When
+    const { getByRole } = render(<LoginPage />);
+
+    // Then
+    expect(getByRole('button')).toHaveTextContent('Log In');
+  });
 });
