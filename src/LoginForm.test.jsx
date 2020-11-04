@@ -35,23 +35,19 @@ describe('LoginForm', () => {
       {
         label: 'E-mail',
         name: 'email',
-        origin: email,
-        value: 'test',
+        value: 'test@test.com',
       },
       {
         label: 'Password',
         name: 'password',
-        origin: password,
         value: 'test',
       },
     ];
 
     controls.forEach(({
-      label, name, origin, value,
+      label, name, value,
     }) => {
       const input = getByLabelText(label);
-
-      expect(input.value).toBe(origin);
 
       fireEvent.change(input, { target: { value } });
 
