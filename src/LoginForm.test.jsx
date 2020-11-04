@@ -8,9 +8,8 @@ describe('LoginForm', () => {
   const handleSubmit = jest.fn();
   const handleChange = jest.fn();
 
-  const renderLoginForm = (inputFields) => render(
+  const renderLoginForm = () => render(
     <LoginForm
-      inputFields={inputFields}
       onSubmit={handleSubmit}
       onChange={handleChange}
     />,
@@ -33,20 +32,26 @@ describe('LoginForm', () => {
   });
 
   it('when change input fields', () => {
-    const inputFields = {
-      email: 'test',
-      password: '',
-    };
-    const { getByDisplayValue } = renderLoginForm(inputFields);
+    const { getByLabelText } = renderLoginForm();
 
-    fireEvent.change(getByDisplayValue('test'), {
+    fireEvent.change(getByLabelText('E-mail'), {
       target: { value: 'tester@example.com' },
     });
 
-    expect(handleChange).toBeCalled();
     expect(handleChange).toBeCalledWith({
       name: 'email',
       value: 'tester@example.com',
     });
+
+    fireEvent.change(getByLabelText('Password'), {
+      target: { value: '1234' },
+    });
+
+    expect(handleChange).toBeCalledWith({
+      name: 'password',
+      value: '1234',
+    });
+
+    expect(handleChange).toBeCalledTimes(2);
   });
 });
