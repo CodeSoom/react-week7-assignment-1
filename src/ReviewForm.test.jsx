@@ -13,9 +13,10 @@ describe('ReviewForm', () => {
     handleSubmit.mockClear();
   });
 
-  function renderReviewForm() {
+  function renderReviewForm({ score, description }) {
     return render(
       <ReviewForm
+        fields={{ score, description }}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />,
@@ -23,7 +24,10 @@ describe('ReviewForm', () => {
   }
 
   it('renders review write inputs', () => {
-    const { getByLabelText } = renderReviewForm();
+    const score = '5';
+    const description = '맛있어요!';
+
+    const { getByLabelText } = renderReviewForm({ score, description });
 
     const controls = [
       {
@@ -44,11 +48,14 @@ describe('ReviewForm', () => {
       fireEvent.change(input, { target: { value } });
 
       expect(handleChange).toBeCalledWith({ name, value });
+    });
   });
-});
 
   it('renders review submit button', () => {
-    const { getByText } = renderReviewForm();
+    const score = '5';
+    const description = '맛있어요!';
+
+    const { getByText } = renderReviewForm({ score, description });
 
     fireEvent.click(getByText('리뷰 남기기'));
 
