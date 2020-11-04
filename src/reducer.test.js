@@ -1,6 +1,7 @@
 import reducer from './reducer';
 
 import {
+  setLoginFields,
   setRegions,
   setCategories,
   setRestaurants,
@@ -45,15 +46,9 @@ describe('reducer', () => {
         password: 'test',
       };
 
-      const state = reducer(initialState, {
-        type: 'setLoginFields',
-        payload: { loginFields },
-      });
+      const state = reducer(initialState, setLoginFields(loginFields));
 
-      expect(state.loginFields).toEqual({
-        email: 'test@test.com',
-        password: 'test',
-      });
+      expect(state.loginFields).toEqual(loginFields);
     });
   });
 
