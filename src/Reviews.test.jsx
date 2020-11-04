@@ -8,7 +8,7 @@ describe('Reviews', () => {
   it('renders title', () => {
     const reviews = [];
 
-    const { container } = render(<Reviews reviews={reviews}/>);
+    const { container } = render(<Reviews reviews={reviews} />);
 
     expect(container).toHaveTextContent('리뷰');
   });
@@ -40,11 +40,11 @@ describe('Reviews', () => {
 
   context('without reviews', () => {
     it('render no review message', () => {
-      const reviews = [];
+      [[], null, undefined].forEach((reviews) => {
+        const { container } = render(<Reviews reviews={reviews} />);
 
-      const { container } = render(<Reviews reviews={reviews} />);
-
-      expect(container).toHaveTextContent('리뷰가 없어요!');
+        expect(container).toHaveTextContent('리뷰가 없어요!');
+      });
     });
   });
 });
