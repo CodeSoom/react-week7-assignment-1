@@ -28,7 +28,7 @@ describe('ReviewForm', () => {
 
     reviewInput.forEach(({ label, name, value }) => {
       fireEvent.change(getByLabelText(label), {
-        target: { name, value },
+        target: { value },
       });
 
       expect(handleChange).toBeCalledWith({ name, value });
