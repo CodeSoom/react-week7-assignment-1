@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 
 import {
+  setLoginFields,
   loadInitialData,
   setRegions,
   setCategories,
@@ -98,6 +99,22 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('setLoginFields', () => {
+    it('returns setLoginFields action', () => {
+      const action = setLoginFields({ email: 'wow@wow.com', password: 'wow' });
+
+      expect(action).toEqual({
+        type: 'setLoginFields',
+        payload: {
+          loginFields: {
+            email: 'wow@wow.com',
+            password: 'wow',
+          },
+        },
+      });
     });
   });
 });
