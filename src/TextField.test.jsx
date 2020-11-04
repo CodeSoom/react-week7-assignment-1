@@ -35,15 +35,17 @@ describe('TextField', () => {
     expect(getByLabelText(label)).toHaveValue('tester@example.com');
   });
 
-  // it('listen change events', () => {
-  //   const { getByLabelText } = renderTextField();
+it('listen change events', () => {
+    const label = 'E-mail';
+    const name = 'email';
+    const value = 'tester@example.com';
 
-  //   inputControls.forEach(({ label, name, value }) => {
-  //     fireEvent.change(getByLabelText(label), {
-  //       target: { value },
-  //     });
+    const { getByLabelText } = renderTextField();
 
-  //     expect(handleChange).toBeCalledWith({ name, value });
-  //   });
-  // });
+    fireEvent.change(getByLabelText(label), {
+      target: { value },
+    });
+
+    expect(handleChange).toBeCalledWith({ name, value });
+  });
 });
