@@ -1,18 +1,18 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import Login from './Login';
+import LoginForm from './LoginForm';
 
 beforeEach(() => {
   jest.clearAllMocks();
 });
 
-describe('Login', () => {
+describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleClick = jest.fn();
 
   const renderLogin = ({ id, password }) => render(
-    <Login
+    <LoginForm
       id={id}
       password={password}
       onChange={handleChange}

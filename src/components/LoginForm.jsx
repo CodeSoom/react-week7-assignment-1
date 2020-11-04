@@ -2,7 +2,7 @@ import React from 'react';
 
 import LoginInput from './LoginInput';
 
-export default function Login({
+export default function LoginForm({
   id, password, onChange, onClick,
 }) {
   const loginAble = id && password;
