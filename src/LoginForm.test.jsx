@@ -25,7 +25,7 @@ describe('LoginForm', () => {
     );
   }
 
-  it('renders input controls', () => {
+  it('renders login input controls', () => {
     const email = 'test@test';
     const password = '1234';
 
