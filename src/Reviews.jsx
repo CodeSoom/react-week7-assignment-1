@@ -14,6 +14,15 @@ export default function Reviews() {
             훌륭하다 훌륭하다 지구인놈들
           </p>
         </li>
+        <li>
+          <p>
+            테스터
+            <br />
+            3점
+            <br />
+            맛있네요!
+          </p>
+        </li>
       </ul>
     </>
   );
