@@ -60,14 +60,14 @@ describe('ReviewForm', () => {
     // });
   });
 
-  // describe('login button', () => {
-  //   const loginButton = 'Log In';
+  describe('review-write button', () => {
+    const reviewButton = '리뷰 남기기';
 
-  //   it('is rendered', () => {
-  //     const { queryByText } = renderReviewForm();
+    it('is rendered', () => {
+      const { queryByText } = renderReviewForm();
 
-  //     expect(queryByText(loginButton)).not.toBeNull();
-  //   });
+      expect(queryByText(reviewButton)).not.toBeNull();
+    });
 
   //   it('listens click event', () => {
   //     const { getByText } = renderReviewForm();
@@ -78,5 +78,5 @@ describe('ReviewForm', () => {
 
   //     expect(handleSubmit).toBeCalledTimes(1);
   //   });
-  // });
+  });
 });
