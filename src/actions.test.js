@@ -136,5 +136,14 @@ describe('actions', () => {
     it('run postReview', async () => {
       await store.dispatch(sendReview({ restaurantId: 1 }));
     });
+
+    it('dispatches loadRestaurant', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
+    });
   });
 });
