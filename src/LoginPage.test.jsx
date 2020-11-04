@@ -4,11 +4,13 @@ import { render } from '@testing-library/react';
 
 import { useSelector } from 'react-redux';
 
+import { MemoryRouter } from 'react-router-dom';
+
 import LoginPage from './LoginPage';
 
 jest.mock('react-redux');
 
-test('LoginPAge', () => {
+test('LoginPage', () => {
   useSelector.mockImplementation((selector) => selector({
     loginFields: {
       email: '',
@@ -17,7 +19,11 @@ test('LoginPAge', () => {
     accessToken: '',
   }));
 
-  const { container, getByLabelText } = render(<LoginPage />);
+  const { container, getByLabelText } = render(
+    <MemoryRouter>
+      <LoginPage />
+    </MemoryRouter>,
+  );
 
   expect(container).toHaveTextContent('Log In');
 
