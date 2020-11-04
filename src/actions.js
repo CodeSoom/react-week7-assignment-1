@@ -121,9 +121,13 @@ export function requestLogin() {
   };
 }
 
-export function sendReview() {
-  return async (dispatch, getState) => ({});
-  // TODO: getState로 reviewField, restaurantId 구하기
-  // TODO: postReview({accessToken, score, description })
-  // TODO: dispatch(loadRestaurant(restaurantId))
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { reviewField: { score, description }, accessToken } = getState();
+    await postReview({
+      score, description, accessToken, restaurantId,
+    });
+
+    // TODO: dispatch(loadRestaurant(restaurantId))
+  };
 }
