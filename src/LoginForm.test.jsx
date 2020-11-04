@@ -12,7 +12,7 @@ describe('LoginForm', () => {
     <LoginForm
       onSubmit={handleSubmit}
       onChange={handleChange}
-      loginFields={loginFields}
+      fields={loginFields}
     />,
   );
 
