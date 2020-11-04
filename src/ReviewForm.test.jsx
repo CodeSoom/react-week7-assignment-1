@@ -60,7 +60,7 @@ describe('ReviewForm', () => {
     // });
   });
 
-  describe('review-write button', () => {
+  describe('review-submit button', () => {
     const reviewButton = '리뷰 남기기';
 
     it('is rendered', () => {
