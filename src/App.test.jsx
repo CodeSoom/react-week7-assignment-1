@@ -107,4 +107,16 @@ describe('App', () => {
       });
     });
   });
+
+  context('when logged out', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it('dispatches setAccessToken action', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
 });
