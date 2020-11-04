@@ -2,7 +2,10 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { requestLogin, changeLoginFields, setAccessToken } from './actions';
+import {
+  requestLogin,
+  changeLoginFields,
+} from './actions';
 
 import { get } from './utils';
 
@@ -20,8 +23,8 @@ export default function LoginFormContainer() {
     dispatch(changeLoginFields({ name, value }));
   }
 
-  function handleClick() {
-    dispatch(setAccessToken(null));
+  function handleClickLogout() {
+    dispatch({ type: 'logout' });
   }
 
   const fields = useSelector(get('loginFields'));
@@ -30,7 +33,7 @@ export default function LoginFormContainer() {
   return (
     <>
       { accessToken
-        ? (<LogoutForm onClick={handleClick} />)
+        ? (<LogoutForm onClick={handleClickLogout} />)
         : (
           <LoginForm
             fields={fields}
