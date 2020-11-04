@@ -11,6 +11,7 @@ import AboutPage from 'presentational/AboutPage';
 import RestaurantsPage from 'presentational/RestaurantsPage';
 import RestaurantPage from 'presentational/RestaurantPage';
 import NotFoundPage from 'presentational/NotFoundPage';
+import LoginPage from 'presentational/LoginPage';
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/about" component={AboutPage} />
         <Route exact path="/restaurants" component={RestaurantsPage} />
         <Route path="/restaurants/:id" component={RestaurantPage} />
+        <Route path="/login" component={LoginPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
