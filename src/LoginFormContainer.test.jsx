@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,8 +19,7 @@ describe('LoginFormContainer', () => {
   });
 
   const renderLoginFormContainer = () => render(
-    <LoginFormContainer />
-    ,
+    <LoginFormContainer />,
   );
 
   it('renders input fields', () => {
@@ -34,5 +33,13 @@ describe('LoginFormContainer', () => {
     const { getByText } = renderLoginFormContainer();
 
     expect(getByText('Log In')).not.toBeNull();
+  });
+
+  it('when click Log In button dispatch action', () => {
+    const { getByText } = renderLoginFormContainer();
+
+    fireEvent.click(getByText('Log In'));
+
+    expect(dispatch).toBeCalled();
   });
 });
