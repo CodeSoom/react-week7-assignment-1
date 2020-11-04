@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LoginForm({ onChange }) {
+export default function LoginForm({ onChange, onSubmit }) {
   const handleChange = (event) => {
     const { target: { name, value } } = event;
 
@@ -29,7 +29,7 @@ export default function LoginForm({ onChange }) {
           />
         </label>
       </div>
-      <button type="button">
+      <button type="button" onClick={onSubmit}>
         리뷰 남기기
       </button>
     </>
