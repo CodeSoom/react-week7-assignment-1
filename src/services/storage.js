@@ -1,3 +1,3 @@
-export function loadItem() {
-  return 'ACCESSTOKEN';
+export function loadItem(key) {
+  return localStorage.getItem(key);
 }
