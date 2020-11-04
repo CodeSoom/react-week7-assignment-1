@@ -14,7 +14,10 @@ describe('LoginFormContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-
+      loginFields: {
+        email: 'tester',
+        password: '',
+      },
     }));
   });
 
@@ -41,5 +44,21 @@ describe('LoginFormContainer', () => {
     fireEvent.click(getByText('Log In'));
 
     expect(dispatch).toBeCalled();
+  });
+
+  it('when change input fields dispatch action', () => {
+    const { getByDisplayValue } = renderLoginFormContainer();
+
+    fireEvent.change(getByDisplayValue('tester'), {
+      target: { value: 'tester@example' },
+    });
+
+    expect(dispatch).toBeCalledWith({
+      type: 'changeLoginFields',
+      payload: {
+        name: 'email',
+        value: 'tester@example.com',
+      },
+    });
   });
 });
