@@ -19,6 +19,11 @@ export default function LoginContainer() {
     dispatch(changeLoginField({ name, value }));
   }
 
+  function handleClickLoginButton(event) {
+    event.preventDefault();
+    dispatch(requestLogin());
+  }
+
   return (
     <form>
 
@@ -42,7 +47,7 @@ export default function LoginContainer() {
         Password
       </Input>
 
-      <button type="submit">Log In</button>
+      <button type="submit" onSubmit={handleClickLoginButton}>Log In</button>
     </form>
   );
 }

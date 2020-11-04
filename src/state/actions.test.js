@@ -100,4 +100,18 @@ describe('actions', () => {
       expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('dispatchs requestLogin', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken(''));
+    });
+  });
 });
