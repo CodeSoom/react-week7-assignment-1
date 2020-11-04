@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './LoginForm';
 
@@ -9,12 +9,10 @@ import {
   changeLoginField,
 } from './actions';
 
+import { get } from './utils';
+
 export default function LoginFormContainer() {
-  // TDDO: delete this!
-  const fields = {
-    email: 'test@test.com',
-    password: '1234',
-  };
+  const fields = useSelector(get('loginField'));
 
   const dispatch = useDispatch();
 
