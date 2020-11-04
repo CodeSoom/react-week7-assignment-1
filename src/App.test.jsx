@@ -94,7 +94,9 @@ describe('App', () => {
   });
 
   context('when logged in', () => {
-    loadItem.mockImplementation(() => 'ACCESSTOKEN');
+    beforeEach(() => {
+      loadItem.mockImplementation(() => 'ACCESSTOKEN');
+    });
 
     it('dispatches setAccessToken action', () => {
       renderApp({ path: '/' });
