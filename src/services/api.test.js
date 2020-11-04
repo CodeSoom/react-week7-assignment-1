@@ -70,14 +70,18 @@ describe('api', () => {
   });
 
   describe('postLogin', () => {
+    const mockAccessToken = 'abcd';
+    const email = 'test@test.com';
+    const password = 'test';
+
     beforeEach(() => {
-      mockFetch({ accessToken: 'abcd' });
+      mockFetch({ accessToken: mockAccessToken });
     });
 
     it('returns accessToken', async () => {
-      const accessToken = await postLogin({ email: 'test@test.com', password: 'test' });
+      const accessToken = await postLogin({ email, password });
 
-      expect(accessToken).toBe('abcd');
+      expect(accessToken).toBe(mockAccessToken);
     });
   });
 });
