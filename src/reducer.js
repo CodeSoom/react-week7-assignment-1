@@ -7,7 +7,10 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
-  loginField: {},
+  loginField: {
+    email: '',
+    password: '',
+  },
 };
 
 const reducers = {
