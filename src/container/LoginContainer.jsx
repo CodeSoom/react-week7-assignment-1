@@ -20,16 +20,6 @@ export default function LoginContainer() {
 
   return (
     <form>
-      <div>
-        <label htmlFor="login-email">E-mail</label>
-        <input
-          type="email"
-          name="email"
-          id="login-email"
-          onChange={handleChangeLoginFields}
-          value={email}
-        />
-      </div>
 
       <div>
         <label htmlFor="login-password">Password</label>
