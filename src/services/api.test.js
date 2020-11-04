@@ -75,7 +75,7 @@ describe('api', () => {
     });
 
     it('returns accessToken', async () => {
-      const restaurant = await fetchAccessToken();
+      const restaurant = await fetchAccessToken({});
 
       expect(restaurant).toEqual('');
     });
