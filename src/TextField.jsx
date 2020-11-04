@@ -1,16 +1,20 @@
 import React from 'react';
 
-export default function TextField({ label, value }) {
-  // const handleChange = (event) => {
-  //   const { target: { name, value } } = event;
+export default function TextField({ label, text, name, onChange }) {
+  const handleChange = (event) => {
+    const { target: { name, value } } = event;
 
-  //   onChange({ name, value });
-  // };
+    onChange({ name, value });
+  };
 
   return (
     <label>
       { label }
-      <input value={value} />
+      <input
+        name={name}
+        value={text}
+        onChange={handleChange}
+      />
     </label>
   );
 }

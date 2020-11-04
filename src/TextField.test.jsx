@@ -5,15 +5,19 @@ import { fireEvent, render } from '@testing-library/react';
 import TextField from './TextField';
 
 describe('TextField', () => {
-  const renderTextField = ({ label, value }) => render(
+  const handleChange = jest.fn();
+
+  const renderTextField = ({ label, text, name }) => render(
     <TextField
+      name={name}
       label={label}
-      value={value}
+      text={text}
+      onChange={handleChange}
     />,
   );
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    handleChange.mockClear();
   });
 
   it('renders label', () => {
@@ -24,23 +28,29 @@ describe('TextField', () => {
     expect(queryByLabelText('E-mail')).not.toBeNull();
   });
 
-  it('show value', () => {
+  it('shows text', () => {
     const label = 'E-mail';
 
     const { getByLabelText } = renderTextField({
       label,
-      value: 'tester@example.com',
+      text: 'tester@example.com',
     });
 
     expect(getByLabelText(label)).toHaveValue('tester@example.com');
   });
 
-it('listen change events', () => {
+  it('listens change events', () => {
     const label = 'E-mail';
     const name = 'email';
-    const value = 'tester@example.com';
+    const text = 'tester@example.com';
 
-    const { getByLabelText } = renderTextField();
+    const value = 'new@example.com';
+
+    const { getByLabelText } = renderTextField({
+      label,
+      name,
+      text,
+    });
 
     fireEvent.change(getByLabelText(label), {
       target: { value },
