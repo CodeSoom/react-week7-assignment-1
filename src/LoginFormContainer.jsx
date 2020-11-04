@@ -14,7 +14,7 @@ import { get } from './utils';
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  const { email, password } = useSelector(get('loginFields'));
+  const { email, password } = useSelector(get('loginField'));
 
   function handleChange({ name, value }) {
     dispatch(changeLoginField({ name, value }));

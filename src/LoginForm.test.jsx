@@ -23,7 +23,7 @@ describe('LoginForm', () => {
     ));
   }
 
-  it('render user name and password ', () => {
+  it('render email and password inputs and change them', () => {
     const email = 'test@test.co.kr';
     const password = '1234';
 
@@ -43,14 +43,6 @@ describe('LoginForm', () => {
         value: 'test',
       },
     ];
-
-    controls.forEach((control) => {
-      expect(getByLabelText(control.label)).not.toBeNull();
-    });
-  });
-
-  it('change user name and password ', () => {
-    const { getByLabelText } = renderLoginForm();
 
     controls.forEach(({
       label, name, origin, value,

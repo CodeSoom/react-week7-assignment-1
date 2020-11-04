@@ -8,8 +8,8 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   loginField: {
-    email: null,
-    password: null,
+    email: '',
+    password: '',
   },
 };
 

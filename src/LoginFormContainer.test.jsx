@@ -24,17 +24,17 @@ describe('LoginFormContainer', () => {
     }));
   });
 
-  const renderHomePage = () => render(<LoginFormContainer />);
+  const renderLoginFormContainer = () => render(<LoginFormContainer />);
 
   it('render user name and password ', () => {
-    const { getByLabelText } = renderHomePage();
+    const { getByLabelText } = renderLoginFormContainer();
 
     expect(getByLabelText('E-mail').value).toBe('test@test.co.kr');
     expect(getByLabelText('Password').value).toBe('test');
   });
 
   it('renders login button', () => {
-    const { getByText } = renderHomePage();
+    const { getByText } = renderLoginFormContainer();
 
     expect(getByText('Login')).not.toBeNull();
 
