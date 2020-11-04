@@ -137,7 +137,7 @@ describe('actions', () => {
       await store.dispatch(sendReview({ restaurantId: 1 }));
     });
 
-    it('dispatches loadRestaurant', async () => {
+    it('dispatches setRestarant actions', async () => {
       await store.dispatch(sendReview({ restaurantId: 1 }));
 
       const actions = store.getActions();
