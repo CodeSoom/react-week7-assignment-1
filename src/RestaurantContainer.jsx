@@ -11,6 +11,10 @@ import {
 
 import { get } from './utils';
 
+function Reviews() {
+  return '테스터 5점 훌륭하다 훌륭하다 지구인놈들';
+}
+
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
@@ -44,7 +48,7 @@ export default function RestaurantContainer({ restaurantId }) {
           onSubmit={handleSubmit}
         />
       ) : ''}
-
+<Reviews />
     </>
   );
 }
