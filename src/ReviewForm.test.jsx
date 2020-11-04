@@ -69,14 +69,14 @@ describe('ReviewForm', () => {
       expect(queryByText(reviewButton)).not.toBeNull();
     });
 
-  //   it('listens click event', () => {
-  //     const { getByText } = renderReviewForm();
+    it('listens click event', () => {
+      const { getByText } = renderReviewForm();
 
-  //     expect(handleSubmit).not.toBeCalled();
+      expect(handleSubmit).not.toBeCalled();
 
-  //     fireEvent.click(getByText(loginButton));
+      fireEvent.click(getByText(reviewButton));
 
-  //     expect(handleSubmit).toBeCalledTimes(1);
-  //   });
+      expect(handleSubmit).toBeCalledTimes(1);
+    });
   });
 });
