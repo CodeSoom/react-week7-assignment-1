@@ -82,8 +82,8 @@ describe('App', () => {
     it('renders the login page', () => {
       const { container } = renderApp({ path: '/login' });
 
-      expect(container).toHaveTextContent('email');
-      expect(container).toHaveTextContent('password');
+      expect(container).toHaveTextContent('E-mail');
+      expect(container).toHaveTextContent('Password');
       expect(container).toHaveTextContent('Log In');
     });
   });

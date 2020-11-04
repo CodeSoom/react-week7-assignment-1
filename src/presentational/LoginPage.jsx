@@ -15,7 +15,7 @@ export default function LoginPage() {
           <input type="password" name="password" id="login-password" />
         </div>
 
-        <button type="button">Log in</button>
+        <button type="button">Log In</button>
       </form>
     </div>
   );
