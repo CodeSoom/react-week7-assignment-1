@@ -6,6 +6,10 @@ import {
   fetchAccessToken,
 } from './services/api';
 
+import {
+  saveItem,
+} from './services/storage';
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -110,6 +114,8 @@ export function login() {
     }
 
     const accessToken = await fetchAccessToken(loginFields);
+
+    saveItem('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
   };
