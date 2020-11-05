@@ -87,7 +87,7 @@ describe('RestaurantContainer', () => {
         target: { value: description },
       });
 
-      expect(dispatch).toBeCalledTimes(2);
+      expect(dispatch).toBeCalledTimes(3);
     });
   });
 });
