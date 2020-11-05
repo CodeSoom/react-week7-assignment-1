@@ -8,6 +8,7 @@ import {
   selectRegion,
   selectCategory,
   changeLoginField,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
