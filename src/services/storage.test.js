@@ -10,7 +10,6 @@ describe('storage', () => {
   });
 
   it('loadItem', () => {
-
     expect(loadItem('key')).toBe('item');
   });
 
