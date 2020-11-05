@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -71,6 +72,7 @@ describe('api', () => {
 
   describe('postLogin', () => {
     beforeEach(() => {
+      fetch.mockClear();
       mockFetch({ accessToken: 'qwer!!' });
     });
 
@@ -78,6 +80,22 @@ describe('api', () => {
       const accessTocken = await postLogin({ email: 'test@test', password: '1234' });
 
       expect(accessTocken).toEqual('qwer!!');
+    });
+  });
+
+  describe('postReview', () => {
+    beforeEach(() => {
+      fetch.mockClear();
+    });
+    it('returns accessTocken', async () => {
+     await postReview({
+        score: '4',
+        description: '맛있네요',
+        accessToken: 'ACCESSTOKEN',
+        restaurantId: 1,
+      });
+
+      expect(fetch).toBeCalledTimes(1);
     });
   });
 });
