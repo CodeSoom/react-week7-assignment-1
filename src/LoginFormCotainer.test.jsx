@@ -11,23 +11,18 @@ jest.mock('react-redux');
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
-  const mockState = (state = {}) => {
-    useSelector.mockImplementation((selector) => selector(state));
-  };
-
   beforeEach(() => {
     dispatch.mockClear();
-
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {},
+      accessToken: given.accessToken,
+    }));
   });
 
   context('when logged-out', () => {
-    beforeEach(() => {
-      mockState({
-        loginFields: {},
-        accessToken: null,
-      });
-    });
+    given('accessToken', () => null);
 
     it('renders input-controls', () => {
       const { queryByLabelText, getByLabelText } = render(
@@ -61,11 +56,7 @@ describe('LoginFormContainer', () => {
   });
 
   context('when logged-in', () => {
-    beforeEach(() => {
-      mockState({
-        accessToken: 'ACCESS_TOKEN',
-      });
-    });
+    given('accessToken', () => 'ACCESS_TOKEN');
 
     it('renders log-out button', () => {
       const { getByText } = render(
