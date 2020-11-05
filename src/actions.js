@@ -10,6 +10,7 @@ import {
 import {
   loadItem,
   deleteItem,
+  saveItem,
 } from './services/storage';
 
 export function setRegions(regions) {
@@ -127,6 +128,7 @@ export function requestLogin() {
 
     const accessToken = await fetchAccessToken({ email, password });
 
+    saveItem('accessToken', accessToken);
     dispatch(setAccessToken(accessToken));
   };
 }
