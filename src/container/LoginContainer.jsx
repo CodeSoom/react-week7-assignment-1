@@ -6,6 +6,7 @@ import Input from 'presentational/Input';
 
 import {
   changeLoginField,
+  requestLogin,
 } from 'state/actions';
 
 export default function LoginContainer() {

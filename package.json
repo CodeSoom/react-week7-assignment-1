@@ -44,6 +44,7 @@
   "dependencies": {
     "@codeceptjs/configure": "^0.5.2",
     "assert": "^2.0.0",
+    "httpie": "^1.1.2",
     "path": "^0.12.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

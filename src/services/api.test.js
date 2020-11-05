@@ -67,4 +67,16 @@ describe('api', () => {
       expect(restaurant).toEqual(RESTAURANT);
     });
   });
+
+  describe('postLogin', () => {
+    beforeEach(() => {
+      mockFetch('ACCESSTOKEN');
+    });
+
+    it('returns accessToken', async () => {
+      const accessToken = await postLogin({ email: 'tester@example', password: 'test' });
+
+      expect(accessToken).toEqual('ACCESSTOKEN');
+    });
+  });
 });

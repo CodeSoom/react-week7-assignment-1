@@ -10,6 +10,7 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
 } from './actions';
 
 const middlewares = [thunk];
