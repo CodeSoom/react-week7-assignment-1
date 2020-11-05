@@ -20,17 +20,18 @@ export default function LoginContainer() {
     dispatch(changeLoginField({ name, value }));
   }
 
-  function handleSubmitLoginButton() {
+  function handleClickLoginButton() {
     dispatch(requestLogin());
   }
 
   return (
-    <LoginForm
-      email={email}
-      password={password}
-      onChange={handleChangeLoginFields}
-      onSubmit={handleSubmitLoginButton}
-    />
-
+    <>
+      <LoginForm
+        email={email}
+        password={password}
+        onChange={handleChangeLoginFields}
+        onClick={handleClickLoginButton}
+      />
+    </>
   );
 }

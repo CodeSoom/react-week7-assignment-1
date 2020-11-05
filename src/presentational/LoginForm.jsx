@@ -3,13 +3,8 @@ import React from 'react';
 import Input from './Input';
 
 export default function LoginForm({
-  email, password, onChange, onSubmit,
+  email, password, onChange, onClick,
 }) {
-  function handleSubmit(event) {
-    event.preventDefault();
-    onSubmit();
-  }
-
   return (
     <form>
 
@@ -33,7 +28,7 @@ export default function LoginForm({
         Password
       </Input>
 
-      <button type="submit" onSubmit={handleSubmit}>Log In</button>
+      <button type="button" onClick={onClick}>Log In</button>
     </form>
   );
 }
