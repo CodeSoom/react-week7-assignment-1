@@ -40,6 +40,12 @@ describe('App', () => {
     );
   }
 
+  it('initially calls loadLoginStatus', () => {
+    renderApp({ path: 'any' });
+
+    expect(dispatch).toBeCalled();
+  });
+
   context('with path /', () => {
     it('renders the home page', () => {
       const { container } = renderApp({ path: '/' });
