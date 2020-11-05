@@ -7,8 +7,26 @@ import InputField from './InputField';
 describe('<InputField />', () => {
   const handleChange = jest.fn();
 
+  const renderInputField = ({
+    id,
+    label,
+    type,
+    name,
+  }) => render((
+    <InputField
+      id={id}
+      label={label}
+      type={type}
+      name={name}
+      onChange={handleChange}
+    />
+  ));
+
+  beforeEach(() => {
+    handleChange.mockClear();
+  });
+
   it('renders input fields', () => {
-    // Given
     const inputs = [
       {
         id: 'email',
@@ -24,31 +42,20 @@ describe('<InputField />', () => {
       },
     ];
 
-    inputs.forEach(({ id, label, name }) => {
-      // When
-      const { getByLabelText } = render((
-        <InputField
-          id={id}
-          label={label}
-          name={name}
-        />
-      ));
+    inputs.forEach((input) => {
+      const { getByLabelText } = renderInputField(input);
 
-      // Then
-      expect(getByLabelText(label)).toBeInTheDocument();
+      expect(getByLabelText(input.label)).toBeInTheDocument();
     });
   });
 
   it('calls onChange', () => {
-    const { getByRole } = render((
-      <InputField
-        id="test"
-        label="test"
-        name="test"
-        type="text"
-        onChange={handleChange}
-      />
-    ));
+    const { getByRole } = renderInputField({
+      id: 'email',
+      label: 'Email',
+      type: 'email',
+      name: 'email',
+    });
 
     fireEvent.change(getByRole('textbox'), {
       target: { value: '인풋 작성' },
