@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -64,5 +64,29 @@ describe('RestaurantContainer', () => {
 
     expect(queryByText('평점')).not.toBeNull();
     expect(queryByText('리뷰 내용')).not.toBeNull();
+  });
+
+  it('changes review score and description', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
+
+    const score = '5';
+    const description = '정말 최고!';
+
+    const { getByLabelText } = renderRestaurantContainer();
+
+    fireEvent.change(getByLabelText('평점'), {
+      target: { value: score },
+    });
+
+    fireEvent.change(getByLabelText('리뷰 내용'), {
+      target: { value: description },
+    });
+
+    expect(getByLabelText('평점').value).toBe(score);
+    expect(getByLabelText('리뷰 내용').value).toBe(description);
   });
 });
