@@ -25,14 +25,14 @@ describe('ReviewFormContainer', () => {
     );
 
     fireEvent.change(getByLabelText('평점'), {
-      target: { value: '3' },
+      target: { value: 3 },
     });
 
     expect(dispatch).toBeCalledWith({
       type: 'changeReviewField',
       payload: {
         name: 'rate',
-        value: 'tester@example.com',
+        value: '3',
       },
     });
   });
