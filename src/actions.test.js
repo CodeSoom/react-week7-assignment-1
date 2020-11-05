@@ -125,6 +125,7 @@ describe('actions', () => {
   describe('sendReview', () => {
     beforeEach(() => {
       store = mockStore({
+        restaurant: { restauantId: 1 },
         reviewFields: { rate: '3', description: '맛있네요' },
       });
     });
