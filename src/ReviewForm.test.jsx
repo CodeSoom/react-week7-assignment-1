@@ -6,10 +6,14 @@ import ReviewForm from './ReviewForm';
 
 describe('ReviewForm', () => {
   const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
   function renderReviewForm() {
     return render(
-      <ReviewForm onChange={handleChange} />,
+      <ReviewForm
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />,
     );
   }
 
@@ -22,6 +26,16 @@ describe('ReviewForm', () => {
 
     expect(queryByText('평점')).not.toBeNull();
     expect(queryByText('리뷰 내용')).not.toBeNull();
+  });
+
+  context('with review button is clicked', () => {
+    it('calls handleSumbit', () => {
+      const { getByText } = renderReviewForm();
+
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(handleSubmit).toBeCalled();
+    });
   });
 
   context('with review change event', () => {
