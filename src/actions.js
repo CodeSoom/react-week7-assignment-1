@@ -128,10 +128,6 @@ export function requestLogin() {
 
 export function sendReview() {
   return async (dispatch, getState) => {
-    // rate, description <- state
-    // postReview -> review
-    // setReview(review)
-    // if success, then loadRestaurant (to get reviews)
     const {
       restaurant: { id },
       reviewFields: { score, description },
