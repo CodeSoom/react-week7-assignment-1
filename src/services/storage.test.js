@@ -5,6 +5,7 @@ describe('storage', () => {
     beforeEach(() => {
       localStorage.accessToken = 'ACCESSTOKEN';
     });
+
     it('run loadItem', () => {
       const accessToken = loadItem('accessToken');
 
