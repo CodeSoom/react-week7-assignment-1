@@ -12,12 +12,14 @@ describe('<InputField />', () => {
     label,
     type,
     name,
+    value,
   }) => render((
     <InputField
       id={id}
       label={label}
       type={type}
       name={name}
+      value={value}
       onChange={handleChange}
     />
   ));
@@ -33,12 +35,14 @@ describe('<InputField />', () => {
         label: 'Email',
         type: 'email',
         name: 'email',
+        value: 'test@test.com',
       },
       {
         id: 'password',
         label: 'Password',
         type: 'password',
         name: 'password',
+        value: 'test',
       },
     ];
 
@@ -46,6 +50,7 @@ describe('<InputField />', () => {
       const { getByLabelText } = renderInputField(input);
 
       expect(getByLabelText(input.label)).toBeInTheDocument();
+      expect(getByLabelText(input.label)).toHaveValue(input.value);
     });
   });
 
@@ -55,6 +60,7 @@ describe('<InputField />', () => {
       label: 'Email',
       type: 'email',
       name: 'email',
+      value: 'test@test.com',
     });
 
     fireEvent.change(getByRole('textbox'), {
