@@ -50,7 +50,6 @@ describe('ReviewForm', () => {
       const input = getByLabelText(label);
 
       fireEvent.change(input, { target: { value } });
-
     });
 
     expect(handleChange).toBeCalledTimes(2);

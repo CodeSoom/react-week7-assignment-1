@@ -87,8 +87,9 @@ describe('api', () => {
     beforeEach(() => {
       fetch.mockClear();
     });
+
     it('returns accessTocken', async () => {
-     await postReview({
+      await postReview({
         score: '4',
         description: '맛있네요',
         accessToken: 'ACCESSTOKEN',
