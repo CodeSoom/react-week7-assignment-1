@@ -19,6 +19,10 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     }));
   });
 
@@ -67,6 +71,14 @@ describe('RestaurantContainer', () => {
           payload: { name, value },
         });
       });
+    });
+
+    it('click "리뷰 남기기" button', () => {
+      const { getByText } = renderRestaurantContainer();
+
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(dispatch).toBeCalledTimes(2);
     });
   });
 
