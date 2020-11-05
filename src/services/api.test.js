@@ -69,15 +69,27 @@ describe('api', () => {
     });
   });
 
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch({});
+    });
+
+    it('returns added review', async () => {
+      const review = await postReview({});
+
+      expect(review).toEqual({});
+    });
+  });
+
   describe('fetchAccessToken', () => {
     beforeEach(() => {
-      mockFetch('');
+      mockFetch('TOKEN');
     });
 
     it('returns accessToken', async () => {
-      const restaurant = await fetchAccessToken({});
+      const accessToken = await fetchAccessToken({});
 
-      expect(restaurant).toEqual('');
+      expect(accessToken).toEqual('TOKEN');
     });
   });
 });
