@@ -126,6 +126,11 @@ export function requestLogin() {
   };
 }
 
+export function loadLoginStatus() {
+  // accessToken <= storage
+  // if exist => setAccessToken
+}
+
 export function sendReview() {
   return async (dispatch, getState) => {
     const {
@@ -143,8 +148,4 @@ export function sendReview() {
 
     dispatch(addReview(review));
   };
-}
-
-export function loadLoginStatus() {
-
 }

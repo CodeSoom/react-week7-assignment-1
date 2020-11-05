@@ -12,6 +12,7 @@ import {
   setRestaurant,
   requestLogin,
   sendReview,
+  loadLoginStatus,
 } from './actions';
 
 const middlewares = [thunk];
@@ -112,6 +113,25 @@ describe('actions', () => {
 
     it('dispatches setAccessToken', async () => {
       await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'setAccessToken',
+        payload: { accessToken: '' },
+      });
+    });
+  });
+
+  describe('loadLoginStatus', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: null,
+      });
+    });
+
+    it('dispatches setAccessToken', async () => {
+      await store.dispatch(loadLoginStatus());
 
       const actions = store.getActions();
 
