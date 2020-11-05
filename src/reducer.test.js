@@ -156,12 +156,20 @@ describe('reducer', () => {
   describe('logout', () => {
     it('changes accessToken', () => {
       const initialState = {
+        loginFields: {
+          email: 'test@test',
+          password: '1234',
+        },
         accessToken: 'ACCESS_TOKEN',
       };
 
       const state = reducer(initialState, logout());
 
       expect(state.accessToken).toBe('');
+      expect(state.loginFields).toStrictEqual({
+        email: '',
+        password: '',
+      });
     });
   });
 
