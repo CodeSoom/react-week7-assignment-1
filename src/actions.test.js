@@ -131,18 +131,36 @@ describe('actions', () => {
       store = mockStore({
         accessToken: null,
       });
-
-      loadItem.mockImplementation(() => 'ACCESS_TOKEN');
     });
 
-    it('dispatches setAccessToken', async () => {
-      await store.dispatch(loadLoginStatus());
+    context('when accessToken is in storage', () => {
+      beforeEach(() => {
+        loadItem.mockImplementation(() => 'ACCESS_TOKEN');
+      });
 
-      const actions = store.getActions();
+      it('dispatches setAccessToken', async () => {
+        await store.dispatch(loadLoginStatus());
 
-      expect(actions[0]).toEqual({
-        type: 'setAccessToken',
-        payload: { accessToken: 'ACCESS_TOKEN' },
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual({
+          type: 'setAccessToken',
+          payload: { accessToken: 'ACCESS_TOKEN' },
+        });
+      });
+    });
+
+    context('when accessToken is not in storage', () => {
+      beforeEach(() => {
+        loadItem.mockImplementation(() => null);
+      });
+
+      it('dispatches nothing', async () => {
+        await store.dispatch(loadLoginStatus());
+
+        const actions = store.getActions();
+
+        expect(actions).toEqual([]);
       });
     });
   });
