@@ -19,7 +19,15 @@ export default function ReviewFormContainer() {
     dispatch(changeReviewField({ name, value }));
   };
 
+  const handleSubmit = () => {
+    dispatch();
+  };
+
   return (
-    <ReviewForm fields={reviewFields} onChange={handleChange} />
+    <ReviewForm
+      fields={reviewFields}
+      onChange={handleChange}
+      onSubmit={handleSubmit}
+    />
   );
 }
