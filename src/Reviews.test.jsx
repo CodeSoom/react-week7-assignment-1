@@ -17,7 +17,7 @@ describe('Reviews', () => {
         },
       ];
 
-      const { container } = render(<Reviews Reviews={reviews} />);
+      const { container } = render(<Reviews reviews={reviews} />);
 
       expect(container).toHaveTextContent('테스터');
       expect(container).toHaveTextContent('3');
