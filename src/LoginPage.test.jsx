@@ -19,6 +19,12 @@ describe('<LoginPage />', () => {
     handleChange.mockClear();
   });
 
+  it('renders heading', () => {
+    const { getByRole } = renderLoginPage();
+
+    expect(getByRole('heading')).toHaveTextContent('Log In');
+  });
+
   it('renders email and password fields', () => {
     // When
     const { getByLabelText } = renderLoginPage();
