@@ -28,6 +28,7 @@ describe('App', () => {
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
       loginFields: {},
+      reviewFields: {},
     }));
   });
 
