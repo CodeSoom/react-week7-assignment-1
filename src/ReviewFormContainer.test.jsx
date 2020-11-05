@@ -24,14 +24,14 @@ describe('ReviewFormContainer', () => {
       <ReviewFormContainer />,
     );
 
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'tester@example.com' },
+    fireEvent.change(getByLabelText('평점'), {
+      target: { value: '3' },
     });
 
     expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
+      type: 'changeReviewField',
       payload: {
-        name: 'email',
+        name: 'rate',
         value: 'tester@example.com',
       },
     });
