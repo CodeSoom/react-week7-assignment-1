@@ -58,7 +58,7 @@ describe('LoginForm', () => {
   it('renders "Log In" button', () => {
     const { getByText } = renderLoginForm({});
 
-    fireEvent.click(getByText('로그인'));
+    fireEvent.click(getByText('Log In'));
 
     expect(handleSubmit).toBeCalled();
   });

@@ -51,7 +51,7 @@ describe('LoginFormContainer', () => {
 
       expect(getByLabelText('E-mail')).not.toBeNull();
       expect(getByLabelText('Password')).not.toBeNull();
-      expect(getByText('로그인')).not.toBeNull();
+      expect(getByText('Log In')).not.toBeNull();
     });
 
     it('listens change events', () => {
@@ -85,7 +85,7 @@ describe('LoginFormContainer', () => {
     it('listens click event', () => {
       const { getByText } = render(<LoginFormContainer />);
 
-      fireEvent.click(getByText('로그인'));
+      fireEvent.click(getByText('Log In'));
 
       expect(dispatch).toBeCalled();
     });
