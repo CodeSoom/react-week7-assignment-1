@@ -9,6 +9,7 @@ import {
   selectCategory,
   changeLoginField,
   changeReviewField,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -133,6 +134,16 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes accessToken', () => {
+      const state = reducer({
+        accessToken: '',
+      }, setAccessToken('ACCESS_TOKEN'));
+
+      expect(state.accessToken).toBe('ACCESS_TOKEN');
     });
   });
 
