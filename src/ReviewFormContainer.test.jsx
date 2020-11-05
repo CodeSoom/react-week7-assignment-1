@@ -57,7 +57,7 @@ describe('ReviewFormContainer', () => {
   });
 
   context('when logged out', () => {
-    given('accessToken', () => 'ACCESS_TOKEN');
+    given('accessToken', () => null);
 
     it('doesnt render review-form', () => {
       const { queryByText, queryByLabelText } = render(
