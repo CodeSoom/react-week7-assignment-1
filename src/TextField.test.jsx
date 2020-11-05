@@ -5,17 +5,32 @@ import { render } from '@testing-library/react';
 import TextField from './TextField';
 
 describe('TextField', () => {
-  it('renders label and input control', () => {
-    const handleChange = jest.fn();
+  const handleChange = jest.fn();
 
-    const { getByLabelText } = render(
+  function renderTextField(label, type, name) {
+    return render(
       <TextField
-        label="평점"
-        name="score"
+        label={label}
+        type={type}
+        name={name}
         onChange={handleChange}
       />,
     );
+  }
 
-    expect(getByLabelText('평점')).not.toBeNull();
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('renders label and input control', () => {
+    const inputTextFields = [
+      { label: '평점', type: 'number', name: 'score' },
+    ];
+
+    inputTextFields.forEach(({ label, type, name }) => {
+      const { getByLabelText } = renderTextField(label, type, name);
+
+      expect(getByLabelText(label)).not.toBeNull();
+    });
   });
 });
