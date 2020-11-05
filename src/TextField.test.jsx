@@ -25,6 +25,7 @@ describe('TextField', () => {
   it('renders label and input control', () => {
     const inputTextFields = [
       { label: '평점', type: 'number', name: 'score' },
+      { label: '리뷰 내용', type: 'text', name: 'description' },
     ];
 
     inputTextFields.forEach(({ label, type, name }) => {
