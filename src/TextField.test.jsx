@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import TextField from './TextField';
 
@@ -25,23 +25,13 @@ describe('TextField', () => {
     });
   });
 
-  // it('score change 이벤트가 발생하면 handleChange가 호출된다.', () => {
-  //   const { getByLabelText } = render(<TextField onChange={handleChange} />);
+  it('change 이벤트가 발생하면 handleChange가 호출된다.', () => {
+    const { getByLabelText } = render(<TextField type="number" label="평점" name="score" onChange={handleChange} />);
 
-  //   fireEvent.change(getByLabelText('평점'), {
-  //     target: { value: '5' },
-  //   });
+    fireEvent.change(getByLabelText('평점'), {
+      target: { value: '5' },
+    });
 
-  //   expect(handleChange).toBeCalled();
-  // });
-
-  // it('description change 이벤트가 발생하면 dispatch가 호출된다.', () => {
-  //   const { getByLabelText } = render(<TextField onChange={handleChange} />);
-
-  //   fireEvent.change(getByLabelText('리뷰 내용'), {
-  //     target: { value: '정말 최고 :)' },
-  //   });
-
-  //   expect(handleChange).toBeCalled();
-  // });
+    expect(handleChange).toBeCalled();
+  });
 });
