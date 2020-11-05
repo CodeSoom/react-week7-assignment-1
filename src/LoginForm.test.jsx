@@ -13,52 +13,64 @@ describe('LoginForm', () => {
     password: '',
   };
 
-  const renderLoginForm = () => render(
+  const renderLoginForm = (accessToken = '') => render(
 
     <LoginForm
       loginFields={loginFields}
       onSubmit={handleSubmit}
       onChange={handleChange}
+      accessToken={accessToken}
     />,
   );
 
-  it('renders input fields and Log In button', () => {
-    const { getByLabelText, getByText } = renderLoginForm();
+  context('without Log In', () => {
+    it('renders input fields and Log In button', () => {
+      const { getByLabelText, getByText } = renderLoginForm();
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
-    expect(getByText('Log In')).not.toBeNull();
+      expect(getByLabelText('E-mail')).not.toBeNull();
+      expect(getByLabelText('Password')).not.toBeNull();
+      expect(getByText('Log In')).not.toBeNull();
+    });
+
+    it('when Log In button click', () => {
+      const { getByText } = renderLoginForm();
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(handleSubmit).toBeCalled();
+    });
+
+    it('when change input fields', () => {
+      const { getByLabelText } = renderLoginForm();
+
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'tester@example.com' },
+      });
+
+      expect(handleChange).toBeCalledWith({
+        name: 'email',
+        value: 'tester@example.com',
+      });
+
+      fireEvent.change(getByLabelText('Password'), {
+        target: { value: '1234' },
+      });
+
+      expect(handleChange).toBeCalledWith({
+        name: 'password',
+        value: '1234',
+      });
+
+      expect(handleChange).toBeCalledTimes(2);
+    });
   });
 
-  it('when Log In button click', () => {
-    const { getByText } = renderLoginForm();
+  context('with Log In', () => {
+    it('renders "Log out" button', () => {
+      const accessToken = 'ACCESS_TOKEN';
+      const { container } = renderLoginForm(accessToken);
 
-    fireEvent.click(getByText('Log In'));
-
-    expect(handleSubmit).toBeCalled();
-  });
-
-  it('when change input fields', () => {
-    const { getByLabelText } = renderLoginForm();
-
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'tester@example.com' },
+      expect(container).toHaveTextContent('Log out');
     });
-
-    expect(handleChange).toBeCalledWith({
-      name: 'email',
-      value: 'tester@example.com',
-    });
-
-    fireEvent.change(getByLabelText('Password'), {
-      target: { value: '1234' },
-    });
-
-    expect(handleChange).toBeCalledWith({
-      name: 'password',
-      value: '1234',
-    });
-
-    expect(handleChange).toBeCalledTimes(2);
   });
 });
