@@ -10,8 +10,8 @@ import { useDispatch } from 'react-redux';
 
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
-import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
+import RestaurantsPage from './RestaurantsPage';
 import NotFoundPage from './NotFoundPage';
 import LoginPage from './LoginPage';
 
