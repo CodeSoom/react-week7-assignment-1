@@ -28,8 +28,20 @@ export async function fetchRestaurant({ restaurantId }) {
   return data;
 }
 
-export async function postReview() {
-  return {};
+export async function postReview({ accessToken, rate, description, restaurantId }) {
+  const url = `https://eatgo-customer-api.ahastudio.com/${restaurantId}/reviews`;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({ rate, description }),
+  });
+
+  const data = await response.json();
+
+  return data;
 }
 
 export async function fetchAccessToken({ email, password }) {
