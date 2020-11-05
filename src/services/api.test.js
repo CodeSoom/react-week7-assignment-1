@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   fetchAccessToken,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
