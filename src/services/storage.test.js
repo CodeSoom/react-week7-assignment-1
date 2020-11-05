@@ -1,16 +1,16 @@
-import { loadItem } from './storage'
+import { loadItem } from './storage';
 
 describe('storage', () => {
-  const getItem = jest.fn();
+  const getItem = jest.fn(() => 'item');
   const setItem = jest.fn();
 
   beforeEach(() => {
-    getItem.mockImplementation(() => 'item');
-
-    global.localStorage = { getItem, setItem };
+    Storage.prototype.getItem = getItem;
+    Storage.prototype.setItem = setItem;
   });
 
-  test('loadItem', () => {
+  it('loadItem', () => {
+
     expect(loadItem('key')).toBe('item');
   });
 });
