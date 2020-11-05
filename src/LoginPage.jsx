@@ -1,9 +1,8 @@
 import React from 'react';
 
-export default function LoginPage() {
+export function LoginFormContainer() {
   return (
     <div>
-      <h2>LogIn</h2>
       <div>
         <label htmlFor="login-email">
           E-mail
@@ -18,5 +17,14 @@ export default function LoginPage() {
       </div>
       <button type="button">로그인</button>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <>
+      <h2>LogIn</h2>
+      <LoginFormContainer />
+    </>
   );
 }
