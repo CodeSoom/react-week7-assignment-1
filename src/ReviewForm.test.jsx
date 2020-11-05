@@ -28,7 +28,7 @@ describe('ReviewForm', () => {
     expect(queryByText('리뷰 내용')).not.toBeNull();
   });
 
-  context('with review button is clicked', () => {
+  context('when review button is clicked', () => {
     it('calls handleSumbit', () => {
       const { getByText } = renderReviewForm();
 
