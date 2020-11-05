@@ -20,6 +20,11 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(changeReviewField({ name, value }));
   }
 
+  function handleSubmit() {
+    // TODO: implement it!
+    dispatch({});
+  }
+
   useEffect(() => {
     dispatch(loadRestaurant({ restaurantId }));
   }, []);
@@ -35,7 +40,10 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm onChange={handleChange} />
+      <ReviewForm
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
     </>
   );
 }
