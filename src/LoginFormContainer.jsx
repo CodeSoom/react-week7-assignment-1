@@ -13,11 +13,11 @@ import {
 
 import { get } from './utils';
 
-const fields = useSelector(get('loginFields'));
-const accessToken = useSelector(get('accessToken'));
-
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
+
+  const fields = useSelector(get('loginFields'));
+  const accessToken = useSelector(get('accessToken'));
 
   function handleSubmit() {
     dispatch(requestLogin());
