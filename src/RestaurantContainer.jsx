@@ -7,6 +7,7 @@ import ReviewForm from './ReviewForm';
 import {
   loadRestaurant,
   changeReviewField,
+  sendReview,
 } from './actions';
 
 import { get } from './utils';
@@ -30,10 +31,17 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(changeReviewField({ name, value }));
   };
 
+  const handleSubmit = () => {
+    dispatch(sendReview({ restaurantId }));
+  };
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm onChange={handleChange} />
+      <ReviewForm
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
     </>
   );
 }
