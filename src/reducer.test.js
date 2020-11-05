@@ -27,7 +27,7 @@ describe('reducer', () => {
         password: '',
       },
       setAccessToken: '',
-      reviewField: {
+      reviewFields: {
         score: '',
         description: '',
       },
@@ -192,7 +192,7 @@ describe('reducer', () => {
 
   describe('changeReviewField', () => {
     const initialState = {
-      reviewField: {
+      reviewFields: {
         score: '',
         description: '',
       },
@@ -201,7 +201,7 @@ describe('reducer', () => {
     it('changes score', () => {
       const state = reducer(initialState, changeReviewField({ name: 'score', value: '5' }));
 
-      expect(state.reviewField).toEqual({
+      expect(state.reviewFields).toEqual({
         score: '5',
         description: '',
       });
@@ -210,7 +210,7 @@ describe('reducer', () => {
     it('changes description', () => {
       const state = reducer(initialState, changeReviewField({ name: 'description', value: 'newDescription' }));
 
-      expect(state.reviewField).toEqual({
+      expect(state.reviewFields).toEqual({
         score: '',
         description: 'newDescription',
       });

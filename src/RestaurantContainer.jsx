@@ -75,7 +75,7 @@ export default function RestaurantContainer({ restaurantId }) {
       <RestaurantDetail restaurant={restaurant} />
       {accessToken ? (
         <ReviewForm
-          fields={reviewfields}
+          reviewfields={reviewfields}
           onChange={handleChangeReviewField}
           onSubmit={handleSubmit}
         />

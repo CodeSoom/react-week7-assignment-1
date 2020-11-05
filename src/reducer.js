@@ -12,7 +12,7 @@ const initialState = {
     password: '',
   },
   setAccessToken: '',
-  reviewField: {
+  reviewFields: {
     score: '',
     description: '',
   },
@@ -90,8 +90,8 @@ const reducers = {
   changeReviewField(state, { payload: { name, value } }) {
     return {
       ...state,
-      reviewField: {
-        ...state.reviewField,
+      reviewFields: {
+        ...state.reviewFields,
         [name]: value,
       },
     };
