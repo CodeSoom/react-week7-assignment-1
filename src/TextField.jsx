@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function TextField({
-  onChange, label, name, value, type = 'text',
+  onChange, label, name, textValue, type = 'text',
 }) {
   const id = `input-${name}`;
 
@@ -19,7 +19,7 @@ export default function TextField({
       <input
         type={type}
         id={id}
-        value={value}
+        value={textValue}
         onChange={handleChange}
       />
     </>

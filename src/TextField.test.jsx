@@ -17,7 +17,7 @@ describe('TextField', () => {
         <TextField
           label="E-mail"
           name="email"
-          value="test@test"
+          textValue="test@test"
           onChange={handleChange}
         />,
       );
@@ -52,7 +52,7 @@ describe('TextField', () => {
         <TextField
           label="E-mail"
           name="email"
-          value="test@test"
+          textValue="test@test"
           type="number"
           onChange={handleChange}
         />,
