@@ -9,6 +9,7 @@ export default function LoginPage({
 }) {
   return (
     <>
+      <h2>Log In</h2>
       <div>
         <InputField
           id="login-email"
