@@ -12,12 +12,6 @@ import RestaurantsPage from './pages/RestaurantsPage';
 import RestaurantPage from './pages/RestaurantPage';
 import NotFoundPage from './pages/NotFoundPage';
 
-// 로그인 서비스 구현
-/*
- *        [POST] https://eatgo-login-api.ahastudio.com/session
- *        Content-Type : application/json
- *        {"email": "", "password": ""}
- */
 // 로그인 액션, 리듀서 구현
 // 로그인 페이지 구현
 // 레스토랑 리뷰 컨테이너 구현
