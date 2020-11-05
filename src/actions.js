@@ -7,7 +7,10 @@ import {
   postReview,
 } from './services/api';
 
-import { loadItem } from './services/storage';
+import {
+  loadItem,
+  deleteItem,
+} from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -140,8 +143,8 @@ export function loadLoginStatus() {
 
 export function logout() {
   return (dispatch) => {
-    // deleteItem('accessToken');
-    // dispatch(setAccessToken(null));
+    deleteItem('accessToken');
+    dispatch(setAccessToken(null));
   };
 }
 
