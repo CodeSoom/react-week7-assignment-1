@@ -67,7 +67,7 @@ export function addReview(review) {
   return {
     type: 'addReview',
     payload: { review },
-  }
+  };
 }
 
 export function setAccessToken(token) {
@@ -133,13 +133,13 @@ export function sendReview() {
     // setReview(review)
     // if success, then loadRestaurant (to get reviews)
     const {
-      restaurant: { restaurantId },
+      restaurant: { id },
       reviewFields: { rate, description },
       accessToken,
     } = getState();
 
     const review = await postReview({
-      restaurantId,
+      restaurantId: id,
       rate,
       description,
       accessToken,
