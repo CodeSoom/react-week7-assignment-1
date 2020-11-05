@@ -8,13 +8,7 @@ describe('Reviews', () => {
   context('with reviews', () => {
     it('renders reviews', () => {
       const reviews = [
-        {
-          id: 1071,
-          restaurantId: 1,
-          name: '테스터',
-          score: 3,
-          description: '우와',
-        },
+        { name: '테스터', score: 3, description: '우와' },
       ];
 
       const { container } = render(<Reviews reviews={reviews} />);
