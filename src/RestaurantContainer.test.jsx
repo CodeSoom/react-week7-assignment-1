@@ -66,28 +66,31 @@ describe('RestaurantContainer', () => {
     expect(queryByText('리뷰 내용')).not.toBeNull();
   });
 
-  context('when review score and description is changed', () => {
-    it('calls dispatch', () => {
+  context('with review change event', () => {
+    it('dispatch changeReviewField', () => {
       given('restaurant', () => ({
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
       }));
 
-      const score = '5';
-      const description = '정말 최고!';
+      const inputs = [
+        { label: '평점', name: 'score', value: '5' },
+        { label: '리뷰 내용', name: 'description', value: '정말 최고!' },
+      ];
 
       const { getByLabelText } = renderRestaurantContainer();
 
-      fireEvent.change(getByLabelText('평점'), {
-        target: { value: score },
-      });
+      inputs.forEach(({ label, name, value }) => {
+        fireEvent.change(getByLabelText(label), {
+          target: { value },
+        });
 
-      fireEvent.change(getByLabelText('리뷰 내용'), {
-        target: { value: description },
+        expect(dispatch).toBeCalledWith({
+          type: 'changeReviewField',
+          payload: { name, value },
+        });
       });
-
-      expect(dispatch).toBeCalledTimes(3);
     });
   });
 });
