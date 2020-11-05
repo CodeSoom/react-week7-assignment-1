@@ -102,3 +102,11 @@ export function requestLogin() {
     dispatch(setAccessToken(accessToken));
   };
 }
+
+export function setEmail(email) {
+
+}
+
+export function setPassword(password) {
+
+}

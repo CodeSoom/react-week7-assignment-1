@@ -2,6 +2,7 @@ import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
 
+import { useDispatch, useSelector } from 'react-redux';
 import {
   loadInitialData,
   setRegions,
@@ -12,6 +13,8 @@ import {
   setRestaurant,
   requestLogin,
   setAccessToken,
+  setEmail,
+  setPassword,
 } from './actions';
 
 const middlewares = [thunk];
@@ -117,6 +120,46 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setAccessToken(''));
+    });
+  });
+
+  describe('setEmail', () => {
+    it('changes email', () => {
+      const dispatch = jest.fn();
+
+      useSelector.mockImplementation((selector) => selector({
+        email: '',
+      }));
+      useDispatch.mockImplementation(() => dispatch);
+
+      dispatch(setEmail('tester@example.com'));
+
+      expect(dispatch).toEqual({
+        type: 'setEmail',
+        payload: {
+          email: 'tester@example.com',
+        },
+      });
+    });
+  });
+
+  describe('setPassword', () => {
+    it('changes email', () => {
+      const dispatch = jest.fn();
+
+      useSelector.mockImplementation((selector) => selector({
+        password: '',
+      }));
+      useDispatch.mockImplementation(() => dispatch);
+
+      dispatch(setPassword('tester@example.com'));
+
+      expect(dispatch).toEqual({
+        type: 'setPassword',
+        payload: {
+          password: 'tester@example.com',
+        },
+      });
     });
   });
 });
