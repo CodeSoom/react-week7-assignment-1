@@ -33,7 +33,7 @@ describe('ReviewFormContainer', () => {
     expect(dispatch).toBeCalledWith({
       type: 'changeReviewField',
       payload: {
-        name: 'rate',
+        name: 'score',
         value: '3',
       },
     });

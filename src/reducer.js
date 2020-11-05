@@ -6,7 +6,7 @@ const initialLoginFields = {
 };
 
 const initialReviewFields = {
-  rate: 0,
+  score: 0,
   description: '',
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function ReviewForm({ fields, onChange, onSubmit }) {
-  const { rate, description } = fields;
+  const { score, description } = fields;
 
   const handleChange = (event) => {
     const { target: { name, value } } = event;
@@ -12,13 +12,13 @@ export default function ReviewForm({ fields, onChange, onSubmit }) {
   return (
     <>
       <div>
-        <label htmlFor="review-rate">
+        <label htmlFor="review-score">
           평점
           <input
-            id="review-rate"
-            value={rate}
+            id="review-score"
+            value={score}
             type="number"
-            name="rate"
+            name="score"
             onChange={handleChange}
           />
         </label>

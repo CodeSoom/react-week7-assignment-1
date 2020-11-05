@@ -134,13 +134,13 @@ export function sendReview() {
     // if success, then loadRestaurant (to get reviews)
     const {
       restaurant: { id },
-      reviewFields: { rate, description },
+      reviewFields: { score, description },
       accessToken,
     } = getState();
 
     const review = await postReview({
       restaurantId: id,
-      rate,
+      score,
       description,
       accessToken,
     });
