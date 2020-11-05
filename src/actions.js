@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -112,12 +113,19 @@ export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
 
-    try {
-      const accessToken = await postLogin({ email, password });
-      dispatch(setAccessToken(accessToken));
-    } catch (error) {
-      // TODO: error 처리
-      console.log(error);
-    }
+    const accessToken = await postLogin({ email, password });
+    dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { accessToken, reviewFields: { score, description } } = getState();
+
+    await postReview({
+      accessToken, score, description, restaurantId,
+    });
+
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }
