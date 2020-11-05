@@ -19,6 +19,7 @@ export default function TextField({
       <input
         type={type}
         id={id}
+        name={name}
         value={textValue}
         onChange={handleChange}
       />
