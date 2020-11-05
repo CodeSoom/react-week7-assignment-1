@@ -121,7 +121,8 @@ export function requestLogin() {
 export function sendReview() {
   return async (dispatch, getState) => {
     // rate, description <- state
-    // postReview -> status
+    // postReview -> review
+    // setReview(review)
     // if success, then loadRestaurant (to get reviews)
   };
 }
