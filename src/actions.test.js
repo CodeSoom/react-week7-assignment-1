@@ -145,7 +145,7 @@ describe('actions', () => {
     context('with reviewFields', () => {
       beforeEach(() => {
         store = mockStore({
-          reviewField: {
+          reviewFields: {
             score: '5',
             description: 'newDescription',
           },

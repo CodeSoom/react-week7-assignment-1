@@ -17,3 +17,7 @@ export async function fetchRestaurant() {
 export async function fetchAccessToken() {
   return null;
 }
+
+export async function postReview() {
+  return null;
+}
