@@ -1,6 +1,8 @@
 import React from 'react';
 
-export default function TextField({ label, name, value }) {
+export default function TextField({
+  label, name, value, type = 'text',
+}) {
   const id = `input-${name}`;
   return (
     <>
@@ -8,7 +10,7 @@ export default function TextField({ label, name, value }) {
         {label}
       </label>
       <input
-        type="number"
+        type={type}
         id={id}
         value={value}
       />
