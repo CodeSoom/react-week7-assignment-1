@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function TextField() {
+export default function TextField({ label }) {
   return (
     <>
       <label htmlFor="id">
-        E-mail
+        {label}
       </label>
       <input
         type="number"
