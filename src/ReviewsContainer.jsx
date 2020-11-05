@@ -2,22 +2,17 @@ import React from 'react';
 
 import { useSelector } from 'react-redux';
 
-import RestaurantDetail from './RestaurantDetail';
+import Reviews from './Reviews';
 
 import { get } from './utils';
 
 export default function ReviewsContainer() {
-  const restaurant = useSelector(get('restaurant'));
-
-  if (!restaurant) {
-    return (
-      <p>Loading...</p>
-    );
-  }
+  const { reviews } = useSelector(get('restaurant'));
 
   return (
-    <>
-      <RestaurantDetail restaurant={restaurant} />
-    </>
+    <div>
+      <h3>리뷰</h3>
+      <Reviews reviews={reviews} />
+    </div>
   );
 }

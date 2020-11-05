@@ -19,5 +19,5 @@ test('ReviewsContainer', () => {
     <ReviewsContainer />,
   );
 
-  expect(container).toHaveTextContent('테스트');
+  expect(container).toHaveTextContent('테스터');
 });
