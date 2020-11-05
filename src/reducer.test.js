@@ -10,7 +10,7 @@ import {
   changeLoginField,
   setAccessToken,
   logout,
-  changeReviewFields,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -199,7 +199,7 @@ describe('reducer', () => {
     };
 
     it('changes score', () => {
-      const state = reducer(initialState, changeReviewFields({ name: 'score', value: '5' }));
+      const state = reducer(initialState, changeReviewField({ name: 'score', value: '5' }));
 
       expect(state.reviewField).toEqual({
         score: '5',
@@ -208,7 +208,7 @@ describe('reducer', () => {
     });
 
     it('changes description', () => {
-      const state = reducer(initialState, changeReviewFields({ name: 'description', value: 'newDescription' }));
+      const state = reducer(initialState, changeReviewField({ name: 'description', value: 'newDescription' }));
 
       expect(state.reviewField).toEqual({
         score: '',
