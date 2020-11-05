@@ -24,8 +24,37 @@ describe('LoginFormContainer', () => {
     }));
   });
 
-  context('when inputs change', () => {
-    it('change inputs', () => {
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOCKEN');
+
+    it('renders "로그아웃" button', () => {
+      const { queryByText } = render(<LoginFormContainer />);
+
+      expect(queryByText('로그아웃')).not.toBeNull();
+    });
+
+    it('listens click event', () => {
+      const { getByText } = render(<LoginFormContainer />);
+
+      fireEvent.click(getByText('로그아웃'));
+
+      expect(dispatch).toBeCalledWith({ type: 'logout' });
+    });
+  });
+
+  context('when logged out', () => {
+    given('accessToken', () => '');
+
+    it('renders log in form', () => {
+      const { queryByLabelText, queryByText } = render(<LoginFormContainer />);
+
+      expect(queryByLabelText('E-mail')).not.toBeNull();
+      expect(queryByLabelText('Password')).not.toBeNull();
+
+      expect(queryByText('로그인')).not.toBeNull();
+    });
+
+    it('listens change events', () => {
       const { getByLabelText } = render(<LoginFormContainer />);
 
       const controls = [
@@ -45,10 +74,8 @@ describe('LoginFormContainer', () => {
         });
       });
     });
-  });
 
-  context('when "로그인" button clicked', () => {
-    it('occurs login dispatch', () => {
+    it('listens click event', () => {
       const { getByText } = render(<LoginFormContainer />);
 
       fireEvent.click(getByText('로그인'));
