@@ -71,6 +71,10 @@ const reducers = {
   logout(state) {
     return {
       ...state,
+      loginFields: {
+        email: '',
+        password: '',
+      },
       accessToken: '',
     };
   },
