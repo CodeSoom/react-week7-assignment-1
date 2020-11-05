@@ -67,19 +67,6 @@ describe('RestaurantContainer', () => {
     context('when logged in', () => {
       given('accessToken', () => 'ACCESSTOKEN');
 
-      const controls = [
-        {
-          label: '평점',
-          name: 'score',
-          value: '5',
-        },
-        {
-          label: '리뷰 내용',
-          name: 'description',
-          value: '구름이 두둥실 떠다니는 맛!',
-        },
-      ];
-
       it('renders review write form', () => {
         const { getByLabelText, getByText } = renderRestaurantContainer();
 
@@ -90,6 +77,19 @@ describe('RestaurantContainer', () => {
 
       it('listens change events', () => {
         const { getByLabelText } = renderRestaurantContainer();
+
+        const controls = [
+          {
+            label: '평점',
+            name: 'score',
+            value: '5',
+          },
+          {
+            label: '리뷰 내용',
+            name: 'description',
+            value: '구름이 두둥실 떠다니는 맛!',
+          },
+        ];
 
         controls.forEach(({ label, name, value }) => {
           const input = getByLabelText(label);
