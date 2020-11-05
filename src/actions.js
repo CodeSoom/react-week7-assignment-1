@@ -114,3 +114,9 @@ export function login() {
     dispatch(setAccessToken(accessToken));
   };
 }
+
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}
