@@ -170,4 +170,16 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('setAccessToken', () => {
+    it('changes access token', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, setAccessToken('ACCESSTOKEN'));
+
+      expect(state.accessToken).toEqual('ACCESSTOKEN');
+    });
+  });
 });
