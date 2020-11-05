@@ -197,5 +197,22 @@ describe('reducer', () => {
       expect(state.reviewField.score).toBe('5');
       expect(state.reviewField.description).toBe('description');
     });
+
+    it('change review description', () => {
+      const initialState = {
+        reviewField: {
+          score: 'score',
+          description: '',
+        },
+      };
+
+      const state = reducer(initialState, changeReviewField({
+        name: 'description',
+        value: '정말 최고!',
+      }));
+
+      expect(state.reviewField.score).toBe('score');
+      expect(state.reviewField.description).toBe('정말 최고!');
+    });
   });
 });
