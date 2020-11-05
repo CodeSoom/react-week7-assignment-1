@@ -66,6 +66,22 @@ describe('RestaurantContainer', () => {
     expect(queryByText('리뷰 내용')).not.toBeNull();
   });
 
+  context('when review button is clicked', () => {
+    it('calls dispatch', () => {
+      given('restaurant', () => ({
+        id: 1,
+        name: '마법사주방',
+        address: '서울시 강남구',
+      }));
+
+      const { getByText } = renderRestaurantContainer();
+
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(dispatch).toBeCalled();
+    });
+  });
+
   context('with review change event', () => {
     it('dispatch changeReviewField', () => {
       given('restaurant', () => ({
