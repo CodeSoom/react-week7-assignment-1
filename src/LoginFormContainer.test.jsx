@@ -29,9 +29,9 @@ describe('LoginFormContainer', () => {
     given('accessToken', () => 'ACCESS_TOCKEN');
 
     it('render log out button', () => {
-      const { getByText } = render(<LoginFormContainer />);
+      const { container } = render(<LoginFormContainer />);
 
-      expect(getByText('Log out')).not.toBeNull();
+      expect(container).toHaveTextContent('Log out');
     });
 
     it('listens click event', () => {
@@ -46,19 +46,6 @@ describe('LoginFormContainer', () => {
   context('when logged out', () => {
     given('accessToken', () => null);
 
-    const controls = [
-      {
-        label: 'E-mail',
-        name: 'email',
-        value: 'test',
-      },
-      {
-        label: 'Password',
-        name: 'password',
-        value: 'test',
-      },
-    ];
-
     it('renders log in form', () => {
       const { getByLabelText, getByText } = render(<LoginFormContainer />);
 
@@ -69,6 +56,19 @@ describe('LoginFormContainer', () => {
 
     it('listens change events', () => {
       const { getByLabelText } = render(<LoginFormContainer />);
+
+      const controls = [
+        {
+          label: 'E-mail',
+          name: 'email',
+          value: 'test',
+        },
+        {
+          label: 'Password',
+          name: 'password',
+          value: 'test',
+        },
+      ];
 
       controls.forEach(({ label, name, value }) => {
         const input = getByLabelText(label);
