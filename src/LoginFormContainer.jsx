@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeLoginField, requestLogin, setAccessToken } from './actions';
+import { changeLoginField, requestLogin, logout } from './actions';
 import { get } from './utils';
 import LoginForm from './LoginForm';
 import LogoutForm from './LogoutForm';
@@ -28,7 +28,7 @@ export default function LoginFormContainer() {
   }
 
   function handleClickLogout() {
-    dispatch(setAccessToken(''));
+    dispatch(logout());
   }
 
   return (
