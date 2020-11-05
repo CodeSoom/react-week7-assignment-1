@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render, fireEvent } from 'react-redux';
+import { render, fireEvent } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
