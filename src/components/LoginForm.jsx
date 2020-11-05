@@ -3,17 +3,17 @@ import React from 'react';
 import LoginInput from './LoginInput';
 
 export default function LoginForm({
-  id, password, onChangeId, onChangePassword, onClick,
+  email, password, onChangeEmail, onChangePassword, onClick,
 }) {
-  const loginAble = id && password;
+  const loginAble = email && password;
 
   return (
     <form>
       <LoginInput
         type="text"
-        placeholder="ID"
-        value={id}
-        onChange={onChangeId}
+        placeholder="EMAIL"
+        value={email}
+        onChange={onChangeEmail}
       />
       <LoginInput
         type="password"

@@ -15,7 +15,7 @@ export default function LoginContainer() {
   const email = useSelector(get('email'));
   const password = useSelector(get('password'));
 
-  function handleChangeId(value) {
+  function handleChangeEmail(value) {
     dispatch(setEmail(value));
   }
 
@@ -29,9 +29,9 @@ export default function LoginContainer() {
 
   return (
     <LoginForm
-      id={email}
+      email={email}
       password={password}
-      onChangeId={handleChangeId}
+      onChangeEmail={handleChangeEmail}
       onChangePassword={handleChangePassword}
       onClick={handleClick}
     />

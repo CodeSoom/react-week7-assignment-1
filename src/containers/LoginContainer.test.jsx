@@ -16,12 +16,12 @@ describe('LoginContainer', () => {
     }));
   });
 
-  context('when change id', () => {
+  context('when change email', () => {
     it('calls action setEmail', () => {
       render(<LoginContainer />);
 
       fireEvent.change(
-        screen.getByPlaceholderText('ID'),
+        screen.getByPlaceholderText('EMAIL'),
         { target: { value: 'test@test.com' } },
       );
 
@@ -45,7 +45,7 @@ describe('LoginContainer', () => {
   context('when click button', () => {
     it('calls action setUser', () => {
       useSelector.mockImplementation((selector) => selector({
-        email: 'id', password: 'password',
+        email: 'email', password: 'password',
       }));
 
       render(<LoginContainer />);

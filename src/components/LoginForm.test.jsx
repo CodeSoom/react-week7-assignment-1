@@ -8,21 +8,21 @@ beforeEach(() => {
 });
 
 describe('LoginForm', () => {
-  const handleChangeId = jest.fn();
+  const handleChangeEmail = jest.fn();
   const handleChangePassword = jest.fn();
   const handleClick = jest.fn();
 
-  const renderLogin = ({ id, password }) => render(
+  const renderLogin = ({ email, password }) => render(
     <LoginForm
-      id={id}
+      email={email}
       password={password}
-      onChangeId={handleChangeId}
+      onChangeEmail={handleChangeEmail}
       onChangePassword={handleChangePassword}
       onClick={handleClick}
     />,
   );
   context('with all fields', () => {
-    const renderFullField = () => renderLogin({ id: 'id', password: 'passowrd' });
+    const renderFullField = () => renderLogin({ email: 'email', password: 'passowrd' });
 
     it('all valid and clickable button', () => {
       renderFullField();
@@ -45,12 +45,12 @@ describe('LoginForm', () => {
   });
 
   context('without one field', () => {
-    const renderOnlyIdField = () => renderLogin({ id: 'id' });
+    const renderOnlyIdField = () => renderLogin({ email: 'email' });
 
     it('password field is invalid. disabled button', () => {
       renderOnlyIdField();
 
-      expect(screen.getByDisplayValue('id'))
+      expect(screen.getByDisplayValue('email'))
         .toHaveAttribute('aria-invalid', 'false');
       expect(screen.getByPlaceholderText('PASSWORD'))
         .toHaveAttribute('aria-invalid', 'true');
@@ -81,20 +81,20 @@ describe('LoginForm', () => {
   });
 
   context('when change input', () => {
-    it('called onChangeId', () => {
+    it('called onChangeEmail', () => {
       renderLogin({});
 
-      expect(handleChangeId).not.toBeCalled();
+      expect(handleChangeEmail).not.toBeCalled();
 
       fireEvent.change(
-        screen.getByPlaceholderText('ID'),
-        { target: { value: 'id' } },
+        screen.getByPlaceholderText('EMAIL'),
+        { target: { value: 'email' } },
       );
 
-      expect(handleChangeId).toBeCalled();
+      expect(handleChangeEmail).toBeCalled();
     });
 
-    it('called onChangeId', () => {
+    it('called onChangeEmail', () => {
       renderLogin({});
 
       expect(handleChangePassword).not.toBeCalled();
