@@ -31,8 +31,8 @@ export default function LoginFormContainer() {
         loginFields={{ email, password }}
         onSubmit={handleSubmit}
         onChange={handleChange}
+        accessToken={accessToken}
       />
-      <p>{accessToken}</p>
     </>
   );
 }

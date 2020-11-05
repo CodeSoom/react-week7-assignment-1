@@ -16,10 +16,11 @@ describe('LoginForm', () => {
   const renderLoginForm = (accessToken = '') => render(
 
     <LoginForm
+      accessToken={accessToken}
       loginFields={loginFields}
       onSubmit={handleSubmit}
       onChange={handleChange}
-      accessToken={accessToken}
+
     />,
   );
 
