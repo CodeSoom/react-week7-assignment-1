@@ -73,7 +73,7 @@ describe('LoginContainer', () => {
     it('calls request login action', () => {
       const { getByText } = renderLoginContainer();
 
-      fireEvent.click(getByText('Log In'));
+      fireEvent.submit(getByText('Log In'));
 
       expect(dispatch).toBeCalled();
     });

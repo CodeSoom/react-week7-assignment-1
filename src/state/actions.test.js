@@ -104,7 +104,12 @@ describe('actions', () => {
 
   describe('requestLogin', () => {
     beforeEach(() => {
-      store = mockStore({});
+      store = mockStore({
+        loginField: {
+          email: '',
+          password: '',
+        },
+      });
     });
 
     it('dispatchs requestLogin', async () => {

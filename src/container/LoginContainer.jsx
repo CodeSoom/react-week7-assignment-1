@@ -22,6 +22,7 @@ export default function LoginContainer() {
 
   function handleClickLoginButton(event) {
     event.preventDefault();
+
     dispatch(requestLogin());
   }
 
