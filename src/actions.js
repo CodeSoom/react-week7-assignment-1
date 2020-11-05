@@ -6,6 +6,7 @@ import {
   postLogin,
   postReview,
 } from './services/api';
+import { saveItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -115,7 +116,7 @@ export function requestLogin() {
 
     const accessToken = await postLogin({ email, password });
 
-    localStorage.setItem('accessToken', accessToken);
+    saveItem('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
   };
