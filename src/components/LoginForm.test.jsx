@@ -3,14 +3,16 @@ import { render, screen, fireEvent } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('LoginForm', () => {
   const handleChangeEmail = jest.fn();
   const handleChangePassword = jest.fn();
   const handleClick = jest.fn();
+
+  beforeEach(() => {
+    handleChangeEmail.mockClear();
+    handleChangePassword.mockClear();
+    handleClick.mockClear();
+  });
 
   const renderLogin = ({ email, password }) => render(
     <LoginForm
@@ -71,7 +73,7 @@ describe('LoginForm', () => {
 
   context('without all fields', () => {
     it('all field is invalid. disabled button', () => {
-      renderLogin({});
+      renderLogin({ email: '', password: '' });
 
       screen.getAllByRole('textbox').forEach((input) => {
         expect(input).toHaveAttribute('aria-invalid', 'true');
@@ -82,7 +84,7 @@ describe('LoginForm', () => {
 
   context('when change input', () => {
     it('called onChangeEmail', () => {
-      renderLogin({});
+      renderLogin({ email: '', password: '' });
 
       expect(handleChangeEmail).not.toBeCalled();
 
@@ -95,7 +97,7 @@ describe('LoginForm', () => {
     });
 
     it('called onChangeEmail', () => {
-      renderLogin({});
+      renderLogin({ email: '', password: '' });
 
       expect(handleChangePassword).not.toBeCalled();
 

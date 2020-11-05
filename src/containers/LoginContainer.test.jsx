@@ -9,14 +9,16 @@ describe('LoginContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
-
-    useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) => selector({
-      email: '', password: '',
-    }));
   });
 
-  context('when change email', () => {
+  context('when change fields', () => {
+    beforeEach(() => {
+      useDispatch.mockImplementation(() => dispatch);
+      useSelector.mockImplementation((selector) => selector({
+        email: '', password: '',
+      }));
+    });
+
     it('calls action setEmail', () => {
       render(<LoginContainer />);
 
@@ -27,9 +29,7 @@ describe('LoginContainer', () => {
 
       expect(dispatch).toBeCalled();
     });
-  });
 
-  context('when change password', () => {
     it('calls action setPassword', () => {
       render(<LoginContainer />);
 
@@ -43,11 +43,14 @@ describe('LoginContainer', () => {
   });
 
   context('when click button', () => {
-    it('calls action setUser', () => {
+    beforeEach(() => {
+      useDispatch.mockImplementation(() => dispatch);
       useSelector.mockImplementation((selector) => selector({
         email: 'email', password: 'password',
       }));
+    });
 
+    it('calls action setUser', () => {
       render(<LoginContainer />);
 
       fireEvent.click(screen.getByRole('button'));

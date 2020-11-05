@@ -14,13 +14,6 @@ import NotFoundPage from './pages/NotFoundPage';
 import LoginPage from './pages/LoginPage';
 
 // 레스토랑 리뷰 컨테이너 구현
-// 레스토랑 리뷰 서비스 구현
-/*
- *        [POST] https://eatgo-customer-api.ahastudio.com/restaurants/${restaurantId}/reviews
- *        Content-Type : application/json
- *        Authorization : Bearer ${key}
- *        {"score": 5, "description": ""}
- */
 // 레스토랑 리뷰 액션, 리듀서 구현
 // RestaurantPage에 레스토랑 리뷰 컨테이너 포함
 // 로그인 시에만 레스토랑 리뷰 기능이 보이도록 처리
