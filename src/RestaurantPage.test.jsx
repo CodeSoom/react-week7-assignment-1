@@ -55,5 +55,6 @@ describe('RestaurantPage', () => {
     );
 
     expect(queryByText('평점')).not.toBeNull();
+    expect(queryByText('리뷰 내용')).not.toBeNull();
   });
 });
