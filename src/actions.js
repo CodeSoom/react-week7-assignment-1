@@ -117,3 +117,11 @@ export function requestLogin() {
     dispatch(setAccessToken(accessToken));
   };
 }
+
+export function sendReview() {
+  return async (dispatch, getState) => {
+    // rate, description <- state
+    // postReview -> status
+    // if success, then loadRestaurant (to get reviews)
+  };
+}

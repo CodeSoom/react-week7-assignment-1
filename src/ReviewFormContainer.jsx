@@ -6,6 +6,7 @@ import ReviewForm from './ReviewForm';
 
 import {
   changeReviewField,
+  sendReview,
 } from './actions';
 
 import { get } from './utils';
@@ -20,7 +21,7 @@ export default function ReviewFormContainer() {
   };
 
   const handleSubmit = () => {
-    dispatch();
+    dispatch(sendReview());
   };
 
   return (
