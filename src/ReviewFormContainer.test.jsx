@@ -18,36 +18,54 @@ describe('ReviewFormContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       reviewFields: {},
+      accessToken: given.accessToken,
     }));
   });
 
-  it('renders input-controls', () => {
-    const { getByLabelText } = render(
-      <ReviewFormContainer />,
-    );
+  context('when logged-in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-    fireEvent.change(getByLabelText('평점'), {
-      target: { value: 3 },
+    it('renders input-controls', () => {
+      const { getByLabelText } = render(
+        <ReviewFormContainer />,
+      );
+
+      fireEvent.change(getByLabelText('평점'), {
+        target: { value: 3 },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeReviewField',
+        payload: {
+          name: 'score',
+          value: '3',
+        },
+      });
     });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeReviewField',
-      payload: {
-        name: 'score',
-        value: '3',
-      },
+    it('renders write-review button', () => {
+      const { queryByText, getByText } = render(
+        <ReviewFormContainer />,
+      );
+
+      expect(queryByText('리뷰 남기기')).not.toBeNull();
+
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(dispatch).toBeCalled();
     });
   });
 
-  it('renders write-review button', () => {
-    const { queryByText, getByText } = render(
-      <ReviewFormContainer />,
-    );
+  context('when logged out', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-    expect(queryByText('리뷰 남기기')).not.toBeNull();
+    it('doesnt render input-controls and button', () => {
+      const { queryByText, queryByLabelText } = render(
+        <ReviewFormContainer />,
+      );
 
-    fireEvent.click(getByText('리뷰 남기기'));
-
-    expect(dispatch).toBeCalled();
+      expect(queryByText('리뷰 남기기')).toBeNull();
+      expect(queryByLabelText('평점')).toBeNull();
+    });
   });
 });
