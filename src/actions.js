@@ -8,6 +8,7 @@ import {
 
 import {
   saveItem,
+  deleteItem,
 } from './services/storage';
 
 export function setRegions(regions) {
@@ -122,6 +123,8 @@ export function login() {
 }
 
 export function logout() {
+  deleteItem('accessToken');
+
   return {
     type: 'logout',
   };
