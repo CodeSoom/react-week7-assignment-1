@@ -111,7 +111,9 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken(''));
+      expect(actions).toEqual([
+        { type: 'setAccessToken', payload: { accessToken: '' } },
+      ]);
     });
   });
 });

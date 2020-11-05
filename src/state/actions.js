@@ -95,3 +95,13 @@ export function changeLoginField({ name, value }) {
     },
   };
 }
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const { loginField: { email, password } } = getState();
+
+    const accessToken = await postLogin({ email, password });
+
+    dispatch(setAccessToken(accessToken));
+  };
+}

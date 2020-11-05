@@ -132,32 +132,42 @@ describe('reducer', () => {
   });
 
   describe('changeLoginField', () => {
-    it('changes email loginField', () => {
-      const value = 'tester@example.com';
-      const initialState = {
-        loginField: {
-          email: '',
-          password: '',
-        },
-      };
+    context('when change email field', () => {
+      it('changes email loginField', () => {
+        const value = 'tester@example.com';
+        const initialState = {
+          loginField: {
+            email: '',
+            password: '',
+          },
+        };
 
-      const { loginField: { email } } = reducer(initialState, changeLoginField({ name: 'email', value }));
+        const { loginField: { email } } = reducer(
+          initialState,
+          changeLoginField({ name: 'email', value }),
+        );
 
-      expect(email).toEqual(value);
+        expect(email).toEqual(value);
+      });
     });
 
-    it('changes password loginField', () => {
-      const value = 'test';
-      const initialState = {
-        loginField: {
-          email: '',
-          password: '',
-        },
-      };
+    context('when change password field', () => {
+      it('changes password loginField', () => {
+        const value = 'test';
+        const initialState = {
+          loginField: {
+            email: '',
+            password: '',
+          },
+        };
 
-      const { loginField: { password } } = reducer(initialState, changeLoginField({ name: 'password', value }));
+        const { loginField: { password } } = reducer(
+          initialState,
+          changeLoginField({ name: 'password', value }),
+        );
 
-      expect(password).toEqual(value);
+        expect(password).toEqual(value);
+      });
     });
   });
 });

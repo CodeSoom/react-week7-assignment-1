@@ -14,10 +14,10 @@ export default function Input({
       </label>
       <input
         type={type}
-        name={name}
         id={id}
-        onChange={handleChange}
+        name={name}
         value={value}
+        onChange={handleChange}
       />
     </div>
   );
