@@ -5,6 +5,11 @@ const initialLoginFields = {
   password: '',
 };
 
+const initialReviewFields = {
+  rate: 0,
+  description: '',
+};
+
 const initialState = {
   regions: [],
   categories: [],
@@ -13,6 +18,7 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   loginFields: initialLoginFields,
+  reviewFields: initialReviewFields,
 };
 
 const reducers = {
