@@ -23,42 +23,38 @@ describe('LoginForm', () => {
     ));
   }
 
-  it('render email and password inputs and change them', () => {
-    const email = 'test@test.co.kr';
-    const password = '1234';
+  it('renders input controls', () => {
+    const email = 'tester@example.com';
+    const password = 'test';
 
     const { getByLabelText } = renderLoginForm({ email, password });
 
     const controls = [
-      {
-        label: 'E-mail',
-        name: 'email',
-        origin: email,
-        value: 'tester@example.com',
-      },
-      {
-        label: 'Password',
-        name: 'password',
-        origin: password,
-        value: 'test',
-      },
+      { label: 'E-mail', value: email },
+      { label: 'Password', value: password },
     ];
 
-    controls.forEach(({
-      label, name, origin, value,
-    }) => {
+    controls.forEach(({ label, value }) => {
       const input = getByLabelText(label);
 
-      expect(input.value).toBe(origin);
+      expect(input.value).toBe(value);
+    });
+  });
+
+  it('listens change events', () => {
+    const { getByLabelText } = renderLoginForm({});
+
+    const controls = [
+      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
+      { label: 'Password', name: 'password', value: 'test' },
+    ];
+
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
 
       fireEvent.change(input, { target: { value } });
 
       expect(handleChange).toBeCalledWith({ name, value });
-    });
-
-    expect(handleChange).toBeCalledWith({
-      name: 'password',
-      value: 'test',
     });
   });
 

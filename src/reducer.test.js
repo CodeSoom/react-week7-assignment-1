@@ -168,9 +168,9 @@ describe('reducer', () => {
         accessToken: '',
       };
 
-      const state = reducer(initialState, setAccessToken('SAMPLE_TOKEN'));
+      const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
 
-      expect(state.accessToken).toBe('SAMPLE_TOKEN');
+      expect(state.accessToken).toBe('ACCESS_TOKEN');
     });
   });
 });
