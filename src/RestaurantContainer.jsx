@@ -7,7 +7,7 @@ import RestaurantDetail from './RestaurantDetail';
 import {
   loadRestaurant,
   changeReviewField,
-  postReview,
+  sendReview,
 } from './actions';
 
 import { get } from './utils';
@@ -61,7 +61,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   function handleSubmit() {
-    dispatch(postReview({ restaurantId }));
+    dispatch(sendReview({ restaurantId }));
   }
 
   if (!restaurant) {

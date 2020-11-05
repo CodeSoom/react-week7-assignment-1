@@ -12,7 +12,7 @@ import {
   setRestaurant,
   login,
   setAccessToken,
-  postReview,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -141,7 +141,7 @@ describe('actions', () => {
     });
   });
 
-  describe('postReview', () => {
+  describe('sendReview', () => {
     context('with reviewFields', () => {
       beforeEach(() => {
         store = mockStore({
@@ -153,7 +153,7 @@ describe('actions', () => {
       });
 
       it('dispatchs setRestaurant', async () => {
-        await store.dispatch(postReview({ restaurantId: 1 }));
+        await store.dispatch(sendReview({ restaurantId: 1 }));
 
         const actions = store.getActions();
 
@@ -169,7 +169,7 @@ describe('actions', () => {
       });
 
       it("doesn't run any actions", async () => {
-        await store.dispatch(postReview({ restaurantId: 1 }));
+        await store.dispatch(sendReview({ restaurantId: 1 }));
 
         const actions = store.getActions();
 

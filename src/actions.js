@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   fetchAccessToken,
+  postReview,
 } from './services/api';
 
 import {
@@ -106,6 +107,13 @@ export function changeLoginField({ name, value }) {
   };
 }
 
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: { name, value },
+  };
+}
+
 export function login() {
   return async (dispatch, getState) => {
     const { loginFields } = getState();
@@ -127,5 +135,19 @@ export function logout() {
 
   return {
     type: 'logout',
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { reviewFields, accessToken } = getState();
+
+    if (!reviewFields) {
+      return;
+    }
+
+    await postReview({ accessToken, restaurantId, reviewFields });
+
+    dispatch(loadRestaurant(restaurantId));
   };
 }
