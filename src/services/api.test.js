@@ -84,19 +84,40 @@ describe('api', () => {
   });
 
   describe('postReview', () => {
-    beforeEach(() => {
-      mockFetch(null, 201);
-    });
-
-    it('returns status 201', async () => {
-      await postReview({
-        score: 5,
-        description: '매일 사먹는 제품입니다.',
-        accessToken: 'token',
-        restaurantId: 8,
+    context('when success', () => {
+      beforeEach(() => {
+        mockFetch(null, 201);
       });
 
-      expect(fetch).toBeCalled();
+      it('returns status 201', async () => {
+        await postReview({
+          score: 5,
+          description: '매일 사먹는 제품입니다.',
+          accessToken: 'token',
+          restaurantId: 8,
+        });
+
+        expect(fetch).toBeCalled();
+      });
+    });
+
+    context('when failed', () => {
+      beforeEach(() => {
+        mockFetch(null, 400);
+      });
+
+      it('returns status 400', async () => {
+        const catchFn = jest.fn();
+
+        await postReview({
+          score: 5,
+          description: '매일 사먹는 제품입니다.',
+          accessToken: 'token',
+          restaurantId: 8,
+        }).catch(catchFn);
+
+        expect(catchFn).toBeCalled();
+      });
     });
   });
 });
