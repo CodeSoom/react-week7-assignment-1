@@ -7,12 +7,18 @@ import ReviewForm from './ReviewForm';
 describe('ReviewForm', () => {
   const handleChange = jest.fn();
 
+  function renderReviewForm() {
+    return render(
+      <ReviewForm onChange={handleChange} />,
+    );
+  }
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it('renders review write form', () => {
-    const { queryByText } = render(<ReviewForm />);
+    const { queryByText } = renderReviewForm();
 
     expect(queryByText('평점')).not.toBeNull();
     expect(queryByText('리뷰 내용')).not.toBeNull();
@@ -25,7 +31,7 @@ describe('ReviewForm', () => {
         { label: '리뷰 내용', name: 'description', value: '정말 최고!' },
       ];
 
-      const { getByLabelText } = render(<ReviewForm onChange={handleChange} />);
+      const { getByLabelText } = renderReviewForm();
 
       inputs.forEach(({ label, name, value }) => {
         fireEvent.change(getByLabelText(label), {
