@@ -7,6 +7,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -123,6 +124,19 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        email: 'tester@example.com',
+        password: 'test',
+      };
+
+      const state = reducer(initialState, setAccessToken('token'));
+
+      expect(state.accessToken).toBe('token');
     });
   });
 });
