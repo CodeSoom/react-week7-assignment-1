@@ -105,7 +105,10 @@ describe('actions', () => {
 
   describe('requestLogin', () => {
     beforeEach(() => {
-      store = mockStore({});
+      store = mockStore({
+        email: 'tester@example.com',
+        password: 'test',
+      });
     });
 
     it('dispatches requestLogin', async () => {
