@@ -17,4 +17,9 @@ describe('storage', () => {
     saveItem('key', 'value');
     expect(setItem).toBeCalledWith('key', 'value');
   });
+
+  it('deleteItem', () => {
+    deleteItem('key');
+    expect(removeItem).toBeCalledWith('key');
+  });
 });
