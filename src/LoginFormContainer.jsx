@@ -25,7 +25,6 @@ export default function LoginFormContainer() {
   }
 
   return (
-
     <>
       <LoginForm
         loginFields={{ email, password }}

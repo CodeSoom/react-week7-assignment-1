@@ -3,10 +3,6 @@ import React from 'react';
 export default function LoginForm({
   accessToken, loginFields, onSubmit, onChange,
 }) {
-  function handleClick() {
-    onSubmit();
-  }
-
   function handleChange(event) {
     const { name, value } = event.target;
     onChange({ name, value });
@@ -17,7 +13,6 @@ export default function LoginForm({
       {
         accessToken ? (
           <button type="button">Log out</button>
-
         ) : (
           <>
             <div>
@@ -40,11 +35,10 @@ export default function LoginForm({
                 onChange={handleChange}
               />
             </div>
-            <button type="button" onClick={handleClick}>Log In</button>
+            <button type="button" onClick={onSubmit}>Log In</button>
           </>
         )
       }
-
     </div>
   );
 }

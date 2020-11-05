@@ -14,13 +14,11 @@ describe('LoginForm', () => {
   };
 
   const renderLoginForm = (accessToken = '') => render(
-
     <LoginForm
       accessToken={accessToken}
       loginFields={loginFields}
       onSubmit={handleSubmit}
       onChange={handleChange}
-
     />,
   );
 
@@ -33,7 +31,7 @@ describe('LoginForm', () => {
       expect(getByText('Log In')).not.toBeNull();
     });
 
-    it('when Log In button click', () => {
+    it('execute the Submit function', () => {
       const { getByText } = renderLoginForm();
 
       fireEvent.click(getByText('Log In'));
