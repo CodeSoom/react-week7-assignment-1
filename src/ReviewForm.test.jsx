@@ -35,7 +35,7 @@ describe('ReviewForm', () => {
       {
         label: '평점',
         name: 'score',
-        value: '5',
+        value: '4',
       },
       {
         label: '리뷰 내용',
@@ -45,14 +45,15 @@ describe('ReviewForm', () => {
     ];
 
     controls.forEach(({
-      label, name, value,
+      label, value,
     }) => {
       const input = getByLabelText(label);
 
       fireEvent.change(input, { target: { value } });
 
-      expect(handleChange).toBeCalledWith({ name, value });
     });
+
+    expect(handleChange).toBeCalledTimes(2);
   });
 
   it('renders review submit button', () => {
