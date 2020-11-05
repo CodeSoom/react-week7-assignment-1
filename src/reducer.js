@@ -19,6 +19,7 @@ const initialState = {
   selectedCategory: null,
   loginFields: initialLoginFields,
   reviewFields: initialReviewFields,
+  accessToken: null,
 };
 
 const reducers = {
