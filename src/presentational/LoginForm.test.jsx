@@ -2,7 +2,7 @@ import React from 'react';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import LoginForm from './. LoginForm';
+import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const inputLabels = ['E-mail', 'Password'];

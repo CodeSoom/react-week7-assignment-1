@@ -5,6 +5,11 @@ import Input from './Input';
 export default function LoginForm({
   email, password, onChange, onSubmit,
 }) {
+  function handleSubmit(event) {
+    event.preventDefault();
+    onSubmit();
+  }
+
   return (
     <form>
 
@@ -13,7 +18,7 @@ export default function LoginForm({
         name="email"
         type="email"
         value={email}
-        onChange={handleChangeLoginFields}
+        onChange={onChange}
       >
         E-mail
       </Input>
@@ -23,12 +28,12 @@ export default function LoginForm({
         name="password"
         type="password"
         value={password}
-        onChange={handleChangeLoginFields}
+        onChange={onChange}
       >
         Password
       </Input>
 
-      <button type="submit" onSubmit={handleClickLoginButton}>Log In</button>
+      <button type="submit" onSubmit={handleSubmit}>Log In</button>
     </form>
   );
 }

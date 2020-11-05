@@ -13,15 +13,14 @@ export default function LoginContainer() {
 
   const { loginField: { email, password } } = useSelector((state) => ({
     loginField: state.loginField,
+    accessToken: state.accessToken,
   }));
 
   function handleChangeLoginFields({ name, value }) {
     dispatch(changeLoginField({ name, value }));
   }
 
-  function handleClickLoginButton(event) {
-    event.preventDefault();
-
+  function handleSubmitLoginButton() {
     dispatch(requestLogin());
   }
 
@@ -30,7 +29,8 @@ export default function LoginContainer() {
       email={email}
       password={password}
       onChange={handleChangeLoginFields}
-      onSubmit={handleClickLoginButton}
+      onSubmit={handleSubmitLoginButton}
     />
+
   );
 }
