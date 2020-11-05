@@ -8,6 +8,8 @@ import {
   selectRegion,
   selectCategory,
   setAccessToken,
+  setEmail,
+  setPassword,
 } from './actions';
 
 describe('reducer', () => {
@@ -137,6 +139,30 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken('token'));
 
       expect(state.accessToken).toBe('token');
+    });
+  });
+
+  describe('setEmail', () => {
+    it('changes email', () => {
+      const initialState = {
+        email: '',
+      };
+
+      const state = reducer(initialState, setEmail('tester@example.com'));
+
+      expect(state.email).toBe('tester@example.com');
+    });
+  });
+
+  describe('setPassword', () => {
+    it('changes password', () => {
+      const initialState = {
+        password: '',
+      };
+
+      const state = reducer(initialState, setPassword('test'));
+
+      expect(state.password).toBe('test');
     });
   });
 });

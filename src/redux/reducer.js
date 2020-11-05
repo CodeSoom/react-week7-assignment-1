@@ -60,6 +60,20 @@ const reducers = {
       accessToken,
     };
   },
+
+  setEmail(state, { payload: { email } }) {
+    return {
+      ...state,
+      email,
+    };
+  },
+
+  setPassword(state, { payload: { password } }) {
+    return {
+      ...state,
+      password,
+    };
+  },
 };
 
 function defaultReducer(state) {
