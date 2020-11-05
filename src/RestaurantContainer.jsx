@@ -12,7 +12,15 @@ import { get } from './utils';
 
 function ReviewForm() {
   return (
-    <div>평점</div>
+    <div>
+      <label htmlFor="review-score">
+        평점
+      </label>
+      <input
+        type="text"
+        id="review-score"
+      />
+    </div>
   );
 }
 export default function RestaurantContainer({ restaurantId }) {
