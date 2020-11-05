@@ -42,7 +42,7 @@ describe('LoginForm', () => {
     });
   });
 
-  context('when input controls is changed', () => {
+  context('with input controls change event', () => {
     it('calls handleChange', () => {
       const inputs = [
         { label: 'E-mail', name: 'email', value: 'tester@example.com' },
@@ -52,9 +52,9 @@ describe('LoginForm', () => {
       const { getByLabelText } = renderLoginForm();
 
       inputs.forEach(({ label, name, value }) => {
-        const input = getByLabelText(label);
-
-        fireEvent.change(input, { target: { value } });
+        fireEvent.change(getByLabelText(label), {
+          target: { value },
+        });
 
         expect(handleChange).toBeCalledWith({ name, value });
       });
