@@ -19,13 +19,13 @@ describe('Reviews', () => {
     });
   });
 
-  // context('without menu item', () => {
-  //   it('renders no items message', () => {
-  //     [[], null, undefined].forEach((Reviews) => {
-  //       const { container } = render(<Reviews Reviews={Reviews} />);
+  context('without reviews', () => {
+    it('renders no-reviews message', () => {
+      [[], null, undefined].forEach((reviews) => {
+        const { container } = render(<Reviews reviews={reviews} />);
 
-  //       expect(container).toHaveTextContent('메뉴가 없어요');
-  //     });
-  //   });
-  // });
+        expect(container).toHaveTextContent('첫번째 리뷰를 남겨주세요');
+      });
+    });
+  });
 });
