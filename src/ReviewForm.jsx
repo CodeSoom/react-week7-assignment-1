@@ -2,7 +2,7 @@ import React from 'react';
 
 import TextField from './TextField';
 
-function ReviewForm({ onChange }) {
+function ReviewForm({ onChange, onSubmit }) {
   return (
     <>
       <TextField
@@ -16,6 +16,12 @@ function ReviewForm({ onChange }) {
         name="description"
         onChange={onChange}
       />
+      <button
+        type="button"
+        onClick={onSubmit}
+      >
+        리뷰 남기기
+      </button>
     </>
   );
 }
