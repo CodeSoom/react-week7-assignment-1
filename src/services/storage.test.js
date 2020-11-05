@@ -1,12 +1,14 @@
-import { loadItem, saveItem } from './storage';
+import { loadItem, saveItem, deleteItem } from './storage';
 
 describe('storage', () => {
   const getItem = jest.fn(() => 'item');
   const setItem = jest.fn();
+  const removeItem = jest.fn();
 
   beforeEach(() => {
     Storage.prototype.getItem = getItem;
     Storage.prototype.setItem = setItem;
+    Storage.prototype.removeItem = removeItem;
   });
 
   it('loadItem', () => {

@@ -7,4 +7,5 @@ export function saveItem(key, value) {
 }
 
 export function deleteItem(key) {
+  localStorage.removeItem(key);
 }
