@@ -17,58 +17,83 @@ describe('LoginFormContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       loginFields: given.loginFields,
+      accessToken: given.accessToken,
     }));
   });
 
   const renderLoginPage = () => render(<LoginFormContainer />);
 
-  context('without error', () => {
-    given('loginFields', () => ({
-      email: 'tester@example.com',
-      password: 'test',
-    }));
+  context('when logged out', () => {
+    given('accessToken', () => '');
+    context('without isError', () => {
+      given('loginFields', () => ({
+        email: 'tester@example.com',
+        password: 'test',
+      }));
+      it('renders input controls', () => {
+        const { getByLabelText } = renderLoginPage();
 
-    it('renders input controls', () => {
-      const { getByLabelText } = renderLoginPage();
-
-      expect(getByLabelText('E-mail').value).toBe('tester@example.com');
-      expect(getByLabelText('Password').value).toBe('test');
-    });
-
-    it('listens change event input controls', () => {
-      const { getByLabelText } = renderLoginPage();
-
-      fireEvent.change(getByLabelText('E-mail'), {
-        target: { value: 'new email' },
+        expect(getByLabelText('E-mail').value).toBe('tester@example.com');
+        expect(getByLabelText('Password').value).toBe('test');
       });
 
-      expect(dispatch).toBeCalledWith({
-        type: 'changeLoginField',
-        payload: { name: 'email', value: 'new email' },
+      it('listens change event input controls', () => {
+        const { getByLabelText } = renderLoginPage();
+
+        fireEvent.change(getByLabelText('E-mail'), {
+          target: { value: 'new email' },
+        });
+
+        expect(dispatch).toBeCalledWith({
+          type: 'changeLoginField',
+          payload: { name: 'email', value: 'new email' },
+        });
+      });
+
+      it('renders "Log In" button', () => {
+        const { getByText } = renderLoginPage();
+
+        fireEvent.click(getByText('Log In'));
+
+        expect(dispatch).toBeCalledTimes(1);
       });
     });
 
-    it('renders "Log In" button', () => {
-      const { getByText } = renderLoginPage();
+    context('with isError', () => {
+      given('loginFields', () => ({
+        email: '',
+        password: 'test',
+      }));
 
-      fireEvent.click(getByText('Log In'));
+      it('Click "Log In" button nothing happen', () => {
+        const { getByText } = renderLoginPage();
 
-      expect(dispatch).toBeCalledTimes(1);
+        fireEvent.click(getByText('Log In'));
+
+        expect(dispatch).not.toBeCalled();
+      });
     });
   });
 
-  context('with error', () => {
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
     given('loginFields', () => ({
       email: '',
-      password: 'test',
+      password: '',
     }));
 
-    it('Click "Log In" button nothing happen', () => {
+    it('renders "Log out" button', () => {
+      const { container } = renderLoginPage();
+
+      expect(container).toHaveTextContent('Log out');
+    });
+
+    it('Click "Log In" button event', () => {
       const { getByText } = renderLoginPage();
 
-      fireEvent.click(getByText('Log In'));
+      fireEvent.click(getByText('Log out'));
 
-      expect(dispatch).not.toBeCalled();
+      expect(dispatch).toBeCalledWith({ type: 'logout' });
     });
   });
 });
