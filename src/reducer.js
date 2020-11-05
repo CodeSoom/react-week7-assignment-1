@@ -66,10 +66,10 @@ const reducers = {
     };
   },
 
-  setAccessToken({ state }) {
+  setAccessToken(state, { payload: { accessToken } }) {
     return {
       ...state,
-      accessToken: 'ACCESS_TOKEN',
+      accessToken,
     };
   },
 
