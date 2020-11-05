@@ -1,10 +1,16 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import TextField from './TextField';
 
 describe('TextField', () => {
+  const handleChange = jest.fn();
+
+  beforeEach(() => {
+    handleChange.mockClear();
+  });
+
   context('without type', () => {
     function renderTextField() {
       return render(
@@ -12,6 +18,7 @@ describe('TextField', () => {
           label="E-mail"
           name="email"
           value="test@test"
+          onChange={handleChange}
         />,
       );
     }
@@ -27,6 +34,16 @@ describe('TextField', () => {
 
       expect(container).toContainHTML('type="text"');
     });
+
+    it('listen change events', () => {
+      const { getByLabelText } = renderTextField();
+
+      const input = getByLabelText('E-mail');
+
+      fireEvent.change(input, { target: { value: 'test@test.com' } });
+
+      expect(handleChange).toBeCalled();
+    });
   });
 
   context('with type', () => {
@@ -37,6 +54,7 @@ describe('TextField', () => {
           name="email"
           value="test@test"
           type="number"
+          onChange={handleChange}
         />,
       );
     }
@@ -51,6 +69,16 @@ describe('TextField', () => {
       const { container } = renderTextField();
 
       expect(container).toContainHTML('type="number"');
+    });
+
+    it('listen change events', () => {
+      const { getByLabelText } = renderTextField();
+
+      const input = getByLabelText('E-mail');
+
+      fireEvent.change(input, { target: { value: 'test@test.com' } });
+
+      expect(handleChange).toBeCalled();
     });
   });
 });
