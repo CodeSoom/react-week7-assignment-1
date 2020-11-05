@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import { render, fireEvent } from '@testing-library/react';
 
 import ReviewFormContainer from './ReviewFormContainer';
@@ -7,15 +9,15 @@ import ReviewFormContainer from './ReviewFormContainer';
 jest.mock('react-redux');
 
 describe('ReviewFormContainer', () => {
-  // const dispatch = jest.fn();
+  const dispatch = jest.fn();
 
-  // beforeEach(() => {
-  //   useDispatch.mockImplementation(() => dispatch);
+  beforeEach(() => {
+    useDispatch.mockImplementation(() => dispatch);
 
-  //   useSelector.mockImplementation((selector) => selector({
-  //     reviewFields: {},
-  //   }));
-  // });
+    useSelector.mockImplementation((selector) => selector({
+      reviewFields: {},
+    }));
+  });
 
   it('renders input-controls', () => {
     const { queryByLabelText } = render(

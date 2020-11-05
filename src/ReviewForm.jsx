@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LoginForm({ fields, onChange, onSubmit }) {
+export default function ReviewForm({ fields, onChange, onSubmit }) {
   const { rate, description } = fields;
 
   const handleChange = (event) => {
