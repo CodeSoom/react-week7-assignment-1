@@ -59,7 +59,7 @@ describe('ReviewFormContainer', () => {
   context('when logged out', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
 
-    it('doesnt render input-controls and button', () => {
+    it('doesnt render review-form', () => {
       const { queryByText, queryByLabelText } = render(
         <ReviewFormContainer />,
       );
