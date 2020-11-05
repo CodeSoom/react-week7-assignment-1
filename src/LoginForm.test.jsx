@@ -9,7 +9,7 @@ describe('LoginForm', () => {
 
   it('renders input controls and listens change events', () => {
     const { getByLabelText } = render((
-      <LoginForm />
+      <LoginForm onChange={handleChange} />
     ));
 
     expect(getByLabelText('E-mail')).not.toBeNull();
