@@ -13,9 +13,9 @@ describe('Reviews', () => {
 
       const { container } = render(<Reviews reviews={reviews} />);
 
-      expect(container).toHaveTextContent('테스터');
-      expect(container).toHaveTextContent('3');
-      expect(container).toHaveTextContent('우와');
+      ['테스터', '3', '우와'].forEach((text) => {
+        expect(container).toHaveTextContent(text);
+      });
     });
   });
 
