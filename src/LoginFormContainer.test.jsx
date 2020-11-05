@@ -51,24 +51,25 @@ describe('LoginFormContainer', () => {
     });
   });
 
-  context('when input controls is changed', () => {
-    it('calls dispatch', () => {
+  context('with input controls change event', () => {
+    it('dispatch changeLoginField', () => {
       const inputs = [
-        { label: 'E-mail', value: 'test@test.com' },
-        { label: 'password', value: '1234' },
+        { label: 'E-mail', name: 'email', value: 'test@test.com' },
+        { label: 'password', name: 'password', value: '1234' },
       ];
 
       const { getByLabelText } = renderLoginFormContainer();
 
-      inputs.forEach(({ label, value }) => {
-        const input = getByLabelText(label);
-
-        fireEvent.change(input, {
+      inputs.forEach(({ label, name, value }) => {
+        fireEvent.change(getByLabelText(label), {
           target: { value },
         });
-      });
 
-      expect(dispatch).toBeCalledTimes(inputs.length);
+        expect(dispatch).toBeCalledWith({
+          type: 'changeLoginField',
+          payload: { name, value },
+        });
+      });
     });
   });
 });
