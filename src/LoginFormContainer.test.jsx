@@ -1,15 +1,49 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { render, fireEvent } from '@testing-library/react';
 
 import LoginFormContainer from './LoginFormContainer';
 
-describe('LoginFormContainer', () => {
-  it('renders LoginFormContainer', () => {
-    const { container } = render(<LoginFormContainer />);
+jest.mock('react-redux');
 
-    expect(container).toHaveTextContent('E-mail');
-    expect(container).toHaveTextContent('Password');
-    expect(container).toHaveTextContent('로그인');
+describe('LoginFormContainer', () => {
+  const dispatch = jest.fn();
+
+  beforeEach(() => {
+    dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: '',
+        password: '',
+      },
+    }));
+  });
+
+  context('when inputs change', () => {
+    it('change inputs', () => {
+      const { getByLabelText } = render(<LoginFormContainer />);
+
+      const controls = [
+        { label: 'E-mail', name: 'email', value: 'newEmail' },
+        { label: 'Password', name: 'password', value: 'newPassword' },
+      ];
+
+      controls.forEach((control) => {
+        const { label, name, value } = control;
+        fireEvent.change(getByLabelText(label), {
+          target: { value },
+        });
+
+        expect(dispatch).toBeCalledWith({
+          type: 'changeLoginField',
+          payload: { name, value },
+        });
+      });
+    });
   });
 });
