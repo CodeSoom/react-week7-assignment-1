@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   changeLoginField,
   login,
+  logout,
 } from './actions';
 
 import { get } from './utils';
@@ -14,6 +15,7 @@ export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
   const loginFields = useSelector(get('loginFields'));
+  const accessToken = useSelector(get('accessToken'));
 
   function handleChangeLoginField(event) {
     const { target: { name, value } } = event;
@@ -24,13 +26,28 @@ export default function LoginFormContainer() {
     dispatch(login());
   }
 
+  function handleClickLogout() {
+    dispatch(logout());
+  }
+
+  function LogoutForm({ onClick }) {
+    return (
+      <button type="button" onClick={onClick}>
+        로그아웃
+      </button>
+    );
+  }
+
   return (
     <>
-      <LoginForm
-        loginFields={loginFields}
-        onChange={handleChangeLoginField}
-        onSubmit={handleSubmit}
-      />
+      { accessToken ? (<LogoutForm onClick={handleClickLogout} />)
+        : (
+          <LoginForm
+            loginFields={loginFields}
+            onChange={handleChangeLoginField}
+            onSubmit={handleSubmit}
+          />
+        )}
     </>
   );
 }

@@ -21,6 +21,7 @@ describe('LoginFormContainer', () => {
         email: '',
         password: '',
       },
+      accessToken: given.accessToken,
     }));
   });
 
