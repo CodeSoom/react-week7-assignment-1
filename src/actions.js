@@ -138,6 +138,13 @@ export function loadLoginStatus() {
   };
 }
 
+export function logout() {
+  return (dispatch) => {
+    // deleteItem('accessToken');
+    // dispatch(setAccessToken(null));
+  };
+}
+
 export function sendReview() {
   return async (dispatch, getState) => {
     const {
