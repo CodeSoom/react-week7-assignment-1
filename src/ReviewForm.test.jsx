@@ -25,7 +25,7 @@ describe('ReviewForm', () => {
     );
   }
 
-  it('renders review input controls', () => {
+  it('renders review write fields', () => {
     const score = '5';
     const description = '맛있어요!';
 
