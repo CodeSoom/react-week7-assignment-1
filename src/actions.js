@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   fetchAccessToken,
+  postReview,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -60,6 +61,13 @@ export function changeReviewField({ name, value }) {
     type: 'changeReviewField',
     payload: { name, value },
   };
+}
+
+export function addReview(review) {
+  return {
+    type: 'addReview',
+    payload: { review },
+  }
 }
 
 export function setAccessToken(token) {
@@ -124,5 +132,13 @@ export function sendReview() {
     // postReview -> review
     // setReview(review)
     // if success, then loadRestaurant (to get reviews)
+    const {
+      reviewFields: { rate, description },
+      accessToken,
+    } = getState();
+
+    const review = await postReview({ rate, description, accessToken });
+
+    dispatch(addReview(review));
   };
 }

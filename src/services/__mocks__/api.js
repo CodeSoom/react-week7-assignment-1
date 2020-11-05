@@ -14,6 +14,10 @@ export async function fetchRestaurant() {
   return {};
 }
 
+export async function postReview() {
+  return {};
+}
+
 export async function fetchAccessToken() {
   return '';
 }
