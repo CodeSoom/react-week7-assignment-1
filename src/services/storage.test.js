@@ -1,4 +1,4 @@
-import { loadItem } from './storage';
+import { loadItem, saveItem } from './storage';
 
 describe('storage', () => {
   const getItem = jest.fn(() => 'item');
@@ -12,5 +12,10 @@ describe('storage', () => {
   it('loadItem', () => {
 
     expect(loadItem('key')).toBe('item');
+  });
+
+  it('saveItem', () => {
+    saveItem('key', 'value');
+    expect(setItem).toBeCalledWith('key', 'value');
   });
 });
