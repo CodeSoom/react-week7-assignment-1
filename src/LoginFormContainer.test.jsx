@@ -46,4 +46,14 @@ describe('LoginFormContainer', () => {
       });
     });
   });
+
+  context('when "로그인" button clicked', () => {
+    it('occurs login dispatch', () => {
+      const { getByText } = render(<LoginFormContainer />);
+
+      fireEvent.click(getByText('로그인'));
+
+      expect(dispatch).toBeCalled();
+    });
+  });
 });
