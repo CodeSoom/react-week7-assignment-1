@@ -40,7 +40,6 @@ export async function postLogin({ email, password }) {
   });
 
   const { accessToken } = await response.json();
-  console.log(accessToken);
 
   return accessToken;
 }
