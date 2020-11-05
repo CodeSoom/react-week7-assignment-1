@@ -7,15 +7,21 @@ import LoginPage from './LoginPage';
 describe('<LoginPage />', () => {
   const handleChange = jest.fn();
 
+  const renderLoginPage = () => render((
+    <LoginPage
+      email="test@test.com"
+      password="test"
+      onChange={handleChange}
+    />
+  ));
+
+  beforeEach(() => {
+    handleChange.mockClear();
+  });
+
   it('renders email and password fields', () => {
     // When
-    const { getByLabelText } = render((
-      <LoginPage
-        email="test@test.com"
-        password="test"
-        onChange={handleChange}
-      />
-    ));
+    const { getByLabelText } = renderLoginPage();
 
     // Then
     expect(getByLabelText('E-mail')).toBeInTheDocument();
@@ -26,14 +32,14 @@ describe('<LoginPage />', () => {
 
   it('renders log in button', () => {
     // When
-    const { getByRole } = render(<LoginPage />);
+    const { getByRole } = renderLoginPage();
 
     // Then
     expect(getByRole('button')).toHaveTextContent('Log In');
   });
 
   it('call onChange', () => {
-    const { getAllByRole } = render(<LoginPage onChange={handleChange} />);
+    const { getAllByRole } = renderLoginPage();
 
     const inputs = getAllByRole('textbox');
     inputs.forEach((input) => {
