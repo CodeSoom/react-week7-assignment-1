@@ -8,15 +8,6 @@ import LoginFormContainer from './LoginFormContainer';
 
 jest.mock('react-redux');
 
-const mockPush = jest.fn();
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useHistory() {
-    return { push: mockPush };
-  },
-}));
-
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
@@ -51,14 +42,6 @@ describe('LoginFormContainer', () => {
   });
 
   it('renders login button', () => {
-    const { queryByText } = render(
-      <LoginFormContainer />,
-    );
-
-    expect(queryByText('Log In')).not.toBeNull();
-  });
-
-  it('listens click event', () => {
     const { getByText } = render(
       <LoginFormContainer />,
     );
@@ -66,6 +49,5 @@ describe('LoginFormContainer', () => {
     fireEvent.click(getByText('Log In'));
 
     expect(dispatch).toBeCalled();
-    expect(mockPush).toBeCalledWith('/');
   });
 });
