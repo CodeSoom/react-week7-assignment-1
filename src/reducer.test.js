@@ -162,4 +162,36 @@ describe('reducer', () => {
       expect(state.loginFields.email).toBe('email');
     });
   });
+
+  describe('changeReviewField', () => {
+    it('changes rate', () => {
+      const reviewFields = {
+        rate: 'rate',
+        description: 'description',
+      };
+
+      const state = reducer({ reviewFields }, changeReviewField({
+        name: 'rate',
+        value: '4',
+      }));
+
+      expect(state.reviewFields.rate).toBe('4');
+      expect(state.reviewFields.description).toBe('description');
+    });
+
+  //   it('changes password', () => {
+  //     const reviewFields = {
+  //       email: 'email',
+  //       password: 'password',
+  //     };
+
+  //     const state = reducer({ reviewFields }, changeReviewField({
+  //       name: 'password',
+  //       value: 'new',
+  //     }));
+
+  //     expect(state.reviewFields.password).toBe('new');
+  //     expect(state.reviewFields.email).toBe('email');
+  //   });
+  });
 });
