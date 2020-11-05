@@ -84,16 +84,16 @@ describe('RestaurantContainer', () => {
 
   context('with review change event', () => {
     it('dispatch changeReviewField', () => {
+      const inputs = [
+        { label: '평점', name: 'score', value: '5' },
+        { label: '리뷰 내용', name: 'description', value: '정말 최고!' },
+      ];
+
       given('restaurant', () => ({
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
       }));
-
-      const inputs = [
-        { label: '평점', name: 'score', value: '5' },
-        { label: '리뷰 내용', name: 'description', value: '정말 최고!' },
-      ];
 
       const { getByLabelText } = renderRestaurantContainer();
 
