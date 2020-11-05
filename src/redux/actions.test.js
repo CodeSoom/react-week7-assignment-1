@@ -134,11 +134,11 @@ describe('actions', () => {
 
       dispatch(setEmail('tester@example.com'));
 
-      expect(dispatch).toEqual({
-        type: 'setEmail',
+      expect(dispatch).toBeCalledWith({
         payload: {
           email: 'tester@example.com',
         },
+        type: 'setEmail',
       });
     });
   });
@@ -154,11 +154,11 @@ describe('actions', () => {
 
       dispatch(setPassword('tester@example.com'));
 
-      expect(dispatch).toEqual({
-        type: 'setPassword',
+      expect(dispatch).toBeCalledWith({
         payload: {
           password: 'tester@example.com',
         },
+        type: 'setPassword',
       });
     });
   });

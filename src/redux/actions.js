@@ -104,9 +104,15 @@ export function requestLogin() {
 }
 
 export function setEmail(email) {
-
+  return {
+    type: 'setEmail',
+    payload: { email },
+  };
 }
 
 export function setPassword(password) {
-
+  return {
+    type: 'setPassword',
+    payload: { password },
+  };
 }
