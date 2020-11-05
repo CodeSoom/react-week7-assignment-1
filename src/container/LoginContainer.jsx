@@ -2,12 +2,11 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import Input from 'presentational/Input';
-
 import {
   changeLoginField,
   requestLogin,
 } from 'state/actions';
+import LoginForm from '../presentational/LoginForm';
 
 export default function LoginContainer() {
   const dispatch = useDispatch();
@@ -27,29 +26,11 @@ export default function LoginContainer() {
   }
 
   return (
-    <form>
-
-      <Input
-        id="login-email"
-        name="email"
-        type="email"
-        value={email}
-        onChange={handleChangeLoginFields}
-      >
-        E-mail
-      </Input>
-
-      <Input
-        id="login-password"
-        name="password"
-        type="password"
-        value={password}
-        onChange={handleChangeLoginFields}
-      >
-        Password
-      </Input>
-
-      <button type="submit" onSubmit={handleClickLoginButton}>Log In</button>
-    </form>
+    <LoginForm
+      email={email}
+      password={password}
+      onChange={handleChangeLoginFields}
+      onSubmit={handleClickLoginButton}
+    />
   );
 }
