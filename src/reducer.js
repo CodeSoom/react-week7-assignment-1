@@ -66,6 +66,13 @@ const reducers = {
     };
   },
 
+  setAccessToken({ state }) {
+    return {
+      ...state,
+      accessToken: 'ACCESS_TOKEN',
+    };
+  },
+
   changeLoginField(state, { payload: { name, value } }) {
     const { loginFields } = state;
     return {
