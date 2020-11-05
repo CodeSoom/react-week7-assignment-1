@@ -20,23 +20,21 @@ describe('ReviewFormContainer', () => {
   });
 
   it('renders input-controls', () => {
-    const { queryByLabelText } = render(
+    const { getByLabelText } = render(
       <ReviewFormContainer />,
     );
 
-    expect(queryByLabelText('평점')).not.toBeNull();
+    fireEvent.change(getByLabelText('E-mail'), {
+      target: { value: 'tester@example.com' },
+    });
 
-    // fireEvent.change(getByLabelText('E-mail'), {
-    //   target: { value: 'tester@example.com' },
-    // });
-
-    // expect(dispatch).toBeCalledWith({
-    //   type: 'changeLoginField',
-    //   payload: {
-    //     name: 'email',
-    //     value: 'tester@example.com',
-    //   },
-    // });
+    expect(dispatch).toBeCalledWith({
+      type: 'changeLoginField',
+      payload: {
+        name: 'email',
+        value: 'tester@example.com',
+      },
+    });
   });
 
   it('renders write-review button', () => {
