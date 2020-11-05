@@ -12,6 +12,8 @@ describe('ReviewFormContainer', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
+    dispatch.mockClear();
+
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
@@ -46,6 +48,6 @@ describe('ReviewFormContainer', () => {
 
     fireEvent.click(getByText('리뷰 남기기'));
 
-    // expect(dispatch).toBeCalled();
+    expect(dispatch).toBeCalled();
   });
 });
