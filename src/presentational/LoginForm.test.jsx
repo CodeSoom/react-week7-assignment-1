@@ -8,13 +8,13 @@ describe('LoginForm', () => {
   const inputLabels = ['E-mail', 'Password'];
 
   const handleChange = jest.fn();
-  const handelSubmit = jest.fn();
+  const handleClick = jest.fn();
 
   const renderLoginForm = () => render(
     <LoginForm
       email="xxx@xxx.com"
       password="test"
-      onSubmit={handelSubmit}
+      onClick={handleClick}
       onChange={handleChange}
     />,
   );
@@ -53,9 +53,9 @@ describe('LoginForm', () => {
     it('calls request login action', () => {
       const { getByText } = renderLoginForm();
 
-      fireEvent.submit(getByText('Log In'));
+      fireEvent.click(getByText('Log In'));
 
-      expect(handelSubmit).toBeCalled();
+      expect(handleClick).toBeCalled();
     });
   });
 });

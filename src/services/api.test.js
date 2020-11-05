@@ -71,7 +71,9 @@ describe('api', () => {
 
   describe('postLogin', () => {
     beforeEach(() => {
-      mockFetch('ACCESSTOKEN');
+      mockFetch({
+        accessToken: 'ACCESSTOKEN',
+      });
     });
 
     it('returns accessToken', async () => {
