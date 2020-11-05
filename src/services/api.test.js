@@ -84,13 +84,13 @@ describe('api', () => {
 
   describe('fetchAccessToken', () => {
     beforeEach(() => {
-      mockFetch('TOKEN');
+      mockFetch({ accessToken: 'ACCESS_TOKEN' });
     });
 
     it('returns accessToken', async () => {
       const accessToken = await fetchAccessToken({});
 
-      expect(accessToken).toEqual('TOKEN');
+      expect(accessToken).toEqual('ACCESS_TOKEN');
     });
   });
 });

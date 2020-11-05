@@ -56,7 +56,7 @@ export async function fetchAccessToken({ email, password }) {
     body: JSON.stringify({ email, password }),
   });
 
-  const data = await response.json();
+  const { accessToken } = await response.json();
 
-  return data;
+  return accessToken;
 }
