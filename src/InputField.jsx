@@ -5,6 +5,7 @@ export default function InputField({
   label,
   type,
   name,
+  value,
   onChange,
 }) {
   const inputId = `input-field-${id}`;
@@ -18,6 +19,7 @@ export default function InputField({
         id={inputId}
         type={type}
         name={name}
+        value={value}
         onChange={onChange}
       />
     </>
