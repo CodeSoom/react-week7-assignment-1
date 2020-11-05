@@ -7,6 +7,8 @@ import {
   postReview,
 } from './services/api';
 
+import { loadItem } from './services/storage';
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -127,8 +129,13 @@ export function requestLogin() {
 }
 
 export function loadLoginStatus() {
-  // accessToken <= storage
-  // if exist => setAccessToken
+  return (dispatch) => {
+    const accessToken = loadItem('accessToken');
+
+    if (accessToken) {
+      dispatch(setAccessToken(accessToken));
+    }
+  };
 }
 
 export function sendReview() {

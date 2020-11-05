@@ -2,6 +2,8 @@ import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
 
+import { loadItem } from './services/storage';
+
 import {
   loadInitialData,
   setRegions,
@@ -19,6 +21,7 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/storage');
 
 describe('actions', () => {
   let store;
@@ -128,6 +131,8 @@ describe('actions', () => {
       store = mockStore({
         accessToken: null,
       });
+
+      loadItem.mockImplementation(() => 'ACCESS_TOKEN');
     });
 
     it('dispatches setAccessToken', async () => {
@@ -137,7 +142,7 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual({
         type: 'setAccessToken',
-        payload: { accessToken: '' },
+        payload: { accessToken: 'ACCESS_TOKEN' },
       });
     });
   });
