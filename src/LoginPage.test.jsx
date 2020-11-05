@@ -9,11 +9,19 @@ describe('<LoginPage />', () => {
 
   it('renders email and password fields', () => {
     // When
-    const { getByLabelText } = render(<LoginPage />);
+    const { getByLabelText } = render((
+      <LoginPage
+        email="test@test.com"
+        password="test"
+        onChange={handleChange}
+      />
+    ));
 
     // Then
     expect(getByLabelText('E-mail')).toBeInTheDocument();
+    expect(getByLabelText('E-mail')).toHaveValue('test@test.com');
     expect(getByLabelText('Password')).toBeInTheDocument();
+    expect(getByLabelText('Password')).toHaveValue('test');
   });
 
   it('renders log in button', () => {
