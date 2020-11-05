@@ -7,6 +7,7 @@ import LoginForm from './LoginForm';
 import {
   requestLogin,
   changeLoginField,
+  setAccessToken,
 } from './actions';
 
 import { get } from './utils';
@@ -25,9 +26,13 @@ export default function LoginFormContainer() {
     dispatch(changeLoginField({ name, value }));
   };
 
+  const handleClickLogOut = () => {
+    dispatch(setAccessToken(null));
+  };
+
   if (isLoggedIn) {
     return (
-      <button type="button">
+      <button type="button" onClick={handleClickLogOut}>
         Log out
       </button>
     );
