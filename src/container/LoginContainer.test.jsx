@@ -31,14 +31,6 @@ describe('LoginContainer', () => {
     jest.clearAllMocks();
   });
 
-  it('render login form ', () => {
-    const { getByLabelText } = renderLoginContainer();
-
-    inputLabels.forEach((label) => {
-      expect(getByLabelText(label)).not.toBeNull();
-    });
-  });
-
   context('when login fields change', () => {
     it('render changed value in input from state', () => {
       useSelector.mockImplementation((selector) => selector({
