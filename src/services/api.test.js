@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -82,6 +83,17 @@ describe('api', () => {
       });
 
       expect(accessToken).toEqual(TOKEN.accessToken);
+    });
+  });
+
+  describe('postReview', () => {
+    it('create review', async () => {
+      await postReview({
+        accessToken: TOKEN.accessToken,
+        description: 'GOOD!',
+        restaurantId: 1,
+        score: '5',
+      });
     });
   });
 });
