@@ -11,43 +11,68 @@ jest.mock('react-redux');
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
+  const mockState = (state = {}) => {
+    useSelector.mockImplementation((selector) => selector(state));
+  };
+
   beforeEach(() => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
-
-    useSelector.mockImplementation((selector) => selector({
-      loginFields: {},
-    }));
   });
 
-  it('renders input-controls', () => {
-    const { queryByLabelText, getByLabelText } = render(
-      <LoginFormContainer />,
-    );
-
-    expect(queryByLabelText('E-mail')).not.toBeNull();
-
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'tester@example.com' },
+  context('when logged-out', () => {
+    beforeEach(() => {
+      mockState({
+        loginFields: {},
+        accessToken: null,
+      });
     });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: {
-        name: 'email',
-        value: 'tester@example.com',
-      },
+    it('renders input-controls', () => {
+      const { queryByLabelText, getByLabelText } = render(
+        <LoginFormContainer />,
+      );
+
+      expect(queryByLabelText('E-mail')).not.toBeNull();
+
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'tester@example.com' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: {
+          name: 'email',
+          value: 'tester@example.com',
+        },
+      });
+    });
+
+    it('renders login button', () => {
+      const { getByText } = render(
+        <LoginFormContainer />,
+      );
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalled();
     });
   });
 
-  it('renders login button', () => {
-    const { getByText } = render(
-      <LoginFormContainer />,
-    );
+  context('when logged-in', () => {
+    beforeEach(() => {
+      mockState({
+        accessToken: 'ACCESS_TOKEN',
+      });
+    });
 
-    fireEvent.click(getByText('Log In'));
+    it('renders log-out button', () => {
+      const { getByText } = render(
+        <LoginFormContainer />,
+      );
 
-    expect(dispatch).toBeCalled();
+      fireEvent.click(getByText('Log out'));
+    });
   });
 });
