@@ -148,3 +148,7 @@ export function sendReview() {
     dispatch(addReview(review));
   };
 }
+
+export function loadLoginStatus() {
+
+}
