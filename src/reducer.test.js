@@ -167,7 +167,7 @@ describe('reducer', () => {
   describe('changeReviewField', () => {
     const initialState = {
       reviewFields: {
-        rate: 'rate',
+        rate: 'same',
         description: 'same',
       },
     };
@@ -185,21 +185,19 @@ describe('reducer', () => {
         expect(state.reviewFields.description).toBe('same');
       });
     });
-    
 
-  //   it('changes password', () => {
-  //     const reviewFields = {
-  //       email: 'email',
-  //       password: 'password',
-  //     };
+    context('when changing field is description', () => {
+      const action = changeReviewField({
+        name: 'description',
+        value: '맛있네요',
+      });
 
-  //     const state = reducer({ reviewFields }, changeReviewField({
-  //       name: 'password',
-  //       value: 'new',
-  //     }));
+      it('changes description and does not change rate', () => {
+        const state = reducer(initialState, action);
 
-  //     expect(state.reviewFields.password).toBe('new');
-  //     expect(state.reviewFields.email).toBe('email');
-  //   });
+        expect(state.reviewFields.description).toBe('맛있네요');
+        expect(state.reviewFields.rate).toBe('same');
+      });
+    });
   });
 });
