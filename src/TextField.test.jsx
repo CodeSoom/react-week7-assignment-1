@@ -9,13 +9,15 @@ describe('TextField', () => {
     return render(
       <TextField
         label="E-mail"
+        name="email"
+        value="test@test"
       />,
     );
   }
 
-  it('renders text field', () => {
+  it('renders label and input control', () => {
     const { getByLabelText } = renderTextField();
 
-    expect(getByLabelText('E-mail'));
+    expect(getByLabelText('E-mail')).not.toBeNull();
   });
 });
