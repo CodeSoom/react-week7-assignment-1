@@ -15,8 +15,6 @@ import { get } from './utils';
 
 export default function LoginFormContainer() {
   const loginFields = useSelector(get('loginFields'));
-  // TODO: deletethis
-  const accessToken = useSelector(get('accessToken'));
 
   const history = useHistory();
 
@@ -32,15 +30,10 @@ export default function LoginFormContainer() {
   };
 
   return (
-    <>
-      <p>
-        {accessToken || 'not logged in'}
-      </p>
-      <LoginForm
-        fields={loginFields}
-        onSubmit={handleSubmit}
-        onChange={handleChange}
-      />
-    </>
+    <LoginForm
+      fields={loginFields}
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+    />
   );
 }
