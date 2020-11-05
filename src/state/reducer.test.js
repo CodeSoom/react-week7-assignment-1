@@ -8,6 +8,7 @@ import {
   changeLoginField,
   selectRegion,
   selectCategory,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
