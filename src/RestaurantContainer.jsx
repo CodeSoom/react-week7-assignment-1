@@ -20,6 +20,13 @@ function ReviewForm() {
         type="text"
         id="review-score"
       />
+      <label htmlFor="review-description">
+        리뷰 내용
+      </label>
+      <input
+        type="text"
+        id="review-description"
+      />
     </div>
   );
 }
