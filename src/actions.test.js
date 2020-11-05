@@ -12,6 +12,7 @@ import {
   setRestaurant,
   requestLogin,
   setAccessToken,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -119,6 +120,27 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setAccessToken({}));
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+        reviewFields: {
+          score: '5',
+          description: 'GOOD!',
+        },
+      });
+    });
+
+    it('dispatchs loadRestaurant', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
 });
