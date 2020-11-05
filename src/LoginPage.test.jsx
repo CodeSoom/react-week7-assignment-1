@@ -17,6 +17,7 @@ describe('LoginPage', () => {
         email: 'tester',
         password: '',
       },
+      accessToken: given.accessToken,
     }));
   });
 
@@ -26,11 +27,23 @@ describe('LoginPage', () => {
     </MemoryRouter>,
   );
 
-  it('renders input field', () => {
-    const { container, getByLabelText } = renderLoginPage();
+  context('without Log In', () => {
+    it('renders input field', () => {
+      const { container, getByLabelText } = renderLoginPage();
 
-    expect(container).toHaveTextContent('Log In');
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+      expect(container).toHaveTextContent('Log In');
+      expect(getByLabelText('E-mail')).not.toBeNull();
+      expect(getByLabelText('Password')).not.toBeNull();
+    });
+  });
+
+  context('with Log In', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
+
+    it('renders "Log out" button', () => {
+      const { container } = renderLoginPage();
+
+      expect(container).toHaveTextContent('Log out');
+    });
   });
 });
