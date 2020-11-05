@@ -38,7 +38,7 @@ export async function postReview({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${accessToken}`,
     },
-    body: JSON.stringify({ rate: score, description }),
+    body: JSON.stringify({ score, description }),
   });
 
   const data = await response.json();
