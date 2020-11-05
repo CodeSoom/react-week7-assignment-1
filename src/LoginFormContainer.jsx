@@ -13,6 +13,9 @@ import {
 
 import { get } from './utils';
 
+const fields = useSelector(get('loginFields'));
+const accessToken = useSelector(get('accessToken'));
+
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
@@ -27,9 +30,6 @@ export default function LoginFormContainer() {
   function handleClickLogout() {
     dispatch(logout());
   }
-
-  const fields = useSelector(get('loginFields'));
-  const accessToken = useSelector(get('accessToken'));
 
   return (
     <>
