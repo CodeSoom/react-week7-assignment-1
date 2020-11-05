@@ -165,20 +165,27 @@ describe('reducer', () => {
   });
 
   describe('changeReviewField', () => {
-    it('changes rate', () => {
-      const reviewFields = {
+    const initialState = {
+      reviewFields: {
         rate: 'rate',
-        description: 'description',
-      };
+        description: 'same',
+      },
+    };
 
-      const state = reducer({ reviewFields }, changeReviewField({
+    context('when changing field is rate', () => {
+      const action = changeReviewField({
         name: 'rate',
         value: '4',
-      }));
+      });
 
-      expect(state.reviewFields.rate).toBe('4');
-      expect(state.reviewFields.description).toBe('description');
+      it('changes rate and does not change description', () => {
+        const state = reducer(initialState, action);
+
+        expect(state.reviewFields.rate).toBe('4');
+        expect(state.reviewFields.description).toBe('same');
+      });
     });
+    
 
   //   it('changes password', () => {
   //     const reviewFields = {
