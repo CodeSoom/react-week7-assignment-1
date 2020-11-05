@@ -19,6 +19,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      accessToken: given.accessToken,
       reviewFields: {
         score: '',
         description: '',
@@ -32,12 +33,22 @@ describe('RestaurantContainer', () => {
     expect(dispatch).toBeCalled();
   });
 
-  context('with restaurant', () => {
+  context('without logged-in', () => {
+    it('renders no review write form', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
+
+      expect(queryByLabelText('평점')).toBeNull();
+      expect(queryByLabelText('리뷰 내용')).toBeNull();
+    });
+  });
+
+  context('with logged in', () => {
     given('restaurant', () => ({
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
     }));
+    given('accessToken', () => 'ACCESS_TOKEN');
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
