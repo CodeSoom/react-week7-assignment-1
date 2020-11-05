@@ -12,6 +12,7 @@ describe('LoginPage', () => {
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
       loginFields: {},
+      accessToken: null,
     }));
   });
 

@@ -13,6 +13,7 @@ import { get } from './utils';
 
 export default function LoginFormContainer() {
   const loginFields = useSelector(get('loginFields'));
+  const isLoggedIn = useSelector(get('accessToken')) !== null;
 
   const dispatch = useDispatch();
 
@@ -23,6 +24,14 @@ export default function LoginFormContainer() {
   const handleChange = ({ name, value }) => {
     dispatch(changeLoginField({ name, value }));
   };
+
+  if (isLoggedIn) {
+    return (
+      <button type="button">
+        Log out
+      </button>
+    );
+  }
 
   return (
     <LoginForm
