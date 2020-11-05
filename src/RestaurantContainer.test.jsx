@@ -53,9 +53,9 @@ describe('RestaurantContainer', () => {
     });
 
     it('renders reviews', () => {
-      const { queryByLabelText } = renderRestaurantContainer();
+      const { container } = renderRestaurantContainer();
 
-      expect(queryByLabelText('테스터')).not.toBeNull();
+      expect(container).toHaveTextContent('테스터');
     });
   });
 
