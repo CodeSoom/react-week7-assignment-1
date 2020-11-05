@@ -10,7 +10,12 @@ import {
 
 import { get } from './utils';
 
-function ReviewForm() {
+function ReviewForm({ onChange }) {
+  function handleChange(event) {
+    const { target: { name, value } } = event;
+
+    onChange({ name, value });
+  }
   return (
     <>
       <div>
@@ -20,6 +25,8 @@ function ReviewForm() {
         <input
           type="number"
           id="review-score"
+          name="score"
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -29,6 +36,8 @@ function ReviewForm() {
         <input
           type="text"
           id="review-description"
+          name="description"
+          onChange={handleChange}
         />
       </div>
     </>
@@ -36,6 +45,10 @@ function ReviewForm() {
 }
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
+
+  function handleChange({ name, value }) {
+    dispatch({});
+  }
 
   useEffect(() => {
     dispatch(loadRestaurant({ restaurantId }));
@@ -52,7 +65,7 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm />
+      <ReviewForm onChange={handleChange} />
     </>
   );
 }
