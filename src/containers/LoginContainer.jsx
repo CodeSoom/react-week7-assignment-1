@@ -4,18 +4,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { get } from '../utils';
 import LoginForm from '../components/LoginForm';
 import {
-  setId,
+  setEmail,
   setPassword,
-  setUser,
+  requestLogin,
 } from '../redux/actions';
 
 export default function LoginContainer() {
   const dispatch = useDispatch();
 
-  const { id, password } = useSelector(get('user'));
+  const email = useSelector(get('email'));
+  const password = useSelector(get('password'));
 
   function handleChangeId(value) {
-    dispatch(setId(value));
+    dispatch(setEmail(value));
   }
 
   function handleChangePassword(value) {
@@ -23,12 +24,12 @@ export default function LoginContainer() {
   }
 
   function handleClick() {
-    dispatch(setUser());
+    dispatch(requestLogin());
   }
 
   return (
     <LoginForm
-      id={id}
+      id={email}
       password={password}
       onChangeId={handleChangeId}
       onChangePassword={handleChangePassword}

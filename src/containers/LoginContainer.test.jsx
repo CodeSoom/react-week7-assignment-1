@@ -4,20 +4,20 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginContainer from './LoginContainer';
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('LoginContainer', () => {
   const dispatch = jest.fn();
 
-  context('when change id', () => {
-    it('calls action setId', () => {
-      useDispatch.mockImplementation(() => dispatch);
-      useSelector.mockImplementation((selector) => selector({
-        login: { id: '', password: '' },
-      }));
+  beforeEach(() => {
+    dispatch.mockClear();
 
+    useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      email: '', password: '',
+    }));
+  });
+
+  context('when change id', () => {
+    it('calls action setEmail', () => {
       render(<LoginContainer />);
 
       fireEvent.change(
@@ -25,17 +25,12 @@ describe('LoginContainer', () => {
         { target: { value: 'test@test.com' } },
       );
 
-      expect(dispatch).toEqual({ type: 'setId', payload: 'test@test.com' });
+      expect(dispatch).toBeCalled();
     });
   });
 
   context('when change password', () => {
     it('calls action setPassword', () => {
-      useDispatch.mockImplementation(() => dispatch);
-      useSelector.mockImplementation((selector) => selector({
-        login: { id: '', password: '' },
-      }));
-
       render(<LoginContainer />);
 
       fireEvent.change(
@@ -43,22 +38,21 @@ describe('LoginContainer', () => {
         { target: { value: 'password' } },
       );
 
-      expect(dispatch).toEqual({ type: 'setPassword', payload: 'password' });
+      expect(dispatch).toBeCalled();
     });
   });
 
   context('when click button', () => {
     it('calls action setUser', () => {
-      useDispatch.mockImplementation(() => dispatch);
       useSelector.mockImplementation((selector) => selector({
-        login: { id: 'test@test.com', password: 'password' },
+        email: 'id', password: 'password',
       }));
 
       render(<LoginContainer />);
 
       fireEvent.click(screen.getByRole('button'));
 
-      expect(dispatch).toEqual({ type: 'setUser' });
+      expect(dispatch).toBeCalled();
     });
   });
 });
