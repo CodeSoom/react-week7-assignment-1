@@ -26,7 +26,7 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
-      setAccessToken: '',
+      accessToken: '',
       reviewFields: {
         score: '',
         description: '',

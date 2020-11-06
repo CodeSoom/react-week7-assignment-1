@@ -11,7 +11,7 @@ const initialState = {
     email: '',
     password: '',
   },
-  setAccessToken: '',
+  accessToken: '',
   reviewFields: {
     score: '',
     description: '',
