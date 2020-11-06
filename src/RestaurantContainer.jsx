@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
 import ReviewForm from './ReviewForm';
+import Reviews from './Reviews';
 
 import {
   loadRestaurant,
@@ -12,32 +13,6 @@ import {
 } from './actions';
 
 import { get } from './utils';
-
-function Reviews({ reviews }) {
-  return (
-    <>
-      <h3>리뷰</h3>
-      <ul>
-        {reviews.map(({
-          id, name, score, description,
-        }) => (
-          <li key={id}>
-            <p>
-              {name}
-            </p>
-            <p>
-              {score}
-              점
-            </p>
-            <p>
-              {description}
-            </p>
-          </li>
-        ))}
-      </ul>
-    </>
-  );
-}
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
