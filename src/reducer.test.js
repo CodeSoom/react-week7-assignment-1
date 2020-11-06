@@ -9,6 +9,8 @@ import {
   selectCategory,
   changeLoginField,
   setAccessToken,
+  changeReviewField,
+  logout,
 } from './actions';
 
 describe('reducer', () => {
@@ -23,6 +25,10 @@ describe('reducer', () => {
       loginFields: {
         email: '',
         password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
       },
       accessToken: '',
     };
@@ -168,12 +174,42 @@ describe('reducer', () => {
   });
 
   describe('setAccessToken', () => {
-    const initialState = {
-      accessToken: '',
-    };
+    it('change accessToken', () => {
+      const initialState = {
+        accessToken: '',
+      };
 
-    const state = reducer(initialState, setAccessToken('TOKEN'));
+      const state = reducer(initialState, setAccessToken('TOKEN'));
 
-    expect(state.accessToken).toBe('TOKEN');
+      expect(state.accessToken).toBe('TOKEN');
+    });
+  });
+
+  describe('logout', () => {
+    it('change accessToken to be empty', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+      };
+
+      const state = reducer(initialState, logout());
+
+      expect(state.accessToken).toBe('');
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('change review fields', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(initialState,
+        changeReviewField({ name: 'score', value: '5' }));
+
+      expect(state.reviewFields.score).toBe('5');
+    });
   });
 });
