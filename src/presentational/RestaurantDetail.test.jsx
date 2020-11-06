@@ -2,6 +2,7 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
+import { useSelector } from 'react-redux';
 import RestaurantDetail from './RestaurantDetail';
 
 describe('RestaurantDetail', () => {
@@ -24,6 +25,15 @@ describe('RestaurantDetail', () => {
       />,
     );
   }
+
+  beforeEach(() => {
+    useSelector.mockImplementation((selector) => selector({
+      reviewField: {
+        score: 0,
+        description: '',
+      },
+    }));
+  });
 
   it('renders name and address', () => {
     const { container } = renderRestaurantDetail();

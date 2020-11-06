@@ -2,7 +2,7 @@ import React from 'react';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ReviewFormContainer from './ReviewFormContainer';
 
 jest.mock('react-redux');
@@ -20,6 +20,12 @@ describe('ReviewFormContainer', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      reviewField: {
+        score: 0,
+        description: '',
+      },
+    }));
   });
 
   it('renders review fields', () => {
@@ -33,13 +39,13 @@ describe('ReviewFormContainer', () => {
   describe('change review fields', () => {
     it('calls review field change action when score is changed', () => {
       const { getByLabelText } = renderReviewFormContainer();
-      const value = 10;
+      const value = '10';
 
       fireEvent.change(getByLabelText('평점'), { target: { value } });
 
       expect(dispatch).toBeCalledWith({
         type: 'changeReviewField',
-        paylod: {
+        payload: {
           name: 'score',
           value,
         },
@@ -54,7 +60,7 @@ describe('ReviewFormContainer', () => {
 
       expect(dispatch).toBeCalledWith({
         type: 'changeReviewField',
-        paylod: {
+        payload: {
           name: 'description',
           value,
         },
