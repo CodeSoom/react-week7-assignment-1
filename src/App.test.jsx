@@ -26,7 +26,15 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
+      restaurant: {
+        id: 1,
+        name: '마녀주방',
+        reviews: [
+          {
+            id: 1, name: '테스트', score: '5', description: '정말 최고!',
+          },
+        ],
+      },
       reviewField: {
         score: '',
         description: ',',

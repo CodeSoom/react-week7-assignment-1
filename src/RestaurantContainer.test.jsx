@@ -37,6 +37,11 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [
+        {
+          id: 1, name: '테스트', score: '5', description: '정말 최고!',
+        },
+      ],
     }));
 
     it('renders name and address', () => {
@@ -62,6 +67,11 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [
+        {
+          id: 1, name: '테스트', score: '5', description: '정말 최고!',
+        },
+      ],
     }));
 
     const { queryByText } = renderRestaurantContainer();
@@ -76,6 +86,11 @@ describe('RestaurantContainer', () => {
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
+        reviews: [
+          {
+            id: 1, name: '테스트', score: '5', description: '정말 최고!',
+          },
+        ],
       }));
 
       const { getByText } = renderRestaurantContainer();
@@ -97,6 +112,11 @@ describe('RestaurantContainer', () => {
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
+        reviews: [
+          {
+            id: 1, name: '테스트', score: '5', description: '정말 최고!',
+          },
+        ],
       }));
 
       const { getByLabelText } = renderRestaurantContainer();
