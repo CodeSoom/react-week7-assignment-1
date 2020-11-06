@@ -14,12 +14,15 @@ describe('LoginForm', () => {
 
     const controls = [
       { label: 'E-mail', name: 'email', value: 'tester@example.com' },
+      { label: 'Password', name: 'password', value: 'test' },
     ];
 
     controls.forEach(({ label, name, value }) => {
-      expect(getByLabelText(label)).not.toBeNull();
+      const input = getByLabelText(label);
 
-      fireEvent.change(getByLabelText(label), {
+      expect(input).not.toBeNull();
+
+      fireEvent.change(input, {
         target: { value },
       });
 
