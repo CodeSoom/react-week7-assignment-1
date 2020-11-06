@@ -2,10 +2,8 @@ import React from 'react';
 
 import TextField from './TextField';
 
-export default function ReviewForm({ onChange, onSubmit }) {
-  // TODO
-  const score = '';
-  const description = '';
+export default function ReviewForm({ field, onChange, onSubmit }) {
+  const { score, description } = field;
 
   return (
     <>
