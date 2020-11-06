@@ -25,7 +25,28 @@ describe('LoginForm', () => {
     );
   }
 
-  it('renders login fields', () => {
+  it('renders login input fields', () => {
+    const { getByLabelText } = renderLoginForm({});
+
+    expect(getByLabelText('E-mail')).not.toBeNull();
+    expect(getByLabelText('Password')).not.toBeNull();
+  });
+
+  it('renders "Log In" button', () => {
+    const { container } = renderLoginForm({});
+
+    expect(container).toHaveTextContent('Log In');
+  });
+
+  it('listens submit event', () => {
+    const { getByText } = renderLoginForm({});
+
+    fireEvent.click(getByText('Log In'));
+
+    expect(handleSubmit).toBeCalled();
+  });
+
+  it('listens change events', () => {
     const email = 'test@test';
     const password = '1234';
 
@@ -53,13 +74,5 @@ describe('LoginForm', () => {
 
       expect(handleChange).toBeCalledWith({ name, value });
     });
-  });
-
-  it('renders "Log In" button', () => {
-    const { getByText } = renderLoginForm({});
-
-    fireEvent.click(getByText('Log In'));
-
-    expect(handleSubmit).toBeCalled();
   });
 });
