@@ -91,7 +91,7 @@ describe('api', () => {
       });
     });
 
-    it('returns accessTocken', async () => {
+    it('return resolved response', async () => {
       const response = await postReview({
         score: '4',
         description: '맛있네요',
