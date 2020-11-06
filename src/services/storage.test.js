@@ -1,17 +1,11 @@
-import { loadItem } from './storage';
+import { saveItem, loadItem, removeItem } from './storage';
 
-jest.mock('./storage');
+test('storage', () => {
+  saveItem('accessToken', 'ACCESS_TOKEN');
 
-describe('storage', () => {
-  const accessToken = 'ACCESS_TOKEN';
+  expect(loadItem('accessToken')).toBe('ACCESS_TOKEN');
 
-  beforeEach(() => {
-    loadItem.mockImplementation(() => accessToken);
-  });
+  removeItem('accessToken');
 
-  it('loadItem', () => {
-    const item = loadItem();
-
-    expect(item).toEqual(accessToken);
-  });
+  expect(loadItem('accessToken')).toBeNull();
 });
