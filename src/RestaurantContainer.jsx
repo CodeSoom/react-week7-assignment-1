@@ -16,6 +16,9 @@ import ReviewForm from './ReviewForm';
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
+  const restaurant = useSelector(get('restaurant'));
+  const reviewField = useSelector(get('reviewField'));
+
   function handleChange({ name, value }) {
     dispatch(changeReviewField({ name, value }));
   }
@@ -29,8 +32,6 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(loadRestaurant({ restaurantId }));
   }, []);
 
-  const restaurant = useSelector(get('restaurant'));
-
   if (!restaurant) {
     return (
       <p>Loading...</p>
@@ -41,6 +42,7 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail restaurant={restaurant} />
       <ReviewForm
+        field={reviewField}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
