@@ -13,7 +13,6 @@ import { get } from '../utils';
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     dispatch(loadRestaurant({ restaurantId }));
   }, []);
@@ -29,7 +28,10 @@ export default function RestaurantContainer({ restaurantId }) {
 
   return (
     <>
-      <RestaurantDetail restaurant={restaurant} accessToken={accessToken} />
+      <RestaurantDetail
+        restaurant={restaurant}
+        accessToken={accessToken}
+      />
     </>
   );
 }

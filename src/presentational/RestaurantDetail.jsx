@@ -1,22 +1,13 @@
 import React from 'react';
 
 import MenuItems from 'presentational/MenuItems';
-
 import Reviews from 'presentational/Reviews';
-import ReviewForm from './ReviewForm';
+import ReviewFormContainer from 'container/ReviewFormContainer';
 
-export default function RestaurantDetail({ restaurant, accessToken = null }) {
+export default function RestaurantDetail({ restaurant, accessToken }) {
   const {
     name, address, menuItems, reviews,
   } = restaurant;
-
-  function handleChange() {
-    // TODO
-  }
-
-  function handleClick() {
-
-  }
 
   return (
     <div>
@@ -30,18 +21,7 @@ export default function RestaurantDetail({ restaurant, accessToken = null }) {
       <MenuItems menuItems={menuItems} />
 
       <h3>리뷰</h3>
-
-      {
-        accessToken && (
-          <ReviewForm
-            score={10}
-            description="test"
-            onChange={handleChange}
-            onClick={handleClick}
-          />
-        )
-      }
-
+      {accessToken && <ReviewFormContainer />}
       <Reviews reviews={reviews} />
     </div>
   );
