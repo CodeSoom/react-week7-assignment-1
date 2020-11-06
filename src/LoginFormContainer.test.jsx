@@ -83,7 +83,5 @@ describe('LoginFormContainer', () => {
 
       expect(dispatch).toBeCalled();
     });
-
-    context('with ')
   });
 });
