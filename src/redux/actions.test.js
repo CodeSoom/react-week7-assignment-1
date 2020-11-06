@@ -11,7 +11,7 @@ import {
   setRestaurants,
   setRestaurant,
   requestLogin,
-  changeReviewField,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -134,7 +134,7 @@ describe('actions', () => {
       });
     });
 
-    await store.dispatch(postReview());
+    await store.dispatch(sendReview());
 
     const actions = store.getActions();
 

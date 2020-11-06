@@ -82,4 +82,23 @@ describe('api', () => {
       expect(accessToken).toEqual('ACCESSTOKEN');
     });
   });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      mockFetch({
+        reviewField: {
+          score: 0,
+          description: '',
+        },
+      });
+    });
+
+    it('retrun 200 status code ', async () => {
+      const statusCode = await postReview({
+        accessToken: 'token', score: 10, description: 'test', restaurantId: 1,
+      });
+
+      expect(statusCode).toEqual(200);
+    });
+  });
 });

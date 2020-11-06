@@ -6,7 +6,7 @@ import ReviewFormContainer from 'container/ReviewFormContainer';
 
 export default function RestaurantDetail({ restaurant, accessToken }) {
   const {
-    name, address, menuItems, reviews,
+    id, name, address, menuItems, reviews,
   } = restaurant;
 
   return (
@@ -21,7 +21,7 @@ export default function RestaurantDetail({ restaurant, accessToken }) {
       <MenuItems menuItems={menuItems} />
 
       <h3>리뷰</h3>
-      {accessToken && <ReviewFormContainer />}
+      {accessToken && <ReviewFormContainer restaurantId={id} />}
       <Reviews reviews={reviews} />
     </div>
   );
