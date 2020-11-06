@@ -9,12 +9,9 @@ import RestaurantContainer from './RestaurantContainer';
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
-  function renderRestaurantContainer() {
-    return render(<RestaurantContainer restaurantId="1" />);
-  }
-
   beforeEach(() => {
     dispatch.mockClear();
+
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
@@ -26,6 +23,10 @@ describe('RestaurantContainer', () => {
       },
     }));
   });
+
+  function renderRestaurantContainer() {
+    return render(<RestaurantContainer restaurantId="1" />);
+  }
 
   it('dispatches action', () => {
     renderRestaurantContainer();
