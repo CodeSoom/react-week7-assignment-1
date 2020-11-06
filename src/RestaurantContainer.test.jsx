@@ -38,24 +38,23 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [
+        {
+          id: 1,
+          restaurantId: 1,
+          name: '테스터',
+          score: 4,
+          description: 'test',
+        },
+        {
+          id: 2,
+          restaurantId: 1,
+          name: '테스터',
+          score: 5,
+          description: '테스트',
+        },
+      ],
     }));
-
-    given('reviews', () => ([
-      {
-        id: 1,
-        restaurantId: 1,
-        name: '테스터',
-        score: 4,
-        description: 'test',
-      },
-      {
-        id: 2,
-        restaurantId: 1,
-        name: '테스터',
-        score: 5,
-        description: '테스트',
-      },
-    ]));
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();

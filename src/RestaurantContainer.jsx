@@ -13,13 +13,28 @@ import {
 
 import { get } from './utils';
 
-function Reviews() {
+function Reviews({ reviews }) {
   return (
     <>
-      <p>테스터</p>
-      <p>5점</p>
-      <p>테스트</p>
-      <p>test</p>
+      <h3>리뷰</h3>
+      <ul>
+        {reviews.map(({
+          id, name, score, description,
+        }) => (
+          <li key={id}>
+            <p>
+              {name}
+            </p>
+            <p>
+              {score}
+              점
+            </p>
+            <p>
+              {description}
+            </p>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
@@ -60,7 +75,7 @@ export default function RestaurantContainer({ restaurantId }) {
           onSubmit={handleSubmit}
         />
       ) : ''}
-      <Reviews />
+      <Reviews reviews={restaurant.reviews} />
     </>
   );
 }
