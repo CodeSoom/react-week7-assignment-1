@@ -11,6 +11,7 @@ import {
   setRestaurants,
   setRestaurant,
   requestLogin,
+  changeReviewField,
 } from './actions';
 
 const middlewares = [thunk];
@@ -121,5 +122,25 @@ describe('actions', () => {
         { type: 'setAccessToken', payload: { accessToken: '' } },
       ]);
     });
+  });
+
+  describe('dispatch postReview', async () => {
+    beforeEach(() => {
+      store = mockStore({
+        reviewField: {
+          score: 0,
+          description: '',
+        },
+      });
+    });
+
+    await store.dispatch(postReview());
+
+    const actions = store.getActions();
+
+    expect(actions).toEqual([
+      { type: 'changeReviewField', payload: { name: 'score', value: 0 } },
+      { type: 'changeReviewField', payload: { name: 'description', value: '' } },
+    ]);
   });
 });

@@ -21,7 +21,7 @@ export default function ReviewFormContainer() {
   }
 
   function handleClickRegisterReviewButton() {
-    // TODO : dispatch requestReview action
+    dispatch(postReview());
   }
   return (
     <>
