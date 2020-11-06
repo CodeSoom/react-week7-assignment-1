@@ -134,42 +134,38 @@ describe('reducer', () => {
   });
 
   describe('changeLoginField', () => {
-    context('when change email field', () => {
-      it('changes email loginField', () => {
-        const value = 'tester@example.com';
-        const initialState = {
-          loginField: {
-            email: '',
-            password: '',
-          },
-        };
+    it('changes email loginField', () => {
+      const value = 'tester@example.com';
+      const initialState = {
+        loginField: {
+          email: '',
+          password: '',
+        },
+      };
 
-        const { loginField: { email } } = reducer(
-          initialState,
-          changeLoginField({ name: 'email', value }),
-        );
+      const { loginField: { email } } = reducer(
+        initialState,
+        changeLoginField({ name: 'email', value }),
+      );
 
-        expect(email).toEqual(value);
-      });
+      expect(email).toEqual(value);
     });
 
-    context('when change password field', () => {
-      it('changes password loginField', () => {
-        const value = 'test';
-        const initialState = {
-          loginField: {
-            email: '',
-            password: '',
-          },
-        };
+    it('changes password loginField', () => {
+      const value = 'test';
+      const initialState = {
+        loginField: {
+          email: '',
+          password: '',
+        },
+      };
 
-        const { loginField: { password } } = reducer(
-          initialState,
-          changeLoginField({ name: 'password', value }),
-        );
+      const { loginField: { password } } = reducer(
+        initialState,
+        changeLoginField({ name: 'password', value }),
+      );
 
-        expect(password).toEqual(value);
-      });
+      expect(password).toEqual(value);
     });
   });
 
@@ -182,6 +178,42 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken('ACCESSTOKEN'));
 
       expect(state.accessToken).toEqual('ACCESSTOKEN');
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('changes score review field', () => {
+      const value = 10;
+      const initialState = {
+        reviewField: {
+          score: null,
+          description: '',
+        },
+      };
+
+      const { reviewField: { score } } = reducer(
+        initialState,
+        changeLoginField({ name: 'score', value }),
+      );
+
+      expect(score).toEqual(value);
+    });
+
+    it('changes description review field', () => {
+      const value = 'test';
+      const initialState = {
+        reviewField: {
+          score: null,
+          description: '',
+        },
+      };
+
+      const { reviewField: { description } } = reducer(
+        initialState,
+        changeLoginField({ name: 'description', value }),
+      );
+
+      expect(description).toEqual(value);
     });
   });
 });

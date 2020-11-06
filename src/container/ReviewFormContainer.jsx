@@ -1,9 +1,11 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import ReviewForm from '../presentational/ReviewForm';
 
 export default function ReviewFormContainer() {
-  function handleChangeReviewField() {
-    // TODO : dispatch review field change action
+  const dispatch = useDispatch();
+  function handleChangeReviewField({ name, value }) {
+    dispatch(changeReviewField({ name, value }));
   }
 
   function handleClickRegisterReviewButton() {
