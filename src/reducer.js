@@ -74,6 +74,13 @@ const reducers = {
     };
   },
 
+  logout(state) {
+    return {
+      ...state,
+      accessToken: '',
+    };
+  },
+
   changeReviewField(state, { payload: { name, value } }) {
     return {
       ...state,
@@ -82,7 +89,7 @@ const reducers = {
         [name]: value,
       },
     };
-  }
+  },
 };
 
 function defaultReducer(state) {

@@ -18,45 +18,61 @@ describe('LoginFormContainer', () => {
       loginFields: {
         email: 'test@test', password: '1234',
       },
+      accessToken: given.accessToken,
     }));
   });
 
   const renderLoginFormContainer = () => render(<LoginFormContainer />);
 
-  it('input control이 보입니다.', () => {
-    const { getByLabelText } = renderLoginFormContainer();
+  context('logout 상태 일 때,', () => {
+    given('accessToken', () => '');
 
-    expect(getByLabelText('E-mail').value).toBe('test@test');
+    it('input control이 보입니다.', () => {
+      const { getByLabelText } = renderLoginFormContainer();
 
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'new email' },
+      expect(getByLabelText('E-mail').value).toBe('test@test');
+
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'new email' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: {
+          name: 'email', value: 'new email',
+        },
+      });
+
+      expect(getByLabelText('Password').value).toBe('1234');
+
+      fireEvent.change(getByLabelText('Password'), {
+        target: { value: 'new password' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: {
+          name: 'password', value: 'new password',
+        },
+      });
     });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: {
-        name: 'email', value: 'new email',
-      },
-    });
+    it('"Log in" 버튼이 보입니다.', () => {
+      const { getByText } = renderLoginFormContainer();
 
-    expect(getByLabelText('Password').value).toBe('1234');
-
-    fireEvent.change(getByLabelText('Password'), {
-      target: { value: 'new password' },
-    });
-
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: {
-        name: 'password', value: 'new password',
-      },
+      fireEvent.click(getByText('Log In'));
+      expect(dispatch).toBeCalled();
     });
   });
 
-  it('"Log in" 버튼이 보입니다.', () => {
-    const { getByText } = renderLoginFormContainer();
+  context('log in일 때', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-    fireEvent.click(getByText('Log In'));
-    expect(dispatch).toBeCalled();
+    it('"Log out" 버튼이 보입니다.', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('Log out'));
+      expect(dispatch).toBeCalledWith({ type: 'logout' });
+    });
   });
 });
