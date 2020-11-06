@@ -27,7 +27,7 @@ describe('reducer', () => {
       },
       accessToken: '',
       reviewField: {
-        score: null,
+        score: 0,
         description: '',
       },
     };

@@ -13,7 +13,7 @@ const initialState = {
   },
   accessToken: '',
   reviewField: {
-    score: null,
+    score: 0,
     description: '',
   },
 };

@@ -67,4 +67,14 @@ describe('ReviewFormContainer', () => {
       });
     });
   });
+
+  describe('click register review button', () => {
+    it('call postreview', () => {
+      const { getByText } = renderReviewFormContainer();
+
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(dispatch).toBeCalled();
+    });
+  });
 });

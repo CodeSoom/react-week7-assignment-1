@@ -11,7 +11,7 @@ import ReviewForm from '../presentational/ReviewForm';
 export default function ReviewFormContainer() {
   const dispatch = useDispatch();
 
-  const { score = 0, description } = useSelector((state) => ({
+  const { score, description } = useSelector((state) => ({
     score: state.reviewField.score,
     description: state.reviewField.description,
   }));
