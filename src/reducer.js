@@ -44,6 +44,10 @@ const reducers = {
     return {
       ...state,
       restaurant,
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
   },
 
