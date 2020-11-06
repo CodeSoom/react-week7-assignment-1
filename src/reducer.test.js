@@ -146,28 +146,31 @@ describe('reducer', () => {
         password: '',
       },
     };
-
-    it('changes email', () => {
+    context('when email field is changed', () => {
       const state = reducer(
         initialState,
         changeLoginField({ name: 'email', value: 'newEmail' }),
       );
 
-      expect(state.loginFields).toEqual({
-        email: 'newEmail',
-        password: '',
+      it('changes email', () => {
+        expect(state.loginFields).toEqual({
+          email: 'newEmail',
+          password: '',
+        });
       });
     });
 
-    it('changes password', () => {
+    context('when password field is changed', () => {
       const state = reducer(
         initialState,
         changeLoginField({ name: 'password', value: 'newPassword' }),
       );
 
-      expect(state.loginFields).toEqual({
-        email: '',
-        password: 'newPassword',
+      it('changes password', () => {
+        expect(state.loginFields).toEqual({
+          email: '',
+          password: 'newPassword',
+        });
       });
     });
   });
@@ -204,27 +207,31 @@ describe('reducer', () => {
       },
     };
 
-    it('changes score', () => {
+    context('when score field is changed', () => {
       const state = reducer(
         initialState,
         changeReviewField({ name: 'score', value: '5' }),
       );
 
-      expect(state.reviewFields).toEqual({
-        score: '5',
-        description: '',
+      it('changes score', () => {
+        expect(state.reviewFields).toEqual({
+          score: '5',
+          description: '',
+        });
       });
     });
 
-    it('changes description', () => {
+    context('when description field is changed', () => {
       const state = reducer(
         initialState,
         changeReviewField({ name: 'description', value: 'newDescription' }),
       );
 
-      expect(state.reviewFields).toEqual({
-        score: '',
-        description: 'newDescription',
+      it('changes description', () => {
+        expect(state.reviewFields).toEqual({
+          score: '',
+          description: 'newDescription',
+        });
       });
     });
   });
