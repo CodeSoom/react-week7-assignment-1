@@ -20,6 +20,11 @@ describe('RestaurantPage', () => {
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
+        reviews: [
+          {
+            id: 1, restaurantId: 1, name: '테스터', score: 5, description: 'GOOD!',
+          },
+        ],
       },
       reviewFields: {
         score: '',
@@ -47,6 +52,14 @@ describe('RestaurantPage', () => {
       expect(queryByLabelText('평점')).not.toBeNull();
       expect(queryByLabelText('리뷰 내용')).not.toBeNull();
     });
+
+    it('renders reviews name, score and description', () => {
+      const { container } = renderRestaurantPage(params);
+
+      expect(container).toHaveTextContent('테스터');
+      expect(container).toHaveTextContent('GOOD!');
+      expect(container).toHaveTextContent('5');
+    });
   });
 
   context('without params props', () => {
@@ -67,6 +80,14 @@ describe('RestaurantPage', () => {
 
       expect(queryByLabelText('평점')).not.toBeNull();
       expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+    });
+
+    it('renders reviews name, score and description', () => {
+      const { container } = renderRestaurantPage();
+
+      expect(container).toHaveTextContent('테스터');
+      expect(container).toHaveTextContent('GOOD!');
+      expect(container).toHaveTextContent('5');
     });
   });
 });
