@@ -170,11 +170,20 @@ describe('reducer', () => {
   describe('setAccessToken', () => {
     const initialState = {
       accessToken: '',
+      loginFields: {
+        email: 'tester@example.com',
+        password: 'test',
+      },
     };
 
-    const state = reducer(initialState, setAccessToken('TOKEN'));
+    const { accessToken, loginFields: { email, password } } = reducer(
+      initialState,
+      setAccessToken('TOKEN'),
+    );
 
-    expect(state.accessToken).toBe('TOKEN');
+    expect(accessToken).toBe('TOKEN');
+    expect(email).toBe('');
+    expect(password).toBe('');
   });
 
   describe('changeReviewField', () => {
