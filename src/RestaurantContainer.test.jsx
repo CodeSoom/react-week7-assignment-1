@@ -43,53 +43,85 @@ describe('RestaurantContainer', () => {
   });
 
   context('with logged in', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
     given('accessToken', () => 'ACCESS_TOKEN');
 
-    it('renders name and address', () => {
-      const { container } = renderRestaurantContainer();
+    context('with reviews', () => {
+      given('restaurant', () => ({
+        id: 1,
+        name: '마법사주방',
+        address: '서울시 강남구',
+        reviews: [
+          {
+            id: 1, restaurantId: 1, name: '테스터', score: 5, description: 'GOOD!',
+          },
+        ],
+      }));
 
-      expect(container).toHaveTextContent('마법사주방');
-      expect(container).toHaveTextContent('서울시');
-    });
+      it('renders name and address', () => {
+        const { container } = renderRestaurantContainer();
 
-    it('renders review write form', () => {
-      const { queryByLabelText } = renderRestaurantContainer();
+        expect(container).toHaveTextContent('마법사주방');
+        expect(container).toHaveTextContent('서울시');
+      });
 
-      expect(queryByLabelText('평점')).not.toBeNull();
-      expect(queryByLabelText('리뷰 내용')).not.toBeNull();
-    });
+      it('renders reviews name, score and description', () => {
+        const { container } = renderRestaurantContainer();
 
-    it('change review write input', () => {
-      const { getByLabelText } = renderRestaurantContainer();
+        expect(container).toHaveTextContent('테스터');
+        expect(container).toHaveTextContent('GOOD!');
+        expect(container).toHaveTextContent('5');
+      });
 
-      const reviewInput = [
-        { label: '평점', name: 'score', value: '5' },
-        { label: '리뷰 내용', name: 'description', value: 'Good!' },
-      ];
+      it('renders review write form', () => {
+        const { queryByLabelText } = renderRestaurantContainer();
 
-      reviewInput.forEach(({ label, name, value }) => {
-        fireEvent.change(getByLabelText(label), {
-          target: { value },
+        expect(queryByLabelText('평점')).not.toBeNull();
+        expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+      });
+
+      it('change review write input', () => {
+        const { getByLabelText } = renderRestaurantContainer();
+
+        const reviewInputs = [
+          { label: '평점', name: 'score', value: '5' },
+          { label: '리뷰 내용', name: 'description', value: 'Good!' },
+        ];
+
+        reviewInputs.forEach(({ label, name, value }) => {
+          fireEvent.change(getByLabelText(label), {
+            target: { value },
+          });
+
+          expect(dispatch).toBeCalledWith({
+            type: 'changeReviewField',
+            payload: { name, value },
+          });
         });
+      });
+      it('click listens events', () => {
+        const { getByText } = renderRestaurantContainer();
 
-        expect(dispatch).toBeCalledWith({
-          type: 'changeReviewField',
-          payload: { name, value },
-        });
+        fireEvent.click(getByText('리뷰 남기기'));
+
+        expect(dispatch).toBeCalledTimes(2);
       });
     });
 
-    it('click "리뷰 남기기" button', () => {
-      const { getByText } = renderRestaurantContainer();
+    context('without reviews', () => {
+      given('restaurant', () => ({
+        id: 1,
+        name: '마법사주방',
+        address: '서울시 강남구',
+        reviews: [],
+      }));
 
-      fireEvent.click(getByText('리뷰 남기기'));
+      it('renders title and "There are no reviews." text', () => {
+        const NO_REVIEW_TEXT = '리뷰가 존재하지 않습니다.';
 
-      expect(dispatch).toBeCalledTimes(2);
+        const { container } = renderRestaurantContainer();
+
+        expect(container).toHaveTextContent(NO_REVIEW_TEXT);
+      });
     });
   });
 
