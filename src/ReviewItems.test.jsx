@@ -21,15 +21,16 @@ describe('ReviewItems', () => {
       },
     ];
 
-    const { container } = render(<ReviewItems reviews={reviews} />);
+    const { getAllByRole } = render(<ReviewItems reviews={reviews} />);
 
-    // TODO: 순서대로 정렬됐다는 것 테스트.
+    const orderedReviews = getAllByRole('listitem');
+
     reviews.forEach(({
       name, score, description,
-    }) => {
-      expect(container).toHaveTextContent(name);
-      expect(container).toHaveTextContent(score);
-      expect(container).toHaveTextContent(description);
+    }, index) => {
+      expect(orderedReviews[index]).toHaveTextContent(name);
+      expect(orderedReviews[index]).toHaveTextContent(score);
+      expect(orderedReviews[index]).toHaveTextContent(description);
     });
   });
 });
