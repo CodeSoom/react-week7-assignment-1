@@ -4,14 +4,9 @@ import configureStore from 'redux-mock-store';
 
 import {
   loadInitialData,
-  setRegions,
-  setCategories,
   loadRestaurants,
   loadRestaurant,
-  setRestaurants,
-  setRestaurant,
   requestLogin,
-  setAccessToken,
   sendReview,
 } from './actions';
 
@@ -33,8 +28,16 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRegions([]));
-      expect(actions[1]).toEqual(setCategories([]));
+      expect(actions).toEqual([
+        {
+          type: 'setRegions',
+          payload: { regions: [] },
+        },
+        {
+          type: 'setCategories',
+          payload: { categories: [] },
+        },
+      ]);
     });
   });
 
@@ -52,7 +55,10 @@ describe('actions', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(setRestaurants([]));
+        expect(actions[0]).toEqual({
+          type: 'setRestaurants',
+          payload: { restaurants: [] },
+        });
       });
     });
 
@@ -99,8 +105,16 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurant(null));
-      expect(actions[1]).toEqual(setRestaurant({}));
+      expect(actions).toEqual([
+        {
+          type: 'setRestaurant',
+          payload: { restaurant: null },
+        },
+        {
+          type: 'setRestaurant',
+          payload: { restaurant: {} },
+        },
+      ]);
     });
   });
 
@@ -119,7 +133,10 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken(''));
+      expect(actions[0]).toEqual({
+        type: 'setAccessToken',
+        payload: { accessToken: '' },
+      });
     });
   });
 
@@ -142,14 +159,16 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual({
-        type: 'setRestaurant',
-        payload: { restaurant: null },
-      });
-      expect(actions[1]).toEqual({
-        type: 'setRestaurant',
-        payload: { restaurant: {} },
-      });
+      expect(actions).toEqual([
+        {
+          type: 'setRestaurant',
+          payload: { restaurant: null },
+        },
+        {
+          type: 'setRestaurant',
+          payload: { restaurant: {} },
+        },
+      ]);
     });
   });
 });
