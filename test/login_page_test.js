@@ -6,9 +6,9 @@ Scenario('로그인과 로그아웃', (I) => {
   I.fillField('email', 'tester@example.com');
   I.fillField('password', 'test');
 
-  I.click('Log In');
+  I.click('로그인');
 
-  I.see('Log out');
+  I.see('로그아웃');
 });
 
 Scenario('로그아웃', (I) => {
@@ -17,9 +17,9 @@ Scenario('로그아웃', (I) => {
   I.fillField('email', 'tester@example.com');
   I.fillField('password', 'test');
 
-  I.click('Log In');
+  I.click('로그인');
 
-  I.click('Log out');
+  I.click('로그아웃');
 
-  I.see('Log In', 'button');
+  I.see('로그인', 'button');
 });
