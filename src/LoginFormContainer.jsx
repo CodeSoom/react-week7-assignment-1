@@ -10,6 +10,7 @@ import {
 import { get } from './utils';
 
 import LoginForm from './LoginForm';
+import LogoutForm from './LogoutForm';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
@@ -28,14 +29,6 @@ export default function LoginFormContainer() {
 
   function handleClickLogout() {
     dispatch(logout());
-  }
-
-  function LogoutForm({ onClick }) {
-    return (
-      <button type="button" onClick={onClick}>
-        로그아웃
-      </button>
-    );
   }
 
   return (
