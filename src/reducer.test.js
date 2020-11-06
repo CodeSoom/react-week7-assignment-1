@@ -92,14 +92,22 @@ describe('reducer', () => {
     it('changes restaurant', () => {
       const initialState = {
         restaurant: null,
+        reviewFields: {
+          score: 'tester@example.com',
+          description: 'test',
+        },
       };
 
       const restaurant = { id: 1, name: '마법사주방' };
 
       const state = reducer(initialState, setRestaurant(restaurant));
 
+      const { score, description } = state.reviewFields;
+
       expect(state.restaurant.id).toBe(1);
       expect(state.restaurant.name).toBe('마법사주방');
+      expect(score).toBe('');
+      expect(description).toBe('');
     });
   });
 
