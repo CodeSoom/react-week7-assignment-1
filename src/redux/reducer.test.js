@@ -9,6 +9,7 @@ import {
   selectRegion,
   selectCategory,
   setAccessToken,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -25,6 +26,10 @@ describe('reducer', () => {
         password: '',
       },
       accessToken: '',
+      reviewField: {
+        score: null,
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -193,7 +198,7 @@ describe('reducer', () => {
 
       const { reviewField: { score } } = reducer(
         initialState,
-        changeLoginField({ name: 'score', value }),
+        changeReviewField({ name: 'score', value }),
       );
 
       expect(score).toEqual(value);
@@ -210,7 +215,7 @@ describe('reducer', () => {
 
       const { reviewField: { description } } = reducer(
         initialState,
-        changeLoginField({ name: 'description', value }),
+        changeReviewField({ name: 'description', value }),
       );
 
       expect(description).toEqual(value);

@@ -1,5 +1,11 @@
 import React from 'react';
+
 import { useDispatch } from 'react-redux';
+
+import {
+  changeReviewField,
+} from '_redux/actions';
+
 import ReviewForm from '../presentational/ReviewForm';
 
 export default function ReviewFormContainer() {
