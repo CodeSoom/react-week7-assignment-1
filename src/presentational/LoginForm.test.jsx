@@ -36,7 +36,7 @@ describe('LoginForm', () => {
     expect(getByText('Log In')).not.toBeNull();
   });
 
-  context('when login field change', () => {
+  describe('login field change', () => {
     it('calls field change action', () => {
       const { getByLabelText } = renderLoginForm();
       const value = 'contents';
@@ -49,7 +49,7 @@ describe('LoginForm', () => {
     });
   });
 
-  context('when login button click', () => {
+  describe('login button click', () => {
     it('calls request login action', () => {
       const { getByText } = renderLoginForm();
 

@@ -7,7 +7,6 @@ export default function LoginForm({
 }) {
   return (
     <form>
-
       <Input
         id="login-email"
         name="email"
@@ -17,7 +16,6 @@ export default function LoginForm({
       >
         E-mail
       </Input>
-
       <Input
         id="login-password"
         name="password"
@@ -27,7 +25,6 @@ export default function LoginForm({
       >
         Password
       </Input>
-
       <button type="button" onClick={onClick}>Log In</button>
     </form>
   );
