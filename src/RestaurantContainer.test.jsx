@@ -40,11 +40,37 @@ describe('RestaurantContainer', () => {
       address: '서울시 강남구',
     }));
 
+    given('reviews', () => ([
+      {
+        id: 1,
+        restaurantId: 1,
+        name: '테스터',
+        score: 4,
+        description: 'test',
+      },
+      {
+        id: 2,
+        restaurantId: 1,
+        name: '테스터',
+        score: 5,
+        description: '테스트',
+      },
+    ]));
+
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+    });
+
+    it('renders reviews', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('테스터');
+      expect(container).toHaveTextContent('5점');
+      expect(container).toHaveTextContent('test');
+      expect(container).toHaveTextContent('테스트');
     });
 
     context('when logged in', () => {
