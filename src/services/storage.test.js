@@ -6,7 +6,7 @@ describe('storage', () => {
       localStorage.accessToken = 'ACCESSTOKEN';
     });
 
-    it('run loadItem', () => {
+    it('get data from localStorage', () => {
       const accessToken = loadItem('accessToken');
 
       expect(accessToken).toBe('ACCESSTOKEN');
@@ -14,7 +14,7 @@ describe('storage', () => {
   });
 
   describe('saveItem', () => {
-    it('run saveItem', () => {
+    it('set data to localStorage', () => {
       saveItem('accessToken', 'ACCESSTOKEN');
 
       expect(localStorage.accessToken).toBe('ACCESSTOKEN');
@@ -26,7 +26,7 @@ describe('storage', () => {
       localStorage.accessToken = 'ACCESSTOKEN';
     });
 
-    it('remove data from localStorage', () => {
+    it('remove data in localStorage', () => {
       removeItem('accessToken');
 
       expect(localStorage.accessToken).toBeUndefined();
