@@ -2,9 +2,8 @@ import React from 'react';
 
 export default function Reviews({ reviews }) {
   return (
-
     <div>
-
+      {reviews.length || <p>리뷰가 없어요!</p>}
       <ul>
         {
           reviews.map(({
