@@ -31,7 +31,7 @@ describe('LoginContainer', () => {
     jest.clearAllMocks();
   });
 
-  context('when login fields change', () => {
+  describe('login fields change', () => {
     it('render changed value in input from state', () => {
       useSelector.mockImplementation((selector) => selector({
         loginField: {
@@ -61,7 +61,7 @@ describe('LoginContainer', () => {
     });
   });
 
-  context('when login button click', () => {
+  describe('login button click', () => {
     it('calls request login action', () => {
       const { getByText } = renderLoginContainer();
 
