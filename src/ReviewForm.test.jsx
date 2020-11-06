@@ -19,7 +19,7 @@ describe('ReviewForm', () => {
   }
 
   it('renders review write form', () => {
-    const { queryByLabelText, queryByText } = renderReviewForm();
+    const { queryByLabelText, queryByText } = renderReviewForm({});
 
     expect(queryByLabelText('평점')).not.toBeNull();
     expect(queryByLabelText('리뷰 내용')).not.toBeNull();
@@ -29,9 +29,10 @@ describe('ReviewForm', () => {
 
   it('listens change events', () => {
     const reviewfields = {
-      score: '5',
-      description: 'description',
+      score: '',
+      description: '',
     };
+
     const { getByLabelText } = renderReviewForm(reviewfields);
 
     const controls = [
@@ -46,12 +47,12 @@ describe('ReviewForm', () => {
         target: { value },
       });
 
-      expect(handleChangeReviewFields).toBeCalledTimes(2);
+      expect(handleChangeReviewFields).toBeCalled();
     });
   });
 
   it('listens click event', () => {
-    const { getByText } = renderReviewForm();
+    const { getByText } = renderReviewForm({});
 
     fireEvent.click(getByText('리뷰 남기기'));
 
