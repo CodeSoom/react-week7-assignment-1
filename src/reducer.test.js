@@ -10,7 +10,7 @@ import {
   selectCategory,
   setAccessToken,
   changeLoginFields,
-  changeReviewField,
+  changeReviewFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -27,7 +27,7 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
-      reviewField: {
+      reviewFields: {
         score: '',
         description: '',
       },
@@ -206,33 +206,33 @@ describe('reducer', () => {
     });
   });
 
-  describe('changeReviewField', () => {
+  describe('changeReviewFields', () => {
     const initialState = {
-      reviewField: {
+      reviewFields: {
         score: '',
         description: '',
       },
     };
 
     context('when score is changed', () => {
-      const state = reducer(initialState, changeReviewField({
+      const state = reducer(initialState, changeReviewFields({
         name: 'score',
         value: '5',
       }));
 
-      expect(state.reviewField).toEqual({
+      expect(state.reviewFields).toEqual({
         score: '5',
         description: '',
       });
     });
 
     context('when description is changed', () => {
-      const state = reducer(initialState, changeReviewField({
+      const state = reducer(initialState, changeReviewFields({
         name: 'description',
         value: '맛점 장소로 최고!',
       }));
 
-      expect(state.reviewField).toEqual({
+      expect(state.reviewFields).toEqual({
         score: '',
         description: '맛점 장소로 최고!',
       });

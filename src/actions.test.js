@@ -143,7 +143,7 @@ describe('actions', () => {
   describe('sendReview', () => {
     beforeEach(() => {
       store = mockStore({
-        reviewField: {
+        reviewFields: {
           score: '5',
           description: '맛점 장소로 딱!',
         },

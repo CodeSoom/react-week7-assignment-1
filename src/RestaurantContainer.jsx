@@ -7,7 +7,7 @@ import ReviewForm from './ReviewForm';
 import Reviews from './Reviews';
 
 import {
-  loadRestaurant, changeReviewField, sendReview,
+  loadRestaurant, changeReviewFields, sendReview,
 } from './actions';
 
 import { get } from './utils';
@@ -21,7 +21,7 @@ export default function RestaurantContainer({ restaurantId }) {
 
   const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
-  const reviewfields = useSelector(get('reviewField'));
+  const reviewfields = useSelector(get('reviewFields'));
 
   if (!restaurant) {
     return (
@@ -32,7 +32,7 @@ export default function RestaurantContainer({ restaurantId }) {
   const { reviews } = restaurant;
 
   function handleChange({ name, value }) {
-    dispatch(changeReviewField({ name, value }));
+    dispatch(changeReviewFields({ name, value }));
   }
 
   function handleSubmit() {

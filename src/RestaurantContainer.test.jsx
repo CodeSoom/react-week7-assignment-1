@@ -17,7 +17,7 @@ describe('RestaurantContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
       accessToken: given.accessToken,
-      reviewField: {
+      reviewFields: {
         score: '',
         description: '',
       },
@@ -98,7 +98,7 @@ describe('RestaurantContainer', () => {
           fireEvent.change(input, { target: { value } });
 
           expect(dispatch).toBeCalledWith({
-            type: 'changeReviewField',
+            type: 'changeReviewFields',
             payload: { name, value },
           });
         });
