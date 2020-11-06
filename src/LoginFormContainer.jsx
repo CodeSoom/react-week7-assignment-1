@@ -40,7 +40,12 @@ export default function LoginFormContainer() {
 
   return (
     <>
-      { accessToken ? (<LogoutForm onClick={handleClickLogout} />)
+      { accessToken
+        ? (
+          <LogoutForm
+            onClick={handleClickLogout}
+          />
+        )
         : (
           <LoginForm
             loginFields={loginFields}
