@@ -86,17 +86,20 @@ describe('api', () => {
   describe('postReview', () => {
     beforeEach(() => {
       fetch.mockClear();
+      global.fetch = jest.fn().mockResolvedValue({
+        ok: true,
+      });
     });
 
     it('returns accessTocken', async () => {
-      await postReview({
+      const response = await postReview({
         score: '4',
         description: '맛있네요',
         accessToken: 'ACCESSTOKEN',
         restaurantId: 1,
       });
 
-      expect(fetch).toBeCalledTimes(1);
+      expect(response.ok).toBeTruthy();
     });
   });
 });
