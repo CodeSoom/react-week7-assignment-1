@@ -142,7 +142,9 @@ export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const { reviewFields, accessToken } = getState();
 
-    if (!reviewFields) {
+    const { score, description } = reviewFields;
+
+    if (!score || !description) {
       return;
     }
 

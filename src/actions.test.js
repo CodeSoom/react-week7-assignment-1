@@ -164,7 +164,10 @@ describe('actions', () => {
     context('without reviewFields', () => {
       beforeEach(() => {
         store = mockStore({
-          reviewField: null,
+          reviewFields: {
+            score: '',
+            description: '',
+          },
         });
       });
 
