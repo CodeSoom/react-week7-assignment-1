@@ -146,16 +146,8 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions).toEqual([
-        {
-          type: 'setRestaurant',
-          payload: { restaurant: null },
-        },
-        {
-          type: 'setRestaurant',
-          payload: { restaurant: {} },
-        },
-      ]);
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
 });
