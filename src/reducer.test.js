@@ -148,7 +148,10 @@ describe('reducer', () => {
     };
 
     it('changes email', () => {
-      const state = reducer(initialState, changeLoginField({ name: 'email', value: 'newEmail' }));
+      const state = reducer(
+        initialState,
+        changeLoginField({ name: 'email', value: 'newEmail' }),
+      );
 
       expect(state.loginFields).toEqual({
         email: 'newEmail',
@@ -157,7 +160,10 @@ describe('reducer', () => {
     });
 
     it('changes password', () => {
-      const state = reducer(initialState, changeLoginField({ name: 'password', value: 'newPassword' }));
+      const state = reducer(
+        initialState,
+        changeLoginField({ name: 'password', value: 'newPassword' }),
+      );
 
       expect(state.loginFields).toEqual({
         email: '',
@@ -199,7 +205,10 @@ describe('reducer', () => {
     };
 
     it('changes score', () => {
-      const state = reducer(initialState, changeReviewField({ name: 'score', value: '5' }));
+      const state = reducer(
+        initialState,
+        changeReviewField({ name: 'score', value: '5' }),
+      );
 
       expect(state.reviewFields).toEqual({
         score: '5',
@@ -208,7 +217,10 @@ describe('reducer', () => {
     });
 
     it('changes description', () => {
-      const state = reducer(initialState, changeReviewField({ name: 'description', value: 'newDescription' }));
+      const state = reducer(
+        initialState,
+        changeReviewField({ name: 'description', value: 'newDescription' }),
+      );
 
       expect(state.reviewFields).toEqual({
         score: '',
