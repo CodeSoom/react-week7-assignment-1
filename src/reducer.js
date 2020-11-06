@@ -77,6 +77,10 @@ const reducers = {
     return {
       ...state,
       accessToken,
+      loginFields: {
+        email: '',
+        password: '',
+      },
     };
   },
 
