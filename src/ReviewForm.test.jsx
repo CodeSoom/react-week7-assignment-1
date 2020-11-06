@@ -8,7 +8,7 @@ describe('ReviewForm', () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
 
-  const field = {
+  const fields = {
     score: '',
     description: '',
   };
@@ -16,7 +16,7 @@ describe('ReviewForm', () => {
   function renderReviewForm() {
     return render(
       <ReviewForm
-        field={field}
+        fields={fields}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />,

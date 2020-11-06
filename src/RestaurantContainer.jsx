@@ -42,7 +42,7 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail restaurant={restaurant} />
       <ReviewForm
-        field={reviewField}
+        fields={reviewField}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
