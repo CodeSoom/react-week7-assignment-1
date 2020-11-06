@@ -25,7 +25,7 @@ describe('LoginForm', () => {
     });
   });
 
-  it('renders "Log In" button', () => {
+  it('requests log in', () => {
     const handleSubmit = jest.fn();
 
     const { getByText } = render((
