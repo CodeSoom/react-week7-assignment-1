@@ -13,6 +13,17 @@ import {
 
 import { get } from './utils';
 
+function Reviews() {
+  return (
+    <>
+      <p>테스터</p>
+      <p>5점</p>
+      <p>테스트</p>
+      <p>test</p>
+    </>
+  );
+}
+
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
@@ -49,6 +60,7 @@ export default function RestaurantContainer({ restaurantId }) {
           onSubmit={handleSubmit}
         />
       ) : ''}
+      <Reviews />
     </>
   );
 }
