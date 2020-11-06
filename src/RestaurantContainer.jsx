@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -22,6 +22,9 @@ export default function RestaurantContainer({ restaurantId }) {
 
   const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
+  const { score, description } = useSelector(get('reviewFields'));
+
+  const [error, setError] = useState(false);
 
   if (!restaurant) {
     return (
@@ -34,6 +37,10 @@ export default function RestaurantContainer({ restaurantId }) {
   };
 
   const handleSubmit = () => {
+    if (!score.trim() || !description.trim()) {
+      setError(true);
+      return;
+    }
     dispatch(sendReview({ restaurantId }));
   };
 
@@ -44,6 +51,8 @@ export default function RestaurantContainer({ restaurantId }) {
         <ReviewForm
           onChange={handleChange}
           onSubmit={handleSubmit}
+          fields={{ score, description }}
+          error={error}
         />
       ) : null}
       <ReviewList reviews={restaurant.reviews} />
