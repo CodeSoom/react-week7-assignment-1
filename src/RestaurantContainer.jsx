@@ -7,6 +7,7 @@ import RestaurantDetail from './RestaurantDetail';
 import {
   loadRestaurant,
   changeReviewField,
+  sendReview,
 } from './actions';
 
 import { get } from './utils';
@@ -24,8 +25,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   function handleSubmit() {
-    // TODO: implement it!
-    dispatch({});
+    dispatch(sendReview({ restaurantId }));
   }
 
   useEffect(() => {
