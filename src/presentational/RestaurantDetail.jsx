@@ -23,7 +23,6 @@ export default function RestaurantDetail({ restaurant }) {
       <h3>리뷰</h3>
 
       <Reviews reviews={reviews} />
-
     </div>
   );
 }
