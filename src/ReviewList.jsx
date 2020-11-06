@@ -9,7 +9,7 @@ const ReviewList = ({ reviews }) => {
       <div>리뷰</div>
       {reviews && reviews.length ? (
         <ul>
-          {reviews.reverse().map((review) => (
+          {reviews.map((review) => (
             <ReviewItem
               key={review.id}
               review={review}
