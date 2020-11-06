@@ -5,10 +5,8 @@ import { fireEvent, render } from '@testing-library/react';
 import ReviewForm from './ReviewForm';
 
 describe('ReviewForm', () => {
-  const inputLabels = ['평점', '리뷰 내용'];
-
   const renderReviewForm = () => render(
-    <renderReviewForm />,
+    <ReviewForm />,
   );
 
   beforeEach(() => {
