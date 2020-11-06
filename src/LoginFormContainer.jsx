@@ -26,7 +26,7 @@ export default function LoginFormContainer() {
 
   return (
     <LoginForm
-      fields={ email, password }
+      fields={{ email, password }}
       onChange={handleChange}
       onSubmit={handleSubmit}
     />
