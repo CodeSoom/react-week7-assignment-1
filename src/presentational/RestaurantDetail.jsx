@@ -1,6 +1,8 @@
 import React from 'react';
 
-import MenuItems from './MenuItems';
+import MenuItems from 'presentational/MenuItems';
+
+import Reviews from 'presentational/Reviews';
 
 export default function RestaurantDetail({ restaurant }) {
   const {
@@ -19,17 +21,9 @@ export default function RestaurantDetail({ restaurant }) {
       <MenuItems menuItems={menuItems} />
 
       <h3>리뷰</h3>
-      <ul>
-        {
-          reviews.map((review) => (
-            <li key={review.id}>
-              <p>{review.name}</p>
-              <p>{review.score}</p>
-              <p>{review.description}</p>
-            </li>
-          ))
-        }
-      </ul>
+
+      <Reviews reviews={reviews} />
+
     </div>
   );
 }
