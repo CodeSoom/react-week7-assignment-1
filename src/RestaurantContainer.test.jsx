@@ -78,7 +78,7 @@ describe('RestaurantContainer', () => {
 
       fireEvent.click(getByText('리뷰 남기기'));
 
-      expect(dispatch).toBeCalled();
+      expect(dispatch).toBeCalledTimes(2);
     });
   });
 
