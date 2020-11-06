@@ -44,7 +44,6 @@ export async function fetchAccessToken({ email, password }) {
 }
 
 export async function postReview({ accessToken, restaurantId, reviewFields }) {
-  console.log(JSON.stringify(reviewFields));
   const url = 'https://eatgo-customer-api.ahastudio.com'
     + `/restaurants/${restaurantId}/reviews`;
 
