@@ -5,7 +5,7 @@ import MenuItems from 'presentational/MenuItems';
 import Reviews from 'presentational/Reviews';
 import ReviewForm from './ReviewForm';
 
-export default function RestaurantDetail({ restaurant, accessToken }) {
+export default function RestaurantDetail({ restaurant, accessToken = null }) {
   const {
     name, address, menuItems, reviews,
   } = restaurant;
