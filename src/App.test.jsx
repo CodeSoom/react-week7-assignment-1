@@ -24,6 +24,7 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      accessToken: 'ACCESS_TOKEN',
       regions: [
         { id: 1, name: '서울' },
       ],
@@ -32,7 +33,6 @@ describe('App', () => {
       restaurant: { id: 1, name: '마녀주방', reviews: [] },
       loginFields: { email: '', password: '' },
       reviewFields: { score: '', description: '' },
-      accessToken: 'ACCESS_TOKEN',
     }));
   });
 
@@ -93,8 +93,10 @@ describe('App', () => {
   });
 
   context('when logged in', () => {
+    const accessToken = 'ACCESS_TOKEN';
+
     beforeEach(() => {
-      loadItem.mockImplementation(() => 'ACCESS_TOKEN');
+      loadItem.mockImplementation(() => accessToken);
     });
 
     it('calls dispatch with setAccessToken action', () => {
@@ -108,8 +110,10 @@ describe('App', () => {
   });
 
   context('when logged out', () => {
+    const accessToken = '';
+
     beforeEach(() => {
-      loadItem.mockImplementation(() => null);
+      loadItem.mockImplementation(() => accessToken);
     });
 
     it("doesn't call dispatch", () => {
