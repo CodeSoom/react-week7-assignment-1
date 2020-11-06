@@ -117,8 +117,9 @@ export function changeReviewField({ name, value }) {
 export function login() {
   return async (dispatch, getState) => {
     const { loginFields } = getState();
+    const { email, password } = loginFields;
 
-    if (!loginFields) {
+    if (!email || !password) {
       return;
     }
 

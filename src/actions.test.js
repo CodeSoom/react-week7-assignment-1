@@ -127,11 +127,14 @@ describe('actions', () => {
     context('without loginFields', () => {
       beforeEach(() => {
         store = mockStore({
-          loginFields: null,
+          loginFields: {
+            email: '',
+            password: '',
+          },
         });
       });
 
-      it('does\'nt dispatch any actions', async () => {
+      it("doesn't dispatch any actions", async () => {
         await store.dispatch(login());
 
         const actions = store.getActions();
