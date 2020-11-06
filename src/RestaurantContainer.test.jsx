@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
+import restaurant from '../fixtures/restaurant';
+
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
@@ -33,22 +35,13 @@ describe('RestaurantContainer', () => {
   });
 
   context('with restaurant', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-      reviews: [
-        {
-          id: 1, name: '테스트', score: '5', description: '정말 최고!',
-        },
-      ],
-    }));
+    given('restaurant', () => (restaurant));
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
 
-      expect(container).toHaveTextContent('마법사주방');
-      expect(container).toHaveTextContent('서울시');
+      expect(container).toHaveTextContent(restaurant.name);
+      expect(container).toHaveTextContent(restaurant.address);
     });
   });
 
@@ -63,16 +56,7 @@ describe('RestaurantContainer', () => {
   });
 
   it('renders review write form', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-      reviews: [
-        {
-          id: 1, name: '테스트', score: '5', description: '정말 최고!',
-        },
-      ],
-    }));
+    given('restaurant', () => (restaurant));
 
     const { queryByText } = renderRestaurantContainer();
 
@@ -82,16 +66,7 @@ describe('RestaurantContainer', () => {
 
   context('when review button is clicked', () => {
     it('calls dispatch', () => {
-      given('restaurant', () => ({
-        id: 1,
-        name: '마법사주방',
-        address: '서울시 강남구',
-        reviews: [
-          {
-            id: 1, name: '테스트', score: '5', description: '정말 최고!',
-          },
-        ],
-      }));
+      given('restaurant', () => (restaurant));
 
       const { getByText } = renderRestaurantContainer();
 
@@ -108,16 +83,7 @@ describe('RestaurantContainer', () => {
         { label: '리뷰 내용', name: 'description', value: '정말 최고!' },
       ];
 
-      given('restaurant', () => ({
-        id: 1,
-        name: '마법사주방',
-        address: '서울시 강남구',
-        reviews: [
-          {
-            id: 1, name: '테스트', score: '5', description: '정말 최고!',
-          },
-        ],
-      }));
+      given('restaurant', () => (restaurant));
 
       const { getByLabelText } = renderRestaurantContainer();
 
