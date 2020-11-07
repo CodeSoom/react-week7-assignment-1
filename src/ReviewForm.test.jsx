@@ -25,7 +25,7 @@ describe('ReviewForm', () => {
     expect(queryByLabelText('리뷰 내용')).not.toBeNull();
   });
 
-  it('change 이벤트가 발생하면, handleChange가 호출됩니다.', () => {
+  it('평정을 변경하면 onChange handler가 호출됩니다.', () => {
     const { getByLabelText } = renderReviewForm();
 
     const controls = [
@@ -40,7 +40,7 @@ describe('ReviewForm', () => {
     });
   });
 
-  it('submit 이벤트가 발생하면, handleSubmit이 호출됩니다.', () => {
+  it('리뷰 남기기 버튼을 클릭하면 onSubmit handler가 호출됩니다.', () => {
     const { getByText } = renderReviewForm();
 
     fireEvent.click(getByText('리뷰 남기기'));
