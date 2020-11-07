@@ -6,11 +6,17 @@ import RestaurantDetail from './RestaurantDetail';
 
 import {
   loadRestaurant,
+  changeReviewField,
 } from './actions';
 
 import { get } from './utils';
 
-function ReveiwForm() {
+function ReveiwForm({ onChange }) {
+  function handleChange(event) {
+    const { targer: { name, value } } = event;
+    onChange({ name, value });
+  }
+
   return (
     <>
       <div>
@@ -20,6 +26,7 @@ function ReveiwForm() {
         <input
           type="number"
           id="review-score"
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -29,6 +36,7 @@ function ReveiwForm() {
         <input
           type="text"
           id="review-description"
+          onChange={handleChange}
         />
       </div>
     </>
@@ -50,10 +58,16 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
+  function handleChange({ name, value }) {
+    dispatch(changeReviewField({ name, value }));
+  }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReveiwForm />
+      <ReveiwForm
+        onChange={handleChange}
+      />
     </>
   );
 }
