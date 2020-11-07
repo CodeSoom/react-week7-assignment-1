@@ -24,6 +24,7 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
+      accessToken: '',
     };
 
     it('returns initialState', () => {
@@ -157,7 +158,7 @@ describe('reducer', () => {
       };
 
       const state = reducer(initialState,
-        setAccessToken('ACCESS_TOKEN'));
+        setAccessToken({ accessToken: 'ACCESS_TOKEN' }));
 
       expect(state.accessToken).toEqual({
         accessToken: 'ACCESS_TOKEN',
