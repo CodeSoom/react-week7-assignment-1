@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useSelector } from 'react-redux';
 
-import InputField from './InputField';
+import LoginForm from './LoginForm';
 
 export default function LoginContainer() {
   const {
@@ -13,28 +13,10 @@ export default function LoginContainer() {
   const handleChange = () => { };
 
   return (
-    <>
-      <div>
-        <InputField
-          id="login-email"
-          label="E-mail"
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <InputField
-          id="login-password"
-          label="Password"
-          type="password"
-          name="password"
-          value={password}
-          onChange={handleChange}
-        />
-      </div>
-      <button type="button">Log In</button>
-    </>
+    <LoginForm
+      email={email}
+      password={password}
+      onChange={handleChange}
+    />
   );
 }
