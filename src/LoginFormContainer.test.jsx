@@ -68,7 +68,7 @@ describe('LoginFormContainer', () => {
   context('log in일 때', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
 
-    it('"Log out" 버튼이 보입니다.', () => {
+    it('로그아웃 버튼이 보입니다.', () => {
       const { getByText } = renderLoginFormContainer();
 
       fireEvent.click(getByText('Log out'));
