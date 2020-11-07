@@ -6,6 +6,8 @@ import RestaurantDetail from './RestaurantDetail';
 
 import ReviewFormContainer from './ReviewFormContainer';
 
+import ReviewsContainer from './ReviewsContainer';
+
 import Reviews from './Reviews';
 
 import { loadRestaurant } from './actions';
@@ -34,9 +36,7 @@ export default function RestaurantContainer({ restaurantId }) {
       {accessToken ? (
         <>
           <ReviewFormContainer id={restaurantId} />
-          <Reviews
-            reviews={restaurant.reviews}
-          />
+          <ReviewsContainer />
         </>
       ) : null}
     </>
