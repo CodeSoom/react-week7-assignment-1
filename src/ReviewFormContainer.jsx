@@ -7,6 +7,7 @@ import ReviewForm from './ReviewForm';
 import {
   changeReviewField,
   sendReview,
+  loadRestaurant,
 } from './actions';
 
 import { get } from './utils';
@@ -26,6 +27,8 @@ export default function ReviewFormContainer({ id }) {
     Object.keys(reviewFields).forEach((name) => {
       handleChange({ name, value: '' });
     });
+
+    dispatch(loadRestaurant({ restaurantId: id }));
   }
 
   return (

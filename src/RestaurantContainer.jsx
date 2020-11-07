@@ -8,8 +8,6 @@ import ReviewFormContainer from './ReviewFormContainer';
 
 import ReviewsContainer from './ReviewsContainer';
 
-import Reviews from './Reviews';
-
 import { loadRestaurant } from './actions';
 
 import { get } from './utils';
