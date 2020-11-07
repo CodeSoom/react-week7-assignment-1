@@ -18,7 +18,7 @@ describe('LogoutForm', () => {
   });
 
   it('clicks "Logout" button', () => {
-    const { getByText } = renderLogoutForm({});
+    const { getByText } = renderLogoutForm();
 
     const logoutButton = getByText('LOGOUT');
 
