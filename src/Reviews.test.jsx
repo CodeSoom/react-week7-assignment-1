@@ -5,8 +5,12 @@ import { render } from '@testing-library/react';
 import Reviews from './Reviews';
 
 describe('Reviews', () => {
+  function renderReviews(reviews) {
+    return render(<Reviews reviews={reviews} />);
+  }
+
   it('renders title', () => {
-    const { container } = render(<Reviews reviews={[]} />);
+    const { container } = renderReviews([]);
 
     expect(container).toHaveTextContent('리뷰');
   });
@@ -30,7 +34,7 @@ describe('Reviews', () => {
     ];
 
     it('renders reviews', () => {
-      const { container } = render(<Reviews reviews={reviews} />);
+      const { container } = renderReviews(reviews);
 
       reviews.forEach(({ name, score, description }) => {
         expect(container).toHaveTextContent(name);
@@ -42,7 +46,7 @@ describe('Reviews', () => {
 
   context('without reviews', () => {
     it('renders no review message', () => {
-      const { container } = render(<Reviews reviews={[]} />);
+      const { container } = renderReviews([]);
 
       expect(container).toHaveTextContent('리뷰가 없어요');
     });
