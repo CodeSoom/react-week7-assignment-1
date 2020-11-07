@@ -5,10 +5,10 @@ import {
   fetchRestaurant,
 } from './services/api';
 
-export function changeLoginFields(loginFields) {
+export function changeLoginFields({ name, value }) {
   return {
     type: 'changeLoginFields',
-    payload: { loginFields },
+    payload: { name, value },
   };
 }
 
