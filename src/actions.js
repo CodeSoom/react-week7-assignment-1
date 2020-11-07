@@ -101,5 +101,10 @@ export function requestLogin() {
     // state = email password
     // HTTP POST <-- email, pass
     // dispatch(setAccessToken)
+    const { reviewFields: { email, password } } = getState();
+
+    const accsseToken = await postLogin({ email, password});
+
+    dispatch(setAccessToken(accsseToken));
   }
 }
