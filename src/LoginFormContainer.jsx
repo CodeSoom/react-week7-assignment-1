@@ -8,15 +8,8 @@ import { get } from './utils';
 
 import {
   changeLoginField,
+  requestLogin,
 } from './actions';
-
-// TODO : dispatch, useSelector
-
-function requestLogin() {
-  return {
-    type: 'requestLogin',
-  };
-}
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();

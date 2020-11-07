@@ -92,3 +92,11 @@ export function changeLoginField({ name, value }) {
     payload: { name, value },
   };
 }
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const { loginFields: { email, password } } = getState();
+
+    const accessToken = await postLogin({ email, password });
+  };
+}
