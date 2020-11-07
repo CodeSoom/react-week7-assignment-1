@@ -11,6 +11,7 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
 } from './actions';
 
 const middlewares = [thunk];
@@ -109,6 +110,28 @@ describe('actions', () => {
       expect(action).toEqual({
         type: 'changeLoginFields',
         payload: { name: 'email', value: 'wow@wow.com' },
+      });
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginFields: {
+          email: 'test@test.com',
+          password: 'test',
+        },
+      });
+    });
+
+    it('dispatches setAccessToken', async () => {
+      await store.dispatch(requestLogin({ email: 'wow@wow.com', password: 'wow' }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'setAccessToken',
+        payload: { accessToken: {} },
       });
     });
   });
