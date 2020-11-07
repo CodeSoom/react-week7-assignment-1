@@ -98,6 +98,13 @@ const reducers = {
       },
     };
   },
+
+  deleteAccessToken(state) {
+    return {
+      ...state,
+      accessToken: '',
+    };
+  },
 };
 
 function defaultReducer(state) {

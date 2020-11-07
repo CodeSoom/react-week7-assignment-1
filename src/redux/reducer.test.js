@@ -12,6 +12,7 @@ import {
   setPassword,
   setDescription,
   setScore,
+  deleteAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -197,6 +198,18 @@ describe('reducer', () => {
       const state = reducer(initialState, setScore(5));
 
       expect(state.review.score).toBe(5);
+    });
+  });
+
+  describe('deleteAccessToken', () => {
+    it('changes score', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, deleteAccessToken());
+
+      expect(state.accessToken).toBe('');
     });
   });
 });
