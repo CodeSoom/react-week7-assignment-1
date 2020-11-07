@@ -32,7 +32,7 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(changeReviewFields({ name, value }));
   }
 
-  function handleSubmit(restaurantId) {
+  function handleSubmit() {
     dispatch(sendReview(restaurantId));
   }
 
