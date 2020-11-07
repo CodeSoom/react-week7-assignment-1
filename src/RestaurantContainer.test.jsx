@@ -10,11 +10,14 @@ describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
   function renderRestaurantContainer() {
-    return render(<RestaurantContainer restaurantId="1" />);
+    return render((
+      <RestaurantContainer restaurantId="1" />
+    ));
   }
 
   beforeEach(() => {
     dispatch.mockClear();
+
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
@@ -59,8 +62,18 @@ describe('RestaurantContainer', () => {
         target: { value: '5' },
       });
 
+      expect(dispatch).toBeCalledWith({
+        type: 'changeReviewField',
+        payload: { name: 'score', value: '5' },
+      });
+
       fireEvent.change(getByLabelText('리뷰 내용'), {
         target: { value: '최고의 맛!' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeReviewField',
+        payload: { name: 'description', value: '최고의 맛!' },
       });
     });
   });
