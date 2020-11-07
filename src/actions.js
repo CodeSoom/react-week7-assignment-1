@@ -105,8 +105,15 @@ export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginField: { email, password } } = getState();
 
-    const accessToken = await postLogin({ email, password });
+    try {
+      const accessToken = await postLogin({ email, password });
 
-    dispatch(setAccessToken(accessToken));
+      localStorage.setItem('accessToken', accessToken);
+
+      dispatch(setAccessToken(accessToken));
+    } catch (e) {
+      // TODO: Login Error Message
+      console.error('Failed to login: ', e);
+    }
   };
 }

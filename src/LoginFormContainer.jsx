@@ -7,7 +7,6 @@ import LoginForm from './LoginForm';
 import {
   requestLogin,
   changeLoginField,
-  setAccessToken,
 } from './actions';
 
 import { get } from './utils';
