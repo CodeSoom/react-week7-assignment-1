@@ -6,6 +6,6 @@ export function saveItem(key, value) {
   return localStorage.setItem(key, value);
 }
 
-export function removeItem(key) {
+export function deleteItem(key) {
   return localStorage.removeItem(key);
 }

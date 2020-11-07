@@ -1,27 +1,31 @@
-import { loadItem, saveItem, removeItem } from './storage';
-
-jest.mock('./storage');
+import { loadItem, saveItem, deleteItem } from './storage';
 
 describe('storage', () => {
   const key = 'accessToken';
   const value = 'ACCESSTOKEN';
 
+  const getItem = jest.fn(() => value);
+  const setItem = jest.fn();
+  const removeItem = jest.fn();
+
+  beforeEach(() => {
+    Storage.prototype.getItem = getItem;
+    Storage.prototype.setItem = setItem;
+    Storage.prototype.removeItem = removeItem;
+  });
+
   it('loadItem', () => {
-    loadItem.mockImplementation(() => value);
-
-    const accessToken = loadItem(key);
-
-    expect(accessToken).toBe(value);
+    expect(loadItem(key)).toBe(value);
   });
 
   it('saveItem', () => {
     saveItem(key, value);
 
-    expect(saveItem).toBeCalledWith(key, value);
+    expect(setItem).toBeCalledWith(key, value);
   });
 
-  it('removeItem', () => {
-    removeItem(key);
+  it('deleteItem', () => {
+    deleteItem(key);
 
     expect(removeItem).toBeCalledWith(key);
   });
