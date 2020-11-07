@@ -124,7 +124,7 @@ describe('actions', () => {
     });
   });
 
-  describe('dispatch postReview', async () => {
+  describe('sendReview', () => {
     beforeEach(() => {
       store = mockStore({
         reviewField: {
@@ -134,13 +134,17 @@ describe('actions', () => {
       });
     });
 
-    await store.dispatch(sendReview());
+    it('dispatch sendReview', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
 
-    const actions = store.getActions();
+      const actions = store.getActions();
 
-    expect(actions).toEqual([
-      { type: 'changeReviewField', payload: { name: 'score', value: 0 } },
-      { type: 'changeReviewField', payload: { name: 'description', value: '' } },
-    ]);
+      expect(actions).toEqual([
+        { type: 'changeReviewField', payload: { name: 'score', value: 0 } },
+        { type: 'changeReviewField', payload: { name: 'description', value: '' } },
+        { type: 'setRestaurant', payload: { restaurant: null } },
+        { type: 'setRestaurant', payload: { restaurant: {} } },
+      ]);
+    });
   });
 });

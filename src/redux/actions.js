@@ -130,16 +130,16 @@ export function sendReview({ restaurantId }) {
     const { reviewField: { score, description }, accessToken } = getState();
 
     dispatch(
-      changeLoginField({
+      changeReviewField({
         name: 'score',
-        description: 0,
+        value: 0,
       }),
     );
 
     dispatch(
-      changeLoginField({
+      changeReviewField({
         name: 'description',
-        description: '',
+        value: '',
       }),
     );
 
