@@ -13,7 +13,7 @@ import { get } from './utils';
 
 function ReveiwForm({ onChange }) {
   function handleChange(event) {
-    const { targer: { name, value } } = event;
+    const { target: { name, value } } = event;
     onChange({ name, value });
   }
 
@@ -26,6 +26,7 @@ function ReveiwForm({ onChange }) {
         <input
           type="number"
           id="review-score"
+          name="score"
           onChange={handleChange}
         />
       </div>
@@ -36,6 +37,7 @@ function ReveiwForm({ onChange }) {
         <input
           type="text"
           id="review-description"
+          name="description"
           onChange={handleChange}
         />
       </div>
@@ -65,9 +67,7 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReveiwForm
-        onChange={handleChange}
-      />
+      <ReveiwForm onChange={handleChange} />
     </>
   );
 }
