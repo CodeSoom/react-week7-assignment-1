@@ -14,6 +14,8 @@ import { get } from './utils';
 
 import ReviewForm from './ReviewForm';
 
+import Reviews from './Reviews';
+
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
@@ -44,8 +46,7 @@ export default function RestaurantContainer({ restaurantId }) {
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
-      <h2>리뷰</h2>
-      <p>정말 맛있어요!</p>
+      <Reviews />
     </>
   );
 }

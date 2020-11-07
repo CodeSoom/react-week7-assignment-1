@@ -142,8 +142,6 @@ export function sendReview({ restaurantId }) {
     });
     const { reviews } = await fetchReviews({ restaurantId });
 
-    console.log(reviews);
-
     dispatch(setReviews({ reviews }));
   };
 }
