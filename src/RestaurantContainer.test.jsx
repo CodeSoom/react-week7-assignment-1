@@ -56,10 +56,10 @@ describe('RestaurantContainer', () => {
     });
 
     it('renders review write form', () => {
-      const { queryByLabelText } = renderRestaurantContainer();
+      const { container } = renderRestaurantContainer();
 
-      expect(queryByLabelText('평점')).not.toBeNull();
-      expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+      expect(container).toHaveTextContent('평점');
+      expect(container).toHaveTextContent('리뷰 내용');
     });
 
     it('listen change events', () => {

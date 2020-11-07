@@ -4,46 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
 
+import ReviewForm from './ReviewForm';
+
 import {
   loadRestaurant,
   changeReviewField,
 } from './actions';
 
 import { get } from './utils';
-
-function ReveiwForm({ onChange }) {
-  function handleChange(event) {
-    const { target: { name, value } } = event;
-    onChange({ name, value });
-  }
-
-  return (
-    <>
-      <div>
-        <label htmlFor="review-score">
-          평점
-        </label>
-        <input
-          type="number"
-          id="review-score"
-          name="score"
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="review-description">
-          리뷰 내용
-        </label>
-        <input
-          type="text"
-          id="review-description"
-          name="description"
-          onChange={handleChange}
-        />
-      </div>
-    </>
-  );
-}
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -67,7 +35,7 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReveiwForm onChange={handleChange} />
+      <ReviewForm onChange={handleChange} />
     </>
   );
 }
