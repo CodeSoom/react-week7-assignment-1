@@ -86,12 +86,12 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
-export function changeLoginField({ email, password }) {
+export function changeLoginField({ name, value }) {
   return {
     type: 'changeLoginField',
     payload: {
-      email,
-      password,
+      name,
+      value,
     },
   };
 }

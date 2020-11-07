@@ -1,4 +1,3 @@
-import { changeLoginField } from './actions';
 import { equal } from './utils';
 
 const initialState = {
@@ -56,12 +55,10 @@ const reducers = {
     };
   },
 
-  changeLoginField(state, { payload: { name, value }}) {
+  changeLoginField(state, { payload: { name, value } }) {
     return {
       ...state,
-      loginFields: {
-        email: 'tester@example.com',
-      },
+      loginFields: { [name]: value },
     };
   },
 };
