@@ -10,10 +10,7 @@ const initialState = {
   email: '',
   password: '',
   accessToken: '',
-  review: {
-    description: '',
-    score: null,
-  },
+  review: {},
 };
 
 const reducers = {

@@ -3,30 +3,36 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantReview from '../components/RestaurantReview';
 import { get } from '../utils';
-// import {
-//   setReview,
-//   postReview,
-// } from '../redux/actions';
+import {
+  setScore,
+  setDescription,
+  writeReview,
+} from '../redux/actions';
 
-export default function RestaurantReviewContainer() {
+export default function RestaurantReviewContainer({ restaurantId }) {
   const { description, score } = useSelector(get('review'));
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // function handleClick() {
-  //   dispatch(setReview());
-  // }
+  function handleClick() {
+    dispatch(writeReview({ restaurantId }));
+  }
 
-  // function handleChange() {
-  //   dispatch(postReview());
-  // }
+  function handleChangeDescription() {
+    dispatch(setDescription());
+  }
+
+  function handleChangeScore() {
+    dispatch(setScore());
+  }
 
   return (
     <RestaurantReview
       description={description}
       score={score}
-      // onClick={handleClick}
-      // onChange={handleChange}
+      onClick={handleClick}
+      onChangeScore={handleChangeScore}
+      onChangeDescription={handleChangeDescription}
     />
   );
 }
