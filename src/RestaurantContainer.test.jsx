@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
+import reviews from '../fixtures/reviews';
+
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
@@ -104,6 +106,16 @@ describe('RestaurantContainer', () => {
         fireEvent.click(getByText('리뷰 남기기'));
 
         expect(dispatch).toBeCalledTimes(2);
+      });
+
+      it('render reviews', () => {
+        const { queryByText } = renderRestaurantContainer();
+
+        reviews.forEach(({ name, score, description }) => {
+          expect(queryByText(name)).not.toBeNull();
+          expect(queryByText(`${score}점`)).not.toBeNull();
+          expect(queryByText(description)).not.toBeNull();
+        });
       });
     });
   });
