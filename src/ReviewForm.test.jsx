@@ -1,9 +1,5 @@
 import React from 'react';
 
-import { MemoryRouter } from 'react-router-dom';
-
-import { useDispatch, useSelector } from 'react-redux';
-
 import { fireEvent, render } from '@testing-library/react';
 
 import ReviewForm from './ReviewForm';

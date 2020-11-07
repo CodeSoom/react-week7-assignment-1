@@ -105,5 +105,4 @@ describe('App', () => {
       expect(dispatch).toBeCalled();
     });
   });
-
 });

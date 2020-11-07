@@ -2,7 +2,7 @@ import React from 'react';
 
 import TextField from './TextField';
 
-export default function ReviewForm({ onChange, onSubmit }) {
+export default function ReviewDetail({ onChange, onSubmit }) {
   return (
     <>
       <TextField

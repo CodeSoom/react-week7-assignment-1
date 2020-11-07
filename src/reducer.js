@@ -12,7 +12,7 @@ const initialState = {
   reviewFields: {
     score: '',
     description: '',
-  }
+  },
 };
 
 const reducers = {
