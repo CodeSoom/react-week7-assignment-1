@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -122,5 +123,19 @@ export function changeReviewFields({ name, value }) {
       name,
       value,
     },
+  };
+}
+
+export function sendReview(restaurantId) {
+  return async (dispatch, getState) => {
+    const {
+      accessToken,
+      ReviewFields:
+      { score, description },
+    } = getState();
+
+    await postReview({
+      accessToken, score, description, restaurantId,
+    });
   };
 }
