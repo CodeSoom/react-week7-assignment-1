@@ -7,9 +7,9 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
-  email: '',
-  password: '',
-  accessToken: '',
+  email: null,
+  password: null,
+  accessToken: sessionStorage.getItem('accessToken'),
   review: {},
 };
 
@@ -59,6 +59,8 @@ const reducers = {
   },
 
   setAccessToken(state, { payload: { accessToken } }) {
+    sessionStorage.setItem('accessToken', accessToken);
+
     return {
       ...state,
       accessToken,
@@ -100,6 +102,8 @@ const reducers = {
   },
 
   deleteAccessToken(state) {
+    sessionStorage.removeItem('accessToken');
+
     return {
       ...state,
       accessToken: '',
