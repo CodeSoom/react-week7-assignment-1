@@ -17,6 +17,13 @@ describe('LoginFormContainer', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: 'test@test',
+        password: '1234'
+      }
+    }))
   })
 
   function renderLoginFormContainer() {
@@ -28,8 +35,8 @@ describe('LoginFormContainer', () => {
   it('render input controls', () => {
     const { getByLabelText } = renderLoginFormContainer();
     
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    expect(getByLabelText('E-mail').value).toBe('test@test');
+    expect(getByLabelText('Password').value).toBe('1234');
   })
 
   it('render "Log In" button', () => {
