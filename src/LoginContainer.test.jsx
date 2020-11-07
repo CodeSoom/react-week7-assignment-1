@@ -10,6 +10,7 @@ describe('<LoginContainer />', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
+    dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
@@ -53,5 +54,15 @@ describe('<LoginContainer />', () => {
     });
 
     expect(dispatch).toBeCalledTimes(1);
+  });
+
+  it('listens the log in button click event', () => {
+    const { getByRole } = render(
+      <LoginContainer />,
+    );
+
+    fireEvent.click(getByRole('button'));
+
+    expect(dispatch).toBeCalled();
   });
 });
