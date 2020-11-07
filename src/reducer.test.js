@@ -11,6 +11,7 @@ import {
   setAccessToken,
   logout,
   changeReviewField,
+  setReviews,
 } from './actions';
 
 describe('reducer', () => {
@@ -20,6 +21,7 @@ describe('reducer', () => {
       categories: [],
       restaurants: [],
       restaurant: null,
+      restaurantReviews: [],
       selectedRegion: null,
       selectedCategory: null,
       loginFields: {
@@ -100,6 +102,27 @@ describe('reducer', () => {
 
       expect(state.restaurant.id).toBe(1);
       expect(state.restaurant.name).toBe('마법사주방');
+    });
+  });
+
+  describe('setReviews', () => {
+    it('changes restaurant reviews', () => {
+      const initialState = {
+        restaurantReviews: [],
+      };
+
+      const reviews = [
+        {
+          id: 1, restaurantId: 1, name: '테스터', score: 5, description: 'GOOD',
+        },
+        {
+          id: 2, restaurantId: 1, name: '테스터', score: 5, description: 'Great',
+        },
+      ];
+
+      const state = reducer(initialState, setReviews({ reviews }));
+
+      expect(state.restaurantReviews).toHaveLength(2);
     });
   });
 
