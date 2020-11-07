@@ -26,11 +26,12 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방', reviews :[] },
+      restaurant: { id: 1, name: '마녀주방', reviews: [] },
       loginField: {
         email: '',
         password: '',
       },
+      accessToken: '',
     }));
   });
 
@@ -86,8 +87,6 @@ describe('App', () => {
     it('renders the login page', () => {
       const { container } = renderApp({ path: '/login' });
 
-      expect(container).toHaveTextContent('E-mail');
-      expect(container).toHaveTextContent('Password');
       expect(container).toHaveTextContent('Log In');
     });
   });

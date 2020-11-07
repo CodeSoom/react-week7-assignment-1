@@ -13,9 +13,10 @@ describe('LoginPage', () => {
       email: '',
       password: '',
     },
+    accessToken: '',
   }));
 
-  const { getByLabelText } = render((
+  const { container } = render((
     <LoginPage />
   ));
 
@@ -23,8 +24,7 @@ describe('LoginPage', () => {
     jest.clearAllMocks();
   });
 
-  it('render login form ', () => {
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+  it('render title ', () => {
+    expect(container).toHaveTextContent('Log In');
   });
 });

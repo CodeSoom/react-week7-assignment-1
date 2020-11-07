@@ -82,8 +82,12 @@ describe('LoginContainer', () => {
   });
 
   context('with accessToken', () => {
+    given('loginField', () => ({
+      email: '',
+      password: '',
+    }));
     given('accessToken', () => ({
-      accessToken: '',
+      accessToken: 'token',
     }));
 
     it('render logout button', () => {
