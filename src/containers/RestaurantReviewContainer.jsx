@@ -9,7 +9,7 @@ import { get } from '../utils';
 // } from '../redux/actions';
 
 export default function RestaurantReviewContainer() {
-  const review = useSelector(get('review'));
+  const { description, score } = useSelector(get('review'));
 
   // const dispatch = useDispatch();
 
@@ -23,7 +23,8 @@ export default function RestaurantReviewContainer() {
 
   return (
     <RestaurantReview
-      review={review}
+      description={description}
+      score={score}
       // onClick={handleClick}
       // onChange={handleChange}
     />

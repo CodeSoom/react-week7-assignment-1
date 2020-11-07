@@ -17,12 +17,16 @@ describe('RestaurantReviewContainer', () => {
 
   it('renders component', () => {
     useSelector.mockImplementation((selector) => selector({
-      review: 'review',
+      review: {
+        description: 'review',
+        score: 5,
+      },
     }));
 
     renderRestaurantReviewContainer();
 
     expect(screen.getByDisplayValue('review')).toBeInTheDocument();
+    expect(screen.getByDisplayValue('5')).toBeInTheDocument();
   });
 
   // context('when changes review', () => {

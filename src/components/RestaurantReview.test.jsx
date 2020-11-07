@@ -5,40 +5,58 @@ import RestaurantReview from './RestaurantReview';
 
 describe('RestaurantReview', () => {
   const handleClick = jest.fn();
-  const handleChange = jest.fn();
+  const handleChangeScore = jest.fn();
+  const handleChangeDescription = jest.fn();
 
   beforeEach(() => {
     handleClick.mockClear();
-    handleChange.mockClear();
+    handleChangeScore.mockClear();
+    handleChangeDescription.mockClear();
   });
 
-  const renderRestaurantReview = ({ review }) => render(
+  const renderRestaurantReview = ({ score, description }) => render(
     <RestaurantReview
-      review={review}
+      score={score}
+      description={description}
       onClick={handleClick}
-      onChange={handleChange}
+      onChangeDescription={handleChangeDescription}
+      onChangeScore={handleChangeScore}
     />,
   );
 
   it('renders input and button', () => {
     renderRestaurantReview({});
 
+    expect(screen.getByPlaceholderText('평가 점수')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('리뷰를 작성해 주세요!')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: '작성하기' })).toBeInTheDocument();
   });
 
-  context('when review is changed', () => {
-    it('call onChange', () => {
+  context('when input field is changed', () => {
+    it('call onChangeDescription', () => {
       renderRestaurantReview({});
 
-      expect(handleChange).not.toBeCalled();
+      expect(handleChangeDescription).not.toBeCalled();
 
       fireEvent.change(
         screen.getByPlaceholderText('리뷰를 작성해 주세요!'),
         { target: { value: 'review' } },
       );
 
-      expect(handleChange).toBeCalled();
+      expect(handleChangeDescription).toBeCalled();
+    });
+
+    it('call onChangeScore', () => {
+      renderRestaurantReview({});
+
+      expect(handleChangeScore).not.toBeCalled();
+
+      fireEvent.change(
+        screen.getByPlaceholderText('평가 점수'),
+        { target: { value: 5 } },
+      );
+
+      expect(handleChangeScore).toBeCalled();
     });
   });
 
@@ -56,7 +74,7 @@ describe('RestaurantReview', () => {
 
   context('with review value', () => {
     it('can click button', () => {
-      renderRestaurantReview({ review: 'review' });
+      renderRestaurantReview({ description: 'review', score: 5 });
 
       expect(handleClick).not.toBeCalled();
 
