@@ -33,17 +33,12 @@ describe('RestaurantPage', () => {
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  });
 
-  context('without params props', () => {
-    it('renders name', () => {
-      const { container } = render(
-        <MemoryRouter initialEntries={['/restaurants/1']}>
-          <RestaurantPage />
-        </MemoryRouter>,
-      );
+    it('nothing renders if undefined restaurant id', () => {
+      const params = { id: 'undefined' };
 
-      expect(container).toHaveTextContent('마법사주방');
+      render(<RestaurantPage params={params} />);
+      // *TODO: render error message
     });
   });
 });
