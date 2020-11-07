@@ -2,7 +2,7 @@ import React from 'react';
 
 import TextField from './TextField';
 
-export default function ReviewForm({ onChange }) {
+export default function ReviewForm({ onChange, onSubmit }) {
   return (
     <>
       <div>
@@ -22,6 +22,7 @@ export default function ReviewForm({ onChange }) {
       </div>
       <button
         type="button"
+        onClick={onSubmit}
       >
         리뷰 남기기
       </button>
