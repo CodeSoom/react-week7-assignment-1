@@ -17,6 +17,7 @@ jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
+  let accessToken = '';
 
   beforeEach(() => {
     dispatch.mockClear();
@@ -34,6 +35,8 @@ describe('App', () => {
       loginFields: { email: '', password: '' },
       reviewFields: { score: '', description: '' },
     }));
+
+    loadItem.mockImplementation(() => accessToken);
   });
 
   function renderApp({ path }) {
@@ -93,13 +96,8 @@ describe('App', () => {
   });
 
   context('when logged in', () => {
-    const accessToken = 'ACCESS_TOKEN';
-
-    beforeEach(() => {
-      loadItem.mockImplementation(() => accessToken);
-    });
-
     it('calls dispatch with setAccessToken action', () => {
+      accessToken = 'ACCESS_TOKEN';
       renderApp({ path: '/' });
 
       expect(dispatch).toBeCalledWith({
@@ -110,13 +108,8 @@ describe('App', () => {
   });
 
   context('when logged out', () => {
-    const accessToken = '';
-
-    beforeEach(() => {
-      loadItem.mockImplementation(() => accessToken);
-    });
-
     it("doesn't call dispatch", () => {
+      accessToken = '';
       renderApp({ path: '/' });
 
       expect(dispatch).not.toBeCalled();
