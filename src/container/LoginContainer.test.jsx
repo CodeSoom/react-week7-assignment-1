@@ -33,9 +33,7 @@ describe('LoginContainer', () => {
       password: 'test',
     }));
 
-    given('accessToken', () => ({
-      accessToken: '',
-    }));
+    given('accessToken', () => '');
 
     describe('login fields change', () => {
       it('render changed value in input from state', () => {
@@ -86,9 +84,7 @@ describe('LoginContainer', () => {
       email: '',
       password: '',
     }));
-    given('accessToken', () => ({
-      accessToken: 'token',
-    }));
+    given('accessToken', () => 'token');
 
     it('render logout button', () => {
       const { getByText } = renderLoginContainer();

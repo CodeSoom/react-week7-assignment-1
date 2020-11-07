@@ -16,7 +16,7 @@ export default function LoginContainer() {
   const dispatch = useDispatch();
 
   const { email, password } = useSelector(get('loginField'));
-  const { accessToken } = useSelector(get('accessToken'));
+  const accessToken = useSelector(get('accessToken'));
 
   function handleChangeLoginFields({ name, value }) {
     dispatch(changeLoginField({ name, value }));
@@ -28,17 +28,19 @@ export default function LoginContainer() {
 
   function handleClickLogoutButton() {
     dispatch(setAccessToken(''));
+    ['email', 'password'].forEach((name) => {
+      dispatch(changeLoginField({ name, value: '' }));
+    });
   }
 
-  if (accessToken !== '') {
+  if (accessToken) {
     return (
-      <button type="button" onClick={handleClickLogoutButton}> Log out</button>
+      <button type="button" onClick={handleClickLogoutButton}>Log out</button>
     );
   }
 
   return (
     <>
-
       <LoginForm
         email={email}
         password={password}
