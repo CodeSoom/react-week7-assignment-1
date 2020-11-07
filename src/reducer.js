@@ -86,6 +86,16 @@ const reducers = {
       },
     };
   },
+
+  changeReviewField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewFields: {
+        ...state.reviewFields,
+        [name]: value,
+      },
+    };
+  },
 };
 
 function defaultReducer(state) {
