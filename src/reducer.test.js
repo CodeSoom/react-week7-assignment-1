@@ -10,6 +10,7 @@ import {
   changeLoginField,
   setAccessToken,
   logout,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -184,6 +185,34 @@ describe('reducer', () => {
       const state = reducer(initialState, logout(''));
 
       expect(state.accessToken).toBe('');
+    });
+  });
+
+  // changeReviewField
+  describe('changeReviewField', () => {
+    const initialState = {
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+    };
+
+    it('changes review scorce', () => {
+      const state = reducer(
+        initialState,
+        changeReviewField({ name: 'score', value: '5' }),
+      );
+
+      expect(state.reviewFields.score).toBe('5');
+    });
+
+    it('changes review description', () => {
+      const state = reducer(
+        initialState,
+        changeReviewField({ name: 'description', value: '완전 맛집!' }),
+      );
+
+      expect(state.reviewFields.score).toBe('완전 맛집!');
     });
   });
 });
