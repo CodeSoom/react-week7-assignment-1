@@ -8,7 +8,7 @@ import {
   fetchReviews,
 } from './services/api';
 
-import { saveItem } from './services/storage';
+import { removeItem, saveItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -129,6 +129,8 @@ export function requestLogin() {
 }
 
 export function logout() {
+  removeItem('accessToken');
+
   return {
     type: 'logout',
   };
@@ -148,6 +150,7 @@ export function sendReview({ restaurantId }) {
     await postReview({
       accessToken, restaurantId, score, description,
     });
+
     const { reviews } = await fetchReviews({ restaurantId });
 
     dispatch(setReviews({ reviews }));

@@ -5,9 +5,9 @@ import { render } from '@testing-library/react';
 import LogoutForm from './LogoutForm';
 
 describe('LogoutForm', () => {
-  it('renders "Log Out" button', () => {
+  it('renders "Log out" button', () => {
     const { getByText } = render(<LogoutForm />);
 
-    expect(getByText('Log Out')).not.toBeNull();
+    expect(getByText('Log out')).not.toBeNull();
   });
 });
