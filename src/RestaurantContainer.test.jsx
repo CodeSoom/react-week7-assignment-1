@@ -92,7 +92,7 @@ describe('RestaurantContainer', () => {
 
       expect(dispatch).toBeCalledWith({
         type: '',
-        pyyload: {},
+        payload: {},
       });
     });
   });

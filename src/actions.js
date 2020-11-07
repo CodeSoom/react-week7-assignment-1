@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
 
 import { saveItem } from './services/storage';
@@ -133,16 +134,14 @@ export function changeReviewField({ name, value }) {
   };
 }
 
-export function sendReview() {
+export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
-    // postReview
-    // TODO: dispatch(loadRestaurant)
-    const { reviewFields: { score, description } } = getState();
+    const { accessToken, reviewFields: { score, description } } = getState();
 
     try {
-      const result = await postReview({ score, description });
-
-      dispatch(postReview());
+      await postReview({
+        accessToken, restaurantId, score, description,
+      });
     } catch (e) {
       // TODO: 리뷰 남기기 Error Message
       console.error('Failed to send review: ', e);
