@@ -24,10 +24,5 @@ export async function postReview({
   score,
   description,
 }) {
-  return {
-    accessToken,
-    restaurantId,
-    score,
-    description,
-  };
+  return {};
 }
