@@ -14,7 +14,6 @@ import {
 
 import { get } from './utils';
 
-
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
