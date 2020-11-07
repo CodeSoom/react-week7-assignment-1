@@ -2,6 +2,12 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function LoginFormContainer() {
+  const dispatch = useDispatch();
+
+  function handleClick() {
+    // click
+    // dsipatch()
+  }
 
   return (
     <>
@@ -17,6 +23,12 @@ export default function LoginFormContainer() {
         </label>
         <input type="password" id="login-password"/>
       </div>
+      <button
+        type='button'
+        onClick={handleClick}
+      >
+        Log In
+      </button>
     </>
   );
 }
