@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ReviewList({ reviews = [] }) {
+export default function Reviews({ reviews = [] }) {
   return (
     <ul>
       {

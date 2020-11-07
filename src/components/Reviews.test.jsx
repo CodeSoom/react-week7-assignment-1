@@ -1,14 +1,14 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import ReviewList from './ReviewList';
+import Reviews from './Reviews';
 
-describe('ReviewList', () => {
-  const renderReviewList = (reviews) => render(<ReviewList reviews={reviews} />);
+describe('Reviews', () => {
+  const renderReviews = (reviews) => render(<Reviews reviews={reviews} />);
 
   context('with reviews', () => {
     it('renders reviews', () => {
-      renderReviewList([
+      renderReviews([
         {
           id: 1, name: '테스터', score: 5, description: '매일 먹어요',
         },
@@ -22,7 +22,7 @@ describe('ReviewList', () => {
 
   context('without reviews', () => {
     it('renders nothing', () => {
-      renderReviewList();
+      renderReviews();
 
       expect(screen.queryByText(/테스터/)).not.toBeInTheDocument();
       expect(screen.queryByText(/★★★★★/)).not.toBeInTheDocument();
