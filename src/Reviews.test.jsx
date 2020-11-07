@@ -11,13 +11,23 @@ describe('Reviews', () => {
     return render(<Reviews reviews={reviewList} />);
   }
 
-  it('renders reviews contained name, score and description', () => {
-    const { queryByText } = renderReviewList(reviews);
+  context('without reviews', () => {
+    it('renders no reviews message', () => {
+      const { container } = renderReviewList();
 
-    reviews.forEach(({ name, score, description }) => {
-      expect(queryByText(name)).not.toBeNull();
-      expect(queryByText(`${score}점`)).not.toBeNull();
-      expect(queryByText(description)).not.toBeNull();
+      expect(container).toHaveTextContent(/리뷰가 없어요/);
+    });
+  });
+
+  context('with reviews', () => {
+    it('renders reviews contained name, score and description', () => {
+      const { queryByText } = renderReviewList(reviews);
+
+      reviews.forEach(({ name, score, description }) => {
+        expect(queryByText(name)).not.toBeNull();
+        expect(queryByText(`${score}점`)).not.toBeNull();
+        expect(queryByText(description)).not.toBeNull();
+      });
     });
   });
 });
