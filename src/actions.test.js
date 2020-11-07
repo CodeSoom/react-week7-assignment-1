@@ -102,7 +102,7 @@ describe('actions', () => {
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
 
-      expect(actions[2]).toEqual(setReviews({ reviews: [] }));
+      expect(actions[2]).toEqual(setReviews({}));
     });
   });
 

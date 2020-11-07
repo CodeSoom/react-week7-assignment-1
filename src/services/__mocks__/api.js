@@ -13,6 +13,15 @@ export async function fetchRestaurants() {
 export async function fetchRestaurant() {
   return {};
 }
+
 export async function postLogin() {
   return {};
+}
+
+export async function postReview() {
+  return {};
+}
+
+export async function fetchReviews() {
+  return [];
 }
