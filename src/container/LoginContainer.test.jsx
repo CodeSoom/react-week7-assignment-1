@@ -12,14 +12,6 @@ describe('LoginContainer', () => {
   const inputLabels = ['E-mail', 'Password'];
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => dispatch);
-  useSelector.mockImplementation((selector) => selector({
-    loginField: {
-      email: '',
-      password: '',
-    },
-  }));
-
   function renderLoginContainer() {
     return render((
       <LoginContainer />
@@ -28,46 +20,91 @@ describe('LoginContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
-    jest.clearAllMocks();
+    useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      loginField: given.loginField,
+      accessToken: given.accessToken,
+    }));
   });
 
-  describe('login fields change', () => {
-    it('render changed value in input from state', () => {
-      useSelector.mockImplementation((selector) => selector({
-        loginField: {
-          email: 'tester@example.com',
-          password: 'test',
-        },
-      }));
+  context('without  accessToken', () => {
+    given('loginField', () => ({
+      email: 'tester@example.com',
+      password: 'test',
+    }));
 
-      const { getByLabelText } = renderLoginContainer();
+    given('accessToken', () => ({
+      accessToken: '',
+    }));
 
-      const emailInput = getByLabelText('E-mail');
-      const passwordInput = getByLabelText('Password');
+    describe('login fields change', () => {
+      it('render changed value in input from state', () => {
+        const { getByLabelText } = renderLoginContainer();
 
-      expect(emailInput.value).toBe('tester@example.com');
-      expect(passwordInput.value).toBe('test');
-    });
+        const emailInput = getByLabelText('E-mail');
+        const passwordInput = getByLabelText('Password');
 
-    it('calls field change action', () => {
-      const { getByLabelText } = renderLoginContainer();
-      const value = 'contents';
-
-      inputLabels.forEach((label) => {
-        fireEvent.change(getByLabelText(label), { target: { value } });
+        expect(emailInput.value).toBe('tester@example.com');
+        expect(passwordInput.value).toBe('test');
       });
 
-      expect(dispatch).toBeCalledTimes(2);
+      it('calls field change action', () => {
+        const { getByLabelText } = renderLoginContainer();
+        const value = 'contents';
+
+        inputLabels.forEach((label) => {
+          fireEvent.change(getByLabelText(label), { target: { value } });
+        });
+
+        expect(dispatch).toBeCalledTimes(2);
+      });
+    });
+
+    describe('login button click', () => {
+      it('calls request login action', () => {
+        const { getByText } = renderLoginContainer();
+
+        fireEvent.click(getByText('Log In'));
+
+        expect(dispatch).toBeCalled();
+      });
+    });
+
+    describe('login button click', () => {
+      it('calls request login action', () => {
+        const { getByText } = renderLoginContainer();
+
+        fireEvent.click(getByText('Log In'));
+
+        expect(dispatch).toBeCalled();
+      });
     });
   });
 
-  describe('login button click', () => {
-    it('calls request login action', () => {
+  context('with accessToken', () => {
+    given('accessToken', () => ({
+      accessToken: '',
+    }));
+
+    it('render logout button', () => {
       const { getByText } = renderLoginContainer();
 
-      fireEvent.click(getByText('Log In'));
+      expect(getByText('Log out')).not.toBeNull();
+    });
 
-      expect(dispatch).toBeCalled();
+    describe('logout button click', () => {
+      it('delete accessToken from state by call setAccessToken action', () => {
+        const { getByText } = renderLoginContainer();
+
+        fireEvent.click(getByText('Log out'));
+
+        expect(dispatch).toBeCalledWith({
+          type: 'setAccessToken',
+          payload: {
+            accessToken: '',
+          },
+        });
+      });
     });
   });
 });
