@@ -9,7 +9,10 @@ import { get } from './utils';
 import {
   changeLoginField,
   requestLogin,
+  logout,
 } from './actions';
+
+import LogoutForm from './LogoutForm';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
@@ -25,10 +28,16 @@ export default function LoginFormContainer() {
     dispatch(requestLogin());
   }
 
+  function handleClickLogout() {
+    dispatch(logout(''));
+  }
+
   return (
     <>
       {accessToken ? (
-        <LogoutForm />
+        <LogoutForm
+          onClick={handleClickLogout}
+        />
       ) : (
         <LoginForm
           onChange={handleChange}
