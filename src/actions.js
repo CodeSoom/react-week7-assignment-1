@@ -116,3 +116,10 @@ export function logout() {
     type: 'logout',
   };
 }
+
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: { name, value },
+  };
+}
