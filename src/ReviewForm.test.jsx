@@ -38,4 +38,10 @@ describe('ReviewForm', () => {
       });
     });
   });
+
+  it('renders send button', () => {
+    const { getByText } = renderReviewForm();
+
+    expect(getByText('리뷰 남기기')).not.toBeNull();
+  });
 });
