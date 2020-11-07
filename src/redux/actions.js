@@ -140,6 +140,6 @@ export function writeReview({ restaurantId }) {
       accessToken, restaurantId, score, description,
     });
 
-    dispatch(loadRestaurant(restaurantId));
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }

@@ -39,7 +39,7 @@ export async function postLogin({ email, password }) {
     },
   );
   const data = await response.json();
-  return data;
+  return data.accessToken;
 }
 
 export async function postReview({
@@ -52,7 +52,7 @@ export async function postReview({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authentication: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({ score, description }),
     },

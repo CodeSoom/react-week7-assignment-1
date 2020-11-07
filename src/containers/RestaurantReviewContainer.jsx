@@ -18,12 +18,12 @@ export default function RestaurantReviewContainer({ restaurantId }) {
     dispatch(writeReview({ restaurantId }));
   }
 
-  function handleChangeDescription() {
-    dispatch(setDescription());
+  function handleChangeDescription(value) {
+    dispatch(setDescription(value));
   }
 
-  function handleChangeScore() {
-    dispatch(setScore());
+  function handleChangeScore(value) {
+    dispatch(setScore(value));
   }
 
   return (

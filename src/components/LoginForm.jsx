@@ -11,14 +11,14 @@ export default function LoginForm({
         type="text"
         placeholder="EMAIL"
         value={email}
-        onChange={onChangeEmail}
+        onChange={(e) => onChangeEmail(e.target.value)}
         aria-invalid={!email}
       />
       <input
         type="password"
         placeholder="PASSWORD"
         value={password}
-        onChange={onChangePassword}
+        onChange={(e) => onChangePassword(e.target.value)}
         aria-invalid={!password}
       />
       <button
