@@ -28,27 +28,39 @@ describe('RestaurantPage', () => {
     }));
   });
 
-  context('with params props', () => {
-    it('renders name', () => {
-      const params = { id: '1' };
+  describe('render restaurant name', () => {
+    context('with params props', () => {
+      it('renders name', () => {
+        const params = { id: '1' };
 
-      const { container } = render(
-        <RestaurantPage params={params} />,
-      );
+        const { container } = render(
+          <RestaurantPage params={params} />,
+        );
 
-      expect(container).toHaveTextContent('마법사주방');
+        expect(container).toHaveTextContent('마법사주방');
+      });
+    });
+
+    context('without params props', () => {
+      it('renders name', () => {
+        const { container } = render(
+          <MemoryRouter initialEntries={['/restaurants/1']}>
+            <RestaurantPage />
+          </MemoryRouter>,
+        );
+
+        expect(container).toHaveTextContent('마법사주방');
+      });
     });
   });
 
-  context('without params props', () => {
-    it('renders name', () => {
-      const { container } = render(
-        <MemoryRouter initialEntries={['/restaurants/1']}>
-          <RestaurantPage />
-        </MemoryRouter>,
-      );
+  describe('render review title', () => {
+    const params = { id: '1' };
 
-      expect(container).toHaveTextContent('마법사주방');
-    });
+    const { container } = render(
+      <RestaurantPage params={params} />,
+    );
+
+    expect(container).toHaveTextContent('리뷰');
   });
 });
