@@ -4,7 +4,7 @@ import MenuItems from 'presentational/MenuItems';
 import Reviews from 'presentational/Reviews';
 import ReviewFormContainer from 'container/ReviewFormContainer';
 
-export default function RestaurantDetail({ restaurant, accessToken }) {
+export default function RestaurantDetail({ restaurant, children }) {
   const {
     id, name, address, menuItems, reviews,
   } = restaurant;
@@ -21,7 +21,7 @@ export default function RestaurantDetail({ restaurant, accessToken }) {
       <MenuItems menuItems={menuItems} />
 
       <h3>리뷰</h3>
-      {accessToken && <ReviewFormContainer restaurantId={id} />}
+      {children}
       <Reviews reviews={reviews} />
     </div>
   );

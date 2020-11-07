@@ -19,6 +19,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      accessToken: given.accessToken,
     }));
   });
 
@@ -40,6 +41,8 @@ describe('RestaurantContainer', () => {
       ],
     }));
 
+    given('accessToken', () => '');
+
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
 
@@ -50,11 +53,54 @@ describe('RestaurantContainer', () => {
 
   context('without restaurant', () => {
     given('restaurant', () => null);
+    given('accessToken', () => '');
 
     it('renders loading', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('Loading');
     });
+  });
+
+  context('with accessToken', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+      reviews: [
+        {
+          id: 1, restaurantId: 1, name: '테스터', score: 5, description: '훌륭하다 훌륭하다 지구인놈들',
+        },
+      ],
+    }));
+
+    given('accessToken', () => 'token');
+
+    it('render review form', () => {
+      const { getByLabelText } = renderRestaurantContainer();
+
+      expect(getByLabelText('평점')).not.toBeNull();
+      expect(getByLabelText('리뷰 내용')).not.toBeNull();
+    });
+  });
+
+  context('without accessToken', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+      reviews: [
+        {
+          id: 1, restaurantId: 1, name: '테스터', score: 5, description: '훌륭하다 훌륭하다 지구인놈들',
+        },
+      ],
+    }));
+
+    given('accessToken', () => '');
+
+    const { queryByLabelText } = renderRestaurantContainer();
+
+    expect(queryByLabelText('평점')).not.toBeInTheDocument();
+    expect(queryByLabelText('리뷰 내용')).not.toBeInTheDocument();
   });
 });
