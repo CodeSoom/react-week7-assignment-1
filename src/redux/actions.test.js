@@ -15,6 +15,9 @@ import {
   setAccessToken,
   setEmail,
   setPassword,
+  setDescription,
+  setScore,
+  writeReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -23,6 +26,13 @@ const mockStore = configureStore(middlewares);
 jest.mock('../services/api');
 
 describe('actions', () => {
+  const dispatch = jest.fn();
+
+  beforeEach(() => {
+    dispatch.mockClear();
+    useDispatch.mockImplementation(() => dispatch);
+  });
+
   let store;
 
   describe('loadInitialData', () => {
@@ -125,12 +135,9 @@ describe('actions', () => {
 
   describe('setEmail', () => {
     it('changes email', () => {
-      const dispatch = jest.fn();
-
       useSelector.mockImplementation((selector) => selector({
         email: '',
       }));
-      useDispatch.mockImplementation(() => dispatch);
 
       dispatch(setEmail('tester@example.com'));
 
@@ -145,12 +152,9 @@ describe('actions', () => {
 
   describe('setPassword', () => {
     it('changes email', () => {
-      const dispatch = jest.fn();
-
       useSelector.mockImplementation((selector) => selector({
         password: '',
       }));
-      useDispatch.mockImplementation(() => dispatch);
 
       dispatch(setPassword('tester@example.com'));
 
@@ -160,6 +164,64 @@ describe('actions', () => {
         },
         type: 'setPassword',
       });
+    });
+  });
+
+  describe('setDescription', () => {
+    it('changes review description', () => {
+      useSelector.mockImplementation((selector) => selector({
+        review: {
+          description: '',
+        },
+      }));
+
+      dispatch(setDescription('description'));
+
+      expect(dispatch).toBeCalledWith({
+        payload: {
+          description: 'description',
+        },
+        type: 'setDescription',
+      });
+    });
+  });
+
+  describe('setScore', () => {
+    it('changes review score', () => {
+      useSelector.mockImplementation((selector) => selector({
+        review: {
+          score: 0,
+        },
+      }));
+
+      dispatch(setScore(5));
+
+      expect(dispatch).toBeCalledWith({
+        payload: {
+          score: 5,
+        },
+        type: 'setScore',
+      });
+    });
+  });
+
+  describe('writeReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        review: {
+          score: 5,
+          description: '항상 먹는 제품입니다.',
+        },
+      });
+    });
+
+    it('dispatches writeReview', async () => {
+      await store.dispatch(writeReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
 });
