@@ -132,3 +132,20 @@ export function changeReviewField({ name, value }) {
     payload: { name, value },
   };
 }
+
+export function sendReview() {
+  return async (dispatch, getState) => {
+    // postReview
+    // TODO: dispatch(loadRestaurant)
+    const { reviewFields: { score, description } } = getState();
+
+    try {
+      const result = await postReview({ score, description });
+
+      dispatch(postReview());
+    } catch (e) {
+      // TODO: 리뷰 남기기 Error Message
+      console.error('Failed to send review: ', e);
+    }
+  };
+}
