@@ -7,6 +7,8 @@ import ReviewForm from 'presentational/ReviewForm';
 
 import {
   loadRestaurant,
+  changeReviewField,
+  sendReview,
 } from '_redux/actions';
 
 import { get } from '../utils';
@@ -20,13 +22,14 @@ export default function RestaurantContainer({ restaurantId }) {
 
   const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
+  const { score, description } = useSelector(get('reviewField'));
 
-  function handleChangeReviewField() {
-
+  function handleChangeReviewField({ name, value }) {
+    dispatch(changeReviewField({ name, value }));
   }
 
   function handleSubmit() {
-
+    dispatch(sendReview({ restaurantId }));
   }
 
   if (!restaurant) {
@@ -41,12 +44,15 @@ export default function RestaurantContainer({ restaurantId }) {
         restaurant={restaurant}
         accessToken={accessToken}
       >
-        <ReviewForm
-          score="10"
-          description="description"
-          onChange={handleChangeReviewField}
-          onClick={handleSubmit}
-        />
+        {accessToken && (
+          <ReviewForm
+            score={score}
+            description={description}
+            onChange={handleChangeReviewField}
+            onClick={handleSubmit}
+          />
+        )}
+
       </RestaurantDetail>
     </>
   );

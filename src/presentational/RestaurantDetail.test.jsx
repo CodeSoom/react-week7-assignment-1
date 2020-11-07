@@ -46,24 +46,4 @@ describe('RestaurantDetail', () => {
     expect(container).toHaveTextContent('테스터');
     expect(container).toHaveTextContent('훌륭하다 훌륭하다 지구인놈들');
   });
-
-  context('when exist accessToken', () => {
-    it('render review form', () => {
-      const { getByLabelText, getByText } = renderRestaurantDetail({ accessToken: 'accessToken' });
-
-      expect(getByLabelText('평점')).not.toBeNull();
-      expect(getByLabelText('리뷰 내용')).not.toBeNull();
-
-      expect(getByText('리뷰 남기기')).not.toBeNull();
-    });
-  });
-
-  context('when not exist accessToken', () => {
-    it('render only reviews', () => {
-      const { container } = renderRestaurantDetail();
-
-      expect(container).not.toHaveTextContent('평점');
-      expect(container).not.toHaveTextContent('리뷰 내용');
-    });
-  });
 });

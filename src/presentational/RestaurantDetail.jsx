@@ -2,11 +2,10 @@ import React from 'react';
 
 import MenuItems from 'presentational/MenuItems';
 import Reviews from 'presentational/Reviews';
-import ReviewFormContainer from 'container/ReviewFormContainer';
 
 export default function RestaurantDetail({ restaurant, children }) {
   const {
-    id, name, address, menuItems, reviews,
+    name, address, menuItems, reviews,
   } = restaurant;
 
   return (

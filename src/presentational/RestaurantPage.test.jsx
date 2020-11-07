@@ -25,6 +25,11 @@ describe('RestaurantPage', () => {
           },
         ],
       },
+      reviewField: {
+        score: '',
+        description: '',
+      },
+      accessToken: '',
     }));
   });
 
@@ -52,15 +57,5 @@ describe('RestaurantPage', () => {
         expect(container).toHaveTextContent('마법사주방');
       });
     });
-  });
-
-  describe('render review title', () => {
-    const params = { id: '1' };
-
-    const { container } = render(
-      <RestaurantPage params={params} />,
-    );
-
-    expect(container).toHaveTextContent('리뷰');
   });
 });
