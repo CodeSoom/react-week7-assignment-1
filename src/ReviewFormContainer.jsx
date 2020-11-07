@@ -11,7 +11,7 @@ import {
 
 import { get } from './utils';
 
-export default function ReviewFormContainer({ restaurantId }) {
+export default function ReviewFormContainer({ id }) {
   const dispatch = useDispatch();
 
   const reviewFields = useSelector(get('reviewFields'));
@@ -21,7 +21,11 @@ export default function ReviewFormContainer({ restaurantId }) {
   }
 
   function handleSubmit() {
-    dispatch(sendReview({ restaurantId }));
+    dispatch(sendReview({ restaurantId: id }));
+
+    Object.keys(reviewFields).forEach((name) => {
+      handleChange({ name, value: '' });
+    });
   }
 
   return (

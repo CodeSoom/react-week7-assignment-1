@@ -8,7 +8,7 @@ export default function Reviews({ reviews = [] }) {
   return (
     <div>
       <ul>
-        {reviews.map((review) => (
+        {reviews.reverse().map((review) => (
           <li key={review.id}>
             <div>
               {review.name}

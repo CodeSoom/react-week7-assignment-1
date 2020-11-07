@@ -33,7 +33,7 @@ export default function RestaurantContainer({ restaurantId }) {
       <RestaurantDetail restaurant={restaurant} />
       {accessToken ? (
         <>
-          <ReviewFormContainer />
+          <ReviewFormContainer id={restaurantId} />
           <Reviews
             reviews={restaurant.reviews}
           />
