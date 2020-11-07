@@ -10,6 +10,8 @@ import {
   setAccessToken,
   setEmail,
   setPassword,
+  setDescription,
+  setScore,
 } from './actions';
 
 describe('reducer', () => {
@@ -24,6 +26,10 @@ describe('reducer', () => {
       email: '',
       password: '',
       accessToken: '',
+      review: {
+        description: '',
+        score: null,
+      },
     };
 
     it('returns initialState', () => {
@@ -166,6 +172,34 @@ describe('reducer', () => {
       const state = reducer(initialState, setPassword('test'));
 
       expect(state.password).toBe('test');
+    });
+  });
+
+  describe('setDescription', () => {
+    it('changes description', () => {
+      const initialState = {
+        review: {
+          description: '',
+        },
+      };
+
+      const state = reducer(initialState, setDescription('description'));
+
+      expect(state.review.description).toBe('description');
+    });
+  });
+
+  describe('setScore', () => {
+    it('changes score', () => {
+      const initialState = {
+        review: {
+          score: null,
+        },
+      };
+
+      const state = reducer(initialState, setScore(5));
+
+      expect(state.review.score).toBe(5);
     });
   });
 });

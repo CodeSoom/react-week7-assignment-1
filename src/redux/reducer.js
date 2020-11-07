@@ -10,6 +10,10 @@ const initialState = {
   email: '',
   password: '',
   accessToken: '',
+  review: {
+    description: '',
+    score: null,
+  },
 };
 
 const reducers = {
@@ -75,6 +79,26 @@ const reducers = {
     return {
       ...state,
       password,
+    };
+  },
+
+  setDescription(state, { payload: { description } }) {
+    return {
+      ...state,
+      review: {
+        ...state.review,
+        description,
+      },
+    };
+  },
+
+  setScore(state, { payload: { score } }) {
+    return {
+      ...state,
+      review: {
+        ...state.review,
+        score,
+      },
     };
   },
 };
