@@ -16,9 +16,9 @@ describe('LoginPage', () => {
   });
 
   useSelector.mockImplementation((selector) => selector({
-    loginfields: {
-      email: '',
-      password: '',
+    loginFields: {
+      email: 'test@test',
+      password: '1234',
     },
   }));
 
@@ -28,6 +28,7 @@ describe('LoginPage', () => {
         <LoginPage />
       </MemoryRouter>,
     );
+
     expect(container).toHaveTextContent('Log In');
   });
 
