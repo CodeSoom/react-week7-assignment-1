@@ -19,6 +19,10 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -136,7 +140,7 @@ describe('reducer', () => {
     }
 
     it('change email in fields', () =>{
-      const steat = reducer(
+      const state = reducer(
         initialState,
         changeLoginField({ name: 'email', value: 'test@admin' })
       );
@@ -145,12 +149,12 @@ describe('reducer', () => {
     });
 
     it('change password in fields', () =>{
-      const steat = reducer(
+      const state = reducer(
         initialState,
         changeLoginField({ name: 'password', value: '2222' })
       );
 
-      expect(state.loginFields.email).toEqual('2222');
+      expect(state.loginFields.password).toEqual('2222');
     });
   });
 });
