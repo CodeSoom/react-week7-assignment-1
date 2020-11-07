@@ -93,17 +93,12 @@ describe('LoginContainer', () => {
     });
 
     describe('logout button click', () => {
-      it('delete accessToken from state by call setAccessToken action', () => {
+      it('calls logout action', () => {
         const { getByText } = renderLoginContainer();
 
         fireEvent.click(getByText('Log out'));
 
-        expect(dispatch).toBeCalledWith({
-          type: 'setAccessToken',
-          payload: {
-            accessToken: '',
-          },
-        });
+        expect(dispatch).toBeCalled();
       });
     });
   });
