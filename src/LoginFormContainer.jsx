@@ -12,6 +12,12 @@ import {
 
 // TODO : dispatch, useSelector
 
+function requestLogin() {
+  return {
+    type: 'requestLogin',
+  };
+}
+
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
@@ -22,7 +28,7 @@ export default function LoginFormContainer() {
   }
 
   function handleSubmit() {
-    // dispatch(requestLogin());
+    dispatch(requestLogin());
   }
 
   return (
