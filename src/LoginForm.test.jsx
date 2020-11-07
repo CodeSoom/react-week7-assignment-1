@@ -46,19 +46,20 @@ describe('LoginForm', () => {
     const email = 'test@test';
 
     const password = '1234';
+
     const { getByLabelText } = render(
       <LoginForm
         onChange={handleChange}
-        fields={{ email, password }}
+        fields={{ email: '', password: '' }}
       />,
     );
 
     fireEvent.change(getByLabelText('E-mail'), { target: { value: email } });
 
-    expect(handleChange).toBeCalledWith({ name: 'email', value: 'test@test' });
+    expect(handleChange).toBeCalledWith({ name: 'email', value: email });
 
     fireEvent.change(getByLabelText('Password'), { target: { value: password } });
 
-    expect(handleChange).toBeCalledWith({ name: 'password', value: '1234' });
+    expect(handleChange).toBeCalledWith({ name: 'password', value: password });
   });
 });

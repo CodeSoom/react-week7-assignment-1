@@ -1,18 +1,24 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './LoginForm';
 
 import { get } from './utils';
 
+import {
+  changeLoginField,
+} from './actions';
+
 // TODO : dispatch, useSelector
 
 export default function LoginFormContainer() {
+  const dispatch = useDispatch();
+
   const loginFields = useSelector(get('loginFields'));
 
-  function handleChange() {
-    dispatch(changeLoginField());
+  function handleChange({ name, value }) {
+    dispatch(changeLoginField({ name, value }));
   }
 
   function handleSubmit() {
