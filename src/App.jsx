@@ -18,7 +18,7 @@ import { setAccessToken } from './redux/actions';
 export default function App() {
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem('accessToken');
-  dispatch(setAccessToken({ accessToken }));
+  dispatch(setAccessToken(accessToken));
 
   return (
     <div>

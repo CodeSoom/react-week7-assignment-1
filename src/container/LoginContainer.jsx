@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   changeLoginField,
   requestLogin,
-  setAccessToken,
+  logout,
 } from '_redux/actions';
 
 import LoginForm from '../presentational/LoginForm';
@@ -27,10 +27,7 @@ export default function LoginContainer() {
   }
 
   function handleClickLogoutButton() {
-    dispatch(setAccessToken(''));
-    ['email', 'password'].forEach((name) => {
-      dispatch(changeLoginField({ name, value: '' }));
-    });
+    dispatch(logout());
   }
 
   if (accessToken) {
