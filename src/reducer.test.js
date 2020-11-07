@@ -16,6 +16,7 @@ import {
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      accessToken: '',
       regions: [],
       categories: [],
       restaurants: [],
@@ -26,7 +27,10 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
-      accessToken: '',
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -212,7 +216,7 @@ describe('reducer', () => {
         changeReviewField({ name: 'description', value: '완전 맛집!' }),
       );
 
-      expect(state.reviewFields.score).toBe('완전 맛집!');
+      expect(state.reviewFields.description).toBe('완전 맛집!');
     });
   });
 });
