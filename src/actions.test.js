@@ -11,6 +11,8 @@ import {
   setRestaurants,
   setRestaurant,
   changeLoginField,
+  requestLogin,
+  setReviews,
 } from './actions';
 
 const middlewares = [thunk];
@@ -99,6 +101,8 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+
+      expect(actions[2]).toEqual(setReviews({ reviews: [] }));
     });
   });
 
@@ -118,6 +122,22 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(changeLoginField({ name: 'email', value: ' test@test' }));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: '',
+      });
+    });
+
+    it('dispatchs requestLogin', () => {
+      store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(requestLogin());
     });
   });
 });

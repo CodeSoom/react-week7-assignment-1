@@ -3,12 +3,14 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  fetchReviews,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
 import CATEGORIES from '../../fixtures/categories';
 import RESTAURANTS from '../../fixtures/restaurants';
 import RESTAURANT from '../../fixtures/restaurant';
+import RESTAURANT_REVIEWS from '../../fixtures/restaurantReviews';
 
 describe('api', () => {
   const mockFetch = (data) => {
@@ -65,6 +67,18 @@ describe('api', () => {
       const restaurant = await fetchRestaurant({ restaurantId: 1 });
 
       expect(restaurant).toEqual(RESTAURANT);
+    });
+  });
+
+  describe('fetchReviews', () => {
+    beforeEach(() => {
+      mockFetch(RESTAURANT_REVIEWS);
+    });
+
+    it('returns restaurant reviews', async () => {
+      const reviews = await fetchReviews({ restaurantId: 1 });
+
+      expect(reviews).toEqual(RESTAURANT_REVIEWS);
     });
   });
 });
