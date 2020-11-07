@@ -14,6 +14,29 @@ import {
 
 import { get } from './utils';
 
+function ReviewList({ reviews = [] }) {
+  return (
+    <div>
+      <ul>
+        {reviews.map((review) => (
+          <li key={review.id}>
+            <div>
+              {review.name}
+            </div>
+            <div>
+              {review.score}
+              점
+            </div>
+            <div>
+              {review.description}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
@@ -42,10 +65,15 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail restaurant={restaurant} />
       {accessToken ? (
-        <ReviewForm
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-        />
+        <>
+          <ReviewForm
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+          />
+          <ReviewList
+            reviews={restaurant.reviews}
+          />
+        </>
       ) : null}
     </>
   );
