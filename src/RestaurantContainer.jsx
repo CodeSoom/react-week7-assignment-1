@@ -49,7 +49,7 @@ export default function RestaurantContainer({ restaurantId }) {
           onSubmit={handleSubmit}
         />
       ) : null}
-      <Reviews />
+      <ReviewsContainer />
     </>
   );
 }
