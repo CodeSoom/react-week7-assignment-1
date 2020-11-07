@@ -79,32 +79,6 @@ describe('RestaurantContainer', () => {
         expect(container).toHaveTextContent('평점');
         expect(container).toHaveTextContent('리뷰 내용');
       });
-
-      it('listen change events', () => {
-        const { getByLabelText } = renderRestaurantContainer();
-
-        const controls = [
-          { label: '평점', name: 'score', value: '5' },
-          { label: '리뷰 내용', name: 'description', value: '최고의 맛!' },
-        ];
-
-        controls.forEach(({ label, name, value }) => {
-          fireEvent.change(getByLabelText(label), { target: { value } });
-
-          expect(dispatch).toBeCalledWith({
-            type: 'changeReviewField',
-            payload: { name, value },
-          });
-        });
-      });
-
-      it('renders "리뷰 남기기" button', () => {
-        const { getByText } = renderRestaurantContainer();
-
-        fireEvent.click(getByText('리뷰 남기기'));
-
-        expect(dispatch).toBeCalledTimes(2);
-      });
     });
   });
 });

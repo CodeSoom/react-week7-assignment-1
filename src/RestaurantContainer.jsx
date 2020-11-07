@@ -4,15 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
 
-import ReviewForm from './ReviewForm';
+import ReviewFormContainer from './ReviewFormContainer';
 
 import Reviews from './Reviews';
 
-import {
-  loadRestaurant,
-  changeReviewField,
-  sendReview,
-} from './actions';
+import { loadRestaurant } from './actions';
 
 import { get } from './utils';
 
@@ -32,23 +28,12 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
-  function handleChange({ name, value }) {
-    dispatch(changeReviewField({ name, value }));
-  }
-
-  function handleSubmit() {
-    dispatch(sendReview({ restaurantId }));
-  }
-
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
       {accessToken ? (
         <>
-          <ReviewForm
-            onChange={handleChange}
-            onSubmit={handleSubmit}
-          />
+          <ReviewFormContainer />
           <Reviews
             reviews={restaurant.reviews}
           />
