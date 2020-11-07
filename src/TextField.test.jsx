@@ -18,24 +18,40 @@ describe('TextField', () => {
     ));
   }
 
-  it('renders label and input control', () => {
-    const { container } = renderTextField({ label: '평점', type: 'text', name: 'score' });
+  context('without type', () => {
+    it('renders label and input control', () => {
+      const { container, getByLabelText } = renderTextField({ label: '리뷰 내용', name: 'description' });
 
-    expect(container).toHaveTextContent('평점');
+      expect(getByLabelText('리뷰 내용')).not.toBeNull();
+      expect(container).toContainHTML('type="text"');
+    });
   });
 
-  // it('listen change events', () => {
-  //   const { getByLabelText } = renderTextField();
+  context('with type', () => {
+    it('renders label and input control', () => {
+      const { container, getByLabelText } = renderTextField({ label: '평점', type: 'number', name: 'score' });
 
-  //   const controls = [
-  //     { label: '평점', name: 'score', value: '5' },
-  //     { label: '리뷰 내용', name: 'description', value: '최고의 맛!' },
-  //   ];
+      expect(getByLabelText('평점')).not.toBeNull();
+      expect(container).toContainHTML('type="number"');
+    });
+  });
 
-  //   controls.forEach(({ label, name, value }) => {
-  //     fireEvent.change(getByLabelText(label), { target: { value } });
+  it('listen change events', () => {
+    const controls = [
+      {
+        label: '평점', type: 'number', name: 'score', value: '5',
+      },
+      {
+        label: '리뷰 내용', name: 'description', value: '최고의 맛!',
+      },
+    ];
 
-  //     expect(handleChange).toBeCalledWith({ name, value });
-  //   });
-  // });
+    controls.forEach(({ label, name, value }) => {
+      const { getByLabelText } = renderTextField({ label, name, value });
+
+      fireEvent.change(getByLabelText(label), { target: { value } });
+
+      expect(handleChange).toBeCalledWith({ name, value });
+    });
+  });
 });

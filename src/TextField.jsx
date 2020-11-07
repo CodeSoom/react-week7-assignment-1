@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function TextField({
-  label, type, name, onChange,
+  label, type = 'text', name, onChange,
 }) {
   const id = `field-${name}`;
 
