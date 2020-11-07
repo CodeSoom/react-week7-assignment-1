@@ -9,7 +9,7 @@ import LogoutForm from './LogoutForm';
 import {
   requestLogin,
   changeLoginField,
-  setAccessToken,
+  logout,
 } from './actions';
 
 import { get } from './utils';
@@ -30,7 +30,7 @@ export default function LoginFormContainer() {
   }
 
   function handleClickLogout() {
-    dispatch(setAccessToken(''));
+    dispatch(logout());
   }
 
   return (
