@@ -8,17 +8,34 @@ import { useSelector } from 'react-redux';
 
 import LoginPage from './LoginPage';
 
+jest.mock('react-redux');
+
 describe('LoginPage', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  useSelector.mockImplementation((selector) => selector({
+    loginfields: {
+      email: '',
+      password: '',
+    },
+  }));
+
   it('renders Log In title', () => {
     const { container } = render(
-      <LoginPage />,
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>,
     );
     expect(container).toHaveTextContent('Log In');
   });
 
   it('render input controls', () => {
     const { getByLabelText } = render(
-      <LoginPage />,
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>,
     );
 
     expect(getByLabelText('E-mail')).not.toBeNull();
