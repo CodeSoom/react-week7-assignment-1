@@ -13,10 +13,6 @@ import RestaurantPage from './pages/RestaurantPage';
 import NotFoundPage from './pages/NotFoundPage';
 import LoginPage from './pages/LoginPage';
 
-// 레스토랑 리뷰 컨테이너 구현
-// 레스토랑 리뷰 액션, 리듀서 구현
-// RestaurantPage에 레스토랑 리뷰 컨테이너 포함
-// 로그인 시에만 레스토랑 리뷰 기능이 보이도록 처리
 // [덤] 최신 리뷰가 가장 위에 표시되도록 정렬하기
 // [덤] RestaurantPage에서 로그인이 안되어있다면 리뷰 폼이 disabled 되어있고
 //     로그인을 하면 리뷰를 남길 수 있다는 안내문구와 로그인 페이지로 가는 링크 추가

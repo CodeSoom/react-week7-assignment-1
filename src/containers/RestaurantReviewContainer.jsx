@@ -10,6 +10,12 @@ import {
 } from '../redux/actions';
 
 export default function RestaurantReviewContainer({ restaurantId }) {
+  const accessToken = useSelector(get('accessToken'));
+
+  if (!accessToken) {
+    return null;
+  }
+
   const { description, score } = useSelector(get('review'));
 
   const dispatch = useDispatch();

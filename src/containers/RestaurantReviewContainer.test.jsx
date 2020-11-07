@@ -19,24 +19,45 @@ describe('RestaurantReviewContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
   });
 
-  it('renders component', () => {
-    useSelector.mockImplementation((selector) => selector({
-      review: {
-        description: 'review',
-        score: 5,
-      },
-    }));
+  context('with accessToken', () => {
+    it('renders component', () => {
+      useSelector.mockImplementation((selector) => selector({
+        review: {
+          description: 'review',
+          score: 5,
+        },
+        accessToken: 'token',
+      }));
 
-    renderRestaurantReviewContainer();
+      renderRestaurantReviewContainer();
 
-    expect(screen.getByDisplayValue('review')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('5')).toBeInTheDocument();
+      expect(screen.getByDisplayValue('review')).toBeInTheDocument();
+      expect(screen.getByDisplayValue('5')).toBeInTheDocument();
+    });
+  });
+
+  context('without accessToken', () => {
+    it('renders nothing', () => {
+      useSelector.mockImplementation((selector) => selector({
+        review: {
+          description: 'review',
+          score: 5,
+        },
+        accessToken: '',
+      }));
+
+      renderRestaurantReviewContainer();
+
+      expect(screen.queryByDisplayValue('review')).not.toBeInTheDocument();
+      expect(screen.queryByDisplayValue('5')).not.toBeInTheDocument();
+    });
   });
 
   context('when changes review', () => {
     beforeEach(() => {
       useSelector.mockImplementation((selector) => selector({
         review: {},
+        accessToken: 'token',
       }));
     });
 
@@ -70,6 +91,7 @@ describe('RestaurantReviewContainer', () => {
           description: 'review',
           score: 5,
         },
+        accessToken: 'token',
       }));
 
       renderRestaurantReviewContainer(8);

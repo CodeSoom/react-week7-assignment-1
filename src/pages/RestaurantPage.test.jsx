@@ -24,6 +24,7 @@ describe('RestaurantPage', () => {
         score: 5,
         description: '보라색 맛 났어!',
       },
+      accessToken: 'token',
     }));
   });
 
