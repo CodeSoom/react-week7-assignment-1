@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -85,20 +86,17 @@ describe('api', () => {
 
   describe('sendReview', () => {
     beforeEach(() => {
-      mockFetch({
-        reviewField: {
-          score: 0,
-          description: '',
-        },
+      global.fetch = jest.fn().mockResolvedValue({
+        ok: true,
       });
     });
 
-    it('retrun 200 status code ', async () => {
-      const statusCode = await postReview({
+    it('retrun response ok ', async () => {
+      const ok = await postReview({
         accessToken: 'token', score: 10, description: 'test', restaurantId: 1,
       });
 
-      expect(statusCode).toEqual(200);
+      expect(ok).toEqual(true);
     });
   });
 });
