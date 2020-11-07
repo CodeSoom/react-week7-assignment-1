@@ -12,6 +12,7 @@ import {
   setRestaurant,
   requestLogin,
   sendReview,
+  logout,
 } from './actions';
 
 const middlewares = [thunk];
@@ -144,6 +145,29 @@ describe('actions', () => {
         { type: 'changeReviewField', payload: { name: 'description', value: '' } },
         { type: 'setRestaurant', payload: { restaurant: null } },
         { type: 'setRestaurant', payload: { restaurant: {} } },
+      ]);
+    });
+  });
+
+  describe('logout', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginField: {
+          email: '',
+          password: '',
+        },
+      });
+    });
+
+    it('dispatch sendReview', async () => {
+      await store.dispatch(logout());
+
+      const actions = store.getActions();
+
+      expect(actions).toEqual([
+        { type: 'setAccessToken', payload: { accessToken: '' } },
+        { type: 'changeLoginField', payload: { name: 'email', value: '' } },
+        { type: 'changeLoginField', payload: { name: 'password', value: '' } },
       ]);
     });
   });

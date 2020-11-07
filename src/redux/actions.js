@@ -151,3 +151,17 @@ export function sendReview({ restaurantId }) {
     dispatch(loadRestaurant({ restaurantId }));
   };
 }
+
+export function logout() {
+  return async (dispatch, getState) => {
+    const { loginField } = getState();
+
+    dispatch(setAccessToken(''));
+
+    Object.keys(loginField).forEach((name) => {
+      dispatch(changeLoginField({ name, value: '' }));
+    });
+
+    localStorage.removeItem('accessToken');
+  };
+}
