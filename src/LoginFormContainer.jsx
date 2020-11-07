@@ -18,7 +18,7 @@ export default function LoginFormContainer() {
 
   function handleSubmit() {
     // click
-    dsipatch(requestLogin());
+    dispatch(requestLogin());
   }
 
   return (

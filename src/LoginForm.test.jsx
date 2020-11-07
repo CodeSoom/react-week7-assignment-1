@@ -24,11 +24,12 @@ describe('LoginForm', () => {
   })
 
   function renderLoginForm({ email, password }) {
-    render(
+    return render(
       <MemoryRouter>
         <LoginForm 
           fields={{ email, password }}
           onChange={handleChange}
+          onSubmit={handleSubmit}
         />
       </MemoryRouter>
     )
@@ -52,7 +53,7 @@ describe('LoginForm', () => {
   });
 
   it('listens change events', () => {
-    const { getByLabelText } = renderLoginForm();
+    const { getByLabelText } = renderLoginForm({});
 
     const controls = [
       { label: 'E-mail', name: 'email', value: 'testers@example.com' },

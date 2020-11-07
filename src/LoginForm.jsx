@@ -6,8 +6,14 @@ import { requestLogin } from './actions';
 export default function LoginForm({ fields, onChange, onSubmit }) {
   const { email, password } = fields;
 
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    onSubmit();
+  }
+
   function handleChange(event) {
-    const { target: { name, value } } = evnet;
+    const { target: { name, value } } = event;
     onChange({ name, value});
   }
 
@@ -38,7 +44,7 @@ export default function LoginForm({ fields, onChange, onSubmit }) {
       </div>
       <button
         type='button'
-        onClick={onSubmit}
+        onClick={handleSubmit}
       >
         Log In
       </button>

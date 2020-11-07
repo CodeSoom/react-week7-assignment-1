@@ -27,9 +27,11 @@ describe('LoginFormContainer', () => {
   })
 
   function renderLoginFormContainer() {
-    <MemoryRouter>
-      <LoginFormContainer />
-    </MemoryRouter>
+    return render(
+      <MemoryRouter>
+        <LoginFormContainer />
+      </MemoryRouter>
+    )
   }
 
   it('render input controls', () => {
