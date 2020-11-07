@@ -35,6 +35,7 @@ describe('RestaurantContainer', () => {
         score: '',
         description: '',
       },
+      accessToken: given.accessToken,
     }));
   });
 
@@ -63,6 +64,30 @@ describe('RestaurantContainer', () => {
         const { container } = renderRestaurantContainer();
 
         expect(container).toHaveTextContent('Loading');
+      });
+    });
+
+    context('with ReviewForm', () => {
+      givenRestaurant();
+      given('accessToken', () => 'ACCESS_TOKEN');
+
+      it('renders review form', () => {
+        const { container } = renderRestaurantContainer();
+
+        expect(container).toHaveTextContent('평점');
+        expect(container).toHaveTextContent('리뷰 내용');
+      });
+    });
+
+    context('without ReviewForm', () => {
+      givenRestaurant();
+      given('accessToken', () => null);
+
+      it('no renders review form', () => {
+        const { container } = renderRestaurantContainer();
+
+        expect(container).not.toHaveTextContent('평점');
+        expect(container).not.toHaveTextContent('리뷰 내용');
       });
     });
   });
