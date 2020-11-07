@@ -12,11 +12,11 @@ export default function LoginFormContainer() {
   const loginFields = useSelector(get('loginFields'));
 
   function handleChange() {
-    //
+    dispatch(changeLoginField());
   }
 
   function handleSubmit() {
-    //
+    // dispatch(requestLogin());
   }
 
   return (
