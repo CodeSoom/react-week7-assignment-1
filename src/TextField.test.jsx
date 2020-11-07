@@ -59,7 +59,13 @@ describe('TextField', () => {
     ];
 
     controls.forEach(({ label, name, value }) => {
-      const { getByLabelText } = renderTextField({ label, name });
+      const { getByLabelText } = render(
+        <TextField
+          label={label}
+          name={name}
+          onChange={handleChange}
+        />,
+      );
 
       fireEvent.change(getByLabelText(label), { target: { value } });
 
