@@ -14,7 +14,7 @@ const initialState = {
 };
 
 const reducers = {
-  setLoginFields(state, { payload: { loginFields } }) {
+  changeLoginFields(state, { payload: { loginFields } }) {
     return {
       ...state,
       loginFields,

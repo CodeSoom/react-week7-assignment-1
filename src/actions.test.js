@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 
 import {
-  setLoginFields,
+  changeLoginFields,
   loadInitialData,
   setRegions,
   setCategories,
@@ -102,12 +102,12 @@ describe('actions', () => {
     });
   });
 
-  describe('setLoginFields', () => {
-    it('returns setLoginFields action', () => {
-      const action = setLoginFields({ email: 'wow@wow.com', password: 'wow' });
+  describe('changeLoginFields', () => {
+    it('returns changeLoginFields action', () => {
+      const action = changeLoginFields({ email: 'wow@wow.com', password: 'wow' });
 
       expect(action).toEqual({
-        type: 'setLoginFields',
+        type: 'changeLoginFields',
         payload: {
           loginFields: {
             email: 'wow@wow.com',

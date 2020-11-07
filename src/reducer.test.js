@@ -1,7 +1,7 @@
 import reducer from './reducer';
 
 import {
-  setLoginFields,
+  changeLoginFields,
   setRegions,
   setCategories,
   setRestaurants,
@@ -32,7 +32,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('setLoginFields', () => {
+  describe('changeLoginFields', () => {
     it('changes login fields value', () => {
       const initialState = {
         loginFields: {
@@ -46,7 +46,7 @@ describe('reducer', () => {
         password: 'test',
       };
 
-      const state = reducer(initialState, setLoginFields(loginFields));
+      const state = reducer(initialState, changeLoginFields(loginFields));
 
       expect(state.loginFields).toEqual(loginFields);
     });
