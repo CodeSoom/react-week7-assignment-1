@@ -2,24 +2,30 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
-import ReviewForm from './ReviewForm';
+import TextField from './TextField';
 
-describe('ReviewForm', () => {
+describe('TextField', () => {
   const handleChange = jest.fn();
 
-  function renderReviewForm() {
-    return render(<ReviewForm onChange={handleChange} />);
+  function renderTextField({ label, type, name }) {
+    return render((
+      <TextField
+        label={label}
+        type={type}
+        name={name}
+        onChange={handleChange}
+      />
+    ));
   }
 
-  it('renders review write fields', () => {
-    const { queryByLabelText } = renderReviewForm();
+  it('renders label and input control', () => {
+    const { container } = renderTextField('평점', 'text', 'score');
 
-    expect(queryByLabelText('평점')).not.toBeNull();
-    expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+    expect(container).toHaveTextContent('평점');
   });
 
   it('listen change events', () => {
-    const { getByLabelText } = renderReviewForm();
+    const { getByLabelText } = renderTextField();
 
     const controls = [
       { label: '평점', name: 'score', value: '5' },
