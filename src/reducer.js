@@ -1,3 +1,4 @@
+import { changeLoginField } from './actions';
 import { equal } from './utils';
 
 const initialState = {
@@ -52,6 +53,15 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  changeLoginField(state, { payload: { name, value }}) {
+    return {
+      ...state,
+      loginFields: {
+        email: 'tester@example.com',
+      },
     };
   },
 };

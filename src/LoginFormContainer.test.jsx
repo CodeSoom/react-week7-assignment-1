@@ -29,8 +29,8 @@ describe('LoginFormContainer', () => {
       <LoginFormContainer />
     ));
 
-    expect(getByLabelText('E-mail')).toBe('test@test');
-    expect(getByLabelText('Password')).toBe('1234');
+    expect(getByLabelText('E-mail').value).toBe('test@test');
+    expect(getByLabelText('Password').value).toBe('1234');
   });
 
   it('renders "Log In" button', () => {
