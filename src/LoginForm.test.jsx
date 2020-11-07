@@ -8,58 +8,57 @@ describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
 
-  it('renders Log In title', () => {
-    const email = 'test@test';
-
-    const password = '1234';
-
-    const { getByText } = render(
+  function renderLoginForm({ email = '', password = '' } = {}) {
+    return render(
       <LoginForm
-        fields={{ email, password }}
+        onChange={handleChange}
         onSubmit={handleSubmit}
+        fields={{ email, password }}
       />,
     );
-
-    fireEvent.click(getByText('Log In'));
-
-    expect(handleSubmit).toBeCalled();
-  });
+  }
 
   it('renders input controls', () => {
     const email = 'test@test';
 
     const password = '1234';
 
-    const { getByLabelText } = render(
-      <LoginForm
-        onChange={handleChange}
-        fields={{ email, password }}
-      />,
-    );
+    const { getByLabelText } = renderLoginForm({ email, password });
 
-    expect(getByLabelText('E-mail').value).toBe(email);
+    const controls = [
+      { label: 'E-mail', value: email },
+      { label: 'Password', value: password },
+    ];
 
-    expect(getByLabelText('Password').value).toBe(password);
+    controls.forEach(({ label, value }) => {
+      const input = getByLabelText(label);
+
+      expect(input.value).toBe(value);
+    });
   });
 
   it('listens change events', () => {
-    const email = 'test@test';
+    const { getByLabelText } = renderLoginForm();
 
-    const password = '1234';
+    const controls = [
+      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
+      { label: 'Password', name: 'password', value: 'test' },
+    ];
 
-    const { getByLabelText } = render(
-      <LoginForm
-        onChange={handleChange}
-        fields={{ email: '', password: '' }}
-      />,
-    );
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
 
-    fireEvent.change(getByLabelText('E-mail'), { target: { value: email } });
+      fireEvent.change(input, { target: { value } });
 
-    expect(handleChange).toBeCalledWith({ name: 'email', value: email });
+      expect(handleChange).toBeCalledWith({ name, value });
+    });
+  });
 
-    fireEvent.change(getByLabelText('Password'), { target: { value: password } });
+  it('renders "Log In" button', () => {
+    const { getByText } = renderLoginForm();
 
-    expect(handleChange).toBeCalledWith({ name: 'password', value: password });
+    fireEvent.click(getByText('Log In'));
+
+    expect(handleSubmit).toBeCalled();
   });
 });
