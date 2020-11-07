@@ -6,12 +6,14 @@ import LoginForm from './LoginForm';
 
 describe('<LoginForm />', () => {
   const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
   const renderLoginForm = () => render((
     <LoginForm
       email="test@email.com"
       password="test"
       onChange={handleChange}
+      onSubmit={handleSubmit}
     />
   ));
 
@@ -46,5 +48,13 @@ describe('<LoginForm />', () => {
         value: 'value',
       });
     });
+  });
+
+  it('listens the log in button click event', () => {
+    const { getByRole } = renderLoginForm();
+
+    fireEvent.click(getByRole('button'));
+
+    expect(handleSubmit).toBeCalled();
   });
 });
