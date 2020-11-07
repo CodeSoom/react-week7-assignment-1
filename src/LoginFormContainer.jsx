@@ -7,9 +7,21 @@ import LoginForm from './LoginForm';
 import {
   requestLogin,
   changeLoginField,
+  setAccessToken,
 } from './actions';
 
 import { get } from './utils';
+
+function LogoutForm({ onClick }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+    >
+      LOGOUT
+    </button>
+  );
+}
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
@@ -26,14 +38,21 @@ export default function LoginFormContainer() {
     // TODO: 로그인 성공하면 -> LocalStorage에 저장
   }
 
+  function handleClickLogout() {
+    dispatch(setAccessToken(''));
+  }
+
   return (
     <>
-      <LoginForm
-        fields={{ email, password }}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      />
-      <p>{accessToken}</p>
+      {accessToken ? (
+        <LogoutForm onClick={handleClickLogout} />
+      ) : (
+        <LoginForm
+          fields={{ email, password }}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
+      )}
     </>
   );
 }
