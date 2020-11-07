@@ -63,13 +63,4 @@ describe('LoginForm', () => {
       expect(handleChange).toBeCalledTimes(2);
     });
   });
-
-  context('with Log In', () => {
-    it('renders logout button', () => {
-      const accessToken = 'ACCESS_TOKEN';
-      const { container } = renderLoginForm(accessToken);
-
-      expect(container).toHaveTextContent('Log out');
-    });
-  });
 });

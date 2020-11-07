@@ -28,6 +28,7 @@ describe('LoginPage', () => {
   );
 
   context('without Log In', () => {
+    given('accessToken', () => null);
     it('renders input field', () => {
       const { container, getByLabelText } = renderLoginPage();
 
@@ -40,7 +41,7 @@ describe('LoginPage', () => {
   context('with Log In', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
 
-    it('renders "Log out" button', () => {
+    it('renders logout button', () => {
       const { container } = renderLoginPage();
 
       expect(container).toHaveTextContent('Log out');

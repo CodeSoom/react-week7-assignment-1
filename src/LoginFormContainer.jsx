@@ -8,6 +8,7 @@ import {
 } from './actions';
 
 import LoginForm from './LoginForm';
+import LogoutForm from './LogoutForm';
 
 import { get } from './utils';
 
@@ -26,12 +27,19 @@ export default function LoginFormContainer() {
 
   return (
     <>
-      <LoginForm
-        loginFields={{ email, password }}
-        onSubmit={handleSubmit}
-        onChange={handleChange}
-        accessToken={accessToken}
-      />
+      {
+        accessToken ? (
+          <LogoutForm />
+        ) : (
+          <LoginForm
+            loginFields={{ email, password }}
+            onSubmit={handleSubmit}
+            onChange={handleChange}
+            accessToken={accessToken}
+          />
+        )
+      }
+
     </>
   );
 }
