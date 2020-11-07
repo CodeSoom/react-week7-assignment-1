@@ -72,12 +72,12 @@ describe('RestaurantReviewContainer', () => {
       expect(dispatch).toBeCalled();
     });
 
-    it('call onChangeScore', () => {
+    it('call onChangeDescription', () => {
       renderRestaurantReviewContainer();
 
       fireEvent.change(
-        screen.getByPlaceholderText('평가 점수'),
-        { target: { value: 5 } },
+        screen.getByPlaceholderText('리뷰를 작성해 주세요!'),
+        { target: { value: '매일 먹습니다.' } },
       );
 
       expect(dispatch).toBeCalled();

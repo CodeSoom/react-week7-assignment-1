@@ -7,10 +7,24 @@ import {
   setEmail,
   setPassword,
   requestLogin,
+  deleteAccessToken,
 } from '../redux/actions';
 
 export default function LoginContainer() {
   const dispatch = useDispatch();
+
+  const accessToken = useSelector(get('accessToken'));
+
+  if (accessToken) {
+    return (
+      <button
+        type="button"
+        onClick={deleteAccessToken}
+      >
+        Log out
+      </button>
+    );
+  }
 
   const email = useSelector(get('email'));
   const password = useSelector(get('password'));

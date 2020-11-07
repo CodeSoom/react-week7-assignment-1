@@ -18,6 +18,7 @@ import {
   setDescription,
   setScore,
   writeReview,
+  deleteAccessToken,
 } from './actions';
 
 const middlewares = [thunk];
@@ -222,6 +223,18 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('deleteAccessToken', () => {
+    it('changes review score', () => {
+      useSelector.mockImplementation((selector) => selector({
+        accessToken: 'token',
+      }));
+
+      dispatch(deleteAccessToken(5));
+
+      expect(dispatch).toBeCalledWith({ type: 'deleteAccessToken' });
     });
   });
 });

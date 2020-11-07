@@ -9,6 +9,7 @@ export default function LoginForm({
     <form>
       <input
         type="text"
+        name="email"
         placeholder="EMAIL"
         value={email}
         onChange={(e) => onChangeEmail(e.target.value)}
@@ -16,6 +17,7 @@ export default function LoginForm({
       />
       <input
         type="password"
+        name="password"
         placeholder="PASSWORD"
         value={password}
         onChange={(e) => onChangePassword(e.target.value)}

@@ -143,3 +143,9 @@ export function writeReview({ restaurantId }) {
     dispatch(loadRestaurant({ restaurantId }));
   };
 }
+
+export function deleteAccessToken() {
+  return {
+    type: 'deleteAccessToken',
+  };
+}

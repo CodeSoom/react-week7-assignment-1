@@ -11,6 +11,30 @@ describe('LoginContainer', () => {
     dispatch.mockClear();
   });
 
+  context('with accessToken', () => {
+    it('renders Log out button', () => {
+      useSelector.mockImplementation((selector) => selector({
+        accessToken: 'token',
+      }));
+
+      render(<LoginContainer />);
+
+      expect(screen.getByRole('button', { name: 'Log out' })).toBeInTheDocument();
+    });
+  });
+
+  context('without accessToken', () => {
+    it('renders Log in button', () => {
+      useSelector.mockImplementation((selector) => selector({
+        email: '', password: '',
+      }));
+
+      render(<LoginContainer />);
+
+      expect(screen.getByRole('button', { name: 'Log in' })).toBeInTheDocument();
+    });
+  });
+
   context('when change fields', () => {
     beforeEach(() => {
       useDispatch.mockImplementation(() => dispatch);
