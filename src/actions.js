@@ -36,6 +36,13 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function setReviews({ reviews }) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
+
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
@@ -85,7 +92,11 @@ export function loadRestaurant({ restaurantId }) {
 
     const restaurant = await fetchRestaurant({ restaurantId });
 
+    const { reviews } = await fetchReviews({ restaurantId });
+
     dispatch(setRestaurant(restaurant));
+
+    dispatch(setReviews({ reviews }));
   };
 }
 
@@ -123,13 +134,6 @@ export function changeReviewField({ name, value }) {
   return {
     type: 'changeReviewField',
     payload: { name, value },
-  };
-}
-
-export function setReviews({ reviews }) {
-  return {
-    type: 'setReviews',
-    payload: { reviews },
   };
 }
 
