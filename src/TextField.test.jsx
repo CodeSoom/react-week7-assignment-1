@@ -7,12 +7,15 @@ import TextField from './TextField';
 describe('TextField', () => {
   const handleChange = jest.fn();
 
-  function renderTextField({ label, type, name }) {
+  function renderTextField({
+    label, type, name, value = '',
+  }) {
     return render((
       <TextField
         label={label}
         type={type}
         name={name}
+        value={value}
         onChange={handleChange}
       />
     ));
@@ -47,7 +50,7 @@ describe('TextField', () => {
     ];
 
     controls.forEach(({ label, name, value }) => {
-      const { getByLabelText } = renderTextField({ label, name, value });
+      const { getByLabelText } = renderTextField({ label, name });
 
       fireEvent.change(getByLabelText(label), { target: { value } });
 

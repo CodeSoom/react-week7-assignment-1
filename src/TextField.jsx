@@ -1,13 +1,19 @@
 import React from 'react';
 
 export default function TextField({
-  label, type = 'text', name, onChange,
+  label,
+  type = 'text',
+  name,
+  value = '',
+  onChange,
 }) {
   const id = `field-${name}`;
 
   function handleChange(event) {
-    const { target: { value } } = event;
-    onChange({ name, value });
+    const { target } = event;
+    const inputValue = target.value;
+
+    onChange({ name, value: inputValue });
   }
 
   return (
@@ -19,6 +25,7 @@ export default function TextField({
         type={type}
         id={id}
         name={name}
+        value={value}
         onChange={handleChange}
       />
     </div>

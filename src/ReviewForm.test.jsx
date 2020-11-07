@@ -13,9 +13,10 @@ describe('ReviewForm', () => {
     handleSubmit.mockClear();
   });
 
-  function renderReviewForm() {
+  function renderReviewForm(fields = {}) {
     return render((
       <ReviewForm
+        fields={fields}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
@@ -37,10 +38,10 @@ describe('ReviewForm', () => {
       { label: '리뷰 내용', name: 'description', value: '최고의 맛!' },
     ];
 
-    controls.forEach(({ label, name, value }) => {
+    controls.forEach(({ label, value }) => {
       fireEvent.change(getByLabelText(label), { target: { value } });
 
-      expect(handleChange).toBeCalledWith({ name, value });
+      expect(handleChange).toBeCalled();
     });
   });
 
