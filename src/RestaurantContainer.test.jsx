@@ -17,6 +17,14 @@ describe('RestaurantContainer', () => {
     ));
   }
 
+  function givenRestaurant() {
+    return given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
+  }
+
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
@@ -38,11 +46,7 @@ describe('RestaurantContainer', () => {
 
   describe('Login and Logout', () => {
     context('with restaurant', () => {
-      given('restaurant', () => ({
-        id: 1,
-        name: '마법사주방',
-        address: '서울시 강남구',
-      }));
+      givenRestaurant();
 
       it('renders name and address', () => {
         const { container } = renderRestaurantContainer();
@@ -64,11 +68,7 @@ describe('RestaurantContainer', () => {
   });
 
   it('change input fields', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
+    givenRestaurant();
     const { getByLabelText } = renderRestaurantContainer();
 
     fireEvent.change(getByLabelText('평점'), {
@@ -94,5 +94,14 @@ describe('RestaurantContainer', () => {
         value: '정말 맛있습니다..호에에엥',
       },
     });
+  });
+
+  it('renders review send button', () => {
+    givenRestaurant();
+    const { getByText } = renderRestaurantContainer();
+
+    fireEvent.click(getByText('리뷰 남기기'));
+
+    expect(dispatch).toBeCalledTimes(2);
   });
 });
