@@ -50,7 +50,9 @@ describe('RestaurantPage', () => {
   describe('review', () => {
     it('renders review write form', () => {
       const { getByLabelText } = render((
-        <RestaurantPage />
+        <MemoryRouter initialEntries={['/restaurants/1']}>
+          <RestaurantPage />
+        </MemoryRouter>
       ));
 
       expect(getByLabelText('평점')).not.toBeNull();
