@@ -123,3 +123,15 @@ export function changeReviewField({ name, value }) {
     payload: { name, value },
   };
 }
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { accessToken, reviewFields: { score, description } } = getState();
+
+    await postReview({
+      accessToken, restaurantId, score, description,
+    });
+
+    // dispatch(setReview({ score, description }));
+  };
+}
