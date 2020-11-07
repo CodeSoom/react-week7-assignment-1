@@ -17,10 +17,14 @@ describe('LoginPage', () => {
   }
 
   it('render log in title', () => {
-    it('renders LoginPage', () => {
-      const { container, queryByText } = loginPageRender();
+    const { container, queryByText } = loginPageRender();
   
-      expect(container).toHaveTextContent('Log In');
-    });
+    expect(container).toHaveTextContent('Log In');
+  })
+
+  it('render input control', () => {
+    const { getByLabelText } = loginPageRender();
+  
+    expect(getByLabelText('E-mail')).not.toBeNull();
   })
 });
