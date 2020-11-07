@@ -7,7 +7,7 @@ describe('storage', () => {
   const value = 'ACCESSTOKEN';
 
   it('loadItem', () => {
-    loadItem.mockImplementation(() => 'ACCESSTOKEN');
+    loadItem.mockImplementation(() => value);
 
     const accessToken = loadItem(key);
 
