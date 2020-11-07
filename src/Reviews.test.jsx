@@ -11,7 +11,7 @@ describe('Reviews', () => {
     const { getByText } = render(<Reviews reviews={restaurantReviews} />);
 
     expect(getByText('테스터')).not.toBeNull();
-    expect(getByText('5')).not.toBeNull();
+    expect(getByText('5점')).not.toBeNull();
     expect(getByText('GOOD')).not.toBeNull();
   });
 });

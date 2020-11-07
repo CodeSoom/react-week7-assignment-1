@@ -11,9 +11,8 @@ export default function Reviews({ reviews }) {
           <li key={id}>
             <p>{name}</p>
             <p>
-              {score}
+              {`${score}점`}
             </p>
-            점
             <p>{description}</p>
           </li>
         ))}
