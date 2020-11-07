@@ -130,7 +130,7 @@ export function sendReview(restaurantId) {
   return async (dispatch, getState) => {
     const {
       accessToken,
-      ReviewFields:
+      reviewFields:
       { score, description },
     } = getState();
 
