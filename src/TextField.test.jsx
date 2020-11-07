@@ -27,7 +27,7 @@ describe('TextField', () => {
     const { getByLabelText } = renderTextField();
 
     expect(getByLabelText('E-mail')).not.toBeNull();
-  })
+  });
 
   it('listens change events', () => {
     const { getByLabelText } = renderTextField();
@@ -38,4 +38,21 @@ describe('TextField', () => {
 
     expect(handleChange).toBeCalled();
   });
-})
+
+  context('with type', () => {
+    it('renders "text" input control', () => {
+      const type = 'number';
+      const { container } = renderTextField(type);
+
+      expect(container).toContainHTML(`type="${type}`);
+    });
+  });
+
+  context('without type', () => {
+    it('renders "text" input control', () => {
+      const { container } = renderTextField();
+
+      expect(container).toContainHTML('type="text');
+    });
+  });
+});
