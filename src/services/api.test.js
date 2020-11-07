@@ -3,12 +3,16 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
 import CATEGORIES from '../../fixtures/categories';
 import RESTAURANTS from '../../fixtures/restaurants';
 import RESTAURANT from '../../fixtures/restaurant';
+import LOGINFIELDS from '../../fixtures/loginFields';
+import ACCESSTOKEN from '../../fixtures/accessToken';
 
 describe('api', () => {
   const mockFetch = (data) => {
@@ -65,6 +69,33 @@ describe('api', () => {
       const restaurant = await fetchRestaurant({ restaurantId: 1 });
 
       expect(restaurant).toEqual(RESTAURANT);
+    });
+  });
+
+  describe('postLogin', () => {
+    beforeEach(() => {
+      mockFetch(ACCESSTOKEN);
+    });
+
+    it('returns restaurants', async () => {
+      const accessToken = await postLogin(LOGINFIELDS);
+
+      expect(accessToken).toEqual(ACCESSTOKEN.accessToken);
+    });
+  });
+
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch({});
+    });
+
+    it('postReview가 실행됩니다.', async () => {
+      await postReview({
+        accessToken: ACCESSTOKEN,
+        restaurantId: 1,
+        score: LOGINFIELDS.score,
+        description: LOGINFIELDS.description,
+      });
     });
   });
 });
