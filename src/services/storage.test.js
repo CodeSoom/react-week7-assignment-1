@@ -1,35 +1,28 @@
 import { loadItem, saveItem, removeItem } from './storage';
 
+jest.mock('./storage');
+
 describe('storage', () => {
-  describe('loadItem', () => {
-    beforeEach(() => {
-      localStorage.accessToken = 'ACCESSTOKEN';
-    });
+  const key = 'accessToken';
+  const value = 'ACCESSTOKEN';
 
-    it('get data from localStorage', () => {
-      const accessToken = loadItem('accessToken');
+  it('loadItem', () => {
+    loadItem.mockImplementation(() => 'ACCESSTOKEN');
 
-      expect(accessToken).toBe('ACCESSTOKEN');
-    });
+    const accessToken = loadItem(key);
+
+    expect(accessToken).toBe(value);
   });
 
-  describe('saveItem', () => {
-    it('set data to localStorage', () => {
-      saveItem('accessToken', 'ACCESSTOKEN');
+  it('saveItem', () => {
+    saveItem(key, value);
 
-      expect(localStorage.accessToken).toBe('ACCESSTOKEN');
-    });
+    expect(saveItem).toBeCalledWith(key, value);
   });
 
-  describe('removeItem', () => {
-    beforeEach(() => {
-      localStorage.accessToken = 'ACCESSTOKEN';
-    });
+  it('removeItem', () => {
+    removeItem(key);
 
-    it('remove data in localStorage', () => {
-      removeItem('accessToken');
-
-      expect(localStorage.accessToken).toBeUndefined();
-    });
+    expect(removeItem).toBeCalledWith(key);
   });
 });
