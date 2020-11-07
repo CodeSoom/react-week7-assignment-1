@@ -6,14 +6,20 @@ import TextField from './TextField';
 
 describe('TextField', () => {
   
-  function renderTextField() {
+  function renderTextField(type) {
     return render(
-      <TextField />
+      <TextField 
+        label="E-mail"
+        name="email"
+        value="test@test"
+        type={type}
+        onChange={handleChange}
+      />
     )
   }
 
   it('render label', () => {
-    const { getLabelText } = renderTextField();
+    const { getByLabelText } = renderTextField();
 
     expect(getByLabelText('E-mail')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
