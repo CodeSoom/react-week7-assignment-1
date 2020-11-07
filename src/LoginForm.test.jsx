@@ -25,12 +25,41 @@ describe('LoginForm', () => {
     </MemoryRouter>
   }
 
-  it('render input controls', () => {
-    const { getByLabelText } = renderLoginForm();
-    
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
-  })
+  it('renders input controls', () => {
+    const email = 'tester@example.com';
+    const password = 'test';
+
+    const { getByLabelText } = renderLoginForm({ email, password, error });
+
+    const controls = [
+      { label: 'E-mail', value: email },
+      { label: 'Password', value: password },
+    ];
+
+    controls.forEach(({ label, value }) => {
+      const input = getByLabelText(label);
+      expect(input.value).toBe(value);
+    });
+  });
+
+  it('listens change events', () => {
+    const { getByLabelText } = renderLoginForm({ error });
+
+    const controls = [
+      { label: 'E-mail', name: 'email', value: 'testers@example.com' },
+      { label: 'Password', name: 'password', value: 'tests' },
+    ];
+
+    controls.forEach(({ label, value, name }) => {
+      const input = getByLabelText(label);
+
+      fireEvent.change(input, {
+        target: { value, name },
+      });
+
+      expect(handleChange).toBeCalledWith({ name, value });
+    });
+  });
 
   it('render "Log In" button', () => {
     const handleSubmit = jest.fn();
@@ -38,6 +67,7 @@ describe('LoginForm', () => {
     
     fireEvent.click(getByText('Log In'));
 
+    // requestLogin 을 좀더 정교하게 확인하기 위해 mock-store 로 코드 리펙토링 들어가자
     expect(handleSubmit).toBeCalled();
   })
 
