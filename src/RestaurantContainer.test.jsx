@@ -76,7 +76,7 @@ describe('RestaurantContainer', () => {
     });
 
     expect(dispatch).toBeCalledWith({
-      type: 'changeReviewField',
+      type: 'changeReviewFields',
       payload: {
         name: 'score',
         value: '5',
