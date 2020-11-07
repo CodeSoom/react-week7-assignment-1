@@ -14,10 +14,13 @@ const initialState = {
 };
 
 const reducers = {
-  changeLoginFields(state, { payload: { loginFields } }) {
+  changeLoginFields(state, { payload: { name, value } }) {
     return {
       ...state,
-      loginFields,
+      loginFields: {
+        ...state.loginFields,
+        [name]: value,
+      },
     };
   },
 
