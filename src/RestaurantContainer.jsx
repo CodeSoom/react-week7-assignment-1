@@ -14,7 +14,7 @@ import { get } from './utils';
 
 import ReviewForm from './ReviewForm';
 
-import Reviews from './Reviews';
+import ReviewsContainer from './ReviewsContainer';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();

@@ -1,10 +1,23 @@
 import React from 'react';
 
-export default function Reviews() {
+export default function Reviews({ reviews }) {
   return (
     <>
       <h2>리뷰</h2>
-      <p>정말 맛있어요!</p>
+      <ul>
+        {reviews.map(({
+          id, name, score, description,
+        }) => (
+          <li key={id}>
+            <p>{name}</p>
+            <p>
+              {score}
+            </p>
+            점
+            <p>{description}</p>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }

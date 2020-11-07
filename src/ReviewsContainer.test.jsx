@@ -17,9 +17,7 @@ test('ReviewsContainer', () => {
     <ReviewsContainer />,
   );
 
-  restaurantReviews.forEach(({ name, score, description }) => {
-    expect(getByText(name)).not.toBeNull();
-    expect(getByText(score)).not.toBeNull();
+  restaurantReviews.forEach(({ description }) => {
     expect(getByText(description)).not.toBeNull();
   });
 });

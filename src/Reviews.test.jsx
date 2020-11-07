@@ -4,10 +4,14 @@ import { render } from '@testing-library/react';
 
 import Reviews from './Reviews';
 
+import restaurantReviews from '../fixtures/restaurantReviews';
+
 describe('Reviews', () => {
   it('renders reviews', () => {
-    const { getByText } = render(<Reviews />);
+    const { getByText } = render(<Reviews reviews={restaurantReviews} />);
 
-    expect(getByText('정말 맛있어요!')).not.toBeNull();
+    expect(getByText('테스터')).not.toBeNull();
+    expect(getByText('5')).not.toBeNull();
+    expect(getByText('GOOD')).not.toBeNull();
   });
 });

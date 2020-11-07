@@ -24,6 +24,9 @@ describe('RestaurantContainer', () => {
         description: '',
       },
       accessToken: given.accessToken,
+      restaurantReviews: [
+        { id: 1, name: '테스터', description: '정말 맛있어요!' },
+      ],
     }));
   });
 

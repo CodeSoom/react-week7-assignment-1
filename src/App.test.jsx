@@ -31,6 +31,7 @@ describe('App', () => {
         email: '',
         password: '',
       },
+      restaurantReviews: [],
     }));
   });
 
