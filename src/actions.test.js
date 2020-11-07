@@ -104,16 +104,11 @@ describe('actions', () => {
 
   describe('changeLoginFields', () => {
     it('returns changeLoginFields action', () => {
-      const action = changeLoginFields({ email: 'wow@wow.com', password: 'wow' });
+      const action = changeLoginFields({ name: 'email', value: 'wow@wow.com' });
 
       expect(action).toEqual({
         type: 'changeLoginFields',
-        payload: {
-          loginFields: {
-            email: 'wow@wow.com',
-            password: 'wow',
-          },
-        },
+        payload: { name: 'email', value: 'wow@wow.com' },
       });
     });
   });
