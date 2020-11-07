@@ -38,6 +38,15 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [
+        {
+          id: 1,
+          restaurantId: 1,
+          name: '테스터',
+          score: 5,
+          description: '훌륭하다 훌륭하다 지구인놈들',
+        },
+      ],
     }));
 
     it('renders name and address', () => {
@@ -48,22 +57,34 @@ describe('RestaurantContainer', () => {
     });
 
     context('loginin이 되지 않으면', () => {
-      it('review를 생성하지 않습니다.', () => {
+      it('reviewForm를 생성하지 않습니다.', () => {
         const { queryByLabelText } = renderRestaurantContainer();
 
         expect(queryByLabelText('평점')).toBeNull();
         expect(queryByLabelText('리뷰 내용')).toBeNull();
+      });
+
+      it('reviewsDetail를 생성하지 않습니다.', () => {
+        const { queryByText } = renderRestaurantContainer();
+
+        expect(queryByText('리뷰')).toBeNull();
       });
     });
 
     context('loggin 되어있으면,', () => {
       given('accessToken', () => 'ACCESS_TOKEN');
 
-      it('review를 생성됩니다.', () => {
+      it('reviewForm를 생성합니다.', () => {
         const { getByLabelText } = renderRestaurantContainer();
 
         expect(getByLabelText('평점')).not.toBeNull();
         expect(getByLabelText('리뷰 내용')).not.toBeNull();
+      });
+
+      it('reviewsDetail를 생성합니다.', () => {
+        const { queryByText } = renderRestaurantContainer();
+
+        expect(queryByText('리뷰')).not.toBeNull();
       });
 
       it('score change 이벤트가 발생하면 dispatch가 호출된다.', () => {
