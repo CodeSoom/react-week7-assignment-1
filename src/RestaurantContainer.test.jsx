@@ -10,7 +10,11 @@ describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
   function renderRestaurantContainer() {
-    return render(<RestaurantContainer restaurantId="1" />);
+    return render((
+      <RestaurantContainer
+        restaurantId="1"
+      />
+    ));
   }
 
   beforeEach(() => {
@@ -60,9 +64,16 @@ describe('RestaurantContainer', () => {
   });
 
   it('change input fields', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
     const { getByLabelText } = renderRestaurantContainer();
 
-    fireEvent.change(getByLabelText('평점'));
+    fireEvent.change(getByLabelText('평점'), {
+      target: { value: '5' },
+    });
 
     expect(dispatch).toBeCalledWith({
       type: 'changeReviewField',
