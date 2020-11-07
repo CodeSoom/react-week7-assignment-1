@@ -8,17 +8,21 @@ export default function ReviewItems({ reviewItems }) {
   }
 
   return (
-    <ul>
-      {reviewItems.map((reviewItem) => (
-        <li key={reviewItem.id}>
-          <p>{reviewItem.name}</p>
-          <p>
-            {reviewItem.score}
-            점
-          </p>
-          <p>{reviewItem.description}</p>
-        </li>
-      ))}
-    </ul>
+    <>
+      <h3>리뷰</h3>
+      <ul>
+        {reviewItems.map((reviewItem) => (
+          <li key={reviewItem.id}>
+            <p>{reviewItem.name}</p>
+            <p>
+              {reviewItem.score}
+              점
+            </p>
+            <p>{reviewItem.description}</p>
+          </li>
+        ))}
+      </ul>
+    </>
+
   );
 }
