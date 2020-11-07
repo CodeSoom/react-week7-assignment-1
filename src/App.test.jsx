@@ -94,4 +94,10 @@ describe('App', () => {
       expect(container).toHaveTextContent('Log In');
     });
   });
+
+  it('get accessToken from localstorage', () => {
+    renderApp({ path: '/' });
+
+    expect(dispatch).toBeCalled();
+  });
 });

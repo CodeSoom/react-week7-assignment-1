@@ -110,6 +110,7 @@ export function requestLogin() {
     const { email, password } = getState().loginField;
 
     const accessToken = await postLogin({ email, password });
+    localStorage.setItem('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
   };
