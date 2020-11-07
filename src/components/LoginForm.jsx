@@ -1,29 +1,29 @@
 import React from 'react';
 
-import LoginInput from './LoginInput';
-
 export default function LoginForm({
   email, password, onChangeEmail, onChangePassword, onClick,
 }) {
-  const loginAble = email && password;
+  const isValid = email && password;
 
   return (
     <form>
-      <LoginInput
+      <input
         type="text"
         placeholder="EMAIL"
         value={email}
         onChange={onChangeEmail}
+        aria-invalid={!email}
       />
-      <LoginInput
+      <input
         type="password"
         placeholder="PASSWORD"
         value={password}
         onChange={onChangePassword}
+        aria-invalid={!password}
       />
       <button
         type="button"
-        disabled={!loginAble}
+        disabled={!isValid}
         onClick={onClick}
       >
         Log in
