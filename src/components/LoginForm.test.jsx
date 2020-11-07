@@ -32,7 +32,7 @@ describe('LoginForm', () => {
       screen.getAllByRole('textbox').forEach((input) => {
         expect(input).toHaveAttribute('aria-invalid', 'false');
       });
-      expect(screen.getByRole('button', { name: 'Log in' })).toBeEnabled();
+      expect(screen.getByRole('button', { name: 'Log In' })).toBeEnabled();
     });
 
     it('can click login button', () => {
@@ -56,7 +56,7 @@ describe('LoginForm', () => {
         .toHaveAttribute('aria-invalid', 'false');
       expect(screen.getByPlaceholderText('PASSWORD'))
         .toHaveAttribute('aria-invalid', 'true');
-      expect(screen.getByRole('button', { name: 'Log in' }))
+      expect(screen.getByRole('button', { name: 'Log In' }))
         .toBeDisabled();
     });
 
@@ -78,7 +78,7 @@ describe('LoginForm', () => {
       screen.getAllByRole('textbox').forEach((input) => {
         expect(input).toHaveAttribute('aria-invalid', 'true');
       });
-      expect(screen.getByRole('button', { name: 'Log in' })).toBeDisabled();
+      expect(screen.getByRole('button', { name: 'Log In' })).toBeDisabled();
     });
   });
 

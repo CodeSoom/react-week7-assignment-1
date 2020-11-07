@@ -28,7 +28,7 @@ export default function LoginForm({
         disabled={!isValid}
         onClick={onClick}
       >
-        Log in
+        Log In
       </button>
     </form>
   );

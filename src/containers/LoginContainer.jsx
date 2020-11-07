@@ -14,18 +14,6 @@ export default function LoginContainer() {
   const dispatch = useDispatch();
 
   const accessToken = useSelector(get('accessToken'));
-
-  if (accessToken) {
-    return (
-      <button
-        type="button"
-        onClick={deleteAccessToken}
-      >
-        Log out
-      </button>
-    );
-  }
-
   const email = useSelector(get('email'));
   const password = useSelector(get('password'));
 
@@ -37,17 +25,36 @@ export default function LoginContainer() {
     dispatch(setPassword(value));
   }
 
-  function handleClick() {
+  function handleClickLogin() {
     dispatch(requestLogin());
   }
 
+  function handleClickLogout() {
+    dispatch(deleteAccessToken());
+  }
+
   return (
-    <LoginForm
-      email={email}
-      password={password}
-      onChangeEmail={handleChangeEmail}
-      onChangePassword={handleChangePassword}
-      onClick={handleClick}
-    />
+    <>
+      {
+        accessToken
+          ? (
+            <button
+              type="button"
+              onClick={handleClickLogout}
+            >
+              Log out
+            </button>
+          )
+          : (
+            <LoginForm
+              email={email}
+              password={password}
+              onChangeEmail={handleChangeEmail}
+              onChangePassword={handleChangePassword}
+              onClick={handleClickLogin}
+            />
+          )
+      }
+    </>
   );
 }

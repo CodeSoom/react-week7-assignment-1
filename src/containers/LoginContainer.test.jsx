@@ -31,7 +31,7 @@ describe('LoginContainer', () => {
 
       render(<LoginContainer />);
 
-      expect(screen.getByRole('button', { name: 'Log in' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Log In' })).toBeInTheDocument();
     });
   });
 
