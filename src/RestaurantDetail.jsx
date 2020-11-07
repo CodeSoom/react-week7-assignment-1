@@ -1,9 +1,12 @@
 import React from 'react';
 
 import MenuItems from './MenuItems';
+import ReviewItems from './ReviewItems';
 
 export default function RestaurantDetail({ restaurant }) {
-  const { name, address, menuItems } = restaurant;
+  const {
+    name, address, menuItems, reviews,
+  } = restaurant;
 
   return (
     <div>
@@ -17,13 +20,7 @@ export default function RestaurantDetail({ restaurant }) {
       <MenuItems menuItems={menuItems} />
 
       <h3>리뷰</h3>
-      <ul>
-        <li>
-          <p>테스터</p>
-          <p>5점</p>
-          <p>맛있어요!</p>
-        </li>
-      </ul>
+      <ReviewItems reviewItems={reviews} />
     </div>
   );
 }
