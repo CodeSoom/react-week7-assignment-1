@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { MemoryRouter } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import { render } from '@testing-library/react';
@@ -20,6 +18,11 @@ describe('RestaurantPage', () => {
         name: '마법사주방',
         address: '서울시 강남구',
       },
+      reviewFields: {
+        score: '5',
+        description: '최고의 맛!',
+      },
+      accessToken: 'ACCESS_TOKEN',
     }));
   });
 
