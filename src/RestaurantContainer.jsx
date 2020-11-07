@@ -42,11 +42,9 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail restaurant={restaurant} />
       {accessToken ? (
-        <>
-          <ReviewForm onChange={handleChange} onSubmit={handleSubmit} />
-          <ReviewsDetail reviews={restaurant.reviews} />
-        </>
+        <ReviewForm onChange={handleChange} onSubmit={handleSubmit} />
       ) : null}
+      <ReviewsDetail reviews={restaurant.reviews} />
     </>
   );
 }

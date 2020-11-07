@@ -54,6 +54,7 @@ describe('RestaurantContainer', () => {
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+      expect(container).toHaveTextContent('리뷰');
     });
 
     context('loginin이 되지 않으면', () => {
@@ -62,12 +63,6 @@ describe('RestaurantContainer', () => {
 
         expect(queryByLabelText('평점')).toBeNull();
         expect(queryByLabelText('리뷰 내용')).toBeNull();
-      });
-
-      it('reviewsDetail를 생성하지 않습니다.', () => {
-        const { queryByText } = renderRestaurantContainer();
-
-        expect(queryByText('리뷰')).toBeNull();
       });
     });
 
@@ -79,12 +74,6 @@ describe('RestaurantContainer', () => {
 
         expect(getByLabelText('평점')).not.toBeNull();
         expect(getByLabelText('리뷰 내용')).not.toBeNull();
-      });
-
-      it('reviewsDetail를 생성합니다.', () => {
-        const { queryByText } = renderRestaurantContainer();
-
-        expect(queryByText('리뷰')).not.toBeNull();
       });
 
       it('score change 이벤트가 발생하면 dispatch가 호출된다.', () => {
