@@ -63,10 +63,13 @@ export function selectCategory(categoryId) {
 
 export function loadInitialData() {
   return async (dispatch) => {
-    const regions = await fetchRegions();
+    const regionsPromise = fetchRegions();
+    const categoriesPromise = fetchCategories();
+
+    const regions = await regionsPromise;
     dispatch(setRegions(regions));
 
-    const categories = await fetchCategories();
+    const categories = await categoriesPromise;
     dispatch(setCategories(categories));
   };
 }
