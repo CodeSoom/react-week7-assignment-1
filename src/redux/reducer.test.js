@@ -221,4 +221,23 @@ describe('reducer', () => {
       expect(description).toEqual(value);
     });
   });
+
+  describe('logout', () => {
+    it('set access token with \'\'', () => {
+      const initialState = {
+        loginField: {
+          email: 'email@xxx.com',
+          password: 'password',
+        },
+        accessToken: 'token',
+      };
+
+      const { accessToken } = reducer(
+        initialState,
+        logout(),
+      );
+
+      expect(accessToken).toBe('');
+    });
+  });
 });

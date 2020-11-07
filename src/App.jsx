@@ -12,8 +12,14 @@ import RestaurantsPage from 'presentational/RestaurantsPage';
 import RestaurantPage from 'presentational/RestaurantPage';
 import NotFoundPage from 'presentational/NotFoundPage';
 import LoginPage from 'presentational/LoginPage';
+import { useDispatch } from 'react-redux';
+import { setAccessToken } from './redux/actions';
 
 export default function App() {
+  const dispatch = useDispatch();
+  const accessToken = localStorage.getItem('accessToken');
+  dispatch(setAccessToken({ accessToken }));
+
   return (
     <div>
       <header>
