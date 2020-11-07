@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import RestaurantPage from './RestaurantPage';
 
@@ -20,6 +20,10 @@ describe('RestaurantPage', () => {
         name: '마법사주방',
         address: '서울시 강남구',
       },
+      review: {
+        score: 5,
+        description: '보라색 맛 났어!',
+      },
     }));
   });
 
@@ -32,6 +36,8 @@ describe('RestaurantPage', () => {
       );
 
       expect(container).toHaveTextContent('마법사주방');
+      expect(screen.getByDisplayValue('5')).toBeInTheDocument();
+      expect(screen.getByDisplayValue('보라색 맛 났어!')).toBeInTheDocument();
     });
   });
 
@@ -44,6 +50,8 @@ describe('RestaurantPage', () => {
       );
 
       expect(container).toHaveTextContent('마법사주방');
+      expect(screen.getByDisplayValue('5')).toBeInTheDocument();
+      expect(screen.getByDisplayValue('보라색 맛 났어!')).toBeInTheDocument();
     });
   });
 });

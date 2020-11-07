@@ -4,7 +4,7 @@ import {
   MemoryRouter,
 } from 'react-router-dom';
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -27,6 +27,10 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      review: {
+        score: 5,
+        description: '보라색 맛 났어!',
+      },
     }));
   });
 
@@ -75,6 +79,8 @@ describe('App', () => {
       const { container } = renderApp({ path: '/restaurants/1' });
 
       expect(container).toHaveTextContent('마녀주방');
+      expect(screen.getByDisplayValue('5')).toBeInTheDocument();
+      expect(screen.getByDisplayValue('보라색 맛 났어!')).toBeInTheDocument();
     });
   });
 
