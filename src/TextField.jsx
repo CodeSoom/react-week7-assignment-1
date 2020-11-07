@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function TextField({ label, type, name, value, onChange }) {
+export default function TextField({ label, type = 'text', name, value, onChange }) {
   return (
     <div>
     <label htmlFor={`login-${name}`}>
