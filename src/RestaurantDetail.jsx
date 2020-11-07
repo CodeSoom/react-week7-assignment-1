@@ -15,6 +15,15 @@ export default function RestaurantDetail({ restaurant }) {
       </p>
       <h3>메뉴</h3>
       <MenuItems menuItems={menuItems} />
+
+      <h3>리뷰</h3>
+      <ul>
+        <li>
+          <p>테스터</p>
+          <p>5점</p>
+          <p>맛있어요!</p>
+        </li>
+      </ul>
     </div>
   );
 }
