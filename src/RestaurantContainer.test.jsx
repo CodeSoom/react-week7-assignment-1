@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,6 +19,10 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     }));
   });
 
@@ -28,28 +32,44 @@ describe('RestaurantContainer', () => {
     expect(dispatch).toBeCalled();
   });
 
-  context('with restaurant', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
+  describe('Login and Logout', () => {
+    context('with restaurant', () => {
+      given('restaurant', () => ({
+        id: 1,
+        name: '마법사주방',
+        address: '서울시 강남구',
+      }));
 
-    it('renders name and address', () => {
-      const { container } = renderRestaurantContainer();
+      it('renders name and address', () => {
+        const { container } = renderRestaurantContainer();
 
-      expect(container).toHaveTextContent('마법사주방');
-      expect(container).toHaveTextContent('서울시');
+        expect(container).toHaveTextContent('마법사주방');
+        expect(container).toHaveTextContent('서울시');
+      });
+    });
+
+    context('without restaurant', () => {
+      given('restaurant', () => null);
+
+      it('renders loading', () => {
+        const { container } = renderRestaurantContainer();
+
+        expect(container).toHaveTextContent('Loading');
+      });
     });
   });
 
-  context('without restaurant', () => {
-    given('restaurant', () => null);
+  it('change input fields', () => {
+    const { getByLabelText } = renderRestaurantContainer();
 
-    it('renders loading', () => {
-      const { container } = renderRestaurantContainer();
+    fireEvent.change(getByLabelText('평점'));
 
-      expect(container).toHaveTextContent('Loading');
+    expect(dispatch).toBeCalledWith({
+      type: 'changeReviewField',
+      payload: {
+        name: 'score',
+        value: '5',
+      },
     });
   });
 });
