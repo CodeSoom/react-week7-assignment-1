@@ -12,24 +12,33 @@ jest.mock('react-redux');
 
 describe('LoginForm', () => {
   const dispatch = jest.fn();
+  const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
   beforeEach(() => {
     dispatch.mockClear();
+    handleChange.mockClear();
+    handleSubmit.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
   })
 
-  function renderLoginForm() {
-    <MemoryRouter>
-      <LoginForm />
-    </MemoryRouter>
+  function renderLoginForm({ email, password }) {
+    render(
+      <MemoryRouter>
+        <LoginForm 
+          fields={{ email, password }}
+          onChange={handleChange}
+        />
+      </MemoryRouter>
+    )
   }
 
   it('renders input controls', () => {
     const email = 'tester@example.com';
     const password = 'test';
 
-    const { getByLabelText } = renderLoginForm({ email, password, error });
+    const { getByLabelText } = renderLoginForm({ email, password });
 
     const controls = [
       { label: 'E-mail', value: email },
@@ -43,7 +52,7 @@ describe('LoginForm', () => {
   });
 
   it('listens change events', () => {
-    const { getByLabelText } = renderLoginForm({ error });
+    const { getByLabelText } = renderLoginForm();
 
     const controls = [
       { label: 'E-mail', name: 'email', value: 'testers@example.com' },
@@ -62,8 +71,7 @@ describe('LoginForm', () => {
   });
 
   it('render "Log In" button', () => {
-    const handleSubmit = jest.fn();
-    const { getByText } = renderLoginForm();
+    const { getByText } = renderLoginForm({});
     
     fireEvent.click(getByText('Log In'));
 
