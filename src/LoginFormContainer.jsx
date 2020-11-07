@@ -29,7 +29,7 @@ export default function LoginFormContainer() {
   }
 
   function handleClickLogout() {
-    dispatch(logout(''));
+    dispatch(logout());
   }
 
   return (

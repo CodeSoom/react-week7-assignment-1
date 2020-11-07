@@ -109,7 +109,7 @@ describe('LoginFormContainer', () => {
 
           fireEvent.click(getByText('Log Out'));
 
-          expect(dispatch).toBeCalled();
+          expect(dispatch).toBeCalledWith({ type: 'logout' });
         });
       });
     });
