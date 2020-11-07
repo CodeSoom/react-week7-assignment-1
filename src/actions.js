@@ -126,7 +126,12 @@ export function changeReviewField({ name, value }) {
   };
 }
 
-export
+export function setReviews({ reviews }) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
 
 export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
@@ -135,8 +140,8 @@ export function sendReview({ restaurantId }) {
     await postReview({
       accessToken, restaurantId, score, description,
     });
-    const reviews = await fetchReviews({ restaurantId });
+    const { reviews } = await fetchReviews({ restaurantId });
 
-    dispatch(setReview(reviews));
+    dispatch(setReviews({ reviews }));
   };
 }

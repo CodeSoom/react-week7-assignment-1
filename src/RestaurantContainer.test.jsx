@@ -67,6 +67,12 @@ describe('RestaurantContainer', () => {
 
       expect(dispatch).toBeCalledTimes(2);
     });
+
+    it('renders restaurant reviews', () => {
+      const { getByText } = renderRestaurantContainer();
+
+      expect(getByText('정말 맛있어요!')).not.toBeNull();
+    });
   });
 
   context('without restaurant', () => {
