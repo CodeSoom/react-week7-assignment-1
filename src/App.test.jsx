@@ -21,6 +21,10 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: '',
+        password: '',
+      },
       regions: [
         { id: 1, name: '서울' },
       ],
