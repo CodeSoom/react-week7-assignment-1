@@ -25,36 +25,36 @@ describe('RestaurantReviewContainer', () => {
     expect(screen.getByDisplayValue('review')).toBeInTheDocument();
   });
 
-  context('when changes review', () => {
-    it('call onChange', () => {
-      useSelector.mockImplementation((selector) => selector({
-        review: '',
-      }));
+  // context('when changes review', () => {
+  //   it('call onChange', () => {
+  //     useSelector.mockImplementation((selector) => selector({
+  //       review: '',
+  //     }));
 
-      renderRestaurantReviewContainer();
+  //     renderRestaurantReviewContainer();
 
-      fireEvent.change(
-        screen.getByPlaceholderText('리뷰를 작성해 주세요!'),
-        'r',
-      );
+  //     fireEvent.change(
+  //       screen.getByPlaceholderText('리뷰를 작성해 주세요!'),
+  //       'r',
+  //     );
 
-      expect(dispatch).toBeCalled();
-    });
-  });
+  //     expect(dispatch).toBeCalled();
+  //   });
+  // });
 
-  context('when click button', () => {
-    it('call onClick', () => {
-      useSelector.mockImplementation((selector) => selector({
-        review: 'review',
-      }));
+  // context('when click button', () => {
+  //   it('call onClick', () => {
+  //     useSelector.mockImplementation((selector) => selector({
+  //       review: 'review',
+  //     }));
 
-      renderRestaurantReviewContainer();
+  //     renderRestaurantReviewContainer();
 
-      fireEvent.click(
-        screen.getByRole('button', { name: '작성하기' }),
-      );
+  //     fireEvent.click(
+  //       screen.getByRole('button', { name: '작성하기' }),
+  //     );
 
-      expect(dispatch).toBeCalled();
-    });
-  });
+  //     expect(dispatch).toBeCalled();
+  //   });
+  // });
 });
