@@ -65,7 +65,7 @@ describe('LoginForm', () => {
   });
 
   context('with Log In', () => {
-    it('renders "Log out" button', () => {
+    it('renders logout button', () => {
       const accessToken = 'ACCESS_TOKEN';
       const { container } = renderLoginForm(accessToken);
 
