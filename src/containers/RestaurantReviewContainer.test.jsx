@@ -97,7 +97,7 @@ describe('RestaurantReviewContainer', () => {
       renderRestaurantReviewContainer(8);
 
       fireEvent.click(
-        screen.getByRole('button', { name: '작성하기' }),
+        screen.getByRole('button', { name: '리뷰 남기기' }),
       );
 
       expect(dispatch).toBeCalled();

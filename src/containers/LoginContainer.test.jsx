@@ -69,12 +69,25 @@ describe('LoginContainer', () => {
   context('when click button', () => {
     beforeEach(() => {
       useDispatch.mockImplementation(() => dispatch);
-      useSelector.mockImplementation((selector) => selector({
-        email: 'email', password: 'password',
-      }));
     });
 
     it('calls action setUser', () => {
+      useSelector.mockImplementation((selector) => selector({
+        email: 'email', password: 'password',
+      }));
+
+      render(<LoginContainer />);
+
+      fireEvent.click(screen.getByRole('button'));
+
+      expect(dispatch).toBeCalled();
+    });
+
+    it('calls action deleteAccessToken', () => {
+      useSelector.mockImplementation((selector) => selector({
+        accessToken: 'token',
+      }));
+
       render(<LoginContainer />);
 
       fireEvent.click(screen.getByRole('button'));

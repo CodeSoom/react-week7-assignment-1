@@ -29,7 +29,7 @@ describe('RestaurantReview', () => {
 
     expect(screen.getByPlaceholderText('평가 점수')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('리뷰를 작성해 주세요!')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: '작성하기' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '리뷰 남기기' })).toBeInTheDocument();
   });
 
   context('when input field is changed', () => {
@@ -66,7 +66,7 @@ describe('RestaurantReview', () => {
 
       expect(handleClick).not.toBeCalled();
 
-      fireEvent.click(screen.getByRole('button', { name: '작성하기' }));
+      fireEvent.click(screen.getByRole('button', { name: '리뷰 남기기' }));
 
       expect(handleClick).not.toBeCalled();
     });
@@ -78,7 +78,7 @@ describe('RestaurantReview', () => {
 
       expect(handleClick).not.toBeCalled();
 
-      fireEvent.click(screen.getByRole('button', { name: '작성하기' }));
+      fireEvent.click(screen.getByRole('button', { name: '리뷰 남기기' }));
 
       expect(handleClick).toBeCalled();
     });

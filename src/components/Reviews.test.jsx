@@ -29,4 +29,16 @@ describe('Reviews', () => {
       expect(screen.queryByText(/매일 먹어요/)).not.toBeInTheDocument();
     });
   });
+
+  context('when score over 5', () => {
+    it('score fixed to 5', () => {
+      renderReviews([
+        {
+          id: 1, name: '테스터', score: 23253255, description: '매일 먹어요',
+        },
+      ]);
+
+      expect(screen.getByText(/★★★★★/)).toBeInTheDocument();
+    });
+  });
 });
