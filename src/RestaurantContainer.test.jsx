@@ -82,5 +82,17 @@ describe('RestaurantContainer', () => {
         value: '5',
       },
     });
+
+    fireEvent.change(getByLabelText('리뷰 내용'), {
+      target: { value: '정말 맛있습니다..호에에엥' },
+    });
+
+    expect(dispatch).toBeCalledWith({
+      type: 'changeReviewFields',
+      payload: {
+        name: 'description',
+        value: '정말 맛있습니다..호에에엥',
+      },
+    });
   });
 });

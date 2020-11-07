@@ -27,6 +27,7 @@ export default function ReviewForm({ onChange }) {
           type="text"
           name="description"
           id="input-review"
+          onChange={handleChange}
         />
       </div>
     </>
