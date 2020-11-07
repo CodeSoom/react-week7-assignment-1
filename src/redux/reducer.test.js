@@ -24,8 +24,8 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
-      email: null,
-      password: null,
+      email: '',
+      password: '',
       accessToken: null,
       review: {},
     };

@@ -7,8 +7,8 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
-  email: null,
-  password: null,
+  email: '',
+  password: '',
   accessToken: sessionStorage.getItem('accessToken'),
   review: {},
 };

@@ -34,6 +34,9 @@ describe('Reviews', () => {
     it('score fixed to 5', () => {
       renderReviews([
         {
+          id: 2, name: '테스터', score: 2, description: '으...',
+        },
+        {
           id: 1, name: '테스터', score: 23253255, description: '매일 먹어요',
         },
       ]);
