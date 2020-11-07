@@ -45,29 +45,29 @@ describe('RestaurantContainer', () => {
     expect(dispatch).toBeCalled();
   });
 
+  context('with restaurant', () => {
+    givenRestaurant();
+
+    it('renders name and address', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('마법사주방');
+      expect(container).toHaveTextContent('서울시');
+    });
+  });
+
+  context('without restaurant', () => {
+    given('restaurant', () => null);
+
+    it('renders loading', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('Loading');
+    });
+  });
+
   describe('Login and Logout', () => {
-    context('with restaurant', () => {
-      givenRestaurant();
-
-      it('renders name and address', () => {
-        const { container } = renderRestaurantContainer();
-
-        expect(container).toHaveTextContent('마법사주방');
-        expect(container).toHaveTextContent('서울시');
-      });
-    });
-
-    context('without restaurant', () => {
-      given('restaurant', () => null);
-
-      it('renders loading', () => {
-        const { container } = renderRestaurantContainer();
-
-        expect(container).toHaveTextContent('Loading');
-      });
-    });
-
-    context('with ReviewForm', () => {
+    context('with login', () => {
       givenRestaurant();
       given('accessToken', () => 'ACCESS_TOKEN');
 
@@ -77,9 +77,47 @@ describe('RestaurantContainer', () => {
         expect(container).toHaveTextContent('평점');
         expect(container).toHaveTextContent('리뷰 내용');
       });
+
+      it('change input fields', () => {
+        givenRestaurant();
+        const { getByLabelText } = renderRestaurantContainer();
+
+        fireEvent.change(getByLabelText('평점'), {
+          target: { value: '5' },
+        });
+
+        expect(dispatch).toBeCalledWith({
+          type: 'changeReviewFields',
+          payload: {
+            name: 'score',
+            value: '5',
+          },
+        });
+
+        fireEvent.change(getByLabelText('리뷰 내용'), {
+          target: { value: '정말 맛있습니다..호에에엥' },
+        });
+
+        expect(dispatch).toBeCalledWith({
+          type: 'changeReviewFields',
+          payload: {
+            name: 'description',
+            value: '정말 맛있습니다..호에에엥',
+          },
+        });
+      });
+
+      it('renders review send button', () => {
+        givenRestaurant();
+        const { getByText } = renderRestaurantContainer();
+
+        fireEvent.click(getByText('리뷰 남기기'));
+
+        expect(dispatch).toBeCalledTimes(2);
+      });
     });
 
-    context('without ReviewForm', () => {
+    context('without logout', () => {
       givenRestaurant();
       given('accessToken', () => null);
 
@@ -90,43 +128,5 @@ describe('RestaurantContainer', () => {
         expect(container).not.toHaveTextContent('리뷰 내용');
       });
     });
-  });
-
-  it('change input fields', () => {
-    givenRestaurant();
-    const { getByLabelText } = renderRestaurantContainer();
-
-    fireEvent.change(getByLabelText('평점'), {
-      target: { value: '5' },
-    });
-
-    expect(dispatch).toBeCalledWith({
-      type: 'changeReviewFields',
-      payload: {
-        name: 'score',
-        value: '5',
-      },
-    });
-
-    fireEvent.change(getByLabelText('리뷰 내용'), {
-      target: { value: '정말 맛있습니다..호에에엥' },
-    });
-
-    expect(dispatch).toBeCalledWith({
-      type: 'changeReviewFields',
-      payload: {
-        name: 'description',
-        value: '정말 맛있습니다..호에에엥',
-      },
-    });
-  });
-
-  it('renders review send button', () => {
-    givenRestaurant();
-    const { getByText } = renderRestaurantContainer();
-
-    fireEvent.click(getByText('리뷰 남기기'));
-
-    expect(dispatch).toBeCalledTimes(2);
   });
 });
