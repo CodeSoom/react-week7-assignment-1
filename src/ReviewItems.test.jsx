@@ -7,7 +7,7 @@ import ReviewItems from './ReviewItems';
 describe('ReviewItems', () => {
   context('with review items', () => {
     it('renders review items', () => {
-      const reviewtems = [
+      const reviewItems = [
         {
           id: 1,
           restaurantId: 1,
@@ -17,7 +17,7 @@ describe('ReviewItems', () => {
         },
       ];
 
-      const { container } = render(<ReviewItems reviewtems={reviewtems} />);
+      const { container } = render(<ReviewItems reviewItems={reviewItems} />);
 
       expect(container).toHaveTextContent('멋');
     });
