@@ -2,7 +2,9 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeLoginFields } from './actions';
+import {
+  changeLoginFields,
+} from './actions';
 
 import LoginForm from './LoginForm';
 
@@ -20,11 +22,16 @@ export default function LoginContainer() {
     dispatch(changeLoginFields({ name, value }));
   };
 
+  const handleSubmit = () => {
+    dispatch();
+  };
+
   return (
     <LoginForm
       email={email}
       password={password}
       onChange={handleChange}
+      onSubmit={handleSubmit}
     />
   );
 }
