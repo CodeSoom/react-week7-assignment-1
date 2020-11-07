@@ -15,7 +15,7 @@ export async function fetchRestaurant() {
 }
 
 export async function postLogin({ email, password }) {
-  return { email, password };
+  return '';
 }
 
 export async function postReview({
