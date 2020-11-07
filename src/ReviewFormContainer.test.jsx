@@ -22,7 +22,7 @@ describe('ReviewFormContainer', () => {
     }));
   });
 
-  context('when logged-in', () => {
+  context('when logged in', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
 
     it('renders input-controls', () => {

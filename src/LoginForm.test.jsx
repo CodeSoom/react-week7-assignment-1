@@ -5,10 +5,22 @@ import { fireEvent, render } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
+  const inputControls = [
+    { label: 'E-mail', name: 'email', value: 'tester@example.com' },
+    { label: 'Password', name: 'password', value: 'test' },
+  ];
+
+  const loginFields = {
+    email: 'origin@example.com',
+    password: 'origin',
+  };
+
+  const loginButton = 'Log In';
+
   const handleSubmit = jest.fn();
   const handleChange = jest.fn();
 
-  const renderLoginForm = (loginFields = {}) => render(
+  const renderLoginForm = () => render(
     <LoginForm
       onSubmit={handleSubmit}
       onChange={handleChange}
@@ -20,63 +32,47 @@ describe('LoginForm', () => {
     jest.clearAllMocks();
   });
 
-  describe('input-controls', () => {
-    const inputControls = [
-      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
-      { label: 'Password', name: 'password', value: 'test' },
-    ];
+  it('renders input controls', () => {
+    const { queryByLabelText } = renderLoginForm();
 
-    it('are rendered', () => {
-      const { queryByLabelText } = renderLoginForm();
-
-      inputControls.forEach(({ label }) => {
-        expect(queryByLabelText(label)).not.toBeNull();
-      });
-    });
-
-    it('show values', () => {
-      const fields = {
-        email: 'origin@example.com',
-        password: 'origin',
-      };
-
-      const { getByLabelText } = renderLoginForm(fields);
-
-      inputControls.forEach(({ label, name }) => {
-        expect(getByLabelText(label)).toHaveValue(fields[name]);
-      });
-    });
-
-    it('listen change events', () => {
-      const { getByLabelText } = renderLoginForm();
-
-      inputControls.forEach(({ label, name, value }) => {
-        fireEvent.change(getByLabelText(label), {
-          target: { value },
-        });
-
-        expect(handleChange).toBeCalledWith({ name, value });
-      });
+    inputControls.forEach(({ label }) => {
+      expect(queryByLabelText(label)).not.toBeNull();
     });
   });
 
-  describe('login button', () => {
-    const loginButton = 'Log In';
+  it('shows login field values', () => {
+    const { getByLabelText } = renderLoginForm();
 
-    it('is rendered', () => {
-      const { queryByText } = renderLoginForm();
-
-      expect(queryByText(loginButton)).not.toBeNull();
+    inputControls.forEach(({ label, name }) => {
+      expect(getByLabelText(label)).toHaveValue(loginFields[name]);
     });
+  });
 
-    it('listens click event', () => {
-      const { getByText } = renderLoginForm();
+  it('listens change events', () => {
+    const { getByLabelText } = renderLoginForm();
 
-      expect(handleSubmit).not.toBeCalled();
+    inputControls.forEach(({ label, name, value }) => {
+      fireEvent.change(getByLabelText(label), {
+        target: { value },
+      });
 
-      fireEvent.click(getByText(loginButton));
-
-      expect(handleSubmit).toBeCalledTimes(1);
+      expect(handleChange).toBeCalledWith({ name, value });
     });
+  });
+
+  it('renders login button', () => {
+    const { queryByText } = renderLoginForm();
+
+    expect(queryByText(loginButton)).not.toBeNull();
+  });
+
+  it('listens click event', () => {
+    const { getByText } = renderLoginForm();
+
+    expect(handleSubmit).not.toBeCalled();
+
+    fireEvent.click(getByText(loginButton));
+
+    expect(handleSubmit).toBeCalledTimes(1);
   });
 });

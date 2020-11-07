@@ -30,19 +30,19 @@ export default function LoginFormContainer() {
     dispatch(logout());
   };
 
-  if (isLoggedIn) {
-    return (
-      <button type="button" onClick={handleClickLogOut}>
-        Log out
-      </button>
-    );
-  }
-
   return (
-    <LoginForm
-      fields={loginFields}
-      onSubmit={handleSubmit}
-      onChange={handleChange}
-    />
+    <>
+      {isLoggedIn ? (
+        <button type="button" onClick={handleClickLogOut}>
+          Log out
+        </button>
+      ) : (
+        <LoginForm
+          fields={loginFields}
+          onSubmit={handleSubmit}
+          onChange={handleChange}
+        />
+      )}
+    </>
   );
 }

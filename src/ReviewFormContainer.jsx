@@ -25,15 +25,16 @@ export default function ReviewFormContainer() {
     dispatch(sendReview());
   };
 
-  if (isLoggedOut) {
-    return '';
-  }
-
   return (
-    <ReviewForm
-      fields={reviewFields}
-      onChange={handleChange}
-      onSubmit={handleSubmit}
-    />
+    <>
+      {isLoggedOut ? ''
+        : (
+          <ReviewForm
+            fields={reviewFields}
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+          />
+        )}
+    </>
   );
 }
