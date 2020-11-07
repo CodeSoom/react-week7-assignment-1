@@ -33,13 +33,13 @@ describe('LoginForm', () => {
       {
         label: 'E-mail',
         name: 'email',
-        origin: 'email',
+        origin: email,
         value: 'tester@example.com',
       },
       {
         label: 'Password',
         name: 'password',
-        origin: 'password',
+        origin: password,
         value: 'test',
       },
     ];
