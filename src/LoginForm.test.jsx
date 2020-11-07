@@ -2,19 +2,19 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
-import LoginPage from './LoginPage';
+import LoginForm from './LoginForm';
 
-describe('LoginPage', () => {
+describe('LoginForm', () => {
   it('renders Log In title', () => {
     const { container } = render(
-      <LoginPage />,
+      <LoginForm />,
     );
     expect(container).toHaveTextContent('Log In');
   });
 
   it('render input controls', () => {
     const { getByLabelText } = render(
-      <LoginPage />,
+      <LoginForm />,
     );
 
     expect(getByLabelText('E-mail')).not.toBeNull();
