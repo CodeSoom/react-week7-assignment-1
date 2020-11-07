@@ -9,6 +9,7 @@ import {
   selectCategory,
   changeLoginFields,
   setAccessToken,
+  changeReviewFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -178,6 +179,42 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken('token'));
 
       expect(state.accessToken).toEqual('token');
+    });
+  });
+
+  describe('changeReviewFields', () => {
+    context('change score input field', () => {
+      it('changes input field', () => {
+        const initialState = {
+          reviewFields: {
+            score: '',
+          },
+        };
+
+        const { reviewFields } = reducer(initialState, changeReviewFields({
+          name: 'score',
+          value: '5',
+        }));
+
+        expect(reviewFields.score).toEqual('5');
+      });
+    });
+
+    context('change description input field', () => {
+      it('changes input field', () => {
+        const initialState = {
+          reviewFields: {
+            description: '',
+          },
+        };
+
+        const { reviewFields } = reducer(initialState, changeReviewFields({
+          name: 'description',
+          value: '맛있어요!',
+        }));
+
+        expect(reviewFields.description).toEqual('맛있어요!');
+      });
     });
   });
 });
