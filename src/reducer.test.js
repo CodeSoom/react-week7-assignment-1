@@ -19,6 +19,7 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {},
     };
 
     it('returns initialState', () => {
@@ -140,6 +141,6 @@ describe('reducer', () => {
       changeLoginField({ name: 'email', value: 'tester@example.com' }),
     );
 
-    expect(state.loginFields.value).toBe('tester@example.com');
+    expect(state.loginFields.email).toBe('tester@example.com');
   });
 });
