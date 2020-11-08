@@ -12,7 +12,7 @@ describe('LoginForm', () => {
     jest.clearAllMocks();
   });
 
-  function renderLoginForm({ email, password }) {
+  function renderLoginForm({ email, password } = {}) {
     return render((
       <LoginForm
         fields={{ email, password }}
@@ -41,7 +41,7 @@ describe('LoginForm', () => {
   });
 
   it('listens change events', () => {
-    const { getByLabelText } = renderLoginForm({});
+    const { getByLabelText } = renderLoginForm();
 
     const controls = [
       {
@@ -66,7 +66,7 @@ describe('LoginForm', () => {
   });
 
   it('renders login button', () => {
-    const { getByText } = renderLoginForm({});
+    const { getByText } = renderLoginForm();
 
     fireEvent.click(getByText('Log In'));
 
