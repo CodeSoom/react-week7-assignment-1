@@ -95,6 +95,12 @@ export function setAccessToken(accessToken) {
   };
 }
 
+export function deleteAccessToken() {
+  return {
+    type: 'deleteAccessToken',
+  };
+}
+
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { email, password } = getState();
@@ -141,11 +147,5 @@ export function writeReview({ restaurantId }) {
     });
 
     dispatch(loadRestaurant({ restaurantId }));
-  };
-}
-
-export function deleteAccessToken() {
-  return {
-    type: 'deleteAccessToken',
   };
 }
