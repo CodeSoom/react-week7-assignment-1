@@ -6,6 +6,8 @@ import {
   postLogin,
 } from './services/api';
 
+import { saveItem } from './services/storage';
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -94,9 +96,25 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
-export function changeLoginField({name, value}) {
+export function logout() {
   return {
-    type: 'changeLoginField',
+    type: 'logout',
+  };
+}
+
+export function changeLoginFields({name, value}) {
+  return {
+    type: 'changeLoginFields',
+    payload: {
+      name,
+      value,
+    }
+  }
+}
+
+export function changeReviewFields({name, value}) {
+  return {
+    type: 'changeReviewFields',
     payload: {
       name,
       value,
@@ -107,9 +125,14 @@ export function changeLoginField({name, value}) {
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
+    try {
+      const accsseToken = await postLogin({ email, password});
 
-    const accsseToken = await postLogin({ email, password});
+      saveItem('accessToken', accsseToken);
 
-    dispatch(setAccessToken(accsseToken));
+      dispatch(setAccessToken(accsseToken));
+    } catch(e) {
+      console.error(e);
+    }
   }
 }
