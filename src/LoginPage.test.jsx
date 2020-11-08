@@ -2,9 +2,18 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
+import { useSelector } from 'react-redux';
+
 import LoginPage from './LoginPage';
 
 describe('LoginPage', () => {
+  useSelector.mockImplementation((selector) => selector({
+    loginFields: {
+      email: 'test@gmail.com',
+      password: '12345',
+    },
+  }));
+
   it('renders', () => {
     const { container } = render(<LoginPage />);
 
