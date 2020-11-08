@@ -11,7 +11,7 @@ import REGIONS from '../../fixtures/regions';
 import CATEGORIES from '../../fixtures/categories';
 import RESTAURANTS from '../../fixtures/restaurants';
 import RESTAURANT from '../../fixtures/restaurant';
-import LOGINFIELDS from '../../fixtures/loginFields';
+import LOGIN_FIELDS from '../../fixtures/loginFields';
 import ACCESSTOKEN from '../../fixtures/accessToken';
 
 describe('api', () => {
@@ -78,7 +78,7 @@ describe('api', () => {
     });
 
     it('returns restaurants', async () => {
-      const accessToken = await postLogin(LOGINFIELDS);
+      const accessToken = await postLogin(LOGIN_FIELDS);
 
       expect(accessToken).toEqual(ACCESSTOKEN.accessToken);
     });
@@ -93,8 +93,8 @@ describe('api', () => {
       await postReview({
         accessToken: ACCESSTOKEN,
         restaurantId: 1,
-        score: LOGINFIELDS.score,
-        description: LOGINFIELDS.description,
+        score: LOGIN_FIELDS.score,
+        description: LOGIN_FIELDS.description,
       });
     });
   });
