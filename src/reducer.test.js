@@ -89,23 +89,31 @@ describe('reducer', () => {
   });
 
   describe('setRestaurant', () => {
+    const initialState = {
+      restaurant: null,
+      reviewFields: {
+        score: 'tester@example.com',
+        description: 'test',
+      },
+    };
+
+    const restaurant = { id: 1, name: '마법사주방' };
+
+    const setRestaurantsReducer = () => reducer(
+      initialState,
+      setRestaurant(restaurant),
+    );
+
     it('changes restaurant', () => {
-      const initialState = {
-        restaurant: null,
-        reviewFields: {
-          score: 'tester@example.com',
-          description: 'test',
-        },
-      };
-
-      const restaurant = { id: 1, name: '마법사주방' };
-
-      const state = reducer(initialState, setRestaurant(restaurant));
-
-      const { score, description } = state.reviewFields;
+      const state = setRestaurantsReducer();
 
       expect(state.restaurant.id).toBe(1);
       expect(state.restaurant.name).toBe('마법사주방');
+    });
+
+    it('deleted reviewFields texts', () => {
+      const { reviewFields: { score, description } } = setRestaurantsReducer();
+
       expect(score).toBe('');
       expect(description).toBe('');
     });
@@ -183,15 +191,21 @@ describe('reducer', () => {
         password: 'test',
       },
     };
-
-    const { accessToken, loginFields: { email, password } } = reducer(
+    const setAccessTokenReducer = () => reducer(
       initialState,
       setAccessToken('TOKEN'),
     );
 
-    expect(accessToken).toBe('TOKEN');
-    expect(email).toBe('');
-    expect(password).toBe('');
+    it('Created accessToken', () => {
+      const { accessToken } = setAccessTokenReducer();
+      expect(accessToken).toBe('TOKEN');
+    });
+
+    it('Deleted loginFields texts', () => {
+      const { loginFields: { email, password } } = setAccessTokenReducer();
+      expect(email).toBe('');
+      expect(password).toBe('');
+    });
   });
 
   describe('changeReviewField', () => {
@@ -218,12 +232,13 @@ describe('reducer', () => {
   });
 
   describe('logout', () => {
-    const initialState = {
-      accessToken: 'ACCESS_TOKEN',
-    };
+    it('Deleted accessToken', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+      };
+      const state = reducer(initialState, logout());
 
-    const state = reducer(initialState, logout());
-
-    expect(state.accessToken).toBe('');
+      expect(state.accessToken).toBe('');
+    });
   });
 });
