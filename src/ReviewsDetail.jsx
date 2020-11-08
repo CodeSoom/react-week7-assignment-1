@@ -11,18 +11,9 @@ export default function ReviewDetail({ reviews }) {
         description,
       }) => ((
         <li key={id}>
-          <span>
-            {`${name}`}
-            <br />
-          </span>
-          <span>
-            {`${score}점`}
-            <br />
-          </span>
-          <span>
-            {`${description}`}
-            <br />
-          </span>
+          <p>{`${name}`}</p>
+          <p>{`${score}점`}</p>
+          <p>{`${description}`}</p>
         </li>
       )))}
     </>
