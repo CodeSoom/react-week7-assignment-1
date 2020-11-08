@@ -155,10 +155,43 @@ describe('reducer', () => {
     it('change password in fields', () =>{
       const state = reducer(
         initialState,
-        changeLoginField({ name: 'password', value: '2222' })
+        changeLoginFields({ name: 'password', value: '2222' })
       );
 
       expect(state.loginFields.password).toEqual('2222');
+    });
+  });
+
+  describe('changeReviewFields', () => {
+    const initialState = {
+      reviewFields: {
+        score: '',
+        description: ''
+      }
+    };
+
+    it('change score', () => {
+      const state = reducer(initialState, changeReviewFields({
+        name: 'score',
+        value: '5',
+      }));
+
+      expect(state.reviewFields).toEqual({
+        score: '5',
+        description: '',
+      });
+    });
+
+    it('change description', () => {
+      const state = reducer(initialState, changeReviewFields({
+        name: 'description',
+        value: '다음에도 올게요',
+      }));
+
+      expect(state.reviewFields).toEqual({
+        score: '',
+        description: '다음에도 올게요',
+      });
     });
   });
 
