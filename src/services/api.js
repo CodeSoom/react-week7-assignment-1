@@ -34,6 +34,6 @@ export async function postLogin({ email, password }) {
     method: 'POST',
     body: JSON.stringify({ email, password }),
   });
-  const data = await response.json();
-  return data;
+  const { accessToken } = await response.json();
+  return accessToken;
 }
