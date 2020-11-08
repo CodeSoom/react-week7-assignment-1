@@ -5,9 +5,9 @@ import { fireEvent, render } from '@testing-library/react';
 import TextField from './TextField';
 
 describe('TextField', () => {
-  function renderTextField({ label, type = 'text', name }) {
-    const handleChange = jest.fn();
+  const handleChange = jest.fn();
 
+  function renderTextField({ label, type = 'text', name }) {
     return render(
       <TextField
         label={label}
@@ -51,8 +51,6 @@ describe('TextField', () => {
   });
 
   it('listens change events', () => {
-    const handleChange = jest.fn();
-
     const controls = [
       { label: '평점', name: 'score', value: '5' },
       { label: '리뷰 내용', name: 'description', value: 'GOOD' },

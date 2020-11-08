@@ -9,6 +9,12 @@ import LoginFormContainer from './LoginFormContainer';
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
+  function renderLoginFormContainer() {
+    return render(
+      <LoginFormContainer />,
+    );
+  }
+
   beforeEach(() => {
     dispatch.mockClear();
 
@@ -28,9 +34,7 @@ describe('LoginFormContainer', () => {
       given('accessToken', () => '');
 
       it('renders input controls', () => {
-        const { getByLabelText } = render(
-          <LoginFormContainer />,
-        );
+        const { getByLabelText } = renderLoginFormContainer();
 
         expect(getByLabelText('E-mail').value).toBe('test@test');
         expect(getByLabelText('Password').value).toBe('1234');
@@ -38,9 +42,7 @@ describe('LoginFormContainer', () => {
 
       context('when typed in', () => {
         it('calls change fields dispatch', () => {
-          const { getByLabelText } = render(
-            <LoginFormContainer />,
-          );
+          const { getByLabelText } = renderLoginFormContainer();
 
           fireEvent.change(getByLabelText('E-mail'), { target: { value: 'new test@test' } });
 
@@ -56,9 +58,7 @@ describe('LoginFormContainer', () => {
       given('accessToken', () => 'ACESS_TOKEN');
 
       it("doesn't render inputs", () => {
-        const { queryByLabelText } = render(
-          <LoginFormContainer />,
-        );
+        const { queryByLabelText } = renderLoginFormContainer();
 
         expect(queryByLabelText('E-mail')).toBeNull();
         expect(queryByLabelText('Password')).toBeNull();
@@ -71,18 +71,14 @@ describe('LoginFormContainer', () => {
       given('accessToken', () => '');
 
       it('renders "Log in" button', () => {
-        const { getByText } = render(
-          <LoginFormContainer />,
-        );
+        const { getByText } = renderLoginFormContainer();
 
         expect(getByText('Log In')).not.toBeNull();
       });
 
       context('when clicked', () => {
         it('calls request login dispatch', () => {
-          const { getByText } = render(
-            <LoginFormContainer />,
-          );
+          const { getByText } = renderLoginFormContainer();
 
           fireEvent.click(getByText('Log In'));
 
@@ -94,18 +90,14 @@ describe('LoginFormContainer', () => {
       given('accessToken', () => 'ACESS_TOKEN');
 
       it('renders "Log out" button', () => {
-        const { getByText } = render(
-          <LoginFormContainer />,
-        );
+        const { getByText } = renderLoginFormContainer();
 
         expect(getByText('Log out')).not.toBeNull();
       });
 
       context('when clicked', () => {
         it('calls logout dispatch', () => {
-          const { getByText } = render(
-            <LoginFormContainer />,
-          );
+          const { getByText } = renderLoginFormContainer();
 
           fireEvent.click(getByText('Log out'));
 

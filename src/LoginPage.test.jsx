@@ -11,6 +11,13 @@ import LoginPage from './LoginPage';
 jest.mock('react-redux');
 
 describe('LoginPage', () => {
+  function renderLoginPage() {
+    return render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>,
+    );
+  }
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -23,21 +30,13 @@ describe('LoginPage', () => {
   }));
 
   it('renders Log In title', () => {
-    const { container } = render(
-      <MemoryRouter>
-        <LoginPage />
-      </MemoryRouter>,
-    );
+    const { container } = renderLoginPage();
 
     expect(container).toHaveTextContent('Log In');
   });
 
   it('render input controls', () => {
-    const { getByLabelText } = render(
-      <MemoryRouter>
-        <LoginPage />
-      </MemoryRouter>,
-    );
+    const { getByLabelText } = renderLoginPage();
 
     expect(getByLabelText('E-mail')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
