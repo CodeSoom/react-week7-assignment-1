@@ -11,16 +11,16 @@ describe('LogoutForm', () => {
     return render(<LogoutForm onClick={handleClick} />);
   }
 
-  it('renders "Logout" button', () => {
+  it('renders "Log out" button', () => {
     const { getByText } = renderLogoutForm();
 
-    expect(getByText('LOGOUT')).not.toBeNull();
+    expect(getByText('Log out')).not.toBeNull();
   });
 
-  it('clicks "Logout" button', () => {
+  it('clicks "Log out" button', () => {
     const { getByText } = renderLogoutForm();
 
-    const logoutButton = getByText('LOGOUT');
+    const logoutButton = getByText('Log out');
 
     fireEvent.click(logoutButton);
 

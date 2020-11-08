@@ -72,16 +72,16 @@ describe('LoginFormContainer', () => {
   context('when logged in', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
 
-    it('renders "LOGOUT" button', () => {
+    it('renders "Log out" button', () => {
       const { container } = renderLoginFormContainer();
 
-      expect(container).toHaveTextContent('LOGOUT');
+      expect(container).toHaveTextContent('Log out');
     });
 
-    it('dispatch setAccessToken click "LOGOUT" button', () => {
+    it('dispatch setAccessToken click "Log out" button', () => {
       const { getByText } = renderLoginFormContainer();
 
-      fireEvent.click(getByText('LOGOUT'));
+      fireEvent.click(getByText('Log out'));
 
       expect(dispatch).toBeCalledWith({ type: 'logout' });
     });
