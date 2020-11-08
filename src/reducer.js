@@ -75,6 +75,27 @@ const reducers = {
       },
     };
   },
+
+  changeReviewFields(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewFields: {
+        ...state.reviewFields,
+        [name]: value,
+      },
+    };
+  },
+
+  logout(state) {
+    return {
+      ...state,
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      accessToken: '',
+    };
+  },
 };
 
 function defaultReducer(state) {
