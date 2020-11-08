@@ -1,6 +1,7 @@
 import {
   saveItem,
   loadItem,
+  deleteItem,
 } from './storage';
 
 describe('storage', () => {
@@ -12,5 +13,9 @@ describe('storage', () => {
 
   it('load item from localStorage', async () => {
     expect(loadItem(key)).toEqual(value);
+  });
+
+  it('delete item in localStorage', async () => {
+    expect(deleteItem(key)).toBeUndefined();
   });
 });

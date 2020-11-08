@@ -12,6 +12,8 @@ import {
   logout,
 } from './actions';
 
+import { deleteItem } from './services/storage';
+
 import { get } from './utils';
 
 export default function LoginFormContainer() {
@@ -30,6 +32,8 @@ export default function LoginFormContainer() {
 
   function handleClickLogout() {
     dispatch(logout());
+
+    deleteItem('accessToken');
   }
 
   return (

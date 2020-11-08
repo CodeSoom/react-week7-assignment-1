@@ -54,16 +54,16 @@ describe('LoginFormContainer', () => {
       expect(dispatch).toBeCalledTimes(2);
     });
 
-    it('renders "login" button', () => {
+    it('renders "Log In" button', () => {
       const { getByText } = renderLoginFormContainer();
 
-      expect(getByText('Login')).not.toBeNull();
+      expect(getByText('Log In')).not.toBeNull();
     });
 
-    it('dispatch setAccessToken when click "Login" button', () => {
+    it('dispatch setAccessToken when click "Log In" button', () => {
       const { getByText } = renderLoginFormContainer();
 
-      fireEvent.click(getByText('Login'));
+      fireEvent.click(getByText('Log In'));
 
       expect(dispatch).toBeCalled();
     });
