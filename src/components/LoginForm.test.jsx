@@ -14,7 +14,7 @@ describe('LoginForm', () => {
     handleClick.mockClear();
   });
 
-  const renderLogin = ({ email, password }) => render(
+  const renderLogin = ({ email = '', password = '' } = {}) => render(
     <LoginForm
       email={email}
       password={password}
@@ -84,7 +84,7 @@ describe('LoginForm', () => {
 
   context('when change input', () => {
     it('called onChangeEmail', () => {
-      renderLogin({ email: '', password: '' });
+      renderLogin();
 
       expect(handleChangeEmail).not.toBeCalled();
 
@@ -97,7 +97,7 @@ describe('LoginForm', () => {
     });
 
     it('called onChangeEmail', () => {
-      renderLogin({ email: '', password: '' });
+      renderLogin();
 
       expect(handleChangePassword).not.toBeCalled();
 

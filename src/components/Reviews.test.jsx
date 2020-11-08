@@ -32,7 +32,7 @@ describe('Reviews', () => {
 
   context('when score over 5', () => {
     it('score fixed to 5', () => {
-      renderReviews([
+      const { container } = renderReviews([
         {
           id: 2, name: '테스터', score: 2, description: '으...',
         },
@@ -41,7 +41,8 @@ describe('Reviews', () => {
         },
       ]);
 
-      expect(screen.getByText(/★★★★★/)).toBeInTheDocument();
+      expect(container.querySelectorAll('li')[0]).toHaveTextContent(/★★★★★/);
+      expect(container.querySelectorAll('li')[1]).toHaveTextContent(/★★/);
     });
   });
 });

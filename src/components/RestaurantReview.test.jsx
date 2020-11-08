@@ -14,7 +14,7 @@ describe('RestaurantReview', () => {
     handleChangeDescription.mockClear();
   });
 
-  const renderRestaurantReview = ({ score, description }) => render(
+  const renderRestaurantReview = ({ score = '', description = '' } = {}) => render(
     <RestaurantReview
       score={score}
       description={description}
@@ -25,7 +25,7 @@ describe('RestaurantReview', () => {
   );
 
   it('renders input and button', () => {
-    renderRestaurantReview({});
+    renderRestaurantReview();
 
     expect(screen.getByPlaceholderText('평가 점수')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('리뷰를 작성해 주세요!')).toBeInTheDocument();
@@ -34,7 +34,7 @@ describe('RestaurantReview', () => {
 
   context('when input field is changed', () => {
     it('call onChangeDescription', () => {
-      renderRestaurantReview({});
+      renderRestaurantReview();
 
       expect(handleChangeDescription).not.toBeCalled();
 
@@ -47,7 +47,7 @@ describe('RestaurantReview', () => {
     });
 
     it('call onChangeScore', () => {
-      renderRestaurantReview({});
+      renderRestaurantReview();
 
       expect(handleChangeScore).not.toBeCalled();
 
@@ -62,7 +62,7 @@ describe('RestaurantReview', () => {
 
   context('without review value', () => {
     it('can not click button', () => {
-      renderRestaurantReview({});
+      renderRestaurantReview();
 
       expect(handleClick).not.toBeCalled();
 

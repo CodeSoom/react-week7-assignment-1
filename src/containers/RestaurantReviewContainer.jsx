@@ -11,11 +11,6 @@ import {
 
 export default function RestaurantReviewContainer({ restaurantId }) {
   const accessToken = useSelector(get('accessToken'));
-
-  if (!accessToken) {
-    return null;
-  }
-
   const { description, score } = useSelector(get('review'));
 
   const dispatch = useDispatch();
@@ -33,12 +28,19 @@ export default function RestaurantReviewContainer({ restaurantId }) {
   }
 
   return (
-    <RestaurantReview
-      description={description}
-      score={score}
-      onClick={handleClick}
-      onChangeScore={handleChangeScore}
-      onChangeDescription={handleChangeDescription}
-    />
+    <>
+      {
+        accessToken
+          ? (
+            <RestaurantReview
+              description={description}
+              score={score}
+              onClick={handleClick}
+              onChangeScore={handleChangeScore}
+              onChangeDescription={handleChangeDescription}
+            />
+          ) : null
+      }
+    </>
   );
 }

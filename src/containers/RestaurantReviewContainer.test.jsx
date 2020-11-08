@@ -17,18 +17,14 @@ describe('RestaurantReviewContainer', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      review: { description: 'review', score: 5 },
+      accessToken: 'token',
+    }));
   });
 
   context('with accessToken', () => {
     it('renders component', () => {
-      useSelector.mockImplementation((selector) => selector({
-        review: {
-          description: 'review',
-          score: 5,
-        },
-        accessToken: 'token',
-      }));
-
       renderRestaurantReviewContainer();
 
       expect(screen.getByDisplayValue('review')).toBeInTheDocument();
@@ -39,11 +35,7 @@ describe('RestaurantReviewContainer', () => {
   context('without accessToken', () => {
     it('renders nothing', () => {
       useSelector.mockImplementation((selector) => selector({
-        review: {
-          description: 'review',
-          score: 5,
-        },
-        accessToken: '',
+        review: { description: 'review', score: 5 },
       }));
 
       renderRestaurantReviewContainer();
@@ -86,14 +78,6 @@ describe('RestaurantReviewContainer', () => {
 
   context('when click button', () => {
     it('call onClick', () => {
-      useSelector.mockImplementation((selector) => selector({
-        review: {
-          description: 'review',
-          score: 5,
-        },
-        accessToken: 'token',
-      }));
-
       renderRestaurantReviewContainer(8);
 
       fireEvent.click(
