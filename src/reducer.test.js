@@ -7,6 +7,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginField,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +19,10 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -123,6 +128,46 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('changeLoginField', () => {
+    context('onChange email', () => {
+      it('update email', () => {
+        const initialState = {
+          loginFields: {
+            email: 'test@gmail.com',
+            password: '12345',
+          },
+        };
+
+        const state = reducer(
+          initialState,
+          changeLoginField({ name: 'email', value: 'test1@gmail.com' }),
+        );
+
+        expect(state.loginFields.email).toBe('test1@gmail.com');
+        expect(state.loginFields.password).toBe('12345');
+      });
+    });
+  });
+
+  context('onChange password', () => {
+    it('update password', () => {
+      const initialState = {
+        loginFields: {
+          email: 'test@gmail.com',
+          password: '12345',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        changeLoginField({ name: 'password', value: '12345test' }),
+      );
+
+      expect(state.loginFields.email).toBe('test@gmail.com');
+      expect(state.loginFields.password).toBe('12345test');
     });
   });
 });
