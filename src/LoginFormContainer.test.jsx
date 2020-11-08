@@ -25,11 +25,13 @@ describe('LoginFormContainer', () => {
 
   context('when logged out', () => {
     given('accessToken', () => '');
-    context('without isError', () => {
+
+    context('with valid email and password', () => {
       given('loginFields', () => ({
         email: 'tester@example.com',
         password: 'test',
       }));
+
       it('renders input controls', () => {
         const { getByLabelText } = renderLoginPage();
 
@@ -37,40 +39,45 @@ describe('LoginFormContainer', () => {
         expect(getByLabelText('Password').value).toBe('test');
       });
 
-      it('listens change event input controls', () => {
-        const { getByLabelText } = renderLoginPage();
+      describe('Change input', () => {
+        it('dispatches changeLoginField action', () => {
+          const { getByLabelText } = renderLoginPage();
 
-        fireEvent.change(getByLabelText('E-mail'), {
-          target: { value: 'new email' },
-        });
+          fireEvent.change(getByLabelText('E-mail'), {
+            target: { value: 'new email' },
+          });
 
-        expect(dispatch).toBeCalledWith({
-          type: 'changeLoginField',
-          payload: { name: 'email', value: 'new email' },
+          expect(dispatch).toBeCalledWith({
+            type: 'changeLoginField',
+            payload: { name: 'email', value: 'new email' },
+          });
         });
       });
+      describe('Click login button', () => {
+        it('call dispatches action', () => {
+          const { getByText } = renderLoginPage();
 
-      it('click login button call dispatch action', () => {
-        const { getByText } = renderLoginPage();
+          fireEvent.click(getByText('Log In'));
 
-        fireEvent.click(getByText('Log In'));
-
-        expect(dispatch).toBeCalledTimes(1);
+          expect(dispatch).toBeCalledTimes(1);
+        });
       });
     });
 
-    context('with isError', () => {
+    context('with invalid email and password', () => {
       given('loginFields', () => ({
         email: '',
         password: 'test',
       }));
 
-      it("doesn't called when click button", () => {
-        const { getByText } = renderLoginPage();
+      describe('Click login button', () => {
+        it("doesn't call dispatches login action", () => {
+          const { getByText } = renderLoginPage();
 
-        fireEvent.click(getByText('Log In'));
+          fireEvent.click(getByText('Log In'));
 
-        expect(dispatch).not.toBeCalled();
+          expect(dispatch).not.toBeCalled();
+        });
       });
     });
   });
@@ -82,18 +89,14 @@ describe('LoginFormContainer', () => {
       password: '',
     }));
 
-    it('renders "Log out" button', () => {
-      const { container } = renderLoginPage();
+    describe('Click logout button', () => {
+      it('dispatches logout action', () => {
+        const { getByText } = renderLoginPage();
 
-      expect(container).toHaveTextContent('Log out');
-    });
+        fireEvent.click(getByText('Log out'));
 
-    it('click logout button calls dispatch action', () => {
-      const { getByText } = renderLoginPage();
-
-      fireEvent.click(getByText('Log out'));
-
-      expect(dispatch).toBeCalledWith({ type: 'logout' });
+        expect(dispatch).toBeCalledWith({ type: 'logout' });
+      });
     });
   });
 });
