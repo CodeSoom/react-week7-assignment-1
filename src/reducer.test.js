@@ -188,16 +188,18 @@ describe('reducer', () => {
     });
   });
 
-  describe('changeREviewField', () => {
-    const initialState = {
-      reviewFields: {
-        score: '',
-        description: '',
-      },
-    };
+  describe('changeReviewField', () => {
+    it('reviewFileds의 값을 변경합니다.', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
 
-    const state = reducer(initialState, changeReviewField({ name: 'score', value: '5' }));
+      const state = reducer(initialState, changeReviewField({ name: 'score', value: '5' }));
 
-    expect(state.reviewFields.score).toBe('5');
+      expect(state.reviewFields.score).toBe('5');
+    });
   });
 });
