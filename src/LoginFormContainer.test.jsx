@@ -50,7 +50,7 @@ describe('LoginFormContainer', () => {
         });
       });
 
-      it('renders "Log In" button', () => {
+      it('Called when clicked the login button', () => {
         const { getByText } = renderLoginPage();
 
         fireEvent.click(getByText('Log In'));
@@ -65,7 +65,7 @@ describe('LoginFormContainer', () => {
         password: 'test',
       }));
 
-      it('Click "Log In" button nothing happen', () => {
+      it("doesn't called when click button", () => {
         const { getByText } = renderLoginPage();
 
         fireEvent.click(getByText('Log In'));
@@ -88,7 +88,7 @@ describe('LoginFormContainer', () => {
       expect(container).toHaveTextContent('Log out');
     });
 
-    it('Click "Log In" button event', () => {
+    it('Called when Clicked button', () => {
       const { getByText } = renderLoginPage();
 
       fireEvent.click(getByText('Log out'));
