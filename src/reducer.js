@@ -66,7 +66,7 @@ const reducers = {
     };
   },
 
-  changeLoginField(state, { payload: { name, value } }) {
+  changeLoginFields(state, { payload: { name, value } }) {
     return {
       ...state,
       loginFields: {
