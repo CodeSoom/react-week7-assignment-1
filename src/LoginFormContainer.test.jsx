@@ -33,7 +33,7 @@ describe('LoginFormContainer', () => {
     expect(getByLabelText('Password').value).toBe('1234');
   });
 
-  it('renders "Log In" button', () => {
+  it('renders log in button', () => {
     const { getByText } = render((
       <LoginFormContainer />
     ));
