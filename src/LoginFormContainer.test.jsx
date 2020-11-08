@@ -18,8 +18,8 @@ describe('LoginFormContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       loginField: {
-        email: 'test@test.co.kr',
-        password: 'test',
+        email: '',
+        password: '',
       },
       accessToken: given.accessToken,
     }));
@@ -33,14 +33,39 @@ describe('LoginFormContainer', () => {
     it('renders login fields', () => {
       const { getByLabelText } = renderLoginFormContainer();
 
-      expect(getByLabelText('E-mail').value).toBe('test@test.co.kr');
-      expect(getByLabelText('Password').value).toBe('test');
+      expect(getByLabelText('E-mail').value).toBe('');
+      expect(getByLabelText('Password').value).toBe('');
+    });
+
+    it('dispatch changeLoginField', () => {
+      const { getByLabelText } = renderLoginFormContainer();
+
+      const controls = [
+        { label: 'E-mail', value: 'test@test.co.kr' },
+        { label: 'Password', value: 'test' },
+      ];
+
+      controls.forEach(({ label, value }) => {
+        const input = getByLabelText(label);
+
+        fireEvent.change(input, { target: { value } });
+      });
+
+      expect(dispatch).toBeCalledTimes(2);
     });
 
     it('renders "login" button', () => {
       const { getByText } = renderLoginFormContainer();
 
       expect(getByText('Login')).not.toBeNull();
+    });
+
+    it('dispatch setAccessToken when click "Login" button', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('Login'));
+
+      expect(dispatch).toBeCalled();
     });
   });
 
