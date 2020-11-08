@@ -108,16 +108,11 @@ export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginField: { email, password } } = getState();
 
-    try {
-      const accessToken = await postLogin({ email, password });
+    const accessToken = await postLogin({ email, password });
 
-      saveItem('accessToken', accessToken);
+    saveItem('accessToken', accessToken);
 
-      dispatch(setAccessToken(accessToken));
-    } catch (e) {
-      // TODO: Login Error Message
-      console.error('Failed to login: ', e);
-    }
+    dispatch(setAccessToken(accessToken));
   };
 }
 
@@ -138,13 +133,8 @@ export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
 
-    try {
-      await postReview({
-        accessToken, restaurantId, score, description,
-      });
-    } catch (e) {
-      // TODO: 리뷰 남기기 Error Message
-      console.error('Failed to send review: ', e);
-    }
+    await postReview({
+      accessToken, restaurantId, score, description,
+    });
   };
 }
