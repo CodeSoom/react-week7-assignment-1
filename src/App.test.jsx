@@ -98,18 +98,6 @@ describe('App', () => {
   });
 
   context('when logged in', () => {
-    beforeEach(() => {
-      loadItem.mockImplementation(() => null);
-    });
-
-    it("doesn't call dispatch", () => {
-      renderApp({ path: '/' });
-
-      expect(dispatch).not.toBeCalled();
-    });
-  });
-
-  context('when logged out', () => {
     const accessToken = 'ACCESS_TOKEN';
 
     beforeEach(() => {
@@ -123,6 +111,18 @@ describe('App', () => {
         type: 'setAccessToken',
         payload: { accessToken },
       });
+    });
+  });
+
+  context('when logged out', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it("doesn't call dispatch", () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
     });
   });
 });
