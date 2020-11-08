@@ -18,7 +18,7 @@ export async function postLogin({ email, password }) {
   return {
     email,
     password,
-    // TODO....
+    accessToken: '',
   };
 }
 
