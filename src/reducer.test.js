@@ -162,24 +162,42 @@ describe('reducer', () => {
         password: 'password',
       },
     };
-    context('when email is changed', () => {
-      const state = reducer(
-        initialState,
-        changeLoginField({ name: 'email', value: 'tester@example.com' }),
-      );
 
-      expect(state.loginFields.email).toBe('tester@example.com');
-      expect(state.loginFields.password).toBe('password');
+    const changeLoginFieldReducer = ({ name, value }) => reducer(
+      initialState,
+      changeLoginField({ name, value }),
+    );
+
+    context('when email is changed', () => {
+      const { name, value } = {
+        name: 'email',
+        value: 'tester@example.com',
+      };
+
+      it("changed email and doesn't changed password", () => {
+        const { loginFields } = changeLoginFieldReducer({ name, value });
+
+        const { email, password } = loginFields;
+
+        expect(email).toBe('tester@example.com');
+        expect(password).toBe('password');
+      });
     });
 
     context('when password is changed', () => {
-      const state = reducer(
-        initialState,
-        changeLoginField({ name: 'password', value: 'test' }),
-      );
+      const { name, value } = {
+        name: 'password',
+        value: 'test',
+      };
 
-      expect(state.loginFields.email).toBe('email');
-      expect(state.loginFields.password).toBe('test');
+      it("doesn't changed email and changed password", () => {
+        const { loginFields } = changeLoginFieldReducer({ name, value });
+
+        const { email, password } = loginFields;
+
+        expect(email).toBe('email');
+        expect(password).toBe('test');
+      });
     });
   });
 
