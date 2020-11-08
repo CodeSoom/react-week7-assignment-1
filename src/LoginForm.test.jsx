@@ -59,7 +59,7 @@ describe('LoginForm', () => {
     });
   });
 
-  it('"Log in" 버튼이 보입니다.', () => {
+  it('로그인 버튼이 보입니다.', () => {
     const email = '';
     const password = '';
     const { getByText } = renderLoginForm({ email, password });
