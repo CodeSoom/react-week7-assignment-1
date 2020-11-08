@@ -8,11 +8,13 @@ import {
   selectRegion,
   selectCategory,
   changeLoginField,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      accessToken: null,
       regions: [],
       categories: [],
       restaurants: [],
@@ -155,6 +157,22 @@ describe('reducer', () => {
       );
 
       expect(state.loginFields.password).toEqual('2222');
+    });
+  });
+
+  describe('setAccessToken', () => {
+    const initialState = {
+      accessToken: null
+    }
+
+    it('change access Token', () => {
+      const accessToken = 'ACCESS_TOKEN';
+      const state = reducer(
+        initialState,
+        setAccessToken(accessToken)
+      );
+
+      expect(state.accessToken).toEqual(accessToken)
     });
   });
 });
