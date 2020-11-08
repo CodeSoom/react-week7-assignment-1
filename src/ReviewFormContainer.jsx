@@ -13,7 +13,9 @@ import { get } from './utils';
 
 export default function ReviewFormContainer() {
   const reviewFields = useSelector(get('reviewFields'));
-  const isLoggedOut = useSelector(get('accessToken')) === null;
+  const accessToken = useSelector(get('accessToken'));
+
+  const isLoggedIn = accessToken !== null;
 
   const dispatch = useDispatch();
 
@@ -27,14 +29,15 @@ export default function ReviewFormContainer() {
 
   return (
     <>
-      {isLoggedOut ? ''
-        : (
-          <ReviewForm
-            fields={reviewFields}
-            onChange={handleChange}
-            onSubmit={handleSubmit}
-          />
-        )}
+      {isLoggedIn ? (
+        <ReviewForm
+          fields={reviewFields}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
+      ) : (
+        ''
+      )}
     </>
   );
 }
