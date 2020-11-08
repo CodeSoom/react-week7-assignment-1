@@ -34,9 +34,9 @@ export default function RestaurantContainer({ restaurantId }) {
       {accessToken ? (
         <>
           <ReviewFormContainer id={restaurantId} />
-          <ReviewsContainer />
         </>
       ) : null}
+      <ReviewsContainer />
     </>
   );
 }

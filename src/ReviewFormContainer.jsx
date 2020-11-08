@@ -32,10 +32,13 @@ export default function ReviewFormContainer({ id }) {
   }
 
   return (
-    <ReviewForm
-      fields={reviewFields}
-      onChange={handleChange}
-      onSubmit={handleSubmit}
-    />
+    <div>
+      <h3>리뷰 작성</h3>
+      <ReviewForm
+        fields={reviewFields}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
+    </div>
   );
 }

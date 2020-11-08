@@ -10,8 +10,11 @@ export default function ReviewsContainer() {
   const { reviews } = useSelector(get('restaurant'));
 
   return (
-    <Reviews
-      reviews={reviews}
-    />
+    <div>
+      <h3>리뷰</h3>
+      <Reviews
+        reviews={reviews}
+      />
+    </div>
   );
 }

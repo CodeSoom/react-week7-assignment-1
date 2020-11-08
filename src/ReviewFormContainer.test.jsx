@@ -28,6 +28,12 @@ describe('ReviewFormContainer', () => {
     }));
   });
 
+  it('renders header called "리뷰 작성"', () => {
+    const { container } = renderRestaurantContainer();
+
+    expect(container).toHaveTextContent('리뷰 작성');
+  });
+
   it('listen change events', () => {
     const { getByLabelText } = renderRestaurantContainer();
 
@@ -51,6 +57,6 @@ describe('ReviewFormContainer', () => {
 
     fireEvent.click(getByText('리뷰 남기기'));
 
-    expect(dispatch).toBeCalledTimes(3);
+    expect(dispatch).toBeCalledTimes(4);
   });
 });

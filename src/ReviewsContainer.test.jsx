@@ -21,6 +21,8 @@ describe('ReviewsContainer', () => {
   }));
 
   it('renders name and address', () => {
-    render(<ReviewsContainer />);
+    const { container } = render(<ReviewsContainer />);
+
+    expect(container).toHaveTextContent('리뷰');
   });
 });
