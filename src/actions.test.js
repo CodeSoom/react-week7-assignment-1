@@ -112,7 +112,7 @@ describe('actions', () => {
         });
       });
 
-      it('setaccessToken이 호출됩니다.', async () => {
+      it('setAccessToken이 호출됩니다.', async () => {
         await store.dispatch(requestLogin());
 
         const actions = store.getActions();
