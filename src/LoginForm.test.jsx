@@ -59,7 +59,7 @@ describe('LoginForm', () => {
     });
   });
 
-  it('requests log in', () => {
+  it('renders login button', () => {
     const { getByText } = renderLoginForm({});
 
     fireEvent.click(getByText('Log In'));
