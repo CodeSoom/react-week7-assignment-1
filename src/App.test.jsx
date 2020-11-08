@@ -27,6 +27,10 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      loginFields: {
+        email: '',
+        password: '',
+      }
     }));
   });
 
@@ -54,6 +58,14 @@ describe('App', () => {
     });
   });
 
+  context('with path /login', () => {
+    it('renders the about page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
+    });
+  });
+
   context('with path /restaurants', () => {
     it('renders the restaurants page', () => {
       const { container } = renderApp({ path: '/restaurants' });
@@ -77,4 +89,5 @@ describe('App', () => {
       expect(container).toHaveTextContent('Not Found');
     });
   });
+
 });
