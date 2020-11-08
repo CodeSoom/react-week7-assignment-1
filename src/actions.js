@@ -128,6 +128,9 @@ export function login() {
 
     const accessToken = await fetchAccessToken(loginFields);
 
+    if (!accessToken) {
+      return;
+    }
     saveItem('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
