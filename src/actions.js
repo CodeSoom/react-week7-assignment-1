@@ -34,10 +34,10 @@ export function setRestaurant(restaurant) {
   };
 }
 
-export function setAccessToken(accsseToken) {
+export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',
-    payload: { accsseToken }
+    payload: { accessToken }
   }
 }
 
@@ -106,9 +106,6 @@ export function changeLoginField({name, value}) {
 
 export function requestLogin() {
   return async (dispatch, getState) => {
-    // state = email password
-    // HTTP POST <-- email, pass
-    // dispatch(setAccessToken)
     const { loginFields: { email, password } } = getState();
 
     const accsseToken = await postLogin({ email, password});
