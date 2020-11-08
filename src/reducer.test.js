@@ -132,47 +132,53 @@ describe('reducer', () => {
 
   describe('changeLoginField', () => {
     context('when email is changed', () => {
-      const initialState = {
-        loginFields: {
-          email: 'email',
-          password: 'password',
-        },
-      };
+      it('changes email', () => {
+        const initialState = {
+          loginFields: {
+            email: 'email',
+            password: 'password',
+          },
+        };
 
-      const state = reducer(
-        initialState,
-        changeLoginField({ name: 'email', value: 'test' }),
-      );
+        const state = reducer(
+          initialState,
+          changeLoginField({ name: 'email', value: 'test' }),
+        );
 
-      expect(state.loginFields.email).toBe('test');
-      expect(state.loginFields.password).toBe('password');
+        expect(state.loginFields.email).toBe('test');
+        expect(state.loginFields.password).toBe('password');
+      });
     });
 
     context('when password is changed', () => {
-      const initialState = {
-        loginFields: {
-          email: 'email',
-          password: 'password',
-        },
-      };
+      it('changes password', () => {
+        const initialState = {
+          loginFields: {
+            email: 'email',
+            password: 'password',
+          },
+        };
 
-      const state = reducer(
-        initialState,
-        changeLoginField({ name: 'password', value: 'test' }),
-      );
+        const state = reducer(
+          initialState,
+          changeLoginField({ name: 'password', value: 'test' }),
+        );
 
-      expect(state.loginFields.email).toBe('email');
-      expect(state.loginFields.password).toBe('test');
+        expect(state.loginFields.email).toBe('email');
+        expect(state.loginFields.password).toBe('test');
+      });
     });
   });
 
   describe('setAccessToken', () => {
-    const initialState = {
-      accessToken: '',
-    };
+    it('sets accessToken', () => {
+      const initialState = {
+        accessToken: '',
+      };
 
-    const state = reducer(initialState, setAccessToken('TOKEN'));
+      const state = reducer(initialState, setAccessToken('TOKEN'));
 
-    expect(state.accessToken).toBe('TOKEN');
+      expect(state.accessToken).toBe('TOKEN');
+    });
   });
 });
