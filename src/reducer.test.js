@@ -7,8 +7,10 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
-  changeLoginField,
+  changeLoginFields,
   setAccessToken,
+  changeReviewFields,
+  logout,
 } from './actions';
 
 describe('reducer', () => {
@@ -144,7 +146,7 @@ describe('reducer', () => {
     it('change email in fields', () =>{
       const state = reducer(
         initialState,
-        changeLoginField({ name: 'email', value: 'test@admin' })
+        changeLoginFields({ name: 'email', value: 'test@admin' })
       );
 
       expect(state.loginFields.email).toEqual('test@admin');
@@ -173,6 +175,26 @@ describe('reducer', () => {
       );
 
       expect(state.accessToken).toEqual(accessToken)
+    });
+  });
+
+  describe('logout', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        loginFields: {
+          email: 'test@test',
+          password: '1234',
+        },
+        accessToken: 'ACCESS_TOKEN',
+      };
+
+      const state = reducer(initialState, logout());
+
+      expect(state.accessToken).toBe('');
+      expect(state.loginFields).toStrictEqual({
+        email: '',
+        password: '',
+      });
     });
   });
 });
