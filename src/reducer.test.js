@@ -165,7 +165,7 @@ describe('reducer', () => {
   });
 
   describe('setAccessToken', () => {
-    it('AccessToken을 설정합니다.', () => {
+    it('accessToken을 설정합니다.', () => {
       const initialState = {
         accessToken: '',
       };
@@ -177,7 +177,7 @@ describe('reducer', () => {
   });
 
   describe('logout', () => {
-    it('AccessToken을 초기화합니다.', () => {
+    it('accessToken을 초기화합니다.', () => {
       const initialState = {
         accessToken: 'ACCESS_TOKEN',
       };
