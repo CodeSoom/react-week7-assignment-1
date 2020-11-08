@@ -5,7 +5,6 @@ import { fireEvent, render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
-import { changeLoginField } from './actions';
 
 jest.mock('react-redux');
 
@@ -31,6 +30,13 @@ describe('LoginFormContainer', () => {
     ));
 
     expect(getByLabelText('E-mail').value).toBe('test@test');
+    expect(getByLabelText('Password').value).toBe('1234');
+  });
+
+  it('listens change events', () => {
+    const { getByLabelText } = render((
+      <LoginFormContainer />
+    ));
 
     fireEvent.change(getByLabelText('E-mail'), {
       target: { value: 'new email' },
@@ -43,8 +49,6 @@ describe('LoginFormContainer', () => {
         value: 'new email',
       },
     });
-
-    expect(getByLabelText('Password').value).toBe('1234');
   });
 
   it('renders log in button', () => {
