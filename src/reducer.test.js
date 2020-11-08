@@ -180,6 +180,7 @@ describe('reducer', () => {
         const { email, password } = loginFields;
 
         expect(email).toBe('tester@example.com');
+
         expect(password).toBe('password');
       });
     });
