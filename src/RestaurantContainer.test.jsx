@@ -123,11 +123,9 @@ describe('RestaurantContainer', () => {
         }));
 
         it('renders title and "There are no reviews." text', () => {
-          const NO_REVIEW_TEXT = '리뷰가 존재하지 않습니다.';
-
           const { container } = renderRestaurantContainer();
 
-          expect(container).toHaveTextContent(NO_REVIEW_TEXT);
+          expect(container).toHaveTextContent('리뷰가 존재하지 않습니다.');
         });
 
         it('click listens events', () => {
