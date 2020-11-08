@@ -111,7 +111,7 @@ describe('reducer', () => {
       expect(state.restaurant.name).toBe('마법사주방');
     });
 
-    it('deleted reviewFields texts', () => {
+    it('delete reviewFields texts', () => {
       const { reviewFields: { score, description } } = setRestaurantsReducer();
 
       expect(score).toBe('');
@@ -174,7 +174,7 @@ describe('reducer', () => {
         value: 'tester@example.com',
       };
 
-      it("changed email and doesn't changed password", () => {
+      it("change email and doesn't change password", () => {
         const { loginFields } = changeLoginFieldReducer({ name, value });
 
         const { email, password } = loginFields;
@@ -190,7 +190,7 @@ describe('reducer', () => {
         value: 'test',
       };
 
-      it("doesn't changed email and changed password", () => {
+      it("doesn't change email and change password", () => {
         const { loginFields } = changeLoginFieldReducer({ name, value });
 
         const { email, password } = loginFields;
@@ -214,12 +214,12 @@ describe('reducer', () => {
       setAccessToken('TOKEN'),
     );
 
-    it('Created accessToken', () => {
+    it('create accessToken', () => {
       const { accessToken } = setAccessTokenReducer();
       expect(accessToken).toBe('TOKEN');
     });
 
-    it('Deleted loginFields texts', () => {
+    it('delete loginFields texts', () => {
       const { loginFields: { email, password } } = setAccessTokenReducer();
       expect(email).toBe('');
       expect(password).toBe('');
@@ -250,7 +250,7 @@ describe('reducer', () => {
   });
 
   describe('logout', () => {
-    it('Deleted accessToken', () => {
+    it('delete accessToken', () => {
       const initialState = {
         accessToken: 'ACCESS_TOKEN',
       };

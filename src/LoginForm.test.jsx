@@ -56,7 +56,7 @@ describe('LoginForm', () => {
       });
     });
 
-    it('called at the click of a button', () => {
+    it('click login button calls onSubmit handler', () => {
       const { getByText } = renderLoginForm({ error });
 
       fireEvent.click(getByText('Log In'));

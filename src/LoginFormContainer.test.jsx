@@ -50,7 +50,7 @@ describe('LoginFormContainer', () => {
         });
       });
 
-      it('Called when clicked the login button', () => {
+      it('click login button call dispatch action', () => {
         const { getByText } = renderLoginPage();
 
         fireEvent.click(getByText('Log In'));
@@ -88,7 +88,7 @@ describe('LoginFormContainer', () => {
       expect(container).toHaveTextContent('Log out');
     });
 
-    it('Called when Clicked button', () => {
+    it('click logout button calls dispatch action', () => {
       const { getByText } = renderLoginPage();
 
       fireEvent.click(getByText('Log out'));
