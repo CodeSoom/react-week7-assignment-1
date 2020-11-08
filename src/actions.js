@@ -97,7 +97,7 @@ export function changeLoginField({ name, value }) {
   };
 }
 
-export function setAccessToken({ accessToken }) {
+export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',
     payload: { accessToken },
