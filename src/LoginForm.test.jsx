@@ -22,37 +22,44 @@ describe('LoginForm', () => {
     ));
   }
 
-  it('renders input controls and listens change events', () => {
+  it('renders input controls', () => {
     const email = 'test@test';
     const password = '1234';
 
     const { getByLabelText } = renderLoginForm({ email, password });
 
     const controls = [
+      { label: 'E-mail', value: email },
+      { label: 'Password', value: password },
+    ];
+
+    controls.forEach(({ label, value }) => {
+      const input = getByLabelText(label);
+
+      expect(input.value).toBe(value);
+    });
+  });
+
+  it('listens change events', () => {
+    const { getByLabelText } = renderLoginForm({});
+
+    const controls = [
       {
         label: 'E-mail',
         name: 'email',
-        origin: email,
         value: 'tester@example.com',
       },
       {
         label: 'Password',
         name: 'password',
-        origin: password,
         value: 'test',
       },
     ];
 
-    controls.forEach(({
-      label, name, origin, value,
-    }) => {
+    controls.forEach(({ label, name, value }) => {
       const input = getByLabelText(label);
 
-      expect(input.value).toBe(origin);
-
-      fireEvent.change(input, {
-        target: { value },
-      });
+      fireEvent.change(input, { target: { value } });
 
       expect(handleChange).toBeCalledWith({ name, value });
     });
