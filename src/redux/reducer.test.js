@@ -7,6 +7,12 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  setAccessToken,
+  setEmail,
+  setPassword,
+  setDescription,
+  setScore,
+  deleteAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +24,10 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      email: '',
+      password: '',
+      accessToken: null,
+      review: {},
     };
 
     it('returns initialState', () => {
@@ -123,6 +133,83 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        email: 'tester@example.com',
+        password: 'test',
+      };
+
+      const state = reducer(initialState, setAccessToken('token'));
+
+      expect(state.accessToken).toBe('token');
+    });
+  });
+
+  describe('setEmail', () => {
+    it('changes email', () => {
+      const initialState = {
+        email: '',
+      };
+
+      const state = reducer(initialState, setEmail('tester@example.com'));
+
+      expect(state.email).toBe('tester@example.com');
+    });
+  });
+
+  describe('setPassword', () => {
+    it('changes password', () => {
+      const initialState = {
+        password: '',
+      };
+
+      const state = reducer(initialState, setPassword('test'));
+
+      expect(state.password).toBe('test');
+    });
+  });
+
+  describe('setDescription', () => {
+    it('changes description', () => {
+      const initialState = {
+        review: {
+          description: '',
+        },
+      };
+
+      const state = reducer(initialState, setDescription('description'));
+
+      expect(state.review.description).toBe('description');
+    });
+  });
+
+  describe('setScore', () => {
+    it('changes score', () => {
+      const initialState = {
+        review: {
+          score: null,
+        },
+      };
+
+      const state = reducer(initialState, setScore(5));
+
+      expect(state.review.score).toBe(5);
+    });
+  });
+
+  describe('deleteAccessToken', () => {
+    it('changes score', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, deleteAccessToken());
+
+      expect(state.accessToken).toBe('');
     });
   });
 });

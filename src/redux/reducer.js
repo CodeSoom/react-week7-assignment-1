@@ -1,4 +1,4 @@
-import { equal } from './utils';
+import { equal } from '../utils';
 
 const initialState = {
   regions: [],
@@ -7,6 +7,10 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  email: '',
+  password: '',
+  accessToken: sessionStorage.getItem('accessToken'),
+  review: {},
 };
 
 const reducers = {
@@ -51,6 +55,58 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    sessionStorage.setItem('accessToken', accessToken);
+
+    return {
+      ...state,
+      accessToken,
+    };
+  },
+
+  setEmail(state, { payload: { email } }) {
+    return {
+      ...state,
+      email,
+    };
+  },
+
+  setPassword(state, { payload: { password } }) {
+    return {
+      ...state,
+      password,
+    };
+  },
+
+  setDescription(state, { payload: { description } }) {
+    return {
+      ...state,
+      review: {
+        ...state.review,
+        description,
+      },
+    };
+  },
+
+  setScore(state, { payload: { score } }) {
+    return {
+      ...state,
+      review: {
+        ...state.review,
+        score,
+      },
+    };
+  },
+
+  deleteAccessToken(state) {
+    sessionStorage.removeItem('accessToken');
+
+    return {
+      ...state,
+      accessToken: '',
     };
   },
 };

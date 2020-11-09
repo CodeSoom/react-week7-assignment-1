@@ -3,7 +3,9 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
-} from './services/api';
+  postLogin,
+  postReview,
+} from '../services/api';
 
 export function setRegions(regions) {
   return {
@@ -83,5 +85,67 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export function deleteAccessToken() {
+  return {
+    type: 'deleteAccessToken',
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const { email, password } = getState();
+    const accessToken = await postLogin({ email, password });
+
+    dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function setEmail(email) {
+  return {
+    type: 'setEmail',
+    payload: { email },
+  };
+}
+
+export function setPassword(password) {
+  return {
+    type: 'setPassword',
+    payload: { password },
+  };
+}
+
+export function setDescription(description) {
+  return {
+    type: 'setDescription',
+    payload: { description },
+  };
+}
+
+export function setScore(score) {
+  return {
+    type: 'setScore',
+    payload: { score },
+  };
+}
+
+export function writeReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { accessToken, review: { score, description } } = getState();
+
+    await postReview({
+      accessToken, restaurantId, score, description,
+    });
+
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }
