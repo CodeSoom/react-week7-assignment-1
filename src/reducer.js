@@ -5,8 +5,18 @@ const initialState = {
   categories: [],
   restaurants: [],
   restaurant: null,
+  restaurantReviews: [],
   selectedRegion: null,
   selectedCategory: null,
+  loginFields: {
+    email: '',
+    password: '',
+  },
+  reviewFields: {
+    score: '',
+    description: '',
+  },
+  accessToken: '',
 };
 
 const reducers = {
@@ -38,6 +48,27 @@ const reducers = {
     };
   },
 
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
+    };
+  },
+
+  setReviews(state, { payload: { reviews } }) {
+    return {
+      ...state,
+      restaurantReviews: reviews,
+    };
+  },
+
+  logout(state) {
+    return {
+      ...state,
+      accessToken: '',
+    };
+  },
+
   selectRegion(state, { payload: { regionId } }) {
     const { regions } = state;
     return {
@@ -51,6 +82,26 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  changeLoginField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      loginFields: {
+        ...state.loginFields,
+        [name]: value,
+      },
+    };
+  },
+
+  changeReviewField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewFields: {
+        ...state.reviewFields,
+        [name]: value,
+      },
     };
   },
 };
