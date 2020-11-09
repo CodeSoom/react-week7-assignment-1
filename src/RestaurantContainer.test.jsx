@@ -48,6 +48,11 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [
+        {
+          id: 1, name: '테스터', description: '맛집 인정!', score: 5,
+        },
+      ],
     }));
     given('reviewFields', () => ({
       score: '',

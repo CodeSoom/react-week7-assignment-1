@@ -4,11 +4,11 @@ import { render } from '@testing-library/react';
 
 import Reviews from './Reviews';
 
-import reviews from '../fixtures/reviews';
+import REVIEWS from '../fixtures/reviews';
 
 describe('Reviews', () => {
-  function renderReviewList(reviewList) {
-    return render(<Reviews reviews={reviewList} />);
+  function renderReviewList(reviews) {
+    return render(<Reviews reviews={reviews} />);
   }
 
   context('without reviews', () => {
@@ -21,9 +21,9 @@ describe('Reviews', () => {
 
   context('with reviews', () => {
     it('renders reviews contained name, score and description', () => {
-      const { queryByText } = renderReviewList(reviews);
+      const { queryByText } = renderReviewList(REVIEWS);
 
-      reviews.forEach(({ name, score, description }) => {
+      REVIEWS.forEach(({ name, score, description }) => {
         expect(queryByText(name)).not.toBeNull();
         expect(queryByText(`${score}점`)).not.toBeNull();
         expect(queryByText(description)).not.toBeNull();
