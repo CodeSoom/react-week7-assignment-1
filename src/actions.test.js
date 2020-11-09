@@ -12,8 +12,10 @@ import {
   setRestaurant,
   setAccessToken,
   requestLogin,
-  sendReview,
+  setReviews,
 } from './actions';
+
+import RESTAURANT from '../fixtures/restaurant';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -146,22 +148,27 @@ describe('actions', () => {
   describe('sendReview', () => {
     beforeEach(() => {
       store = mockStore({
-        restaurant: { restauantId: 1 },
-        reviewFields: { score: '5', description: '맛집 인정!' },
+        restaurant: RESTAURANT,
+        reviewFields: {
+          score: '',
+          description: '',
+        },
       });
     });
 
     it('sends review and returns nothing', async () => {
-      await store.dispatch(sendReview(1));
+      const review = {
+        id: 1, name: '테스터', description: 'JMT!', score: 4,
+      };
+
+      await store.dispatch(setReviews(review));
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(
-        {
-          type: 'setRestaurant',
-          payload: { restaurant: null },
-        },
-      );
+      expect(actions[0]).toEqual({
+        type: 'setReviews',
+        payload: { reviews: review },
+      });
     });
   });
 });

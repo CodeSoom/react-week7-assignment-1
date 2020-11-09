@@ -5,6 +5,7 @@ const restaurant = {
   menuItems: [
     { id: 1, name: '떡볶이' },
   ],
+  reviews: [],
 };
 
 export default restaurant;
