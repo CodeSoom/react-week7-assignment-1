@@ -5,8 +5,8 @@ import { render, fireEvent } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  const onChange = jest.fn();
-  const onSubmit = jest.fn();
+  const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -16,8 +16,8 @@ describe('LoginForm', () => {
     return render((
       <LoginForm
         fields={{ email, password }}
-        onChange={onChange}
-        onSubmit={onSubmit}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
       />
     ));
   }
@@ -55,7 +55,7 @@ describe('LoginForm', () => {
       fireEvent.change(input, { target: { value } });
 
       // TODO
-      expect(onChange).toBeCalled();
+      expect(handleChange).toBeCalled();
     });
   });
 
