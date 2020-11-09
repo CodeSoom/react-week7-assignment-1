@@ -10,10 +10,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import { loadItem } from './services/storage';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
+  let accessToken = '';
 
   beforeEach(() => {
     dispatch.mockClear();
@@ -21,13 +25,18 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      accessToken: 'ACCESS_TOKEN',
       regions: [
         { id: 1, name: '서울' },
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
+      restaurant: { id: 1, name: '마녀주방', reviews: [] },
+      loginFields: { email: '', password: '' },
+      reviewFields: { score: '', description: '' },
     }));
+
+    loadItem.mockImplementation(() => accessToken);
   });
 
   function renderApp({ path }) {
@@ -75,6 +84,35 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('LogIn');
+    });
+  });
+
+  context('when logged in', () => {
+    it('calls dispatch with setAccessToken action', () => {
+      accessToken = 'ACCESS_TOKEN';
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: { accessToken: 'ACCESS_TOKEN' },
+      });
+    });
+  });
+
+  context('when logged out', () => {
+    it("doesn't call dispatch", () => {
+      accessToken = '';
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
     });
   });
 });

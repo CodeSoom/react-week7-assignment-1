@@ -27,9 +27,9 @@ Scenario('로그인을 했으면 리뷰를 남길 수 있다.', (I) => {
   I.fillField('email', 'tester@example.com');
   I.fillField('password', 'test');
 
-  I.click('Log In', 'button');
+  I.click('로그인', 'button');
 
-  I.see('Log out', 'button');
+  I.see('로그아웃', 'button');
 
   I.amOnPage('/restaurants/1');
 
