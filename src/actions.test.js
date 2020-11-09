@@ -156,7 +156,12 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toBeUndefined();
+      expect(actions[0]).toEqual(
+        {
+          type: 'setRestaurant',
+          payload: { restaurant: null },
+        },
+      );
     });
   });
 });

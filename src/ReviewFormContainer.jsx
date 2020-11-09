@@ -27,8 +27,6 @@ export default function ReviewFormContainer({ id }) {
     Object.keys(reviewFields).forEach((name) => {
       handleChange({ name, value: '' });
     });
-
-    dispatch(loadRestaurant({ restaurantId: id }));
   }
 
   return (

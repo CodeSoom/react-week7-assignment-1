@@ -57,6 +57,6 @@ describe('ReviewFormContainer', () => {
 
     fireEvent.click(getByText('리뷰 남기기'));
 
-    expect(dispatch).toBeCalledTimes(4);
+    expect(dispatch).toBeCalledTimes(3);
   });
 });
