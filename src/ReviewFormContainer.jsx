@@ -7,7 +7,6 @@ import ReviewForm from './ReviewForm';
 import {
   changeReviewField,
   sendReview,
-  loadRestaurant,
 } from './actions';
 
 import { get } from './utils';
