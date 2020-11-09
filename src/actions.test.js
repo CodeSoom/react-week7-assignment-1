@@ -12,7 +12,8 @@ import {
   setRestaurant,
   setAccessToken,
   requestLogin,
-  setReviews,
+  loadReview,
+  sendReview,
 } from './actions';
 
 import RESTAURANT from '../fixtures/restaurant';
@@ -145,6 +146,25 @@ describe('actions', () => {
     });
   });
 
+  describe('loadReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        restaurant: RESTAURANT,
+      });
+    });
+
+    it('load reviews from fetchRestaurant', async () => {
+      await store.dispatch(loadReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'setReviews',
+        payload: { reviews: undefined },
+      });
+    });
+  });
+
   describe('sendReview', () => {
     beforeEach(() => {
       store = mockStore({
@@ -157,17 +177,13 @@ describe('actions', () => {
     });
 
     it('sends review and returns nothing', async () => {
-      const review = {
-        id: 1, name: '테스터', description: 'JMT!', score: 4,
-      };
-
-      await store.dispatch(setReviews(review));
+      await store.dispatch(sendReview({ restaurantId: 1 }));
 
       const actions = store.getActions();
 
       expect(actions[0]).toEqual({
         type: 'setReviews',
-        payload: { reviews: review },
+        payload: { reviews: undefined },
       });
     });
   });
