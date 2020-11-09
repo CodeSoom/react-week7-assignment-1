@@ -5,10 +5,12 @@ export default function Reviews({ reviews = [] }) {
     return <p>리뷰가 없어요!</p>;
   }
 
+  const sortedReviews = [...reviews].sort((a, b) => b.id - a.id);
+
   return (
     <div>
       <ul>
-        {reviews.reverse().map((review) => (
+        {sortedReviews.map((review) => (
           <li key={review.id}>
             <div>
               {review.name}
