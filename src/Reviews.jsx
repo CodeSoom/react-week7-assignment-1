@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Reviews({ reviews = [] }) {
-  if (reviews.length === 0) {
+  if (!reviews || !reviews.length) {
     return <p>리뷰가 없어요!</p>;
   }
 
