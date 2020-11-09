@@ -23,10 +23,6 @@ export default function ReviewFormContainer({ id }) {
 
   function handleSubmit() {
     dispatch(sendReview({ restaurantId: id }));
-
-    Object.keys(reviewFields).forEach((name) => {
-      handleChange({ name, value: '' });
-    });
   }
 
   return (

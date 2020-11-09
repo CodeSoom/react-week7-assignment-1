@@ -129,6 +129,12 @@ export function changeReviewField({ name, value }) {
   };
 }
 
+export function clearReviewField() {
+  return {
+    type: 'clearReviewField',
+  };
+}
+
 export function setReviews(reviews) {
   return {
     type: 'setReviews',
@@ -153,5 +159,6 @@ export function sendReview({ restaurantId }) {
     });
 
     dispatch(loadReview({ restaurantId }));
+    dispatch(clearReviewField());
   };
 }

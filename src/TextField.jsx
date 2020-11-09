@@ -11,9 +11,8 @@ export default function TextField({
 
   function handleChange(event) {
     const { target } = event;
-    const inputValue = target.value;
 
-    onChange({ name, value: inputValue });
+    onChange({ name, value: target.value });
   }
 
   return (

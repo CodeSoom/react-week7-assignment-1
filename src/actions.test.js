@@ -181,10 +181,7 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual({
-        type: 'setReviews',
-        payload: { reviews: undefined },
-      });
+      expect(actions[0]).toEqual({ type: 'clearReviewField' });
     });
   });
 });

@@ -11,6 +11,7 @@ import {
   setAccessToken,
   logout,
   changeReviewField,
+  clearReviewField,
   setReviews,
 } from './actions';
 
@@ -217,6 +218,21 @@ describe('reducer', () => {
       );
 
       expect(state.reviewFields.description).toBe('완전 맛집!');
+    });
+  });
+
+  describe('clearReviewField', () => {
+    const initialState = {
+      reviewFields: {
+        score: 'score',
+        description: 'description',
+      },
+    };
+    it('clear fields of review', () => {
+      const state = reducer(initialState, clearReviewField());
+
+      expect(state.reviewFields.score).toBe('');
+      expect(state.reviewFields.description).toBe('');
     });
   });
 

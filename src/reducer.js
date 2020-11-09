@@ -1,5 +1,10 @@
 import { equal } from './utils';
 
+const initialReviewFields = {
+  score: '',
+  description: '',
+};
+
 const initialState = {
   accessToken: '',
   regions: [],
@@ -13,8 +18,7 @@ const initialState = {
     password: '',
   },
   reviewFields: {
-    score: '',
-    description: '',
+    ...initialReviewFields,
   },
 };
 
@@ -93,6 +97,15 @@ const reducers = {
       reviewFields: {
         ...state.reviewFields,
         [name]: value,
+      },
+    };
+  },
+
+  clearReviewField(state) {
+    return {
+      ...state,
+      reviewFields: {
+        ...initialReviewFields,
       },
     };
   },
