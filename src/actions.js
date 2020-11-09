@@ -137,8 +137,6 @@ export function setReviews(reviews) {
 }
 
 export function loadReview({ restaurantId }) {
-  // TODO: fetch restaurant
-  // setRestaurant / setReviews
   return async (dispatch) => {
     const restaurant = await fetchRestaurant({ restaurantId });
 
