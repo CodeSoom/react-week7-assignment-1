@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import RESTAURANT from '../fixtures/restaurant';
 import { loadItem } from './services/storage';
 
 jest.mock('react-redux');
@@ -29,18 +30,7 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: {
-        id: 1,
-        name: '마녀주방',
-        reviews: [
-          {
-            id: 1,
-            restaurantId: 1,
-            name: '테스터',
-            score: 5,
-            description: '훌륭하다 훌륭하다 지구인놈들',
-          }],
-      },
+      restaurant: RESTAURANT,
     }));
   });
 
