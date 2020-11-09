@@ -7,6 +7,9 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginField,
+  changeReviewField,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +21,15 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      accessToken: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      reviewFields: {
+        score: 0,
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -122,6 +134,85 @@ describe('reducer', () => {
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
+      });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes accessToken', () => {
+      const state = reducer({
+        accessToken: '',
+      }, setAccessToken('ACCESS_TOKEN'));
+
+      expect(state.accessToken).toBe('ACCESS_TOKEN');
+    });
+  });
+
+  describe('changeLoginField', () => {
+    it('changes email', () => {
+      const loginFields = {
+        email: 'email',
+        password: 'password',
+      };
+
+      const state = reducer({ loginFields }, changeLoginField({
+        name: 'email',
+        value: 'new@email',
+      }));
+
+      expect(state.loginFields.email).toBe('new@email');
+      expect(state.loginFields.password).toBe('password');
+    });
+
+    it('changes password', () => {
+      const loginFields = {
+        email: 'email',
+        password: 'password',
+      };
+
+      const state = reducer({ loginFields }, changeLoginField({
+        name: 'password',
+        value: 'new',
+      }));
+
+      expect(state.loginFields.password).toBe('new');
+      expect(state.loginFields.email).toBe('email');
+    });
+  });
+
+  describe('changeReviewField', () => {
+    const initialState = {
+      reviewFields: {
+        score: 'same',
+        description: 'same',
+      },
+    };
+
+    context('when changing field is score', () => {
+      const action = changeReviewField({
+        name: 'score',
+        value: '4',
+      });
+
+      it('changes score and does not change description', () => {
+        const state = reducer(initialState, action);
+
+        expect(state.reviewFields.score).toBe('4');
+        expect(state.reviewFields.description).toBe('same');
+      });
+    });
+
+    context('when changing field is description', () => {
+      const action = changeReviewField({
+        name: 'description',
+        value: '맛있네요',
+      });
+
+      it('changes description and does not change rate', () => {
+        const state = reducer(initialState, action);
+
+        expect(state.reviewFields.description).toBe('맛있네요');
+        expect(state.reviewFields.score).toBe('same');
       });
     });
   });

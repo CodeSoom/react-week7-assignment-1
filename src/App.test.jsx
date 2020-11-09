@@ -27,6 +27,8 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      loginFields: {},
+      reviewFields: {},
     }));
   });
 
@@ -37,6 +39,12 @@ describe('App', () => {
       </MemoryRouter>,
     );
   }
+
+  it('initially calls loadLoginStatus', () => {
+    renderApp({ path: 'any' });
+
+    expect(dispatch).toBeCalled();
+  });
 
   context('with path /', () => {
     it('renders the home page', () => {
@@ -67,6 +75,14 @@ describe('App', () => {
       const { container } = renderApp({ path: '/restaurants/1' });
 
       expect(container).toHaveTextContent('마녀주방');
+    });
+  });
+
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
     });
   });
 

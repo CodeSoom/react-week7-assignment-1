@@ -19,6 +19,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviewFields: {},
     }));
   });
 
@@ -33,6 +34,9 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [
+        { name: '테스터', score: 3, description: '우와' },
+      ],
     }));
 
     it('renders name and address', () => {
@@ -40,6 +44,18 @@ describe('RestaurantContainer', () => {
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+    });
+
+    it('renders review-form', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
+
+      expect(queryByLabelText('평점')).not.toBeNull();
+    });
+
+    it('renders reviews', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('테스터');
     });
   });
 

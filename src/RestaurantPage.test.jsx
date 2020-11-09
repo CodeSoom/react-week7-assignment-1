@@ -20,6 +20,7 @@ describe('RestaurantPage', () => {
         name: '마법사주방',
         address: '서울시 강남구',
       },
+      reviewFields: {},
     }));
   });
 
@@ -45,5 +46,15 @@ describe('RestaurantPage', () => {
 
       expect(container).toHaveTextContent('마법사주방');
     });
+  });
+
+  it('renders review-form', () => {
+    const { queryByLabelText } = render(
+      <MemoryRouter initialEntries={['/restaurants/1']}>
+        <RestaurantPage />
+      </MemoryRouter>,
+    );
+
+    expect(queryByLabelText('평점')).not.toBeNull();
   });
 });
