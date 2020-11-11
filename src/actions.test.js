@@ -10,6 +10,9 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  setAccessToken,
+  requestLogin,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -98,6 +101,43 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    context('loginFields가 주어지면,', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: { email: 'tester@example.com', password: 'test' },
+        });
+      });
+
+      it('setAccessToken이 호출됩니다.', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setAccessToken(''));
+      });
+    });
+  });
+
+  describe('sendReview', () => {
+    context('accessToken과 loginFields가 주어지면,', () => {
+      beforeEach(() => {
+        store = mockStore({
+          reviewFields: { score: 5, description: 'test' },
+          accessToken: 'ACCESS_TOKEN',
+        });
+      });
+
+      it('setRestaurant이 호출됩니다.', async () => {
+        await store.dispatch(sendReview({ restaurantId: 1 }));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setRestaurant({}));
+      });
     });
   });
 });

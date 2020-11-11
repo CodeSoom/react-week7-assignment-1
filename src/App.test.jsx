@@ -10,7 +10,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import RESTAURANT from '../fixtures/restaurant';
+import { loadItem } from './services/storage';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -26,7 +30,7 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
+      restaurant: RESTAURANT,
     }));
   });
 
@@ -75,6 +79,31 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('로그인이 되지 않으면', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it('setAccesToken action이 dispatch 되지 않는다.', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
+
+  context('로그인이 되어 있으면', () => {
+    const accessToken = 'ACCESS_TOKEN';
+    beforeEach(() => {
+      loadItem.mockImplementation(() => accessToken);
+    });
+
+    it('setAccesToken action이 dispatch 된다.', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalled();
     });
   });
 });

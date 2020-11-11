@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,6 +19,11 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+      accessToken: given.accessToken,
     }));
   });
 
@@ -33,6 +38,15 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [
+        {
+          id: 1,
+          restaurantId: 1,
+          name: '테스터',
+          score: 5,
+          description: '훌륭하다 훌륭하다 지구인놈들',
+        },
+      ],
     }));
 
     it('renders name and address', () => {
@@ -40,6 +54,61 @@ describe('RestaurantContainer', () => {
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+      expect(container).toHaveTextContent('리뷰');
+    });
+
+    context('loginin이 되지 않으면', () => {
+      it('reviewForm를 생성하지 않습니다.', () => {
+        const { queryByLabelText } = renderRestaurantContainer();
+
+        expect(queryByLabelText('평점')).toBeNull();
+        expect(queryByLabelText('리뷰 내용')).toBeNull();
+      });
+    });
+
+    context('loggin 되어있으면,', () => {
+      given('accessToken', () => 'ACCESS_TOKEN');
+
+      it('reviewForm를 생성합니다.', () => {
+        const { getByLabelText } = renderRestaurantContainer();
+
+        expect(getByLabelText('평점')).not.toBeNull();
+        expect(getByLabelText('리뷰 내용')).not.toBeNull();
+      });
+
+      it('score change 이벤트가 발생하면 dispatch가 호출된다.', () => {
+        const { getByLabelText } = renderRestaurantContainer();
+
+        fireEvent.change(getByLabelText('평점'), {
+          target: { value: '5' },
+        });
+
+        expect(dispatch).toBeCalledWith({
+          type: 'changeReviewField',
+          payload: { name: 'score', value: '5' },
+        });
+      });
+
+      it('description change 이벤트가 발생하면 dispatch가 호출된다.', () => {
+        const { getByLabelText } = renderRestaurantContainer();
+
+        fireEvent.change(getByLabelText('리뷰 내용'), {
+          target: { value: '정말 최고 :)' },
+        });
+
+        expect(dispatch).toBeCalledWith({
+          type: 'changeReviewField',
+          payload: { name: 'description', value: '정말 최고 :)' },
+        });
+      });
+
+      it('리뷰 남기기 버튼을 클릭하면 dispatch가 호출됩니다.', () => {
+        const { getByText } = renderRestaurantContainer();
+
+        fireEvent.click(getByText('리뷰 남기기'));
+
+        expect(dispatch).toBeCalledTimes(2);
+      });
     });
   });
 

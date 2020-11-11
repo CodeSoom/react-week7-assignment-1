@@ -7,6 +7,10 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginField,
+  setAccessToken,
+  logout,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +22,12 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: { email: '', password: '' },
+      accessToken: '',
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -123,6 +133,73 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('changeLoginField', () => {
+    it('loginFields의 email이 변경됩니다.', () => {
+      const initialState = {
+        loginFields: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, changeLoginField({ name: 'email', value: 'test' }));
+
+      expect(state.loginFields.email).toBe('test');
+    });
+
+    it('loginFields의 password이 변경됩니다.', () => {
+      const initialState = {
+        loginFields: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, changeLoginField({ name: 'password', value: '123123' }));
+
+      expect(state.loginFields.password).toBe('123123');
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('accessToken을 설정합니다.', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, setAccessToken('TOKEN'));
+
+      expect(state.accessToken).toBe('TOKEN');
+    });
+  });
+
+  describe('logout', () => {
+    it('accessToken을 초기화합니다.', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+      };
+
+      const state = reducer(initialState, logout());
+
+      expect(state.accessToken).toBe('');
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('reviewFileds의 값을 변경합니다.', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(initialState, changeReviewField({ name: 'score', value: '5' }));
+
+      expect(state.reviewFields.score).toBe('5');
     });
   });
 });
