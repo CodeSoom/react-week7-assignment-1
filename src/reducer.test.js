@@ -7,6 +7,9 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginFields,
+  setAccessToken,
+  changeReviewFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +21,15 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+      accessToken: '',
     };
 
     it('returns initialState', () => {
@@ -122,6 +134,90 @@ describe('reducer', () => {
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
+      });
+    });
+  });
+
+  describe('changeLoginFields', () => {
+    context('change email input field', () => {
+      it('changes input field', () => {
+        const initialState = {
+          loginFields: {
+            email: '',
+          },
+        };
+
+        const { loginFields } = reducer(initialState, changeLoginFields({
+          name: 'email',
+          value: 'tester@example.com',
+        }));
+
+        expect(loginFields.email).toEqual('tester@example.com');
+      });
+    });
+
+    context('change password input field', () => {
+      it('changes input field', () => {
+        const initialState = {
+          loginFields: {
+            password: '',
+          },
+        };
+
+        const { loginFields } = reducer(initialState, changeLoginFields({
+          name: 'password',
+          value: '1234',
+        }));
+
+        expect(loginFields.password).toEqual('1234');
+      });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('get accessToken', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, setAccessToken('token'));
+
+      expect(state.accessToken).toEqual('token');
+    });
+  });
+
+  describe('changeReviewFields', () => {
+    context('change score input field', () => {
+      it('changes input field', () => {
+        const initialState = {
+          reviewFields: {
+            score: '',
+          },
+        };
+
+        const { reviewFields } = reducer(initialState, changeReviewFields({
+          name: 'score',
+          value: '5',
+        }));
+
+        expect(reviewFields.score).toEqual('5');
+      });
+    });
+
+    context('change description input field', () => {
+      it('changes input field', () => {
+        const initialState = {
+          reviewFields: {
+            description: '',
+          },
+        };
+
+        const { reviewFields } = reducer(initialState, changeReviewFields({
+          name: 'description',
+          value: '맛있어요!',
+        }));
+
+        expect(reviewFields.description).toEqual('맛있어요!');
       });
     });
   });

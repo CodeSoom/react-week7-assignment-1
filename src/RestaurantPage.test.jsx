@@ -20,6 +20,7 @@ describe('RestaurantPage', () => {
         name: '마법사주방',
         address: '서울시 강남구',
       },
+      accessToken: given.accessToken,
     }));
   });
 
@@ -44,6 +45,49 @@ describe('RestaurantPage', () => {
       );
 
       expect(container).toHaveTextContent('마법사주방');
+    });
+  });
+
+  describe('review', () => {
+    context('with login', () => {
+      given('accessToken', () => 'ACCESS_TOKEN');
+
+      it('renders review write form', () => {
+        const { getByLabelText } = render((
+          <MemoryRouter initialEntries={['/restaurants/1']}>
+            <RestaurantPage />
+          </MemoryRouter>
+        ));
+
+        expect(getByLabelText('평점')).not.toBeNull();
+        expect(getByLabelText('리뷰 내용')).not.toBeNull();
+      });
+
+      it('renders review form', () => {
+        const { container } = render((
+          <MemoryRouter initialEntries={['/restaurants/1']}>
+            <RestaurantPage />
+          </MemoryRouter>
+        ));
+
+        expect(container).toHaveTextContent('평점');
+        expect(container).toHaveTextContent('리뷰 내용');
+      });
+    });
+
+    context('without logout', () => {
+      given('accessToken', () => null);
+
+      it('no renders review form', () => {
+        const { container } = render((
+          <MemoryRouter initialEntries={['/restaurants/1']}>
+            <RestaurantPage />
+          </MemoryRouter>
+        ));
+
+        expect(container).not.toHaveTextContent('평점');
+        expect(container).not.toHaveTextContent('리뷰 내용');
+      });
     });
   });
 });
