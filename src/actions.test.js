@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 
 import {
+  changeLoginFields,
   loadInitialData,
   setRegions,
   setCategories,
@@ -10,6 +11,7 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
 } from './actions';
 
 const middlewares = [thunk];
@@ -98,6 +100,39 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('changeLoginFields', () => {
+    it('returns changeLoginFields action', () => {
+      const action = changeLoginFields({ name: 'email', value: 'wow@wow.com' });
+
+      expect(action).toEqual({
+        type: 'changeLoginFields',
+        payload: { name: 'email', value: 'wow@wow.com' },
+      });
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginFields: {
+          email: 'test@test.com',
+          password: 'test',
+        },
+      });
+    });
+
+    it('dispatches setAccessToken', async () => {
+      await store.dispatch(requestLogin({ email: 'wow@wow.com', password: 'wow' }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'setAccessToken',
+        payload: { accessToken: {} },
+      });
     });
   });
 });

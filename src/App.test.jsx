@@ -21,6 +21,10 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: '',
+        password: '',
+      },
       regions: [
         { id: 1, name: '서울' },
       ],
@@ -51,6 +55,14 @@ describe('App', () => {
       const { container } = renderApp({ path: '/about' });
 
       expect(container).toHaveTextContent('About 페이지');
+    });
+  });
+
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
     });
   });
 
