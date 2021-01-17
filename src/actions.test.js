@@ -4,12 +4,10 @@ import configureStore from 'redux-mock-store';
 
 import {
   loadInitialData,
-  setRegions,
-  setCategories,
   loadRestaurants,
   loadRestaurant,
-  setRestaurants,
-  setRestaurant,
+  requestLogin,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -30,8 +28,16 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRegions([]));
-      expect(actions[1]).toEqual(setCategories([]));
+      expect(actions).toEqual([
+        {
+          type: 'setRegions',
+          payload: { regions: [] },
+        },
+        {
+          type: 'setCategories',
+          payload: { categories: [] },
+        },
+      ]);
     });
   });
 
@@ -49,7 +55,10 @@ describe('actions', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(setRestaurants([]));
+        expect(actions[0]).toEqual({
+          type: 'setRestaurants',
+          payload: { restaurants: [] },
+        });
       });
     });
 
@@ -96,8 +105,70 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurant(null));
-      expect(actions[1]).toEqual(setRestaurant({}));
+      expect(actions).toEqual([
+        {
+          type: 'setRestaurant',
+          payload: { restaurant: null },
+        },
+        {
+          type: 'setRestaurant',
+          payload: { restaurant: {} },
+        },
+      ]);
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginFields: {
+          email: 'test@test',
+          password: '1234',
+        },
+      });
+    });
+
+    it('dispatchs setAccessToken', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'setAccessToken',
+        payload: { accessToken: '' },
+      });
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        reviewFields: {
+          score: '5',
+          description: '맛점 장소로 딱!',
+        },
+      });
+    });
+
+    it('run postReview', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+    });
+
+    it('dispatches setRestarant actions', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions).toEqual([
+        {
+          type: 'setRestaurant',
+          payload: { restaurant: null },
+        },
+        {
+          type: 'setRestaurant',
+          payload: { restaurant: {} },
+        },
+      ]);
     });
   });
 });
