@@ -10,12 +10,15 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
+  sendReview,
+  logout,
 } from './actions';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-jest.mock('./services/api');
+jest.mock('services/api');
 
 describe('actions', () => {
   let store;
@@ -98,6 +101,74 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginField: {
+          email: '',
+          password: '',
+        },
+      });
+    });
+
+    it('dispatchs requestLogin', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions).toEqual([
+        { type: 'setAccessToken', payload: { accessToken: '' } },
+      ]);
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        reviewField: {
+          score: 0,
+          description: '',
+        },
+      });
+    });
+
+    it('dispatch sendReview', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions).toEqual([
+        { type: 'changeReviewField', payload: { name: 'score', value: 0 } },
+        { type: 'changeReviewField', payload: { name: 'description', value: '' } },
+        { type: 'setRestaurant', payload: { restaurant: null } },
+        { type: 'setRestaurant', payload: { restaurant: {} } },
+      ]);
+    });
+  });
+
+  describe('logout', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginField: {
+          email: '',
+          password: '',
+        },
+      });
+    });
+
+    it('dispatch sendReview', async () => {
+      await store.dispatch(logout());
+
+      const actions = store.getActions();
+
+      expect(actions).toEqual([
+        { type: 'setAccessToken', payload: { accessToken: '' } },
+        { type: 'changeLoginField', payload: { name: 'email', value: '' } },
+        { type: 'changeLoginField', payload: { name: 'password', value: '' } },
+      ]);
     });
   });
 });

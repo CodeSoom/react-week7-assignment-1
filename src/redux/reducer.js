@@ -1,4 +1,4 @@
-import { equal } from './utils';
+import { equal } from '../utils';
 
 const initialState = {
   regions: [],
@@ -7,6 +7,15 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginField: {
+    email: '',
+    password: '',
+  },
+  accessToken: '',
+  reviewField: {
+    score: 0,
+    description: '',
+  },
 };
 
 const reducers = {
@@ -53,6 +62,36 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
+
+  changeLoginField(state, { payload: { name, value } }) {
+    const { loginField } = state;
+    return {
+      ...state,
+      loginField: {
+        ...loginField,
+        [name]: value,
+      },
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
+    };
+  },
+
+  changeReviewField(state, { payload: { name, value } }) {
+    const { reviewField } = state;
+    return {
+      ...state,
+      reviewField: {
+        ...reviewField,
+        [name]: value,
+      },
+    };
+  },
+
 };
 
 function defaultReducer(state) {

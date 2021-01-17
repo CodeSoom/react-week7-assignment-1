@@ -26,7 +26,16 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
+      restaurant: { id: 1, name: '마녀주방', reviews: [] },
+      loginField: {
+        email: '',
+        password: '',
+      },
+      reviewField: {
+        score: '',
+        description: '',
+      },
+      accessToken: '',
     }));
   });
 
@@ -76,5 +85,19 @@ describe('App', () => {
 
       expect(container).toHaveTextContent('Not Found');
     });
+  });
+
+  context('with path /login ', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
+    });
+  });
+
+  it('get accessToken from localstorage', () => {
+    renderApp({ path: '/' });
+
+    expect(dispatch).toBeCalled();
   });
 });
