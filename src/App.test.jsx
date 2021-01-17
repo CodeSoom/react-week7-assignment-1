@@ -8,6 +8,9 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import regions from '../fixtures/regions';
+import restaurant from '../fixtures/restaurant';
+
 import App from './App';
 
 jest.mock('react-redux');
@@ -21,12 +24,14 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      regions: [
-        { id: 1, name: '서울' },
-      ],
+      regions,
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
+      restaurant,
+      reviewField: {
+        score: '',
+        description: ',',
+      },
     }));
   });
 

@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
+
+import restaurant from '../fixtures/restaurant';
 
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
@@ -19,6 +21,10 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviewField: {
+        score: '',
+        description: '',
+      },
     }));
   });
 
@@ -29,17 +35,13 @@ describe('RestaurantContainer', () => {
   });
 
   context('with restaurant', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
+    given('restaurant', () => (restaurant));
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
 
-      expect(container).toHaveTextContent('마법사주방');
-      expect(container).toHaveTextContent('서울시');
+      expect(container).toHaveTextContent(restaurant.name);
+      expect(container).toHaveTextContent(restaurant.address);
     });
   });
 
@@ -50,6 +52,51 @@ describe('RestaurantContainer', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('Loading');
+    });
+  });
+
+  it('renders review write form', () => {
+    given('restaurant', () => (restaurant));
+
+    const { queryByText } = renderRestaurantContainer();
+
+    expect(queryByText('평점')).not.toBeNull();
+    expect(queryByText('리뷰 내용')).not.toBeNull();
+  });
+
+  context('when review button is clicked', () => {
+    it('calls dispatch', () => {
+      given('restaurant', () => (restaurant));
+
+      const { getByText } = renderRestaurantContainer();
+
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(dispatch).toBeCalledTimes(2);
+    });
+  });
+
+  context('with review change event', () => {
+    it('dispatch changeReviewField', () => {
+      const inputs = [
+        { label: '평점', name: 'score', value: '5' },
+        { label: '리뷰 내용', name: 'description', value: '정말 최고!' },
+      ];
+
+      given('restaurant', () => (restaurant));
+
+      const { getByLabelText } = renderRestaurantContainer();
+
+      inputs.forEach(({ label, name, value }) => {
+        fireEvent.change(getByLabelText(label), {
+          target: { value },
+        });
+
+        expect(dispatch).toBeCalledWith({
+          type: 'changeReviewField',
+          payload: { name, value },
+        });
+      });
     });
   });
 });

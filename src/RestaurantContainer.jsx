@@ -6,18 +6,32 @@ import RestaurantDetail from './RestaurantDetail';
 
 import {
   loadRestaurant,
+  changeReviewField,
+  sendReview,
 } from './actions';
 
 import { get } from './utils';
 
+import ReviewForm from './ReviewForm';
+import Reviews from './Reviews';
+
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
+
+  const restaurant = useSelector(get('restaurant'));
+  const reviewField = useSelector(get('reviewField'));
+
+  function handleChange({ name, value }) {
+    dispatch(changeReviewField({ name, value }));
+  }
+
+  function handleSubmit() {
+    dispatch(sendReview({ restaurantId }));
+  }
 
   useEffect(() => {
     dispatch(loadRestaurant({ restaurantId }));
   }, []);
-
-  const restaurant = useSelector(get('restaurant'));
 
   if (!restaurant) {
     return (
@@ -28,6 +42,14 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
+      <ReviewForm
+        fields={reviewField}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
+      <Reviews
+        reviews={restaurant.reviews}
+      />
     </>
   );
 }

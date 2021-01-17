@@ -6,10 +6,13 @@ import {
   loadInitialData,
   setRegions,
   setCategories,
+  setAccessToken,
   loadRestaurants,
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -93,6 +96,53 @@ describe('actions', () => {
 
     it('dispatchs setRestaurant', async () => {
       await store.dispatch(loadRestaurant({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginField: {
+          email: '',
+          password: '',
+        },
+      });
+    });
+
+    it('dispatches setAccessToken', async () => {
+      await store.dispatch(requestLogin({
+        email: 'tester@example.com',
+        password: 'test',
+      }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken({}));
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'abcd',
+        reviewField: {
+          score: '5',
+          description: '정말 최고!',
+        },
+      });
+    });
+
+    it('calls postReview', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+    });
+
+    it('dispatches setRestaurant', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
 
       const actions = store.getActions();
 
