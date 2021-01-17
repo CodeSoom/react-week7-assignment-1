@@ -7,17 +7,26 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginFields,
+  setAccessToken,
+  changeReviewFields,
+  logout,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      accessToken: null,
       regions: [],
       categories: [],
       restaurants: [],
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -122,6 +131,102 @@ describe('reducer', () => {
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
+      });
+    });
+  });
+
+  describe('changeLoginFields', () => {
+    const initialState = {
+      loginFields: {
+        email: 'test@test',
+        password: '1234'
+      }
+    }
+
+    it('change email in fields', () =>{
+      const state = reducer(
+        initialState,
+        changeLoginFields({ name: 'email', value: 'test@admin' })
+      );
+
+      expect(state.loginFields.email).toEqual('test@admin');
+    });
+
+    it('change password in fields', () =>{
+      const state = reducer(
+        initialState,
+        changeLoginFields({ name: 'password', value: '2222' })
+      );
+
+      expect(state.loginFields.password).toEqual('2222');
+    });
+  });
+
+  describe('changeReviewFields', () => {
+    const initialState = {
+      reviewFields: {
+        score: '',
+        description: ''
+      }
+    };
+
+    it('change score', () => {
+      const state = reducer(initialState, changeReviewFields({
+        name: 'score',
+        value: '5',
+      }));
+
+      expect(state.reviewFields).toEqual({
+        score: '5',
+        description: '',
+      });
+    });
+
+    it('change description', () => {
+      const state = reducer(initialState, changeReviewFields({
+        name: 'description',
+        value: '다음에도 올게요',
+      }));
+
+      expect(state.reviewFields).toEqual({
+        score: '',
+        description: '다음에도 올게요',
+      });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    const initialState = {
+      accessToken: null
+    }
+
+    it('change access Token', () => {
+      const accessToken = 'ACCESS_TOKEN';
+      const state = reducer(
+        initialState,
+        setAccessToken(accessToken)
+      );
+
+      expect(state.accessToken).toEqual(accessToken)
+    });
+  });
+
+  describe('logout', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        loginFields: {
+          email: 'test@test',
+          password: '1234',
+        },
+        accessToken: 'ACCESS_TOKEN',
+      };
+
+      const state = reducer(initialState, logout());
+
+      expect(state.accessToken).toBe('');
+      expect(state.loginFields).toStrictEqual({
+        email: '',
+        password: '',
       });
     });
   });

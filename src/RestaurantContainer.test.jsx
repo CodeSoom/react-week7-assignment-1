@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -33,6 +33,15 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [
+        {
+          id: 1,
+          restaurantId: 1,
+          name: '테스터',
+          score: 5,
+          description: '맛나다',
+        }
+      ],
     }));
 
     it('renders name and address', () => {
@@ -40,6 +49,34 @@ describe('RestaurantContainer', () => {
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+    });
+
+    it('render reviews', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('테스터');
+      expect(container).toHaveTextContent('5점');
+      expect(container).toHaveTextContent('맛나다');
+    });
+
+    it('listens chagne events', () => {
+      const { getByLabelText } = renderRestaurantContainer();
+
+      const controls = [
+        { label: '평점', name: 'score', value: '5' },
+        { label: '리뷰내용', name: 'description', value: '피곤하다' }
+      ];
+
+      controls.forEach(({ label, name, value }) => {
+        const input = getByLabelText(label);
+
+        fireEvent.change(input, { target: { value } });
+
+        expect(dispatch).toBeCalledWith({
+          type: 'changeReviewFields',
+          payload: { name, value }
+        });
+      });
     });
   });
 
