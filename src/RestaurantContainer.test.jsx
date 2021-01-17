@@ -10,15 +10,20 @@ describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
   function renderRestaurantContainer() {
-    return render(<RestaurantContainer restaurantId="1" />);
+    return render((
+      <RestaurantContainer restaurantId="1" />
+    ));
   }
 
   beforeEach(() => {
     dispatch.mockClear();
+
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviewFields: given.reviewFields,
+      accessToken: given.accessToken,
     }));
   });
 
@@ -28,11 +33,30 @@ describe('RestaurantContainer', () => {
     expect(dispatch).toBeCalled();
   });
 
+  context('without restaurant', () => {
+    given('restaurant', () => null);
+
+    it('renders loading', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('Loading');
+    });
+  });
+
   context('with restaurant', () => {
     given('restaurant', () => ({
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [
+        {
+          id: 1, name: '테스터', description: '맛집 인정!', score: 5,
+        },
+      ],
+    }));
+    given('reviewFields', () => ({
+      score: '',
+      description: '',
     }));
 
     it('renders name and address', () => {
@@ -41,15 +65,25 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
     });
-  });
 
-  context('without restaurant', () => {
-    given('restaurant', () => null);
+    context('without logged-in', () => {
+      it('renders no review write form', () => {
+        const { container } = renderRestaurantContainer();
 
-    it('renders loading', () => {
-      const { container } = renderRestaurantContainer();
+        expect(container).not.toHaveTextContent('평점');
+        expect(container).not.toHaveTextContent('리뷰 내용');
+      });
+    });
 
-      expect(container).toHaveTextContent('Loading');
+    context('with logged-in', () => {
+      given('accessToken', () => 'ACCESS_TOKEN');
+
+      it('renders review write form', () => {
+        const { container } = renderRestaurantContainer();
+
+        expect(container).toHaveTextContent('평점');
+        expect(container).toHaveTextContent('리뷰 내용');
+      });
     });
   });
 });

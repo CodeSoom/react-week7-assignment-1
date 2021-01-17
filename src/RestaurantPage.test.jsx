@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { MemoryRouter } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import { render } from '@testing-library/react';
@@ -20,6 +18,11 @@ describe('RestaurantPage', () => {
         name: '마법사주방',
         address: '서울시 강남구',
       },
+      reviewFields: {
+        score: '5',
+        description: '최고의 맛!',
+      },
+      accessToken: 'ACCESS_TOKEN',
     }));
   });
 
@@ -33,17 +36,12 @@ describe('RestaurantPage', () => {
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  });
 
-  context('without params props', () => {
-    it('renders name', () => {
-      const { container } = render(
-        <MemoryRouter initialEntries={['/restaurants/1']}>
-          <RestaurantPage />
-        </MemoryRouter>,
-      );
+    it('nothing renders if undefined restaurant id', () => {
+      const params = { id: 'undefined' };
 
-      expect(container).toHaveTextContent('마법사주방');
+      render(<RestaurantPage params={params} />);
+      // *TODO: render error message
     });
   });
 });

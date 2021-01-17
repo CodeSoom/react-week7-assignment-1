@@ -10,7 +10,13 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  setAccessToken,
+  requestLogin,
+  loadReview,
+  sendReview,
 } from './actions';
+
+import RESTAURANT from '../fixtures/restaurant';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -98,6 +104,84 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('setAccessToken', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: '',
+      });
+    });
+
+    it('dispatchs setAccessToken', async () => {
+      const accessToken = 'ACCESS_TOKEN';
+      await store.dispatch(setAccessToken(accessToken));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'setAccessToken',
+        payload: { accessToken },
+      });
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginField: {
+          email: 'test@test.com',
+          password: 'test',
+        },
+      });
+    });
+
+    it('dispatchs setAccessToken', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).not.toBeNull();
+    });
+  });
+
+  describe('loadReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        restaurant: RESTAURANT,
+      });
+    });
+
+    it('load reviews from fetchRestaurant', async () => {
+      await store.dispatch(loadReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'setReviews',
+        payload: { reviews: undefined },
+      });
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        restaurant: RESTAURANT,
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      });
+    });
+
+    it('sends review and returns nothing', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({ type: 'clearReviewField' });
     });
   });
 });

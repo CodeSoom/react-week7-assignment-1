@@ -1,12 +1,25 @@
 import { equal } from './utils';
 
+const initialReviewFields = {
+  score: '',
+  description: '',
+};
+
 const initialState = {
+  accessToken: '',
   regions: [],
   categories: [],
   restaurants: [],
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginField: {
+    email: '',
+    password: '',
+  },
+  reviewFields: {
+    ...initialReviewFields,
+  },
 };
 
 const reducers = {
@@ -51,6 +64,61 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  changeLoginField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      loginField: {
+        ...state.loginField,
+        [name]: value,
+      },
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
+    };
+  },
+
+  logout(state) {
+    return {
+      ...state,
+      accessToken: '',
+    };
+  },
+
+  changeReviewField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewFields: {
+        ...state.reviewFields,
+        [name]: value,
+      },
+    };
+  },
+
+  clearReviewField(state) {
+    return {
+      ...state,
+      reviewFields: {
+        ...initialReviewFields,
+      },
+    };
+  },
+
+  setReviews(state, { payload: { reviews } }) {
+    const { restaurant } = state;
+
+    return {
+      ...state,
+      restaurant: {
+        ...restaurant,
+        reviews,
+      },
     };
   },
 };
