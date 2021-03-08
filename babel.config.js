@@ -17,6 +17,7 @@ module.exports = {
         alias: {
           '@fixtures': './fixtures',
           '@utils': './src/utils',
+          '@actions': './src/redux/actions',
         },
       },
     ],
