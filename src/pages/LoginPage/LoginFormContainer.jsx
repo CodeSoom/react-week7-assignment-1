@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { updateUserLoginInputs } from '../../actions';
+
 import LoginForm from './LoginForm';
 
 export default function LoginFormContainer() {
@@ -11,7 +13,7 @@ export default function LoginFormContainer() {
   }));
 
   function handleChange({ name, value }) {
-    dispatch();
+    dispatch(updateUserLoginInputs(name, value));
   }
 
   function handleClick() {
