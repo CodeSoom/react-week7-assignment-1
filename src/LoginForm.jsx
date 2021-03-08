@@ -15,6 +15,7 @@ export default function LoginForm({ field, onChange, onClick }) {
         <input
           type="email"
           id="login-email"
+          name="email"
           value={email}
           onChange={handleChange}
         />
@@ -24,6 +25,7 @@ export default function LoginForm({ field, onChange, onClick }) {
         <input
           type="password"
           id="login-password"
+          name="password"
           value={password}
           onChange={handleChange}
         />
