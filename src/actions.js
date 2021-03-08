@@ -85,3 +85,12 @@ export function loadRestaurant({ restaurantId }) {
     dispatch(setRestaurant(restaurant));
   };
 }
+
+export function requestLogin() {
+  /*
+   TODO
+   - get { email, password}
+   - get access token by posting login
+   - set access token
+   */
+}

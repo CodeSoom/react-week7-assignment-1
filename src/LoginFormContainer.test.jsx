@@ -14,7 +14,7 @@ describe('LoginFormContainer', () => {
   beforeEach(() => {
     dispatch.mockClear();
 
-    useDispatch.mockImplemenetation(() => dispatch);
+    useDispatch.mockImplementation(() => dispatch);
   });
 
   it('renders login form', () => {
