@@ -1,8 +1,8 @@
 module.exports = {
   setupFilesAfterEnv: [
-    "given2/setup",
-    "jest-plugin-context/setup",
-    "./jest.setup",
+    'given2/setup',
+    'jest-plugin-context/setup',
+    './jest.setup',
   ],
   coverageThreshold: {
     global: {
@@ -13,4 +13,9 @@ module.exports = {
     },
   },
   verbose: true,
+  moduleNameMapper: {
+    '^@components(.*)$': '<rootDir>/src/components$1',
+    '^@containers(.*)$': '<rootDir>/src/containers$1',
+    '^@pages(.*)$': '<rootDir>/src/pages$1',
+  },
 };
