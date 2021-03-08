@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { get } from '@utils';
+
 import RestaurantDetail from './RestaurantDetail';
 
 import {
   loadRestaurant,
 } from '../../redux/actions';
-
-import { get } from '../../utils';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
