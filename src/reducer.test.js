@@ -7,6 +7,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginField,
 } from './actions';
 
 describe('reducer', () => {
@@ -122,6 +123,23 @@ describe('reducer', () => {
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
+      });
+    });
+  });
+
+  describe('changeLoginField', () => {
+    context('when email field changes', () => {
+      it('changes login field', () => {
+        const initialState = {
+          loginFields: {
+            email: '',
+            password: '',
+          },
+        };
+
+        const state = reducer(initialState, changeLoginField({ name: 'email', value: 'test@test.com' }));
+
+        expect(state.loginFields.email).toBe('test@test.com');
       });
     });
   });
