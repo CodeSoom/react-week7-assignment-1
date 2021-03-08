@@ -19,6 +19,10 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -137,9 +141,30 @@ describe('reducer', () => {
           },
         };
 
-        const state = reducer(initialState, changeLoginField({ name: 'email', value: 'test@test.com' }));
+        const state = reducer(
+          initialState,
+          changeLoginField({ name: 'email', value: 'test@test.com' }),
+        );
 
         expect(state.loginFields.email).toBe('test@test.com');
+      });
+    });
+
+    context('when password field changes', () => {
+      it('changes login field', () => {
+        const initialState = {
+          loginFields: {
+            email: '',
+            password: '',
+          },
+        };
+
+        const state = reducer(
+          initialState,
+          changeLoginField({ name: 'password', value: 'test' }),
+        );
+
+        expect(state.loginFields.password).toBe('test');
       });
     });
   });
