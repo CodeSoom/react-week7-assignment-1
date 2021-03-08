@@ -7,11 +7,16 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  updateUserLoginInputs,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      userLoginInputs: {
+        email: '',
+        password: '',
+      },
       regions: [],
       categories: [],
       restaurants: [],
@@ -123,6 +128,18 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('updateUserLoginInputs', () => {
+    it('로그인 입력을 업데이트한다.', () => {
+      const initialState = {
+        userLoginInputs: { email: '', password: '' },
+      };
+
+      const state = reducer(initialState, updateUserLoginInputs('email', 'test@naver.com'));
+
+      expect(state.userLoginInputs.email).toEqual('test@naver.com');
     });
   });
 });
