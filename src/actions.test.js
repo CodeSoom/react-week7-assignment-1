@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 
 import {
+  requestLogin,
   loadInitialData,
   setRegions,
   setCategories,
@@ -10,6 +11,7 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  setAccessToken,
 } from './actions';
 
 const middlewares = [thunk];
@@ -98,6 +100,20 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({ email: 'test@naver.com', password: 'test' });
+    });
+
+    it('accessToken을 저장하는 action을 실행한다.', async () => {
+      await store.dispatch(requestLogin({ accessToken: 'ACCESS_TOKEN' }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken(null));
     });
   });
 });
