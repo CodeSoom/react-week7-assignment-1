@@ -3,7 +3,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
-} from '../services/api';
+} from '@api';
 
 export function setRegions(regions) {
   return {
