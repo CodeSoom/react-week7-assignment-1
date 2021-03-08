@@ -10,4 +10,13 @@ module.exports = {
     ],
     '@babel/preset-react',
   ],
+  plugins: [
+    [
+      'module-resolver',
+      {
+        alias: {
+        },
+      },
+    ],
+  ],
 };
