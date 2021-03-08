@@ -10,4 +10,11 @@ describe('LoginPage', () => {
 
     expect(container).toHaveTextContent('Log In');
   });
+
+  it('renders login form', () => {
+    const { getByLabelText } = render(<LoginPage />);
+
+    expect(getByLabelText('Email')).not.toBeNull();
+    expect(getByLabelText('Password')).not.toBeNull();
+  });
 });
