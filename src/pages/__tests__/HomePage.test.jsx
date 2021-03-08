@@ -6,8 +6,6 @@ import { render } from '@testing-library/react';
 import HomePage from '@pages/HomePage';
 
 describe('HomePage', () => {
-  const links = ['About', 'Restaurants'];
-
   const renderHomePage = () => render(
     <MemoryRouter>
       <HomePage />
@@ -21,10 +19,10 @@ describe('HomePage', () => {
   });
 
   it('renders links', () => {
-    const { container } = renderHomePage();
+    const { getByRole } = renderHomePage();
 
-    links.forEach((link) => {
-      expect(container).toHaveTextContent(link);
-    });
+    expect(getByRole('link', { name: 'About' })).toHaveAttribute('href', '/about');
+    expect(getByRole('link', { name: 'Restaurants' })).toHaveAttribute('href', '/restaurants');
+    expect(getByRole('link', { name: 'Log In' })).toHaveAttribute('href', '/login');
   });
 });
