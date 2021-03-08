@@ -13,9 +13,10 @@ describe('LoginForm', () => {
     handleClick.mockClear();
   });
 
-  function renderLoginForm() {
+  function renderLoginForm({ email, password }) {
     return render((
       <LoginForm
+        field={{ email, password }}
         onChange={handleChange}
         onClick={handleClick}
       />
@@ -23,7 +24,7 @@ describe('LoginForm', () => {
   }
 
   it('renders login form', () => {
-    const { getByLabelText, getByText } = renderLoginForm();
+    const { getByLabelText, getByText } = renderLoginForm({});
 
     expect(getByLabelText('Email')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
@@ -34,12 +35,20 @@ describe('LoginForm', () => {
   });
 
   it('listens to input change events', () => {
-    const { getByLabelText } = renderLoginForm();
+    const controls = [
+      { label: 'Email', origin: '', value: 'test@test.com' },
+      { label: 'Password', origin: '', value: 'test' },
+    ];
+    const { getByLabelText } = renderLoginForm({ email: '', password: '' });
 
-    fireEvent.change(getByLabelText('Email'), {
-      target: { value: 'test@test.com' },
+    controls.forEach(({ label, origin, value }) => {
+      expect(getByLabelText(label).value).toBe(origin);
+
+      fireEvent.change(getByLabelText(label), {
+        target: { value },
+      });
+
+      expect(handleChange).toBeCalled();
     });
-
-    expect(handleChange).toBeCalled();
   });
 });
