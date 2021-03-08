@@ -1,16 +1,16 @@
 import {
+  REGIONS,
+  CATEGORIES,
+  RESTAURANTS,
+  RESTAURANT,
+} from '@fixtures';
+
+import {
   fetchRegions,
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
 } from '../api';
-
-import {
-  REGIONS,
-  CATEGORIES,
-  RESTAURANTS,
-  RESTAURANT,
-} from '../../../fixtures';
 
 describe('api', () => {
   const mockFetch = (data) => {
