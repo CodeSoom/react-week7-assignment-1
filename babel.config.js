@@ -18,6 +18,7 @@ module.exports = {
           '@fixtures': './fixtures',
           '@utils': './src/utils',
           '@actions': './src/redux/actions',
+          '@api': './src/services/api',
         },
       },
     ],
