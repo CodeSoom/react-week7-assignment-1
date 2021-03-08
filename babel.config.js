@@ -15,6 +15,7 @@ module.exports = {
       'module-resolver',
       {
         alias: {
+          '@fixtures': './fixtures',
         },
       },
     ],
