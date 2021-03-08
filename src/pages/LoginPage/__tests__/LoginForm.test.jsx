@@ -58,9 +58,9 @@ describe('LoginForm', () => {
   });
 
   it('Log In 버튼을 누르면 handleSubmit함수가 실행된다.', () => {
-    const { queryAllByText } = renderLoginForm();
+    const { queryByText } = renderLoginForm();
 
-    fireEvent.click(queryAllByText('Log In')[1]);
+    fireEvent.click(queryByText('Log In'));
 
     expect(handleSubmit).toBeCalled();
   });

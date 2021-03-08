@@ -37,9 +37,9 @@ describe('LoginFormContainer', () => {
   });
 
   it('Login 버튼을 클릭하면 로그인하는 dispatch함수가 실행된다.', () => {
-    const { queryAllByText } = render(<LoginFormContainer />);
+    const { queryByText } = render(<LoginFormContainer />);
 
-    fireEvent.click(queryAllByText('Log In')[1]);
+    fireEvent.click(queryByText('Log In'));
 
     expect(dispatch).toBeCalled();
   });
