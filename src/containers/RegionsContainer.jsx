@@ -2,12 +2,9 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  selectRegion,
-  loadRestaurants,
-} from './actions';
+import { selectRegion, loadRestaurants } from '../actions';
 
-import { get } from './utils';
+import { get } from '../utils';
 
 export default function RegionsContainer() {
   const dispatch = useDispatch();
@@ -24,15 +21,10 @@ export default function RegionsContainer() {
     <ul>
       {regions.map((region) => (
         <li key={region.id}>
-          <button
-            type="button"
-            onClick={() => handleClick(region.id)}
-          >
+          <button type="button" onClick={() => handleClick(region.id)}>
             {region.name}
             {selectedRegion ? (
-              <>
-                {region.id === selectedRegion.id ? '(V)' : null}
-              </>
+              <>{region.id === selectedRegion.id ? '(V)' : null}</>
             ) : null}
           </button>
         </li>

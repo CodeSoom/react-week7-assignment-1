@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { render } from '@testing-library/react';
 
-import RestaurantPage from './RestaurantPage';
+import RestaurantPage from '@pages/RestaurantPage';
 
 describe('RestaurantPage', () => {
   beforeEach(() => {
@@ -27,9 +27,7 @@ describe('RestaurantPage', () => {
     it('renders name', () => {
       const params = { id: '1' };
 
-      const { container } = render(
-        <RestaurantPage params={params} />,
-      );
+      const { container } = render(<RestaurantPage params={params} />);
 
       expect(container).toHaveTextContent('마법사주방');
     });

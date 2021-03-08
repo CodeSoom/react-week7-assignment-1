@@ -2,14 +2,12 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
-import MenuItems from './MenuItems';
+import MenuItems from '@components/MenuItems';
 
 describe('MenuItems', () => {
   context('with menu items', () => {
     it('renders menu items', () => {
-      const menuItems = [
-        { id: 1, name: '공기밥' },
-      ];
+      const menuItems = [{ id: 1, name: '공기밥' }];
 
       const { container } = render(<MenuItems menuItems={menuItems} />);
 

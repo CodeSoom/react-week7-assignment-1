@@ -4,7 +4,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import RegionsContainer from './RegionsContainer';
+import RegionsContainer from '@containers/RegionsContainer';
 
 describe('RegionsContainer', () => {
   const dispatch = jest.fn();
@@ -23,9 +23,7 @@ describe('RegionsContainer', () => {
   });
 
   it('renders checked regions', () => {
-    const { container, getByText } = render((
-      <RegionsContainer />
-    ));
+    const { container, getByText } = render(<RegionsContainer />);
 
     expect(container).toHaveTextContent('서울(V)');
     expect(container).toHaveTextContent('부산');

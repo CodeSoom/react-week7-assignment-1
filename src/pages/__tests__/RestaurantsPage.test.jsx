@@ -6,7 +6,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import RestaurantsPage from './RestaurantsPage';
+import RestaurantsPage from '@pages/RestaurantsPage';
 
 const mockPush = jest.fn();
 
@@ -26,24 +26,18 @@ describe('RestaurantsPage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      regions: [
-        { id: 1, name: '서울' },
-      ],
-      categories: [
-        { id: 1, name: '한식' },
-      ],
-      restaurants: [
-        { id: 1, name: '마법사주방' },
-      ],
+      regions: [{ id: 1, name: '서울' }],
+      categories: [{ id: 1, name: '한식' }],
+      restaurants: [{ id: 1, name: '마법사주방' }],
     }));
   });
 
   function renderRestaurantsPage() {
-    return render((
+    return render(
       <MemoryRouter>
         <RestaurantsPage />
-      </MemoryRouter>
-    ));
+      </MemoryRouter>,
+    );
   }
 
   it('renders region and category select buttons', () => {
