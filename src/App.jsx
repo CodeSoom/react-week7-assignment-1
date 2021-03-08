@@ -12,6 +12,8 @@ import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
 
+// 전략:
+
 export default function App() {
   return (
     <div>
