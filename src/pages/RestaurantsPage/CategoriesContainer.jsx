@@ -7,7 +7,7 @@ import { get } from '@utils';
 import {
   selectCategory,
   loadRestaurants,
-} from '../../redux/actions';
+} from '@actions';
 
 export default function CategoriesContainer() {
   const dispatch = useDispatch();
