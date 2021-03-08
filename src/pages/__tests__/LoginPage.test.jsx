@@ -14,4 +14,11 @@ describe('LoginPage', () => {
 
     expect(getByRole('heading', { name: 'Log In' })).toBeInTheDocument();
   });
+
+  it('renders input fields', () => {
+    const { getByLabelText } = renderLoginPage();
+
+    expect(getByLabelText('email')).toBeInTheDocument();
+    expect(getByLabelText('password')).toBeInTheDocument();
+  });
 });
