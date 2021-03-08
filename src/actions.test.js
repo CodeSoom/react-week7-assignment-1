@@ -105,7 +105,7 @@ describe('actions', () => {
 
   describe('requestLogin', () => {
     beforeEach(() => {
-      store = mockStore({ email: 'test@naver.com', password: 'test' });
+      store = mockStore({ userLoginInputs: { email: 'test@naver.com', password: 'test' } });
     });
 
     it('accessToken을 저장하는 action을 실행한다.', async () => {
@@ -113,7 +113,7 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken(null));
+      expect(actions[0]).toEqual(setAccessToken('ACCESS_TOKEN'));
     });
   });
 });
