@@ -10,7 +10,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
-} from '../api';
+} from '@api';
 
 describe('api', () => {
   const mockFetch = (data) => {
