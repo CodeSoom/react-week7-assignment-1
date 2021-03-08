@@ -10,7 +10,7 @@ export default function LoginFormContainer() {
     userLoginInputs: state.userLoginInputs,
   }));
 
-  function handleChange() {
+  function handleChange({ name, value }) {
     dispatch();
   }
 
