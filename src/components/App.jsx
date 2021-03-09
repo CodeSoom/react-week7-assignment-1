@@ -6,11 +6,13 @@ import {
   Link,
 } from 'react-router-dom';
 
-import HomePage from '../pages/HomePage';
-import AboutPage from '../pages/AboutPage';
-import RestaurantsPage from '../pages/RestaurantsPage';
-import RestaurantPage from '../pages/RestaurantPage';
-import NotFoundPage from '../pages/NotFoundPage';
+import {
+  HomePage,
+  AboutPage,
+  RestaurantsPage,
+  RestaurantPage,
+  NotFoundPage,
+} from '../pages';
 
 // 전략:
 
