@@ -6,13 +6,13 @@ export default function LoginForm() {
       <label htmlFor="email">
         email
       </label>
-      <input type="email" id="email" />
+      <input type="email" id="email" name="email" />
       <label htmlFor="password">
         password
       </label>
-      <input type="password" id="password" />
+      <input type="password" id="password" name="password" />
 
-      <button>Log In</button>
+      <button type="submit">Log In</button>
     </form>
   );
 }
