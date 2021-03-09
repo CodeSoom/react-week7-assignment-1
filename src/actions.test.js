@@ -105,7 +105,9 @@ describe('actions', () => {
 
   describe('requestLogin', () => {
     beforeEach(() => {
-      store = mockStore({});
+      store = mockStore({
+        loginFields: { email: 'test@test.com', password: 'test' },
+      });
     });
 
     it('dispatchs setAccessToken', async () => {
@@ -113,8 +115,7 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken(null));
-      expect(actions[1]).toEqual(setAccessToken({}));
+      expect(actions[0]).toEqual(setAccessToken({}));
     });
   });
 });
