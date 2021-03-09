@@ -1,18 +1,22 @@
 import React from 'react';
 
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import LoginPage from './LoginPage';
 
-describe('LoginPage', () => {
-  const dispatch = jest.fn();
+jest.mock('react-redux');
 
+describe('LoginPage', () => {
   beforeEach(() => {
-    dispatch.mockClear();
-    useDispatch.mockImplementation(() => dispatch);
-  })
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: 'test@test',
+        password: '1234',
+      },
+    }));
+  });
 
   it('renders log-in title', () => {
     const { container } = render(<LoginPage />);
@@ -20,18 +24,10 @@ describe('LoginPage', () => {
     expect(container).toHaveTextContent('Log In');
   });
 
-  it('renders log-in form', () => {
-    const { container } = render(<LoginPage />);
+  it('renders input controls', () => {
+    const { getByLabelText } = render(<LoginPage />);
 
-    expect(container).toHaveTextContent('E-mail');
-    expect(container).toHaveTextContent('Password');
-  });
-
-  it('renders log-in button', () => {
-    const { getByText } = render(<LoginPage />);
-
-    fireEvent.click(getByText('Log-In'));
-
-    expect(dispatch).toBeCalled();
+    expect(getByLabelText('E-mail')).not.toBeNull();
+    expect(getByLabelText('Password')).not.toBeNull();
   })
 });
