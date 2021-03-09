@@ -62,6 +62,12 @@ export function setAccessToken(accessToken) {
   };
 }
 
+export function deleteAccessToken() {
+  return {
+    type: 'deleteAccessToken',
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();
