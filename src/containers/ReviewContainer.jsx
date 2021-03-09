@@ -13,7 +13,15 @@ export default function ReviewContainer() {
       payload: { name, value },
     });
   }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    dispatch();
+  }
   return (
-    <ReviewForm onChange={handleChange} />
+    <ReviewForm
+      onChange={handleChange}
+      onSubmit={handleSubmit}
+    />
   );
 }
