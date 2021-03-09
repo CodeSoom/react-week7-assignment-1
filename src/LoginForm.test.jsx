@@ -24,7 +24,7 @@ describe('LoginForm', () => {
   }
 
   it('renders login form', () => {
-    const { getByLabelText: queryByLabelText, getByText } = renderLoginForm({});
+    const { queryByLabelText, getByText } = renderLoginForm({});
 
     expect(queryByLabelText('Email')).not.toBeNull();
     expect(queryByLabelText('Password')).not.toBeNull();

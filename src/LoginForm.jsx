@@ -1,35 +1,26 @@
 import React from 'react';
 
+import InputField from './InputField';
+
 export default function LoginForm({ fields, onChange, onClick }) {
   const { email, password } = fields;
 
-  function handleChange(event) {
-    const { target: { name, value } } = event;
-    onChange({ name, value });
-  }
-
   return (
     <>
-      <div>
-        <label htmlFor="login-email">Email</label>
-        <input
-          type="email"
-          id="login-email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="login-password">Password</label>
-        <input
-          type="password"
-          id="login-password"
-          name="password"
-          value={password}
-          onChange={handleChange}
-        />
-      </div>
+      <InputField
+        label="Email"
+        type="email"
+        name="email"
+        value={email}
+        onChange={onChange}
+      />
+      <InputField
+        label="Password"
+        type="password"
+        name="password"
+        value={password}
+        onChange={onChange}
+      />
       <button
         type="button"
         onClick={onClick}
