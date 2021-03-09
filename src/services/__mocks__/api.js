@@ -13,3 +13,7 @@ export async function fetchRestaurants() {
 export async function fetchRestaurant() {
   return {};
 }
+
+export async function postLogin() {
+  return { accessToken: '12345678' };
+}

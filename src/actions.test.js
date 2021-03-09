@@ -11,6 +11,8 @@ import {
   setRestaurants,
   setRestaurant,
   changeLoginFields,
+  postLoginFields,
+  setAccessToken,
 } from './actions';
 
 const middlewares = [thunk];
@@ -121,6 +123,43 @@ describe('actions', () => {
       expect(actions[1]).toEqual(
         changeLoginFields({ name: 'password', value: 'test' }),
       );
+    });
+  });
+
+  describe('postLoginFields', () => {
+    context('without email, password ', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: { email: '', password: '' },
+        });
+      });
+
+      it("don't dispatch", async () => {
+        await store.dispatch(postLoginFields());
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
+    });
+
+    context('with email, password ', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: 'tester@example.com',
+            password: 'test',
+          },
+        });
+      });
+
+      it('dispatch setAccessToken', async () => {
+        await store.dispatch(postLoginFields());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setAccessToken('12345678'));
+      });
     });
   });
 });
