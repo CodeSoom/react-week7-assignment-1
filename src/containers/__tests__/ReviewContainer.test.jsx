@@ -33,5 +33,15 @@ describe('ReviewContainer', () => {
         payload: { name: 'description', value: '그만큼 맜있다는 거지' },
       });
     });
+
+    it('submits input fields values', () => {
+      const { getByRole } = render(
+        <ReviewContainer />,
+      );
+
+      fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
+
+      expect(dispatch).toHaveBeenCalled();
+    });
   });
 });
