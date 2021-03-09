@@ -22,8 +22,15 @@ describe('LoginFormContainer', () => {
     const passwordInput = getByLabelText('password');
 
     fireEvent.change(emailInput, { target: { value: 'tester@example.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'test' } });
+    expect(dispatch).toHaveBeenCalledWith({
+      type: 'changeLoginFields',
+      payload: { name: 'email', value: 'tester@example.com' },
+    });
 
-    expect(dispatch).toHaveBeenCalledTimes(2);
+    fireEvent.change(passwordInput, { target: { value: 'test' } });
+    expect(dispatch).toHaveBeenCalledWith({
+      type: 'changeLoginFields',
+      payload: { name: 'password', value: 'test' },
+    });
   });
 });
