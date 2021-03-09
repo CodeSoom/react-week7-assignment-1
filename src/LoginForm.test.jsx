@@ -12,8 +12,12 @@ describe('LoginForm', () => {
     jest.clearAllMocks();
   });
 
+  const email = '';
+  const password = '';
+
   const renderLoginForm = () => render((
     <LoginForm
+      fields={{ email, password }}
       onChange={handeChange}
       onSubmit={handleSubmit}
     />
