@@ -9,5 +9,7 @@ describe('LoginPage', () => {
     const { container } = render(<LoginPage />);
 
     expect(container).toHaveTextContent('Log In');
+    expect(container).toHaveTextContent('E-mail');
+    expect(container).toHaveTextContent('Password');
   });
 });
