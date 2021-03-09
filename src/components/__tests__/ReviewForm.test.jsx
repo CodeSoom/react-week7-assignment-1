@@ -12,7 +12,7 @@ describe('ReviewForm', () => {
     const reviewInput = getByLabelText('리뷰');
 
     expect(scoreInput).toHaveAttribute('name', 'score');
-    expect(reviewInput).toHaveAttribute('name', 'review');
+    expect(reviewInput).toHaveAttribute('name', 'description');
 
     expect(scoreInput).toHaveAttribute('type', 'number');
     expect(reviewInput).toHaveAttribute('type', 'text');
