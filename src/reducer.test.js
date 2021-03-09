@@ -9,6 +9,7 @@ import {
   selectCategory,
   changeLoginFields,
   setAccessToken,
+  deleteAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -149,6 +150,18 @@ describe('reducer', () => {
       const { accessToken } = reducer(initialState, setAccessToken('12345678'));
 
       expect(accessToken).toEqual('12345678');
+    });
+  });
+
+  describe('deleteAccessToken', () => {
+    it('delete accessToken', () => {
+      const initialState = {
+        accessToken: '12345678',
+      };
+
+      const { accessToken } = reducer(initialState, deleteAccessToken());
+
+      expect(accessToken).toBeNull();
     });
   });
 });
