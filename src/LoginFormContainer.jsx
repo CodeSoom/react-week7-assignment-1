@@ -23,12 +23,16 @@ export default function LoginFormContainer() {
   }
 
   const { email, password } = useSelector(get('loginFields'));
+  const accessToken = useSelector(get('accessToken'));
 
   return (
-    <LoginForm
-      fields={{ email, password }}
-      onChange={handleChange}
-      onClick={handleClick}
-    />
+    <>
+      <LoginForm
+        fields={{ email, password }}
+        onChange={handleChange}
+        onClick={handleClick}
+      />
+      { accessToken ? <p>로그인 되었습니다.</p> : <p>로그인 해주세요.</p>}
+    </>
   );
 }

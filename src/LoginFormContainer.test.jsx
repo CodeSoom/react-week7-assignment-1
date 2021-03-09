@@ -14,51 +14,49 @@ describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
-    dispatch.mockClear();
+    jest.clearAllMocks();
 
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      loginFields: given.loginFields,
+      accessToken: given.accessToken,
+      loginFields: {
+        email: '',
+        password: '',
+      },
     }));
   });
 
-  given('loginFields', () => ({
-    email: '',
-    password: '',
-    accessToken: '',
-  }));
+  context('without login', () => {
+    given('accessToken', () => '');
 
-  it('renders login form', () => {
-    const { queryByLabelText, getByText } = render(<LoginFormContainer />);
+    it('renders login form', () => {
+      const { queryByLabelText, getByText } = render(<LoginFormContainer />);
 
-    expect(queryByLabelText('Email')).not.toBeNull();
-    expect(queryByLabelText('Password')).not.toBeNull();
+      expect(queryByLabelText('Email')).not.toBeNull();
+      expect(queryByLabelText('Password')).not.toBeNull();
 
-    fireEvent.click(getByText('Log In'));
+      fireEvent.click(getByText('Log In'));
 
-    expect(dispatch).toBeCalled();
-  });
-
-  it('listens to input change events', () => {
-    const { getByLabelText } = render(<LoginFormContainer />);
-
-    fireEvent.change(getByLabelText('Email'), {
-      target: { name: 'email', value: 'test@test.com' },
+      expect(dispatch).toBeCalled();
     });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: { name: 'email', value: 'test@test.com' },
+    it('listens to input change events', () => {
+      const { getByLabelText } = render(<LoginFormContainer />);
+
+      fireEvent.change(getByLabelText('Email'), {
+        target: { name: 'email', value: 'test@test.com' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: { name: 'email', value: 'test@test.com' },
+      });
     });
   });
 
   context('with login', () => {
-    given('loginFields', () => ({
-      email: 'with',
-      password: '',
-      accessToken: 'TOKEN',
-    }));
+    given('accessToken', () => 'TOKEN');
 
     it('renders logged on status message', () => {
       const { container } = render(<LoginFormContainer />);
