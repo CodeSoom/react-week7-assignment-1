@@ -70,6 +70,16 @@ describe('App', () => {
     });
   });
 
+  context('with path /login', () => {
+    it('renders the log in page', () => {
+      const { container, getByLabelText } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
+      expect(getByLabelText('E-Mail')).not.toBeUndefined();
+      expect(getByLabelText('Password')).not.toBeUndefined();
+    });
+  });
+
   context('with invalid path', () => {
     it('renders the not found page', () => {
       const { container } = renderApp({ path: '/xxx' });
