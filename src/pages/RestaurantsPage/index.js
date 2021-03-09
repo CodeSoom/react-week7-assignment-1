@@ -1,3 +1,1 @@
-import RestaurantsPage from './RestaurantsPage';
-
-export default RestaurantsPage;
+export { default } from './RestaurantsPage';
