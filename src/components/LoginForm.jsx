@@ -11,6 +11,8 @@ export default function LoginForm() {
         password
       </label>
       <input type="password" id="password" />
+
+      <button>Log In</button>
     </form>
   );
 }
