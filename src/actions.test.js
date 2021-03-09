@@ -95,7 +95,7 @@ describe('actions', () => {
       store = mockStore({});
     });
 
-    it('dispatchs setRestaurant', async () => {
+    it('runs setRestaurant', async () => {
       await store.dispatch(loadRestaurant({ restaurantId: 1 }));
 
       const actions = store.getActions();
@@ -109,7 +109,7 @@ describe('actions', () => {
     beforeEach(() => {
       store = mockStore({});
     });
-    it('change loginFileds', () => {
+    it('runs changeLoginFileds', () => {
       store.dispatch(
         changeLoginFields({ name: 'email', value: 'tester@example.com' }),
       );
@@ -135,7 +135,7 @@ describe('actions', () => {
         });
       });
 
-      it("don't dispatch", async () => {
+      it("does'nt run any actions", async () => {
         await store.dispatch(postLoginFields());
 
         const actions = store.getActions();
@@ -154,7 +154,7 @@ describe('actions', () => {
         });
       });
 
-      it('dispatch setAccessToken', async () => {
+      it('runs setAccessToken', async () => {
         await store.dispatch(postLoginFields());
 
         const actions = store.getActions();
@@ -171,7 +171,7 @@ describe('actions', () => {
       });
     });
 
-    it('delete accessToken', () => {
+    it('runs deleteAccessToken', () => {
       store.dispatch(deleteAccessToken());
 
       const actions = store.getActions();
