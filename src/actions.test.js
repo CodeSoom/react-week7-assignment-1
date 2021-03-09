@@ -13,6 +13,7 @@ import {
   changeLoginFields,
   postLoginFields,
   setAccessToken,
+  deleteAccessToken,
 } from './actions';
 
 const middlewares = [thunk];
@@ -159,6 +160,24 @@ describe('actions', () => {
         const actions = store.getActions();
 
         expect(actions[0]).toEqual(setAccessToken('12345678'));
+      });
+    });
+  });
+
+  describe('deleteAccessToken', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: '12345678',
+      });
+    });
+
+    it('delete accessToken', () => {
+      store.dispatch(deleteAccessToken());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'deleteAccessToken',
       });
     });
   });
