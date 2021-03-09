@@ -14,7 +14,13 @@ import {
   NotFoundPage,
 } from '../pages';
 
-// 전략:
+/*
+전략: Draft v.0.1
+1. 로그인 페이지 구현
+2. 로그아웃 구현
+3. 리뷰 목록 구현
+4. 리뷰 평점/내용 등록 구현
+*/
 
 export default function App() {
   return (
