@@ -17,11 +17,11 @@ describe('LoginFormContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
   });
 
-  const renderLoginFormContainer = () => render(
+  const renderLoginFormContainer = () => render((
     <MemoryRouter>
       <LoginFormContainer />
-    </MemoryRouter>,
-  );
+    </MemoryRouter>
+  ));
 
   it('renders input controls', () => {
     const { getByLabelText } = renderLoginFormContainer();
@@ -33,7 +33,7 @@ describe('LoginFormContainer', () => {
   it('renders login button and listens click event', () => {
     const { getByText } = renderLoginFormContainer();
 
-    fireEvent.click(getByText(/Log In/));
+    fireEvent.click(getByText('Log In'));
 
     expect(dispatch).toBeCalled();
   });
