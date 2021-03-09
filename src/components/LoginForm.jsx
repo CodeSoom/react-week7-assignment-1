@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LoginForm({ onChange }) {
+export default function LoginForm({ onChange, loginFields: { email, password } }) {
   return (
     <form>
       <label htmlFor="email">
@@ -11,6 +11,7 @@ export default function LoginForm({ onChange }) {
         id="email"
         name="email"
         onChange={onChange}
+        value={email}
       />
       <label htmlFor="password">
         password
@@ -20,6 +21,7 @@ export default function LoginForm({ onChange }) {
         id="password"
         name="password"
         onChange={onChange}
+        value={password}
       />
 
       <button type="submit">Log In</button>
