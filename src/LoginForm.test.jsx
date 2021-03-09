@@ -5,11 +5,26 @@ import { fireEvent, render } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  it('renders input controls', () => {
-    const { getByLabelText } = render(<LoginForm />);
+  it('renders input controls and listens change events', () => {
+    const handleChange = jest.fn();
+    const { getByLabelText } = render(<LoginForm onChange={handleChange} />);
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    const controls = [
+      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
+      { label: 'Password', name: 'password', value: 'test' },
+    ];
+
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
+
+      expect(input).not.toBeNull();
+
+      fireEvent.change(getByLabelText(label), {
+        target: { value },
+      });
+
+      expect(handleChange).toBeCalledWith({ name, value });
+    });
   });
 
   it('renders "Log In" button', () => {
