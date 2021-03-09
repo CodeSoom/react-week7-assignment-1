@@ -10,6 +10,7 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  changeLoginFields,
 } from './actions';
 
 const middlewares = [thunk];
@@ -60,7 +61,7 @@ describe('actions', () => {
         });
       });
 
-      it('does\'nt run any actions', async () => {
+      it("does'nt run any actions", async () => {
         await store.dispatch(loadRestaurants());
 
         const actions = store.getActions();
@@ -76,7 +77,7 @@ describe('actions', () => {
         });
       });
 
-      it('does\'nt run any actions', async () => {
+      it("does'nt run any actions", async () => {
         await store.dispatch(loadRestaurants());
 
         const actions = store.getActions();
@@ -98,6 +99,28 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('changeLoginFields', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+    it('change loginFileds', () => {
+      store.dispatch(
+        changeLoginFields({ name: 'email', value: 'tester@example.com' }),
+      );
+      store.dispatch(changeLoginFields({ name: 'password', value: 'test' }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(
+        changeLoginFields({ name: 'email', value: 'tester@example.com' }),
+      );
+
+      expect(actions[1]).toEqual(
+        changeLoginFields({ name: 'password', value: 'test' }),
+      );
     });
   });
 });
