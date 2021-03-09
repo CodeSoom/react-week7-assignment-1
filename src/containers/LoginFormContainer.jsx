@@ -6,10 +6,12 @@ import LoginForm from '@components/LoginForm';
 
 import { changeLoginFields, postLoginFields } from 'src/actions';
 
+import { get } from 'src/utils';
+
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  const loginFields = useSelector((state) => state.loginFields);
+  const loginFields = useSelector(get('loginFields'));
 
   function handleChange({ target: { name, value } }) {
     dispatch(changeLoginFields({ name, value }));
