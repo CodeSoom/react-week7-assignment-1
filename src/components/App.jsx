@@ -8,6 +8,7 @@ import {
 
 import {
   HomePage,
+  LogInPage,
   AboutPage,
   RestaurantsPage,
   RestaurantPage,
@@ -22,30 +23,6 @@ import {
 4. 리뷰 평점/내용 등록 구현
 */
 
-function logInPage() {
-  return (
-    <div>
-      <h1>Log In</h1>
-      <form>
-        <label htmlFor="user-email">
-          E-Mail
-        </label>
-        <input
-          type="email"
-          id="user-email"
-        />
-        <label htmlFor="user-password">
-          Password
-        </label>
-        <input
-          type="email"
-          id="user-password"
-        />
-      </form>
-    </div>
-  );
-}
-
 export default function App() {
   return (
     <div>
@@ -56,7 +33,7 @@ export default function App() {
       </header>
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/login" component={logInPage} />
+        <Route path="/login" component={LogInPage} />
         <Route path="/about" component={AboutPage} />
         <Route exact path="/restaurants" component={RestaurantsPage} />
         <Route path="/restaurants/:id" component={RestaurantPage} />
