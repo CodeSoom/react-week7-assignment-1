@@ -11,4 +11,10 @@ describe('LoginForm', () => {
     expect(getByLabelText('email')).toBeInTheDocument();
     expect(getByLabelText('password')).toBeInTheDocument();
   });
+
+  it('renders "Log In" button', () => {
+    const { getByRole } = render(<LoginForm />);
+
+    expect(getByRole('button', { name: 'Log In' })).toBeInTheDocument();
+  });
 });
