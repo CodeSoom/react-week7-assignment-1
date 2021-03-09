@@ -43,7 +43,7 @@ describe('LoginFormContainer', () => {
     const { getByLabelText } = renderLoginFormContainer();
 
     fireEvent.change(getByLabelText('Email'), {
-      target: { value: 'test@test.com' },
+      target: { name: 'email', value: 'test@test.com' },
     });
 
     expect(dispatch).toBeCalledWith({

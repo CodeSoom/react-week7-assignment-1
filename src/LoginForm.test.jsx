@@ -57,7 +57,7 @@ describe('LoginForm', () => {
       expect(getByLabelText(label).value).toBe(origin);
 
       fireEvent.change(getByLabelText(label), {
-        target: { value },
+        target: { name, value },
       });
 
       expect(handleChange).toBeCalledWith({ name, value });
