@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function ReviewForm({ onChange }) {
+export default function ReviewForm({ onChange, onSubmit }) {
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <label htmlFor="score">평점</label>
       <input
         type="number"
