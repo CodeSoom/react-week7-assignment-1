@@ -6,6 +6,7 @@ import LoginForm from '@components/LoginForm';
 
 describe('LoginForm', () => {
   const onChange = jest.fn();
+  const onSubmit = jest.fn();
 
   const loginFields = { email: 'tester@example.com', password: 'test' };
 
@@ -13,6 +14,7 @@ describe('LoginForm', () => {
     const { getByLabelText } = render(
       <LoginForm
         onChange={onChange}
+        onSubmit={onSubmit}
         loginFields={loginFields}
       />,
     );
@@ -37,6 +39,7 @@ describe('LoginForm', () => {
     const { getByRole } = render(
       <LoginForm
         onChange={onChange}
+        onSubmit={onSubmit}
         loginFields={loginFields}
       />,
     );
