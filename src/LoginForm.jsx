@@ -9,6 +9,8 @@ export default function LoginForm() {
 
       <label htmlFor="login-password">Password</label>
       <input type="password" id="login-password" />
+
+      <button type="button">Login</button>
     </>
   );
 }
