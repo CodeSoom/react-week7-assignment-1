@@ -1,6 +1,10 @@
 import React from 'react';
 
 export default function LoginFormContainer() {
+  function handleClick() {
+    // dispatch
+  }
+
   return (
     <div>
       <div>
@@ -21,6 +25,12 @@ export default function LoginFormContainer() {
           id="login-password"
         />
       </div>
+      <button
+        type="button"
+        onClick={handleClick}
+      >
+        Log in
+      </button>
     </div>
   );
 }

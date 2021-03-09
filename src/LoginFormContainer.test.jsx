@@ -33,7 +33,7 @@ describe('LoginFormContainer', () => {
   it('renders login button and listens click event', () => {
     const { getByText } = renderLoginFormContainer();
 
-    fireEvent.click(getByText('Log In'));
+    fireEvent.click(getByText(/Log In/));
 
     expect(dispatch).toBeCalled();
   });
