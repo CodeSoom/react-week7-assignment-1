@@ -15,9 +15,15 @@ export default function LoginFormContainer() {
     dispatch(changeLoginFields({ name, value }));
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    dispatch();
+  }
+
   return (
     <LoginForm
       onChange={handleChange}
+      onSubmit={handleSubmit}
       loginFields={loginFields}
     />
   );
