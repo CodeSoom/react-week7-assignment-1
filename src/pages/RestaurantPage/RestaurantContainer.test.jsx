@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import RestaurantContainer from '../RestaurantContainer';
+import RestaurantContainer from './RestaurantContainer';
 
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();

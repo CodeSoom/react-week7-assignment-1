@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
-import MenuItems from '../MenuItems';
+import MenuItems from './MenuItems';
 
 describe('MenuItems', () => {
   context('with menu items', () => {

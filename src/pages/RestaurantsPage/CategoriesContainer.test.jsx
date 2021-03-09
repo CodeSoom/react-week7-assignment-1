@@ -4,7 +4,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import CategoriesContainer from '../CategoriesContainer';
+import CategoriesContainer from './CategoriesContainer';
 
 describe('CategoriesContainer', () => {
   const dispatch = jest.fn();

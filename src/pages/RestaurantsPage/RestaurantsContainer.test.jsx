@@ -4,7 +4,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useSelector } from 'react-redux';
 
-import RestaurantsContainer from '../RestaurantsContainer';
+import RestaurantsContainer from './RestaurantsContainer';
 
 test('RestaurantsContainer', () => {
   useSelector.mockImplementation((selector) => selector({
