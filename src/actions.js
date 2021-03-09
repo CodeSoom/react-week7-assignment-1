@@ -34,10 +34,10 @@ export function setRestaurant(restaurant) {
   };
 }
 
-export function setAccessToken(accesesToken) {
+export function setAccessToken(accessToken) {
   return {
-    type: 'setAccesesToken',
-    payload: { accesesToken },
+    type: 'setAccessToken',
+    payload: { accessToken },
   };
 }
 
