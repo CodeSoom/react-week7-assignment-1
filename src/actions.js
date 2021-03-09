@@ -87,5 +87,5 @@ export function loadRestaurant({ restaurantId }) {
 }
 
 export function requestLogin() {
-  // TODO: write somthing
+  // TODO: make this
 }

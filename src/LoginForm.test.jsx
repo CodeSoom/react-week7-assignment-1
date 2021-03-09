@@ -6,14 +6,16 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const handleSubmit = jest.fn();
+  const handeChange = jest.fn();
 
   beforeEach(() => {
-    handleSubmit.mockClear();
+    jest.clearAllMocks();
   });
 
   const renderLoginForm = () => render((
     <LoginForm
-      onClick={handleSubmit}
+      onChange={handeChange}
+      onSubmit={handleSubmit}
     />
   ));
 
@@ -22,9 +24,22 @@ describe('LoginForm', () => {
 
     expect(getByLabelText('E-mail')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
+
+    fireEvent.change(getByLabelText('E-mail'), {
+      target: { value: 'test@test.com' },
+    });
+
+    expect(handeChange).toBeCalled();
   });
 
-  it('renders login button and listens click event', () => {
+  it('listens change event', () => {
+    const { getByLabelText } = renderLoginForm();
+
+    expect(getByLabelText('E-mail')).not.toBeNull();
+    expect(getByLabelText('Password')).not.toBeNull();
+  });
+
+  it('renders login button', () => {
     const { getByText } = renderLoginForm();
 
     fireEvent.click(getByText('Log In'));
