@@ -9,7 +9,7 @@ import {
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import RestaurantsPage from './RestaurantsPage';
-import RestaurantPage from './RestaurantPage';
+import RestaurantPage from './pages/RestaurantPage/RestaurantPage';
 import NotFoundPage from './NotFoundPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 
