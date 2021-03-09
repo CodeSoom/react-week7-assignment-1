@@ -86,6 +86,13 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
+export function changeLoginField({ name, value }) {
+  return {
+    type: 'changeLoginField',
+    payload: { name, value },
+  }
+}
+
 export function requestLogin() {
   return async (dispatch, getState) => {
 
