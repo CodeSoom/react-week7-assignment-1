@@ -5,7 +5,7 @@ export default function ReviewList({ reviews }) {
     <>
       <h3>리뷰</h3>
       <ul>
-        {reviews.map(({
+        {reviews?.map(({
           id, restaurantId, name, score, description,
         }) => (
           <li key={`${restaurantId}-${id}`}>
