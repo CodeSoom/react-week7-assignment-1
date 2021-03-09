@@ -5,6 +5,7 @@ const initialState = {
     email: '',
     password: '',
   },
+  accessToken: '',
   regions: [],
   categories: [],
   restaurants: [],

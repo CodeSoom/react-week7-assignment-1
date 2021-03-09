@@ -8,8 +8,9 @@ import LoginForm from './LoginForm';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
-  const { userLoginInputs } = useSelector((state) => ({
+  const { userLoginInputs, accessToken } = useSelector((state) => ({
     userLoginInputs: state.userLoginInputs,
+    accessToken: state.accessToken,
   }));
 
   function handleChange({ name, value }) {
@@ -21,10 +22,13 @@ export default function LoginFormContainer() {
   }
 
   return (
-    <LoginForm
-      userLoginInputs={userLoginInputs}
-      onChange={handleChange}
-      onSubmit={handleClick}
-    />
+    <>
+      <p>{accessToken}</p>
+      <LoginForm
+        userLoginInputs={userLoginInputs}
+        onChange={handleChange}
+        onSubmit={handleClick}
+      />
+    </>
   );
 }

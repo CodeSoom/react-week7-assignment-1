@@ -18,6 +18,7 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
+      accessToken: '',
       regions: [],
       categories: [],
       restaurants: [],
