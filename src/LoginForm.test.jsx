@@ -19,17 +19,34 @@ describe('LoginForm', () => {
     />
   ));
 
-  it('renders input controls', () => {
+  it('renders "e-mail" input controls', () => {
     const { getByLabelText } = renderLoginForm();
 
     expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
 
     fireEvent.change(getByLabelText('E-mail'), {
       target: { value: 'test@test.com' },
     });
 
-    expect(handeChange).toBeCalled();
+    expect(handeChange).toBeCalledWith({
+      name: 'email',
+      value: 'test@test.com',
+    });
+  });
+
+  it('renders "password" input controls', () => {
+    const { getByLabelText } = renderLoginForm();
+
+    expect(getByLabelText('Password')).not.toBeNull();
+
+    fireEvent.change(getByLabelText('Password'), {
+      target: { value: '1234567*' },
+    });
+
+    expect(handeChange).toBeCalledWith({
+      name: 'password',
+      value: '1234567*',
+    });
   });
 
   it('listens change event', () => {
