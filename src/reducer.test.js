@@ -8,6 +8,7 @@ import {
   selectRegion,
   selectCategory,
   updateUserLoginInputs,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -128,6 +129,16 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('AccessToken을 저장한다.', () => {
+      const initialState = { accessToken: '' };
+
+      const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
+
+      expect(state.accessToken).toEqual('ACCESS_TOKEN');
     });
   });
 
