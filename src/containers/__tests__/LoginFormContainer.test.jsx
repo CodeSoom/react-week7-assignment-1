@@ -17,6 +17,7 @@ describe('LoginFormContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) => selector({ loginFields: given.loginFields }));
   });
+
   it('change input fields value', () => {
     const { getByLabelText } = render(
       <LoginFormContainer />,
@@ -38,5 +39,15 @@ describe('LoginFormContainer', () => {
       type: 'changeLoginFields',
       payload: { name: 'password', value: 'test' },
     });
+  });
+
+  it('submit input fields values', () => {
+    const { getByRole } = render(
+      <LoginFormContainer />,
+    );
+
+    fireEvent.click(getByRole('button', { name: 'Log In' }));
+
+    expect(dispatch).toHaveBeenCalled();
   });
 });
