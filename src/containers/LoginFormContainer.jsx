@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from '@components/LoginForm';
 
-import { changeLoginFields } from 'src/actions';
+import { changeLoginFields, postLoginFields } from 'src/actions';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ export default function LoginFormContainer() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    dispatch();
+    dispatch(postLoginFields());
   }
 
   return (
