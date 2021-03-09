@@ -6,20 +6,20 @@ import LoginForm from '@components/LoginForm';
 
 import { changeLoginFields, postLoginFields } from 'src/actions';
 
-import { get } from 'src/utils';
-
 import LogoutContainer from './LogoutContainer';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  const accessToken = useSelector(get('accessToken'));
+  const { accessToken, loginFields } = useSelector((state) => (
+    {
+      accessToken: state.accessToken,
+      loginFields: state.loginFields,
+    }));
 
   if (accessToken) {
     return <LogoutContainer />;
   }
-
-  const loginFields = useSelector(get('loginFields'));
 
   function handleChange({ target: { name, value } }) {
     dispatch(changeLoginFields({ name, value }));
