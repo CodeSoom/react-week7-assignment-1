@@ -29,10 +29,10 @@ describe('LoginFormContainer', () => {
   }
 
   it('renders login form', () => {
-    const { getByLabelText, getByText } = renderLoginFormContainer();
+    const { queryByLabelText, getByText } = renderLoginFormContainer();
 
-    expect(getByLabelText('Email')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    expect(queryByLabelText('Email')).not.toBeNull();
+    expect(queryByLabelText('Password')).not.toBeNull();
 
     fireEvent.click(getByText('Log In'));
 
