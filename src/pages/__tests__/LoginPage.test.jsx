@@ -9,12 +9,10 @@ import LoginPage from '@pages/LoginPage';
 describe('LoginPage', () => {
   const dispatch = jest.fn();
 
-  given('loginFields', () => ({ email: 'tester@example.com', password: 'test' }));
-
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) => selector({ loginFields: given.loginFields }));
+    useSelector.mockImplementation((selector) => selector({ loginFields: { email: 'tester@example.com', password: 'test' } }));
   });
 
   it('renders title', () => {
