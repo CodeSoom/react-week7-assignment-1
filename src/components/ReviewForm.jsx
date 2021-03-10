@@ -5,7 +5,7 @@ export default function ReviewForm({ onChange, onSubmit, reviewFields }) {
 
   return (
     <form onSubmit={onSubmit}>
-      <label htmlFor="score">평점</label>
+      <label htmlFor="score">score</label>
       <input
         type="number"
         id="score"
@@ -13,7 +13,7 @@ export default function ReviewForm({ onChange, onSubmit, reviewFields }) {
         onChange={onChange}
         value={score}
       />
-      <label htmlFor="review">리뷰</label>
+      <label htmlFor="review">description</label>
       <input
         type="text"
         id="review"
