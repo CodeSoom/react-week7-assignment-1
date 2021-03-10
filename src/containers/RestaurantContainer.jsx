@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import RestaurantDetail from '@components/RestaurantDetail';
 import ReviewForm from '@components/ReviewForm';
 
-import { loadRestaurant } from '../actions';
+import { loadRestaurant, postReviewFields } from '../actions';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ export default function RestaurantContainer({ restaurantId }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    dispatch();
+    dispatch(postReviewFields());
   }
 
   return (
