@@ -5,6 +5,10 @@ const initialState = {
     email: '',
     password: '',
   },
+  review: {
+    score: '',
+    description: '',
+  },
   accessToken: '',
   regions: [],
   categories: [],
@@ -20,6 +24,16 @@ const reducers = {
       ...state,
       userLoginInputs: {
         ...state.userLoginInputs,
+        [name]: value,
+      },
+    };
+  },
+
+  updateReview(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      review: {
+        ...state.review,
         [name]: value,
       },
     };
