@@ -42,7 +42,7 @@ export async function postLogin({ email, password }) {
   return data;
 }
 
-export async function postReviw({
+export async function postReview({
   score, description, accessToken, restaurantId,
 }) {
   const url = `${baseUrl}/restaurants/${restaurantId}/reviews`;
