@@ -25,27 +25,39 @@ describe('LoginContainer', () => {
     expect(queryByLabelText('Password')).not.toBeNull();
   });
 
+  it('listens change event', () => {
+    const { queryByLabelText } = render(<LoginContainer />);
+
+    const controls = [{
+      label: 'E-mail',
+      name: 'email',
+      value: 'test@email.com',
+    }, {
+      label: 'Password',
+      name: 'password',
+      value: '1234',
+    }];
+
+    controls.forEach(({ label, name, value }) => {
+      fireEvent.change(queryByLabelText(label), {
+        target: {
+          value,
+        },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginFields',
+        payload: {
+          value,
+          name,
+        },
+      });
+    });
+  });
+
   it('renders "Log In" button', () => {
     const { queryByText } = render(<LoginContainer />);
 
     expect(queryByText('Log In')).not.toBeNull();
-  });
-
-  it('listens email input change event', () => {
-    const { queryByLabelText } = render(<LoginContainer />);
-
-    fireEvent.change(queryByLabelText('E-mail'), {
-      target: {
-        value: 'test@email.com',
-      },
-    });
-
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginFields',
-      payload: {
-        value: 'test@email.com',
-        name: 'email',
-      },
-    });
   });
 });
