@@ -1,11 +1,11 @@
 import React from 'react';
 
 export default function ReviewForm({
-  userReviewInputs,
+  review,
   onChange,
   onSubmit,
 }) {
-  const { score, description } = userReviewInputs;
+  const { score, description } = review;
 
   function handleChange(event) {
     const { target: { name, value } } = event;

@@ -31,7 +31,7 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail restaurant={restaurant} />
       <ReviewForm
-        userReviewInputs={{ score: '4', description: '맛있다!' }}
+        review={{ score: '4', description: '맛있다!' }}
         onChange={dispatch}
         onSubmit={dispatch}
       />
