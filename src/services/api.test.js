@@ -71,12 +71,14 @@ describe('api', () => {
 
   describe('postLogin', () => {
     beforeEach(() => {
-      mockFetch('ACCESS_TOKEN');
+      mockFetch({
+        accessToken: 'ACCESS_TOKEN',
+      });
     });
 
     it('returns restaurants', async () => {
       const accessToken = await postLogin({
-        email: 'tester@exzmple.com',
+        email: 'tester@example.com',
         password: 'test',
       });
 
