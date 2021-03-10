@@ -178,7 +178,7 @@ describe('actions', () => {
     beforeEach(() => {
       store = mockStore({});
     });
-    it('runs changeLoginFileds', () => {
+    it('runs changeLoginFields', () => {
       store.dispatch(
         changeLoginFields({ name: 'email', value: 'tester@example.com' }),
       );
