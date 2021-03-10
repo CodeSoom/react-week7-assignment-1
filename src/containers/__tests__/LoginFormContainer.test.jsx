@@ -23,9 +23,9 @@ describe('LoginFormContainer', () => {
       }));
     });
 
-    it('change input fields value', () => {
+    it('changes input fields value', () => {
       const { getByLabelText } = render(
-        <LoginFormContainer />,
+        <LoginFormContainer />
       );
 
       const emailInput = getByLabelText('email');
@@ -46,9 +46,9 @@ describe('LoginFormContainer', () => {
       });
     });
 
-    it('submit input fields values', () => {
+    it('submits input fields values', () => {
       const { getByRole } = render(
-        <LoginFormContainer />,
+        <LoginFormContainer />
       );
 
       fireEvent.click(getByRole('button', { name: 'Log In' }));
@@ -71,7 +71,7 @@ describe('LoginFormContainer', () => {
 
     it('renders "Log out" button ', () => {
       const { getByRole } = render(
-        <LoginFormContainer />,
+        <LoginFormContainer />
       );
 
       expect(getByRole('button', { name: 'Log out' })).toBeInTheDocument();
