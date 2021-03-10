@@ -21,9 +21,17 @@ export default function LoginFormContainer() {
     dispatch(requestLogin());
   }
 
+  function handleLogout() {
+  }
+
   if (accessToken) {
     return (
-      <button>Log out</button>
+      <button
+        type="button"
+        onClick={handleLogout}
+      >
+        Log out
+      </button>
     );
   }
 
