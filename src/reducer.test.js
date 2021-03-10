@@ -10,6 +10,7 @@ import {
   changeLoginFields,
   setAccessToken,
   deleteAccessToken,
+  changeReviewFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -19,6 +20,7 @@ describe('reducer', () => {
       categories: [],
       restaurants: [],
       restaurant: null,
+      reviewFields: { score: '', description: '' },
       selectedRegion: null,
       selectedCategory: null,
       loginFields: { email: '', password: '' },
@@ -89,6 +91,29 @@ describe('reducer', () => {
     });
   });
 
+  describe('changeReviewFields', () => {
+    it('changes review Fields', () => {
+      const initialState = {
+        reviewFields: { score: 3, description: '' },
+      };
+
+      const state = reducer(
+        initialState,
+        changeReviewFields({
+          name: 'description',
+          value: '그만큼 맜있으시다는 거지',
+        })
+      );
+
+      const {
+        reviewFields: { score, description },
+      } = state;
+
+      expect(score).toBe(3);
+      expect(description).toBe('그만큼 맜있으시다는 거지');
+    });
+  });
+
   describe('selectRegion', () => {
     it('changes selected region', () => {
       const initialState = {
@@ -129,7 +154,7 @@ describe('reducer', () => {
 
       const state = reducer(
         initialState,
-        changeLoginFields({ name: 'email', value: 'tester@example.com' }),
+        changeLoginFields({ name: 'email', value: 'tester@example.com' })
       );
 
       const {
