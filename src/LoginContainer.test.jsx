@@ -15,4 +15,10 @@ describe('LoginContainer', () => {
 
     expect(queryByLabelText('Password')).not.toBeNull();
   });
+
+  it('renders "Log In" button', () => {
+    const { queryByText } = render(<LoginContainer />);
+
+    expect(queryByText('Log In')).not.toBeNull();
+  });
 });
