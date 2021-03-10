@@ -9,19 +9,23 @@ describe('LoginForm', () => {
   const handleChange = jest.fn();
 
   function renderLoginForm() {
-    return render(<LoginForm onChange={handleChange} />);
+    return render(<LoginForm
+      onChange={handleChange}
+      email="test@test.com"
+      password="1234"
+    />);
   }
 
   it('renders email input', () => {
     const { queryByLabelText } = renderLoginForm();
 
-    expect(queryByLabelText('E-mail')).not.toBeNull();
+    expect(queryByLabelText('E-mail').value).toBe('test@test.com');
   });
 
   it('renders password input', () => {
     const { queryByLabelText } = renderLoginForm();
 
-    expect(queryByLabelText('Password')).not.toBeNull();
+    expect(queryByLabelText('Password').value).toBe('1234');
   });
 
   it('renders "Log In" button', () => {
