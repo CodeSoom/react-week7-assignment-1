@@ -10,10 +10,10 @@ describe('ReviewForm', () => {
 
   const reviewInputs = [
     {
-      text: '평점', name: 'score', type: 'number', value: '3',
+      name: 'score', type: 'number', value: '3',
     },
     {
-      text: '리뷰', name: 'description', type: 'text', value: '그만큼 맜있다는 거지',
+      name: 'description', type: 'text', value: '그만큼 맜있다는 거지',
     },
   ];
 
@@ -31,12 +31,13 @@ describe('ReviewForm', () => {
     const { getByLabelText } = renderReviewForm();
 
     reviewInputs.forEach(({
-      text, name, type, value,
+      name, type, value,
     }) => {
-      expect(getByLabelText(text)).toHaveAttribute('name', name);
-      expect(getByLabelText(text)).toHaveAttribute('type', type);
-      expect(getByLabelText(text).value).toBe(reviewFields[name]);
-      fireEvent.change(getByLabelText(text), { target: { value } });
+      expect(getByLabelText(name)).toHaveAttribute('name', name);
+      expect(getByLabelText(name)).toHaveAttribute('type', type);
+      expect(getByLabelText(name).value).toBe(reviewFields[name]);
+
+      fireEvent.change(getByLabelText(name), { target: { value } });
       expect(onChange).toHaveBeenCalled();
     });
   });

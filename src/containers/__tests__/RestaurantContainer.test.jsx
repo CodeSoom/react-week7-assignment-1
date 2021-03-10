@@ -63,8 +63,8 @@ describe('RestaurantContainer', () => {
     it('changes input fields value', () => {
       const { getByLabelText } = renderRestaurantContainer();
 
-      const scoreInput = getByLabelText('평점');
-      const reviewInput = getByLabelText('리뷰');
+      const scoreInput = getByLabelText('score');
+      const reviewInput = getByLabelText('description');
 
       expect(scoreInput.value).toBe('1');
       fireEvent.change(scoreInput, { target: { value: '3' } });
