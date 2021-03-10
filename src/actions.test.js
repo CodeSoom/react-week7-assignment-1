@@ -6,6 +6,7 @@ import {
   loadInitialData,
   setRegions,
   setCategories,
+  setAccessToken,
   loadRestaurants,
   loadRestaurant,
   setRestaurants,
@@ -117,7 +118,7 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken({}));
+      expect(actions[0]).toEqual(setAccessToken('ACCESS_TOKEN'));
     });
   });
 });
