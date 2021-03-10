@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
 
 export function updateUserLoginInputs(name, value) {
@@ -122,10 +123,9 @@ export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const { accessToken, review: { score, description } } = getState();
 
-    await postLogin({
+    await postReview({
       accessToken, restaurantId, score, description,
     });
-
-    dispatch(loadRestaurant(restaurantId));
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }

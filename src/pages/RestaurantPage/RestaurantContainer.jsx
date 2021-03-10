@@ -8,6 +8,7 @@ import ReviewList from './ReviewList';
 
 import {
   loadRestaurant,
+  sendReview,
   updateReview,
 } from '../../actions';
 
@@ -35,7 +36,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   function handleSubmit() {
-    dispatch();
+    dispatch(sendReview({ restaurantId }));
   }
 
   return (
