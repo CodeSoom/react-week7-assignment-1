@@ -1,9 +1,13 @@
 import React from 'react';
 
-export default function LoginForm({ onChange }) {
+export default function LoginForm({ onChange, onClick }) {
   function handleChange(event) {
     const { target: { value } } = event;
     onChange({ value });
+  }
+
+  function handleClick() {
+    onClick();
   }
 
   return (
@@ -23,7 +27,12 @@ export default function LoginForm({ onChange }) {
         onChange={handleChange}
       />
 
-      <button type="button">Login</button>
+      <button
+        type="button"
+        onClick={handleClick}
+      >
+        Login
+      </button>
     </>
   );
 }

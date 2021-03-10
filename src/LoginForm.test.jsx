@@ -31,12 +31,12 @@ describe('LoginForm', () => {
   });
 
   it('로그인하는 버튼을 눌러 아이디와 비밀번호를 제출합니다.', () => {
-    const handleSubmit = jest.fn();
+    const handleClick = jest.fn();
 
-    const { queryByText } = render((<LoginForm onSubmit={handleSubmit} />));
+    const { queryByText } = render((<LoginForm onClick={handleClick} />));
 
     fireEvent.click(queryByText(/Login/));
 
-    expect(handleSubmit).toBeCalled();
+    expect(handleClick).toBeCalled();
   });
 });
