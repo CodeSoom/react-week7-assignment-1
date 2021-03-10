@@ -1,10 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import LoginForm from './LoginForm';
 
-export default function LoginContainer() {
-  function handleChange() {
+import { changeLoginFields } from './actions';
 
+export default function LoginContainer() {
+  const dispatch = useDispatch();
+
+  function handleChange({ value, name }) {
+    dispatch(changeLoginFields({ value, name }));
   }
 
   return (
