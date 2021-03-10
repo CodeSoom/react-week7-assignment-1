@@ -36,7 +36,7 @@ describe('ReviewContainer', () => {
 
     it('submits input fields values', () => {
       const { getByRole } = render(
-        <ReviewContainer />,
+        <ReviewContainer />
       );
 
       fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
