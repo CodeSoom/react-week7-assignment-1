@@ -21,6 +21,7 @@ export default function LoginContainer() {
           placeholder="password"
         />
       </div>
+      <button type="submit">Log In</button>
     </form>
   );
 }
