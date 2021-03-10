@@ -4,7 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
-  postReviw,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -97,7 +97,7 @@ describe('api', () => {
     });
 
     it('returns status 201', async () => {
-      const status = await postReviw({
+      const status = await postReview({
         score: '1',
         description: '무우야호!',
         accessToken: '12345678',

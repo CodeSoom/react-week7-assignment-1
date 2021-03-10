@@ -17,3 +17,7 @@ export async function fetchRestaurant() {
 export async function postLogin() {
   return { accessToken: '12345678' };
 }
+
+export async function postReview() {
+  return 201;
+}
