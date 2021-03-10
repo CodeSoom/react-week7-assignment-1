@@ -14,6 +14,7 @@ import {
   postLoginFields,
   setAccessToken,
   deleteAccessToken,
+  changeReviewFields,
 } from './actions';
 
 const middlewares = [thunk];
@@ -105,24 +106,52 @@ describe('actions', () => {
     });
   });
 
+  describe('changeReviewFields', () => {
+    beforeEach(() => {
+      store = mockStore({ reviewFiels: { score: null, description: null } });
+    });
+
+    it('runs changeReviewFields', () => {
+      store.dispatch(changeReviewFields({ name: 'score', value: '3' }));
+      store.dispatch(
+        changeReviewFields({
+          name: 'description',
+          value: '그만큼 맜있으시다는 거지',
+        })
+      );
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(
+        changeReviewFields({ name: 'score', value: '3' })
+      );
+      expect(actions[1]).toEqual(
+        changeReviewFields({
+          name: 'description',
+          value: '그만큼 맜있으시다는 거지',
+        })
+      );
+    });
+  });
+
   describe('changeLoginFields', () => {
     beforeEach(() => {
       store = mockStore({});
     });
     it('runs changeLoginFileds', () => {
       store.dispatch(
-        changeLoginFields({ name: 'email', value: 'tester@example.com' }),
+        changeLoginFields({ name: 'email', value: 'tester@example.com' })
       );
       store.dispatch(changeLoginFields({ name: 'password', value: 'test' }));
 
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(
-        changeLoginFields({ name: 'email', value: 'tester@example.com' }),
+        changeLoginFields({ name: 'email', value: 'tester@example.com' })
       );
 
       expect(actions[1]).toEqual(
-        changeLoginFields({ name: 'password', value: 'test' }),
+        changeLoginFields({ name: 'password', value: 'test' })
       );
     });
   });
