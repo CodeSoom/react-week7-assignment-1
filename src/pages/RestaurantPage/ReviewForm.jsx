@@ -28,8 +28,8 @@ export default function ReviewForm({
           name="description"
           onChange={onChange}
         />
-        <button type="button" onClick={onSubmit}>리뷰 남기기</button>
       </div>
+      <button type="button" onClick={onSubmit}>리뷰 남기기</button>
     </>
   );
 }

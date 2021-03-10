@@ -9,9 +9,9 @@ export default function ReviewList({ reviews }) {
           id, restaurantId, name, score, description,
         }) => (
           <li key={`${restaurantId}-${id}`}>
-            <p>{name}</p>
-            <p>{score}</p>
-            <p>{description}</p>
+            <div>{name}</div>
+            <div>{score}</div>
+            <div>{description}</div>
           </li>
         ))}
       </ul>

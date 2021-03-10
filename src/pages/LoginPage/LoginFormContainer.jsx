@@ -21,6 +21,12 @@ export default function LoginFormContainer() {
     dispatch(requestLogin());
   }
 
+  if (accessToken) {
+    return (
+      <button>Log out</button>
+    );
+  }
+
   return (
     <>
       <p>{accessToken}</p>
