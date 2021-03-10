@@ -10,6 +10,7 @@ import LoginFormContainer from '@containers/LoginFormContainer';
 
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
+
   given('loginFields', () => ({ email: '123@naver.com', password: '5678' }));
   given('accessToken', () => null);
 
@@ -24,9 +25,7 @@ describe('LoginFormContainer', () => {
     });
 
     it('changes input fields value', () => {
-      const { getByLabelText } = render(
-        <LoginFormContainer />
-      );
+      const { getByLabelText } = render(<LoginFormContainer />);
 
       const emailInput = getByLabelText('email');
       const passwordInput = getByLabelText('password');
@@ -47,9 +46,7 @@ describe('LoginFormContainer', () => {
     });
 
     it('submits input fields values', () => {
-      const { getByRole } = render(
-        <LoginFormContainer />
-      );
+      const { getByRole } = render(<LoginFormContainer />);
 
       fireEvent.click(getByRole('button', { name: 'Log In' }));
 
@@ -69,12 +66,16 @@ describe('LoginFormContainer', () => {
       }));
     });
 
-    it('renders "Log out" button ', () => {
-      const { getByRole } = render(
-        <LoginFormContainer />
-      );
+    it('deletes accessToken', () => {
+      const { getByRole } = render(<LoginFormContainer />);
 
-      expect(getByRole('button', { name: 'Log out' })).toBeInTheDocument();
+      const logoutButton = getByRole('button', { name: 'Log out' });
+
+      expect(logoutButton).toBeInTheDocument();
+
+      fireEvent.click(logoutButton);
+
+      expect(dispatch).toHaveBeenCalledWith({ type: 'deleteAccessToken' });
     });
   });
 });
