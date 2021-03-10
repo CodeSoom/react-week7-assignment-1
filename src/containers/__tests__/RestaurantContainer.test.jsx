@@ -19,12 +19,15 @@ describe('RestaurantContainer', () => {
     address: '서울시 강남구',
   }));
 
+  given('accessToken', () => null);
+
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      accessToken: given.accessToken,
     }));
   });
 
@@ -53,16 +56,9 @@ describe('RestaurantContainer', () => {
   });
 
   context('when logged in ', () => {
-    beforeEach(() => {
-      dispatch.mockClear();
-      useDispatch.mockImplementation(() => dispatch);
-      useSelector.mockImplementation((selector) => selector({
-        restaurant: given.restaurant,
-      }));
-    });
-
+    given('accessToken', () => '12345678');
     it('changes input fields value', () => {
-      const { getByLabelText } = render(<RestaurantContainer />);
+      const { getByLabelText } = renderRestaurantContainer();
 
       const scoreInput = getByLabelText('평점');
       const reviewInput = getByLabelText('리뷰');
@@ -81,10 +77,20 @@ describe('RestaurantContainer', () => {
     });
 
     it('submits input fields values', () => {
-      const { getByRole } = render(<RestaurantContainer />);
+      const { getByRole } = renderRestaurantContainer();
       fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
 
       expect(dispatch).toHaveBeenCalled();
+    });
+  });
+
+  context('when not logged in', () => {
+    it("doesn't render review form", () => {
+      const { queryByLabelText, queryByRole } = renderRestaurantContainer();
+
+      expect(queryByLabelText('평점')).toBeNull();
+      expect(queryByLabelText('리뷰')).toBeNull();
+      expect(queryByRole('button', { name: '리뷰 남기기' })).toBeNull();
     });
   });
 });
