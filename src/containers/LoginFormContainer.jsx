@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from '@components/LoginForm';
 
-import { changeLoginFields, postLoginFields } from 'src/actions';
-
-import LogoutContainer from './LogoutContainer';
+import { changeLoginFields, deleteAccessToken, postLoginFields } from 'src/actions';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
@@ -17,8 +15,14 @@ export default function LoginFormContainer() {
       loginFields: state.loginFields,
     }));
 
+  function handleClick() {
+    dispatch(deleteAccessToken());
+  }
+
   if (accessToken) {
-    return <LogoutContainer />;
+    return (
+      <button type="button" onClick={handleClick}>Log out</button>
+    );
   }
 
   function handleChange({ target: { name, value } }) {
