@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LoginForm({ onChange }) {
+export default function LoginForm({ onChange, email, password }) {
   function HandleChange(e) {
     const { target: { value, name } } = e;
 
@@ -15,6 +15,7 @@ export default function LoginForm({ onChange }) {
           type="email"
           name="email"
           id="input-email"
+          value={email}
           placeholder="email"
           onChange={HandleChange}
         />
@@ -25,6 +26,7 @@ export default function LoginForm({ onChange }) {
           type="password"
           name="password"
           id="input-password"
+          value={password}
           placeholder="password"
           onChange={HandleChange}
         />
