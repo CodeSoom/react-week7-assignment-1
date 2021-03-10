@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -124,5 +125,25 @@ export function postLoginFields() {
     const { accessToken } = await postLogin({ email, password });
 
     dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function postReviewFields() {
+  return async (dispatch, getState) => {
+    const {
+      reviewFields: { score, description },
+      accessToken,
+      restaurant: { id },
+    } = getState();
+
+    if (!score || !description) {
+      return;
+    }
+
+    await postReview({
+      score, description, accessToken, id,
+    });
+
+    dispatch(loadRestaurant(id));
   };
 }
