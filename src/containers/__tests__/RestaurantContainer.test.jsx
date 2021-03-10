@@ -21,6 +21,8 @@ describe('RestaurantContainer', () => {
 
   given('accessToken', () => null);
 
+  given('reviewFields', () => ({ score: '1', description: '그만큼 맜없다는 거지' }));
+
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
@@ -28,6 +30,7 @@ describe('RestaurantContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
       accessToken: given.accessToken,
+      reviewFields: given.reviewFields,
     }));
   });
 
@@ -63,12 +66,14 @@ describe('RestaurantContainer', () => {
       const scoreInput = getByLabelText('평점');
       const reviewInput = getByLabelText('리뷰');
 
+      expect(scoreInput.value).toBe('1');
       fireEvent.change(scoreInput, { target: { value: '3' } });
       expect(dispatch).toHaveBeenCalledWith({
         type: 'changeReviewFields',
         payload: { name: 'score', value: '3' },
       });
 
+      expect(reviewInput.value).toBe('그만큼 맜없다는 거지');
       fireEvent.change(reviewInput, { target: { value: '그만큼 맜있다는 거지' } });
       expect(dispatch).toHaveBeenCalledWith({
         type: 'changeReviewFields',
