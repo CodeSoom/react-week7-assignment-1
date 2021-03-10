@@ -101,6 +101,13 @@ export function changeLoginField({ name, value }) {
   };
 }
 
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: { name, value },
+  };
+}
+
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
@@ -109,4 +116,8 @@ export function requestLogin() {
 
     dispatch(setAccessToken(accessToken));
   };
+}
+
+export function saveReview() {
+  // TODO: post review
 }
