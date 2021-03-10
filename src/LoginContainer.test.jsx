@@ -1,8 +1,10 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginContainer from './LoginContainer';
+
+import LOGIN_FIELDS from '../fixtures/loginFields';
 
 jest.mock('react-redux');
 
@@ -10,7 +12,15 @@ describe('LoginContainer', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
+    dispatch.mockClear();
+
     useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: '',
+        password: '',
+      },
+    }));
   });
 
   it('renders email input', () => {
@@ -25,33 +35,39 @@ describe('LoginContainer', () => {
     expect(queryByLabelText('Password')).not.toBeNull();
   });
 
-  it('listens change event', () => {
+  it('listens email input change event', () => {
+    const { getByLabelText } = render(<LoginContainer />);
+
+    fireEvent.change(getByLabelText('E-mail'), {
+      target: {
+        value: LOGIN_FIELDS.email,
+      },
+    });
+
+    expect(dispatch).toBeCalledWith({
+      type: 'changeLoginFields',
+      payload: {
+        name: 'email',
+        value: LOGIN_FIELDS.email,
+      },
+    });
+  });
+
+  it('listens password input change event', () => {
     const { queryByLabelText } = render(<LoginContainer />);
 
-    const controls = [{
-      label: 'E-mail',
-      name: 'email',
-      value: 'test@email.com',
-    }, {
-      label: 'Password',
-      name: 'password',
-      value: '1234',
-    }];
+    fireEvent.change(queryByLabelText('Password'), {
+      target: {
+        value: LOGIN_FIELDS.password,
+      },
+    });
 
-    controls.forEach(({ label, name, value }) => {
-      fireEvent.change(queryByLabelText(label), {
-        target: {
-          value,
-        },
-      });
-
-      expect(dispatch).toBeCalledWith({
-        type: 'changeLoginFields',
-        payload: {
-          value,
-          name,
-        },
-      });
+    expect(dispatch).toBeCalledWith({
+      type: 'changeLoginFields',
+      payload: {
+        name: 'password',
+        value: LOGIN_FIELDS.password,
+      },
     });
   });
 
