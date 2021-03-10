@@ -27,6 +27,11 @@ describe('ReviewForm', () => {
     />);
   }
 
+  beforeEach(() => {
+    onChange.mockClear();
+    onSubmit.mockClear();
+  });
+
   it('renders input fields', () => {
     const { getByLabelText } = renderReviewForm();
 
