@@ -13,7 +13,6 @@ export default function ReviewForm({ onChange, onSubmit, reviewFields }) {
         onChange={onChange}
         value={score}
       />
-
       <label htmlFor="review">리뷰</label>
       <input
         type="text"
@@ -22,7 +21,6 @@ export default function ReviewForm({ onChange, onSubmit, reviewFields }) {
         onChange={onChange}
         value={description}
       />
-
       <button type="submit">리뷰 남기기</button>
     </form>
   );
