@@ -34,7 +34,6 @@ export default function RestaurantContainer({ restaurantId }) {
   function handleSubmit(event) {
     event.preventDefault();
     dispatch();
-    dispatch();
   }
 
   return (
