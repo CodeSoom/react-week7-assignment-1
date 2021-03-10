@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -36,13 +36,37 @@ describe('RestaurantContainer', () => {
       address: '서울시 강남구',
     }));
 
-    it('renders name and address', () => {
+    it('renders name and address / review', () => {
       const { container, getByDisplayValue } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
       expect(getByDisplayValue('맛있다!')).toBeInTheDocument();
       expect(getByDisplayValue('4')).toBeInTheDocument();
+    });
+
+
+    it('리뷰를 입력하면 입력을 update하는 dispatch함수가 실행된다.', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
+
+      const controls = [
+        { label: '평점', value: '23', times: 2 },
+        { label: '리뷰 내용', value: '요리를 잘하시네요!', times: 3 },
+      ];
+
+      controls.forEach(({ label, value, times }) => {
+        fireEvent.change(queryByLabelText(label), {
+          target: { value },
+        });
+        expect(dispatch).toBeCalledTimes(times);
+      });
+    });
+
+    it('리뷰 남기기 버튼을 누르면 리뷰를 post하는 dispatch함수가 실행된다.', () => {
+      const { queryByText } = renderRestaurantContainer();
+
+      fireEvent.click(queryByText('리뷰 남기기'));
+      expect(dispatch).toBeCalledTimes(2);
     });
   });
 

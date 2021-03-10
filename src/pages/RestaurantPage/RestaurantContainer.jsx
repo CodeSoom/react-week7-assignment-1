@@ -34,16 +34,16 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(updateReview(name, value));
   }
 
-  function handleDispatch() {
-
+  function handleSubmit() {
   }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
       <ReviewForm
         review={review}
         onChange={handleChange}
-        onSubmit={dispatch}
+        onSubmit={handleSubmit}
       />
       <ReviewList reviews={restaurant.reviews} />
     </>
