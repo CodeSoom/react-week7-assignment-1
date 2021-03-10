@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -78,6 +79,23 @@ describe('api', () => {
       const accessToken = await postLogin({ email: 'test@naver.com', password: 'test' });
 
       expect(accessToken).toEqual('ACCESS_TOKEN');
+    });
+  });
+
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch({ response: 'SUCCESS' });
+    });
+
+    it('returns restaurants', async () => {
+      const { response } = await postReview({
+        accessToken: 'ACCESS_TOKEN',
+        restaurantId: '1',
+        score: '4',
+        description: '맛굿',
+      });
+
+      expect(response).toEqual('SUCCESS');
     });
   });
 });
