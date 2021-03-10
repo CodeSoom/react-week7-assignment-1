@@ -102,7 +102,7 @@ describe('reducer', () => {
         changeReviewFields({
           name: 'description',
           value: '그만큼 맜있으시다는 거지',
-        })
+        }),
       );
 
       const {
@@ -154,7 +154,7 @@ describe('reducer', () => {
 
       const state = reducer(
         initialState,
-        changeLoginFields({ name: 'email', value: 'tester@example.com' })
+        changeLoginFields({ name: 'email', value: 'tester@example.com' }),
       );
 
       const {

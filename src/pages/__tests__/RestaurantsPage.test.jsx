@@ -33,11 +33,10 @@ describe('RestaurantsPage', () => {
   });
 
   function renderRestaurantsPage() {
-    return render(
+    return render((
       <MemoryRouter>
         <RestaurantsPage />
-      </MemoryRouter>
-    );
+      </MemoryRouter>));
   }
 
   it('renders region and category select buttons', () => {

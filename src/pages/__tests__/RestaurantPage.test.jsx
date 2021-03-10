@@ -35,11 +35,10 @@ describe('RestaurantPage', () => {
 
   context('without params props', () => {
     it('renders name', () => {
-      const { container } = render(
+      const { container } = render((
         <MemoryRouter initialEntries={['/restaurants/1']}>
           <RestaurantPage />
-        </MemoryRouter>
-      );
+        </MemoryRouter>));
 
       expect(container).toHaveTextContent('마법사주방');
     });
