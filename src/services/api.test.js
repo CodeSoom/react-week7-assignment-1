@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReviw,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -18,6 +19,10 @@ describe('api', () => {
         return data;
       },
     });
+  };
+
+  const mockPostReviwFetch = () => {
+    global.fetch = jest.fn().mockResolvedValue({ status: '201' });
   };
 
   describe('fetchRegions', () => {
@@ -83,6 +88,23 @@ describe('api', () => {
       });
 
       expect(accessToken).toEqual('12345678');
+    });
+  });
+
+  describe('postReviw', () => {
+    beforeEach(() => {
+      mockPostReviwFetch();
+    });
+
+    it('returns status 201', async () => {
+      const status = await postReviw({
+        score: '1',
+        description: '무우야호!',
+        accessToken: '12345678',
+        restaurantId: '1',
+      });
+
+      expect(status).toEqual('201');
     });
   });
 });
