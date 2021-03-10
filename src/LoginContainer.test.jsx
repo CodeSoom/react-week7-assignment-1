@@ -76,4 +76,12 @@ describe('LoginContainer', () => {
 
     expect(queryByText('Log In')).not.toBeNull();
   });
+
+  it('listens click event', () => {
+    const { getByText } = render(<LoginContainer />);
+
+    fireEvent.submit(getByText('Log In'));
+
+    expect(dispatch).toBeCalled();
+  });
 });
