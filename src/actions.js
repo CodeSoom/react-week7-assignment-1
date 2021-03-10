@@ -117,3 +117,15 @@ export function requestLogin() {
     dispatch(setAccessToken(accessToken));
   };
 }
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { accessToken, review: { score, description } } = getState();
+
+    await postLogin({
+      accessToken, restaurantId, score, description,
+    });
+
+    dispatch(loadRestaurant(restaurantId));
+  };
+}

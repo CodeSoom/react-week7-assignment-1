@@ -45,7 +45,6 @@ describe('RestaurantContainer', () => {
       expect(getByDisplayValue('4')).toBeInTheDocument();
     });
 
-
     it('리뷰를 입력하면 입력을 update하는 dispatch함수가 실행된다.', () => {
       const { queryByLabelText } = renderRestaurantContainer();
 
