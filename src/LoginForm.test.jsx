@@ -18,8 +18,8 @@ describe('LoginForm', () => {
     expect(queryByLabelText(/E-mail/)).not.toBeNull();
     expect(queryByLabelText(/Password/)).not.toBeNull();
 
-    expect(queryByLabelText(/E-mail/)).toHaveValue('');
-    expect(queryByLabelText(/Password/)).toHaveValue('');
+    expect(queryByLabelText(/E-mail/).value).toBe('');
+    expect(queryByLabelText(/Password/).value).toBe('');
 
     expect(queryByText(/Login/)).not.toBeNull();
   });
@@ -38,8 +38,8 @@ describe('LoginForm', () => {
         onChange={handleChange}
       />));
 
-    expect(queryByLabelText(/E-mail/)).toHaveValue('previousEmail@example.com');
-    expect(queryByLabelText(/Password/)).toHaveValue('previousPassword123');
+    expect(queryByLabelText(/E-mail/).value).toBe('previousEmail@example.com');
+    expect(queryByLabelText(/Password/).value).toBe('previousPassword123');
 
     fireEvent.change(queryByLabelText(/E-mail/), { target: { value: 'currentEmail@example.com' } });
 
