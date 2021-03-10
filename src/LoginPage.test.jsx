@@ -12,16 +12,4 @@ describe('LoginPage', () => {
 
     expect(queryByText('Log In'));
   });
-
-  it('renders email input', () => {
-    const { queryByLabelText } = renderLoginPage();
-
-    expect(queryByLabelText('E-mail')).not.toBeNull();
-  });
-
-  it('renders password input', () => {
-    const { queryByLabelText } = renderLoginPage();
-
-    expect(queryByLabelText('Password')).not.toBeNull();
-  });
 });
