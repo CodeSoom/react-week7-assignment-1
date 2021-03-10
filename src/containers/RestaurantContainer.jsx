@@ -7,8 +7,6 @@ import ReviewForm from '@components/ReviewForm';
 
 import { loadRestaurant } from '../actions';
 
-import { get } from '../utils';
-
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
@@ -16,7 +14,10 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(loadRestaurant({ restaurantId }));
   }, []);
 
-  const restaurant = useSelector(get('restaurant'));
+  const { restaurant, accessToken } = useSelector((state) => ({
+    restaurant: state.restaurant,
+    accessToken: state.accessToken,
+  }));
 
   if (!restaurant) {
     return <p>Loading...</p>;
@@ -37,10 +38,12 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      />
+      {accessToken ? (
+        <ReviewForm
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
+      ) : <></>}
     </>
   );
 }
