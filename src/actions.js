@@ -13,6 +13,13 @@ export function updateUserLoginInputs(name, value) {
   };
 }
 
+export function updateReview(name, value) {
+  return {
+    type: 'updateReview',
+    payload: { name, value },
+  };
+}
+
 export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',
