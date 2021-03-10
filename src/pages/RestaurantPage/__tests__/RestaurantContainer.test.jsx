@@ -37,10 +37,12 @@ describe('RestaurantContainer', () => {
     }));
 
     it('renders name and address', () => {
-      const { container } = renderRestaurantContainer();
+      const { container, getByDisplayValue } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+      expect(getByDisplayValue('맛있다!')).toBeInTheDocument();
+      expect(getByDisplayValue('4')).toBeInTheDocument();
     });
   });
 
@@ -48,9 +50,11 @@ describe('RestaurantContainer', () => {
     given('restaurant', () => null);
 
     it('renders loading', () => {
-      const { container } = renderRestaurantContainer();
+      const { queryByDisplayValue, container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('Loading');
+      expect(queryByDisplayValue('맛있다!')).not.toBeInTheDocument();
+      expect(queryByDisplayValue('4')).not.toBeInTheDocument();
     });
   });
 });
