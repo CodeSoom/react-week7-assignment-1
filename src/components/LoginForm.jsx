@@ -23,7 +23,6 @@ export default function LoginForm({ onChange, onSubmit, loginFields: { email, pa
         onChange={onChange}
         value={password}
       />
-
       <button type="submit">Log In</button>
     </form>
   );
