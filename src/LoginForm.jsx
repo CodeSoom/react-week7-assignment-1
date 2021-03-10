@@ -20,6 +20,7 @@ export default function LoginForm({ onChange }) {
       <input
         type="password"
         id="login-password"
+        onChange={handleChange}
       />
 
       <button type="button">Login</button>
