@@ -10,15 +10,6 @@ export default function LoginForm({
 }) {
   const { email, password } = loginInputs;
 
-  function handleChange(event) {
-    const { target: { value } } = event;
-    onChange({ value });
-  }
-
-  function handleClick() {
-    onClick();
-  }
-
   return (
     <>
       <h1>Log in</h1>
@@ -27,7 +18,7 @@ export default function LoginForm({
         type="email"
         id="login-email"
         value={email}
-        onChange={handleChange}
+        onChange={onChange}
       />
 
       <label htmlFor="login-password">Password</label>
@@ -35,12 +26,12 @@ export default function LoginForm({
         type="password"
         id="login-password"
         value={password}
-        onChange={handleChange}
+        onChange={onChange}
       />
 
       <button
         type="button"
-        onClick={handleClick}
+        onClick={onClick}
       >
         Login
       </button>
