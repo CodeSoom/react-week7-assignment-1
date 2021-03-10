@@ -8,8 +8,8 @@ describe('LoginPage', () => {
     return render(<LoginPage />);
   }
   it('renders "Login" title', () => {
-    const { queryByText } = renderLoginPage();
+    const { queryAllByText } = renderLoginPage();
 
-    expect(queryByText('Log In'));
+    expect(queryAllByText('Log In')).not.toBeNull();
   });
 });
