@@ -84,4 +84,20 @@ describe('api', () => {
       expect(accessToken).toEqual(ACCESSTOKEN);
     });
   });
+
+  describe('saveReview', () => {
+    beforeEach(() => {
+      mockFetch('');
+    });
+
+    // TODO: 리뷰 저장 API가 어떤 응답 주는지 확인해야 함
+    // it('returns access token', async () => {
+    //   const accessToken = await postLogin({
+    //     email: 'test@test.com',
+    //     password: 'test',
+    //   });
+
+    //   expect(accessToken).toEqual(ACCESSTOKEN);
+    // });
+  });
 });

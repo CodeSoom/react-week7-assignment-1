@@ -12,6 +12,7 @@ import {
   setRestaurant,
   requestLogin,
   setAccessToken,
+  saveReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -116,6 +117,24 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setAccessToken({}));
+    });
+  });
+
+  describe('saveReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        restaurant: { id: 1, name: '양천주가' },
+        reviewFields: { score: '5', description: '돈쭐맛집' },
+      });
+    });
+
+    it('dispatchs setRestaurant', async () => {
+      await store.dispatch(saveReview());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
 });
