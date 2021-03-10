@@ -24,6 +24,7 @@ describe('App', () => {
       regions: [
         { id: 1, name: '서울' },
       ],
+      review: { score: '4', description: '맛있다!' },
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },

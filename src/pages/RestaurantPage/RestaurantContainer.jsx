@@ -8,6 +8,7 @@ import ReviewList from './ReviewList';
 
 import {
   loadRestaurant,
+  updateReview,
 } from '../../actions';
 
 import { get } from '../../utils';
@@ -20,6 +21,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
+  const review = useSelector(get('review'));
 
   if (!restaurant) {
     return (
@@ -27,12 +29,20 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
+  function handleChange(event) {
+    const { target: { name, value } } = event;
+    dispatch(updateReview(name, value));
+  }
+
+  function handleDispatch() {
+
+  }
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
       <ReviewForm
-        review={{ score: '4', description: '맛있다!' }}
-        onChange={dispatch}
+        review={review}
+        onChange={handleChange}
         onSubmit={dispatch}
       />
       <ReviewList reviews={restaurant.reviews} />

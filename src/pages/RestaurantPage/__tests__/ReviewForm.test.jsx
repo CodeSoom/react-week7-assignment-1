@@ -35,23 +35,23 @@ describe('ReviewForm', () => {
   it('평점 입력창과 내용 입력창에 입력을 하면 handleChange함수가 실행된다.', () => {
     const controls = [
       {
-        label: '평점', name: 'score', origin: score, value: '3',
+        label: '평점', origin: score, value: '3',
       },
       {
-        label: '리뷰 내용', name: 'description', origin: description, value: '맛없어요.',
+        label: '리뷰 내용', origin: description, value: '맛없어요.',
       },
     ];
 
     const { queryByLabelText } = renderReviewForm();
 
     controls.forEach(({
-      label, name, origin, value,
+      label, origin, value,
     }) => {
       expect(queryByLabelText(label).value).toBe(origin);
 
       fireEvent.change(queryByLabelText(label), { target: { value } });
 
-      expect(handleChange).toBeCalledWith({ name, value });
+      expect(handleChange).toBeCalled();
     });
   });
 
