@@ -27,7 +27,7 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
-      loginFields: { email: 'tester@example.com', password: 'test' },
+      loginFields: { email: null, password: null },
     }));
   });
 
@@ -35,7 +35,7 @@ describe('App', () => {
     return render(
       <MemoryRouter initialEntries={[path]}>
         <App />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
   }
 
