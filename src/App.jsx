@@ -12,8 +12,6 @@ import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
 
-/* 개발 계획*/ 
-
 export default function App() {
   return (
     <div>
