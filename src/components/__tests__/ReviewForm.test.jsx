@@ -8,28 +8,44 @@ describe('ReviewForm', () => {
   const onChange = jest.fn();
   const onSubmit = jest.fn();
 
+  const reviewInputs = [
+    {
+      text: '평점', name: 'score', type: 'number', value: '3',
+    },
+    {
+      text: '리뷰', name: 'description', type: 'text', value: '그만큼 맜있다는 거지',
+    },
+  ];
+
+  const reviewFields = { score: '1', description: '그만큼 맜없다는 거지' };
+
+  function renderReviewForm() {
+    return render(<ReviewForm
+      onChange={onChange}
+      onSubmit={onSubmit}
+      reviewFields={reviewFields}
+    />);
+  }
+
   it('renders input fields', () => {
-    const { getByLabelText } = render(<ReviewForm onChange={onChange} />);
+    const { getByLabelText } = renderReviewForm();
 
-    const scoreInput = getByLabelText('평점');
-    const reviewInput = getByLabelText('리뷰');
-
-    expect(scoreInput).toHaveAttribute('name', 'score');
-    expect(reviewInput).toHaveAttribute('name', 'description');
-
-    expect(scoreInput).toHaveAttribute('type', 'number');
-    expect(reviewInput).toHaveAttribute('type', 'text');
-
-    fireEvent.change(scoreInput, { target: { value: '3' } });
-    fireEvent.change(reviewInput, { target: { value: '그만큼 맜있다는 거지' } });
-    expect(onChange).toHaveBeenCalledTimes(2);
+    reviewInputs.forEach(({
+      text, name, type, value,
+    }) => {
+      expect(getByLabelText(text)).toHaveAttribute('name', name);
+      expect(getByLabelText(text)).toHaveAttribute('type', type);
+      expect(getByLabelText(text).value).toBe(reviewFields[name]);
+      fireEvent.change(getByLabelText(text), { target: { value } });
+      expect(onChange).toHaveBeenCalled();
+    });
   });
 
   it('renders button ', () => {
     onSubmit.mockImplementationOnce((event) => {
       event.preventDefault();
     });
-    const { getByRole } = render(<ReviewForm onSubmit={onSubmit} />);
+    const { getByRole } = renderReviewForm();
 
     const postReviewButton = getByRole('button', { name: '리뷰 남기기' });
 
