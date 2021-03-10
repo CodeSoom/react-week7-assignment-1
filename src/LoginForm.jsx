@@ -1,6 +1,12 @@
 import React from 'react';
 
 export default function LoginForm({ onChange }) {
+  function HandleChange(e) {
+    const { target: { value, name } } = e;
+
+    onChange({ value, name });
+  }
+
   return (
     <form>
       <div>
@@ -10,7 +16,7 @@ export default function LoginForm({ onChange }) {
           name="email"
           id="input-email"
           placeholder="email"
-          onChange={onChange}
+          onChange={HandleChange}
         />
       </div>
       <div>
@@ -20,7 +26,7 @@ export default function LoginForm({ onChange }) {
           name="password"
           id="input-password"
           placeholder="password"
-          onChange={onChange}
+          onChange={HandleChange}
         />
       </div>
       <button type="submit">Log In</button>
