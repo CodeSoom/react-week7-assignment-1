@@ -141,9 +141,9 @@ export function postReviewFields() {
     }
 
     await postReview({
-      score, description, accessToken, id,
+      score, description, accessToken, restaurantId: id,
     });
 
-    dispatch(loadRestaurant(id));
+    dispatch(loadRestaurant({ restaurantId: id }));
   };
 }
