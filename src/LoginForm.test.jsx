@@ -6,6 +6,7 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const handleChange = jest.fn();
+
   it('제목, 이메일 입력창, 암호 입력창, 버튼을 보여줍니다.', () => {
     const { queryByText, queryByLabelText } = render(<LoginForm />);
 
@@ -20,9 +21,11 @@ describe('LoginForm', () => {
   it('이메일, 암호 입력창에 값을 입력하면 입력값이 업데이트 됩니다.', () => {
     const { queryByLabelText } = render((<LoginForm onChange={handleChange} />));
 
-    expect(handleChange).not.toBeCalled();
-
     fireEvent.change(queryByLabelText(/E-mail/), { target: { value: 'tester@example.com' } });
+
+    expect(handleChange).toBeCalled();
+
+    fireEvent.change(queryByLabelText(/Password/), { target: { value: 'thisispassword123' } });
 
     expect(handleChange).toBeCalled();
   });
