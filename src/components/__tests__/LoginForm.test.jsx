@@ -16,7 +16,7 @@ describe('LoginForm', () => {
         onChange={onChange}
         onSubmit={onSubmit}
         loginFields={loginFields}
-      />,
+      />
     );
 
     const emailInput = getByLabelText('email');
@@ -41,7 +41,7 @@ describe('LoginForm', () => {
         onChange={onChange}
         onSubmit={onSubmit}
         loginFields={loginFields}
-      />,
+      />
     );
     expect(getByRole('button', { name: 'Log In' })).toBeInTheDocument();
   });
