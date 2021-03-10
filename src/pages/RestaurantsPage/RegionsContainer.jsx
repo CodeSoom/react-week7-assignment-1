@@ -9,6 +9,8 @@ import {
   loadRestaurants,
 } from '@actions';
 
+import Buttons from './Buttons';
+
 export default function RegionsContainer() {
   const dispatch = useDispatch();
 
@@ -21,22 +23,10 @@ export default function RegionsContainer() {
   }
 
   return (
-    <ul>
-      {regions.map((region) => (
-        <li key={region.id}>
-          <button
-            type="button"
-            onClick={() => handleClick(region.id)}
-          >
-            {region.name}
-            {selectedRegion ? (
-              <>
-                {region.id === selectedRegion.id ? '(V)' : null}
-              </>
-            ) : null}
-          </button>
-        </li>
-      ))}
-    </ul>
+    <Buttons
+      buttons={regions}
+      handleClick={handleClick}
+      selected={selectedRegion}
+    />
   );
 }
