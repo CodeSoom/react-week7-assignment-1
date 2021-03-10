@@ -41,3 +41,22 @@ export async function postLogin({ email, password }) {
   const data = await response.json();
   return data;
 }
+
+export async function postReviw({
+  score, description, accessToken, restaurantId,
+}) {
+  const url = `${baseUrl}/restaurants/${restaurantId}/reviews`;
+
+  const option = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({ score, description }),
+  };
+
+  const response = await fetch(url, option);
+
+  return response.status;
+}
