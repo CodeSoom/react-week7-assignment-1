@@ -15,6 +15,7 @@ import {
   setAccessToken,
   deleteAccessToken,
   changeReviewFields,
+  postReviewFields,
 } from './actions';
 
 const middlewares = [thunk];
@@ -117,20 +118,59 @@ describe('actions', () => {
         changeReviewFields({
           name: 'description',
           value: '그만큼 맜있으시다는 거지',
-        })
+        }),
       );
 
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(
-        changeReviewFields({ name: 'score', value: '3' })
+        changeReviewFields({ name: 'score', value: '3' }),
       );
       expect(actions[1]).toEqual(
         changeReviewFields({
           name: 'description',
           value: '그만큼 맜있으시다는 거지',
-        })
+        }),
       );
+    });
+  });
+
+  describe('postReviewFields', () => {
+    context('without score, description', () => {
+      beforeEach(() => {
+        store = mockStore({
+          reviewFields: { score: '', description: '' },
+          accessToken: '1234',
+          restaurant: { id: '1' },
+        });
+      });
+
+      it("does'nt run any actions", async () => {
+        await store.dispatch(postReviewFields());
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
+    });
+
+    context('with score, description', () => {
+      beforeEach(() => {
+        store = mockStore({
+          reviewFields: { score: '1', description: '무야호!' },
+          accessToken: '1234',
+          restaurant: { id: '1' },
+        });
+      });
+
+      it('runs loadRestaurant', async () => {
+        await store.dispatch(postReviewFields());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setRestaurant(null));
+        expect(actions[1]).toEqual(setRestaurant({}));
+      });
     });
   });
 
@@ -140,18 +180,18 @@ describe('actions', () => {
     });
     it('runs changeLoginFileds', () => {
       store.dispatch(
-        changeLoginFields({ name: 'email', value: 'tester@example.com' })
+        changeLoginFields({ name: 'email', value: 'tester@example.com' }),
       );
       store.dispatch(changeLoginFields({ name: 'password', value: 'test' }));
 
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(
-        changeLoginFields({ name: 'email', value: 'tester@example.com' })
+        changeLoginFields({ name: 'email', value: 'tester@example.com' }),
       );
 
       expect(actions[1]).toEqual(
-        changeLoginFields({ name: 'password', value: 'test' })
+        changeLoginFields({ name: 'password', value: 'test' }),
       );
     });
   });
