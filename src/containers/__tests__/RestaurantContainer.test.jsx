@@ -85,7 +85,7 @@ describe('RestaurantContainer', () => {
       const { getByRole } = renderRestaurantContainer();
       fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
 
-      expect(dispatch).toHaveBeenCalled();
+      expect(dispatch).toHaveBeenCalledTimes(3);
     });
   });
 
