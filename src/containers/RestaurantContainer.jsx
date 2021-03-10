@@ -14,9 +14,10 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(loadRestaurant({ restaurantId }));
   }, []);
 
-  const { restaurant, accessToken } = useSelector((state) => ({
+  const { restaurant, accessToken, reviewFields } = useSelector((state) => ({
     restaurant: state.restaurant,
     accessToken: state.accessToken,
+    reviewFields: state.reviewFields,
   }));
 
   if (!restaurant) {
@@ -42,6 +43,7 @@ export default function RestaurantContainer({ restaurantId }) {
         <ReviewForm
           onChange={handleChange}
           onSubmit={handleSubmit}
+          reviewFields={reviewFields}
         />
       ) : <></>}
     </>
