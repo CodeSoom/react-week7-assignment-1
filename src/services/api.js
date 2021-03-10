@@ -29,7 +29,7 @@ export async function fetchRestaurant({ restaurantId }) {
 }
 
 export async function postLogin({ email, password }) {
-  const url = `${baseUrl}/session`;
+  const url = 'https://eatgo-login-api.ahastudio.com/session';
   const option = {
     method: 'POST',
     headers: {
