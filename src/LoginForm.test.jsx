@@ -6,12 +6,20 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   it('제목, 이메일 입력창, 암호 입력창, 버튼을 보여줍니다.', () => {
-    const { queryByText, queryByLabelText } = render(<LoginForm />);
+    const initialInputs = {
+      email: '',
+      password: '',
+    };
+
+    const { queryByText, queryByLabelText } = render(<LoginForm loginInputs={initialInputs} />);
 
     expect(queryByText(/Log in/)).not.toBeNull();
 
     expect(queryByLabelText(/E-mail/)).not.toBeNull();
     expect(queryByLabelText(/Password/)).not.toBeNull();
+
+    expect(queryByLabelText(/E-mail/)).toHaveValue('');
+    expect(queryByLabelText(/Password/)).toHaveValue('');
 
     expect(queryByText(/Login/)).not.toBeNull();
   });
@@ -19,13 +27,25 @@ describe('LoginForm', () => {
   it('이메일, 암호 입력창에 값을 입력하면 입력값이 업데이트 됩니다.', () => {
     const handleChange = jest.fn();
 
-    const { queryByLabelText } = render((<LoginForm onChange={handleChange} />));
+    const initialInputs = {
+      email: 'previousEmail@example.com',
+      password: 'previousPassword123',
+    };
 
-    fireEvent.change(queryByLabelText(/E-mail/), { target: { value: 'tester@example.com' } });
+    const { queryByLabelText } = render((
+      <LoginForm
+        loginInputs={initialInputs}
+        onChange={handleChange}
+      />));
+
+    expect(queryByLabelText(/E-mail/)).toHaveValue('previousEmail@example.com');
+    expect(queryByLabelText(/Password/)).toHaveValue('previousPassword123');
+
+    fireEvent.change(queryByLabelText(/E-mail/), { target: { value: 'currentEmail@example.com' } });
 
     expect(handleChange).toBeCalled();
 
-    fireEvent.change(queryByLabelText(/Password/), { target: { value: 'thisispassword123' } });
+    fireEvent.change(queryByLabelText(/Password/), { target: { value: 'currentPassword123' } });
 
     expect(handleChange).toBeCalled();
   });
