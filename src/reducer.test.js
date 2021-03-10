@@ -9,6 +9,7 @@ import {
   selectCategory,
   updateUserLoginInputs,
   setAccessToken,
+  updateReview,
 } from './actions';
 
 describe('reducer', () => {
@@ -17,6 +18,10 @@ describe('reducer', () => {
       userLoginInputs: {
         email: '',
         password: '',
+      },
+      review: {
+        score: '',
+        description: '',
       },
       accessToken: '',
       regions: [],
@@ -152,6 +157,16 @@ describe('reducer', () => {
       const state = reducer(initialState, updateUserLoginInputs('email', 'test@naver.com'));
 
       expect(state.userLoginInputs.email).toEqual('test@naver.com');
+    });
+  });
+
+  describe('updateReview', () => {
+    it('리뷰 입력을 update한다.', () => {
+      const initialState = { review: { score: '', description: '' } };
+
+      const state = reducer(initialState, updateReview('score', '4'));
+
+      expect(state.review.score).toEqual('4');
     });
   });
 });
