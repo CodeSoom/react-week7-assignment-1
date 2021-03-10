@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -23,14 +23,12 @@ describe('RegionsContainer', () => {
   });
 
   it('renders checked regions', () => {
-    const { container, getByText } = render((
-      <RegionsContainer />
-    ));
+    render(<RegionsContainer />);
 
-    expect(container).toHaveTextContent('서울(V)');
-    expect(container).toHaveTextContent('부산');
+    expect(screen.getByText('서울(V)')).toBeInTheDocument();
+    expect(screen.getByText('부산')).toBeInTheDocument();
 
-    fireEvent.click(getByText('부산'));
+    fireEvent.click(screen.getByText('부산'));
 
     expect(dispatch).toBeCalled();
   });

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import MenuItems from './MenuItems';
 
@@ -11,9 +11,9 @@ describe('MenuItems', () => {
         { id: 1, name: '공기밥' },
       ];
 
-      const { container } = render(<MenuItems menuItems={menuItems} />);
+      render(<MenuItems menuItems={menuItems} />);
 
-      expect(container).toHaveTextContent('공기밥');
+      expect(screen.getByText('공기밥')).toBeInTheDocument();
     });
   });
 

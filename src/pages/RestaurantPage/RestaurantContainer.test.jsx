@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -36,10 +36,10 @@ describe('RestaurantContainer', () => {
     }));
 
     it('renders name and address', () => {
-      const { container } = renderRestaurantContainer();
+      renderRestaurantContainer();
 
-      expect(container).toHaveTextContent('마법사주방');
-      expect(container).toHaveTextContent('서울시');
+      expect(screen.getByText('마법사주방')).toBeInTheDocument();
+      expect(screen.getByText(/서울시/i)).toBeInTheDocument();
     });
   });
 
@@ -47,9 +47,9 @@ describe('RestaurantContainer', () => {
     given('restaurant', () => null);
 
     it('renders loading', () => {
-      const { container } = renderRestaurantContainer();
+      renderRestaurantContainer();
 
-      expect(container).toHaveTextContent('Loading');
+      expect(screen.getByText(/Loading/i)).toBeInTheDocument();
     });
   });
 });

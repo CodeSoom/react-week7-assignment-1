@@ -2,7 +2,7 @@ import React from 'react';
 
 import { MemoryRouter } from 'react-router-dom';
 
-import { render, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -47,19 +47,19 @@ describe('RestaurantsPage', () => {
   }
 
   it('renders region and category select buttons', () => {
-    const { queryByText } = renderRestaurantsPage();
+    renderRestaurantsPage();
 
     expect(dispatch).toBeCalled();
 
-    expect(queryByText('서울')).not.toBeNull();
-    expect(queryByText('한식')).not.toBeNull();
+    expect(screen.queryByText('서울')).not.toBeNull();
+    expect(screen.queryByText('한식')).not.toBeNull();
   });
 
   context('when click restaurant', () => {
     it('occurs handle event', () => {
-      const { getByText } = renderRestaurantsPage();
+      renderRestaurantsPage();
 
-      fireEvent.click(getByText('마법사주방'));
+      fireEvent.click(screen.getByText('마법사주방'));
 
       expect(mockPush).toBeCalledWith('/restaurants/1');
     });

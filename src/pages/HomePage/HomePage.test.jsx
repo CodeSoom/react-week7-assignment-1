@@ -2,7 +2,7 @@ import React from 'react';
 
 import { MemoryRouter } from 'react-router-dom';
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import HomePage from './HomePage';
 
@@ -16,16 +16,16 @@ describe('HomePage', () => {
   );
 
   it('renders title', () => {
-    const { container } = renderHomePage();
+    renderHomePage();
 
-    expect(container).toHaveTextContent('Home');
+    expect(screen.getByText('Home')).toBeInTheDocument();
   });
 
   it('renders links', () => {
-    const { container } = renderHomePage();
+    renderHomePage();
 
     links.forEach((link) => {
-      expect(container).toHaveTextContent(link);
+      expect(screen.getByText(link)).toBeInTheDocument();
     });
   });
 });

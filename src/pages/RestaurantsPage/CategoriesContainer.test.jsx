@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -23,14 +23,12 @@ describe('CategoriesContainer', () => {
   });
 
   it('renders regions and checked symbol', () => {
-    const { container, getByText } = render((
-      <CategoriesContainer />
-    ));
+    render(<CategoriesContainer />);
 
-    expect(container).toHaveTextContent('한식(V)');
-    expect(container).toHaveTextContent('양식');
+    expect(screen.getByText('한식(V)')).toBeInTheDocument();
+    expect(screen.getByText('양식')).toBeInTheDocument();
 
-    fireEvent.click(getByText('양식'));
+    fireEvent.click(screen.getByText('양식'));
 
     expect(dispatch).toBeCalled();
   });

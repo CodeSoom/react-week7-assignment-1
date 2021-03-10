@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import AboutPage from './AboutPage';
 
 describe('AboutPage', () => {
   it('renders title', () => {
-    const { container } = render(<AboutPage />);
+    render(<AboutPage />);
 
-    expect(container).toHaveTextContent('About 페이지');
+    expect(screen.getByText('About 페이지')).toBeInTheDocument();
   });
 });

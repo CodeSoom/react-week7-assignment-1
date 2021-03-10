@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import RestaurantDetail from './RestaurantDetail';
 
@@ -12,11 +12,11 @@ describe('RestaurantDetail', () => {
   };
 
   it('renders name and address', () => {
-    const { container } = render(
-      <RestaurantDetail restaurant={restaurant} />,
-    );
+    render((
+      <RestaurantDetail restaurant={restaurant} />
+    ));
 
-    expect(container).toHaveTextContent('마법사주방');
-    expect(container).toHaveTextContent('서울시');
+    expect(screen.getByText('마법사주방')).toBeInTheDocument();
+    expect(screen.getByText(/서울시/i)).toBeInTheDocument();
   });
 });

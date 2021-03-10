@@ -4,7 +4,7 @@ import {
   MemoryRouter,
 } from 'react-router-dom';
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -40,51 +40,54 @@ describe('App', () => {
 
   context('with path /', () => {
     it('renders the home page', () => {
-      const { container } = renderApp({ path: '/' });
+      renderApp({ path: '/' });
 
-      expect(container).toHaveTextContent('Home');
+      expect(screen.getByText('Home')).toBeInTheDocument();
     });
   });
 
   context('with path /about', () => {
     it('renders the about page', () => {
-      const { container } = renderApp({ path: '/about' });
+      renderApp({ path: '/about' });
 
-      expect(container).toHaveTextContent('About 페이지');
+      expect(screen.getByText('About 페이지')).toBeInTheDocument();
     });
   });
 
   context('with path /restaurants', () => {
     it('renders the restaurants page', () => {
-      const { container } = renderApp({ path: '/restaurants' });
+      renderApp({ path: '/restaurants' });
 
-      expect(container).toHaveTextContent('서울');
+      expect(screen.getByText('서울')).toBeInTheDocument();
     });
   });
 
   context('with path /restaurants/:id', () => {
     it('renders the restaurant page', () => {
-      const { container } = renderApp({ path: '/restaurants/1' });
+      renderApp({ path: '/restaurants/1' });
 
-      expect(container).toHaveTextContent('마녀주방');
+      expect(screen.getByText('마녀주방')).toBeInTheDocument();
     });
   });
 
   context('with path /login', () => {
     it('renders the log in page', () => {
-      const { container, getByLabelText } = renderApp({ path: '/login' });
+      renderApp({ path: '/login' });
 
-      expect(container).toHaveTextContent('Log In');
-      expect(getByLabelText('E-Mail')).not.toBeUndefined();
-      expect(getByLabelText('Password')).not.toBeUndefined();
+      expect(screen.getByRole('button', {
+        name: /log in/i,
+      })).toBeInTheDocument();
+
+      expect(screen.getByLabelText('E-Mail')).not.toBeUndefined();
+      expect(screen.getByLabelText('Password')).not.toBeUndefined();
     });
   });
 
   context('with invalid path', () => {
     it('renders the not found page', () => {
-      const { container } = renderApp({ path: '/xxx' });
+      renderApp({ path: '/xxx' });
 
-      expect(container).toHaveTextContent('Not Found');
+      expect(screen.getByText(/404 not found/i)).toBeInTheDocument();
     });
   });
 });
