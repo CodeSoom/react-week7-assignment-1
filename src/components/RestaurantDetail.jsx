@@ -1,9 +1,11 @@
 import React from 'react';
 
-import MenuItems from './MenuItems';
+import List from './List';
 
 export default function RestaurantDetail({ restaurant }) {
-  const { name, address, menuItems } = restaurant;
+  const {
+    name, address, menuItems, reviews,
+  } = restaurant;
 
   return (
     <div>
@@ -13,8 +15,14 @@ export default function RestaurantDetail({ restaurant }) {
         {' '}
         {address}
       </p>
-      <h3>메뉴</h3>
-      <MenuItems menuItems={menuItems} />
+      <List
+        title="메뉴"
+        list={menuItems}
+      />
+      <List
+        title="리뷰"
+        list={reviews}
+      />
     </div>
   );
 }
