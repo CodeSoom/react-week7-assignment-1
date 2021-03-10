@@ -36,7 +36,7 @@ describe('RestaurantsPage', () => {
     return render(
       <MemoryRouter>
         <RestaurantsPage />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
   }
 
