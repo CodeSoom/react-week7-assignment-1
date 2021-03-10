@@ -23,7 +23,7 @@ describe('LoginForm', () => {
     />
   ));
 
-  it('renders "e-mail" input controls', () => {
+  it('renders "e-mail" input controls and listens change event', () => {
     const { getByLabelText } = renderLoginForm();
 
     expect(getByLabelText('E-mail')).not.toBeNull();
@@ -38,7 +38,7 @@ describe('LoginForm', () => {
     });
   });
 
-  it('renders "password" input controls', () => {
+  it('renders "password" input controls listens change event', () => {
     const { getByLabelText } = renderLoginForm();
 
     expect(getByLabelText('Password')).not.toBeNull();
@@ -53,14 +53,7 @@ describe('LoginForm', () => {
     });
   });
 
-  it('listens change event', () => {
-    const { getByLabelText } = renderLoginForm();
-
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
-  });
-
-  it('renders login button', () => {
+  it('renders login button and listens click event', () => {
     const { getByText } = renderLoginForm();
 
     fireEvent.click(getByText('Log In'));
