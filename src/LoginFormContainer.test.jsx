@@ -27,7 +27,7 @@ describe('LoginFormContainer', () => {
     }));
   });
 
-  context('without login', () => {
+  context('when logged out', () => {
     given('accessToken', () => '');
 
     it('renders login form', () => {
@@ -55,13 +55,24 @@ describe('LoginFormContainer', () => {
     });
   });
 
-  context('with login', () => {
+  context('when logged in', () => {
     given('accessToken', () => 'TOKEN');
 
-    it('renders logged on status message', () => {
-      const { container } = render(<LoginFormContainer />);
+    it('renders "Log out" button', () => {
+      const { queryByText } = render(<LoginFormContainer />);
 
-      expect(container).toHaveTextContent('로그인 되었습니다.');
+      expect(queryByText('Log In')).toBeNull();
+      expect(queryByText('Log out')).not.toBeNull();
+    });
+
+    it('logs out when "Log out" is clicked', () => {
+      const { getByText } = render(<LoginFormContainer />);
+
+      fireEvent.click(getByText('Log out'));
+
+      expect(dispatch).toBeCalledWith({
+        type: 'requestLogout',
+      });
     });
   });
 });

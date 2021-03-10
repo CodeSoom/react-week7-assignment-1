@@ -7,9 +7,21 @@ import LoginForm from './LoginForm';
 import {
   changeLoginField,
   requestLogin,
+  requestLogout,
 } from './actions';
 
 import { get } from './utils';
+
+function LogoutButton({ onClick }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+    >
+      Log out
+    </button>
+  );
+}
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
@@ -18,8 +30,12 @@ export default function LoginFormContainer() {
     dispatch(changeLoginField({ name, value }));
   }
 
-  function handleClick() {
+  function handleClickLogin() {
     dispatch(requestLogin());
+  }
+
+  function handleClickLogout() {
+    dispatch(requestLogout());
   }
 
   const { email, password } = useSelector(get('loginFields'));
@@ -27,12 +43,19 @@ export default function LoginFormContainer() {
 
   return (
     <>
-      <LoginForm
-        fields={{ email, password }}
-        onChange={handleChange}
-        onClick={handleClick}
-      />
-      { accessToken ? <p>로그인 되었습니다.</p> : <p>로그인 해주세요.</p>}
+      { accessToken
+        ? (
+          <LogoutButton
+            onClick={handleClickLogout}
+          />
+        )
+        : (
+          <LoginForm
+            fields={{ email, password }}
+            onChange={handleChange}
+            onClick={handleClickLogin}
+          />
+        )}
     </>
   );
 }
