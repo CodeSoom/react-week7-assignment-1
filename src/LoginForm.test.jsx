@@ -7,9 +7,11 @@ jest.mock('react-redux');
 
 describe('LoginForm', () => {
   const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
   function renderLoginForm() {
     return render(<LoginForm
+      onSubmit={handleSubmit}
       onChange={handleChange}
       email="test@test.com"
       password="1234"
@@ -35,14 +37,22 @@ describe('LoginForm', () => {
   });
 
   it('listens email input change event', () => {
-    const { queryByLabelText } = renderLoginForm();
+    const { getByLabelText } = renderLoginForm();
 
-    fireEvent.change(queryByLabelText('E-mail'), {
+    fireEvent.change(getByLabelText('E-mail'), {
       target: {
         value: 'test@email.com',
       },
     });
 
     expect(handleChange).toBeCalled();
+  });
+
+  it('listens click event', () => {
+    const { getByText } = renderLoginForm();
+
+    fireEvent.submit(getByText('Log In'));
+
+    expect(handleSubmit).toBeCalled();
   });
 });
