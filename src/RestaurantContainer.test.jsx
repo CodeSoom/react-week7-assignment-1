@@ -20,14 +20,12 @@ describe('RestaurantContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       accessToken: given.accessToken,
       restaurant: given.restaurant,
-      reviewFields: given.reviewFields,
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     }));
   });
-
-  given('reviewFields', () => ({
-    score: '',
-    description: '',
-  }));
 
   it('dispatches action', () => {
     renderRestaurantContainer();
@@ -41,10 +39,6 @@ describe('RestaurantContainer', () => {
       name: '마법사주방',
       address: '서울시 강남구',
     }));
-    given('reviewFields', () => ({
-      score: '',
-      description: '',
-    }));
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
@@ -55,10 +49,6 @@ describe('RestaurantContainer', () => {
 
     context('when logged in', () => {
       given('accessToken', () => 'TOKEN');
-      given('reviewFields', () => ({
-        score: '',
-        description: '',
-      }));
 
       it('renders review form', () => {
         const { queryByLabelText, queryByText } = renderRestaurantContainer();
@@ -96,14 +86,22 @@ describe('RestaurantContainer', () => {
         expect(dispatch).toBeCalled();
       });
     });
+
+    context('when logged out', () => {
+      given('accessToken', () => '');
+
+      it('does not render review form', () => {
+        const { queryByLabelText, queryByText } = renderRestaurantContainer();
+
+        expect(queryByLabelText('평점')).toBeNull();
+        expect(queryByLabelText('리뷰 내용')).toBeNull();
+        expect(queryByText('리뷰 남기기')).toBeNull();
+      });
+    });
   });
 
   context('without restaurant', () => {
     given('restaurant', () => null);
-    given('reviewFields', () => ({
-      score: '',
-      description: '',
-    }));
 
     it('renders loading', () => {
       const { container } = renderRestaurantContainer();
