@@ -10,6 +10,7 @@ import {
   loadRestaurant,
   sendReview,
   updateReview,
+  resetReviewInput,
 } from '../../actions';
 
 import { get } from '../../utils';
@@ -38,6 +39,7 @@ export default function RestaurantContainer({ restaurantId }) {
 
   function handleSubmit() {
     dispatch(sendReview({ restaurantId }));
+    dispatch(resetReviewInput());
   }
 
   return (
