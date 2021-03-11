@@ -58,5 +58,5 @@ export async function postReview({
 
   const response = await fetch(url, option);
 
-  return response.status;
+  return response;
 }
