@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updateUserLoginInputs, requestLogin } from '../../actions';
+import { updateUserLoginInputs, requestLogin, resetAccessToken } from '../../actions';
 
 import LoginForm from './LoginForm';
 
@@ -22,8 +22,7 @@ export default function LoginFormContainer() {
   }
 
   function handleLogout() {
-    dispatch();
-    // 디테일한 action을 추가해야한다.
+    dispatch(resetAccessToken());
   }
 
   if (accessToken) {
