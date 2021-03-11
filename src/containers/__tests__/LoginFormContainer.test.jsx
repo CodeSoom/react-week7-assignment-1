@@ -11,18 +11,17 @@ import LoginFormContainer from '@containers/LoginFormContainer';
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
-  context('when logged out', () => {
-    given('loginFields', () => ({ email: '123@naver.com', password: '5678' }));
-    given('accessToken', () => null);
+  beforeEach(() => {
+    dispatch.mockClear();
+    useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: { email: '123@naver.com', password: '5678' },
+      accessToken: given.accessToken,
+    }));
+  });
 
-    beforeEach(() => {
-      dispatch.mockClear();
-      useDispatch.mockImplementation(() => dispatch);
-      useSelector.mockImplementation((selector) => selector({
-        loginFields: given.loginFields,
-        accessToken: given.accessToken,
-      }));
-    });
+  context('when logged out', () => {
+    given('accessToken', () => null);
 
     it('changes input fields value', () => {
       const { getByLabelText } = render(<LoginFormContainer />);
@@ -60,15 +59,6 @@ describe('LoginFormContainer', () => {
 
   context('when logged in ', () => {
     given('accessToken', () => '12346578');
-
-    beforeEach(() => {
-      dispatch.mockClear();
-      useDispatch.mockImplementation(() => dispatch);
-      useSelector.mockImplementation((selector) => selector({
-        loginFields: given.loginFields,
-        accessToken: given.accessToken,
-      }));
-    });
 
     it('deletes accessToken', () => {
       const { getByRole } = render(<LoginFormContainer />);
