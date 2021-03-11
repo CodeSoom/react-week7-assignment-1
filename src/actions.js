@@ -28,6 +28,10 @@ export function setAccessToken(accessToken) {
   };
 }
 
+export function resetAccessToken() {
+  return { type: 'setAccessToken' };
+}
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
