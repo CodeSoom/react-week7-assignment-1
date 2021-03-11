@@ -17,20 +17,15 @@ describe('LoginForm', () => {
       loginFields={loginFields}
     />));
 
-    const emailInput = getByLabelText('email');
-    const passwordInput = getByLabelText('password');
+    const loginInputs = ['email', 'password'];
 
-    expect(emailInput).toBeInTheDocument();
-    expect(passwordInput).toBeInTheDocument();
+    loginInputs.forEach((loginInput) => {
+      const input = getByLabelText(loginInput);
 
-    expect(emailInput).toHaveAttribute('name', 'email');
-    expect(passwordInput).toHaveAttribute('name', 'password');
-
-    expect(emailInput).toHaveAttribute('type', 'email');
-    expect(passwordInput).toHaveAttribute('type', 'password');
-
-    expect(emailInput.value).toBe(loginFields.email);
-    expect(passwordInput.value).toBe(loginFields.password);
+      expect(input).toBeInTheDocument();
+      expect(input).toHaveAttribute('name', loginInput);
+      expect(input.value).toBe(loginFields[loginInput]);
+    });
   });
 
   it('renders "Log In" button', () => {
