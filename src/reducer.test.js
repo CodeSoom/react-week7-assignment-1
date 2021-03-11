@@ -5,6 +5,7 @@ import {
   setCategories,
   setRestaurants,
   setRestaurant,
+  setRestaurantReview,
   selectRegion,
   selectCategory,
   changeLoginFields,
@@ -20,6 +21,7 @@ describe('reducer', () => {
       categories: [],
       restaurants: [],
       restaurant: null,
+      restaurantReviews: [],
       selectedRegion: null,
       selectedCategory: null,
       loginFields: {
@@ -99,6 +101,20 @@ describe('reducer', () => {
 
       expect(state.restaurant.id).toBe(1);
       expect(state.restaurant.name).toBe('마법사주방');
+    });
+  });
+
+  describe('setRestaurantReview', () => {
+    it('changes reviews', () => {
+      const initialState = {
+        restaurantReviews: [],
+      };
+
+      const review = { score: '5', description: 'good!!!' };
+
+      const state = reducer(initialState, setRestaurantReview(review));
+
+      expect(state.restaurantReviews).toHaveLength(1);
     });
   });
 
