@@ -16,6 +16,7 @@ describe('LoginContainer', () => {
 
     useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) => selector({
+      accessToken: given.accessToken,
       loginFields: {
         email: '',
         password: '',
@@ -26,6 +27,8 @@ describe('LoginContainer', () => {
   const { email: EMAIL, password: PASSWORD } = LOGIN_FIELDS;
 
   context('when logged out', () => {
+    given('accessToken', () => null);
+
     it('renders email input', () => {
       const { queryByLabelText } = render(<LoginContainer />);
 
@@ -80,6 +83,15 @@ describe('LoginContainer', () => {
       fireEvent.submit(getByText('Log In'));
 
       expect(dispatch).toBeCalled();
+    });
+  });
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
+
+    it('renders "Log out" button', () => {
+      const { queryByText } = render(<LoginContainer />);
+
+      expect(queryByText('Log Out')).not.toBeNull();
     });
   });
 });
