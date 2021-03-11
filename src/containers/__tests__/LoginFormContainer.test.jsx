@@ -11,7 +11,7 @@ import LoginFormContainer from '@containers/LoginFormContainer';
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
-  context('without accessToken', () => {
+  context('when logged out', () => {
     given('loginFields', () => ({ email: '123@naver.com', password: '5678' }));
     given('accessToken', () => null);
 
@@ -58,7 +58,7 @@ describe('LoginFormContainer', () => {
     });
   });
 
-  context('with accessToken', () => {
+  context('when logged in ', () => {
     given('accessToken', () => '12346578');
 
     beforeEach(() => {
