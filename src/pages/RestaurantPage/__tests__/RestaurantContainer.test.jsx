@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, queryByText, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from '../RestaurantContainer';
+import { IgnorePlugin } from 'webpack';
 
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
@@ -20,6 +21,7 @@ describe('RestaurantContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
       review: { score: '4', description: '맛있다!' },
+      accessToken: given.accessToken,
     }));
   });
 
@@ -45,27 +47,40 @@ describe('RestaurantContainer', () => {
       expect(getByDisplayValue('4')).toBeInTheDocument();
     });
 
-    it('리뷰를 입력하면 입력을 update하는 dispatch함수가 실행된다.', () => {
-      const { queryByLabelText } = renderRestaurantContainer();
+    context('accessToken이 있을 때', () => {
+      given('accessToken', () => 'ACCESS_TOKEN');
+      it('리뷰를 입력하면 입력을 update하는 dispatch함수가 실행된다.', () => {
+        const { queryByLabelText } = renderRestaurantContainer();
 
-      const controls = [
-        { label: '평점', value: '23', times: 2 },
-        { label: '리뷰 내용', value: '요리를 잘하시네요!', times: 3 },
-      ];
+        const controls = [
+          { label: '평점', value: '23', times: 2 },
+          { label: '리뷰 내용', value: '요리를 잘하시네요!', times: 3 },
+        ];
 
-      controls.forEach(({ label, value, times }) => {
-        fireEvent.change(queryByLabelText(label), {
-          target: { value },
+        controls.forEach(({ label, value, times }) => {
+          fireEvent.change(queryByLabelText(label), {
+            target: { value },
+          });
+          expect(dispatch).toBeCalledTimes(times);
         });
-        expect(dispatch).toBeCalledTimes(times);
+      });
+
+      it('리뷰 남기기 버튼을 누르면 리뷰를 post하는 dispatch함수가 실행된다.', () => {
+        const { queryByText } = renderRestaurantContainer();
+
+        fireEvent.click(queryByText('리뷰 남기기'));
+        expect(dispatch).toBeCalledTimes(2);
       });
     });
 
-    it('리뷰 남기기 버튼을 누르면 리뷰를 post하는 dispatch함수가 실행된다.', () => {
-      const { queryByText } = renderRestaurantContainer();
+    context('accessToken이 없을 때', () => {
+      given('accessToken', () => '');
+      it('리뷰 남기는 form을 보여주지 않는다.', () => {
+        const { queryByLabelText } = renderRestaurantContainer();
 
-      fireEvent.click(queryByText('리뷰 남기기'));
-      expect(dispatch).toBeCalledTimes(2);
+        expect(queryByLabelText('평점')).not.toBeInTheDocument();
+        expect(queryByLabelText('리뷰 내용')).not.toBeInTheDocument();
+      });
     });
   });
 

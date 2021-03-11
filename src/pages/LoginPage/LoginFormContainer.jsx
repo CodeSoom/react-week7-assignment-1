@@ -2,7 +2,12 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updateUserLoginInputs, requestLogin, resetAccessToken } from '../../actions';
+import {
+  updateUserLoginInputs,
+  requestLogin,
+  resetAccessToken,
+  resetLoginInput,
+} from '../../actions';
 
 import LoginForm from './LoginForm';
 
@@ -23,6 +28,7 @@ export default function LoginFormContainer() {
 
   function handleLogout() {
     dispatch(resetAccessToken());
+    dispatch(resetLoginInput());
   }
 
   if (accessToken) {
