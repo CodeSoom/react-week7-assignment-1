@@ -120,5 +120,19 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setAccessToken('ACCESS_TOKEN'));
     });
+
+    it('catch error', async () => {
+      const response = {
+        status: 400,
+      };
+
+      global.fetch = jest.fn().mockRejectedValue(response);
+
+      try {
+        await expect(store.dispatch(requestLogin()));
+      } catch (event) {
+        expect(event).toEqual(response);
+      }
+    });
   });
 });
