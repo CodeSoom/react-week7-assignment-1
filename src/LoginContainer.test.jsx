@@ -51,8 +51,8 @@ describe('LoginContainer', () => {
         value: PASSWORD,
       }];
 
-      controls.forEach(({ lable, name, value }) => {
-        fireEvent.change(getByLabelText(lable), {
+      controls.forEach(({ label, name, value }) => {
+        fireEvent.change(getByLabelText(label), {
           target: {
             value,
           },
