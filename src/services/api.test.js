@@ -91,20 +91,20 @@ describe('api', () => {
     });
   });
 
-  describe('postReviw', () => {
+  describe('postReview', () => {
     beforeEach(() => {
       mockPostReviwFetch();
     });
 
     it('returns status 201', async () => {
-      const status = await postReview({
+      const response = await postReview({
         score: '1',
         description: '무우야호!',
         accessToken: '12345678',
         restaurantId: '1',
       });
 
-      expect(status).toEqual('201');
+      expect(response.status).toEqual('201');
     });
   });
 });
