@@ -12,6 +12,10 @@ const initialState = {
     email: '',
     password: '',
   },
+  reviewFields: {
+    score: '',
+    description: '',
+  },
 };
 
 const reducers = {
