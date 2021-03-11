@@ -113,7 +113,7 @@ describe('actions', () => {
 
   describe('changeReviewFields', () => {
     beforeEach(() => {
-      store = mockStore({ reviewFiels: { score: null, description: null } });
+      store = mockStore({ reviewFiels: { score: '', description: '' } });
     });
 
     it('runs changeReviewFields', () => {
@@ -182,10 +182,12 @@ describe('actions', () => {
     beforeEach(() => {
       store = mockStore({});
     });
+
     it('runs changeLoginFields', () => {
       store.dispatch(
         changeLoginFields({ name: 'email', value: 'tester@example.com' }),
       );
+
       store.dispatch(changeLoginFields({ name: 'password', value: 'test' }));
 
       const actions = store.getActions();
