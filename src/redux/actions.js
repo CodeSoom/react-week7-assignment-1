@@ -33,6 +33,13 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function setLoginFields(loginFields) {
+  return {
+    type: 'setLoginFields',
+    payload: { loginFields },
+  };
+}
+
 export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',

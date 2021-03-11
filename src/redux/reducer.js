@@ -7,6 +7,7 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginFields: {},
   accessToken: '',
 };
 
@@ -59,6 +60,13 @@ const reducers = {
     return ({
       ...state,
       accessToken,
+    });
+  },
+
+  setLoginFields(state, { payload: { loginFields } }) {
+    return ({
+      ...state,
+      loginFields,
     });
   },
 
