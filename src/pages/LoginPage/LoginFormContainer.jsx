@@ -22,6 +22,7 @@ export default function LoginFormContainer() {
   }
 
   function handleLogout() {
+    //TODO
   }
 
   if (accessToken) {

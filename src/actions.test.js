@@ -10,8 +10,6 @@ import {
   loadRestaurants,
   loadRestaurant,
   setRestaurants,
-  setRestaurant,
-  setAccessToken,
   sendReview,
 } from './actions';
 
@@ -99,8 +97,14 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurant(null));
-      expect(actions[1]).toEqual(setRestaurant({}));
+      expect(actions[0]).toEqual({
+        type: 'setRestaurant',
+        payload: { restaurant: null },
+      });
+      expect(actions[1]).toEqual({
+        type: 'setRestaurant',
+        payload: { restaurant: {} },
+      });
     });
   });
 
@@ -114,7 +118,12 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken('ACCESS_TOKEN'));
+      expect(actions[0]).toEqual(
+        {
+          type: 'setAccessToken',
+          payload: { accessToken: 'ACCESS_TOKEN' },
+        },
+      );
     });
   });
 
@@ -131,8 +140,14 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurant(null));
-      expect(actions[1]).toEqual(setRestaurant({}));
+      expect(actions[0]).toEqual({
+        type: 'setRestaurant',
+        payload: { restaurant: null },
+      });
+      expect(actions[1]).toEqual({
+        type: 'setRestaurant',
+        payload: { restaurant: {} },
+      });
     });
   });
 });

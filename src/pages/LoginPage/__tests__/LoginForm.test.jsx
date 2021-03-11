@@ -57,7 +57,7 @@ describe('LoginForm', () => {
     });
   });
 
-  it('Log In 버튼을 누르면 handleSubmit함수가 실행된다.', () => {
+  it('Log In 버튼을 누르면 onSubmit handler가 실행된다.', () => {
     const { queryByText } = renderLoginForm();
 
     fireEvent.click(queryByText('Log In'));
