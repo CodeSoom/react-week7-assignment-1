@@ -74,7 +74,7 @@ describe('LoginContainer', () => {
       expect(queryByText('Log In')).not.toBeNull();
     });
 
-    it('listens click event', () => {
+    it('listens "Log In" button click event', () => {
       const { getByText } = render(<LoginContainer />);
 
       fireEvent.submit(getByText('Log In'));
