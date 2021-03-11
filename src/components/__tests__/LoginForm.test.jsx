@@ -11,11 +11,12 @@ describe('LoginForm', () => {
   const loginFields = { email: 'tester@example.com', password: 'test' };
 
   it('renders input fields', () => {
-    const { getByLabelText } = render((<LoginForm
-      onChange={onChange}
-      onSubmit={onSubmit}
-      loginFields={loginFields}
-    />));
+    const { getByLabelText } = render((
+      <LoginForm
+        onChange={onChange}
+        onSubmit={onSubmit}
+        loginFields={loginFields}
+      />));
 
     const loginInputs = ['email', 'password'];
 
