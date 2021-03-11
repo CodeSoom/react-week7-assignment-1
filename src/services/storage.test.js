@@ -1,12 +1,14 @@
 import { setItem, getItem, removeItem } from './storage';
 
-describe('localStorage', () => {
+describe('storage', () => {
   const mockSetItem = jest.spyOn(Storage.prototype, 'setItem');
   const mockGetItem = jest.spyOn(Storage.prototype, 'getItem');
   const mockRemoveItem = jest.spyOn(Storage.prototype, 'removeItem');
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    mockSetItem.mockClear();
+    mockGetItem.mockClear();
+    mockRemoveItem.mockClear();
   });
 
   it('sets item', () => {
