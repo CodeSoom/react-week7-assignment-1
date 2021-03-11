@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './LoginForm';
 
-import { changeLoginFields, requestLogin } from './actions';
+import { changeLoginFields, requestLogin, setAccessToken } from './actions';
 import { get } from './utils';
 
 export default function LoginContainer() {
@@ -22,11 +22,21 @@ export default function LoginContainer() {
     dispatch(requestLogin());
   }
 
+  function handleClick() {
+    dispatch(setAccessToken(null));
+  }
+
   return (
     <>
       {accessToken ? (
         <div>
-          <button type="button">Log Out</button>
+          <button
+            type="button"
+            onClick={handleClick}
+          >
+            Log Out
+
+          </button>
         </div>
       ) : (
         <LoginForm
