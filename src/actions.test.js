@@ -19,6 +19,7 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/storage');
 
 describe('actions', () => {
   let store;
