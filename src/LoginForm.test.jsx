@@ -6,7 +6,7 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const handleSubmit = jest.fn();
-  const handeChange = jest.fn();
+  const handleChange = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -18,38 +18,42 @@ describe('LoginForm', () => {
   const renderLoginForm = () => render((
     <LoginForm
       fields={{ email, password }}
-      onChange={handeChange}
+      onChange={handleChange}
       onSubmit={handleSubmit}
     />
   ));
 
-  it('renders "e-mail" input controls and listens change event', () => {
-    const { getByLabelText } = renderLoginForm();
+  it('renders input contorls', () => {
+    const { getByLabelText } = renderLoginForm({ email, password });
 
     expect(getByLabelText('E-mail')).not.toBeNull();
+    expect(getByLabelText('Password')).not.toBeNull();
 
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'test@test.com' },
-    });
+    const controls = [
+      { label: 'E-mail', value: email },
+      { label: 'Password', value: password },
+    ];
 
-    expect(handeChange).toBeCalledWith({
-      name: 'email',
-      value: 'test@test.com',
+    controls.forEach(({ label, value }) => {
+      const input = getByLabelText(label);
+      expect(input.value).toBe(value);
     });
   });
 
-  it('renders "password" input controls listens change event', () => {
+  it('listens change event', () => {
     const { getByLabelText } = renderLoginForm();
 
-    expect(getByLabelText('Password')).not.toBeNull();
+    const controls = [
+      { label: 'E-mail', name: 'email', value: 'test@test.com' },
+      { label: 'Password', name: 'password', value: 'test' },
+    ];
 
-    fireEvent.change(getByLabelText('Password'), {
-      target: { value: '1234567*' },
-    });
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
 
-    expect(handeChange).toBeCalledWith({
-      name: 'password',
-      value: '1234567*',
+      fireEvent.change(input, { target: { value } });
+
+      expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 
