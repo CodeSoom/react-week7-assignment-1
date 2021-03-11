@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { fireEvent, queryByText, render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from '../RestaurantContainer';
-import { IgnorePlugin } from 'webpack';
 
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
@@ -37,18 +36,18 @@ describe('RestaurantContainer', () => {
       name: '마법사주방',
       address: '서울시 강남구',
     }));
-
-    it('renders name and address / review', () => {
-      const { container, getByDisplayValue } = renderRestaurantContainer();
-
-      expect(container).toHaveTextContent('마법사주방');
-      expect(container).toHaveTextContent('서울시');
-      expect(getByDisplayValue('맛있다!')).toBeInTheDocument();
-      expect(getByDisplayValue('4')).toBeInTheDocument();
-    });
-
     context('accessToken이 있을 때', () => {
       given('accessToken', () => 'ACCESS_TOKEN');
+
+      it('renders name and address / review', () => {
+        const { container, getByDisplayValue } = renderRestaurantContainer();
+
+        expect(container).toHaveTextContent('마법사주방');
+        expect(container).toHaveTextContent('서울시');
+        expect(getByDisplayValue('맛있다!')).toBeInTheDocument();
+        expect(getByDisplayValue('4')).toBeInTheDocument();
+      });
+
       it('리뷰를 입력하면 입력을 update하는 dispatch함수가 실행된다.', () => {
         const { queryByLabelText } = renderRestaurantContainer();
 
