@@ -32,6 +32,14 @@ export function resetAccessToken() {
   return { type: 'resetAccessToken' };
 }
 
+export function resetLoginInput() {
+  return { type: 'resetLoginInput' };
+}
+
+export function resetReviewInput() {
+  return { type: 'resetReviewInput' };
+}
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',

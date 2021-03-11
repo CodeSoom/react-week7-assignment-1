@@ -53,6 +53,20 @@ const reducers = {
     };
   },
 
+  resetLoginInput(state) {
+    return {
+      ...state,
+      userLoginInputs: { email: '', password: '' },
+    };
+  },
+
+  resetReviewInput(state) {
+    return {
+      ...state,
+      review: { score: '', description: '' },
+    };
+  },
+
   setRegions(state, { payload: { regions } }) {
     return {
       ...state,

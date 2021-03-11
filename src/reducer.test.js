@@ -11,6 +11,8 @@ import {
   setAccessToken,
   updateReview,
   resetAccessToken,
+  resetLoginInput,
+  resetReviewInput,
 } from './actions';
 
 describe('reducer', () => {
@@ -169,7 +171,8 @@ describe('reducer', () => {
 
       const state = reducer(initialState, resetLoginInput());
 
-      expect(state.userLoginInputs).toBe({ email: '', password: '' });
+      expect(state.userLoginInputs.email).toBe('');
+      expect(state.userLoginInputs.password).toBe('');
     });
   });
 
@@ -181,7 +184,8 @@ describe('reducer', () => {
 
       const state = reducer(initialState, resetReviewInput());
 
-      expect(state.review).toBe({ score: '', description: '' });
+      expect(state.review.score).toBe('');
+      expect(state.review.description).toBe('');
     });
   });
 
