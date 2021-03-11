@@ -161,6 +161,30 @@ describe('reducer', () => {
     });
   });
 
+  describe('resetLoginInput', () => {
+    it('UserLoginInputs을 reset한다.', () => {
+      const initialState = {
+        userLoginInputs: { email: 'test@naver.com', password: '1234' },
+      };
+
+      const state = reducer(initialState, resetLoginInput());
+
+      expect(state.userLoginInputs).toBe({ email: '', password: '' });
+    });
+  });
+
+  describe('resetReviewInput', () => {
+    it('Review를 reset한다.', () => {
+      const initialState = {
+        review: { score: '5', description: '예술이다' },
+      };
+
+      const state = reducer(initialState, resetReviewInput());
+
+      expect(state.review).toBe({ score: '', description: '' });
+    });
+  });
+
   describe('updateUserLoginInputs', () => {
     it('로그인 입력을 업데이트한다.', () => {
       const initialState = {
