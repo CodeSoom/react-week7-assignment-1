@@ -105,7 +105,7 @@ export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
     try {
-      const accessToken = postLogin({ email, password });
+      const accessToken = await postLogin({ email, password });
       dispatch(setAccessToken(accessToken));
     } catch (error) {
       // 에러 처리 추가하기
