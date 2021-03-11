@@ -11,10 +11,10 @@ import LoginFormContainer from '@containers/LoginFormContainer';
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
-  given('loginFields', () => ({ email: '123@naver.com', password: '5678' }));
-  given('accessToken', () => null);
-
   context('without accessToken', () => {
+    given('loginFields', () => ({ email: '123@naver.com', password: '5678' }));
+    given('accessToken', () => null);
+
     beforeEach(() => {
       dispatch.mockClear();
       useDispatch.mockImplementation(() => dispatch);
@@ -27,21 +27,25 @@ describe('LoginFormContainer', () => {
     it('changes input fields value', () => {
       const { getByLabelText } = render(<LoginFormContainer />);
 
-      const emailInput = getByLabelText('email');
-      const passwordInput = getByLabelText('password');
+      const reviewInputs = [
+        {
+          label: 'email', originalValue: '123@naver.com', changedValue: 'tester@example.com',
+        },
+        {
+          label: 'password', originalValue: '5678', changedValue: 'test',
+        },
+      ];
 
-      expect(emailInput.value).toBe('123@naver.com');
-      fireEvent.change(emailInput, { target: { value: 'tester@example.com' } });
-      expect(dispatch).toHaveBeenCalledWith({
-        type: 'changeLoginFields',
-        payload: { name: 'email', value: 'tester@example.com' },
-      });
+      reviewInputs.forEach(({ label, originalValue, changedValue }) => {
+        const input = getByLabelText(label);
 
-      expect(passwordInput.value).toBe('5678');
-      fireEvent.change(passwordInput, { target: { value: 'test' } });
-      expect(dispatch).toHaveBeenCalledWith({
-        type: 'changeLoginFields',
-        payload: { name: 'password', value: 'test' },
+        expect(input.value).toBe(originalValue);
+        fireEvent.change(input, { target: { value: changedValue } });
+
+        expect(dispatch).toHaveBeenCalledWith({
+          type: 'changeLoginFields',
+          payload: { name: label, value: changedValue },
+        });
       });
     });
 
