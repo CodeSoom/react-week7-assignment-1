@@ -38,6 +38,22 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [
+        {
+          id: 1,
+          restaurantId: 1,
+          name: '테스터',
+          score: 5,
+          description: '훌륭하다 훌륭하다 지구인놈들',
+        },
+        {
+          id: 3,
+          restaurantId: 1,
+          name: '테스터',
+          score: 3,
+          description: 'Hi!',
+        },
+      ],
     }));
 
     it('renders name and address', () => {
@@ -45,6 +61,12 @@ describe('RestaurantContainer', () => {
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+    });
+
+    it('renders reviews', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('리뷰');
     });
 
     context('when logged in', () => {
