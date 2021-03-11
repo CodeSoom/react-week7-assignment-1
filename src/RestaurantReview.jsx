@@ -1,6 +1,11 @@
 import React from 'react';
 
-export default function RestaurantReview({ score, description, onChange }) {
+export default function RestaurantReview({
+  score,
+  description,
+  onChange,
+  onClick,
+}) {
   function handleChange(event) {
     const { target: { name, value } } = event;
 
@@ -31,7 +36,7 @@ export default function RestaurantReview({ score, description, onChange }) {
           />
         </div>
 
-        <button type="button">리뷰 남기기</button>
+        <button type="button" onClick={onClick}>리뷰 남기기</button>
       </div>
     </>
   );
