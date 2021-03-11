@@ -106,7 +106,7 @@ export function requestLogin() {
     const { loginFields: { email, password } } = getState();
 
     try {
-      const accessToken = postLogin({ email, password });
+      const accessToken = await postLogin({ email, password });
       dispatch(setAccessTocken(accessToken));
     } catch (e) {
       // TODO: 에러 처리
