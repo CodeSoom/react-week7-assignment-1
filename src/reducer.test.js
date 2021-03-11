@@ -10,6 +10,7 @@ import {
   updateUserLoginInputs,
   setAccessToken,
   updateReview,
+  resetAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -145,6 +146,18 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
 
       expect(state.accessToken).toEqual('ACCESS_TOKEN');
+    });
+  });
+
+  describe('resetAccessToken', () => {
+    it('changes regions', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+      };
+
+      const state = reducer(initialState, resetAccessToken());
+
+      expect(state.accessToken).toBe('');
     });
   });
 
