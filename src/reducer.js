@@ -7,6 +7,10 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginInputs: {
+    id: '',
+    password: '',
+  },
 };
 
 const reducers = {
@@ -38,6 +42,13 @@ const reducers = {
     };
   },
 
+  setLoginInputs(state, { payload: { loginInputs } }) {
+    return {
+      ...state,
+      loginInputs,
+    };
+  },
+
   selectRegion(state, { payload: { regionId } }) {
     const { regions } = state;
     return {
@@ -53,6 +64,7 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
+
 };
 
 function defaultReducer(state) {
