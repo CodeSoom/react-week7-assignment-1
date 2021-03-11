@@ -35,8 +35,10 @@ export async function postLogin({ email, password }) {
     headers: {
       'Content-Type': 'application/json',
     },
+    mode: 'no-cors',
     body: JSON.stringify({ email, password }),
   });
+
   const { accessToken } = await response.json();
   return accessToken;
 }
