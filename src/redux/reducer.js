@@ -7,6 +7,7 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  accessToken: '',
 };
 
 const reducers = {
@@ -53,6 +54,14 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return ({
+      ...state,
+      accessToken,
+    });
+  },
+
 };
 
 function defaultReducer(state) {
