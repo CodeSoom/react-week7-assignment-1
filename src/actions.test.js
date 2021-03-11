@@ -18,10 +18,13 @@ import {
   postReviewFields,
 } from './actions';
 
+import { setItem } from './services/storage';
+
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/storage');
 
 describe('actions', () => {
   let store;
@@ -225,6 +228,8 @@ describe('actions', () => {
 
       it('runs setAccessToken', async () => {
         await store.dispatch(postLoginFields());
+
+        expect(setItem).toHaveBeenCalledWith('accessToken', undefined);
 
         const actions = store.getActions();
 
