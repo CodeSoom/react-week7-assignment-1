@@ -85,6 +85,7 @@ describe('LoginContainer', () => {
       expect(dispatch).toBeCalled();
     });
   });
+
   context('when logged in', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
 
@@ -92,6 +93,19 @@ describe('LoginContainer', () => {
       const { queryByText } = render(<LoginContainer />);
 
       expect(queryByText('Log Out')).not.toBeNull();
+    });
+
+    it('listens "Log out" button click event', () => {
+      const { getByText } = render(<LoginContainer />);
+
+      fireEvent.click(getByText('Log Out'));
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: {
+          accessToken: null,
+        },
+      });
     });
   });
 });
