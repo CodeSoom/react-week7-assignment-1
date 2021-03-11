@@ -7,6 +7,8 @@ import {
   postReview,
 } from './services/api';
 
+import { setItem } from './services/storage';
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -123,6 +125,8 @@ export function postLoginFields() {
     }
 
     const { accessToken } = await postLogin({ email, password });
+
+    setItem('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
   };
