@@ -22,7 +22,8 @@ export default function LoginFormContainer() {
   }
 
   function handleLogout() {
-    //TODO
+    dispatch();
+    // 디테일한 action을 추가해야한다.
   }
 
   if (accessToken) {
