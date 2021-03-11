@@ -25,14 +25,7 @@ describe('LoginForm', () => {
     );
   }
 
-  it('renders input controls', () => {
-    const { getByLabelText } = renderLoginForm({});
-
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
-  });
-
-  it('listens change events', () => {
+  it('renders input controls and listens change events', () => {
     const email = 'test@test';
     const password = '1234';
 
@@ -58,7 +51,7 @@ describe('LoginForm', () => {
 
       expect(input.value).toBe(origin);
 
-      fireEvent.change(input, { target: { value } });
+      fireEvent.change(input, { target: { name, value } });
 
       expect(handleChange).toBeCalledWith({ name, value });
     });
