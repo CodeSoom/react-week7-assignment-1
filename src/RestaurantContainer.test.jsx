@@ -56,6 +56,7 @@ describe('RestaurantContainer', () => {
 
     it('listens change event', () => {
       const { queryByLabelText } = renderRestaurantContainer();
+
       const controls = [{
         label: '평점',
         name: 'score',
@@ -81,6 +82,14 @@ describe('RestaurantContainer', () => {
           },
         });
       });
+    });
+
+    it('listens change event', () => {
+      const { getByText } = renderRestaurantContainer();
+
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(dispatch).toBeCalledTimes(2);
     });
   });
 
