@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -40,6 +40,20 @@ describe('RestaurantContainer', () => {
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+    });
+
+    it('renders review write form', () => {
+      const { getByLabelText } = render((
+        <RestaurantContainer restaurantId="1" />
+      ));
+
+      fireEvent.change(getByLabelText('평점'), {
+        target: { value: '5' },
+      });
+
+      fireEvent.change(getByLabelText('리뷰 내용'), {
+        target: { value: '정말 최고 :)' },
+      });
     });
   });
 
