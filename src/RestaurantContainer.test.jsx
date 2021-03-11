@@ -24,6 +24,11 @@ describe('RestaurantContainer', () => {
     }));
   });
 
+  given('reviewFields', () => ({
+    score: '',
+    description: '',
+  }));
+
   it('dispatches action', () => {
     renderRestaurantContainer();
 
@@ -95,6 +100,10 @@ describe('RestaurantContainer', () => {
 
   context('without restaurant', () => {
     given('restaurant', () => null);
+    given('reviewFields', () => ({
+      score: '',
+      description: '',
+    }));
 
     it('renders loading', () => {
       const { container } = renderRestaurantContainer();

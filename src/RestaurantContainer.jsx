@@ -21,14 +21,13 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
+  const { score, description } = useSelector(get('reviewFields'));
 
   if (!restaurant) {
     return (
       <p>Loading...</p>
     );
   }
-
-  const { score, description } = useSelector(get('reviewFields'));
 
   function handleChange({ name, value }) {
     dispatch(changeReviewField({ name, value }));
