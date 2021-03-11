@@ -7,6 +7,7 @@ import LoginForm from './LoginForm';
 import {
   requestLogin,
   changeLoginField,
+  setAccessTocken,
 } from './actions';
 
 import { get } from './utils';
@@ -15,6 +16,8 @@ export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
   const loginFields = useSelector(get('loginFields'));
+
+  const accessTocken = useSelector(get('accessToken'));
 
   function handleChange({ name, value }) {
     dispatch(changeLoginField({ name, value }));
@@ -31,6 +34,7 @@ export default function LoginFormContainer() {
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
+      <p>{accessTocken}</p>
     </div>
   );
 }
