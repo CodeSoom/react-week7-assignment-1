@@ -5,6 +5,7 @@ import {
   setCategories,
   setRestaurants,
   setRestaurant,
+  setLoginInputs,
   selectRegion,
   selectCategory,
 } from './actions';
@@ -18,6 +19,10 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginInputs: {
+        id: '',
+        password: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -122,6 +127,27 @@ describe('reducer', () => {
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
+      });
+    });
+  });
+
+  describe('updateLoginInputs', () => {
+    it('changes id and passwords', () => {
+      const initialState = {
+        loginInputs: {
+          id: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, setLoginInputs({
+        id: 'currentId',
+        password: 'currentPasswords',
+      }));
+
+      expect(state.loginInputs).toEqual({
+        id: 'currentId',
+        password: 'currentPasswords',
       });
     });
   });

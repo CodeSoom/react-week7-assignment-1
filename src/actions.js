@@ -33,6 +33,10 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function setLoginInputs() {
+
+}
+
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
