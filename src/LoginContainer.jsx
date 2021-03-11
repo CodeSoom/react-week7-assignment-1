@@ -15,8 +15,8 @@ export default function LoginContainer() {
     dispatch(changeLoginFields({ value, name }));
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(event) {
+    event.preventDefault();
 
     dispatch(requestLogin());
   }

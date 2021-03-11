@@ -4,8 +4,8 @@ export default function LoginForm({
   email, password,
   onChange, onSubmit,
 }) {
-  function HandleChange(e) {
-    const { target: { value, name } } = e;
+  function HandleChange(event) {
+    const { target: { value, name } } = event;
 
     onChange({ value, name });
   }
