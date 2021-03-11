@@ -8,6 +8,7 @@ import {
   selectRegion,
   selectCategory,
   changeLoginField,
+  changeReviewField,
   setAccessToken,
 } from './actions';
 
@@ -157,6 +158,30 @@ describe('reducer', () => {
         );
 
         expect(state.loginFields[name]).toBe(value);
+      });
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('changes review field', () => {
+      const fields = [
+        { name: 'score', origin: '', value: '5' },
+        { name: 'description', origin: '', value: '돈쭐맛집' },
+      ];
+
+      fields.forEach(({ name, origin, value }) => {
+        const initialState = {
+          reviewFields: {
+            [name]: origin,
+          },
+        };
+
+        const state = reducer(
+          initialState,
+          changeReviewField({ name, value }),
+        );
+
+        expect(state.reviewFields[name]).toBe(value);
       });
     });
   });
