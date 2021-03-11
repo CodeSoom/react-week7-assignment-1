@@ -10,6 +10,7 @@ import REGIONS from '../../fixtures/regions';
 import CATEGORIES from '../../fixtures/categories';
 import RESTAURANTS from '../../fixtures/restaurants';
 import RESTAURANT from '../../fixtures/restaurant';
+import ACCESS_TOKEN from '../../fixtures/accessToken';
 
 describe('api', () => {
   const mockFetch = (data) => {
@@ -72,7 +73,7 @@ describe('api', () => {
   describe('postLogin', () => {
     beforeEach(() => {
       mockFetch({
-        accessToken: 'ACCESS_TOKEN',
+        accessToken: ACCESS_TOKEN,
       });
     });
 
@@ -82,7 +83,7 @@ describe('api', () => {
         password: 'test',
       });
 
-      expect(accessToken).toEqual('ACCESS_TOKEN');
+      expect(accessToken).toEqual(ACCESS_TOKEN);
     });
   });
 });
