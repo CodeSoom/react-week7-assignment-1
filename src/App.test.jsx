@@ -22,6 +22,7 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      accessToken: null,
       regions: [
         { id: 1, name: '서울' },
       ],
@@ -72,6 +73,14 @@ describe('App', () => {
       const { container } = renderApp({ path: '/restaurants/1' });
 
       expect(container).toHaveTextContent('마녀주방');
+    });
+  });
+
+  context('with path /login', () => {
+    it('renders tje login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
     });
   });
 
