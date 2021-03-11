@@ -6,9 +6,11 @@ import RestaurantDetail from './RestaurantDetail';
 
 import {
   loadRestaurant,
+  changeReviewFields,
 } from './actions';
 
 import { get } from './utils';
+import RestaurantReview from './RestaurantReview';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -25,21 +27,14 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
+  function handleChange({ value, name }) {
+    dispatch(changeReviewFields({ value, name }));
+  }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <div>
-        <div>
-          <label htmlFor="score-input">평점</label>
-          <input id="score-input" />
-        </div>
-        <div>
-          <label htmlFor="score-input">리뷰 내용</label>
-          <input id="score-input" />
-        </div>
-
-        <button type="button">리뷰 남기기</button>
-      </div>
+      <RestaurantReview onChange={handleChange} />
     </>
   );
 }
