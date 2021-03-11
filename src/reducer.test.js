@@ -105,9 +105,7 @@ describe('reducer', () => {
         }),
       );
 
-      const {
-        reviewFields: { score, description },
-      } = state;
+      const { score, description } = state.reviewFields;
 
       expect(score).toBe(3);
       expect(description).toBe('그만큼 맜있으시다는 거지');
@@ -157,9 +155,7 @@ describe('reducer', () => {
         changeLoginFields({ name: 'email', value: 'tester@example.com' }),
       );
 
-      const {
-        loginFields: { email, password },
-      } = state;
+      const { email, password } = state.loginFields;
 
       expect(email).toEqual('tester@example.com');
       expect(password).toEqual('1234');
