@@ -94,7 +94,7 @@ describe('actions', () => {
       store = mockStore({});
     });
 
-    it('dispatchs setRestaurant', async () => {
+    it('dispatches setRestaurant', async () => {
       await store.dispatch(loadRestaurant({ restaurantId: 1 }));
 
       const actions = store.getActions();
@@ -111,7 +111,7 @@ describe('actions', () => {
       });
     });
 
-    it('dispatchs setAccessToken', async () => {
+    it('dispatches setAccessToken', async () => {
       await store.dispatch(requestLogin());
 
       const actions = store.getActions();
@@ -128,7 +128,7 @@ describe('actions', () => {
       });
     });
 
-    it('dispatchs setRestaurant', async () => {
+    it('dispatches setRestaurant', async () => {
       await store.dispatch(saveReview());
 
       const actions = store.getActions();
