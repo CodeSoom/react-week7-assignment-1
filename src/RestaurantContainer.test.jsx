@@ -43,16 +43,24 @@ describe('RestaurantContainer', () => {
     });
 
     it('renders review write form', () => {
-      const { getByLabelText } = render((
-        <RestaurantContainer restaurantId="1" />
-      ));
+      const { getByLabelText } = renderRestaurantContainer();
 
       fireEvent.change(getByLabelText('평점'), {
         target: { value: '5' },
       });
 
+      expect(dispatch).toBeCalledWith({
+        type: 'changeReviewField',
+        payload: { name: 'score', value: '5' },
+      });
+
       fireEvent.change(getByLabelText('리뷰 내용'), {
         target: { value: '정말 최고 :)' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeReviewField',
+        payload: { name: 'description', value: '5' },
       });
     });
   });
