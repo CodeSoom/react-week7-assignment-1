@@ -55,5 +55,12 @@ describe('LoginFormContainer', () => {
 
       expect(queryByText('Log out')).toBeInTheDocument();
     });
+
+    it('로그아웃 버튼을 누르면 accessToken을 제거하는 dispatch가 실행된다.', () => {
+      const { queryByText } = render(<LoginFormContainer />);
+      fireEvent.click(queryByText('Log out'));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 });
