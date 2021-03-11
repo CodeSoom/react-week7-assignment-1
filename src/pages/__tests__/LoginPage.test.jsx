@@ -24,19 +24,18 @@ describe('LoginPage', () => {
   it('renders input fields', () => {
     const { getByLabelText } = render(<LoginPage />);
 
-    const emailInput = getByLabelText('email');
-    const passwordInput = getByLabelText('password');
+    const loginInputs = [
+      { label: 'email', value: 'tester@example.com' },
+      { label: 'password', value: 'test' },
+    ];
 
-    expect(emailInput).toBeInTheDocument();
-    expect(passwordInput).toBeInTheDocument();
+    loginInputs.forEach(({ label, value }) => {
+      const input = getByLabelText(label);
 
-    expect(emailInput).toHaveAttribute('name', 'email');
-    expect(passwordInput).toHaveAttribute('name', 'password');
-
-    expect(emailInput).toHaveAttribute('type', 'email');
-    expect(passwordInput).toHaveAttribute('type', 'password');
-
-    expect(emailInput.value).toBe('tester@example.com');
-    expect(passwordInput.value).toBe('test');
+      expect(input).toBeInTheDocument();
+      expect(input).toHaveAttribute('name', label);
+      expect(input).toHaveAttribute('type', label);
+      expect(input.value).toBe(value);
+    });
   });
 });
