@@ -10,6 +10,7 @@ const { score: SCORE, description: DESCRIPTION } = REVIEWS;
 
 describe('RestaurantReview', () => {
   const handleChange = jest.fn();
+  const handleClick = jest.fn();
 
   function renderRestaurantReview() {
     return render(
@@ -17,12 +18,13 @@ describe('RestaurantReview', () => {
         score=""
         description=""
         onChange={handleChange}
+        onClick={handleClick}
       />,
     );
   }
 
   beforeEach(() => {
-    handleChange.mockClear();
+    jest.clearAllMocks();
   });
 
   it('renders review form', () => {
@@ -57,5 +59,13 @@ describe('RestaurantReview', () => {
         value,
       });
     });
+  });
+
+  it('listens change event', () => {
+    const { getByText } = renderRestaurantReview();
+
+    fireEvent.click(getByText('리뷰 남기기'));
+
+    expect(handleClick).toBeCalled();
   });
 });
