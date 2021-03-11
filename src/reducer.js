@@ -6,6 +6,7 @@ const initialState = {
   categories: [],
   restaurants: [],
   restaurant: null,
+  restaurantReviews: [],
   selectedRegion: null,
   selectedCategory: null,
   loginFields: {
@@ -44,6 +45,14 @@ const reducers = {
     return {
       ...state,
       restaurant,
+    };
+  },
+
+  setRestaurantReview(state, { payload: { review } }) {
+    const { restaurantReviews } = state;
+    return {
+      ...state,
+      restaurantReviews: [review, ...restaurantReviews],
     };
   },
 
