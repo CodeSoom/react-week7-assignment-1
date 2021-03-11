@@ -95,6 +95,8 @@ export function changeLoginField({ name, value }) {
 
 export function requestLogin() {
   return async (dispatch, getState) => {
-
+    // TODO : state = email, password
+    // HTTP POST
+    // dispatch(setAccessToken(accessToken));
   }
 }
