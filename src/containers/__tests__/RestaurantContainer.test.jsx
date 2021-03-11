@@ -4,6 +4,8 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import given from 'given2';
+
 import RestaurantContainer from '@containers/RestaurantContainer';
 
 describe('RestaurantContainer', () => {
@@ -60,29 +62,34 @@ describe('RestaurantContainer', () => {
 
   context('when logged in ', () => {
     given('accessToken', () => '12345678');
+
     it('changes input fields value', () => {
       const { getByLabelText } = renderRestaurantContainer();
 
-      const scoreInput = getByLabelText('score');
-      const reviewInput = getByLabelText('description');
+      const reviewInputs = [
+        {
+          label: 'score', originalValue: '1', changedValue: '3',
+        }, {
+          label: 'description', originalValue: '그만큼 맜없다는 거지', changedValue: '그만큼 맜있다는 거지',
+        },
+      ];
 
-      expect(scoreInput.value).toBe('1');
-      fireEvent.change(scoreInput, { target: { value: '3' } });
-      expect(dispatch).toHaveBeenCalledWith({
-        type: 'changeReviewFields',
-        payload: { name: 'score', value: '3' },
-      });
+      reviewInputs.forEach(({ label, originalValue, changedValue }) => {
+        const input = getByLabelText(label);
 
-      expect(reviewInput.value).toBe('그만큼 맜없다는 거지');
-      fireEvent.change(reviewInput, { target: { value: '그만큼 맜있다는 거지' } });
-      expect(dispatch).toHaveBeenCalledWith({
-        type: 'changeReviewFields',
-        payload: { name: 'description', value: '그만큼 맜있다는 거지' },
+        expect(input.value).toBe(originalValue);
+
+        fireEvent.change(input, { target: { value: changedValue } });
+        expect(dispatch).toHaveBeenCalledWith({
+          type: 'changeReviewFields',
+          payload: { name: label, value: changedValue },
+        });
       });
     });
 
     it('submits input fields values', () => {
       const { getByRole } = renderRestaurantContainer();
+
       fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
 
       expect(dispatch).toHaveBeenCalledTimes(2);
