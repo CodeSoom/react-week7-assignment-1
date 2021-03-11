@@ -7,6 +7,7 @@ import RestaurantDetail from './RestaurantDetail';
 import {
   loadRestaurant,
   changeReviewFields,
+  sendReview,
 } from './actions';
 
 import { get } from './utils';
@@ -31,10 +32,14 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(changeReviewFields({ value, name }));
   }
 
+  function handleClick() {
+    dispatch(sendReview({ restaurantId }));
+  }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <RestaurantReview onChange={handleChange} />
+      <RestaurantReview onChange={handleChange} onClick={handleClick} />
     </>
   );
 }
