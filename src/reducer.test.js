@@ -150,7 +150,7 @@ describe('reducer', () => {
   });
 
   describe('resetAccessToken', () => {
-    it('changes regions', () => {
+    it('AccessToken을 reset한다.', () => {
       const initialState = {
         accessToken: 'ACCESS_TOKEN',
       };

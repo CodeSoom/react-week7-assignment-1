@@ -29,7 +29,7 @@ export function setAccessToken(accessToken) {
 }
 
 export function resetAccessToken() {
-  return { type: 'setAccessToken' };
+  return { type: 'resetAccessToken' };
 }
 
 export function setRegions(regions) {
