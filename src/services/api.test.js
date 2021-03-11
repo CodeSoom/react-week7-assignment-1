@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -87,17 +88,18 @@ describe('api', () => {
 
   describe('saveReview', () => {
     beforeEach(() => {
-      mockFetch('');
+      mockFetch({});
     });
 
-    // TODO: 리뷰 저장 API가 어떤 응답 주는지 확인해야 함
-    // it('returns access token', async () => {
-    //   const accessToken = await postLogin({
-    //     email: 'test@test.com',
-    //     password: 'test',
-    //   });
+    it('returns empty object', async () => {
+      const data = await postReview({
+        accessToken: 'TOKEN',
+        restaurantId: 1,
+        score: '5',
+        description: '돈쭐맛집',
+      });
 
-    //   expect(accessToken).toEqual(ACCESSTOKEN);
-    // });
+      expect(data).toEqual({});
+    });
   });
 });
