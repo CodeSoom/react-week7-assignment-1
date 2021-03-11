@@ -7,6 +7,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  setLoginFields,
   setAccessToken,
 } from './actions';
 
@@ -19,6 +20,7 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {},
       accessToken: '',
     };
 
@@ -137,6 +139,26 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken('123'));
 
       expect(state.accessToken).toBe('123');
+    });
+  });
+
+  describe('setLoginFields', () => {
+    it('changes fields', () => {
+      const initialState = {
+        loginFields: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const loginFields = {
+        email: 'test@test',
+        password: 'ilovetdd',
+      };
+
+      const state = reducer(initialState, setLoginFields(loginFields));
+
+      expect(state.loginFields).toEqual(loginFields);
     });
   });
 });
