@@ -35,27 +35,27 @@ describe('RestaurantReview', () => {
 
   it('listens change event', () => {
     const { queryByLabelText } = renderRestaurantReview();
-
-    fireEvent.change(queryByLabelText('평점'), {
-      target: {
-        value: SCORE,
-      },
-    });
-
-    expect(handleChange).toBeCalledWith({
+    const controls = [{
+      label: '평점',
       name: 'score',
       value: SCORE,
-    });
-
-    fireEvent.change(queryByLabelText('리뷰 내용'), {
-      target: {
-        value: DESCRIPTION,
-      },
-    });
-
-    expect(handleChange).toBeCalledWith({
+    }, {
+      label: '리뷰 내용',
       name: 'description',
       value: DESCRIPTION,
+    }];
+
+    controls.forEach(({ label, name, value }) => {
+      fireEvent.change(queryByLabelText(label), {
+        target: {
+          value,
+        },
+      });
+
+      expect(handleChange).toBeCalledWith({
+        name,
+        value,
+      });
     });
   });
 });
