@@ -94,6 +94,7 @@ describe('api', () => {
         restaurantId: 1,
         score: '5',
         description: 'good!',
+        token: 'ACCESS_TOKEN',
       });
 
       expect(response).toBeUndefined();
