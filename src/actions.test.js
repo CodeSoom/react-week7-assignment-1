@@ -228,7 +228,7 @@ describe('actions', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(setAccessToken('12345678'));
+        expect(actions[0]).toEqual(setAccessToken());
       });
     });
   });
