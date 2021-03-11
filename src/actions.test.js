@@ -118,7 +118,12 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken('ACCESS_TOKEN'));
+      expect(actions).toEqual([{
+        type: 'setAccessToken',
+        payload: {
+          accessToken: 'ACCESS_TOKEN',
+        },
+      }]);
     });
 
     it('catch error', async () => {
