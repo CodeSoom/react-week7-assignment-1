@@ -1,10 +1,24 @@
 import React from 'react';
 
-export default function LoginForm({ onChange, onSubmit, loginFields }) {
+import { changeLoginFields, postLoginFields } from 'src/actions';
+
+import { useDispatch } from 'react-redux';
+
+export default function LoginForm({ loginFields }) {
+  const dispatch = useDispatch();
   const { email, password } = loginFields;
 
+  function handleChange({ target: { name, value } }) {
+    dispatch(changeLoginFields({ name, value }));
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    dispatch(postLoginFields());
+  }
+
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit}>
       <label htmlFor="email">
         email
       </label>
@@ -12,7 +26,7 @@ export default function LoginForm({ onChange, onSubmit, loginFields }) {
         type="email"
         id="email"
         name="email"
-        onChange={onChange}
+        onChange={handleChange}
         value={email}
       />
       <label htmlFor="password">
@@ -22,7 +36,7 @@ export default function LoginForm({ onChange, onSubmit, loginFields }) {
         type="password"
         id="password"
         name="password"
-        onChange={onChange}
+        onChange={handleChange}
         value={password}
       />
       <button type="submit">Log In</button>

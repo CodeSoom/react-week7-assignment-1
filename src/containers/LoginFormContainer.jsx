@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from '@components/LoginForm';
 
-import { changeLoginFields, deleteAccessToken, postLoginFields } from 'src/actions';
+import { deleteAccessToken } from 'src/actions';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
@@ -25,20 +25,7 @@ export default function LoginFormContainer() {
     );
   }
 
-  function handleChange({ target: { name, value } }) {
-    dispatch(changeLoginFields({ name, value }));
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    dispatch(postLoginFields());
-  }
-
   return (
-    <LoginForm
-      onChange={handleChange}
-      onSubmit={handleSubmit}
-      loginFields={loginFields}
-    />
+    <LoginForm loginFields={loginFields} />
   );
 }
