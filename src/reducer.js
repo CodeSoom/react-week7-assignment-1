@@ -8,6 +8,7 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   loginFields: {},
+  accessToken: '',
 };
 
 const reducers = {
@@ -54,6 +55,7 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
+
   changeLoginField(state, { payload: { name, value } }) {
     return {
       ...state,
@@ -61,6 +63,13 @@ const reducers = {
         ...state.loginFields,
         [name]: value,
       },
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
     };
   },
 };
