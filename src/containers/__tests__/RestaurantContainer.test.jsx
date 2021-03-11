@@ -23,8 +23,6 @@ describe('RestaurantContainer', () => {
 
   given('accessToken', () => null);
 
-  given('reviewFields', () => ({ score: '1', description: '그만큼 맜없다는 거지' }));
-
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
@@ -32,7 +30,7 @@ describe('RestaurantContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
       accessToken: given.accessToken,
-      reviewFields: given.reviewFields,
+      reviewFields: { score: '1', description: '그만큼 맜없다는 거지' },
     }));
   });
 
