@@ -12,6 +12,10 @@ const initialState = {
     email: '',
     password: '',
   },
+  reviewFields: {
+    score: '',
+    description: '',
+  },
 };
 
 const reducers = {
@@ -65,12 +69,24 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
+
   changeLoginFields(state, { payload: { name, value } }) {
     const { loginFields } = state;
     return {
       ...state,
       loginFields: {
         ...loginFields,
+        [name]: value,
+      },
+    };
+  },
+
+  changeReviewFields(state, { payload: { name, value } }) {
+    const { reviewFields } = state;
+    return {
+      ...state,
+      reviewFields: {
+        ...reviewFields,
         [name]: value,
       },
     };
