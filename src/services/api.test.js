@@ -3,6 +3,7 @@ import {
   CATEGORIES,
   RESTAURANTS,
   RESTAURANT,
+  TOKEN,
 } from '@fixtures';
 
 import {
@@ -10,6 +11,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
 } from '@api';
 
 describe('api', () => {
@@ -67,6 +69,21 @@ describe('api', () => {
       const restaurant = await fetchRestaurant({ restaurantId: 1 });
 
       expect(restaurant).toEqual(RESTAURANT);
+    });
+  });
+
+  describe('postLogin', () => {
+    beforeEach(() => {
+      mockFetch(TOKEN);
+    });
+
+    it('returns accessToken', async () => {
+      const accessToken = await postLogin({
+        email: 'tester@example.com',
+        password: 'test',
+      });
+
+      expect(accessToken).toEqual(TOKEN.accessToken);
     });
   });
 });
