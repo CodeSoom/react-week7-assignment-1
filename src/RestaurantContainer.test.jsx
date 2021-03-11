@@ -42,13 +42,6 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('서울시');
     });
 
-    it('renders review write form', () => {
-      const { queryByLabelText } = renderRestaurantContainer();
-
-      expect(queryByLabelText('평점')).not.toBeNull();
-      expect(queryByLabelText('리뷰 내용')).not.toBeNull();
-    });
-
     it('listen change events', () => {
       const { getByLabelText } = renderRestaurantContainer();
 
@@ -64,19 +57,6 @@ describe('RestaurantContainer', () => {
           type: 'changeReviewField',
           payload: { name, value },
         });
-      });
-    });
-
-    it('listens score change event', () => {
-      const { getByLabelText } = renderRestaurantContainer();
-
-      fireEvent.change(getByLabelText('평점'), {
-        target: { value: '5' },
-      });
-
-      expect(dispatch).toBeCalledWith({
-        type: 'changeReviewField',
-        payload: { name: 'score', value: '5' },
       });
     });
 
