@@ -112,8 +112,10 @@ export function loadRestaurants() {
 }
 
 export function loadRestaurant({ restaurantId }) {
-  return async (dispatch) => {
-    dispatch(setRestaurant(null));
+  return async (dispatch, getState) => {
+    if (getState()?.restaurant?.id !== Number(restaurantId)) {
+      dispatch(setRestaurant(null));
+    }
 
     const restaurant = await fetchRestaurant({ restaurantId });
 
@@ -138,6 +140,7 @@ export function sendReview({ restaurantId }) {
     await postReview({
       accessToken, restaurantId, score, description,
     });
+
     dispatch(loadRestaurant({ restaurantId }));
   };
 }
