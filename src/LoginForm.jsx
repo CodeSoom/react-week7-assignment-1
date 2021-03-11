@@ -4,7 +4,7 @@ export default function LoginForm({
   email, password,
   onChange, onSubmit,
 }) {
-  function HandleChange(event) {
+  function handleChange(event) {
     const { target: { value, name } } = event;
 
     onChange({ value, name });
@@ -20,7 +20,7 @@ export default function LoginForm({
           id="input-email"
           value={email}
           placeholder="email"
-          onChange={HandleChange}
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -31,7 +31,7 @@ export default function LoginForm({
           id="input-password"
           value={password}
           placeholder="password"
-          onChange={HandleChange}
+          onChange={handleChange}
         />
       </div>
       <button type="submit">Log In</button>
