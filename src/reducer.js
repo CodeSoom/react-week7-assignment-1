@@ -11,6 +11,12 @@ const initialState = {
     email: '',
     password: '',
   },
+  reviewFields: {
+    score: '',
+    description: '',
+    name: '',
+    value: '',
+  },
   accessToken: '',
 };
 
@@ -73,6 +79,16 @@ const reducers = {
     return {
       ...state,
       accessToken,
+    };
+  },
+
+  changeReviewField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewFields: {
+        ...state.reviewFields,
+        [name]: value,
+      },
     };
   },
 };
