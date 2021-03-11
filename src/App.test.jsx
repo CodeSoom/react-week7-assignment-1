@@ -9,6 +9,7 @@ import { render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
+import LOGIM_FIELDS from '../fixtures/loginFields';
 
 jest.mock('react-redux');
 
@@ -28,8 +29,8 @@ describe('App', () => {
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
       loginFields: {
-        email: 'test@test.com',
-        password: '1234',
+        email: LOGIM_FIELDS.email,
+        password: LOGIM_FIELDS.password,
       },
     }));
   });

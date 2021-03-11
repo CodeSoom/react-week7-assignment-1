@@ -3,6 +3,8 @@ import { fireEvent, render } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
+import LOGIN_FIELDS from '../fixtures/loginFields';
+
 jest.mock('react-redux');
 
 describe('LoginForm', () => {
@@ -13,21 +15,21 @@ describe('LoginForm', () => {
     return render(<LoginForm
       onSubmit={handleSubmit}
       onChange={handleChange}
-      email="test@test.com"
-      password="1234"
+      email=""
+      password=""
     />);
   }
 
   it('renders email input', () => {
     const { queryByLabelText } = renderLoginForm();
 
-    expect(queryByLabelText('E-mail').value).toBe('test@test.com');
+    expect(queryByLabelText('E-mail').value).toBe('');
   });
 
   it('renders password input', () => {
     const { queryByLabelText } = renderLoginForm();
 
-    expect(queryByLabelText('Password').value).toBe('1234');
+    expect(queryByLabelText('Password').value).toBe('');
   });
 
   it('renders "Log In" button', () => {
@@ -41,7 +43,7 @@ describe('LoginForm', () => {
 
     fireEvent.change(getByLabelText('E-mail'), {
       target: {
-        value: 'test@email.com',
+        value: LOGIN_FIELDS.email,
       },
     });
 

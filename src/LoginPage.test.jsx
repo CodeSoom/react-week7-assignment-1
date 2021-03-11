@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 
+import LOGIN_FIELDS from '../fixtures/loginFields';
+
 import LoginPage from './LoginPage';
 
 jest.mock('react-redux');
@@ -9,8 +11,8 @@ jest.mock('react-redux');
 describe('LoginPage', () => {
   useSelector.mockImplementation((selector) => selector({
     loginFields: {
-      email: 'test@test.com',
-      password: '1234',
+      email: LOGIN_FIELDS.email,
+      password: LOGIN_FIELDS.password,
     },
   }));
 
