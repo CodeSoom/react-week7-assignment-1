@@ -88,22 +88,43 @@ describe('actions', () => {
   });
 
   describe('loadRestaurant', () => {
-    beforeEach(() => {
-      store = mockStore({});
+    context('새로운 레스토랑의 정보를 받아야 할 때', () => {
+      beforeEach(() => {
+        store = mockStore({});
+      });
+
+      it('dispatchs setRestaurant twice', async () => {
+        await store.dispatch(loadRestaurant({ restaurantId: 1 }));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual({
+          type: 'setRestaurant',
+          payload: { restaurant: null },
+        });
+        expect(actions[1]).toEqual({
+          type: 'setRestaurant',
+          payload: { restaurant: {} },
+        });
+      });
     });
 
-    it('dispatchs setRestaurant', async () => {
-      await store.dispatch(loadRestaurant({ restaurantId: 1 }));
-
-      const actions = store.getActions();
-
-      expect(actions[0]).toEqual({
-        type: 'setRestaurant',
-        payload: { restaurant: null },
+    context('기존의 레스토랑 정보를 다시 받아야 할 때', () => {
+      beforeEach(() => {
+        store = mockStore({
+          restaurant: { id: 1 },
+        });
       });
-      expect(actions[1]).toEqual({
-        type: 'setRestaurant',
-        payload: { restaurant: {} },
+
+      it('dispatchs setRestaurant only one time', async () => {
+        await store.dispatch(loadRestaurant({ restaurantId: 1 }));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual({
+          type: 'setRestaurant',
+          payload: { restaurant: {} },
+        });
       });
     });
   });
