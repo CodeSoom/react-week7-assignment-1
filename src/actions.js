@@ -7,7 +7,7 @@ import {
   postReview,
 } from './services/api';
 
-import { setItem } from './services/storage';
+import { setItem, removeItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -129,6 +129,14 @@ export function postLoginFields() {
     setItem('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function logout() {
+  return (dispatch) => {
+    removeItem('accessToken');
+
+    dispatch(deleteAccessToken());
   };
 }
 
