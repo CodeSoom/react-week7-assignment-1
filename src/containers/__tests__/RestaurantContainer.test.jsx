@@ -34,7 +34,7 @@ describe('RestaurantContainer', () => {
     }));
   });
 
-  it('dispatches action', () => {
+  it('dispatches action for get restaurnt information', () => {
     renderRestaurantContainer();
     expect(dispatch).toBeCalled();
   });
