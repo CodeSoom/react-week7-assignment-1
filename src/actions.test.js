@@ -16,9 +16,10 @@ import {
   deleteAccessToken,
   changeReviewFields,
   postReviewFields,
+  logout,
 } from './actions';
 
-import { setItem } from './services/storage';
+import { setItem, removeItem } from './services/storage';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -235,6 +236,24 @@ describe('actions', () => {
 
         expect(actions[0]).toEqual(setAccessToken());
       });
+    });
+  });
+
+  describe('logout', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: '12345678',
+      });
+    });
+
+    it('runs deleteAccessToken', () => {
+      store.dispatch(logout());
+
+      expect(removeItem).toHaveBeenCalledWith('accessToken');
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(deleteAccessToken());
     });
   });
 
