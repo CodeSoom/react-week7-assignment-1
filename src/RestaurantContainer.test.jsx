@@ -91,6 +91,14 @@ describe('RestaurantContainer', () => {
 
       expect(dispatch).toBeCalledTimes(2);
     });
+
+    it('renders review list', () => {
+      const { queryByText } = renderRestaurantContainer();
+
+      expect(queryByText('테스터')).not.toBeNull();
+      expect(queryByText('5점')).not.toBeNull();
+      expect(queryByText('맛있어요')).not.toBeNull();
+    });
   });
 
   context('without restaurant', () => {
