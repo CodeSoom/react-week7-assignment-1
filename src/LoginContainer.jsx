@@ -28,24 +28,14 @@ export default function LoginContainer() {
 
   return (
     <>
-      {accessToken ? (
-        <div>
-          <button
-            type="button"
-            onClick={handleClick}
-          >
-            Log Out
-
-          </button>
-        </div>
-      ) : (
-        <LoginForm
-          email={email}
-          password={password}
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-        />
-      )}
+      <LoginForm
+        accessToken={accessToken}
+        email={email}
+        password={password}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+        onClick={handleClick}
+      />
     </>
   );
 }
