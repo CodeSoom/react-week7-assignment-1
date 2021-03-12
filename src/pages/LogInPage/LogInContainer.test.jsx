@@ -1,11 +1,13 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   act,
   fireEvent,
   render,
   screen,
 } from '@testing-library/react';
-import { useDispatch, useSelector } from 'react-redux';
+
+import given from 'given2';
 
 import LogInContainer from './LogInContainer';
 
@@ -19,8 +21,8 @@ describe('LogInContainer', () => {
 
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation(() => useSelector({
-      accessToken: 'asfjlkasjdf',
+    useSelector.mockImplementation((selector) => selector({
+      accessToken: given.accessToken,
     }));
   });
 
@@ -46,6 +48,18 @@ describe('LogInContainer', () => {
         name: /log in/i,
       }));
     });
+
+    expect(dispatch).toBeCalled();
+  });
+
+  it('calls dispatch upon clicking log out', () => {
+    given('accessToken', () => '123123');
+
+    renderLogInContainer();
+
+    fireEvent.click(screen.getByRole('button', {
+      name: /Log Out/i,
+    }));
 
     expect(dispatch).toBeCalled();
   });
