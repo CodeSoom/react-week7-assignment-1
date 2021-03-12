@@ -11,10 +11,7 @@ export async function fetchRestaurants() {
 }
 
 export async function fetchRestaurant() {
-  return {
-    menuItems: [],
-    reviews: [],
-  };
+  return {};
 }
 
 export async function postReview() {
