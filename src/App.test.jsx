@@ -34,8 +34,7 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
-      restaurantReviews: REVIEWS,
+      restaurant: { id: 1, name: '마녀주방', reviews: REVIEWS },
       loginFields: {
         email: LOGIM_FIELDS.email,
         password: LOGIM_FIELDS.password,
