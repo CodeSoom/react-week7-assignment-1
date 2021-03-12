@@ -118,9 +118,11 @@ export function loadRestaurant({ restaurantId }) {
 
 export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
-    const { reviewFields: { score, description } } = getState();
+    const { accessToken, reviewFields: { score, description } } = getState();
 
-    await postReview({ restaurantId, score, description });
+    await postReview({
+      restaurantId, score, description, accessToken,
+    });
 
     dispatch(setRestaurantReview({ score, description }));
   };
@@ -132,6 +134,8 @@ export function requestLogin() {
 
     try {
       const accessToken = await postLogin({ email, password });
+
+      localStorage.setItem('accessToken', accessToken);
 
       dispatch(setAccessToken(accessToken));
     } catch (error) {
