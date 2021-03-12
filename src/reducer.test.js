@@ -11,7 +11,6 @@ import {
   setAccessToken,
   updateReview,
   resetAccessToken,
-  resetLoginInput,
   resetReviewInput,
 } from './actions';
 
@@ -152,25 +151,15 @@ describe('reducer', () => {
   });
 
   describe('resetAccessToken', () => {
-    it('AccessToken을 reset한다.', () => {
+    it('AccessToken, loginInput을 reset한다.', () => {
       const initialState = {
         accessToken: 'ACCESS_TOKEN',
+        userLoginInputs: { email: 'test@naver.com', password: '1234' },
       };
 
       const state = reducer(initialState, resetAccessToken());
 
       expect(state.accessToken).toBe('');
-    });
-  });
-
-  describe('resetLoginInput', () => {
-    it('UserLoginInputs을 reset한다.', () => {
-      const initialState = {
-        userLoginInputs: { email: 'test@naver.com', password: '1234' },
-      };
-
-      const state = reducer(initialState, resetLoginInput());
-
       expect(state.userLoginInputs.email).toBe('');
       expect(state.userLoginInputs.password).toBe('');
     });

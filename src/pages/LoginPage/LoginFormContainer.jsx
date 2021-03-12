@@ -6,10 +6,10 @@ import {
   updateUserLoginInputs,
   requestLogin,
   resetAccessToken,
-  resetLoginInput,
 } from '../../actions';
 
 import LoginForm from './LoginForm';
+import LogoutButton from './LogoutButton';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
@@ -28,28 +28,17 @@ export default function LoginFormContainer() {
 
   function handleLogout() {
     dispatch(resetAccessToken());
-    dispatch(resetLoginInput());
   }
 
   if (accessToken) {
-    return (
-      <button
-        type="button"
-        onClick={handleLogout}
-      >
-        Log out
-      </button>
-    );
+    return (<LogoutButton onClick={handleLogout} />);
   }
 
   return (
-    <>
-      <p>{accessToken}</p>
-      <LoginForm
-        userLoginInputs={userLoginInputs}
-        onChange={handleChange}
-        onSubmit={handleClick}
-      />
-    </>
+    <LoginForm
+      userLoginInputs={userLoginInputs}
+      onChange={handleChange}
+      onSubmit={handleClick}
+    />
   );
 }

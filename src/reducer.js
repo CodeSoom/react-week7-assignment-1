@@ -50,12 +50,6 @@ const reducers = {
     return {
       ...state,
       accessToken: '',
-    };
-  },
-
-  resetLoginInput(state) {
-    return {
-      ...state,
       userLoginInputs: { email: '', password: '' },
     };
   },

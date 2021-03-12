@@ -6,6 +6,7 @@ import {
   postLogin,
   postReview,
 } from './services/api';
+import { isNewRestaurant } from './utils';
 
 export function updateUserLoginInputs(name, value) {
   return {
@@ -30,10 +31,6 @@ export function setAccessToken(accessToken) {
 
 export function resetAccessToken() {
   return { type: 'resetAccessToken' };
-}
-
-export function resetLoginInput() {
-  return { type: 'resetLoginInput' };
 }
 
 export function resetReviewInput() {
@@ -113,7 +110,10 @@ export function loadRestaurants() {
 
 export function loadRestaurant({ restaurantId }) {
   return async (dispatch, getState) => {
-    if (getState()?.restaurant?.id !== Number(restaurantId)) {
+    const id = getState()?.restaurant?.id;
+    const newId = restaurantId;
+
+    if (isNewRestaurant(id, newId)) {
       dispatch(setRestaurant(null));
     }
 
@@ -141,6 +141,7 @@ export function sendReview({ restaurantId }) {
       accessToken, restaurantId, score, description,
     });
 
+    dispatch(resetReviewInput());
     dispatch(loadRestaurant({ restaurantId }));
   };
 }

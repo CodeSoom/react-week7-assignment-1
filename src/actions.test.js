@@ -152,6 +152,7 @@ describe('actions', () => {
     beforeEach(() => {
       store = mockStore({
         accessToken: 'ACCESS_TOKEN',
+        restaurant: { id: 1 },
         review: { score: '5', description: '요리 고수~' },
       });
     });
@@ -162,9 +163,9 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual({
-        type: 'setRestaurant',
-        payload: { restaurant: null },
+        type: 'resetReviewInput',
       });
+
       expect(actions[1]).toEqual({
         type: 'setRestaurant',
         payload: { restaurant: {} },
