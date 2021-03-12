@@ -42,22 +42,31 @@ describe('LoginForm', () => {
 
   it('이메일, 암호 입력창에 값을 입력하면 입력값이 업데이트 됩니다.', () => {
     const initialInputs = {
-      email: 'previousEmail@example.com',
-      password: 'previousPassword123',
+      email: 'initialEmail@example.com',
+      password: 'initialPassword123',
     };
 
     const { queryByLabelText } = renderLoginForm({ loginInputs: initialInputs });
 
-    expect(queryByLabelText(/E-mail/).value).toBe('previousEmail@example.com');
-    expect(queryByLabelText(/Password/).value).toBe('previousPassword123');
+    const initialData = [
+      { label: 'E-mail', value: initialInputs.email },
+      { label: 'Password', value: initialInputs.password },
+    ];
 
-    fireEvent.change(queryByLabelText(/E-mail/), { target: { value: 'currentEmail@example.com' } });
+    initialData.forEach(({ label, value }) => {
+      expect(queryByLabelText(label).value).toBe(value);
+    });
 
-    expect(handleChange).toBeCalledWith({ name: 'email', value: 'currentEmail@example.com' });
+    const currentData = [
+      { label: 'E-mail', name: 'email', value: 'currentEmail@example.com' },
+      { label: 'Password', name: 'password', value: 'currentPassword123' },
+    ];
 
-    fireEvent.change(queryByLabelText(/Password/), { target: { value: 'currentPassword123' } });
+    currentData.forEach(({ label, name, value }) => {
+      fireEvent.change(queryByLabelText(label), { target: { value } });
 
-    expect(handleChange).toBeCalledWith({ name: 'password', value: 'currentPassword123' });
+      expect(handleChange).toBeCalledWith({ name, value });
+    });
   });
 
   it('로그인하는 버튼을 눌러 아이디와 비밀번호를 제출합니다.', () => {
