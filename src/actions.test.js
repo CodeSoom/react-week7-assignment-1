@@ -9,7 +9,6 @@ import {
   loadRestaurants,
   loadRestaurant,
   setRestaurants,
-  setRestaurant,
   requestLogin,
   sendReview,
 } from './actions';
@@ -93,13 +92,31 @@ describe('actions', () => {
       store = mockStore({});
     });
 
-    it('dispatchs setRestaurant', async () => {
+    it('runs setRestaurant and setRestaurantReview', async () => {
       await store.dispatch(loadRestaurant({ restaurantId: 1 }));
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurant(null));
-      expect(actions[1]).toEqual(setRestaurant({}));
+      expect(actions).toEqual([
+        {
+          type: 'setRestaurant',
+          payload: {
+            restaurant: null,
+          },
+        },
+        {
+          type: 'setRestaurant',
+          payload: {
+            restaurant: {},
+          },
+        },
+        {
+          type: 'setRestaurantReview',
+          payload: {
+            review: {},
+          },
+        },
+      ]);
     });
   });
 
