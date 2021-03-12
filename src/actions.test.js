@@ -92,7 +92,7 @@ describe('actions', () => {
       store = mockStore({});
     });
 
-    it('runs setRestaurant and setRestaurantsReview', async () => {
+    it('runs setRestaurant', async () => {
       await store.dispatch(loadRestaurant({ restaurantId: 1 }));
 
       const actions = store.getActions();
@@ -107,13 +107,7 @@ describe('actions', () => {
         {
           type: 'setRestaurant',
           payload: {
-            restaurant: [],
-          },
-        },
-        {
-          type: 'setRestaurantsReview',
-          payload: {
-            reviews: [],
+            restaurant: {},
           },
         },
       ]);
