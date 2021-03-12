@@ -10,7 +10,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import { loadItem } from './services/storage';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -76,6 +79,32 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('로그인이 되어 있을 때', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+    it('accessToken을 저장하는 dispatch가 실행된다.', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
+
+  context('로그인이 되어 있을 때', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => 'ACCESS_TOKEN');
+    });
+
+    it('accessToken을 저장하는 dispatch가 실행된다.', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: { accessToken: 'ACCESS_TOKEN' },
+      });
     });
   });
 });
