@@ -22,9 +22,9 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
-  const reviews = useSelector(get('reviews'));
+  const restaurantReviews = useSelector(get('restaurantReviews'));
 
-  if (!restaurant || !reviews) {
+  if (!restaurant || !restaurantReviews) {
     return (
       <p>Loading...</p>
     );
@@ -45,7 +45,7 @@ export default function RestaurantContainer({ restaurantId }) {
         onChange={handleChange}
         onClick={handleClick}
       />
-      <RestaurantReviews reviews={reviews} />
+      <RestaurantReviews reviews={restaurantReviews} />
     </>
   );
 }

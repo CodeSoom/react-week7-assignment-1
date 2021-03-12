@@ -17,7 +17,7 @@ describe('RestaurantPage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((state) => state({
-      reviews: REVIEWS,
+      restaurantReviews: REVIEWS,
       restaurant: {
         id: 1,
         name: '마법사주방',
