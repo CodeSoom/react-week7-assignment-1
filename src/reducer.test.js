@@ -11,10 +11,7 @@ import {
   changeLoginFields,
   setAccessToken,
   changeReviewFields,
-  setRestaurantsReview,
 } from './actions';
-
-import REVIEWS from '../fixtures/reviews';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -23,8 +20,7 @@ describe('reducer', () => {
       regions: [],
       categories: [],
       restaurants: [],
-      restaurant: null,
-      restaurantReviews: [],
+      restaurant: [],
       selectedRegion: null,
       selectedCategory: null,
       loginFields: {
@@ -110,26 +106,16 @@ describe('reducer', () => {
   describe('addRestaurantReview', () => {
     it('changes reviews', () => {
       const initialState = {
-        restaurantReviews: [],
+        restaurant: {
+          reviews: [],
+        },
       };
 
       const review = { score: '5', description: 'good!!!' };
 
       const state = reducer(initialState, addRestaurantReview(review));
 
-      expect(state.restaurantReviews).toHaveLength(1);
-    });
-  });
-
-  describe('setRestaurantsReview', () => {
-    it('changes reviews', () => {
-      const initialState = {
-        restaurantReviews: null,
-      };
-
-      const state = reducer(initialState, setRestaurantsReview(REVIEWS));
-
-      expect(state.restaurantReviews).toBe(REVIEWS);
+      expect(state.restaurant.reviews).toHaveLength(1);
     });
   });
 
