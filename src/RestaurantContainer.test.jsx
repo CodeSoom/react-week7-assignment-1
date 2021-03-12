@@ -6,9 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
+import REVIEW from '../fixtures/review';
 import REVIEWS from '../fixtures/reviews';
 
-const { score: SCORE, description: DESCRIPTION } = REVIEWS;
+const { score: SCORE, description: DESCRIPTION } = REVIEW;
 
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
@@ -23,6 +24,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviews: given.reviews,
     }));
   });
 
@@ -38,6 +40,7 @@ describe('RestaurantContainer', () => {
       name: '마법사주방',
       address: '서울시 강남구',
     }));
+    given('reviews', () => REVIEWS);
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
@@ -91,20 +94,6 @@ describe('RestaurantContainer', () => {
 
       expect(dispatch).toBeCalledTimes(2);
     });
-
-    it('renders review list', () => {
-      given('restaurant', () => ({
-        id: 1,
-        name: '마법사주방',
-        address: '서울시 강남구',
-      }));
-
-      const { queryByText } = renderRestaurantContainer();
-
-      expect(queryByText('테스터')).not.toBeNull();
-      expect(queryByText('5점')).not.toBeNull();
-      expect(queryByText('맛있어요')).not.toBeNull();
-    });
   });
 
   context('without restaurant', () => {
@@ -114,6 +103,38 @@ describe('RestaurantContainer', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('Loading');
+    });
+  });
+
+  context('without reviews', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
+    given('reviews', () => null);
+
+    it('renders loading message', () => {
+      const { queryByText } = renderRestaurantContainer();
+
+      expect(queryByText('Loading...')).not.toBeNull();
+    });
+  });
+
+  context('with reviews', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
+    given('reviews', () => REVIEWS);
+
+    it('renders review list', () => {
+      const { queryByText } = renderRestaurantContainer();
+
+      expect(queryByText('테스터')).not.toBeNull();
+      expect(queryByText('5점')).not.toBeNull();
+      expect(queryByText('맛있어요')).not.toBeNull();
     });
   });
 });
