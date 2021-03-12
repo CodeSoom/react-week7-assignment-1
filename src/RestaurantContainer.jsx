@@ -40,6 +40,13 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail restaurant={restaurant} />
       <RestaurantReview onChange={handleChange} onClick={handleClick} />
+      <ul>
+        <li>
+          <p>테스터</p>
+          <p>5점</p>
+          <p>맛있어요</p>
+        </li>
+      </ul>
     </>
   );
 }
