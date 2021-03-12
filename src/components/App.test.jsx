@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   MemoryRouter,
 } from 'react-router-dom';
@@ -8,9 +7,12 @@ import { render, screen } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { loadItem } from '../services/storage';
+
 import App from './App';
 
 jest.mock('react-redux');
+jest.mock('../services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -27,6 +29,7 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      accessToken: '',
     }));
   });
 
@@ -88,6 +91,32 @@ describe('App', () => {
       renderApp({ path: '/xxx' });
 
       expect(screen.getByText(/404 not found/i)).toBeInTheDocument();
+    });
+  });
+
+  context('when logged out', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it("doesn't call dispatch", () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
+
+  context('when logged in', () => {
+    const accessToken = 'ACCESS_TOKEN';
+
+    beforeEach(() => {
+      loadItem.mockImplementation(() => accessToken);
+    });
+
+    it('calls dispatch', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalled();
     });
   });
 });
