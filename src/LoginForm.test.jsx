@@ -4,57 +4,83 @@ import { fireEvent, render } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 import LOGIN_FIELDS from '../fixtures/loginFields';
+import ACCESS_TOKEN from '../fixtures/accessToken';
 
 jest.mock('react-redux');
 
 describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
+  const handleClick = jest.fn();
 
   function renderLoginForm() {
     return render(<LoginForm
+      accessToken={given.accessToken}
       onSubmit={handleSubmit}
       onChange={handleChange}
+      onClick={handleClick}
       email=""
       password=""
     />);
   }
 
-  it('renders email input', () => {
-    const { queryByLabelText } = renderLoginForm();
+  context('when logged out', () => {
+    given('accessToken', () => null);
 
-    expect(queryByLabelText('E-mail').value).toBe('');
-  });
+    it('renders email input', () => {
+      const { queryByLabelText } = renderLoginForm();
 
-  it('renders password input', () => {
-    const { queryByLabelText } = renderLoginForm();
-
-    expect(queryByLabelText('Password').value).toBe('');
-  });
-
-  it('renders "Log In" button', () => {
-    const { queryByText } = renderLoginForm();
-
-    expect(queryByText('Log In')).not.toBeNull();
-  });
-
-  it('listens email input change event', () => {
-    const { getByLabelText } = renderLoginForm();
-
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: {
-        value: LOGIN_FIELDS.email,
-      },
+      expect(queryByLabelText('E-mail').value).toBe('');
     });
 
-    expect(handleChange).toBeCalled();
+    it('renders password input', () => {
+      const { queryByLabelText } = renderLoginForm();
+
+      expect(queryByLabelText('Password').value).toBe('');
+    });
+
+    it('renders "Log In" button', () => {
+      const { queryByText } = renderLoginForm();
+
+      expect(queryByText('Log In')).not.toBeNull();
+    });
+
+    it('listens email input change event', () => {
+      const { getByLabelText } = renderLoginForm();
+
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: {
+          value: LOGIN_FIELDS.email,
+        },
+      });
+
+      expect(handleChange).toBeCalled();
+    });
+
+    it('calls onSubmit handler when click Log in button', () => {
+      const { getByText } = renderLoginForm();
+
+      fireEvent.submit(getByText('Log In'));
+
+      expect(handleSubmit).toBeCalled();
+    });
   });
 
-  it('listens click event', () => {
-    const { getByText } = renderLoginForm();
+  context('when logged in', () => {
+    given('accessToken', () => ACCESS_TOKEN);
 
-    fireEvent.submit(getByText('Log In'));
+    it('renders Log Out button', () => {
+      const { queryByText } = renderLoginForm();
 
-    expect(handleSubmit).toBeCalled();
+      expect(queryByText('Log Out')).not.toBeNull();
+    });
+
+    it('calls onClick handler when click Log Out button', () => {
+      const { getByText } = renderLoginForm();
+
+      fireEvent.click(getByText('Log Out'));
+
+      expect(handleClick).toBeCalled();
+    });
   });
 });
