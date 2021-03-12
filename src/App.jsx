@@ -21,7 +21,7 @@ import { setAccessToken } from './actions';
 export default function App() {
   const dispatch = useDispatch();
 
-  const accessToken = loadItem();
+  const accessToken = loadItem('accessToken');
 
   if (accessToken) {
     dispatch(setAccessToken(accessToken));
