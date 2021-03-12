@@ -82,6 +82,14 @@ export function selectCategory(categoryId) {
   };
 }
 
+export function resetLogin() {
+  return async (dispatch) => {
+    saveItem('accessToken', '');
+
+    dispatch(resetAccessToken());
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();

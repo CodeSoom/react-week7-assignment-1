@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoginFormContainer from '../LoginFormContainer';
 
 jest.mock('react-redux');
+jest.mock('../../../services/storage');
 
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
@@ -56,8 +57,9 @@ describe('LoginFormContainer', () => {
       expect(queryByText('Log out')).toBeInTheDocument();
     });
 
-    it('로그아웃 버튼을 누르면 accessToken을 제거하는 dispatch가 실행된다.', () => {
+    it('로그아웃 버튼을 누르면 accessToken을 제거하는 dispatch와 saveItem이 실행된다.', () => {
       const { queryByText } = render(<LoginFormContainer />);
+
       fireEvent.click(queryByText('Log out'));
 
       expect(dispatch).toBeCalled();

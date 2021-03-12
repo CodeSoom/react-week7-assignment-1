@@ -11,6 +11,7 @@ import {
   loadRestaurant,
   setRestaurants,
   sendReview,
+  resetLogin,
 } from './actions';
 
 import { saveItem } from './services/storage';
@@ -148,6 +149,22 @@ describe('actions', () => {
           payload: { accessToken: 'ACCESS_TOKEN' },
         },
       );
+
+      expect(saveItem).toBeCalled();
+    });
+  });
+
+  describe('resetLogin', () => {
+    beforeEach(() => {
+      store = mockStore({ accessToken: 'ACCESS_TOKEN' });
+    });
+
+    it('accessToken을 초기화하는 action을 실행하고 로컬스토리지를 비운다', async () => {
+      await store.dispatch(resetLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({ type: 'resetAccessToken' });
 
       expect(saveItem).toBeCalled();
     });
