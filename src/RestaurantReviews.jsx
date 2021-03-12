@@ -1,6 +1,10 @@
 import React from 'react';
 
 export default function RestaurantReviews({ reviews }) {
+  if (!reviews) {
+    return null;
+  }
+
   return (
     <ul>
       {reviews.map(({
