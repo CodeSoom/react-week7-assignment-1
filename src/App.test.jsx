@@ -29,7 +29,12 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
+      restaurant: {
+        id: 1,
+        name: '마녀주방',
+        reviews: [],
+      },
+      
     }));
   });
 
@@ -101,7 +106,7 @@ describe('App', () => {
     it("calls dispatch with setAccessToken action", () => {
       renderApp({ path: '/' });
 
-      expect(dispatch) .toBeCalled();
+      expect(dispatch).toBeCalled();
     });
   });
 });
