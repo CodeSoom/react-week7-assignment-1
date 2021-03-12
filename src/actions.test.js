@@ -13,10 +13,13 @@ import {
   sendReview,
 } from './actions';
 
+import { saveItem } from './services/storage';
+
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/storage');
 
 describe('actions', () => {
   let store;
@@ -134,7 +137,7 @@ describe('actions', () => {
       store = mockStore({ userLoginInputs: { email: 'test@naver.com', password: 'test' } });
     });
 
-    it('accessToken을 저장하는 action을 실행한다.', async () => {
+    it('accessToken을 저장하는 action을 실행하고 로컬스토리지에 저장한다', async () => {
       await store.dispatch(requestLogin());
 
       const actions = store.getActions();
@@ -145,6 +148,8 @@ describe('actions', () => {
           payload: { accessToken: 'ACCESS_TOKEN' },
         },
       );
+
+      expect(saveItem).toBeCalled();
     });
   });
 
