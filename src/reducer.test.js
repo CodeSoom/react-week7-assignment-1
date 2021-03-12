@@ -132,23 +132,36 @@ describe('reducer', () => {
   });
 
   describe('setLoginInputs', () => {
-    it('changes id and passwords', () => {
+    it('changes email', () => {
       const initialState = {
         loginInputs: {
-          id: '',
+          email: '',
           password: '',
         },
       };
 
       const state = reducer(initialState, setLoginInputs({
-        id: 'currentId',
-        password: 'currentPasswords',
+        name: 'email',
+        value: 'currentEmail',
       }));
 
-      expect(state.loginInputs).toEqual({
-        id: 'currentId',
-        password: 'currentPasswords',
-      });
+      expect(state.loginInputs.email).toEqual('currentEmail');
+    });
+
+    it('changes passwords', () => {
+      const initialState = {
+        loginInputs: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, setLoginInputs({
+        name: 'password',
+        value: 'currentPassword',
+      }));
+
+      expect(state.loginInputs.password).toEqual('currentPassword');
     });
   });
 });
