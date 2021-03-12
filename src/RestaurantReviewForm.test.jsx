@@ -2,19 +2,19 @@ import React from 'react';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import RestaurantReview from './RestaurantReview';
+import RestaurantReviewForm from './RestaurantReviewForm';
 
 import REVIEWS from '../fixtures/reviews';
 
 const { score: SCORE, description: DESCRIPTION } = REVIEWS;
 
-describe('RestaurantReview', () => {
+describe('RestaurantReviewForm', () => {
   const handleChange = jest.fn();
   const handleClick = jest.fn();
 
-  function renderRestaurantReview() {
+  function renderRestaurantReviewForm() {
     return render(
-      <RestaurantReview
+      <RestaurantReviewForm
         score=""
         description=""
         onChange={handleChange}
@@ -28,7 +28,7 @@ describe('RestaurantReview', () => {
   });
 
   it('renders review form', () => {
-    const { queryByLabelText, queryByText } = renderRestaurantReview();
+    const { queryByLabelText, queryByText } = renderRestaurantReviewForm();
 
     expect(queryByLabelText('평점').value).toBe('');
     expect(queryByLabelText('리뷰 내용').value).toBe('');
@@ -36,7 +36,7 @@ describe('RestaurantReview', () => {
   });
 
   it('listens change event', () => {
-    const { queryByLabelText } = renderRestaurantReview();
+    const { queryByLabelText } = renderRestaurantReviewForm();
     const controls = [{
       label: '평점',
       name: 'score',
@@ -62,7 +62,7 @@ describe('RestaurantReview', () => {
   });
 
   it('listens change event', () => {
-    const { getByText } = renderRestaurantReview();
+    const { getByText } = renderRestaurantReviewForm();
 
     fireEvent.click(getByText('리뷰 남기기'));
 

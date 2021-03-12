@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function RestaurantReview({
+export default function RestaurantReviewForm({
   score,
   description,
   onChange,
