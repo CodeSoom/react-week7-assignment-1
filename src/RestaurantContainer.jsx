@@ -51,7 +51,7 @@ export default function RestaurantContainer({ restaurantId }) {
           />
         )
         : null}
-      <RestaurantReviews restaurant={restaurant} />
+      <RestaurantReviews reviews={restaurant.reviews} />
     </>
   );
 }
