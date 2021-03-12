@@ -3,5 +3,11 @@ export function saveItem(key, value) {
 }
 
 export function loadItem(key) {
-  return localStorage.getItem(key);
+  const item = localStorage.getItem(key);
+
+  if (item === 'undefined') {
+    return undefined;
+  }
+
+  return item;
 }
