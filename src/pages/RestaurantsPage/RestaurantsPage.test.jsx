@@ -1,9 +1,10 @@
 import React from 'react';
-
 import { MemoryRouter } from 'react-router-dom';
-
-import { render, screen, fireEvent } from '@testing-library/react';
-
+import {
+  render,
+  screen,
+  fireEvent,
+} from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantsPage from './RestaurantsPage';

@@ -1,9 +1,7 @@
 import React from 'react';
-
 import { render, fireEvent } from '@testing-library/react';
 
 import { REGIONS } from '@fixtures';
-
 import Buttons from './Buttons';
 
 describe('Buttons', () => {

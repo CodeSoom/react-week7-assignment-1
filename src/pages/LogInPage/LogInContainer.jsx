@@ -1,10 +1,8 @@
 import React from 'react';
-
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 
 import { setLoginFields, requestLogin } from '@actions';
-
-import { useForm } from 'react-hook-form';
 import LogInForm from './LogInForm';
 
 export default function LogInContainer() {
