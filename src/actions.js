@@ -6,6 +6,9 @@ import {
   postLogin,
   postReview,
 } from './services/api';
+
+import { saveItem } from './services/storage';
+
 import { isNewRestaurant } from './utils';
 
 export function updateUserLoginInputs(name, value) {
@@ -128,6 +131,8 @@ export function requestLogin() {
     const { userLoginInputs: { email, password } } = getState();
 
     const accessToken = await postLogin({ email, password });
+
+    saveItem('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
   };
