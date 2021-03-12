@@ -33,10 +33,10 @@ export function setRestaurant(restaurant) {
   };
 }
 
-export function setLoginInputs(loginInputs) {
+export function setLoginInputs({ name, value }) {
   return {
     type: 'setLoginInputs',
-    payload: { loginInputs },
+    payload: { name, value },
   };
 }
 

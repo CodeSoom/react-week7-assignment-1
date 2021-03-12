@@ -8,7 +8,7 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   loginInputs: {
-    id: '',
+    email: '',
     password: '',
   },
 };
@@ -42,10 +42,13 @@ const reducers = {
     };
   },
 
-  setLoginInputs(state, { payload: { loginInputs } }) {
+  setLoginInputs(state, { payload: { name, value } }) {
     return {
       ...state,
-      loginInputs,
+      loginInputs: {
+        ...state.loginInputs,
+        [name]: value,
+      },
     };
   },
 
