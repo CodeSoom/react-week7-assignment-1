@@ -33,8 +33,11 @@ export function setRestaurant(restaurant) {
   };
 }
 
-export function setLoginInputs() {
-
+export function setLoginInputs(loginInputs) {
+  return {
+    type: 'setLoginInputs',
+    payload: { loginInputs },
+  };
 }
 
 export function selectRegion(regionId) {

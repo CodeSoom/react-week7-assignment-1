@@ -131,7 +131,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('updateLoginInputs', () => {
+  describe('setLoginInputs', () => {
     it('changes id and passwords', () => {
       const initialState = {
         loginInputs: {
