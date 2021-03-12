@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
-import { setLoginFields, requestLogin } from '@actions';
+import { requestLogin } from '@actions';
 import LogInForm from './LogInForm';
 
 export default function LogInContainer() {
@@ -11,8 +11,7 @@ export default function LogInContainer() {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    dispatch(setLoginFields(data));
-    dispatch(requestLogin({ logInField: data }));
+    dispatch(requestLogin({ logInFields: data }));
   };
 
   return (

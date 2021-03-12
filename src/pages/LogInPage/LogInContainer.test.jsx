@@ -47,6 +47,6 @@ describe('LogInContainer', () => {
       }));
     });
 
-    expect(dispatch).toBeCalledTimes(2);
+    expect(dispatch).toBeCalled();
   });
 });
