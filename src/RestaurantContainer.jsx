@@ -12,6 +12,7 @@ import {
 
 import { get } from './utils';
 import RestaurantReviewForm from './RestaurantReviewForm';
+import RestaurantReviews from './RestaurantReviews';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -52,20 +53,7 @@ export default function RestaurantContainer({ restaurantId }) {
         onChange={handleChange}
         onClick={handleClick}
       />
-      <ul>
-        {reviews.map(({
-          id, name, score, description,
-        }) => (
-          <li key={id}>
-            <p>{name}</p>
-            <p>
-              {score}
-              점
-            </p>
-            <p>{description}</p>
-          </li>
-        ))}
-      </ul>
+      <RestaurantReviews reviews={reviews} />
     </>
   );
 }
