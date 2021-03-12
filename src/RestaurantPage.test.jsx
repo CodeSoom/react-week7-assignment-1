@@ -17,11 +17,11 @@ describe('RestaurantPage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((state) => state({
-      restaurantReviews: REVIEWS,
       restaurant: {
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
+        reviews: REVIEWS,
       },
     }));
   });
