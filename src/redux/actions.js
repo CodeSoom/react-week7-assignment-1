@@ -5,6 +5,7 @@ import {
   fetchRestaurant,
   postLogin,
 } from '@api';
+import { saveItem } from '../services/storage';
 
 export function setRegions(regions) {
   return {
@@ -62,6 +63,12 @@ export function selectCategory(categoryId) {
   };
 }
 
+export function logOut() {
+  return {
+    type: 'logOut',
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();
@@ -108,6 +115,8 @@ export function requestLogin({ logInFields }) {
     dispatch(setLoginFields(logInFields));
 
     const accessToken = await postLogin({ email, password });
+
+    saveItem('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
   };
