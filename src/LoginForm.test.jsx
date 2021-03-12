@@ -53,11 +53,11 @@ describe('LoginForm', () => {
 
     fireEvent.change(queryByLabelText(/E-mail/), { target: { value: 'currentEmail@example.com' } });
 
-    expect(handleChange).toBeCalled();
+    expect(handleChange).toBeCalledWith({ name: 'email', value: 'currentEmail@example.com' });
 
     fireEvent.change(queryByLabelText(/Password/), { target: { value: 'currentPassword123' } });
 
-    expect(handleChange).toBeCalled();
+    expect(handleChange).toBeCalledWith({ name: 'password', value: 'currentPassword123' });
   });
 
   it('로그인하는 버튼을 눌러 아이디와 비밀번호를 제출합니다.', () => {
