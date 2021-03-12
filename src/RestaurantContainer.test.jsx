@@ -24,7 +24,6 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
-      restaurantReviews: given.reviews,
     }));
   });
 
@@ -39,8 +38,8 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: REVIEWS,
     }));
-    given('reviews', () => REVIEWS);
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
@@ -94,6 +93,14 @@ describe('RestaurantContainer', () => {
 
       expect(dispatch).toBeCalledTimes(2);
     });
+
+    it('renders review list', () => {
+      const { queryByText } = renderRestaurantContainer();
+
+      expect(queryByText('테스터')).not.toBeNull();
+      expect(queryByText('5점')).not.toBeNull();
+      expect(queryByText('맛있어요')).not.toBeNull();
+    });
   });
 
   context('without restaurant', () => {
@@ -103,38 +110,6 @@ describe('RestaurantContainer', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('Loading');
-    });
-  });
-
-  context('without reviews', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
-    given('reviews', () => null);
-
-    it('renders loading message', () => {
-      const { queryByText } = renderRestaurantContainer();
-
-      expect(queryByText('Loading...')).not.toBeNull();
-    });
-  });
-
-  context('with reviews', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
-    given('reviews', () => REVIEWS);
-
-    it('renders review list', () => {
-      const { queryByText } = renderRestaurantContainer();
-
-      expect(queryByText('테스터')).not.toBeNull();
-      expect(queryByText('5점')).not.toBeNull();
-      expect(queryByText('맛있어요')).not.toBeNull();
     });
   });
 });
