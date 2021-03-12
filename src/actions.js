@@ -35,10 +35,17 @@ export function setRestaurant(restaurant) {
   };
 }
 
-export function setRestaurantReview(review) {
+export function addRestaurantReview(review) {
   return {
-    type: 'setRestaurantReview',
+    type: 'addRestaurantReview',
     payload: { review },
+  };
+}
+
+export function setRestaurantsReview(reviews) {
+  return {
+    type: 'setRestaurantsReview',
+    payload: { reviews },
   };
 }
 
@@ -115,8 +122,10 @@ export function loadRestaurant({ restaurantId }) {
       reviews,
     } = await fetchRestaurant({ restaurantId });
 
+    console.log('reviews ? ', reviews);
+
     dispatch(setRestaurant(restaurant));
-    dispatch(setRestaurantReview(reviews));
+    dispatch(setRestaurantsReview(reviews));
   };
 }
 
@@ -128,7 +137,7 @@ export function sendReview({ restaurantId }) {
       restaurantId, score, description, accessToken,
     });
 
-    dispatch(setRestaurantReview({ score, description }));
+    dispatch(addRestaurantReview({ score, description }));
   };
 }
 

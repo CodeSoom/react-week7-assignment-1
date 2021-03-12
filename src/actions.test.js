@@ -92,7 +92,7 @@ describe('actions', () => {
       store = mockStore({});
     });
 
-    it('runs setRestaurant and setRestaurantReview', async () => {
+    it('runs setRestaurant and setRestaurantsReview', async () => {
       await store.dispatch(loadRestaurant({ restaurantId: 1 }));
 
       const actions = store.getActions();
@@ -107,13 +107,13 @@ describe('actions', () => {
         {
           type: 'setRestaurant',
           payload: {
-            restaurant: {},
+            restaurant: [],
           },
         },
         {
-          type: 'setRestaurantReview',
+          type: 'setRestaurantsReview',
           payload: {
-            review: {},
+            reviews: [],
           },
         },
       ]);
@@ -130,14 +130,14 @@ describe('actions', () => {
       });
     });
 
-    it('dispatchs setRestaurantReview', async () => {
+    it('dispatchs addRestaurantReview', async () => {
       const restaurantId = 1;
       await store.dispatch(sendReview(restaurantId));
 
       const actions = store.getActions();
 
       expect(actions).toEqual([{
-        type: 'setRestaurantReview',
+        type: 'addRestaurantReview',
         payload: {
           review: {
             score: '5',
