@@ -8,7 +8,7 @@ export default function LogoutForm({ onClick }) {
      type="button"
      onClick={onClick}
      >
-       Log out
+       Log out 
      </button>
     </>
   );

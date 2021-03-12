@@ -22,12 +22,12 @@ export default function RestaurantContainer({ restaurantId }) {
 
   const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
-
   if (!restaurant) {
     return (
       <p>Loading...</p>
     );
   }
+  const reviews = restaurant.reviews.sort((a, b) => b.id - a.id);
 
   function handleChange({ name, value }) {
     dispatch(changeReviewField({ name, value }));
@@ -35,7 +35,6 @@ export default function RestaurantContainer({ restaurantId }) {
   function handleSubmit() {
     dispatch(sendReview(restaurantId));
   }
-
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
@@ -43,6 +42,12 @@ export default function RestaurantContainer({ restaurantId }) {
         onChange={handleChange}
         onSubmit={handleSubmit}
       />) : null}
+      <h2>리뷰</h2>
+      <ul>
+        {reviews.map(({id, description}) => (
+          <li key={id}>{description}</li>
+        ))}
+      </ul>
     </>
   );
 }
