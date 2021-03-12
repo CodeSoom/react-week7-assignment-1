@@ -31,11 +31,16 @@ describe('LoginForm', () => {
 
     expect(queryByText(/Log in/)).not.toBeNull();
 
-    expect(queryByLabelText(/E-mail/)).not.toBeNull();
-    expect(queryByLabelText(/Password/)).not.toBeNull();
+    const initialData = [
+      { label: 'E-mail', value: initialInputs.email },
+      { label: 'Password', value: initialInputs.password },
+    ];
 
-    expect(queryByLabelText(/E-mail/).value).toBe('');
-    expect(queryByLabelText(/Password/).value).toBe('');
+    initialData.forEach(({ label, value }) => {
+      const currentLabel = queryByLabelText(label);
+      expect(currentLabel).not.toBeNull();
+      expect(currentLabel.value).toBe(value);
+    });
 
     expect(queryByText(/Login/)).not.toBeNull();
   });
@@ -75,13 +80,19 @@ describe('LoginForm', () => {
       password: '',
     };
 
-    const { getByText, getByLabelText } = renderLoginForm({ loginInputs: initialInputs });
+    const { queryByText, queryByLabelText } = renderLoginForm({ loginInputs: initialInputs });
 
-    fireEvent.click(getByText(/Login/));
+    fireEvent.click(queryByText(/Login/));
 
     expect(handleClick).toBeCalled();
 
-    expect(getByLabelText(/E-mail/).value).toBe('');
-    expect(getByLabelText(/Password/).value).toBe('');
+    const initialData = [
+      { label: 'E-mail', value: initialInputs.email },
+      { label: 'Password', value: initialInputs.password },
+    ];
+
+    initialData.forEach(({ label, value }) => {
+      expect(queryByLabelText(label).value).toBe(value);
+    });
   });
 });
