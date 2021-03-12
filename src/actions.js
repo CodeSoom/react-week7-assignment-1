@@ -133,7 +133,7 @@ export function changeReviewField({ name, value}) {
 export function sendReview(restaurantId) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
-    await postReview({accessToken, restaurantId, score, description})
-    //TODO:dispatch(loadRestaurant)
+    await postReview({accessToken, restaurantId, score, description});
+    dispatch(loadRestaurant({ restaurantId }));
   }
 }

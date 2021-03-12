@@ -16,28 +16,6 @@ describe('RestaurantContainer', () => {
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
-
-    useSelector.mockImplementation((selector) => selector({
-      restaurant: {
-        id: 1,
-        name: '마법사주방',
-        address: '서울시 강남구',
-        reviews: [
-          {
-            id: 1,
-            restaurantId: 1,
-            name: '테스터',
-            score: 5,
-            description: '훌륭하다 훌륭하다 지구인놈들'
-          },
-        ]
-      },
-      reviewFields: {
-        score: '',
-        description: '',
-      },
-      accessToken: given.accessToken,
-    }));
   });
 
   it('dispatches action', () => {
@@ -46,9 +24,47 @@ describe('RestaurantContainer', () => {
     expect(dispatch).toBeCalled();
   });
 
-
+  context('without restaurant', () => {
+    beforeEach(() =>{
+      useSelector.mockImplementation((selector) => selector({
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+        accessToken: given.accessToken,
+      }));
+    });
+    given('restaurant', () => null);
+    it('renders loading text', () => {
+      const { container } = renderRestaurantContainer();
+      expect(container).toHaveTextContent('Loading...');
+    });
+  });
 
   context('with restaurant', () => {
+    beforeEach(() => {
+      useSelector.mockImplementation((selector) => selector({
+        restaurant: {
+          id: 1,
+          name: '마법사주방',
+          address: '서울시 강남구',
+          reviews: [
+            {
+              id: 1,
+              restaurantId: 1,
+              name: '테스터',
+              score: 5,
+              description: '훌륭하다 훌륭하다 지구인놈들'
+            },
+          ],
+        },
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+        accessToken: given.accessToken,
+      }));
+    });
     given('restaurant', () => ({
       id: 1,
       name: '마법사주방',

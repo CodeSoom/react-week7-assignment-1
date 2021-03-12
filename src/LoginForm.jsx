@@ -4,6 +4,17 @@ import React from 'react';
 export default function LoginForm({ fields, onChange, onSubmit }) {
   const { email, password } = fields;
 
+  function setInput(type, value) {
+    return (
+      <input
+        type={type}
+        id={`login-${type}`}
+        name={type}
+        value={value}
+        onChange={handleChange}
+      />
+    );
+  }
   function handleChange(event){
     const { target: { name, value } } = event;
     onChange({ name, value });
@@ -14,25 +25,13 @@ export default function LoginForm({ fields, onChange, onSubmit }) {
         <label htmlFor="login-email">
           E-mail
         </label>
-        <input
-          type="email"
-          id="login-email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
+        {setInput('email', email)}
       </div>
       <div>
         <label htmlFor="login-password">
           Password
         </label>
-        <input
-        type="password"
-        id="login-password"
-        name="password"
-        value={password}
-        onChange={handleChange}
-        />
+        {setInput('password', password)}
       </div>
       <button
         type="button"

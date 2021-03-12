@@ -72,4 +72,17 @@ describe('LoginFormContainer', () => {
       expect(dispatch).toBeCalledWith({ type: 'logout' });
     });
   });
+
+  context('when log in', () => {
+    given('accessToken', () => '');
+
+    it('renders "Log in" button', () => {
+      const { getByText } = render(
+        <LoginFormContainer />
+      );
+      fireEvent.click(getByText('Log In'));
+     
+      expect(dispatch).toBeCalled();
+    });
+  });
 });

@@ -20,20 +20,20 @@ describe('LoginPage', () => {
     }));
   });
   it('renders Log-in title', () => {
-    const { container } = render(
+    const { container } = render((
       <MemoryRouter>
         <LoginPage />
-      </MemoryRouter>,
-    );
+      </MemoryRouter>
+    ));
   
     expect(container).toHaveTextContent('Log In');
   });
   it('renders input control', () => {
-    const { getByLabelText } = render(
+    const { getByLabelText } = render((
       <MemoryRouter>
         <LoginPage />
-      </MemoryRouter>,
-    );
+      </MemoryRouter>
+    ));
   
     expect(getByLabelText('E-mail')).not.toBeNull();
   });

@@ -32,8 +32,7 @@ export default function LoginFormContainer() {
   }
 
   function handleSubmit() {
-    dispatch(requestLogin())
-    //TODO : 로그인 성공하면 -> localstorage에 저장
+    dispatch(requestLogin());
   }
 
   function handleClickLogout() {
