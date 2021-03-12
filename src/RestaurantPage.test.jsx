@@ -8,6 +8,8 @@ import { render } from '@testing-library/react';
 
 import RestaurantPage from './RestaurantPage';
 
+import REVIEWS from '../fixtures/reviews';
+
 describe('RestaurantPage', () => {
   beforeEach(() => {
     const dispatch = jest.fn();
@@ -15,6 +17,7 @@ describe('RestaurantPage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((state) => state({
+      reviews: REVIEWS,
       restaurant: {
         id: 1,
         name: '마법사주방',

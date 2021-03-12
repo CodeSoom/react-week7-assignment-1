@@ -4,9 +4,9 @@ import { fireEvent, render } from '@testing-library/react';
 
 import RestaurantReviewForm from './RestaurantReviewForm';
 
-import REVIEWS from '../fixtures/reviews';
+import REVIEW from '../fixtures/review';
 
-const { score: SCORE, description: DESCRIPTION } = REVIEWS;
+const { score: SCORE, description: DESCRIPTION } = REVIEW;
 
 describe('RestaurantReviewForm', () => {
   const handleChange = jest.fn();

@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LOGIM_FIELDS from '../fixtures/loginFields';
 import ACCESS_TOKEN from '../fixtures/accessToken';
+import REVIEWS from '../fixtures/reviews';
 
 import { loadItem } from './services/storage';
 
@@ -34,6 +35,7 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      reviews: REVIEWS,
       loginFields: {
         email: LOGIM_FIELDS.email,
         password: LOGIM_FIELDS.password,
