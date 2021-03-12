@@ -11,10 +11,19 @@ import {
 } from './actions';
 
 import { get } from './utils';
-import RestaurantReview from './RestaurantReview';
+import RestaurantReviewForm from './RestaurantReviewForm';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
+
+  const reviews = [
+    {
+      id: 1,
+      name: '테스터',
+      score: '5',
+      description: '맛있어요',
+    },
+  ];
 
   useEffect(() => {
     dispatch(loadRestaurant({ restaurantId }));
@@ -39,13 +48,23 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <RestaurantReview onChange={handleChange} onClick={handleClick} />
+      <RestaurantReviewForm
+        onChange={handleChange}
+        onClick={handleClick}
+      />
       <ul>
-        <li>
-          <p>테스터</p>
-          <p>5점</p>
-          <p>맛있어요</p>
-        </li>
+        {reviews.map(({
+          id, name, score, description,
+        }) => (
+          <li key={id}>
+            <p>{name}</p>
+            <p>
+              {score}
+              점
+            </p>
+            <p>{description}</p>
+          </li>
+        ))}
       </ul>
     </>
   );
