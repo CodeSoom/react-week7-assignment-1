@@ -48,7 +48,7 @@ const reducers = {
     };
   },
 
-  setRestaurantReview(state, { payload: { review } }) {
+  addRestaurantReview(state, { payload: { review } }) {
     const { restaurantReviews } = state;
     return {
       ...state,

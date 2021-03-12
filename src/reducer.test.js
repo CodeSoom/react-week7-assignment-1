@@ -5,7 +5,7 @@ import {
   setCategories,
   setRestaurants,
   setRestaurant,
-  setRestaurantReview,
+  addRestaurantReview,
   selectRegion,
   selectCategory,
   changeLoginFields,
@@ -104,7 +104,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('setRestaurantReview', () => {
+  describe('addRestaurantReview', () => {
     it('changes reviews', () => {
       const initialState = {
         restaurantReviews: [],
@@ -112,7 +112,7 @@ describe('reducer', () => {
 
       const review = { score: '5', description: 'good!!!' };
 
-      const state = reducer(initialState, setRestaurantReview(review));
+      const state = reducer(initialState, addRestaurantReview(review));
 
       expect(state.restaurantReviews).toHaveLength(1);
     });
