@@ -17,22 +17,14 @@ import RestaurantReviews from './RestaurantReviews';
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
-  const reviews = [
-    {
-      id: 1,
-      name: '테스터',
-      score: '5',
-      description: '맛있어요',
-    },
-  ];
-
   useEffect(() => {
     dispatch(loadRestaurant({ restaurantId }));
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
+  const reviews = useSelector(get('reviews'));
 
-  if (!restaurant) {
+  if (!restaurant || !reviews) {
     return (
       <p>Loading...</p>
     );
