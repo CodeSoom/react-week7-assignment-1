@@ -11,7 +11,10 @@ import {
   changeLoginFields,
   setAccessToken,
   changeReviewFields,
+  setRestaurantsReview,
 } from './actions';
+
+import REVIEWS from '../fixtures/reviews';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -115,6 +118,18 @@ describe('reducer', () => {
       const state = reducer(initialState, addRestaurantReview(review));
 
       expect(state.restaurantReviews).toHaveLength(1);
+    });
+  });
+
+  describe('setRestaurantsReview', () => {
+    it('changes reviews', () => {
+      const initialState = {
+        restaurantReviews: null,
+      };
+
+      const state = reducer(initialState, setRestaurantsReview(REVIEWS));
+
+      expect(state.restaurantReviews).toBe(REVIEWS);
     });
   });
 
