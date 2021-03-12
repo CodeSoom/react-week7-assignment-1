@@ -11,7 +11,6 @@ import {
   setRestaurant,
   requestLogin,
   setAccessToken,
-  setLoginFields,
 } from './actions';
 
 const middlewares = [thunk];
