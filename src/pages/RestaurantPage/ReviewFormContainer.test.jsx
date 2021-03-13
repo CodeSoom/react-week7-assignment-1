@@ -1,10 +1,11 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
+  act,
+  fireEvent,
   render,
   screen,
-  fireEvent,
-  act,
 } from '@testing-library/react';
 import given from 'given2';
 

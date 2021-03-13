@@ -3,14 +3,14 @@ import configureStore from 'redux-mock-store';
 
 import {
   loadInitialData,
-  setRegions,
-  setCategories,
   loadRestaurants,
   loadRestaurant,
-  setRestaurants,
-  setRestaurant,
-  requestLogin,
   setAccessToken,
+  setCategories,
+  setRegions,
+  setRestaurant,
+  setRestaurants,
+  requestLogin,
   requestReview,
 } from './actions';
 

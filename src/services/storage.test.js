@@ -1,4 +1,4 @@
-import { saveItem, loadItem } from './storage';
+import { loadItem, saveItem } from './storage';
 
 describe('storage', () => {
   Storage.prototype.setItem = jest.fn();

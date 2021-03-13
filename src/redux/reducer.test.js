@@ -1,15 +1,15 @@
 import reducer from './reducer';
 
 import {
-  setRegions,
+  logOut,
   setCategories,
-  setRestaurants,
-  setRestaurant,
+  setRegions,
   selectRegion,
   selectCategory,
-  setLoginFields,
+  setRestaurant,
   setAccessToken,
-  logOut,
+  setLoginFields,
+  setRestaurants,
 } from './actions';
 
 describe('reducer', () => {

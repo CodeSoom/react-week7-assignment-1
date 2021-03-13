@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import {
   loadInitialData,
 } from '@actions';
-import RegionsContainer from './RegionsContainer';
+
 import CategoriesContainer from './CategoriesContainer';
+import RegionsContainer from './RegionsContainer';
 import RestaurantsContainer from './RestaurantsContainer';
 
 export default function RestaurantsPage() {

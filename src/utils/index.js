@@ -1,2 +1,2 @@
-export { get } from './utils';
 export { equal } from './utils';
+export { get } from './utils';

@@ -1,11 +1,8 @@
 import React from 'react';
-import {
-  MemoryRouter,
-} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 
 import { render, screen } from '@testing-library/react';
-
-import { useDispatch, useSelector } from 'react-redux';
 
 import { loadItem } from '../services/storage';
 

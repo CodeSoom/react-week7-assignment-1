@@ -1,10 +1,11 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
+  fireEvent,
   render,
   screen,
-  fireEvent,
 } from '@testing-library/react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import RegionsContainer from './RegionsContainer';
 

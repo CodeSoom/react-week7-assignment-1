@@ -1,7 +1,7 @@
-const saveItem = jest.fn();
 const loadItem = jest.fn();
+const saveItem = jest.fn();
 
 export {
-  saveItem,
   loadItem,
+  saveItem,
 };

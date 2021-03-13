@@ -1,16 +1,4 @@
-import { get, equal } from './utils';
-
-test('get', () => {
-  const state = {
-    name: '홍길동',
-  };
-
-  const f = get('name');
-  const g = get('age');
-
-  expect(f(state)).toBe('홍길동');
-  expect(g(state)).toBeUndefined();
-});
+import { equal, get } from './utils';
 
 test('equal', () => {
   const state = {
@@ -22,4 +10,16 @@ test('equal', () => {
 
   expect(f(state)).toBeTruthy();
   expect(g(state)).toBeFalsy();
+});
+
+test('get', () => {
+  const state = {
+    name: '홍길동',
+  };
+
+  const f = get('name');
+  const g = get('age');
+
+  expect(f(state)).toBe('홍길동');
+  expect(g(state)).toBeUndefined();
 });

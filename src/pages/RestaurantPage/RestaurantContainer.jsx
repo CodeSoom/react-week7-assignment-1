@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { get } from '@utils';
-
 import {
   loadRestaurant,
 } from '@actions';
+import { get } from '@utils';
 
 import RestaurantDetail from './RestaurantDetail';
 

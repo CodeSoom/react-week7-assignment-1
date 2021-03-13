@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { render, screen } from '@testing-library/react';
 import given from 'given2';
 
 import ReviewContainer from './ReviewContainer';

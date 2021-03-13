@@ -8,6 +8,7 @@ import {
 
 import { setAccessToken } from '../redux/actions';
 import { loadItem } from '../services/storage';
+
 import {
   HomePage,
   LogInPage,

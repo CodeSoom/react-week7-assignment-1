@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import {
   act,
   fireEvent,
   render,
   screen,
 } from '@testing-library/react';
-
 import given from 'given2';
 
 import LogInContainer from './LogInContainer';

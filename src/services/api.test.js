@@ -1,19 +1,19 @@
 import {
-  REGIONS,
-  CATEGORIES,
-  RESTAURANTS,
-  RESTAURANT,
-  TOKEN,
-} from '@fixtures';
-
-import {
-  fetchRegions,
   fetchCategories,
-  fetchRestaurants,
+  fetchRegions,
   fetchRestaurant,
+  fetchRestaurants,
   postLogin,
   postReview,
 } from '@api';
+
+import {
+  CATEGORIES,
+  REGIONS,
+  RESTAURANT,
+  RESTAURANTS,
+  TOKEN,
+} from '@fixtures';
 
 describe('api', () => {
   const mockFetch = (data) => {
