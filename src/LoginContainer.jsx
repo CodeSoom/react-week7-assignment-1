@@ -5,6 +5,7 @@ import LoginForm from './LoginForm';
 
 import { changeLoginFields, requestLogin, setAccessToken } from './actions';
 import { get } from './utils';
+import { removeItem } from './services/storage';
 
 export default function LoginContainer() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function LoginContainer() {
   }
 
   function handleClick() {
+    removeItem();
     dispatch(setAccessToken(null));
   }
 
