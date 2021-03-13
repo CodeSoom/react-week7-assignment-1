@@ -35,6 +35,12 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function requestLoginError() {
+  return {
+    type: 'requestLoginError',
+  };
+}
+
 export function addRestaurantReview(review) {
   return {
     type: 'addRestaurantReview',
@@ -139,7 +145,7 @@ export function requestLogin() {
 
       dispatch(setAccessToken(accessToken));
     } catch (error) {
-      // console.error(error);
+      dispatch(requestLoginError());
     }
   };
 }
