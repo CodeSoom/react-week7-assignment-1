@@ -6,11 +6,13 @@ import ReviewForm from './ReviewForm';
 
 describe('ReviewForm', () => {
   const handleChange = jest.fn();
+  const handleClick = jest.fn();
 
   function renderReviewForm({ reviewInputs }) {
     return render(<ReviewForm
       reviewInputs={reviewInputs}
       onChange={handleChange}
+      onClick={handleClick}
     />);
   }
 
@@ -56,5 +58,18 @@ describe('ReviewForm', () => {
       });
       expect(handleChange).toBeCalledWith({ name, value });
     });
+  });
+
+  it('listens onChange', () => {
+    const initialInputs = {
+      rating: '',
+      content: '',
+    };
+
+    const { queryByText } = renderReviewForm({ reviewInputs: initialInputs });
+
+    fireEvent.click(queryByText('리뷰남기기'));
+
+    expect(handleClick).toBeCalled();
   });
 });
