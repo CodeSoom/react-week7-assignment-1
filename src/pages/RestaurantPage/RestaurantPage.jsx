@@ -10,7 +10,7 @@ export default function RestaurantPage({ params }) {
   return (
     <>
       <RestaurantContainer restaurantId={id} />
-      <ReviewFormContainer />
+      <ReviewFormContainer restaurantId={id} />
     </>
   );
 }

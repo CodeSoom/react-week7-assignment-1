@@ -12,6 +12,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from '@api';
 
 describe('api', () => {
@@ -84,6 +85,25 @@ describe('api', () => {
       });
 
       expect(accessToken).toEqual(TOKEN.accessToken);
+    });
+  });
+
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch({});
+    });
+
+    it('returns list of reviews', async () => {
+      const review = await postReview({
+        reviewFields: {
+          score: 3,
+          description: 'TDD는 맛있다',
+          restaurantId: 1,
+          accessToken: '123123123',
+        },
+      });
+
+      expect(review).toEqual({});
     });
   });
 });

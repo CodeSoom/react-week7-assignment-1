@@ -11,6 +11,7 @@ import {
   setRestaurant,
   requestLogin,
   setAccessToken,
+  requestReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -118,6 +119,23 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[1]).toEqual(setAccessToken({}));
+    });
+  });
+
+  describe('requestReview', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('requests postReview', async () => {
+      await store.dispatch(requestReview({
+        reviewFields: {
+          score: 3,
+          description: 'TDD는 맛있다',
+          restaurantId: 1,
+          accessToken: '123123123',
+        },
+      }));
     });
   });
 });
