@@ -11,12 +11,14 @@ import {
   changeLoginFields,
   setAccessToken,
   changeReviewFields,
+  requestLoginError,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
       accessToken: null,
+      loginError: false,
       regions: [],
       categories: [],
       restaurants: [],
@@ -37,6 +39,18 @@ describe('reducer', () => {
       const state = reducer(undefined, { type: 'action' });
 
       expect(state).toEqual(initialState);
+    });
+  });
+
+  describe('requestLoginError', () => {
+    it('changes loginError', () => {
+      const initialState = {
+        loginError: false,
+      };
+
+      const state = reducer(initialState, requestLoginError());
+
+      expect(state.loginError).toBe(true);
     });
   });
 
