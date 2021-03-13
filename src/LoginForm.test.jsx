@@ -45,7 +45,7 @@ describe('LoginForm', () => {
     expect(queryByText(/Login/)).not.toBeNull();
   });
 
-  it('이메일, 암호 입력창에 값을 입력하면 입력값이 업데이트 됩니다.', () => {
+  it('이메일, 암호의 초치값을 render합니다.', () => {
     const initialInputs = {
       email: 'initialEmail@example.com',
       password: 'initialPassword123',
@@ -61,6 +61,15 @@ describe('LoginForm', () => {
     initialData.forEach(({ label, value }) => {
       expect(queryByLabelText(label).value).toBe(value);
     });
+  });
+
+  it('이메일, 암호 입력창에 값을 입력하면 입력값이 업데이트 됩니다.', () => {
+    const initialInputs = {
+      email: 'initialEmail@example.com',
+      password: 'initialPassword123',
+    };
+
+    const { queryByLabelText } = renderLoginForm({ loginInputs: initialInputs });
 
     const currentData = [
       { label: 'E-mail', name: 'email', value: 'currentEmail@example.com' },
