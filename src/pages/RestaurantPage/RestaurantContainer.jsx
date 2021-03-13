@@ -9,13 +9,13 @@ import { get } from '@utils';
 import RestaurantDetail from './RestaurantDetail';
 
 export default function RestaurantContainer({ restaurantId }) {
+  const restaurant = useSelector(get('restaurant'));
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadRestaurant({ restaurantId }));
   }, []);
-
-  const restaurant = useSelector(get('restaurant'));
 
   if (!restaurant) {
     return (
@@ -24,8 +24,6 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   return (
-    <>
-      <RestaurantDetail restaurant={restaurant} />
-    </>
+    <RestaurantDetail restaurant={restaurant} />
   );
 }
