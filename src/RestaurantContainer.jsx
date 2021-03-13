@@ -41,12 +41,11 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      {accessToken && (
-        <RestaurantReviewForm
-          onChange={handleChange}
-          onClick={handleClick}
-        />
-      )}
+      <RestaurantReviewForm
+        accessToken={accessToken}
+        onChange={handleChange}
+        onClick={handleClick}
+      />
       <RestaurantReviews reviews={restaurant.reviews} />
     </>
   );

@@ -8,6 +8,7 @@ import RestaurantContainer from './RestaurantContainer';
 
 import REVIEW from '../fixtures/review';
 import REVIEWS from '../fixtures/reviews';
+import ACCESS_TOKEN from '../fixtures/accessToken';
 
 const { score: SCORE, description: DESCRIPTION } = REVIEW;
 
@@ -41,6 +42,7 @@ describe('RestaurantContainer', () => {
       address: '서울시 강남구',
       reviews: REVIEWS,
     }));
+    given('accessToken', () => ACCESS_TOKEN);
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
@@ -76,7 +78,7 @@ describe('RestaurantContainer', () => {
       reviews: REVIEWS,
     }));
 
-    given('accessToken', () => 'ACCESS_TOKEN');
+    given('accessToken', () => ACCESS_TOKEN);
 
     it('renders review form', () => {
       const { queryByLabelText, queryByText } = renderRestaurantContainer();
