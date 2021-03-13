@@ -11,6 +11,10 @@ const initialState = {
     email: '',
     password: '',
   },
+  reviewInputs: {
+    rating: '',
+    content: '',
+  },
 };
 
 const reducers = {
@@ -47,6 +51,16 @@ const reducers = {
       ...state,
       loginInputs: {
         ...state.loginInputs,
+        [name]: value,
+      },
+    };
+  },
+
+  setReviewInputs(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewInputs: {
+        ...state.reviewInputs,
         [name]: value,
       },
     };
