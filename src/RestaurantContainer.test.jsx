@@ -88,7 +88,7 @@ describe('RestaurantContainer', () => {
       expect(queryByText('리뷰 남기기')).not.toBeNull();
     });
 
-    it('listens change event', () => {
+    it('dispatches "changeReviewFields" action when change score and description ', () => {
       const { queryByLabelText } = renderRestaurantContainer();
 
       const controls = [{
@@ -118,7 +118,7 @@ describe('RestaurantContainer', () => {
       });
     });
 
-    it('listens change event', () => {
+    it('dispatches action when click "리뷰 남기기" button', () => {
       const { getByText } = renderRestaurantContainer();
 
       fireEvent.click(getByText('리뷰 남기기'));
