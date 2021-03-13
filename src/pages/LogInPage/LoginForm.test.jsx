@@ -6,10 +6,10 @@ import given from 'given2';
 import LoginForm from './LogInForm';
 
 describe('LoginForm', () => {
-  const onSubmit = jest.fn();
   const handleSubmit = jest.fn();
-  const register = jest.fn();
   const handleLogout = jest.fn();
+  const onSubmit = jest.fn();
+  const register = jest.fn();
 
   given('accessToken', () => '');
 
@@ -17,9 +17,9 @@ describe('LoginForm', () => {
     <LoginForm
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
+      handleLogout={handleLogout}
       register={register}
       token={given.accessToken}
-      handleLogout={handleLogout}
     />
   ));
 
