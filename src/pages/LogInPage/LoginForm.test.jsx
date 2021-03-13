@@ -46,7 +46,7 @@ describe('LoginForm', () => {
     renderLoginForm();
 
     fireEvent.click(screen.getByRole('button', {
-      name: /Log Out/i,
+      name: /Log out/,
     }));
 
     expect(handleLogout).toBeCalled();

@@ -13,7 +13,7 @@ export default function LogInForm({
         type="button"
         onClick={handleLogout}
       >
-        Log Out
+        Log out
       </button>
     );
   }
