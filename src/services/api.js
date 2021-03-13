@@ -38,6 +38,11 @@ export async function postLogin({ email, password }) {
     body: JSON.stringify({ email, password }),
   });
   const { accessToken } = await response.json();
+
+  if (!accessToken) {
+    throw new Error();
+  }
+
   return accessToken;
 }
 
