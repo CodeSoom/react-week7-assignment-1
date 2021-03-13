@@ -17,7 +17,7 @@ export default function LoginForm({
 
   return (
     <>
-      <h1>Log in</h1>
+      <h2>Log in 페이지</h2>
       <label htmlFor="login-email">E-mail</label>
       <input
         type="email"
