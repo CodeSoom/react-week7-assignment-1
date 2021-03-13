@@ -20,13 +20,16 @@ describe('LoginFormContainer', () => {
   it('이메일, 암호 입력창에 값을 입력하면 입력값이 업데이트 됩니다.', () => {
     const { queryByLabelText } = render(<LoginFormContainer />);
 
-    fireEvent.change(queryByLabelText(/E-mail/), { target: { value: 'currentEmail@example.com' } });
+    const currentData = [
+      { label: 'E-mail', name: 'email', value: 'currentEmail@example.com' },
+      { label: 'Password', name: 'password', value: 'currentPassword123' },
+    ];
 
-    expect(dispatch).toBeCalled();
+    currentData.forEach(({ label, value }) => {
+      fireEvent.change(queryByLabelText(label), { target: { value } });
 
-    fireEvent.change(queryByLabelText(/Password/), { target: { value: 'currentPassword123' } });
-
-    expect(dispatch).toBeCalled();
+      expect(dispatch).toBeCalled();
+    });
   });
 
   it('로그인하는 버튼을 눌러 아이디와 비밀번호를 제출합니다.', () => {
