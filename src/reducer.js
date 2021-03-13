@@ -74,7 +74,6 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
-
 };
 
 function defaultReducer(state) {
