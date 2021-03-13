@@ -7,7 +7,7 @@ describe('LogInPage', () => {
   it('renders input control', () => {
     render(<LogInPage />);
 
-    expect(screen.getByLabelText('E-Mail')).not.toBeUndefined();
-    expect(screen.getByLabelText('Password')).not.toBeUndefined();
+    expect(screen.getByLabelText('E-Mail')).toBeInTheDocument();
+    expect(screen.getByLabelText('Password')).toBeInTheDocument();
   });
 });

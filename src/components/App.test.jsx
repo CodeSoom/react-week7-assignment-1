@@ -81,8 +81,8 @@ describe('App', () => {
         name: /log in/i,
       })).toBeInTheDocument();
 
-      expect(screen.getByLabelText('E-Mail')).not.toBeUndefined();
-      expect(screen.getByLabelText('Password')).not.toBeUndefined();
+      expect(screen.getByLabelText('E-Mail')).toBeInTheDocument();
+      expect(screen.getByLabelText('Password')).toBeInTheDocument();
     });
   });
 
