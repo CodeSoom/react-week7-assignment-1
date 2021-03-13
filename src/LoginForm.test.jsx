@@ -16,6 +16,7 @@ describe('LoginForm', () => {
   function renderLoginForm() {
     return render(<LoginForm
       accessToken={given.accessToken}
+      error={given.error}
       onSubmit={handleSubmit}
       onChange={handleChange}
       onClick={handleClick}
@@ -43,6 +44,14 @@ describe('LoginForm', () => {
       const { queryByText } = renderLoginForm();
 
       expect(queryByText('Log In')).not.toBeNull();
+    });
+
+    it('renders error message when login error', () => {
+      given('error', () => true);
+
+      const { queryByText } = renderLoginForm();
+
+      expect(queryByText('아이디 또는 비밀번호를 확인해주세요')).not.toBeNull();
     });
 
     it('listens email input change event', () => {
