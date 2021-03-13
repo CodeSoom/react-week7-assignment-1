@@ -63,24 +63,30 @@ describe('RestaurantContainer', () => {
     it('renders a rating and a review', () => {
       const { queryByLabelText } = renderRestaurantContainer();
 
-      expect(queryByLabelText('평점')).not.toBeNull();
-      expect(queryByLabelText('리뷰내용')).not.toBeNull();
+      const currentInputs = [
+        { label: '평점' },
+        { label: '리뷰내용' },
+      ];
+
+      currentInputs.forEach(({ label }) => {
+        expect(queryByLabelText(label)).not.toBeNull();
+      });
     });
 
     it('listens onChange', () => {
       const { queryByLabelText } = renderRestaurantContainer();
 
-      fireEvent.change(queryByLabelText('평점'), {
-        target: { value: 3 },
+      const currentInputs = [
+        { label: '평점', name: 'rating', value: '3' },
+        { label: '리뷰내용', name: 'content', value: '보통이에요' },
+      ];
+
+      currentInputs.forEach(({ label, value }) => {
+        fireEvent.change(queryByLabelText(label), {
+          target: { value },
+        });
+        expect(dispatch).toBeCalled();
       });
-
-      expect(dispatch).toBeCalled();
-
-      fireEvent.change(queryByLabelText('리뷰내용'), {
-        target: { value: '보통이에요' },
-      });
-
-      expect(dispatch).toBeCalled();
     });
   });
 });
