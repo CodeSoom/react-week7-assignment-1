@@ -54,11 +54,17 @@ describe('RestaurantContainer', () => {
   });
 
   context('with login', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
+
     it('renders a rating and a review', () => {
       const { queryByLabelText } = renderRestaurantContainer();
 
-      expect(queryByLabelText(/평점/)).not.toBeNull();
-      expect(queryByLabelText(/리뷰내용/)).not.toBeNull();
+      expect(queryByLabelText('평점')).not.toBeNull();
+      expect(queryByLabelText('리뷰내용')).not.toBeNull();
     });
   });
 });
