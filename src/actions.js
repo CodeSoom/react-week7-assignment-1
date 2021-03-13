@@ -41,6 +41,13 @@ export function setLoginInputs({ name, value }) {
   };
 }
 
+export function setReviewInputs({ name, value }) {
+  return {
+    type: 'setReviewInputs',
+    payload: { name, value },
+  };
+}
+
 export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',
