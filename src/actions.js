@@ -7,6 +7,8 @@ import {
   postReview,
 } from './services/api';
 
+import { saveItem } from './services/storage';
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -107,6 +109,7 @@ export function requestLogin() {
     const { loginFields: { email, password } } = getState();
     try {
       const accessToken = await postLogin({ email, password });
+      saveItem('accessToken', accessToken);
       dispatch(setAccessToken(accessToken));
     } catch (error) {
       // 에러 처리 추가하기
