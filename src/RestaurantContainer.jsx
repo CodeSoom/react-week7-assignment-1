@@ -7,7 +7,7 @@ import RestaurantDetail from './RestaurantDetail';
 import ReviewForm from './ReviewForm';
 
 import {
-  loadRestaurant,
+  loadRestaurant, setReviewInputs,
 } from './actions';
 
 import { get } from './utils';
@@ -29,8 +29,8 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
-  function handleChange() {
-    dispatch();
+  function handleChange({ name, value }) {
+    dispatch(setReviewInputs({ name, value }));
   }
 
   function handleClick() {
