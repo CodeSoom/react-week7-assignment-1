@@ -90,7 +90,7 @@ describe('App', () => {
     it('renders the not found page', () => {
       renderApp({ path: '/xxx' });
 
-      expect(screen.getByText(/404 not found/i)).toBeInTheDocument();
+      expect(screen.getByText('404 Not Found')).toBeInTheDocument();
     });
   });
 

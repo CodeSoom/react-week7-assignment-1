@@ -44,7 +44,7 @@ describe('ReviewFormContainer', () => {
       expect(screen.getByLabelText('평점')).toBeInTheDocument();
       expect(screen.getByLabelText('리뷰 내용')).toBeInTheDocument();
       expect(screen.getByRole('button', {
-        name: /리뷰 남기기/,
+        name: '리뷰 남기기',
       })).toBeInTheDocument();
     });
 
@@ -52,7 +52,7 @@ describe('ReviewFormContainer', () => {
       renderReviewFormContainer();
 
       fireEvent.input(screen.getByRole('spinbutton', {
-        name: /평점/i,
+        name: '평점',
       }), {
         target: {
           value: '5',
@@ -60,7 +60,7 @@ describe('ReviewFormContainer', () => {
       });
 
       fireEvent.input(screen.getByRole('textbox', {
-        name: /리뷰 내용/,
+        name: '리뷰 내용',
       }), {
         target: {
           value: '존맛탱',
@@ -69,7 +69,7 @@ describe('ReviewFormContainer', () => {
 
       await act(async () => {
         fireEvent.submit(screen.getByRole('button', {
-          name: /리뷰 남기기/,
+          name: '리뷰 남기기',
         }));
       });
 

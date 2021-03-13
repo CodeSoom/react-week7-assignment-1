@@ -47,7 +47,7 @@ describe('RestaurantContainer', () => {
     it('renders loading', () => {
       renderRestaurantContainer();
 
-      expect(screen.getByText(/Loading/i)).toBeInTheDocument();
+      expect(screen.getByText('Loading...')).toBeInTheDocument();
     });
   });
 });

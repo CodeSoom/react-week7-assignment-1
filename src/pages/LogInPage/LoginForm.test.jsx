@@ -36,7 +36,7 @@ describe('LoginForm', () => {
     renderLoginForm();
 
     expect(screen.getByRole('button', {
-      name: /Log Out/i,
+      name: 'Log out',
     })).toBeInTheDocument();
   });
 
@@ -46,7 +46,7 @@ describe('LoginForm', () => {
     renderLoginForm();
 
     fireEvent.click(screen.getByRole('button', {
-      name: /Log out/,
+      name: 'Log out',
     }));
 
     expect(handleLogout).toBeCalled();

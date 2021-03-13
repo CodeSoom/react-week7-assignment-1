@@ -30,7 +30,7 @@ describe('LogInContainer', () => {
     renderLogInContainer();
 
     fireEvent.input(screen.getByRole('textbox', {
-      name: /e-mail/i,
+      name: 'E-Mail',
     }), {
       target: {
         value: 'test@mail.com',
@@ -45,7 +45,7 @@ describe('LogInContainer', () => {
 
     await act(async () => {
       fireEvent.submit(screen.getByRole('button', {
-        name: /log in/i,
+        name: 'Log In',
       }));
     });
 
@@ -58,7 +58,7 @@ describe('LogInContainer', () => {
     renderLogInContainer();
 
     fireEvent.click(screen.getByRole('button', {
-      name: /Log Out/i,
+      name: 'Log out',
     }));
 
     expect(dispatch).toBeCalled();
