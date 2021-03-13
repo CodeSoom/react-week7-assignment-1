@@ -18,23 +18,28 @@ export default function LoginForm({
   return (
     <>
       <h2>Log in 페이지</h2>
-      <label htmlFor="login-email">E-mail</label>
-      <input
-        type="email"
-        id="login-email"
-        name="email"
-        value={email}
-        onChange={handleChange}
-      />
 
-      <label htmlFor="login-password">Password</label>
-      <input
-        type="password"
-        id="login-password"
-        name="password"
-        value={password}
-        onChange={handleChange}
-      />
+      <div>
+        <label htmlFor="login-email">E-mail</label>
+        <input
+          type="email"
+          id="login-email"
+          name="email"
+          value={email}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="login-password">Password</label>
+        <input
+          type="password"
+          id="login-password"
+          name="password"
+          value={password}
+          onChange={handleChange}
+        />
+      </div>
 
       <button
         type="button"
