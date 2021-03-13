@@ -60,7 +60,7 @@ describe('ReviewForm', () => {
     });
   });
 
-  it('listens onChange', () => {
+  it('listens onClick', () => {
     const initialInputs = {
       rating: '',
       content: '',

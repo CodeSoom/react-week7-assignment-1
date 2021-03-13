@@ -89,4 +89,12 @@ describe('RestaurantContainer', () => {
       });
     });
   });
+
+  it('listens onClick', () => {
+    const { queryByText } = renderRestaurantContainer();
+
+    fireEvent.click(queryByText('리뷰남기기'));
+
+    expect(dispatch).toBeCalled();
+  });
 });
