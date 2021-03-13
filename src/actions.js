@@ -135,3 +135,9 @@ export function sendReview({ restaurantId }) {
     // TODO: dispatch(loadRestaurant)
   };
 }
+
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}

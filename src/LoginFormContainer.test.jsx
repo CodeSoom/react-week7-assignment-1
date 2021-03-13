@@ -4,6 +4,8 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import given from 'given2';
+
 import LoginFormContainer from './LoginFormContainer';
 
 jest.mock('react-redux');
@@ -20,34 +22,43 @@ describe('LoginFormContainer', () => {
         email: 'test@test',
         password: '1234',
       },
+      accessToken: given.accessToken,
     }));
   });
 
-  it('listens change events', () => {
-    const { getByLabelText } = render((
-      <LoginFormContainer />
-    ));
+  context('when logged out', () => {
+    given('accessToken', () => '');
 
-    expect(getByLabelText('E-mail').value).toBe('test@test');
-    expect(getByLabelText('Password').value).toBe('1234');
+    it('renders change events', () => {
+      const { getByLabelText } = render((
+        <LoginFormContainer />
+      ));
 
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'new email' },
-    });
+      expect(getByLabelText('E-mail').value).toBe('test@test');
+      expect(getByLabelText('Password').value).toBe('1234');
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: { name: 'email', value: 'new email' },
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'new email' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: { name: 'email', value: 'new email' },
+      });
     });
   });
 
-  it('renders "Log In" button', () => {
-    const { getByText } = render((
-      <LoginFormContainer />
-    ));
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-    fireEvent.click(getByText('Log In'));
+    it('renders "Log Out" button', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
 
-    expect(dispatch).toBeCalled();
+      fireEvent.click(getByText('Log Out'));
+
+      expect(dispatch).toBeCalledWith({ type: 'logout' });
+    });
   });
 });
