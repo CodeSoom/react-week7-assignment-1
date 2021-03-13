@@ -40,6 +40,12 @@ export function setLoginInputs({ name, value }) {
   };
 }
 
+export function setAccessToken() {
+  return {
+
+  };
+}
+
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
@@ -90,5 +96,11 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function requestLogin() {
+  return async () => {
+
   };
 }
