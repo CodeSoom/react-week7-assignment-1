@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function LoginForm({
-  accessToken, email, password,
+  accessToken, email, password, error,
   onChange, onSubmit, onClick,
 }) {
   function handleChange(event) {
@@ -46,6 +46,7 @@ export default function LoginForm({
               onChange={handleChange}
             />
           </div>
+          {error && <p>아이디 또는 비밀번호를 확인해주세요</p>}
           <button type="submit">Log In</button>
         </form>
       )}
