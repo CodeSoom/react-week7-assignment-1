@@ -24,7 +24,7 @@ export default function LoginContainer() {
   }
 
   function handleClick() {
-    removeItem();
+    removeItem('accessToken');
     dispatch(setAccessToken(null));
   }
 
