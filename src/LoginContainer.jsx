@@ -12,6 +12,7 @@ export default function LoginContainer() {
 
   const { email, password } = useSelector(get('loginFields'));
   const accessToken = useSelector(get('accessToken'));
+  const loginError = useSelector(get('loginError'));
 
   function handleChange({ value, name }) {
     dispatch(changeLoginFields({ value, name }));
@@ -33,6 +34,7 @@ export default function LoginContainer() {
       accessToken={accessToken}
       email={email}
       password={password}
+      error={loginError}
       onChange={handleChange}
       onSubmit={handleSubmit}
       onClick={handleClick}
