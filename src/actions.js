@@ -107,13 +107,9 @@ export function setAccessToken(accessToken) {
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
-    try {
-      const accessToken = await postLogin({ email, password });
-      saveItem('accessToken', accessToken);
-      dispatch(setAccessToken(accessToken));
-    } catch (error) {
-      // 에러 처리 추가하기
-    }
+    const accessToken = await postLogin({ email, password });
+    saveItem('accessToken', accessToken);
+    dispatch(setAccessToken(accessToken));
   };
 }
 
@@ -133,7 +129,6 @@ export function sendReview({ restaurantId }) {
     });
 
     dispatch(loadRestaurant({ restaurantId }));
-    // TODO: dispatch(loadRestaurant)
   };
 }
 

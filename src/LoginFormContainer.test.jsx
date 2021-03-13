@@ -29,6 +29,16 @@ describe('LoginFormContainer', () => {
   context('when logged out', () => {
     given('accessToken', () => '');
 
+    it('log in when "Log In" button Clicked', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalled();
+    });
+
     it('renders change events', () => {
       const { getByLabelText } = render((
         <LoginFormContainer />
@@ -51,12 +61,12 @@ describe('LoginFormContainer', () => {
   context('when logged in', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
 
-    it('renders "Log Out" button', () => {
+    it('renders "Log out" button', () => {
       const { getByText } = render((
         <LoginFormContainer />
       ));
 
-      fireEvent.click(getByText('Log Out'));
+      fireEvent.click(getByText('Log out'));
 
       expect(dispatch).toBeCalledWith({ type: 'logout' });
     });

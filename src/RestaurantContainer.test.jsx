@@ -35,6 +35,13 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [{
+        id: 1,
+        restaurantId: 1,
+        name: '테스터',
+        score: 5,
+        description: '훌륭하다 훌륭하다 지구인놈들',
+      }],
     }));
 
     given('reviewFields', () => ({
@@ -51,9 +58,7 @@ describe('RestaurantContainer', () => {
 
     context('without logged in', () => {
       it('renders no review write fields', () => {
-        const { queryByLabelText } = render((
-          <RestaurantContainer restaurantId="1" />
-        ));
+        const { queryByLabelText } = renderRestaurantContainer();
 
         expect(queryByLabelText('평점')).toBeNull();
         expect(queryByLabelText('리뷰 내용')).toBeNull();
@@ -63,10 +68,18 @@ describe('RestaurantContainer', () => {
     context('with logged in', () => {
       given('accessToken', () => 'ACCESS_TOKEN');
 
+      it('renders change events', () => {
+        const { getByLabelText } = renderRestaurantContainer();
+
+        fireEvent.change(getByLabelText('평점'), {
+          target: { value: 5 },
+        });
+
+        expect(dispatch).toBeCalled();
+      });
+
       it('renders review write fields', () => {
-        const { queryByLabelText } = render((
-          <RestaurantContainer restaurantId="1" />
-        ));
+        const { queryByLabelText } = renderRestaurantContainer();
 
         expect(queryByLabelText('평점')).not.toBeNull();
         expect(queryByLabelText('리뷰 내용')).not.toBeNull();
@@ -81,16 +94,6 @@ describe('RestaurantContainer', () => {
       });
 
       it('renders reviews', () => {
-        given('restaurant', () => ({
-          reviews: [{
-            id: 1,
-            restaurantId: 1,
-            name: '테스터',
-            score: 5,
-            description: '훌륭하다 훌륭하다 지구인놈들',
-          }],
-        }));
-
         const { container } = renderRestaurantContainer();
         expect(container).toHaveTextContent('훌륭하다 훌륭하다 지구인놈들');
       });

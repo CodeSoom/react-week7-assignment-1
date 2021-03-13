@@ -29,7 +29,6 @@ export default function RestaurantContainer({ restaurantId }) {
       <p>Loading...</p>
     );
   }
-  const { reviews } = restaurant;
 
   function handleChange({ name, value }) {
     dispatch(changeReviewField({ name, value }));
@@ -42,13 +41,13 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      {accessToken ? (
+      {accessToken && (
         <ReviewForm
           onChange={handleChange}
           onSubmit={handleSubmit}
         />
-      ) : null}
-      <Reviews reviews={reviews} />
+      )}
+      <Reviews reviews={restaurant.reviews} />
     </>
   );
 }

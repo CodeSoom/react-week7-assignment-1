@@ -18,7 +18,7 @@ function LogoutForm({ onClick }) {
       type="button"
       onClick={onClick}
     >
-      Log Out
+      Log out
     </button>
   );
 }
