@@ -139,7 +139,7 @@ export function requestLogin() {
 
       dispatch(setAccessToken(accessToken));
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 }
