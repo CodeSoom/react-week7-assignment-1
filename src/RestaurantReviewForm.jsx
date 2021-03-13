@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function RestaurantReviewForm({
+  accessToken,
   score,
   description,
   onChange,
@@ -10,6 +11,10 @@ export default function RestaurantReviewForm({
     const { target: { name, value } } = event;
 
     onChange({ name, value });
+  }
+
+  if (!accessToken) {
+    return null;
   }
 
   return (
