@@ -23,6 +23,7 @@ describe('RestaurantContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      accessToken: given.accessToken,
       restaurant: given.restaurant,
     }));
   });
@@ -47,6 +48,35 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
     });
+
+    it('renders review list', () => {
+      const { queryByText } = renderRestaurantContainer();
+
+      expect(queryByText('테스터')).not.toBeNull();
+      expect(queryByText('5점')).not.toBeNull();
+      expect(queryByText('맛있어요')).not.toBeNull();
+    });
+  });
+
+  context('without restaurant', () => {
+    given('restaurant', () => null);
+
+    it('renders loading', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('Loading');
+    });
+  });
+
+  context('when logged in', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+      reviews: REVIEWS,
+    }));
+
+    given('accessToken', () => 'ACCESS_TOKEN');
 
     it('renders review form', () => {
       const { queryByLabelText, queryByText } = renderRestaurantContainer();
@@ -93,23 +123,24 @@ describe('RestaurantContainer', () => {
 
       expect(dispatch).toBeCalledTimes(2);
     });
-
-    it('renders review list', () => {
-      const { queryByText } = renderRestaurantContainer();
-
-      expect(queryByText('테스터')).not.toBeNull();
-      expect(queryByText('5점')).not.toBeNull();
-      expect(queryByText('맛있어요')).not.toBeNull();
-    });
   });
 
-  context('without restaurant', () => {
-    given('restaurant', () => null);
+  context('when logged out', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+      reviews: REVIEWS,
+    }));
 
-    it('renders loading', () => {
-      const { container } = renderRestaurantContainer();
+    given('accessToken', () => null);
 
-      expect(container).toHaveTextContent('Loading');
+    it('renders review form', () => {
+      const { queryByLabelText, queryByText } = renderRestaurantContainer();
+
+      expect(queryByLabelText('평점')).toBeNull();
+      expect(queryByLabelText('리뷰 내용')).toBeNull();
+      expect(queryByText('리뷰 남기기')).toBeNull();
     });
   });
 });
