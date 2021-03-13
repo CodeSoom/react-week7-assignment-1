@@ -47,13 +47,6 @@ const reducers = {
     };
   },
 
-  setRestaurantsReview(state, { payload: { reviews } }) {
-    return {
-      ...state,
-      restaurantReviews: reviews,
-    };
-  },
-
   addRestaurantReview(state, { payload: { review } }) {
     const { restaurant: { reviews } } = state;
     return {

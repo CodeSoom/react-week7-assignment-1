@@ -42,13 +42,6 @@ export function addRestaurantReview(review) {
   };
 }
 
-export function setRestaurantsReview(reviews) {
-  return {
-    type: 'setRestaurantsReview',
-    payload: { reviews },
-  };
-}
-
 export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',
