@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -65,6 +65,22 @@ describe('RestaurantContainer', () => {
 
       expect(queryByLabelText('평점')).not.toBeNull();
       expect(queryByLabelText('리뷰내용')).not.toBeNull();
+    });
+
+    it('listens onChange', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
+
+      fireEvent.change(queryByLabelText('평점'), {
+        target: { value: 3 },
+      });
+
+      expect(dispatch).toBeCalled();
+
+      fireEvent.change(queryByLabelText('리뷰내용'), {
+        target: { value: '보통이에요' },
+      });
+
+      expect(dispatch).toBeCalled();
     });
   });
 });
