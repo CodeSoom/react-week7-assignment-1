@@ -17,6 +17,7 @@ describe('LoginContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) => selector({
       accessToken: given.accessToken,
+      loginError: given.error,
       loginFields: {
         email: '',
         password: '',
@@ -39,6 +40,14 @@ describe('LoginContainer', () => {
       const { queryByLabelText } = render(<LoginContainer />);
 
       expect(queryByLabelText('Password')).not.toBeNull();
+    });
+
+    it('renders error message when login error', () => {
+      given('error', () => true);
+
+      const { queryByText } = render(<LoginContainer />);
+
+      expect(queryByText('아이디 또는 비밀번호를 확인해주세요')).not.toBeNull();
     });
 
     it('listens change event', () => {
