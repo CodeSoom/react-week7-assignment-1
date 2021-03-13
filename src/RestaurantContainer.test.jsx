@@ -88,13 +88,13 @@ describe('RestaurantContainer', () => {
         expect(dispatch).toBeCalled();
       });
     });
-  });
 
-  it('listens onClick', () => {
-    const { queryByText } = renderRestaurantContainer();
+    it('listens onClick', () => {
+      const { queryByText } = renderRestaurantContainer();
 
-    fireEvent.click(queryByText('리뷰남기기'));
+      fireEvent.click(queryByText('리뷰남기기'));
 
-    expect(dispatch).toBeCalled();
+      expect(dispatch).toBeCalled();
+    });
   });
 });

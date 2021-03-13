@@ -33,12 +33,17 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch();
   }
 
+  function handleClick() {
+    dispatch();
+  }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
       <ReviewForm
         reviewInputs={reviewInputs}
         onChange={handleChange}
+        onClick={handleClick}
       />
     </>
   );
