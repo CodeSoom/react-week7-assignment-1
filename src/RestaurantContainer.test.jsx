@@ -52,4 +52,13 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('Loading');
     });
   });
+
+  context('with login', () => {
+    it('renders a rating and a review', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
+
+      expect(queryByLabelText(/평점/)).not.toBeNull();
+      expect(queryByLabelText(/리뷰내용/)).not.toBeNull();
+    });
+  });
 });
