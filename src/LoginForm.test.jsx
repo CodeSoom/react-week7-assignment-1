@@ -54,7 +54,7 @@ describe('LoginForm', () => {
       expect(queryByText('아이디 또는 비밀번호를 확인해주세요')).not.toBeNull();
     });
 
-    it('listens email input change event', () => {
+    it('calls onChange handler when change email', () => {
       const { getByLabelText } = renderLoginForm();
 
       fireEvent.change(getByLabelText('E-mail'), {
