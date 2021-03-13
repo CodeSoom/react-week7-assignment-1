@@ -13,6 +13,8 @@ import {
   sendReview,
 } from './actions';
 
+import { postLogin } from './services/api';
+
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
@@ -144,39 +146,56 @@ describe('actions', () => {
 
   describe('requestLogin', () => {
     beforeEach(() => {
+      jest.clearAllMocks();
+
       store = mockStore({
         loginFields: {
           email: 'tester@example.com',
           password: 'test',
         },
       });
+
+      postLogin.mockResolvedValue('ACCESS_TOKEN');
     });
 
-    it('dispatchs setAccessToken', async () => {
-      await store.dispatch(requestLogin());
+    context('without error', () => {
+      it('runs setAccessToken', async () => {
+        await store.dispatch(requestLogin());
 
-      const actions = store.getActions();
+        const actions = store.getActions();
 
-      expect(actions).toEqual([{
-        type: 'setAccessToken',
-        payload: {
-          accessToken: 'ACCESS_TOKEN',
-        },
-      }]);
+        expect(actions).toEqual([{
+          type: 'setAccessToken',
+          payload: {
+            accessToken: 'ACCESS_TOKEN',
+          },
+        }]);
+      });
     });
 
-    it('catch error', async () => {
-      const response = {
-        status: 400,
-      };
+    context('with error', () => {
+      beforeEach(() => {
+        jest.clearAllMocks();
 
-      global.fetch = jest.fn().mockRejectedValue(response);
+        store = mockStore({
+          loginFields: {
+            email: 'tester@example.com',
+            password: 'test',
+          },
+        });
 
-      try {
-        await expect(store.dispatch(requestLogin()));
-      } catch (event) {
-        expect(event).toEqual(response);
-      }
+        postLogin.mockRejectedValue('error');
+      });
+
+      it('runs requestLoginError', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions).toEqual([{
+          type: 'requestLoginError',
+        }]);
+      });
     });
   });
 });
