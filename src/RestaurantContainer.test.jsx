@@ -21,6 +21,7 @@ describe('RestaurantContainer', () => {
       restaurant: given.restaurant,
       reviewFields: given.reviewFields,
       accessToken: given.accessToken,
+      reviews: given.reviews,
     }));
   });
 
@@ -79,16 +80,30 @@ describe('RestaurantContainer', () => {
 
         expect(dispatch).toBeCalledTimes(2);
       });
-    });
 
-    context('without restaurant', () => {
-      given('restaurant', () => null);
+      it('renders reviews', () => {
+        given('reviews', () => ([{
+          id: 1,
+          restaurantId: 1,
+          name: '테스터',
+          score: 5,
+          description: '훌륭하다 훌륭하다 지구인놈들',
+        }]));
 
-      it('renders loading', () => {
-        const { container } = renderRestaurantContainer();
+        const { queryByText } = renderRestaurantContainer();
 
-        expect(container).toHaveTextContent('Loading');
+        expect(queryByText('훌륭하다 훌륭하다 지구인놈들')).not.toBeNull();
       });
+    });
+  });
+
+  context('without restaurant', () => {
+    given('restaurant', () => null);
+
+    it('renders loading', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('Loading');
     });
   });
 });
