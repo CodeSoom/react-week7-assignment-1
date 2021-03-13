@@ -8,6 +8,7 @@ import {
   setLoginInputs,
   selectRegion,
   selectCategory,
+  setReviewInputs,
 } from './actions';
 
 describe('reducer', () => {
@@ -22,6 +23,10 @@ describe('reducer', () => {
       loginInputs: {
         email: '',
         password: '',
+      },
+      reviewInputs: {
+        rating: '',
+        content: '',
       },
     };
 
@@ -162,6 +167,40 @@ describe('reducer', () => {
       }));
 
       expect(state.loginInputs.password).toEqual('currentPassword');
+    });
+  });
+
+  describe('setReviewInputs', () => {
+    it('changes review rating', () => {
+      const initialState = {
+        reviewInputs: {
+          rating: '',
+          content: '',
+        },
+      };
+
+      const state = reducer(initialState, setReviewInputs({
+        name: 'rating',
+        value: '3',
+      }));
+
+      expect(state.reviewInputs.rating).toEqual('3');
+    });
+
+    it('changes review content', () => {
+      const initialState = {
+        reviewInputs: {
+          rating: '',
+          content: '',
+        },
+      };
+
+      const state = reducer(initialState, setReviewInputs({
+        name: 'content',
+        value: '그냥 보통이네요.',
+      }));
+
+      expect(state.reviewInputs.content).toEqual('그냥 보통이네요.');
     });
   });
 });
