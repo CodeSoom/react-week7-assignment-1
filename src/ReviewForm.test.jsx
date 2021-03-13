@@ -26,11 +26,15 @@ describe('ReviewForm', () => {
 
     const { queryByLabelText } = renderReviewForm({ reviewInputs: initialInputs });
 
-    expect(queryByLabelText('평점')).not.toBeNull();
-    expect(queryByLabelText('평점').value).toBe('');
+    const currentInputs = [
+      { label: '평점', value: '' },
+      { label: '리뷰내용', value: '' },
+    ];
 
-    expect(queryByLabelText('리뷰내용')).not.toBeNull();
-    expect(queryByLabelText('리뷰내용').value).toBe('');
+    currentInputs.forEach(({ label, value }) => {
+      expect(queryByLabelText(label)).not.toBeNull();
+      expect(queryByLabelText(label).value).toBe(value);
+    });
   });
 
   it('listens onChange', () => {
@@ -41,16 +45,16 @@ describe('ReviewForm', () => {
 
     const { queryByLabelText } = renderReviewForm({ reviewInputs: initialInputs });
 
-    fireEvent.change(queryByLabelText('평점'), {
-      target: { value: 3 },
+    const currentInputs = [
+      { label: '평점', name: 'rating', value: '5' },
+      { label: '리뷰내용', name: 'content', value: '맛있네요' },
+    ];
+
+    currentInputs.forEach(({ label, name, value }) => {
+      fireEvent.change(queryByLabelText(label), {
+        target: { value },
+      });
+      expect(handleChange).toBeCalledWith({ name, value });
     });
-
-    expect(handleChange).toBeCalled();
-
-    fireEvent.change(queryByLabelText('리뷰내용'), {
-      target: { value: '보통이에요' },
-    });
-
-    expect(handleChange).toBeCalled();
   });
 });

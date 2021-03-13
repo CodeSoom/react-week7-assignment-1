@@ -18,7 +18,7 @@ export default function ReviewForm({ reviewInputs = initialReviewInputs, onChang
       <div>
         <label htmlFor="review-rating">평점</label>
         <input
-          type="number"
+          type="text"
           id="review-rating"
           name="rating"
           value={rating}
