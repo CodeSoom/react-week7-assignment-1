@@ -83,7 +83,7 @@ describe('App', () => {
   });
 
   context('with path /login', () => {
-    it('renders tje login page', () => {
+    it('renders login page', () => {
       const { container } = renderApp({ path: '/login' });
 
       expect(container).toHaveTextContent('Log In');
