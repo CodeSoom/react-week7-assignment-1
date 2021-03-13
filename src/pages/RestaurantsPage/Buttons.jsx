@@ -10,11 +10,11 @@ export default function Buttons({ buttons, handleClick, selected }) {
             onClick={() => handleClick(id)}
           >
             {name}
-            {selected ? (
+            {selected && (
               <>
                 {id === selected.id ? '(V)' : null}
               </>
-            ) : null}
+            )}
           </button>
         </li>
       ))}
