@@ -2,6 +2,7 @@ import { equal } from './utils';
 
 const initialState = {
   accessToken: null,
+  loginError: false,
   regions: [],
   categories: [],
   restaurants: [],
@@ -19,6 +20,13 @@ const initialState = {
 };
 
 const reducers = {
+  requestLoginError(state) {
+    return {
+      ...state,
+      loginError: true,
+    };
+  },
+
   setRegions(state, { payload: { regions } }) {
     return {
       ...state,
