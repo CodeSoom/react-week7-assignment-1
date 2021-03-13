@@ -29,8 +29,6 @@ describe('LoginForm', () => {
 
     const { queryByText, queryByLabelText } = renderLoginForm({ loginInputs: initialInputs });
 
-    expect(queryByText(/Log in/)).not.toBeNull();
-
     const initialData = [
       { label: 'E-mail', value: initialInputs.email },
       { label: 'Password', value: initialInputs.password },
