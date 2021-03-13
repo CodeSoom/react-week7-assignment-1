@@ -50,7 +50,7 @@ describe('LoginContainer', () => {
       expect(queryByText('아이디 또는 비밀번호를 확인해주세요')).not.toBeNull();
     });
 
-    it('listens change event', () => {
+    it('dispatches "changeLoginFields" action when change email and password', () => {
       const { getByLabelText } = render(<LoginContainer />);
 
       const controls = [{
@@ -86,7 +86,7 @@ describe('LoginContainer', () => {
       expect(queryByText('Log In')).not.toBeNull();
     });
 
-    it('listens "Log In" button click event', () => {
+    it('dispatches action when "log In" button click', () => {
       const { getByText } = render(<LoginContainer />);
 
       fireEvent.submit(getByText('Log In'));
@@ -104,7 +104,7 @@ describe('LoginContainer', () => {
       expect(queryByText('Log Out')).not.toBeNull();
     });
 
-    it('listens "Log out" button click event', () => {
+    it('dispatches "setAccessToken" action when "log Out" button click', () => {
       const { getByText } = render(<LoginContainer />);
 
       fireEvent.click(getByText('Log Out'));
