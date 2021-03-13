@@ -7,6 +7,7 @@ export default function ReviewForm({
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+
       <label htmlFor="review-score">
         평점
       </label>
@@ -16,6 +17,7 @@ export default function ReviewForm({
         name="score"
         ref={register({ required: true })}
       />
+
       <label htmlFor="review-description">
         리뷰 내용
       </label>
@@ -25,6 +27,7 @@ export default function ReviewForm({
         name="description"
         ref={register({ required: true })}
       />
+
       <button type="submit">
         리뷰 남기기
       </button>

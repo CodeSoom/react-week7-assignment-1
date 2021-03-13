@@ -38,6 +38,7 @@ describe('ReviewContainer', () => {
 
   context('without restaurant', () => {
     given('restaurant', () => null);
+
     it('renders loading', () => {
       render(<ReviewContainer />);
 
@@ -56,6 +57,7 @@ describe('ReviewContainer', () => {
 
     context('without reviews', () => {
       given('reviews', () => null);
+
       it('renders reviews', () => {
         const { container } = render(<ReviewContainer />);
 

@@ -24,6 +24,7 @@ export default function LogInForm({
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           <legend>식당 로그인:</legend>
+
           <label htmlFor="email">
             E-Mail
           </label>
@@ -33,6 +34,7 @@ export default function LogInForm({
             name="email"
             ref={register({ required: true })}
           />
+
           <label htmlFor="password">
             Password
           </label>
@@ -42,6 +44,7 @@ export default function LogInForm({
             name="password"
             ref={register({ required: true })}
           />
+
           <button type="submit">
             Log In
           </button>
