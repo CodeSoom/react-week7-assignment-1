@@ -127,7 +127,7 @@ describe('actions', () => {
       store = mockStore({});
     });
 
-    it('requests postReview', async () => {
+    it('calls postReview', async () => {
       await store.dispatch(requestReview({
         reviewFields: {
           score: 3,
@@ -136,6 +136,10 @@ describe('actions', () => {
           accessToken: '123123123',
         },
       }));
+
+      const actions = store.getActions();
+
+      expect(actions).toHaveLength(0);
     });
   });
 });
