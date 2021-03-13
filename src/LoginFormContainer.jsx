@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './LoginForm';
 
-import { setLoginInputs } from './actions';
+import { requestLogin, setLoginInputs } from './actions';
 
 import { get } from './utils';
 
@@ -18,7 +18,7 @@ export default function LoginFormContainer() {
   }
 
   function handleClick() {
-    disptach();
+    disptach(requestLogin());
   }
 
   return (
