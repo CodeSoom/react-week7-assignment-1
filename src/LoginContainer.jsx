@@ -29,15 +29,13 @@ export default function LoginContainer() {
   }
 
   return (
-    <>
-      <LoginForm
-        accessToken={accessToken}
-        email={email}
-        password={password}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-        onClick={handleClick}
-      />
-    </>
+    <LoginForm
+      accessToken={accessToken}
+      email={email}
+      password={password}
+      onChange={handleChange}
+      onSubmit={handleSubmit}
+      onClick={handleClick}
+    />
   );
 }
