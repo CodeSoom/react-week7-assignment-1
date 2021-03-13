@@ -72,19 +72,36 @@ describe('api', () => {
   });
 
   describe('postLogin', () => {
-    beforeEach(() => {
-      mockFetch({
-        accessToken: ACCESS_TOKEN,
+    context('without error', () => {
+      beforeEach(() => {
+        mockFetch({
+          accessToken: ACCESS_TOKEN,
+        });
+      });
+
+      it('returns accessToken', async () => {
+        const accessToken = await postLogin({
+          email: 'tester@example.com',
+          password: 'test',
+        });
+
+        expect(accessToken).toEqual(ACCESS_TOKEN);
       });
     });
 
-    it('returns restaurants', async () => {
-      const accessToken = await postLogin({
-        email: 'tester@example.com',
-        password: 'test',
+    context('with error', () => {
+      beforeEach(() => {
+        mockFetch({
+          accessToken: undefined,
+        });
       });
 
-      expect(accessToken).toEqual(ACCESS_TOKEN);
+      it("doesn't returns accessToken", async () => {
+        await expect(postLogin({
+          email: 'tester@example.com',
+          password: 'test',
+        })).rejects.toThrow();
+      });
     });
   });
 
