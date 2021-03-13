@@ -5,13 +5,13 @@ const initialReviewInputs = {
   content: '맛있는 편이에요',
 };
 
-export default function ReviewForm({ reviewInputs = initialReviewInputs, onChange }) {
+export default function ReviewForm({ reviewInputs = initialReviewInputs, onChange, onClick }) {
+  const { rating, content } = reviewInputs;
+
   function handleChange(event) {
     const { target: { name, value } } = event;
     onChange({ name, value });
   }
-
-  const { rating, content } = reviewInputs;
 
   return (
     <>
@@ -36,6 +36,13 @@ export default function ReviewForm({ reviewInputs = initialReviewInputs, onChang
           onChange={handleChange}
         />
       </div>
+
+      <button
+        type="button"
+        onClick={onClick}
+      >
+        리뷰남기기
+      </button>
     </>
   );
 }
