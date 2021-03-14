@@ -8,12 +8,14 @@ describe('ReviewForm', () => {
   const handleSubmit = jest.fn();
   const onSubmit = jest.fn();
   const register = jest.fn();
+  const errors = jest.fn();
 
   const renderReviewForm = () => render((
     <ReviewForm
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
       register={register}
+      errors={errors}
     />
   ));
 

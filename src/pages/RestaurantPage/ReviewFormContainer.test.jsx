@@ -47,30 +47,74 @@ describe('ReviewFormContainer', () => {
       })).toBeInTheDocument();
     });
 
-    it('exectues dispatch upon submission', async () => {
-      render(<ReviewFormContainer />);
+    context('without score', () => {
+      it('displays matching error message for user to input score', async () => {
+        render(<ReviewFormContainer />);
 
-      fireEvent.input(screen.getByRole('spinbutton', {
-        name: '평점',
-      }), {
-        target: {
-          value: '5',
-        },
+        fireEvent.input(screen.getByRole('textbox', {
+          name: '리뷰 내용',
+        }), {
+          target: {
+            value: '존맛탱',
+          },
+        });
+
+        await waitFor(() => fireEvent.submit(screen.getByRole('button', {
+          name: '리뷰 남기기',
+        })));
+
+        expect(dispatch).not.toBeCalled();
+        expect(screen.getByText('평점을 입력해주세요')).toBeInTheDocument();
       });
+    });
 
-      fireEvent.input(screen.getByRole('textbox', {
-        name: '리뷰 내용',
-      }), {
-        target: {
-          value: '존맛탱',
-        },
+    context('without description', () => {
+      it('displays matching error message for user to input description', async () => {
+        render(<ReviewFormContainer />);
+
+        fireEvent.input(screen.getByRole('spinbutton', {
+          name: '평점',
+        }), {
+          target: {
+            value: '5',
+          },
+        });
+
+        await waitFor(() => fireEvent.submit(screen.getByRole('button', {
+          name: '리뷰 남기기',
+        })));
+
+        expect(dispatch).not.toBeCalled();
+        expect(screen.getByText('리뷰 내용을 입력해주세요')).toBeInTheDocument();
       });
+    });
 
-      await waitFor(() => fireEvent.submit(screen.getByRole('button', {
-        name: '리뷰 남기기',
-      })));
+    context('with score and description', () => {
+      it('exectues dispatch upon submission', async () => {
+        render(<ReviewFormContainer />);
 
-      expect(dispatch).toBeCalledTimes(2);
+        fireEvent.input(screen.getByRole('spinbutton', {
+          name: '평점',
+        }), {
+          target: {
+            value: '5',
+          },
+        });
+
+        fireEvent.input(screen.getByRole('textbox', {
+          name: '리뷰 내용',
+        }), {
+          target: {
+            value: '존맛탱',
+          },
+        });
+
+        await waitFor(() => fireEvent.submit(screen.getByRole('button', {
+          name: '리뷰 남기기',
+        })));
+
+        expect(dispatch).toBeCalledTimes(2);
+      });
     });
   });
 });

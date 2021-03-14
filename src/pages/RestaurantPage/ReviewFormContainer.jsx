@@ -17,6 +17,7 @@ export default function ReviewFormContainer({ restaurantId }) {
     register,
     handleSubmit,
     reset,
+    errors,
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -44,6 +45,7 @@ export default function ReviewFormContainer({ restaurantId }) {
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
       register={register}
+      errors={errors}
     />
   );
 }

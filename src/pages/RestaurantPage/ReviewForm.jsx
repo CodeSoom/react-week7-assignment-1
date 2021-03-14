@@ -4,6 +4,7 @@ export default function ReviewForm({
   handleSubmit,
   onSubmit,
   register,
+  errors,
 }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -31,6 +32,9 @@ export default function ReviewForm({
       <button type="submit">
         리뷰 남기기
       </button>
+
+      {errors.score && <p>평점을 입력해주세요</p>}
+      {errors.description && <p>리뷰 내용을 입력해주세요</p>}
     </form>
   );
 }
