@@ -14,7 +14,7 @@ export default function LogInContainer() {
 
   const dispatch = useDispatch();
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
     dispatch(requestLogin({ logInFields: data }));
@@ -31,6 +31,7 @@ export default function LogInContainer() {
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
       register={register}
+      errors={errors}
       handleLogout={handleLogOut}
     />
   );

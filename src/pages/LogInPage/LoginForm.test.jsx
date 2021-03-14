@@ -10,6 +10,7 @@ describe('LoginForm', () => {
   const onSubmit = jest.fn();
   const register = jest.fn();
   const handleLogout = jest.fn();
+  const errors = jest.fn();
 
   given('accessToken', () => '');
 
@@ -20,6 +21,7 @@ describe('LoginForm', () => {
       onSubmit={onSubmit}
       register={register}
       handleLogout={handleLogout}
+      errors={errors}
     />
   ));
 

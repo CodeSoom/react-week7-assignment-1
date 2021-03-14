@@ -5,6 +5,7 @@ export default function LogInForm({
   handleSubmit,
   onSubmit,
   register,
+  errors,
   handleLogout,
 }) {
   if (token) {
@@ -48,7 +49,10 @@ export default function LogInForm({
           <button type="submit">
             Log In
           </button>
-          <br />
+
+          {errors.email && <p>이메일을 입력해주세요</p>}
+          {errors.password && <p>비밀번호를 입력해주세요</p>}
+
         </fieldset>
       </form>
     </div>
