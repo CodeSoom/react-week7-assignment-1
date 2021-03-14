@@ -14,8 +14,6 @@ import ReviewFormContainer from './ReviewFormContainer';
 describe('ReviewFormContainer', () => {
   const dispatch = jest.fn();
 
-  const renderReviewFormContainer = () => render(<ReviewFormContainer />);
-
   given('accessToken', () => '');
 
   beforeEach(() => {
@@ -30,7 +28,7 @@ describe('ReviewFormContainer', () => {
 
   context('when logged out', () => {
     it('renders a message for user to log in', () => {
-      renderReviewFormContainer();
+      render(<ReviewFormContainer />);
 
       expect(screen.getByText('로그인을 해주세요.')).toBeInTheDocument();
     });
@@ -40,7 +38,7 @@ describe('ReviewFormContainer', () => {
     given('accessToken', () => 'tdd는재밌다');
 
     it('renders review form', () => {
-      renderReviewFormContainer();
+      render(<ReviewFormContainer />);
 
       expect(screen.getByLabelText('평점')).toBeInTheDocument();
       expect(screen.getByLabelText('리뷰 내용')).toBeInTheDocument();
@@ -50,7 +48,7 @@ describe('ReviewFormContainer', () => {
     });
 
     it('exectues dispatch upon submission', async () => {
-      renderReviewFormContainer();
+      render(<ReviewFormContainer />);
 
       fireEvent.input(screen.getByRole('spinbutton', {
         name: '평점',
