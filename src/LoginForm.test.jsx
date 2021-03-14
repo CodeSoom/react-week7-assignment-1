@@ -81,13 +81,13 @@ describe('LoginForm', () => {
     it('renders Log Out button', () => {
       const { queryByText } = renderLoginForm();
 
-      expect(queryByText('Log Out')).not.toBeNull();
+      expect(queryByText('Log out')).not.toBeNull();
     });
 
     it('calls onClick handler when click Log Out button', () => {
       const { getByText } = renderLoginForm();
 
-      fireEvent.click(getByText('Log Out'));
+      fireEvent.click(getByText('Log out'));
 
       expect(handleClick).toBeCalled();
     });

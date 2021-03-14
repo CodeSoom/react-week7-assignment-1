@@ -18,7 +18,7 @@ export default function LoginForm({
             type="button"
             onClick={onClick}
           >
-            Log Out
+            Log out
 
           </button>
         </div>

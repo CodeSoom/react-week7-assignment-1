@@ -101,13 +101,13 @@ describe('LoginContainer', () => {
     it('renders "Log out" button', () => {
       const { queryByText } = render(<LoginContainer />);
 
-      expect(queryByText('Log Out')).not.toBeNull();
+      expect(queryByText('Log out')).not.toBeNull();
     });
 
     it('dispatches "setAccessToken" action when "log Out" button click', () => {
       const { getByText } = render(<LoginContainer />);
 
-      fireEvent.click(getByText('Log Out'));
+      fireEvent.click(getByText('Log out'));
 
       expect(dispatch).toBeCalledWith({
         type: 'setAccessToken',
