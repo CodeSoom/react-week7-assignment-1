@@ -9,7 +9,7 @@ import {
   selectCategory,
   changeLoginField,
   changeReviewField,
-  setAccessTocken,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -158,7 +158,7 @@ describe('changeLoginField', () => {
   });
 
   describe('setAccessToken', () => {
-    const state = reducer(initialState, setAccessTocken('TOKEN'));
+    const state = reducer(initialState, setAccessToken('TOKEN'));
 
     expect(state.accessToken).toBe('TOKEN');
   });

@@ -47,7 +47,7 @@ const reducers = {
     };
   },
 
-  setAccessTocken(state, { payload: { accessToken } }) {
+  setAccessToken(state, { payload: { accessToken } }) {
     return {
       ...state,
       accessToken,

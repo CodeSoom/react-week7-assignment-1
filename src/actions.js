@@ -37,9 +37,9 @@ export function setRestaurant(restaurant) {
   };
 }
 
-export function setAccessTocken(accessToken) {
+export function setAccessToken(accessToken) {
   return {
-    type: 'setAccessTocken',
+    type: 'setAccessToken',
     payload: { accessToken },
   };
 }
@@ -119,7 +119,7 @@ export function requestLogin() {
 
     saveItem('accessToken', accessToken);
 
-    dispatch(setAccessTocken(accessToken));
+    dispatch(setAccessToken(accessToken));
   };
 }
 

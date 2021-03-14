@@ -12,7 +12,7 @@ import {
   setRestaurant,
   requestLogin,
   sendReview,
-  setAccessTocken,
+  setAccessToken,
 } from './actions';
 
 const middlewares = [thunk];
@@ -119,7 +119,7 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessTocken({}));
+      expect(actions[0]).toEqual(setAccessToken({}));
     });
   });
 

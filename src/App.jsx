@@ -15,7 +15,7 @@ import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
 
-import { setAccessTocken } from './actions';
+import { setAccessToken } from './actions';
 
 import { loadItem } from './services/storage';
 
@@ -25,7 +25,7 @@ export default function App() {
   const accessToken = loadItem('accessToken');
 
   if (accessToken) {
-    dispatch(setAccessTocken(accessToken));
+    dispatch(setAccessToken(accessToken));
   }
 
   return (
