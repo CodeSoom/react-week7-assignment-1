@@ -18,6 +18,7 @@ describe('RestaurantContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      accessToken: given.accessToken,
       restaurant: given.restaurant,
     }));
   });
@@ -54,6 +55,7 @@ describe('RestaurantContainer', () => {
   });
 
   context('with login', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
     given('restaurant', () => ({
       id: 1,
       name: '마법사주방',
@@ -95,6 +97,24 @@ describe('RestaurantContainer', () => {
       fireEvent.click(queryByText('리뷰남기기'));
 
       expect(dispatch).toBeCalled();
+    });
+  });
+
+  context('without login', () => {
+    given('accessToken', () => '');
+
+    it('does not render a rating and a review', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
+
+      const currentInputs = [
+        { label: '평점' },
+        { label: '리뷰내용' },
+        { label: '리뷰남기기' },
+      ];
+
+      currentInputs.forEach(({ label }) => {
+        expect(queryByLabelText(label)).toBeNull();
+      });
     });
   });
 });
