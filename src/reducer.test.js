@@ -28,6 +28,7 @@ describe('reducer', () => {
         rating: '',
         content: '',
       },
+      accessToken: '',
     };
 
     it('returns initialState', () => {

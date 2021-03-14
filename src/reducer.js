@@ -15,6 +15,7 @@ const initialState = {
     rating: '',
     content: '',
   },
+  accessToken: '',
 };
 
 const reducers = {
