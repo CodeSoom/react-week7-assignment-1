@@ -20,9 +20,7 @@ describe('reducer', () => {
       regions: [],
       categories: [],
       restaurants: [],
-      restaurant: {
-        reviews: [],
-      },
+      restaurant: [],
       selectedRegion: null,
       selectedCategory: null,
       loginFields: {
@@ -200,13 +198,13 @@ describe('changeReviewField', () => {
 });
 
 describe('setReviews', () => {
-  const reviews = {
+  const reviews = [{
     id: '1',
     restaurantId: '1',
     name: 'tester',
     score: '5',
     description: '맛있다!',
-  };
+  }];
 
   const initialState = {
     restaurant: {
@@ -221,5 +219,6 @@ describe('setReviews', () => {
     );
 
     expect(state.restaurant.reviews).toHaveLength(reviews.length);
+    expect(state.restaurant.reviews[0]).toEqual(reviews[0]);
   });
 });

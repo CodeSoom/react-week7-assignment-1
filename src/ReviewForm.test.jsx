@@ -13,9 +13,10 @@ describe('ReviewForm', () => {
     handleSubmit.mockClear();
   });
 
-  function renderReviewForm() {
+  function renderReviewForm({ score, description } = {}) {
     return render((
       <ReviewForm
+        fields={{ score, description }}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
@@ -27,6 +28,16 @@ describe('ReviewForm', () => {
 
     expect(queryByLabelText('평점')).not.toBeNull();
     expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+  });
+
+  it('renders values of fields', () => {
+    const { queryByLabelText } = renderReviewForm({
+      score: '6',
+      description: '맛있당',
+    });
+
+    expect(queryByLabelText('평점').value).toBe('6');
+    expect(queryByLabelText('리뷰 내용').value).toBe('맛있당');
   });
 
   it('listens change events', () => {

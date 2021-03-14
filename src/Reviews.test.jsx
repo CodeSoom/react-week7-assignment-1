@@ -13,6 +13,11 @@ describe('Reviews', () => {
       description: '맛있어요!',
     },
   ];
+  it('renders title', () => {
+    const { container } = render(<Reviews />);
+
+    expect(container).toHaveTextContent('리뷰');
+  });
 
   context('with reviews', () => {
     it('renders names and descriptions', () => {
