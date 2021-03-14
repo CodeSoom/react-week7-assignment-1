@@ -39,7 +39,7 @@ describe('ReviewFormContainer', () => {
   context('when logged in', () => {
     given('accessToken', () => 'tdd는재밌다');
 
-    it('renders ReviewFormContainer', () => {
+    it('renders review form', () => {
       renderReviewFormContainer();
 
       expect(screen.getByLabelText('평점')).toBeInTheDocument();
