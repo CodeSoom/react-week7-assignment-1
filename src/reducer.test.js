@@ -10,6 +10,7 @@ import {
   changeLoginField,
   changeReviewField,
   setAccessToken,
+  setReviews,
   logout,
 } from './actions';
 
@@ -19,7 +20,9 @@ describe('reducer', () => {
       regions: [],
       categories: [],
       restaurants: [],
-      restaurant: null,
+      restaurant: {
+        reviews: [],
+      },
       selectedRegion: null,
       selectedCategory: null,
       loginFields: {
@@ -193,5 +196,30 @@ describe('changeReviewField', () => {
 
     expect(state.reviewFields.score).toBe('7');
     expect(state.reviewFields.description).toBe('맛있어요!');
+  });
+});
+
+describe('setReviews', () => {
+  const reviews = {
+    id: '1',
+    restaurantId: '1',
+    name: 'tester',
+    score: '5',
+    description: '맛있다!',
+  };
+
+  const initialState = {
+    restaurant: {
+      reviews: [],
+    },
+  };
+
+  it('changes reviews of the current restaurant', () => {
+    const state = reducer(
+      initialState,
+      setReviews(reviews),
+    );
+
+    expect(state.restaurant.reviews).toHaveLength(reviews.length);
   });
 });
