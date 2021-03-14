@@ -19,5 +19,5 @@ export async function postLogin() {
 }
 
 export async function postReview() {
-  return '';
+  return {};
 }

@@ -91,15 +91,15 @@ describe('api', () => {
       mockFetch({});
     });
 
-    it('returns accessToken', async () => {
-      const accessToken = await postReview({
+    it('returns review', async () => {
+      const data = await postReview({
         accessToken: 'TOKEN',
         restaurantId: 1,
         rating: '5',
         content: '추천합니다.',
       });
 
-      expect(accessToken).toEqual({});
+      expect(data).toEqual({});
     });
   });
 });

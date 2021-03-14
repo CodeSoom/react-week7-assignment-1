@@ -41,8 +41,20 @@ export async function postLogin({ email, password }) {
   return accessToken;
 }
 
-export async function postReview() {
-  return {
-
-  };
+export async function postReview({
+  accessToken, restaurantId,
+  rating, content,
+}) {
+  const url = 'https://eatgo-customer-api.ahastudio.com/restaurants/'
+    + `${restaurantId}/reviews`;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/jsion',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({ rating, content }),
+  });
+  const data = response.json();
+  return data;
 }
