@@ -10,6 +10,7 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  changeReviewField,
   requestLogin,
   setAccessTocken,
 } from './actions';

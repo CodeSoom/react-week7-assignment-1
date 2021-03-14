@@ -8,6 +8,7 @@ import {
   selectRegion,
   selectCategory,
   changeLoginField,
+  changeReviewField,
   setAccessTocken,
 } from './actions';
 
@@ -25,6 +26,10 @@ describe('reducer', () => {
         password: '',
       },
       accessToken: '',
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -156,5 +161,24 @@ describe('changeLoginField', () => {
     const state = reducer(initialState, setAccessTocken('TOKEN'));
 
     expect(state.accessToken).toBe('TOKEN');
+  });
+});
+
+describe('changeReviewField', () => {
+  const initialState = {
+    reviewFields: {
+      score: '7',
+      description: '',
+    },
+  };
+
+  it('changes a field of rievew', () => {
+    const state = reducer(
+      initialState,
+      changeReviewField({ name: 'description', value: '맛있어요!' }),
+    );
+
+    expect(state.reviewFields.score).toBe('7');
+    expect(state.reviewFields.description).toBe('맛있어요!');
   });
 });
