@@ -7,7 +7,7 @@ import RestaurantDetail from './RestaurantDetail';
 import ReviewForm from './ReviewForm';
 
 import {
-  loadRestaurant, setReviewInputs,
+  loadRestaurant, sendReview, setReviewInputs,
 } from './actions';
 
 import { get } from './utils';
@@ -34,7 +34,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   function handleClick() {
-    dispatch();
+    dispatch(sendReview({ restaurantId }));
   }
 
   return (
