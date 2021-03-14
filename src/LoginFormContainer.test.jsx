@@ -68,14 +68,14 @@ describe('LoginFormContainer', () => {
   });
 
   context('when logged in', () => {
-    given('accessToken', () => 'ACCESS_TOKEN');
+    given('accessToken', () => 'TOKEN');
 
     it('renders "Log out" button', () => {
       const { getByText } = renderLoginFormContainer();
 
       fireEvent.click(getByText('Log out'));
 
-      expect(dispatch).toBeCalled({ type: 'logout' });
+      expect(dispatch).toBeCalledWith({ type: 'logout' });
     });
   });
 });

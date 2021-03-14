@@ -10,6 +10,7 @@ import {
   changeLoginField,
   changeReviewField,
   setAccessToken,
+  logout,
 } from './actions';
 
 describe('reducer', () => {
@@ -164,6 +165,18 @@ describe('changeLoginField', () => {
   });
 });
 
+describe('logout', () => {
+  const initialState = {
+    accessToken: 'TOKEN',
+  };
+
+  it('clears access token', () => {
+    const state = reducer(initialState, logout());
+
+    expect(state.accessToken).toBe('');
+  });
+});
+
 describe('changeReviewField', () => {
   const initialState = {
     reviewFields: {
@@ -172,7 +185,7 @@ describe('changeReviewField', () => {
     },
   };
 
-  it('changes a field of rievew', () => {
+  it('changes a field of review', () => {
     const state = reducer(
       initialState,
       changeReviewField({ name: 'description', value: '맛있어요!' }),
