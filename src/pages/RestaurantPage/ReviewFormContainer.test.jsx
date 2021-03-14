@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  act,
   fireEvent,
   render,
   screen,
+  waitFor,
 } from '@testing-library/react';
 import given from 'given2';
 
@@ -66,11 +66,9 @@ describe('ReviewFormContainer', () => {
         },
       });
 
-      await act(async () => {
-        fireEvent.submit(screen.getByRole('button', {
-          name: '리뷰 남기기',
-        }));
-      });
+      await waitFor(() => fireEvent.submit(screen.getByRole('button', {
+        name: '리뷰 남기기',
+      })));
 
       expect(dispatch).toBeCalledTimes(2);
     });
