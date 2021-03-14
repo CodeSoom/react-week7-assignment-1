@@ -72,7 +72,7 @@ describe('ReviewFormContainer', () => {
         }));
       });
 
-      expect(dispatch).toBeCalled();
+      expect(dispatch).toBeCalledTimes(2);
     });
   });
 });

@@ -64,6 +64,13 @@ export function selectCategory(categoryId) {
   };
 }
 
+export function setReviews(reviews) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
+
 export function logOut() {
   return {
     type: 'logOut',
@@ -106,6 +113,16 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+
+    dispatch(setReviews(restaurant.reviews));
+  };
+}
+
+export function loadReviews({ restaurantId }) {
+  return async (dispatch) => {
+    const { reviews } = await fetchRestaurant({ restaurantId });
+
+    dispatch(setReviews(reviews));
   };
 }
 

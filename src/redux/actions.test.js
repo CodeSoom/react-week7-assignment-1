@@ -5,11 +5,13 @@ import {
   loadInitialData,
   loadRestaurants,
   loadRestaurant,
+  loadReviews,
   setAccessToken,
   setCategories,
   setRegions,
   setRestaurant,
   setRestaurants,
+  setReviews,
   requestLogin,
   requestReview,
 } from './actions';
@@ -99,7 +101,22 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setRestaurant(null));
-      expect(actions[1]).toEqual(setRestaurant({}));
+      expect(actions[1]).toEqual(setRestaurant({ reviews: [] }));
+      expect(actions[2]).toEqual(setReviews([]));
+    });
+  });
+
+  describe('loadReviews', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('dispatchs setReviews', async () => {
+      await store.dispatch(loadReviews({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setReviews([]));
     });
   });
 

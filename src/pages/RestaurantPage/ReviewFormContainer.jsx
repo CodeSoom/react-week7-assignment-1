@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useForm } from 'react-hook-form';
 
-import { requestReview, loadRestaurant } from '@actions';
+import { requestReview, loadReviews } from '@actions';
 import { get } from '../../utils/utils';
 
 import ReviewForm from './ReviewForm';
@@ -19,8 +19,8 @@ export default function ReviewFormContainer({ restaurantId }) {
     reset,
   } = useForm();
 
-  const onSubmit = (data) => {
-    dispatch(requestReview({
+  const onSubmit = async (data) => {
+    await dispatch(requestReview({
       reviewFields: {
         ...data,
         restaurantId,
@@ -28,7 +28,7 @@ export default function ReviewFormContainer({ restaurantId }) {
       },
     }));
 
-    dispatch(loadRestaurant({ restaurantId }));
+    await dispatch(loadReviews({ restaurantId }));
 
     reset();
   };

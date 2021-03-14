@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import given from 'given2';
 
 import ReviewContainer from './ReviewContainer';
@@ -19,50 +19,31 @@ describe('ReviewContainer', () => {
     },
   ]));
 
-  given('restaurant', () => ({
-    id: 1,
-    name: '마법사주방',
-    address: '서울시 강남구',
-    reviews: given.reviews,
-  }));
-
   beforeEach(() => {
     jest.clearAllMocks();
 
     useSelector.mockImplementation((selector) => selector({
-      restaurant: given.restaurant,
+      reviews: given.reviews,
     }));
 
     useDispatch.mockImplementation(() => dispatch);
   });
 
-  context('without restaurant', () => {
-    given('restaurant', () => null);
+  context('with reviews', () => {
+    it('renders reviews', () => {
+      const { container } = render(<ReviewContainer />);
 
-    it('renders loading', () => {
-      render(<ReviewContainer />);
-
-      expect(screen.getByText('Loading...')).toBeInTheDocument();
+      expect(container).toHaveTextContent('테스터');
     });
   });
 
-  context('with restaurant', () => {
-    context('with reviews', () => {
-      it('renders reviews', () => {
-        const { container } = render(<ReviewContainer />);
+  context('without reviews', () => {
+    given('reviews', () => []);
 
-        expect(container).toHaveTextContent('테스터');
-      });
-    });
+    it('renders reviews', () => {
+      const { container } = render(<ReviewContainer />);
 
-    context('without reviews', () => {
-      given('reviews', () => null);
-
-      it('renders reviews', () => {
-        const { container } = render(<ReviewContainer />);
-
-        expect(container).toHaveTextContent('리뷰가 없습니다.');
-      });
+      expect(container).toHaveTextContent('리뷰가 없습니다.');
     });
   });
 });

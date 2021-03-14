@@ -6,21 +6,15 @@ import { get } from '../../utils/utils';
 import Review from './Review';
 
 export default function ReviewContainer() {
-  const restaurant = useSelector(get('restaurant'));
+  const reviews = useSelector(get('reviews'));
 
-  if (!restaurant) {
-    return (
-      <p>Loading...</p>
-    );
-  }
-
-  if (!restaurant.reviews) {
+  if (!reviews.length) {
     return (
       <p>리뷰가 없습니다.</p>
     );
   }
 
   return (
-    <Review reviews={restaurant.reviews} />
+    <Review reviews={reviews} />
   );
 }
