@@ -117,3 +117,9 @@ export function requestLogin() {
     dispatch(setAccessToken(accessToken));
   };
 }
+
+export function sendReview() {
+  return {
+
+  };
+}
