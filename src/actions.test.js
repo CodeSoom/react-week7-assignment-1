@@ -10,8 +10,8 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
-  changeReviewField,
   requestLogin,
+  sendReview,
   setAccessTocken,
 } from './actions';
 
@@ -120,6 +120,27 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setAccessTocken({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+        restaurant: { id: 1 },
+        reviewFields: {
+          score: '7', description: '맛있어요!',
+        },
+      });
+    });
+
+    it('dispatches setRestaurant', async () => {
+      await store.dispatch(sendReview({ restaurantId: '1' }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
 });

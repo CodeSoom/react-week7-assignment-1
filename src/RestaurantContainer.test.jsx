@@ -24,6 +24,7 @@ describe('RestaurantContainer', () => {
         score: '',
         description: '',
       },
+      accessToken: given.accessToken,
     }));
   });
 
@@ -34,6 +35,8 @@ describe('RestaurantContainer', () => {
   });
 
   context('with restaurant', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
+
     given('restaurant', () => ({
       id: 1,
       name: '마법사주방',
@@ -77,7 +80,7 @@ describe('RestaurantContainer', () => {
 
       fireEvent.click(getByText('리뷰 남기기'));
 
-      expect(dispatch).toBeCalled();
+      expect(dispatch).toBeCalledTimes(2);
     });
   });
 
