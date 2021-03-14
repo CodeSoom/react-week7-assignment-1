@@ -82,7 +82,7 @@ export function selectCategory(categoryId) {
   };
 }
 
-export function resetLogin() {
+export function logout() {
   return async (dispatch) => {
     saveItem('accessToken', '');
 
@@ -122,9 +122,8 @@ export function loadRestaurants() {
 export function loadRestaurant({ restaurantId }) {
   return async (dispatch, getState) => {
     const id = getState()?.restaurant?.id;
-    const newId = restaurantId;
 
-    if (isNewRestaurant(id, newId)) {
+    if (isNewRestaurant(id, restaurantId)) {
       dispatch(setRestaurant(null));
     }
 
@@ -140,9 +139,10 @@ export function requestLogin() {
 
     const accessToken = await postLogin({ email, password });
 
-    saveItem('accessToken', accessToken);
-
-    dispatch(setAccessToken(accessToken));
+    if (accessToken) {
+      saveItem('accessToken', accessToken);
+      dispatch(setAccessToken(accessToken));
+    }
   };
 }
 

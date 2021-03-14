@@ -11,10 +11,11 @@ import {
   loadRestaurant,
   setRestaurants,
   sendReview,
-  resetLogin,
+  logout,
 } from './actions';
 
 import { saveItem } from './services/storage';
+import { postLogin } from './services/api';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -134,33 +135,52 @@ describe('actions', () => {
   });
 
   describe('requestLogin', () => {
+    const a = jest.fn();
+    a.mockImplementation(() => '');
+
     beforeEach(() => {
+      postLogin.mockClear();
       store = mockStore({ userLoginInputs: { email: 'test@naver.com', password: 'test' } });
     });
+    context('accessToken이 정상적으로 받아졌을 경우', () => {
+      it('accessToken을 저장하는 action을 실행하고 로컬스토리지에 저장한다', async () => {
+        postLogin.mockImplementation(() => 'ACCESS_TOKEN');
 
-    it('accessToken을 저장하는 action을 실행하고 로컬스토리지에 저장한다', async () => {
-      await store.dispatch(requestLogin());
+        await store.dispatch(requestLogin());
 
-      const actions = store.getActions();
+        const actions = store.getActions();
 
-      expect(actions[0]).toEqual(
-        {
-          type: 'setAccessToken',
-          payload: { accessToken: 'ACCESS_TOKEN' },
-        },
-      );
+        expect(actions[0]).toEqual(
+          {
+            type: 'setAccessToken',
+            payload: { accessToken: 'ACCESS_TOKEN' },
+          },
+        );
 
-      expect(saveItem).toBeCalled();
+        expect(saveItem).toBeCalled();
+      });
+    });
+
+    context('accessToken이 비정상적으로 받아졌을 경우', () => {
+      it('accessToken을 저장하는 action은 실행되지 않는다.', async () => {
+        postLogin.mockImplementation(() => '');
+
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toBeUndefined();
+      });
     });
   });
 
-  describe('resetLogin', () => {
+  describe('logout', () => {
     beforeEach(() => {
       store = mockStore({ accessToken: 'ACCESS_TOKEN' });
     });
 
     it('accessToken을 초기화하는 action을 실행하고 로컬스토리지를 비운다', async () => {
-      await store.dispatch(resetLogin());
+      await store.dispatch(logout());
 
       const actions = store.getActions();
 
