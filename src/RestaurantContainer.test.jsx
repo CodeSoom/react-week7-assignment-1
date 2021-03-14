@@ -35,8 +35,6 @@ describe('RestaurantContainer', () => {
   });
 
   context('with restaurant', () => {
-    given('accessToken', () => 'ACCESS_TOKEN');
-
     given('restaurant', () => ({
       id: 1,
       name: '마법사주방',
@@ -49,6 +47,26 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
     });
+  });
+
+  context('without restaurant', () => {
+    given('restaurant', () => null);
+
+    it('renders loading', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('Loading');
+    });
+  });
+
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
+
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
 
     it('renders review write form', () => {
       const { queryByLabelText } = renderRestaurantContainer();
@@ -84,13 +102,14 @@ describe('RestaurantContainer', () => {
     });
   });
 
-  context('without restaurant', () => {
-    given('restaurant', () => null);
+  context('without logged-in', () => {
+    it('renders no review write field', () => {
+      const { queryByLabelText } = render((
+        <RestaurantContainer restaurantId="1" />
+      ));
 
-    it('renders loading', () => {
-      const { container } = renderRestaurantContainer();
-
-      expect(container).toHaveTextContent('Loading');
+      expect(queryByLabelText('평점')).toBeNull();
+      expect(queryByLabelText('리뷰 내용')).toBeNull();
     });
   });
 });
