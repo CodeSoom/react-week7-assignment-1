@@ -28,13 +28,16 @@ export default function LoginFormContainer() {
   }
 
   return (
-    <div>
-      <LoginForm
-        fields={loginFields}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      />
-      <p>{accessToken}</p>
-    </div>
+    <>
+      {accessToken ? (
+        // <LogoutForm />
+      ) : (
+        <LoginForm
+          fields={loginFields}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
+      )}
+    </>
   );
 }
