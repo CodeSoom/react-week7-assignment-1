@@ -105,11 +105,7 @@ export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
 
-    try {
-      const accessToken = await postLogin({ email, password });
-      dispatch(setAccessTocken(accessToken));
-    } catch (e) {
-      // TODO: 에러 처리
-    }
+    const accessToken = await postLogin({ email, password });
+    dispatch(setAccessTocken(accessToken));
   };
 }
