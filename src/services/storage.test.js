@@ -1,29 +1,14 @@
 import { loadItem, saveItem } from './storage';
 
-describe('storage', () => {
-  Storage.prototype.setItem = jest.fn();
-  Storage.prototype.getItem = jest.fn();
+test('storageService', () => {
+  const { key, value } = {
+    key: 'token',
+    value: 'tddtddtdd',
+  };
 
-  describe('saveItem', () => {
-    it('sets given key and assigned value on localStorage', () => {
-      const obj = {
-        key: 'token',
-        value: 'tddtddtddtdd',
-      };
+  saveItem(key, value);
 
-      saveItem(obj.key, obj.value);
+  const item = loadItem(key);
 
-      expect(window.localStorage.setItem).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('loadItem', () => {
-    it('loads storage with given key', () => {
-      const key = 'token';
-
-      loadItem(key);
-
-      expect(window.localStorage.getItem).toHaveBeenCalledTimes(1);
-    });
-  });
+  expect(item).toBe(value);
 });
