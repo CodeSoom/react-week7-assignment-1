@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './LoginForm';
+import LogoutForm from './LogoutForm';
 
 import {
   requestLogin,
@@ -27,10 +28,16 @@ export default function LoginFormContainer() {
     // TODO: 로그인 성공하면 localstorage에 저장
   }
 
+  function handleClickLogout() {
+    //
+  }
+
   return (
     <>
       {accessToken ? (
-        // <LogoutForm />
+        <LogoutForm
+          onClick={handleClickLogout}
+        />
       ) : (
         <LoginForm
           fields={loginFields}
