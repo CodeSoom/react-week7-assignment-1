@@ -20,6 +20,14 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviews: [
+        {
+          id: 1,
+          name: 'tester',
+          score: '5',
+          description: '맛있어요!',
+        },
+      ],
       reviewFields: {
         score: '',
         description: '',
@@ -47,6 +55,12 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
     });
+  });
+
+  it('renders revies', () => {
+    const { container } = renderRestaurantContainer();
+
+    expect(container).toHaveTextContent('맛있어요!');
   });
 
   context('without restaurant', () => {
