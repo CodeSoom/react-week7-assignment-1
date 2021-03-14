@@ -1,10 +1,10 @@
 import React from 'react';
 
 export default function LogInForm({
+  token,
   handleSubmit,
   onSubmit,
   register,
-  token,
   handleLogout,
 }) {
   if (token) {

@@ -27,10 +27,10 @@ export default function LogInContainer() {
 
   return (
     <LogInForm
-      register={register}
+      token={accessToken}
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
-      token={accessToken}
+      register={register}
       handleLogout={handleLogOut}
     />
   );

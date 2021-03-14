@@ -7,19 +7,19 @@ import LoginForm from './LogInForm';
 
 describe('LoginForm', () => {
   const handleSubmit = jest.fn();
-  const handleLogout = jest.fn();
   const onSubmit = jest.fn();
   const register = jest.fn();
+  const handleLogout = jest.fn();
 
   given('accessToken', () => '');
 
   const renderLoginForm = () => render((
     <LoginForm
+      token={given.accessToken}
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
-      handleLogout={handleLogout}
       register={register}
-      token={given.accessToken}
+      handleLogout={handleLogout}
     />
   ));
 
