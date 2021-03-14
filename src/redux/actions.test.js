@@ -14,6 +14,7 @@ import {
   setReviews,
   requestLogin,
   requestReview,
+  setLoginFields,
 } from './actions';
 
 const middlewares = [thunk];
@@ -121,21 +122,42 @@ describe('actions', () => {
   });
 
   describe('requestLogin', () => {
+    const validUser = {
+      email: 'tester@example.com',
+      password: 'test',
+    };
+
+    const invalidUser = {
+      email: 'tdd@fun.com',
+      password: 'asdf',
+    };
+
     beforeEach(() => {
       store = mockStore({});
     });
 
     it('dispatchs setAccessToken', async () => {
       await store.dispatch(requestLogin({
-        logInFields: {
-          email: 'tester@example.com',
-          password: 'test',
-        },
+        logInFields: validUser,
       }));
 
       const actions = store.getActions();
 
-      expect(actions[1]).toEqual(setAccessToken({}));
+      expect(actions[0]).toEqual(setLoginFields(validUser));
+      expect(actions[1]).toEqual(setAccessToken({
+        accessToken: 'tddtddtdd',
+      }));
+    });
+
+    it("doesn't dispatch setAccessToken", async () => {
+      await store.dispatch(requestLogin({
+        logInFields: invalidUser,
+      }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setLoginFields(invalidUser));
+      expect(actions).toHaveLength(1);
     });
   });
 

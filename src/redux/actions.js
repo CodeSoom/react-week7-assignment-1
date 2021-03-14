@@ -134,6 +134,8 @@ export function requestLogin({ logInFields }) {
 
     const accessToken = await postLogin({ email, password });
 
+    if (!accessToken) return;
+
     saveItem('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
