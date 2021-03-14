@@ -71,6 +71,15 @@ describe('RestaurantContainer', () => {
         });
       });
     });
+
+    it('renders “리뷰 남기기” button', () => {
+      const { getByText } = renderRestaurantContainer();
+
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(dispatch).toBeCalledTimes(2);
+    });
+  });
   });
 
   context('without restaurant', () => {
