@@ -49,7 +49,7 @@ describe('ReviewForm', () => {
         value: '돈쭐맛집',
       },
     ];
-    const { getByLabelText } = renderReviewForm({ email: '', password: '' });
+    const { getByLabelText } = renderReviewForm({ score: '', description: '' });
 
     controls.forEach(({
       label, name, origin, value,
