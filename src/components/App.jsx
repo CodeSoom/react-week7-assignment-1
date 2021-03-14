@@ -1,21 +1,21 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  Switch,
-  Route,
   Link,
+  Route,
+  Switch,
 } from 'react-router-dom';
 
-import { setAccessToken } from '../redux/actions';
+import { setAccessToken } from '@actions';
 import { loadItem } from '../services/storage';
 
 import {
+  AboutPage,
   HomePage,
   LogInPage,
-  AboutPage,
+  NotFoundPage,
   RestaurantsPage,
   RestaurantPage,
-  NotFoundPage,
 } from '../pages';
 
 export default function App() {
