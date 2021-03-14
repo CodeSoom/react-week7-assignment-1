@@ -1,10 +1,10 @@
-
 import React from 'react';
+
 import { MemoryRouter } from 'react-router-dom';
 
 import { render } from '@testing-library/react';
 
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import LoginPage from './LoginPage';
 
@@ -14,8 +14,8 @@ describe('LoginPage', () => {
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
-        email:'test@test.com',
-        password:'1234',
+        email: '',
+        password: '',
       },
     }));
   });
@@ -25,7 +25,7 @@ describe('LoginPage', () => {
         <LoginPage />
       </MemoryRouter>
     ));
-  
+
     expect(container).toHaveTextContent('Log In');
   });
   it('renders input control', () => {
@@ -34,7 +34,7 @@ describe('LoginPage', () => {
         <LoginPage />
       </MemoryRouter>
     ));
-  
+
     expect(getByLabelText('E-mail')).not.toBeNull();
   });
 });

@@ -1,11 +1,15 @@
 import React from 'react';
 
-
 export default function LoginForm({ fields, onChange, onSubmit }) {
   const { email, password } = fields;
 
+  function handleChange(event) {
+    const { target: { name, value } } = event;
+    onChange({ name, value });
+  }
+
   function setInput(type, value) {
-    return (
+    return ((
       <input
         type={type}
         id={`login-${type}`}
@@ -13,12 +17,9 @@ export default function LoginForm({ fields, onChange, onSubmit }) {
         value={value}
         onChange={handleChange}
       />
-    );
+    ));
   }
-  function handleChange(event){
-    const { target: { name, value } } = event;
-    onChange({ name, value });
-  }
+
   return (
     <>
       <div>

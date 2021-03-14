@@ -22,7 +22,7 @@ describe('ReviewForm', () => {
     ));
   }
 
-  it('renders review write fields', () => {
+  it('renders review fields', () => {
     const { queryByLabelText } = renderReviewForm();
 
     expect(queryByLabelText('평점')).not.toBeNull();
@@ -52,5 +52,5 @@ describe('ReviewForm', () => {
     fireEvent.click(getByText('리뷰 남기기'));
 
     expect(handleSubmit).toBeCalled();
-  })
+  });
 });

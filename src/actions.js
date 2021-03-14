@@ -4,7 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
-  postReview
+  postReview,
 } from './services/api';
 
 import { saveItem } from './services/storage';
@@ -106,34 +106,35 @@ export function setAccessToken(accessToken) {
 
 export function requestLogin() {
   return async (dispatch, getState) => {
-
     const { loginFields: { email, password } } = getState();
 
     const accessToken = await postLogin({ email, password });
 
     saveItem('accessToken', accessToken);
-    
+
     dispatch(setAccessToken(accessToken));
   };
 }
 
 export function logout() {
-  return{
+  return {
     type: 'logout',
-  }
+  };
 }
 
-export function changeReviewField({ name, value}) {
+export function changeReviewField({ name, value }) {
   return {
     type: 'changeReviewField',
     payload: { name, value },
-  }
+  };
 }
 
 export function sendReview(restaurantId) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
-    await postReview({accessToken, restaurantId, score, description});
+    await postReview({
+      accessToken, restaurantId, score, description,
+    });
     dispatch(loadRestaurant({ restaurantId }));
-  }
+  };
 }

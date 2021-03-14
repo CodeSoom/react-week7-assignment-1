@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import { fireEvent, render } from '@testing-library/react';
@@ -12,14 +11,15 @@ describe('LoginForm', () => {
     handleChange.mockClear();
     handleSubmit.mockClear();
   });
-  
+
   function renderLoginForm({ email, password }) {
-    return render(
+    return render((
       <LoginForm
         fields={{ email, password }}
         onChange={handleChange}
         onSubmit={handleSubmit}
-      />);
+      />
+    ));
   }
   it('renders input controls', () => {
     const email = 'test@test.com';
@@ -28,11 +28,11 @@ describe('LoginForm', () => {
     const { getByLabelText } = renderLoginForm({ email, password });
 
     const controls = [
-        { label: 'E-mail', value: email, value: 'test@test.com' },
-        { label: 'Password', value: password, value: 'test' },
-    ]
+      { label: 'E-mail', value: email },
+      { label: 'Password', value: password },
+    ];
 
-    controls.forEach(({ label, value}) => {
+    controls.forEach(({ label, value }) => {
       const input = getByLabelText(label);
 
       expect(input.value).toBe(value);
@@ -43,8 +43,8 @@ describe('LoginForm', () => {
     const { getByLabelText } = renderLoginForm({});
 
     const controls = [
-        { label: 'E-mail', name: 'email', value: 'test@test.com' },
-        { label: 'Password', name: 'password', value: 'test' },
+      { label: 'E-mail', name: 'email', value: 'test@test.com' },
+      { label: 'Password', name: 'password', value: 'test' },
     ];
 
     controls.forEach(({ label, name, value }) => {
@@ -60,7 +60,7 @@ describe('LoginForm', () => {
     const { getByText } = renderLoginForm({});
 
     fireEvent.click(getByText('Log In'));
-    
+
     expect(handleSubmit).toBeCalled();
   });
 });

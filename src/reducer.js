@@ -75,7 +75,7 @@ const reducers = {
     };
   },
 
-  setAccessToken(state, { payload: { accessToken }}) {
+  setAccessToken(state, { payload: { accessToken } }) {
     return {
       ...state,
       accessToken,
@@ -89,7 +89,7 @@ const reducers = {
     };
   },
 
-  changeReviewField(state, { payload: { name, value }}) {
+  changeReviewField(state, { payload: { name, value } }) {
     return {
       ...state,
       reviewFields: {
@@ -97,8 +97,7 @@ const reducers = {
         [name]: value,
       },
     };
-  }
-
+  },
 };
 
 function defaultReducer(state) {

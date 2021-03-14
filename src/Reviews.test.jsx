@@ -2,7 +2,6 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
-
 import Reviews from './Reviews';
 
 test('Reviews', () => {
@@ -12,7 +11,7 @@ test('Reviews', () => {
       restaurantId: 1,
       name: '테스터',
       score: 5,
-      description: '훌륭하다 훌륭하다 지구인놈들'
+      description: '훌륭하다 훌륭하다 지구인놈들',
     },
   ];
   const { getByText } = render((

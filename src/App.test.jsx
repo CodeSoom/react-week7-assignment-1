@@ -34,7 +34,7 @@ describe('App', () => {
         name: '마녀주방',
         reviews: [],
       },
-      
+
     }));
   });
 
@@ -88,7 +88,7 @@ describe('App', () => {
 
   context('when logged out ', () => {
     beforeEach(() => {
-      loadItem.mockImplementation((key) => null);
+      loadItem.mockImplementation(() => null);
     });
 
     it("doesn't call dispatch with setAccessToken action", () => {
@@ -103,7 +103,7 @@ describe('App', () => {
       loadItem.mockImplementation(() => accessToken);
     });
 
-    it("calls dispatch with setAccessToken action", () => {
+    it('scalls dispatch with setAccessToken action', () => {
       renderApp({ path: '/' });
 
       expect(dispatch).toBeCalled();

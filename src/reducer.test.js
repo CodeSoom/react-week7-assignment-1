@@ -32,7 +32,7 @@ describe('reducer', () => {
       reviewFields: {
         score: '',
         description: '',
-      }
+      },
     };
 
     it('returns initialState', () => {
@@ -149,12 +149,12 @@ describe('reducer', () => {
           password: 'password',
         },
       };
-  
+
       const state = reducer(
         initialState,
-        changeLoginField({ name: 'email', value: 'test' })
+        changeLoginField({ name: 'email', value: 'test' }),
       );
-  
+
       expect(state.loginFields.email).toBe('test');
       expect(state.loginFields.password).toBe('password');
     });
@@ -165,7 +165,7 @@ describe('reducer', () => {
     };
 
     const state = reducer(initialState, setAccessToken('TOKEN'));
-    
+
     expect(state.accessToken).toBe('TOKEN');
   });
 
@@ -175,7 +175,7 @@ describe('reducer', () => {
     };
 
     const state = reducer(initialState, logout());
-    
+
     expect(state.accessToken).toBe('');
   });
 
@@ -183,12 +183,14 @@ describe('reducer', () => {
     const initialState = {
       reviewFields: {
         name: 'score',
-        value: '5'
+        value: '5',
       },
     };
 
-    const state = reducer(initialState, changeReviewField({ name: 'score', value: '5'}));
-    
+    const state = reducer(initialState, changeReviewField({
+      name: 'score', value: '5',
+    }));
+
     expect(state.reviewFields.score).toBe('5');
   });
 });
