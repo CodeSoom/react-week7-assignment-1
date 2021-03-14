@@ -49,7 +49,6 @@ export default function RestaurantContainer({ restaurantId }) {
           />
         ) : null
       }
-
     </>
   );
 }

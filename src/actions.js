@@ -130,6 +130,6 @@ export function sendReview({ restaurantId }) {
       content,
     });
 
-    dispatch(loadRestaurant(restaurantId));
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }
