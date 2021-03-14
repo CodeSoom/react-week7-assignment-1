@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import App from './App';
 
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
