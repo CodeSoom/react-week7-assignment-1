@@ -19,7 +19,7 @@ describe('Review', () => {
     />
   ));
 
-  it('renders review', () => {
+  it('renders reviews', () => {
     renderReviewForm();
 
     expect(screen.getByText('테스터')).toBeInTheDocument();
