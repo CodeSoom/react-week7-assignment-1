@@ -15,6 +15,7 @@ export async function fetchRestaurant() {
 }
 
 export async function postReview() {
+  return 'success';
 }
 
 export const postLogin = jest.fn();
