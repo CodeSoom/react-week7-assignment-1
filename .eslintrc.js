@@ -26,6 +26,7 @@ module.exports = {
   },
   plugins: [
     'react',
+    'react-hooks',
   ],
   rules: {
     indent: ['error', 2],
@@ -51,5 +52,6 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' }],
     'react/prop-types': 'off',
     'linebreak-style': 'off',
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
   },
 };

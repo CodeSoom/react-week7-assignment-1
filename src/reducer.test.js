@@ -7,17 +7,29 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginField,
+  changeReviewField,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      accessToken: '',
       regions: [],
       categories: [],
       restaurants: [],
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -123,6 +135,68 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('changeLoginField', () => {
+    it('changes login field', () => {
+      const fields = [
+        { name: 'email', origin: '', value: 'test@test.com' },
+        { name: 'password', origin: '', value: 'test' },
+      ];
+
+      fields.forEach(({ name, origin, value }) => {
+        const initialState = {
+          loginFields: {
+            [name]: origin,
+          },
+        };
+
+        const state = reducer(
+          initialState,
+          changeLoginField({ name, value }),
+        );
+
+        expect(state.loginFields[name]).toBe(value);
+      });
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('changes review field', () => {
+      const fields = [
+        { name: 'score', origin: '', value: '5' },
+        { name: 'description', origin: '', value: '돈쭐맛집' },
+      ];
+
+      fields.forEach(({ name, origin, value }) => {
+        const initialState = {
+          reviewFields: {
+            [name]: origin,
+          },
+        };
+
+        const state = reducer(
+          initialState,
+          changeReviewField({ name, value }),
+        );
+
+        expect(state.reviewFields[name]).toBe(value);
+      });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes access token', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const accessToken = 'TOKEN';
+
+      const state = reducer(initialState, setAccessToken(accessToken));
+
+      expect(state.accessToken).toBe(accessToken);
     });
   });
 });

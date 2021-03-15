@@ -10,12 +10,16 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
+  setAccessToken,
+  saveReview,
 } from './actions';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/storage');
 
 describe('actions', () => {
   let store;
@@ -91,8 +95,42 @@ describe('actions', () => {
       store = mockStore({});
     });
 
-    it('dispatchs setRestaurant', async () => {
+    it('dispatches setRestaurant', async () => {
       await store.dispatch(loadRestaurant({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginFields: { email: 'test@test.com', password: 'test' },
+      });
+    });
+
+    it('dispatches setAccessToken', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken(''));
+    });
+  });
+
+  describe('saveReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        restaurant: { id: 1, name: '양천주가' },
+        reviewFields: { score: '5', description: '돈쭐맛집' },
+      });
+    });
+
+    it('dispatches setRestaurant', async () => {
+      await store.dispatch(saveReview());
 
       const actions = store.getActions();
 

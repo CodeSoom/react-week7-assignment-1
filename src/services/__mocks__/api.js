@@ -13,3 +13,13 @@ export async function fetchRestaurants() {
 export async function fetchRestaurant() {
   return {};
 }
+
+export async function postLogin() {
+  return {
+    accessToken: '',
+  };
+}
+
+export async function postReview() {
+  return {};
+}
