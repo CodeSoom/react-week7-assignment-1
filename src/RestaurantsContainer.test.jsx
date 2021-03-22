@@ -6,22 +6,28 @@ import { useSelector } from 'react-redux';
 
 import RestaurantsContainer from './RestaurantsContainer';
 
-test('RestaurantsContainer', () => {
-  useSelector.mockImplementation((selector) => selector({
-    restaurants: [
-      { id: 1, name: '마법사주방' },
-    ],
-  }));
-
+describe('RestaurantsContainer', () => {
   const handleClick = jest.fn();
 
-  const { container, getByText } = render(
-    <RestaurantsContainer onClickRestaurant={handleClick} />,
-  );
+  beforeEach(() => {
+    handleClick.mockClear();
 
-  expect(container).toHaveTextContent('마법사주방');
+    useSelector.mockImplementation((selector) => selector({
+      restaurants: [
+        { id: 1, name: '마법사주방' },
+      ],
+    }));
+  });
 
-  fireEvent.click(getByText('마법사주방'));
+  it('renders name and listnes click event', () => {
+    const { container, getByText } = render(
+      <RestaurantsContainer onClickRestaurant={handleClick} />,
+    );
 
-  expect(handleClick).toBeCalledWith({ id: 1, name: '마법사주방' });
+    expect(container).toHaveTextContent('마법사주방');
+
+    fireEvent.click(getByText('마법사주방'));
+
+    expect(handleClick).toBeCalledWith({ id: 1, name: '마법사주방' });
+  });
 });
