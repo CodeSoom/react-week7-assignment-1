@@ -13,3 +13,9 @@ export async function fetchRestaurants() {
 export async function fetchRestaurant() {
   return {};
 }
+
+export async function postReview() {
+  return 'success';
+}
+
+export const postLogin = jest.fn();

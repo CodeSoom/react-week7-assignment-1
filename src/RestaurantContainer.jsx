@@ -6,9 +6,13 @@ import RestaurantDetail from './RestaurantDetail';
 
 import {
   loadRestaurant,
+  changeReviewFields,
+  sendReview,
 } from './actions';
 
 import { get } from './utils';
+import RestaurantReviewForm from './RestaurantReviewForm';
+import RestaurantReviews from './RestaurantReviews';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -18,6 +22,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
+  const accessToken = useSelector(get('accessToken'));
 
   if (!restaurant) {
     return (
@@ -25,9 +30,23 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
+  function handleChange({ value, name }) {
+    dispatch(changeReviewFields({ value, name }));
+  }
+
+  function handleClick() {
+    dispatch(sendReview({ restaurantId }));
+  }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
+      <RestaurantReviewForm
+        accessToken={accessToken}
+        onChange={handleChange}
+        onClick={handleClick}
+      />
+      <RestaurantReviews reviews={restaurant.reviews} />
     </>
   );
 }

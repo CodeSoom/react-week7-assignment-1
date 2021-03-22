@@ -5,25 +5,52 @@ import {
   setCategories,
   setRestaurants,
   setRestaurant,
+  addRestaurantReview,
   selectRegion,
   selectCategory,
+  changeLoginFields,
+  setAccessToken,
+  changeReviewFields,
+  requestLoginError,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      accessToken: null,
+      loginError: false,
       regions: [],
       categories: [],
       restaurants: [],
-      restaurant: null,
+      restaurant: [],
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
       const state = reducer(undefined, { type: 'action' });
 
       expect(state).toEqual(initialState);
+    });
+  });
+
+  describe('requestLoginError', () => {
+    it('changes loginError', () => {
+      const initialState = {
+        loginError: false,
+      };
+
+      const state = reducer(initialState, requestLoginError());
+
+      expect(state.loginError).toBe(true);
     });
   });
 
@@ -90,6 +117,34 @@ describe('reducer', () => {
     });
   });
 
+  describe('addRestaurantReview', () => {
+    it('changes reviews', () => {
+      const initialState = {
+        restaurant: {
+          reviews: [],
+        },
+      };
+
+      const review = { score: '5', description: 'good!!!' };
+
+      const state = reducer(initialState, addRestaurantReview(review));
+
+      expect(state.restaurant.reviews).toHaveLength(1);
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        accessToken: null,
+      };
+
+      const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
+
+      expect(state.accessToken).toEqual('ACCESS_TOKEN');
+    });
+  });
+
   describe('selectRegion', () => {
     it('changes selected region', () => {
       const initialState = {
@@ -123,6 +178,44 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('changeLoginFields', () => {
+    it('changes email fields', () => {
+      const initialState = {
+        loginFields: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, changeLoginFields({
+        name: 'email',
+        value: 'test@test.com',
+      }));
+
+      expect(state.loginFields.email).toEqual('test@test.com');
+      expect(state.loginFields.password).toEqual('');
+    });
+  });
+
+  describe('changeReviewFields', () => {
+    it('changes review fields', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(initialState, changeReviewFields({
+        name: 'score',
+        value: '5',
+      }));
+
+      expect(state.reviewFields.score).toEqual('5');
+      expect(state.reviewFields.description).toEqual('');
     });
   });
 });

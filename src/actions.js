@@ -3,6 +3,8 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
+  postReview,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -30,6 +32,40 @@ export function setRestaurant(restaurant) {
   return {
     type: 'setRestaurant',
     payload: { restaurant },
+  };
+}
+
+export function requestLoginError() {
+  return {
+    type: 'requestLoginError',
+  };
+}
+
+export function addRestaurantReview(review) {
+  return {
+    type: 'addRestaurantReview',
+    payload: { review },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export function changeLoginFields({ value, name }) {
+  return {
+    type: 'changeLoginFields',
+    payload: { value, name },
+  };
+}
+
+export function changeReviewFields({ value, name }) {
+  return {
+    type: 'changeReviewFields',
+    payload: { value, name },
   };
 }
 
@@ -83,5 +119,33 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { accessToken, reviewFields: { score, description } } = getState();
+
+    await postReview({
+      restaurantId, score, description, accessToken,
+    });
+
+    dispatch(addRestaurantReview({ score, description }));
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const { loginFields: { email, password } } = getState();
+
+    try {
+      const accessToken = await postLogin({ email, password });
+
+      localStorage.setItem('accessToken', accessToken);
+
+      dispatch(setAccessToken(accessToken));
+    } catch (error) {
+      dispatch(requestLoginError());
+    }
   };
 }

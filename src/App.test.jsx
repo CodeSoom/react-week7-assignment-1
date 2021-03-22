@@ -8,9 +8,16 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import LOGIM_FIELDS from '../fixtures/loginFields';
+import ACCESS_TOKEN from '../fixtures/accessToken';
+import REVIEWS from '../fixtures/reviews';
+
+import { loadItem } from './services/storage';
+
 import App from './App';
 
 jest.mock('react-redux');
+jest.mock('./services/storage.js');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -21,12 +28,17 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      accessToken: null,
       regions: [
         { id: 1, name: '서울' },
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
+      restaurant: { id: 1, name: '마녀주방', reviews: REVIEWS },
+      loginFields: {
+        email: LOGIM_FIELDS.email,
+        password: LOGIM_FIELDS.password,
+      },
     }));
   });
 
@@ -70,11 +82,48 @@ describe('App', () => {
     });
   });
 
+  context('with path /login', () => {
+    it('renders login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
+    });
+  });
+
   context('with invalid path', () => {
     it('renders the not found page', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('when logged out', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it("doesn't call dispatch with setAccessToken action", () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
+
+  context('when logged in', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => ACCESS_TOKEN);
+    });
+
+    it('calls dispatch with setAccessToken action', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: {
+          accessToken: ACCESS_TOKEN,
+        },
+      });
     });
   });
 });

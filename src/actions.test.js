@@ -9,8 +9,11 @@ import {
   loadRestaurants,
   loadRestaurant,
   setRestaurants,
-  setRestaurant,
+  requestLogin,
+  sendReview,
 } from './actions';
+
+import { postLogin } from './services/api';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -91,13 +94,108 @@ describe('actions', () => {
       store = mockStore({});
     });
 
-    it('dispatchs setRestaurant', async () => {
+    it('runs setRestaurant', async () => {
       await store.dispatch(loadRestaurant({ restaurantId: 1 }));
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurant(null));
-      expect(actions[1]).toEqual(setRestaurant({}));
+      expect(actions).toEqual([
+        {
+          type: 'setRestaurant',
+          payload: {
+            restaurant: null,
+          },
+        },
+        {
+          type: 'setRestaurant',
+          payload: {
+            restaurant: {},
+          },
+        },
+      ]);
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        reviewFields: {
+          score: '5',
+          description: 'good',
+        },
+      });
+    });
+
+    it('dispatchs addRestaurantReview', async () => {
+      const restaurantId = 1;
+      await store.dispatch(sendReview(restaurantId));
+
+      const actions = store.getActions();
+
+      expect(actions).toEqual([{
+        type: 'addRestaurantReview',
+        payload: {
+          review: {
+            score: '5',
+            description: 'good',
+          },
+        },
+      }]);
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      store = mockStore({
+        loginFields: {
+          email: 'tester@example.com',
+          password: 'test',
+        },
+      });
+
+      postLogin.mockResolvedValue('ACCESS_TOKEN');
+    });
+
+    context('without error', () => {
+      it('runs setAccessToken', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions).toEqual([{
+          type: 'setAccessToken',
+          payload: {
+            accessToken: 'ACCESS_TOKEN',
+          },
+        }]);
+      });
+    });
+
+    context('with error', () => {
+      beforeEach(() => {
+        jest.clearAllMocks();
+
+        store = mockStore({
+          loginFields: {
+            email: 'tester@example.com',
+            password: 'test',
+          },
+        });
+
+        postLogin.mockRejectedValue('error');
+      });
+
+      it('runs requestLoginError', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions).toEqual([{
+          type: 'requestLoginError',
+        }]);
+      });
     });
   });
 });

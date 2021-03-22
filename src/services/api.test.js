@@ -3,12 +3,15 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
 import CATEGORIES from '../../fixtures/categories';
 import RESTAURANTS from '../../fixtures/restaurants';
 import RESTAURANT from '../../fixtures/restaurant';
+import ACCESS_TOKEN from '../../fixtures/accessToken';
 
 describe('api', () => {
   const mockFetch = (data) => {
@@ -65,6 +68,53 @@ describe('api', () => {
       const restaurant = await fetchRestaurant({ restaurantId: 1 });
 
       expect(restaurant).toEqual(RESTAURANT);
+    });
+  });
+
+  describe('postLogin', () => {
+    context('without error', () => {
+      beforeEach(() => {
+        mockFetch({
+          accessToken: ACCESS_TOKEN,
+        });
+      });
+
+      it('returns accessToken', async () => {
+        const accessToken = await postLogin({
+          email: 'tester@example.com',
+          password: 'test',
+        });
+
+        expect(accessToken).toEqual(ACCESS_TOKEN);
+      });
+    });
+
+    context('with error', () => {
+      beforeEach(() => {
+        mockFetch({
+          accessToken: undefined,
+        });
+      });
+
+      it("doesn't returns accessToken", async () => {
+        await expect(postLogin({
+          email: 'tester@example.com',
+          password: 'test',
+        })).rejects.toThrow();
+      });
+    });
+  });
+
+  describe('postReview', () => {
+    it('doesn`t returns ', async () => {
+      const response = await postReview({
+        restaurantId: 1,
+        score: '5',
+        description: 'good!',
+        token: 'ACCESS_TOKEN',
+      });
+
+      expect(response).toBeUndefined();
     });
   });
 });
