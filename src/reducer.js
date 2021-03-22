@@ -7,6 +7,15 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginInputs: {
+    email: '',
+    password: '',
+  },
+  reviewInputs: {
+    rating: '',
+    content: '',
+  },
+  accessToken: '',
 };
 
 const reducers = {
@@ -35,6 +44,33 @@ const reducers = {
     return {
       ...state,
       restaurant,
+    };
+  },
+
+  setLoginInputs(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      loginInputs: {
+        ...state.loginInputs,
+        [name]: value,
+      },
+    };
+  },
+
+  setReviewInputs(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewInputs: {
+        ...state.reviewInputs,
+        [name]: value,
+      },
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
     };
   },
 

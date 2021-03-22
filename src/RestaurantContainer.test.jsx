@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,6 +18,7 @@ describe('RestaurantContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      accessToken: given.accessToken,
       restaurant: given.restaurant,
     }));
   });
@@ -50,6 +51,70 @@ describe('RestaurantContainer', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('Loading');
+    });
+  });
+
+  context('with login', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
+
+    it('renders a rating and a review', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
+
+      const currentInputs = [
+        { label: '평점' },
+        { label: '리뷰내용' },
+      ];
+
+      currentInputs.forEach(({ label }) => {
+        expect(queryByLabelText(label)).not.toBeNull();
+      });
+    });
+
+    it('listens onChange', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
+
+      const currentInputs = [
+        { label: '평점', name: 'rating', value: '3' },
+        { label: '리뷰내용', name: 'content', value: '보통이에요' },
+      ];
+
+      currentInputs.forEach(({ label, value }) => {
+        fireEvent.change(queryByLabelText(label), {
+          target: { value },
+        });
+        expect(dispatch).toBeCalled();
+      });
+    });
+
+    it('listens onClick', () => {
+      const { queryByText } = renderRestaurantContainer();
+
+      fireEvent.click(queryByText('리뷰남기기'));
+
+      expect(dispatch).toBeCalled();
+    });
+  });
+
+  context('without login', () => {
+    given('accessToken', () => '');
+
+    it('does not render a rating and a review', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
+
+      const currentInputs = [
+        { label: '평점' },
+        { label: '리뷰내용' },
+        { label: '리뷰남기기' },
+      ];
+
+      currentInputs.forEach(({ label }) => {
+        expect(queryByLabelText(label)).toBeNull();
+      });
     });
   });
 });

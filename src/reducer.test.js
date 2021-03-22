@@ -5,8 +5,10 @@ import {
   setCategories,
   setRestaurants,
   setRestaurant,
+  setLoginInputs,
   selectRegion,
   selectCategory,
+  setReviewInputs,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +20,15 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginInputs: {
+        email: '',
+        password: '',
+      },
+      reviewInputs: {
+        rating: '',
+        content: '',
+      },
+      accessToken: '',
     };
 
     it('returns initialState', () => {
@@ -123,6 +134,74 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('setLoginInputs', () => {
+    it('changes email', () => {
+      const initialState = {
+        loginInputs: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, setLoginInputs({
+        name: 'email',
+        value: 'currentEmail',
+      }));
+
+      expect(state.loginInputs.email).toEqual('currentEmail');
+    });
+
+    it('changes passwords', () => {
+      const initialState = {
+        loginInputs: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, setLoginInputs({
+        name: 'password',
+        value: 'currentPassword',
+      }));
+
+      expect(state.loginInputs.password).toEqual('currentPassword');
+    });
+  });
+
+  describe('setReviewInputs', () => {
+    it('changes review rating', () => {
+      const initialState = {
+        reviewInputs: {
+          rating: '',
+          content: '',
+        },
+      };
+
+      const state = reducer(initialState, setReviewInputs({
+        name: 'rating',
+        value: '3',
+      }));
+
+      expect(state.reviewInputs.rating).toEqual('3');
+    });
+
+    it('changes review content', () => {
+      const initialState = {
+        reviewInputs: {
+          rating: '',
+          content: '',
+        },
+      };
+
+      const state = reducer(initialState, setReviewInputs({
+        name: 'content',
+        value: '그냥 보통이네요.',
+      }));
+
+      expect(state.reviewInputs.content).toEqual('그냥 보통이네요.');
     });
   });
 });

@@ -6,10 +6,13 @@ import {
   loadInitialData,
   setRegions,
   setCategories,
+  setAccessToken,
   loadRestaurants,
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -93,6 +96,49 @@ describe('actions', () => {
 
     it('dispatchs setRestaurant', async () => {
       await store.dispatch(loadRestaurant({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginInputs: {
+          email: 'test@ex.com',
+          password: 'test123',
+        },
+      });
+    });
+
+    it('dispatchs setAccessToken', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken(''));
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        retaurant: {
+          id: '1',
+          name: '양천주가',
+        },
+        reviewInputs: {
+          rating: '5',
+          content: '맛집이에요',
+        },
+      });
+    });
+
+    it('dispatchs setRestaurant', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
 
       const actions = store.getActions();
 
