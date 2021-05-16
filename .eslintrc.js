@@ -6,8 +6,15 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
     'airbnb',
   ],
+  settings: {
+    'import/resolver': {
+      'babel-module': {}
+    },
+  },
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',

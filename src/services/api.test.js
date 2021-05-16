@@ -1,14 +1,19 @@
 import {
-  fetchRegions,
   fetchCategories,
-  fetchRestaurants,
+  fetchRegions,
   fetchRestaurant,
-} from './api';
+  fetchRestaurants,
+  postLogin,
+  postReview,
+} from '@api';
 
-import REGIONS from '../../fixtures/regions';
-import CATEGORIES from '../../fixtures/categories';
-import RESTAURANTS from '../../fixtures/restaurants';
-import RESTAURANT from '../../fixtures/restaurant';
+import {
+  CATEGORIES,
+  REGIONS,
+  RESTAURANT,
+  RESTAURANTS,
+  TOKEN,
+} from '@fixtures';
 
 describe('api', () => {
   const mockFetch = (data) => {
@@ -65,6 +70,40 @@ describe('api', () => {
       const restaurant = await fetchRestaurant({ restaurantId: 1 });
 
       expect(restaurant).toEqual(RESTAURANT);
+    });
+  });
+
+  describe('postLogin', () => {
+    beforeEach(() => {
+      mockFetch(TOKEN);
+    });
+
+    it('returns accessToken', async () => {
+      const accessToken = await postLogin({
+        email: 'tester@example.com',
+        password: 'test',
+      });
+
+      expect(accessToken).toEqual(TOKEN.accessToken);
+    });
+  });
+
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch({});
+    });
+
+    it('returns list of reviews', async () => {
+      const review = await postReview({
+        reviewFields: {
+          score: 3,
+          description: 'TDD는 맛있다',
+          restaurantId: 1,
+          accessToken: '123123123',
+        },
+      });
+
+      expect(review).toEqual({});
     });
   });
 });

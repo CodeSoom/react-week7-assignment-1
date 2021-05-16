@@ -11,5 +11,21 @@ export async function fetchRestaurants() {
 }
 
 export async function fetchRestaurant() {
+  return {
+    reviews: [],
+  };
+}
+
+export async function postLogin({ email, password }) {
+  if (email !== 'tester@example.com' && password !== 'test') {
+    return null;
+  }
+
+  return {
+    accessToken: 'tddtddtdd',
+  };
+}
+
+export async function postReview() {
   return {};
 }
