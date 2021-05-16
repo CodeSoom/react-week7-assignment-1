@@ -5,7 +5,7 @@ const menus = [
   { name: 'Restaurants', url: '/restaurants' },
 ];
 
-Scenario('메뉴들을 볼 수 있다.', (I) => {
+Scenario('메뉴들을 볼 수 있다.', ({ I }) => {
   I.amOnPage('/');
 
   I.see('Home');
@@ -15,7 +15,7 @@ Scenario('메뉴들을 볼 수 있다.', (I) => {
   });
 });
 
-Scenario('메뉴를 클릭하면 메뉴페이지로 이동한다.', (I) => {
+Scenario('메뉴를 클릭하면 메뉴페이지로 이동한다.', ({ I }) => {
   menus.forEach(({ name, url }) => {
     I.amOnPage('/');
 

@@ -1,6 +1,6 @@
 Feature('LoginPage');
 
-Scenario('로그인과 로그아웃', (I) => {
+Scenario('로그인과 로그아웃', ({ I }) => {
   I.amOnPage('/login');
 
   I.fillField('email', 'tester@example.com');
@@ -11,7 +11,7 @@ Scenario('로그인과 로그아웃', (I) => {
   I.see('Log out');
 });
 
-Scenario('로그아웃', (I) => {
+Scenario('로그아웃', ({ I }) => {
   I.amOnPage('/login');
 
   I.fillField('email', 'tester@example.com');
