@@ -70,6 +70,14 @@ describe('App', () => {
     });
   });
 
+  context('with path /login', () => {
+    it('renders the restaurant page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log in');
+    });
+  });
+
   context('with invalid path', () => {
     it('renders the not found page', () => {
       const { container } = renderApp({ path: '/xxx' });
