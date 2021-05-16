@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MenuItems from './MenuItems';
+import MenuItems from '../../MenuItems';
 
 export default function RestaurantDetail({ restaurant }) {
   const { name, address, menuItems } = restaurant;

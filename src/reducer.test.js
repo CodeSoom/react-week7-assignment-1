@@ -7,11 +7,25 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  updateUserLoginInputs,
+  setAccessToken,
+  updateReview,
+  resetAccessToken,
+  resetReviewInput,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      userLoginInputs: {
+        email: '',
+        password: '',
+      },
+      review: {
+        score: '',
+        description: '',
+      },
+      accessToken: '',
       regions: [],
       categories: [],
       restaurants: [],
@@ -123,6 +137,66 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('AccessToken을 저장한다.', () => {
+      const initialState = { accessToken: '' };
+
+      const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
+
+      expect(state.accessToken).toEqual('ACCESS_TOKEN');
+    });
+  });
+
+  describe('resetAccessToken', () => {
+    it('AccessToken, loginInput을 reset한다.', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+        userLoginInputs: { email: 'test@naver.com', password: '1234' },
+      };
+
+      const state = reducer(initialState, resetAccessToken());
+
+      expect(state.accessToken).toBe('');
+      expect(state.userLoginInputs.email).toBe('');
+      expect(state.userLoginInputs.password).toBe('');
+    });
+  });
+
+  describe('resetReviewInput', () => {
+    it('Review를 reset한다.', () => {
+      const initialState = {
+        review: { score: '5', description: '예술이다' },
+      };
+
+      const state = reducer(initialState, resetReviewInput());
+
+      expect(state.review.score).toBe('');
+      expect(state.review.description).toBe('');
+    });
+  });
+
+  describe('updateUserLoginInputs', () => {
+    it('로그인 입력을 업데이트한다.', () => {
+      const initialState = {
+        userLoginInputs: { email: '', password: '' },
+      };
+
+      const state = reducer(initialState, updateUserLoginInputs('email', 'test@naver.com'));
+
+      expect(state.userLoginInputs.email).toEqual('test@naver.com');
+    });
+  });
+
+  describe('updateReview', () => {
+    it('리뷰 입력을 update한다.', () => {
+      const initialState = { review: { score: '', description: '' } };
+
+      const state = reducer(initialState, updateReview('score', '4'));
+
+      expect(state.review.score).toEqual('4');
     });
   });
 });

@@ -3,7 +3,42 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
+  postReview,
 } from './services/api';
+
+import { saveItem } from './services/storage';
+
+import { isNewRestaurant } from './utils';
+
+export function updateUserLoginInputs(name, value) {
+  return {
+    type: 'updateUserLoginInputs',
+    payload: { name, value },
+  };
+}
+
+export function updateReview(name, value) {
+  return {
+    type: 'updateReview',
+    payload: { name, value },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export function resetAccessToken() {
+  return { type: 'resetAccessToken' };
+}
+
+export function resetReviewInput() {
+  return { type: 'resetReviewInput' };
+}
 
 export function setRegions(regions) {
   return {
@@ -47,6 +82,14 @@ export function selectCategory(categoryId) {
   };
 }
 
+export function logout() {
+  return async (dispatch) => {
+    saveItem('accessToken', '');
+
+    dispatch(resetAccessToken());
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();
@@ -77,11 +120,41 @@ export function loadRestaurants() {
 }
 
 export function loadRestaurant({ restaurantId }) {
-  return async (dispatch) => {
-    dispatch(setRestaurant(null));
+  return async (dispatch, getState) => {
+    const id = getState()?.restaurant?.id;
+
+    if (isNewRestaurant(id, restaurantId)) {
+      dispatch(setRestaurant(null));
+    }
 
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const { userLoginInputs: { email, password } } = getState();
+
+    const accessToken = await postLogin({ email, password });
+
+    if (accessToken) {
+      saveItem('accessToken', accessToken);
+      dispatch(setAccessToken(accessToken));
+    }
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { accessToken, review: { score, description } } = getState();
+
+    await postReview({
+      accessToken, restaurantId, score, description,
+    });
+
+    dispatch(resetReviewInput());
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }

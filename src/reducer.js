@@ -1,6 +1,15 @@
 import { equal } from './utils';
 
 const initialState = {
+  userLoginInputs: {
+    email: '',
+    password: '',
+  },
+  review: {
+    score: '',
+    description: '',
+  },
+  accessToken: '',
   regions: [],
   categories: [],
   restaurants: [],
@@ -10,6 +19,48 @@ const initialState = {
 };
 
 const reducers = {
+  updateUserLoginInputs(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      userLoginInputs: {
+        ...state.userLoginInputs,
+        [name]: value,
+      },
+    };
+  },
+
+  updateReview(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      review: {
+        ...state.review,
+        [name]: value,
+      },
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
+    };
+  },
+
+  resetAccessToken(state) {
+    return {
+      ...state,
+      accessToken: '',
+      userLoginInputs: { email: '', password: '' },
+    };
+  },
+
+  resetReviewInput(state) {
+    return {
+      ...state,
+      review: { score: '', description: '' },
+    };
+  },
+
   setRegions(state, { payload: { regions } }) {
     return {
       ...state,

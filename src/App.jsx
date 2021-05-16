@@ -6,13 +6,28 @@ import {
   Link,
 } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import RestaurantsPage from './RestaurantsPage';
-import RestaurantPage from './RestaurantPage';
+import RestaurantPage from './pages/RestaurantPage/RestaurantPage';
 import NotFoundPage from './NotFoundPage';
+import LoginPage from './pages/LoginPage/LoginPage';
+
+import { setAccessToken } from './actions';
+
+import { loadItem } from './services/storage';
 
 export default function App() {
+  const dispatch = useDispatch();
+
+  const accessToken = loadItem('accessToken');
+
+  if (accessToken) {
+    dispatch(setAccessToken(accessToken));
+  }
+
   return (
     <div>
       <header>
@@ -23,6 +38,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
+        <Route path="/login" component={LoginPage} />
         <Route exact path="/restaurants" component={RestaurantsPage} />
         <Route path="/restaurants/:id" component={RestaurantPage} />
         <Route component={NotFoundPage} />
