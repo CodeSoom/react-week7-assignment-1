@@ -8,9 +8,14 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { getItem } from './services/storage';
+
+import { setAccessToken } from './actions';
+
 import App from './App';
 
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -27,16 +32,40 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      loginFields: { email: '', password: '' },
     }));
   });
 
   function renderApp({ path }) {
-    return render(
+    return render((
       <MemoryRouter initialEntries={[path]}>
         <App />
-      </MemoryRouter>,
-    );
+      </MemoryRouter>));
   }
+
+  context('when logged in ', () => {
+    beforeEach(() => {
+      getItem.mockImplementation(() => '123456');
+    });
+
+    it('call dispatch with setAccessToken', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toHaveBeenCalledWith(setAccessToken('123456'));
+    });
+  });
+
+  context('when logged out', () => {
+    beforeEach(() => {
+      getItem.mockImplementation(() => null);
+    });
+
+    it('doesn`t call dispatch', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toHaveBeenCalled();
+    });
+  });
 
   context('with path /', () => {
     it('renders the home page', () => {
@@ -51,6 +80,14 @@ describe('App', () => {
       const { container } = renderApp({ path: '/about' });
 
       expect(container).toHaveTextContent('About 페이지');
+    });
+  });
+
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
     });
   });
 

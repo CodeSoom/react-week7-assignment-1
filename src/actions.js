@@ -3,7 +3,11 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
+  postReview,
 } from './services/api';
+
+import { setItem, removeItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -33,6 +37,13 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function changeReviewFields({ name, value }) {
+  return {
+    type: 'changeReviewFields',
+    payload: { name, value },
+  };
+}
+
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
@@ -44,6 +55,26 @@ export function selectCategory(categoryId) {
   return {
     type: 'selectCategory',
     payload: { categoryId },
+  };
+}
+
+export function changeLoginFields({ name, value }) {
+  return {
+    type: 'changeLoginFields',
+    payload: { name, value },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export function deleteAccessToken() {
+  return {
+    type: 'deleteAccessToken',
   };
 }
 
@@ -59,10 +90,7 @@ export function loadInitialData() {
 
 export function loadRestaurants() {
   return async (dispatch, getState) => {
-    const {
-      selectedRegion: region,
-      selectedCategory: category,
-    } = getState();
+    const { selectedRegion: region, selectedCategory: category } = getState();
 
     if (!region || !category) {
       return;
@@ -83,5 +111,51 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function postLoginFields() {
+  return async (dispatch, getState) => {
+    const {
+      loginFields: { email, password },
+    } = getState();
+
+    if (!email || !password) {
+      return;
+    }
+
+    const { accessToken } = await postLogin({ email, password });
+
+    setItem('accessToken', accessToken);
+
+    dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function logout() {
+  return (dispatch) => {
+    removeItem('accessToken');
+
+    dispatch(deleteAccessToken());
+  };
+}
+
+export function postReviewFields() {
+  return async (dispatch, getState) => {
+    const {
+      reviewFields: { score, description },
+      accessToken,
+      restaurant: { id },
+    } = getState();
+
+    if (!score || !description) {
+      return;
+    }
+
+    await postReview({
+      score, description, accessToken, restaurantId: id,
+    });
+
+    dispatch(loadRestaurant({ restaurantId: id }));
   };
 }

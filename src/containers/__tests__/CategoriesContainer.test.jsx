@@ -4,7 +4,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import CategoriesContainer from './CategoriesContainer';
+import CategoriesContainer from '@containers/CategoriesContainer';
 
 describe('CategoriesContainer', () => {
   const dispatch = jest.fn();
@@ -23,9 +23,7 @@ describe('CategoriesContainer', () => {
   });
 
   it('renders regions and checked symbol', () => {
-    const { container, getByText } = render((
-      <CategoriesContainer />
-    ));
+    const { container, getByText } = render(<CategoriesContainer />);
 
     expect(container).toHaveTextContent('한식(V)');
     expect(container).toHaveTextContent('양식');

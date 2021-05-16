@@ -3,6 +3,8 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -13,8 +15,14 @@ import RESTAURANT from '../../fixtures/restaurant';
 describe('api', () => {
   const mockFetch = (data) => {
     global.fetch = jest.fn().mockResolvedValue({
-      async json() { return data; },
+      async json() {
+        return data;
+      },
     });
+  };
+
+  const mockPostReviwFetch = () => {
+    global.fetch = jest.fn().mockResolvedValue({ status: '201' });
   };
 
   describe('fetchRegions', () => {
@@ -65,6 +73,38 @@ describe('api', () => {
       const restaurant = await fetchRestaurant({ restaurantId: 1 });
 
       expect(restaurant).toEqual(RESTAURANT);
+    });
+  });
+
+  describe('postLogin', () => {
+    beforeEach(() => {
+      mockFetch({ accessToken: '12345678' });
+    });
+
+    it('returns accessToken', async () => {
+      const { accessToken } = await postLogin({
+        email: 'tester@example.com',
+        password: 'test',
+      });
+
+      expect(accessToken).toEqual('12345678');
+    });
+  });
+
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockPostReviwFetch();
+    });
+
+    it('returns status 201', async () => {
+      const response = await postReview({
+        score: '1',
+        description: '무우야호!',
+        accessToken: '12345678',
+        restaurantId: '1',
+      });
+
+      expect(response.status).toEqual('201');
     });
   });
 });
