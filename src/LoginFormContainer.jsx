@@ -1,3 +1,15 @@
 export default function LoginFormContainer() {
-  // Todo: ...
+  return (
+    <div>
+      <label
+        htmlFor="login-email"
+      >
+        E-mail
+      </label>
+      <input
+        type="email"
+        id="login-email"
+      />
+    </div>
+  );
 }
