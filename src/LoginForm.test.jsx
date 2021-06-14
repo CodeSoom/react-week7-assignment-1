@@ -4,6 +4,13 @@ import { setEmail } from './actions';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
+  const dispatch = jest.fn();
+
+  beforeEach(() => {
+    dispatch.mockClear();
+    useDispatch.mockReturnValue(dispatch);
+  });
+
   it('renders input controls', () => {
     const { getByRole } = render(<LoginForm />);
 
@@ -18,12 +25,17 @@ describe('LoginForm', () => {
   });
 
   it('updates state with input control', () => {
-    const dispatch = jest.fn();
-    useDispatch.mockImplementation(() => dispatch);
-
     const { getByRole } = render(<LoginForm />);
-    const emailInput = getByRole('textbox', { name: 'Email' });
-    fireEvent.change(emailInput, { target: { value: 'testing@test.com' } });
-    expect(dispatch).toBeCalledWith(setEmail('testing@test.com'));
+
+    const controls = [
+      { name: 'Email', value: 'testing@test.com' },
+    ];
+
+    controls.forEach(({ name, value }) => {
+      const input = getByRole('textbox', { name });
+      fireEvent.change(input, { target: { value } });
+
+      expect(dispatch).toBeCalledWith(setEmail(value));
+    });
   });
 });
