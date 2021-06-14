@@ -12,6 +12,8 @@ const initialState = {
   form: {
     email: 'email',
     password: 'password',
+    score: 'score',
+    description: 'description',
   },
 };
 

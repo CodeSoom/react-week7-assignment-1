@@ -25,6 +25,8 @@ describe('reducer', () => {
       form: {
         email: 'email',
         password: 'password',
+        score: 'score',
+        description: 'description',
       },
     };
 
