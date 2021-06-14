@@ -7,6 +7,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  setForm,
 } from './actions';
 
 describe('reducer', () => {
@@ -127,6 +128,26 @@ describe('reducer', () => {
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
+      });
+    });
+  });
+
+  describe('setForm', () => {
+    it('changes form field data', () => {
+      const initialState = {
+        form: {
+          email: 'email',
+          password: 'password',
+        },
+      };
+
+      const state = reducer(initialState, setForm(
+        { name: 'email', value: 'test@test' },
+      ));
+
+      expect(state.form).toEqual({
+        email: 'test@test',
+        password: 'password',
       });
     });
   });

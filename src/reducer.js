@@ -58,6 +58,16 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
+
+  setForm(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      form: {
+        ...state.form,
+        [name]: value,
+      },
+    };
+  },
 };
 
 function defaultReducer(state) {
