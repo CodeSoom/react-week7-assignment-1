@@ -11,6 +11,9 @@ describe('LoginFormContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
+  });
+
+  beforeAll(() => {
     useDispatch.mockReturnValue(dispatch);
 
     useSelector.mockImplementation((selector) => selector({
