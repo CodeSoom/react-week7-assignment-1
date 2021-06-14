@@ -21,13 +21,6 @@ describe('LoginFormContainer', () => {
     }));
   });
 
-  it('renders input controllers', () => {
-    const { getByLabelText } = render((<LoginFormContainer />));
-
-    expect(getByLabelText('E-mail')).toBeInTheDocument();
-    expect(getByLabelText('Password')).toBeInTheDocument();
-  });
-
   it('listens change event', () => {
     const { getByLabelText } = render((<LoginFormContainer />));
 
