@@ -5,7 +5,6 @@ export default function LoginForm({ handleChange, handleSubmit, form }) {
     <>
       {fields.map((field) => (
         <div key={field}>
-
           <label htmlFor={`input-${field}`}>
             {field}
           </label>
@@ -16,7 +15,6 @@ export default function LoginForm({ handleChange, handleSubmit, form }) {
             value={form[field]}
             onChange={(e) => handleChange(e.target)}
           />
-
         </div>
       ))}
 
