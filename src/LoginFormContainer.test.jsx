@@ -46,4 +46,12 @@ describe('LoginFormContainer', () => {
       },
     });
   });
+
+  it('listens click event', () => {
+    const { getByRole } = render((<LoginFormContainer />));
+
+    fireEvent.click(getByRole('button', { name: 'Log In' }));
+
+    expect(dispatch).toBeCalled();
+  });
 });
