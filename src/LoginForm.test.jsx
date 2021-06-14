@@ -1,16 +1,7 @@
-import { fireEvent, render } from '@testing-library/react';
-import { useDispatch } from 'react-redux';
-import { setForm } from './actions';
+import { render } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  const dispatch = jest.fn();
-
-  beforeEach(() => {
-    dispatch.mockClear();
-    useDispatch.mockReturnValue(dispatch);
-  });
-
   it('renders input controls', () => {
     const { getByRole } = render(<LoginForm />);
 
@@ -22,20 +13,5 @@ describe('LoginForm', () => {
     const { getByRole } = render(<LoginForm />);
 
     expect(getByRole('button', { name: 'Log In' })).toBeInTheDocument();
-  });
-
-  it('updates state with input control', () => {
-    const { getByRole } = render(<LoginForm />);
-
-    const controls = [
-      { name: 'email', value: 'testing@test.com' },
-    ];
-
-    controls.forEach(({ name, value }) => {
-      const input = getByRole('textbox', { name });
-      fireEvent.change(input, { target: { value } });
-
-      expect(dispatch).toBeCalledWith(setForm({ name, value }));
-    });
   });
 });
