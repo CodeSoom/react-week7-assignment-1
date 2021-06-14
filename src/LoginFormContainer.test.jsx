@@ -8,4 +8,10 @@ describe('LoginFormContainer', () => {
 
     expect(container).toHaveTextContent('E-mail');
   });
+
+  it('renders password input field', () => {
+    const { container } = render(<LoginFormContainer />);
+
+    expect(container).toHaveTextContent('Password');
+  });
 });
