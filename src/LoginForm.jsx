@@ -1,27 +1,24 @@
 export default function LoginForm({ handleChange, handleSubmit, form }) {
+  const fields = ['email', 'password'];
+
   return (
     <>
-      <label htmlFor="input-email">
-        email
-      </label>
-      <input
-        type="text"
-        id="input-email"
-        name="email"
-        value={form.email}
-        onChange={(e) => handleChange(e.target)}
-      />
+      {fields.map((field) => (
+        <div key={field}>
 
-      <label htmlFor="input-password">
-        password
-      </label>
-      <input
-        type="text"
-        id="input-password"
-        name="password"
-        value={form.password}
-        onChange={(e) => handleChange(e.target)}
-      />
+          <label htmlFor={`input-${field}`}>
+            {field}
+          </label>
+          <input
+            type="text"
+            id={`input-${field}`}
+            name={field}
+            value={form[field]}
+            onChange={(e) => handleChange(e.target)}
+          />
+
+        </div>
+      ))}
 
       <button
         type="button"
