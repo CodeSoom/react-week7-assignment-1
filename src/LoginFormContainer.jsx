@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { requestLogin, setForm } from './actions';
 import LoginForm from './LoginForm';
@@ -14,8 +14,11 @@ export default function LoginFormContainer() {
     dispatch(requestLogin());
   }
 
+  const form = useSelector((state) => state.form);
+
   return (
     <LoginForm
+      form={form}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
     />

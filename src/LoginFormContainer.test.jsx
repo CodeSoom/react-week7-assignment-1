@@ -1,5 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { setForm } from './actions';
 import LoginFormContainer from './LoginFormContainer';
@@ -12,6 +12,13 @@ describe('LoginFormContainer', () => {
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockReturnValue(dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      form: {
+        email: 'email',
+        password: 'password',
+      },
+    }));
   });
 
   it('listens change events', () => {
@@ -24,6 +31,7 @@ describe('LoginFormContainer', () => {
 
     controls.forEach(({ name, value }) => {
       const input = getByRole('textbox', { name });
+
       fireEvent.change(input, { target: { value } });
 
       expect(dispatch).toBeCalledWith(setForm({ name, value }));

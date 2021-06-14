@@ -3,15 +3,32 @@ import { render } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  it('renders input controls', () => {
-    const { getByRole } = render(<LoginForm />);
+  function renderLoginForm() {
+    const form = {
+      email: 'email',
+      password: 'password',
+    };
 
-    expect(getByRole('textbox', { name: 'email' })).toBeInTheDocument();
-    expect(getByRole('textbox', { name: 'password' })).toBeInTheDocument();
+    const handleChange = jest.fn();
+    const handleSubmit = jest.fn();
+
+    return render(
+      <LoginForm
+        form={form}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />,
+    );
+  }
+  it('renders input controls', () => {
+    const { getByRole } = renderLoginForm();
+
+    expect(getByRole('textbox', { name: 'email' })).toHaveValue('email');
+    expect(getByRole('textbox', { name: 'password' })).toHaveValue('password');
   });
 
   it('renders submit button', () => {
-    const { getByRole } = render(<LoginForm />);
+    const { getByRole } = renderLoginForm();
 
     expect(getByRole('button', { name: 'Log In' })).toBeInTheDocument();
   });

@@ -1,4 +1,4 @@
-export default function LoginForm({ handleChange, handleSubmit }) {
+export default function LoginForm({ handleChange, handleSubmit, form }) {
   return (
     <>
       <label htmlFor="input-email">
@@ -8,6 +8,7 @@ export default function LoginForm({ handleChange, handleSubmit }) {
         type="text"
         id="input-email"
         name="email"
+        value={form.email}
         onChange={(e) => handleChange(e.target)}
       />
 
@@ -18,6 +19,7 @@ export default function LoginForm({ handleChange, handleSubmit }) {
         type="text"
         id="input-password"
         name="password"
+        value={form.password}
         onChange={(e) => handleChange(e.target)}
       />
 
