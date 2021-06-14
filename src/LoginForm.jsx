@@ -8,7 +8,7 @@ export default function LoginForm({ handleChange }) {
         type="text"
         id="input-email"
         name="email"
-        onChange={handleChange}
+        onChange={(e) => handleChange(e.target)}
       />
 
       <label htmlFor="input-password">
@@ -18,7 +18,7 @@ export default function LoginForm({ handleChange }) {
         type="text"
         id="input-password"
         name="password"
-        onChange={handleChange}
+        onChange={(e) => handleChange(e.target)}
       />
 
       <button type="button">

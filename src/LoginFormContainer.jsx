@@ -6,9 +6,7 @@ import LoginForm from './LoginForm';
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-
+  function handleChange({ name, value }) {
     dispatch(setForm({ name, value }));
   }
 
