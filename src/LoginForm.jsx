@@ -1,23 +1,33 @@
 import { useDispatch } from 'react-redux';
-import { setEmail } from './actions';
+import { setForm } from './actions';
 
 export default function LoginForm() {
   const dispatch = useDispatch();
   function handleChange(event) {
-    dispatch(setEmail(event.target.value));
+    const { name, value } = event.target;
+
+    dispatch(setForm({ name, value }));
   }
 
   return (
     <>
       <label htmlFor="input-email">
-        Email
+        email
       </label>
-      <input type="text" id="input-email" onChange={handleChange} />
+      <input
+        type="text"
+        id="input-email"
+        name="email"
+        onChange={handleChange}
+      />
 
       <label htmlFor="input-password">
-        Password
+        password
       </label>
-      <input type="text" id="input-password" />
+      <input
+        type="text"
+        id="input-password"
+      />
 
       <button type="button">
         Log In

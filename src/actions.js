@@ -86,9 +86,9 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
-export function setEmail(email) {
+export function setForm({ name, value }) {
   return {
-    type: 'setEmail',
-    payload: { email },
+    type: 'setForm',
+    payload: { name, value },
   };
 }
