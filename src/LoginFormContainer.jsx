@@ -6,6 +6,8 @@ import {
 } from './actions';
 import { get } from './utils';
 
+import LoginForm from './LoginForm';
+
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
@@ -20,37 +22,10 @@ export default function LoginFormContainer() {
   }
 
   return (
-    <>
-      <label>
-        E-mail
-        <input
-          type="email"
-          value={email}
-          onChange={(event) => {
-            const { target: { name, value } } = event;
-
-            handleChange({ name, value });
-          }}
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(event) => {
-            const { target: { name, value } } = event;
-
-            handleChange({ name, value });
-          }}
-        />
-      </label>
-      <button
-        type="button"
-        onClick={handleSubmit}
-      >
-        Log In
-      </button>
-    </>
+    <LoginForm
+      fields={{ email, password }}
+      onChange={handleChange}
+      onSubmit={handleSubmit}
+    />
   );
 }
