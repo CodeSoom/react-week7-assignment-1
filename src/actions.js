@@ -85,3 +85,9 @@ export function loadRestaurant({ restaurantId }) {
     dispatch(setRestaurant(restaurant));
   };
 }
+
+export function requestLogin() {
+  return async (dispatch) => {
+    dispatch(); // Todo: 로그인에 대한 인증키 요청하기 로직 추가
+  };
+}
