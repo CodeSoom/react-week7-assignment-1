@@ -92,3 +92,11 @@ export function setForm({ name, value }) {
     payload: { name, value },
   };
 }
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    //
+    // HTTP POST
+    // dispatch(setAccessToken(accessToken))
+  };
+}

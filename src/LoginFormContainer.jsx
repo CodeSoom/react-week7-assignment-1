@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 
-import { setForm } from './actions';
+import { requestLogin, setForm } from './actions';
 import LoginForm from './LoginForm';
 
 export default function LoginFormContainer() {
@@ -11,7 +11,7 @@ export default function LoginFormContainer() {
   }
 
   function handleSubmit() {
-    dispatch({});
+    dispatch(requestLogin());
   }
 
   return (
