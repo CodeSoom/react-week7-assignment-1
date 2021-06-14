@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import LogInPage from './LogInPage';
+import LoginPage from './LoginPage';
 
-describe('LogInPage', () => {
+describe('LoginPage', () => {
   it('renders title', () => {
-    const { container } = render(<LogInPage />);
+    const { container } = render(<LoginPage />);
 
     expect(container).toHaveTextContent('Log In');
   });
