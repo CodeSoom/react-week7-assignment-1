@@ -8,6 +8,7 @@ import {
   selectRegion,
   selectCategory,
   setForm,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -19,6 +20,7 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      accessToken: null,
 
       form: {
         email: 'email',
@@ -149,6 +151,18 @@ describe('reducer', () => {
         email: 'test@test',
         password: 'password',
       });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, setAccessToken('TOKEN'));
+
+      expect(state.accessToken).toBe('TOKEN');
     });
   });
 });

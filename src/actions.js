@@ -3,6 +3,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -93,10 +94,18 @@ export function setForm({ name, value }) {
   };
 }
 
-export function requestLogin() {
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export async function requestLogin() {
   return async (dispatch, getState) => {
-    //
-    // HTTP POST
-    // dispatch(setAccessToken(accessToken))
+    const { form: { email, password } } = getState();
+    const { accessToken } = await postLogin({ email, password });
+
+    dispatch(setAccessToken(accessToken));
   };
 }
