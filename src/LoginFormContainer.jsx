@@ -10,7 +10,14 @@ export default function LoginFormContainer() {
     dispatch(setForm({ name, value }));
   }
 
+  function handleSubmit() {
+    dispatch({});
+  }
+
   return (
-    <LoginForm handleChange={handleChange} />
+    <LoginForm
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+    />
   );
 }

@@ -1,7 +1,10 @@
 import { fireEvent, render } from '@testing-library/react';
 import { useDispatch } from 'react-redux';
+
 import { setForm } from './actions';
 import LoginFormContainer from './LoginFormContainer';
+
+jest.mock('react-redux');
 
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
@@ -11,7 +14,7 @@ describe('LoginFormContainer', () => {
     useDispatch.mockReturnValue(dispatch);
   });
 
-  it('updates state with input control', () => {
+  it('listens change events', () => {
     const { getByRole } = render(<LoginFormContainer />);
 
     const controls = [
@@ -25,5 +28,12 @@ describe('LoginFormContainer', () => {
 
       expect(dispatch).toBeCalledWith(setForm({ name, value }));
     });
+  });
+
+  it('listens to button click event', () => {
+    const { getByRole } = render(<LoginFormContainer />);
+    fireEvent.click(getByRole('button', { name: 'Log In' }));
+
+    expect(dispatch).toBeCalled();
   });
 });

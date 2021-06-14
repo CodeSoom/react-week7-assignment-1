@@ -1,4 +1,4 @@
-export default function LoginForm({ handleChange }) {
+export default function LoginForm({ handleChange, handleSubmit }) {
   return (
     <>
       <label htmlFor="input-email">
@@ -21,7 +21,10 @@ export default function LoginForm({ handleChange }) {
         onChange={(e) => handleChange(e.target)}
       />
 
-      <button type="button">
+      <button
+        type="button"
+        onClick={handleSubmit}
+      >
         Log In
       </button>
     </>
