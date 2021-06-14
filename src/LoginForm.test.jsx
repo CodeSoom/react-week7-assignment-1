@@ -1,4 +1,6 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
+import { useDispatch } from 'react-redux';
+import { setEmail } from './actions';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
@@ -13,5 +15,15 @@ describe('LoginForm', () => {
     const { getByRole } = render(<LoginForm />);
 
     expect(getByRole('button', { name: 'Log In' })).toBeInTheDocument();
+  });
+
+  it('updates state with input control', () => {
+    const dispatch = jest.fn();
+    useDispatch.mockImplementation(() => dispatch);
+
+    const { getByRole } = render(<LoginForm />);
+    const emailInput = getByRole('textbox', { name: 'Email' });
+    fireEvent.change(emailInput, { target: { value: 'testing@test.com' } });
+    expect(dispatch).toBeCalledWith(setEmail('testing@test.com'));
   });
 });

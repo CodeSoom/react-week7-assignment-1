@@ -85,3 +85,10 @@ export function loadRestaurant({ restaurantId }) {
     dispatch(setRestaurant(restaurant));
   };
 }
+
+export function setEmail(email) {
+  return {
+    type: 'setEmail',
+    payload: { email },
+  };
+}
