@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
+jest.mock('react-redux');
+
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
@@ -12,6 +14,7 @@ describe('LoginFormContainer', () => {
 
     useDispatch.mockImplementation(() => dispatch);
   });
+
   it('renders email input field', () => {
     const { container } = render(<LoginFormContainer />);
 
