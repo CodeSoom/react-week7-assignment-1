@@ -4,17 +4,18 @@ import LoginForm from './LoginForm';
 
 import {
   requestLogin,
+  changeLoginField,
 } from './actions';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  function handleSubmit() {
-    dispatch(requestLogin());
+  function handleChange({ name, value }) {
+    dispatch(changeLoginField({ name, value }));
   }
 
-  function handleChange() {
-    // Todo: ...
+  function handleSubmit() {
+    dispatch(requestLogin());
   }
 
   return (
