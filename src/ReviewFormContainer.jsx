@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setForm } from './actions';
+import { setForm, sendReview } from './actions';
 import ReviewForm from './ReviewForm';
 
 export default function ReviewFormContainer() {
@@ -12,7 +12,7 @@ export default function ReviewFormContainer() {
     dispatch(setForm({ name, value }));
   }
   function handleSubmit() {
-    dispatch(); // Todo
+    dispatch(sendReview());
   }
 
   return (
