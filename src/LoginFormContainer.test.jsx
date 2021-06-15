@@ -24,19 +24,20 @@ describe('LoginFormContainer', () => {
   it('listens change event', () => {
     const { getByLabelText } = render((<LoginFormContainer />));
 
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: {
-        name: 'email',
-        value: 'test@test.com',
-      },
-    });
+    const controls = [
+      { label: 'E-mail', name: 'email', value: 'test@test.com' },
+      { label: 'Password', name: 'password', value: 'test' },
+    ];
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: {
-        name: 'email',
-        value: 'test@test.com',
-      },
+    controls.forEach(({ label, name, value }) => {
+      fireEvent.change(getByLabelText(label), {
+        target: { name, value },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: { name, value },
+      });
     });
   });
 

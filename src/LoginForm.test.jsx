@@ -17,26 +17,37 @@ describe('LoginForm', () => {
   }
 
   it('renders input controllers and submit button', () => {
-    const { getByLabelText, getByRole } = renderLoginForm();
+    const email = 'test@naver.com';
+    const password = 'test';
 
-    expect(getByLabelText('E-mail')).toBeInTheDocument();
-    expect(getByLabelText('Password')).toBeInTheDocument();
+    const { getByLabelText, getByRole } = renderLoginForm({ email, password });
+
+    const controls = [
+      { label: 'E-mail', value: email },
+      { label: 'Password', value: password },
+    ];
+
+    controls.forEach(({ label, value }) => {
+      expect(getByLabelText(label).value).toBe(value);
+    });
+
     expect(getByRole('button', { name: 'Log In' })).toBeInTheDocument();
   });
 
   it('listens change event', () => {
     const { getByLabelText } = renderLoginForm();
 
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: {
-        name: 'email',
-        value: 'test@test.com',
-      },
-    });
+    const controls = [
+      { label: 'E-mail', name: 'email', value: 'test@test.com' },
+      { label: 'Password', name: 'password', value: 'test' },
+    ];
 
-    expect(handleChange).toBeCalledWith({
-      name: 'email',
-      value: 'test@test.com',
+    controls.forEach(({ name, value, label }) => {
+      fireEvent.change(getByLabelText(label), {
+        target: { name, value },
+      });
+
+      expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 
