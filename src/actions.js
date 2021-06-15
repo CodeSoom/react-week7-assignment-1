@@ -3,6 +3,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -93,8 +94,12 @@ export function changeLoginField({ name, value }) {
   };
 }
 
+export function setAccessToken(accessToken) {
+  // Todo: ...
+}
+
 export function requestLogin() {
   return async (dispatch) => {
-    dispatch(); // Todo: 로그인에 대한 인증키 요청하기 로직 추가
+    // dispatch(setAccessToken(accessToken));
   };
 }
