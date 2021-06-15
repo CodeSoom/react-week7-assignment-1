@@ -43,7 +43,7 @@ describe('ReviewFormContainer', () => {
 
   it('listens to button click event', () => {
     const { getByRole } = render(<ReviewFormContainer />);
-    fireEvent.click(getByRole('button', { name: 'Submit' }));
+    fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
 
     expect(dispatch).toBeCalled();
   });

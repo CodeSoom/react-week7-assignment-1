@@ -15,7 +15,7 @@ export default function ReviewForm({ handleChange, handleSubmit, form }) {
         type="button"
         onClick={handleSubmit}
       >
-        Submit
+        리뷰 남기기
       </button>
     </>
   );

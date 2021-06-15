@@ -30,6 +30,6 @@ describe('ReviewForm', () => {
   it('renders submit button', () => {
     const { getByRole } = renderReviewForm();
 
-    expect(getByRole('button', { name: 'Submit' })).toBeInTheDocument();
+    expect(getByRole('button', { name: '리뷰 남기기' })).toBeInTheDocument();
   });
 });

@@ -20,8 +20,8 @@ describe('RestaurantPage', () => {
       },
 
       form: {
-        scroe: 'score',
-        discriptipn: 'discription',
+        score: 'score',
+        description: 'description',
       },
     }));
   });
