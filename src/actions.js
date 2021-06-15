@@ -95,11 +95,17 @@ export function changeLoginField({ name, value }) {
 }
 
 export function setAccessToken(accessToken) {
-  // Todo: ...
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
 }
 
 export function requestLogin() {
-  return async (dispatch) => {
-    // dispatch(setAccessToken(accessToken));
+  return async (dispatch, getState) => {
+    const { loginFields: { email, password } } = getState();
+
+    const accessToken = await postLogin({ email, password });
+    dispatch(setAccessToken(accessToken));
   };
 }
