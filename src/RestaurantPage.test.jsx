@@ -1,8 +1,7 @@
 import { MemoryRouter } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import { render } from '@testing-library/react';
+import given from 'given2';
 
 import RestaurantPage from './RestaurantPage';
 
@@ -23,6 +22,8 @@ describe('RestaurantPage', () => {
         score: 'score',
         description: 'description',
       },
+
+      accessToken: given.accessToken,
     }));
   });
 
@@ -50,13 +51,27 @@ describe('RestaurantPage', () => {
     });
   });
 
-  it('renders review form', () => {
-    const { getAllByRole } = render(
-      <MemoryRouter initialEntries={['/restaurants/1']}>
-        <RestaurantPage />
-      </MemoryRouter>,
-    );
+  context('with logged in', () => {
+    given('accessToken', () => 'TOKEN');
 
-    expect(getAllByRole('textbox')).toHaveLength(2);
+    it('renders review form', () => {
+      const { getAllByRole } = render(
+        <RestaurantPage params={{ id: 1 }} />,
+      );
+
+      expect(getAllByRole('textbox')).toHaveLength(2);
+    });
+  });
+
+  context('with logged in', () => {
+    given('accessToken', () => null);
+
+    it("doesn't renders review form", () => {
+      const { queryByRole } = render(
+        <RestaurantPage params={{ id: 1 }} />,
+      );
+
+      expect(queryByRole('textbox')).not.toBeInTheDocument();
+    });
   });
 });
