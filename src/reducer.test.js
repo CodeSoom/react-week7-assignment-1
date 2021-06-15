@@ -139,6 +139,7 @@ describe('reducer', () => {
           password: '',
         },
       };
+
       const { name, value } = {
         name: 'email',
         value: 'tester@example.com',
