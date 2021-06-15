@@ -12,8 +12,14 @@ export default function LoginFormContainer() {
   function handleSubmit() {
     dispatch(requestLogin());
   }
+
+  function handleChange() {
+    // Todo: ...
+  }
+
   return (
     <LoginForm
+      onChange={handleChange}
       onSubmit={handleSubmit}
     />
   );
