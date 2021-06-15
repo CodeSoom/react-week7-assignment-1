@@ -86,6 +86,13 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
+export function changeLoginField({ name, value }) {
+  return {
+    type: 'changeLoginField',
+    payload: { name, value },
+  };
+}
+
 export function requestLogin() {
   return async (dispatch) => {
     dispatch(); // Todo: 로그인에 대한 인증키 요청하기 로직 추가
