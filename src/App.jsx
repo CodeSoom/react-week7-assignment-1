@@ -1,8 +1,12 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Switch,
   Route,
   Link,
 } from 'react-router-dom';
+
+import { setAccessToken } from './actions';
 
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
@@ -12,8 +16,12 @@ import NotFoundPage from './NotFoundPage';
 import LoginPage from './LoginPage';
 
 export default function App() {
-  // localStorage에서 accessToken 가져와서
-  // dispatch(setAccessToken(accessToken))
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    dispatch(setAccessToken(accessToken));
+  });
 
   return (
     <div>
