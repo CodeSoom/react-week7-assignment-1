@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import given from 'given2';
 
 import LoginForm from './LoginForm';
 
@@ -17,6 +18,7 @@ describe('LoginForm', () => {
         form={form}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        isLoggedIn={given.isLoggedIn}
       />,
     );
   }
@@ -27,9 +29,23 @@ describe('LoginForm', () => {
     expect(getByRole('textbox', { name: 'password' })).toHaveValue('password');
   });
 
-  it('renders submit button', () => {
-    const { getByRole } = renderLoginForm();
+  context('when logged in', () => {
+    given('isLoggedIn', () => true);
 
-    expect(getByRole('button', { name: 'Log In' })).toBeInTheDocument();
+    it('renders log out button', () => {
+      const { getByRole } = renderLoginForm();
+
+      expect(getByRole('button', { name: 'Log out' })).toBeInTheDocument();
+    });
+  });
+
+  context('when not logged in', () => {
+    given('isLoggedIn', () => false);
+
+    it('renders log in button', () => {
+      const { getByRole } = renderLoginForm();
+
+      expect(getByRole('button', { name: 'Log In' })).toBeInTheDocument();
+    });
   });
 });

@@ -1,6 +1,8 @@
 import TextField from './TextField';
 
-export default function LoginForm({ handleChange, handleSubmit, form }) {
+export default function LoginForm({
+  handleChange, handleSubmit, form, isLoggedIn,
+}) {
   const fields = ['email', 'password'];
 
   return (
@@ -15,7 +17,7 @@ export default function LoginForm({ handleChange, handleSubmit, form }) {
         type="button"
         onClick={handleSubmit}
       >
-        Log In
+        {isLoggedIn ? 'Log out' : 'Log In'}
       </button>
     </>
   );

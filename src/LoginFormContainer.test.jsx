@@ -1,7 +1,8 @@
 import { fireEvent, render } from '@testing-library/react';
+import given from 'given2';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setForm } from './actions';
+import { setAccessToken, setForm } from './actions';
 import LoginFormContainer from './LoginFormContainer';
 
 jest.mock('react-redux');
@@ -9,18 +10,19 @@ jest.mock('react-redux');
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
-  beforeEach(() => {
-    dispatch.mockClear();
-  });
-
   beforeAll(() => {
     useDispatch.mockReturnValue(dispatch);
+  });
+
+  beforeEach(() => {
+    dispatch.mockClear();
 
     useSelector.mockImplementation((selector) => selector({
       form: {
         email: 'email',
         password: 'password',
       },
+      accessToken: given.accessToken,
     }));
   });
 
@@ -41,10 +43,25 @@ describe('LoginFormContainer', () => {
     });
   });
 
-  it('listens to button click event', () => {
-    const { getByRole } = render(<LoginFormContainer />);
-    fireEvent.click(getByRole('button', { name: 'Log In' }));
+  context('when logged in', () => {
+    given('accessToken', () => 'TOKEN');
 
-    expect(dispatch).toBeCalled();
+    it('renders button for log out', () => {
+      const { getByRole } = render(<LoginFormContainer />);
+      fireEvent.click(getByRole('button', { name: 'Log out' }));
+
+      expect(dispatch).toBeCalledWith(setAccessToken(null));
+    });
+  });
+
+  context('when not logged in', () => {
+    given('accessToken', () => null);
+
+    it('renders button for log in', () => {
+      const { getByRole } = render(<LoginFormContainer />);
+      fireEvent.click(getByRole('button', { name: 'Log In' }));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 });

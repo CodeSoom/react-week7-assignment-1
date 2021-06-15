@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { requestLogin, setForm } from './actions';
+import { requestLogin, setAccessToken, setForm } from './actions';
 import LoginForm from './LoginForm';
 
 export default function LoginFormContainer() {
@@ -8,18 +8,23 @@ export default function LoginFormContainer() {
 
   const { email, password } = useSelector((state) => state.form);
 
+  const accessToken = useSelector((state) => state.accessToken);
+  const isLoggedIn = (accessToken !== null);
+
   function handleChange({ name, value }) {
     dispatch(setForm({ name, value }));
   }
-  function handleSubmit() {
-    dispatch(requestLogin());
-  }
+
+  const handleSubmit = (isLoggedIn)
+    ? () => dispatch(setAccessToken(null))
+    : () => dispatch(requestLogin());
 
   return (
     <LoginForm
       form={{ email, password }}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
+      isLoggedIn={isLoggedIn}
     />
   );
 }
