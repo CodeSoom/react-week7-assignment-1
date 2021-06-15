@@ -9,6 +9,7 @@ import {
   selectCategory,
   setForm,
   setAccessToken,
+  resetAllForm,
 } from './actions';
 
 describe('reducer', () => {
@@ -165,6 +166,28 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken('TOKEN'));
 
       expect(state.accessToken).toBe('TOKEN');
+    });
+  });
+
+  describe('resetAllForm', () => {
+    it('resets all form fields to initial value', () => {
+      const initialState = {
+        form: {
+          email: '',
+          password: '',
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(initialState, resetAllForm());
+
+      expect(state.form).toEqual({
+        email: 'email',
+        password: 'password',
+        score: 'score',
+        description: 'description',
+      });
     });
   });
 });

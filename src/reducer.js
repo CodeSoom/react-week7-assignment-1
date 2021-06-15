@@ -72,6 +72,18 @@ const reducers = {
     };
   },
 
+  resetAllForm(state) {
+    return {
+      ...state,
+      form: {
+        email: 'email',
+        password: 'password',
+        score: 'score',
+        description: 'description',
+      },
+    };
+  },
+
   setAccessToken(state, { payload: { accessToken } }) {
     return {
       ...state,

@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { requestLogin, setAccessToken, setForm } from './actions';
+import {
+  requestLogin, resetAllForm, setAccessToken, setForm,
+} from './actions';
 import LoginForm from './LoginForm';
 
 export default function LoginFormContainer() {
@@ -18,7 +20,9 @@ export default function LoginFormContainer() {
   const handleSubmit = (isLoggedIn)
     ? () => {
       localStorage.setItem('accessToken', null);
+
       dispatch(setAccessToken(null));
+      dispatch(resetAllForm());
     }
     : () => dispatch(requestLogin());
 

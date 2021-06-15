@@ -95,6 +95,13 @@ export function setForm({ name, value }) {
   };
 }
 
+export function resetAllForm() {
+  return {
+    type: 'resetAllForm',
+    payload: null,
+  };
+}
+
 export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',
@@ -105,10 +112,15 @@ export function setAccessToken(accessToken) {
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { form: { email, password } } = getState();
+
     const accessToken = await postLogin({ email, password });
 
-    localStorage.setItem('accessToken', accessToken);
-    dispatch(setAccessToken(accessToken));
+    localStorage.setItem('accessToken', accessToken || null);
+    dispatch(setAccessToken(accessToken || null));
+
+    if (!accessToken) {
+      dispatch(resetAllForm());
+    }
   };
 }
 
@@ -124,8 +136,7 @@ export function sendReview() {
       score, restaurantId, description, accessToken,
     });
 
-    dispatch(setForm({ name: 'score', value: 'score' }));
-    dispatch(setForm({ name: 'description', value: 'description' }));
+    dispatch(resetAllForm());
 
     dispatch(loadRestaurant({ restaurantId }));
   };
