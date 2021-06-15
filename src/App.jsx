@@ -12,6 +12,9 @@ import NotFoundPage from './NotFoundPage';
 import LoginPage from './LoginPage';
 
 export default function App() {
+  // localStorage에서 accessToken 가져와서
+  // dispatch(setAccessToken(accessToken))
+
   return (
     <div>
       <header>
