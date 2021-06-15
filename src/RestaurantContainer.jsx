@@ -24,18 +24,6 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   return (
-    <>
-      <RestaurantDetail restaurant={restaurant} />
-
-      <label htmlFor="input-score">
-        평점
-      </label>
-      <input type="text" id="input-score" />
-
-      <label htmlFor="input-description">
-        내용
-      </label>
-      <input type="text" id="input-description" />
-    </>
+    <RestaurantDetail restaurant={restaurant} />
   );
 }

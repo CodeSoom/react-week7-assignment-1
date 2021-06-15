@@ -3,15 +3,15 @@ import { render } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
+  const form = {
+    email: 'email',
+    password: 'password',
+  };
+
+  const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
+
   function renderLoginForm() {
-    const form = {
-      email: 'email',
-      password: 'password',
-    };
-
-    const handleChange = jest.fn();
-    const handleSubmit = jest.fn();
-
     return render(
       <LoginForm
         form={form}

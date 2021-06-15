@@ -50,17 +50,4 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('Loading');
     });
   });
-
-  it('renders review input control', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
-
-    const { getByRole } = renderRestaurantContainer();
-
-    expect(getByRole('textbox', { name: '평점' })).toBeInTheDocument();
-    expect(getByRole('textbox', { name: '내용' })).toBeInTheDocument();
-  });
 });

@@ -1,23 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { requestLogin, setForm } from './actions';
-import LoginForm from './LoginForm';
+import { setForm } from './actions';
+import ReviewForm from './ReviewForm';
 
-export default function LoginFormContainer() {
+export default function ReviewFormContainer() {
   const dispatch = useDispatch();
 
-  const { email, password } = useSelector((state) => state.form);
+  const { score, description } = useSelector((state) => state.form);
 
   function handleChange({ name, value }) {
     dispatch(setForm({ name, value }));
   }
   function handleSubmit() {
-    dispatch(requestLogin());
+    dispatch(); // Todo
   }
 
   return (
-    <LoginForm
-      form={{ email, password }}
+    <ReviewForm
+      form={{ score, description }}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
     />
