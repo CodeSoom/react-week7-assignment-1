@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
@@ -13,17 +13,19 @@ describe('LoginFormContainer', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: 'tester@example.com',
+        password: 'test',
+      },
+    }));
   });
 
-  it('renders email input field', () => {
+  it('renders email input controls', () => {
     const { container } = render(<LoginFormContainer />);
 
     expect(container).toHaveTextContent('E-mail');
-  });
-
-  it('renders password input field', () => {
-    const { container } = render(<LoginFormContainer />);
-
     expect(container).toHaveTextContent('Password');
   });
 
