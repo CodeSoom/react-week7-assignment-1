@@ -61,7 +61,10 @@ const reducers = {
   changeLoginField(state, { payload: { name, value } }) {
     return {
       ...state,
-      loginFields: { [name]: value },
+      loginFields: {
+        ...state.loginFields,
+        [name]: value,
+      },
     };
   },
 };
