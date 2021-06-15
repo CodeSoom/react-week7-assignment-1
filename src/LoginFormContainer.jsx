@@ -16,7 +16,10 @@ export default function LoginFormContainer() {
   }
 
   const handleSubmit = (isLoggedIn)
-    ? () => dispatch(setAccessToken(null))
+    ? () => {
+      localStorage.setItem('accessToken', null);
+      dispatch(setAccessToken(null));
+    }
     : () => dispatch(requestLogin());
 
   return (
