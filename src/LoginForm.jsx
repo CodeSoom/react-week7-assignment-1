@@ -4,6 +4,7 @@ export default function LoginForm({
   handleChange, handleSubmit, form, isLoggedIn,
 }) {
   const fields = ['email', 'password'];
+  const buttonName = isLoggedIn ? 'Log out' : 'Log In';
 
   return (
     <>
@@ -17,7 +18,7 @@ export default function LoginForm({
         type="button"
         onClick={handleSubmit}
       >
-        {isLoggedIn ? 'Log out' : 'Log In'}
+        {buttonName}
       </button>
     </>
   );
