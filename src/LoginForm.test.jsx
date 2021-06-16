@@ -5,8 +5,8 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const form = {
-    email: 'email',
-    password: 'password',
+    email: 'email@email.com',
+    password: 'paXXword',
   };
 
   const handleChange = jest.fn();
@@ -25,8 +25,8 @@ describe('LoginForm', () => {
   it('renders input controls', () => {
     const { getByRole } = renderLoginForm();
 
-    expect(getByRole('textbox', { name: 'email' })).toHaveValue('email');
-    expect(getByRole('textbox', { name: 'password' })).toHaveValue('password');
+    expect(getByRole('textbox', { name: 'email' })).toHaveValue('email@email.com');
+    expect(getByRole('textbox', { name: 'password' })).toHaveValue('paXXword');
   });
 
   context('when logged in', () => {

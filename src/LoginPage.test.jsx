@@ -9,8 +9,8 @@ describe('LoginPage', () => {
   beforeAll(() => {
     useSelector.mockImplementation((selector) => selector({
       form: {
-        email: 'email',
-        password: 'password',
+        email: 'email@email.com',
+        password: 'paXXword',
       },
     }));
   });

@@ -18,8 +18,8 @@ describe('ReviewFormContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       form: {
-        score: 'score',
-        description: 'description',
+        score: '3',
+        description: 'soso',
       },
     }));
   });

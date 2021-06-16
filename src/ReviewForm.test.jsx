@@ -4,8 +4,8 @@ import ReviewForm from './ReviewForm';
 
 describe('ReviewForm', () => {
   const form = {
-    score: 'score',
-    description: 'description',
+    score: '3',
+    description: 'soso',
   };
 
   const handleChange = jest.fn();
@@ -23,8 +23,8 @@ describe('ReviewForm', () => {
   it('renders input controls', () => {
     const { getByRole } = renderReviewForm();
 
-    expect(getByRole('textbox', { name: 'score' })).toHaveValue('score');
-    expect(getByRole('textbox', { name: 'description' })).toHaveValue('description');
+    expect(getByRole('textbox', { name: 'score' })).toHaveValue('3');
+    expect(getByRole('textbox', { name: 'description' })).toHaveValue('soso');
   });
 
   it('renders submit button', () => {
