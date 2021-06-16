@@ -24,36 +24,24 @@ describe('ReviewForm', () => {
     expect(queryByText('리뷰 내용')).not.toBeNull();
   });
 
-  it('listens change event', () => {
-    const { name, value } = {
-      score: {
-        name: 'score',
-        value: '5',
-      },
-      description: {
-        name: 'description',
-        value: '최고인듯!',
-      },
-    };
+  it('listens change events', () => {
+    const { getByLabelText } = renderReviewForm();
 
-    const { getByLabelText } = renderReviewForm({ name, value });
+    const controls = [
+      { label: '평점', name: 'score', value: '5' },
+      { label: '리뷰 내용', name: 'description', value: '최고인듯!' },
+    ];
 
-    fireEvent.change(getByLabelText('평점'), {
-      target: { value: '5' },
-    });
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
 
-    expect(handleChange).toBeCalledWith({
-      name: 'score',
-      value: '5',
-    });
+      expect(input).not.toBeNull();
 
-    fireEvent.change(getByLabelText('리뷰 내용'), {
-      target: { value: '최고인듯!' },
-    });
+      fireEvent.change(input, {
+        target: { value },
+      });
 
-    expect(handleChange).toBeCalledWith({
-      name: 'description',
-      value: '최고인듯!',
+      expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 });
