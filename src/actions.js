@@ -118,9 +118,14 @@ export function requestLogin() {
   };
 }
 
-export function sendReview() {
+export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
-    // postReview({  accessToken, restaurantId, score, description, })
-    // Todo: dispatch(loadRestaurant)
+    const { accessToken, reviewFields: { score, description } } = getState();
+
+    postReview({
+      accessToken, restaurantId, score, description,
+    });
+
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }
