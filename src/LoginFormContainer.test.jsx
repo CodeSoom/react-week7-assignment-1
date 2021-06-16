@@ -22,11 +22,17 @@ describe('LoginFormContainer', () => {
     }));
   });
 
-  it('renders email input controls', () => {
+  it('renders input controls', () => {
     const { container } = render(<LoginFormContainer />);
 
     expect(container).toHaveTextContent('E-mail');
     expect(container).toHaveTextContent('Password');
+  });
+
+  it('renders login button', () => {
+    const { queryByText } = render(<LoginFormContainer />);
+
+    expect(queryByText('Log in')).not.toBeNull();
   });
 
   it('changes loginFields', () => {
@@ -42,7 +48,7 @@ describe('LoginFormContainer', () => {
     });
   });
 
-  it('renders login button', () => {
+  it('listens click event', () => {
     const { getByText } = render(<LoginFormContainer />);
 
     fireEvent.click(getByText('Log in'));

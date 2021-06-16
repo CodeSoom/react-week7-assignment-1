@@ -33,7 +33,13 @@ describe('LoginForm', () => {
     expect(container).toHaveTextContent('Password');
   });
 
-  it('changes input value', () => {
+  it('renders login button', () => {
+    const { queryByText } = renderLoginForm({});
+
+    expect(queryByText('Log in')).not.toBeNull();
+  });
+
+  it('listens change event', () => {
     const { name, value } = {
       name: 'email',
       value: 'tester@example.com',
@@ -51,7 +57,7 @@ describe('LoginForm', () => {
     });
   });
 
-  it('renders login button', () => {
+  it('listens click event', () => {
     const { getByText } = renderLoginForm({});
 
     fireEvent.click(getByText('Log in'));
