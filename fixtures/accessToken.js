@@ -1,5 +1,5 @@
 const accessToken = {
-  accessToken: 'eyJhb',
+  accessToken: 'TOKEN',
 };
 
 export default accessToken;
