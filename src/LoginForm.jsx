@@ -1,4 +1,4 @@
-export default function LoginForm() {
+export default function LoginForm({ onSubmit }) {
   function handleClick() {
     //
   }
@@ -19,7 +19,7 @@ export default function LoginForm() {
       </div>
       <button
         type="button"
-        onClick={handleClick}
+        onClick={onSubmit}
       >
         Log In
       </button>
