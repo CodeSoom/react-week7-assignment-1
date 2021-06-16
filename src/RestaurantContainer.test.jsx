@@ -50,4 +50,13 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('Loading');
     });
   });
+
+  describe('Authenticated ', () => {
+    it('renders review write form', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('평점');
+      expect(container).toHaveTextContent('리뷰 내용');
+    });
+  });
 });
