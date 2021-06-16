@@ -8,6 +8,7 @@ import {
   selectRegion,
   selectCategory,
   changeLoginField,
+  changeReviewField,
   setAccessToken,
 } from './actions';
 
@@ -150,6 +151,26 @@ describe('reducer', () => {
       const state = reducer(initialState, changeLoginField({ name, value }));
 
       expect(state.loginFields.email).toBe('tester@example.com');
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('changes changeReviewField', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const { name, value } = {
+        name: 'score',
+        value: '5',
+      };
+
+      const state = reducer(initialState, changeReviewField({ name, value }));
+
+      expect(state.reviewFields.score).toBe('5');
     });
   });
 
