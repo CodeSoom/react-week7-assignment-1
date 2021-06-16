@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -114,5 +115,12 @@ export function requestLogin() {
 
     const accessToken = await postLogin({ email, password });
     dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function sendReview() {
+  return async (dispatch, getState) => {
+    // postReview({ accessToken, score, description })
+    // Todo: dispatch(loadRestaurant)
   };
 }
