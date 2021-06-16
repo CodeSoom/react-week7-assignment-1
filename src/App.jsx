@@ -1,19 +1,15 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  Switch,
-  Route,
-  Link,
-} from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 
 import { setAccessToken } from './actions';
 
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
+import LoginPage from './LoginPage';
 import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
-import LoginPage from './LoginPage';
 
 export default function App() {
   const dispatch = useDispatch();
