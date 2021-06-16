@@ -23,7 +23,7 @@ describe('RestaurantContainer', () => {
     return render(<RestaurantContainer restaurantId="1" />);
   }
 
-  it('dispatches action', () => {
+  it('loads restaurant informations', () => {
     given('restaurant', () => ({
       id: 1,
       name: '마법사주방',
@@ -38,6 +38,7 @@ describe('RestaurantContainer', () => {
         },
       ],
     }));
+
     renderRestaurantContainer();
 
     expect(dispatch).toBeCalled();
