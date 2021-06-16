@@ -24,7 +24,7 @@ describe('ReviewFormContainer', () => {
     }));
   });
 
-  it('listens change events', () => {
+  it('listens to change events', () => {
     const { getByRole } = render(<ReviewFormContainer />);
 
     const controls = [
