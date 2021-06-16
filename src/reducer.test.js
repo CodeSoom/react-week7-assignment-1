@@ -24,10 +24,10 @@ describe('reducer', () => {
       accessToken: null,
 
       form: {
-        email: 'email',
-        password: 'password',
-        score: 'score',
-        description: 'description',
+        email: '',
+        password: '',
+        score: '',
+        description: '',
       },
     };
 
@@ -173,20 +173,20 @@ describe('reducer', () => {
     it('resets all form fields to initial value', () => {
       const initialState = {
         form: {
-          email: '',
-          password: '',
-          score: '',
-          description: '',
+          email: 'email',
+          password: 'password',
+          score: 'score',
+          description: 'description',
         },
       };
 
       const state = reducer(initialState, resetAllForm());
 
       expect(state.form).toEqual({
-        email: 'email',
-        password: 'password',
-        score: 'score',
-        description: 'description',
+        email: '',
+        password: '',
+        score: '',
+        description: '',
       });
     });
   });

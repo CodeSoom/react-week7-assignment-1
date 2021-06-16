@@ -10,10 +10,10 @@ const initialState = {
   accessToken: null,
 
   form: {
-    email: 'email',
-    password: 'password',
-    score: 'score',
-    description: 'description',
+    email: '',
+    password: '',
+    score: '',
+    description: '',
   },
 };
 
@@ -76,10 +76,10 @@ const reducers = {
     return {
       ...state,
       form: {
-        email: 'email',
-        password: 'password',
-        score: 'score',
-        description: 'description',
+        email: '',
+        password: '',
+        score: '',
+        description: '',
       },
     };
   },

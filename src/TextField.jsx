@@ -1,4 +1,6 @@
-export default function TextField({ fields, handleChange, form }) {
+export default function TextField({
+  fields, handleChange, form,
+}) {
   return (
     <>
       {fields.map((field) => (
@@ -10,6 +12,7 @@ export default function TextField({ fields, handleChange, form }) {
             type="text"
             id={`input-${field}`}
             name={field}
+            placeholder={field}
             value={form[field]}
             onChange={(e) => handleChange(e.target)}
           />
