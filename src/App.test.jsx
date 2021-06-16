@@ -32,14 +32,14 @@ describe('App', () => {
             id: 1,
             restaurantId: 1,
             name: '테스터',
-            score: 5,
+            score: '5',
             description: '훌륭하다',
           },
         ],
       },
       form: {
-        score: 'score',
-        description: 'description',
+        score: '3',
+        description: 'soso',
       },
     }));
   });
