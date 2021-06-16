@@ -1,11 +1,11 @@
-import TextField from './TextField';
+import TextFields from './TextFields';
 
 export default function ReviewForm({ handleChange, handleSubmit, form }) {
   const fields = ['score', 'description'];
 
   return (
     <>
-      <TextField
+      <TextFields
         fields={fields}
         form={form}
         handleChange={handleChange}

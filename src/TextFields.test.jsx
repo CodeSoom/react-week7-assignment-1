@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import TextField from './TextField';
+import TextFields from './TextFields';
 
 describe('TextField', () => {
   it('renders input controls', () => {
@@ -7,7 +7,7 @@ describe('TextField', () => {
     const form = { email: 'email', password: 'password' };
 
     const { getAllByRole } = render((
-      <TextField
+      <TextFields
         fields={field}
         form={form}
         handleChange={jest.fn()}

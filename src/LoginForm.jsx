@@ -1,4 +1,4 @@
-import TextField from './TextField';
+import TextFields from './TextFields';
 
 export default function LoginForm({
   handleChange, handleSubmit, form, isLoggedIn,
@@ -8,7 +8,7 @@ export default function LoginForm({
 
   return (
     <>
-      <TextField
+      <TextFields
         fields={fields}
         form={form}
         handleChange={handleChange}

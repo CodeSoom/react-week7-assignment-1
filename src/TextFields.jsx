@@ -1,4 +1,4 @@
-export default function TextField({
+export default function TextFields({
   fields, handleChange, form,
 }) {
   return (
