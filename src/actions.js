@@ -120,7 +120,7 @@ export function requestLogin() {
 
 export function sendReview() {
   return async (dispatch, getState) => {
-    // postReview({ accessToken, score, description })
+    // postReview({  accessToken, restaurantId, score, description, })
     // Todo: dispatch(loadRestaurant)
   };
 }
