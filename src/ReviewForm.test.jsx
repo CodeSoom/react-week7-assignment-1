@@ -3,9 +3,11 @@ import { render, fireEvent } from '@testing-library/react';
 import ReviewForm from './ReviewForm';
 
 describe('ReviewForm', () => {
+  const handleSubmit = jest.fn();
   const handleChange = jest.fn();
 
   beforeEach(() => {
+    handleSubmit.mockClear();
     handleChange.mockClear();
   });
 
@@ -13,6 +15,7 @@ describe('ReviewForm', () => {
     return render(
       <ReviewForm
         onChange={handleChange}
+        onSubmit={handleSubmit}
       />,
     );
   }
@@ -43,5 +46,13 @@ describe('ReviewForm', () => {
 
       expect(handleChange).toBeCalledWith({ name, value });
     });
+  });
+
+  it('listens click event', () => {
+    const { getByText } = renderReviewForm({});
+
+    fireEvent.click(getByText('리뷰 남기기'));
+
+    expect(handleSubmit).toBeCalled();
   });
 });
