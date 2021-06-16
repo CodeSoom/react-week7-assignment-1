@@ -63,6 +63,14 @@ describe('RestaurantContainer', () => {
 
         expect(dispatch).toBeCalled();
       });
+
+      it('listens click event', () => {
+        const { getByText } = renderRestaurantContainer();
+
+        fireEvent.click(getByText('리뷰 남기기'));
+
+        expect(dispatch).toBeCalled();
+      });
     });
   });
 
