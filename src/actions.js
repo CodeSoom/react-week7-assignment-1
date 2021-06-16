@@ -104,7 +104,7 @@ export function setAccessToken(accessToken) {
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
-    const accessToken = postLogin({ email, password });
+    const accessToken = await postLogin({ email, password });
     dispatch(setAccessToken(accessToken));
   };
 }
