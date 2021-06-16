@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -46,6 +46,16 @@ describe('RestaurantContainer', () => {
 
         expect(container).toHaveTextContent('평점');
         expect(container).toHaveTextContent('리뷰 내용');
+      });
+
+      it('changes reviewFields', () => {
+        const { getByLabelText } = renderRestaurantContainer();
+
+        fireEvent.change(getByLabelText('평점'), {
+          target: { value: '5' },
+        });
+
+        expect(dispatch).toBeCalled();
       });
     });
   });
