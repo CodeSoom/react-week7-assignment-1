@@ -1,4 +1,9 @@
-export default function ReviewForm() {
+export default function ReviewForm({ onChange }) {
+  function handleChange(event) {
+    const { target: { name, value } } = event;
+    onChange({ name, value });
+  }
+
   return (
     <>
       <div>
@@ -10,17 +15,21 @@ export default function ReviewForm() {
         <input
           type="number"
           id="review-score"
+          name="score"
+          onChange={handleChange}
         />
       </div>
       <div>
         <label
-          htmlFor="review-score"
+          htmlFor="review-description"
         >
           리뷰 내용
         </label>
         <input
           type="text"
-          id="review-score"
+          id="review-description"
+          name="description"
+          onChange={handleChange}
         />
       </div>
     </>
