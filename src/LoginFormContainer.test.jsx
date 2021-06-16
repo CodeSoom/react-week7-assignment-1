@@ -35,7 +35,7 @@ describe('LoginFormContainer', () => {
     expect(queryByText('Log in')).not.toBeNull();
   });
 
-  it('changes loginFields', () => {
+  it('changes E-mail Field', () => {
     const { getByLabelText } = render(<LoginFormContainer />);
 
     fireEvent.change(getByLabelText('E-mail'), {
@@ -45,6 +45,19 @@ describe('LoginFormContainer', () => {
     expect(dispatch).toBeCalledWith({
       type: 'changeLoginField',
       payload: { name: 'email', value: 'newtester@example.com' },
+    });
+  });
+
+  it('changes Password Fields', () => {
+    const { getByLabelText } = render(<LoginFormContainer />);
+
+    fireEvent.change(getByLabelText('Password'), {
+      target: { value: 'newtest' },
+    });
+
+    expect(dispatch).toBeCalledWith({
+      type: 'changeLoginField',
+      payload: { name: 'password', value: 'newtest' },
     });
   });
 
