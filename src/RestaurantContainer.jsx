@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
+import ReviewForm from './ReviewForm';
 
 import {
   loadRestaurant,
@@ -26,30 +27,9 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   return (
-    <>
+    <div>
       <RestaurantDetail restaurant={restaurant} />
-      <div>
-        <label
-          htmlFor="review-score"
-        >
-          평점
-        </label>
-        <input
-          type="text"
-          id="review-score"
-        />
-      </div>
-      <div>
-        <label
-          htmlFor="review-score"
-        >
-          리뷰 내용
-        </label>
-        <input
-          type="text"
-          id="review-score"
-        />
-      </div>
-    </>
+      <ReviewForm />
+    </div>
   );
 }
