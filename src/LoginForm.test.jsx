@@ -5,12 +5,63 @@ import { fireEvent, render } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  it('renders input controls', () => {
-    const { getByLabelText } = render((
-      <LoginForm />
-    ));
+  const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+  beforeEach(() => {
+    handleChange.mockClear();
+    handleSubmit.mockClear();
+  });
+
+  function renderLoginForm({ email, password }) {
+    return render((
+      <LoginForm
+        fields={{ email, password }}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
+    ));
+  }
+
+  it('renders input controls and listens change events', () => {
+    const email = 'test@test';
+    const password = '1234';
+
+    const { getByLabelText } = renderLoginForm({ email, password });
+
+    const controls = [
+      {
+        label: 'E-mail',
+        name: 'email',
+        origin: email,
+        value: 'tester@example.com',
+      },
+      {
+        label: 'Password',
+        name: 'password',
+        origin: password,
+        value: 'test',
+      },
+    ];
+
+    controls.forEach(({
+      label, name, origin, value,
+    }) => {
+      const input = getByLabelText(label);
+
+      expect(input).toBe(origin);
+
+      fireEvent.change(input, { target: { value } });
+
+      expect(handleChange).toBeCalledWith({ name, value });
+    });
+  });
+
+  it('renders "Log In" button', () => {
+    const { getByText } = renderLoginForm({ });
+
+    fireEvent.click(getByText('Log In'));
+
+    expect(handleSubmit).toBeCalled();
   });
 });
