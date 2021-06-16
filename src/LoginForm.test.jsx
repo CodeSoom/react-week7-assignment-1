@@ -6,17 +6,33 @@ describe('LoginForm', () => {
   it('renders input controls and listens change events', () => {
     const handleChange = jest.fn();
 
+    const email = 'test@test';
+    const password = '1234';
+
     const { getByLabelText } = render(
-      <LoginForm onChange={handleChange} />
+      <LoginForm
+        fields={{ email, password }}
+        onChange={handleChange}
+      />
     );
     const controls = [
-      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
-      { label: 'Password', name: 'password', value: 'test' },
+      {
+        label: 'E-mail',
+        name: 'email',
+        origin: email,
+        value: 'tester@example.com'
+      },
+      {
+        label: 'Password',
+        name: 'password',
+        origin: password,
+        value: 'test'
+      },
     ];
 
-    controls.forEach(({ label, name, value }) => {
+    controls.forEach(({ label, name, origin, value }) => {
       const input = getByLabelText(label)
-      expect(input).not.toBeNull();
+      expect(input.value).toBe(origin);
 
       fireEvent.change(input, { target: { value } });
 
