@@ -9,9 +9,7 @@ export default function LoginForm({ fields, onChange, onSubmit }) {
   return (
     <>
       <div>
-        <label
-          htmlFor="login-email"
-        >
+        <label htmlFor="login-email">
           E-mail
         </label>
         <input
@@ -23,9 +21,7 @@ export default function LoginForm({ fields, onChange, onSubmit }) {
         />
       </div>
       <div>
-        <label
-          htmlFor="login-password"
-        >
+        <label htmlFor="login-password">
           Password
         </label>
         <input
