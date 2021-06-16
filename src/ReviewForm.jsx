@@ -8,7 +8,7 @@ export default function ReviewForm() {
           평점
         </label>
         <input
-          type="text"
+          type="number"
           id="review-score"
         />
       </div>
