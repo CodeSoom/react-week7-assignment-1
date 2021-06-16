@@ -26,8 +26,14 @@ describe('ReviewForm', () => {
 
   it('listens change event', () => {
     const { name, value } = {
-      name: 'score',
-      value: '5',
+      score: {
+        name: 'score',
+        value: '5',
+      },
+      description: {
+        name: 'description',
+        value: '최고인듯!',
+      },
     };
 
     const { getByLabelText } = renderReviewForm({ name, value });
@@ -36,6 +42,18 @@ describe('ReviewForm', () => {
       target: { value: '5' },
     });
 
-    expect(handleChange).toBeCalled();
+    expect(handleChange).toBeCalledWith({
+      name: 'score',
+      value: '5',
+    });
+
+    fireEvent.change(getByLabelText('리뷰 내용'), {
+      target: { value: '최고인듯!' },
+    });
+
+    expect(handleChange).toBeCalledWith({
+      name: 'description',
+      value: '최고인듯!',
+    });
   });
 });
