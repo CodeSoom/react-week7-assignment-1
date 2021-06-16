@@ -1,4 +1,4 @@
-export default function ReviewForm({ onChange }) {
+export default function ReviewForm({ onSubmit, onChange }) {
   function handleChange(event) {
     const { target: { name, value } } = event;
     onChange({ name, value });
@@ -32,6 +32,12 @@ export default function ReviewForm({ onChange }) {
           onChange={handleChange}
         />
       </div>
+      <button
+        type="button"
+        onClick={onSubmit}
+      >
+        리뷰 남기기
+      </button>
     </>
   );
 }
