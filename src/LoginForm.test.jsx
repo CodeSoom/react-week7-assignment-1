@@ -11,7 +11,7 @@ describe('LoginForm', () => {
     handleChange.mockClear();
   });
 
-  const { email, password } = {
+  const fields = {
     email: '',
     password: '',
   };
@@ -19,7 +19,7 @@ describe('LoginForm', () => {
   function renderLoginForm() {
     return render(
       <LoginForm
-        fields={{ email, password }}
+        fields={fields}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />,
@@ -39,10 +39,16 @@ describe('LoginForm', () => {
     expect(queryByText('Log in')).not.toBeNull();
   });
 
-  it('listens change event', () => {
+  it('listens change events', () => {
     const { name, value } = {
-      name: 'email',
-      value: 'tester@example.com',
+      email: {
+        name: 'email',
+        value: 'tester@example.com',
+      },
+      password: {
+        name: 'password',
+        value: 'test',
+      },
     };
 
     const { getByLabelText } = renderLoginForm({ name, value });
@@ -54,6 +60,15 @@ describe('LoginForm', () => {
     expect(handleChange).toBeCalledWith({
       name: 'email',
       value: 'tester@example.com',
+    });
+
+    fireEvent.change(getByLabelText('Password'), {
+      target: { value: 'test' },
+    });
+
+    expect(handleChange).toBeCalledWith({
+      name: 'password',
+      value: 'test',
     });
   });
 
