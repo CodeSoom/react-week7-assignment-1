@@ -40,35 +40,23 @@ describe('LoginForm', () => {
   });
 
   it('listens change events', () => {
-    const { name, value } = {
-      email: {
-        name: 'email',
-        value: 'tester@example.com',
-      },
-      password: {
-        name: 'password',
-        value: 'test',
-      },
-    };
+    const { getByLabelText } = renderLoginForm();
 
-    const { getByLabelText } = renderLoginForm({ name, value });
+    const controls = [
+      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
+      { label: 'Password', name: 'password', value: 'test' },
+    ];
 
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'tester@example.com' },
-    });
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
 
-    expect(handleChange).toBeCalledWith({
-      name: 'email',
-      value: 'tester@example.com',
-    });
+      expect(input).not.toBeNull();
 
-    fireEvent.change(getByLabelText('Password'), {
-      target: { value: 'test' },
-    });
+      fireEvent.change(input, {
+        target: { value },
+      });
 
-    expect(handleChange).toBeCalledWith({
-      name: 'password',
-      value: 'test',
+      expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 
