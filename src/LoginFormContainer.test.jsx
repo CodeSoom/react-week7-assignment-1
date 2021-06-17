@@ -15,6 +15,7 @@ describe('LoginFormContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      accessToken: given.accessToken,
       loginFields: {
         email: 'tester@example.com',
         password: 'test',
@@ -23,6 +24,8 @@ describe('LoginFormContainer', () => {
   });
 
   describe('LoginForm', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
+
     it('renders input controls', () => {
       const { container } = render(<LoginFormContainer />);
 
@@ -62,7 +65,7 @@ describe('LoginFormContainer', () => {
       });
     });
 
-    it('listens click event', () => {
+    it('listens login click event', () => {
       const { getByText } = render(<LoginFormContainer />);
 
       fireEvent.click(getByText('Log in'));
@@ -72,10 +75,20 @@ describe('LoginFormContainer', () => {
   });
 
   describe('LogoutForm', () => {
-    it('renders logout button', () => {
-      const { container } = render(<LoginFormContainer />);
+    given('accessToken', () => '');
 
-      expect(container).toHaveTextContent('Log out');
+    it('renders logout button', () => {
+      const { queryByText } = render(<LoginFormContainer />);
+
+      expect(queryByText('Log out')).not.toBeNull();
     });
+  });
+
+  it('listens logout click event', () => {
+    const { getByText } = render(<LoginFormContainer />);
+
+    fireEvent.click(getByText('Log out'));
+
+    expect(dispatch).toBeCalled();
   });
 });
