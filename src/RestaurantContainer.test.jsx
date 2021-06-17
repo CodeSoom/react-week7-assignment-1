@@ -36,6 +36,11 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: {
+        name: '테스터',
+        score: '5',
+        description: '훌륭하다 지구놈들',
+      },
     }));
 
     it('renders name and address', () => {
@@ -49,6 +54,7 @@ describe('RestaurantContainer', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('리뷰');
+      // expect(container).toHaveTextContent('훌륭하다 지구놈들');
     });
 
     context('without restaurant', () => {
