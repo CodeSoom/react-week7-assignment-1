@@ -22,12 +22,12 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
-  const { review } = restaurant;
+  const { reviews } = restaurant;
 
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <Reviews items={review || []} />
+      <Reviews items={reviews || []} />
     </>
   );
 }

@@ -22,7 +22,6 @@ describe('reducer', () => {
       selectedRegion: null,
       selectedCategory: null,
       accessToken: null,
-
       form: {
         email: '',
         password: '',

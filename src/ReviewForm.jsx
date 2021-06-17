@@ -10,7 +10,6 @@ export default function ReviewForm({ handleChange, handleSubmit, form }) {
         form={form}
         handleChange={handleChange}
       />
-
       <button
         type="button"
         onClick={handleSubmit}

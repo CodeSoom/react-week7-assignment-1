@@ -16,6 +16,4 @@ describe('TextField', () => {
 
     expect(getAllByRole('textbox')).toHaveLength(field.length);
   });
-
-  // Todo: more test?
 });

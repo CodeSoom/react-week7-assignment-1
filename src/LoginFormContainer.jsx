@@ -17,7 +17,7 @@ export default function LoginFormContainer() {
     dispatch(setForm({ name, value }));
   }
 
-  function handleSubmitByLoginState() {
+  function processLoginAndOut() {
     if (!isLoggedIn) {
       dispatch(requestLogin());
       return;
@@ -33,7 +33,7 @@ export default function LoginFormContainer() {
     <LoginForm
       form={form}
       handleChange={handleChange}
-      handleSubmit={handleSubmitByLoginState}
+      handleSubmit={processLoginAndOut}
       isLoggedIn={isLoggedIn}
     />
   );
