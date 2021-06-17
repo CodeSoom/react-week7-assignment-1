@@ -8,7 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import { loadItem } from './services/storage';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -35,6 +38,28 @@ describe('App', () => {
       </MemoryRouter>,
     );
   }
+
+  context('do login', () => {
+    const accessToken = 'TOKEN';
+
+    beforeEach(() => {
+      loadItem.mockImplementation(() => accessToken);
+    });
+
+    it('calls dispatch with setAccessToken action', () => {
+      expect(dispatch).toBeCalled();
+    });
+  });
+
+  context('do logout', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it('no calls dispatch with action', () => {
+      expect(dispatch).not.toBeCalled();
+    });
+  });
 
   context('with path /', () => {
     it('renders the home page', () => {
