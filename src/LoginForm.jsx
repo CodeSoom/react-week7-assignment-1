@@ -6,6 +6,7 @@ export default function LoginForm({
 
   function handleChange(event) {
     const { target: { name, value } } = event;
+    console.log(value);
 
     onChange({ name, value });
   }
@@ -16,6 +17,7 @@ export default function LoginForm({
         E-mail
         <input
           type="email"
+          name="email"
           value={email}
           onChange={handleChange}
         />
@@ -24,6 +26,7 @@ export default function LoginForm({
         Password
         <input
           type="password"
+          name="password"
           value={password}
           onChange={handleChange}
         />

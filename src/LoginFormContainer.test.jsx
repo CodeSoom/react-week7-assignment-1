@@ -31,7 +31,7 @@ describe('LoginFormContainer', () => {
 
     controls.forEach(({ label, name, value }) => {
       fireEvent.change(getByLabelText(label), {
-        target: { name, value },
+        target: { value },
       });
 
       expect(dispatch).toBeCalledWith({
