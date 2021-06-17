@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, queryAllByText } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -17,6 +17,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      accessToken: given.accessToken,
     }));
   });
 
@@ -40,7 +41,19 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('서울시');
     });
 
-    describe('Authenticated ', () => {
+    context('without restaurant', () => {
+      given('restaurant', () => null);
+
+      it('renders loading', () => {
+        const { container } = renderRestaurantContainer();
+
+        expect(container).toHaveTextContent('Loading');
+      });
+    });
+
+    describe('Authentication success', () => {
+      given('accessToken', () => 'ACCESS_TOKEN');
+
       it('renders review write form', () => {
         const { container } = renderRestaurantContainer();
 
@@ -74,13 +87,14 @@ describe('RestaurantContainer', () => {
     });
   });
 
-  context('without restaurant', () => {
-    given('restaurant', () => null);
+  context('Authentication fail', () => {
+    given('accessToken', () => null);
 
-    it('renders loading', () => {
-      const { container } = renderRestaurantContainer();
+    it('renders no review write form', () => {
+      const { queryByText } = renderRestaurantContainer();
 
-      expect(container).toHaveTextContent('Loading');
+      expect(queryByText('평점')).toBeNull();
+      expect(queryByText('리뷰 내용')).toBeNull();
     });
   });
 });
