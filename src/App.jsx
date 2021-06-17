@@ -15,10 +15,14 @@ import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
 
+import { setAccessToken } from './actions';
+
+import { loadItem } from './services/storage';
+
 export default function App() {
   const dispatch = useDispatch();
-  // TODO: localStirage에서 accessToken 가져오기
-  const accessToken = '';
+
+  const accessToken = loadItem('accessToken');
   if (accessToken) {
     dispatch(setAccessToken(accessToken));
   }
