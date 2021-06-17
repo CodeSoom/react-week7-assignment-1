@@ -1,8 +1,12 @@
+import React from 'react';
+
 import {
   Switch,
   Route,
   Link,
 } from 'react-router-dom';
+
+import { useDispatch } from 'react-redux';
 
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
@@ -12,6 +16,13 @@ import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
 
 export default function App() {
+  const dispatch = useDispatch();
+  // TODO: localStirage에서 accessToken 가져오기
+  const accessToken = '';
+  if (accessToken) {
+    dispatch(setAccessToken(accessToken));
+  }
+
   return (
     <div>
       <header>
