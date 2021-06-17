@@ -5,27 +5,32 @@ import { render, fireEvent } from '@testing-library/react';
 import ReviewForm from './ReviewForm';
 
 describe('ReviewForm', () => {
-  it('renders review write fields', () => {
-    const handleChange = jest.fn();
+  const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
-    const { queryByLabelText } = render((
+  beforeEach(() => {
+    handleChange.mockClear();
+    handleSubmit.mockClear();
+  });
+
+  function renderReviewForm() {
+    return render((
       <ReviewForm
         onChange={handleChange}
+        onSubmit={handleSubmit}
       />
     ));
+  }
+
+  it('renders review write fields', () => {
+    const { queryByLabelText } = renderReviewForm();
 
     expect(queryByLabelText('평점')).not.toBeNull();
     expect(queryByLabelText('리뷰 내용')).not.toBeNull();
   });
 
   it('listens change events', () => {
-    const handleChange = jest.fn();
-
-    const { getByLabelText } = render((
-      <ReviewForm
-        onChange={handleChange}
-      />
-    ));
+    const { getByLabelText } = renderReviewForm();
 
     const controls = [
       { label: '평점', name: 'score', value: '5' },
@@ -37,5 +42,13 @@ describe('ReviewForm', () => {
 
       expect(handleChange).toBeCalledWith({ name, value });
     });
+  });
+
+  it('renders "Send" button', () => {
+    const { getByText } = renderReviewForm();
+
+    fireEvent.click(getByText('리뷰 남기기'));
+
+    expect(handleSubmit).toBeCalled();
   });
 });
