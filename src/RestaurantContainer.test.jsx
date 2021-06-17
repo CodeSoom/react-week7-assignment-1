@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
+import REVIEWS from '../fixtures/reviews';
+
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
@@ -36,11 +38,7 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
-      reviews: {
-        name: '테스터',
-        score: '5',
-        description: '훌륭하다 지구놈들',
-      },
+      reviews: REVIEWS,
     }));
 
     it('renders name and address', () => {
@@ -48,13 +46,6 @@ describe('RestaurantContainer', () => {
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
-    });
-
-    it('renders reviews', () => {
-      const { container } = renderRestaurantContainer();
-
-      expect(container).toHaveTextContent('리뷰');
-      // expect(container).toHaveTextContent('훌륭하다 지구놈들');
     });
 
     context('without restaurant', () => {
@@ -100,6 +91,14 @@ describe('RestaurantContainer', () => {
 
         expect(dispatch).toBeCalled();
       });
+    });
+
+    it('reders reivews list', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('리뷰');
+      // expect(container).toHaveTextContent('5');
+      // expect(container).toHaveTextContent('훌륭하다 지구놈들');
     });
   });
 

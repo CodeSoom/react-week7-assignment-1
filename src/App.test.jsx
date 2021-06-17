@@ -10,6 +10,8 @@ import App from './App';
 
 import { loadItem } from './services/storage';
 
+import REVIEWS from '../fixtures/reviews';
+
 jest.mock('react-redux');
 jest.mock('./services/storage');
 
@@ -22,12 +24,13 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      accessToken: null,
       regions: [
         { id: 1, name: '서울' },
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
+      restaurant: { id: 1, name: '마녀주방', reviews: REVIEWS },
     }));
   });
 
