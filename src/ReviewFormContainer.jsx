@@ -6,7 +6,7 @@ import ReviewForm from './ReviewForm';
 export default function ReviewFormContainer() {
   const dispatch = useDispatch();
 
-  const { score, description } = useSelector((state) => state.form);
+  const form = useSelector((state) => state.form);
 
   function handleChange({ name, value }) {
     dispatch(setForm({ name, value }));
@@ -17,7 +17,7 @@ export default function ReviewFormContainer() {
 
   return (
     <ReviewForm
-      form={{ score, description }}
+      form={form}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
     />

@@ -8,7 +8,7 @@ import LoginForm from './LoginForm';
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  const { email, password } = useSelector((state) => state.form);
+  const form = useSelector((state) => state.form);
 
   const accessToken = useSelector((state) => state.accessToken);
   const isLoggedIn = (accessToken !== null);
@@ -32,7 +32,7 @@ export default function LoginFormContainer() {
 
   return (
     <LoginForm
-      form={{ email, password }}
+      form={form}
       handleChange={handleChange}
       handleSubmit={handleSubmitByLoginState(isLoggedIn)}
       isLoggedIn={isLoggedIn}
