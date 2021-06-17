@@ -1,7 +1,11 @@
 export default function LogoutForm() {
   return (
-    // Todo: ...
     <>
+      <button
+        type="button"
+      >
+        Log out
+      </button>
     </>
   );
 }

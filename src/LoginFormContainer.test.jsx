@@ -73,9 +73,9 @@ describe('LoginFormContainer', () => {
 
   describe('LogoutForm', () => {
     it('renders logout button', () => {
-      const { queryByText } = render(<LoginFormContainer />);
+      const { container } = render(<LoginFormContainer />);
 
-      expect(queryByText('Log out')).not.toBeNull();
+      expect(container).toHaveTextContent('Log out');
     });
   });
 });
