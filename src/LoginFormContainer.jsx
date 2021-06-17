@@ -17,24 +17,23 @@ export default function LoginFormContainer() {
     dispatch(setForm({ name, value }));
   }
 
-  function handleSubmitByLoginState(loggedIn) {
-    if (!loggedIn) {
-      return () => dispatch(requestLogin());
+  function handleSubmitByLoginState() {
+    if (!isLoggedIn) {
+      dispatch(requestLogin());
+      return;
     }
 
-    return () => {
-      localStorage.setItem('accessToken', null);
+    localStorage.setItem('accessToken', null);
 
-      dispatch(setAccessToken(null));
-      dispatch(resetAllForm());
-    };
+    dispatch(setAccessToken(null));
+    dispatch(resetAllForm());
   }
 
   return (
     <LoginForm
       form={form}
       handleChange={handleChange}
-      handleSubmit={handleSubmitByLoginState(isLoggedIn)}
+      handleSubmit={handleSubmitByLoginState}
       isLoggedIn={isLoggedIn}
     />
   );
