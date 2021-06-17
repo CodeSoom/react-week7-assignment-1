@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './LoginForm';
-// import LogoutForm from './LogoutForm';
+import LogoutForm from './LogoutForm';
 
 import {
   requestLogin,
