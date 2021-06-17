@@ -11,6 +11,10 @@ const initialState = {
     email: '',
     password: '',
   },
+  reviewFields: {
+    score: '',
+    description: '',
+  },
   accessToken: null,
 };
 
@@ -58,6 +62,7 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
+
   changeLoginField(state, { payload: { name, value } }) {
     return {
       ...state,
@@ -67,6 +72,17 @@ const reducers = {
       },
     };
   },
+
+  changeReviewField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewFields: {
+        ...state.reviewFields,
+        [name]: value,
+      },
+    };
+  },
+
   setAccessToken(state, { payload: { accessToken } }) {
     return {
       ...state,
