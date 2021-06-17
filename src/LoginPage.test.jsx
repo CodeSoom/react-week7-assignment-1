@@ -6,7 +6,7 @@ import LoginPage from './LoginPage';
 jest.mock('react-redux');
 
 describe('LoginPage', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
       form: {
         email: 'email@email.com',

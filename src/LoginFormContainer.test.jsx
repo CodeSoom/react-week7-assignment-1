@@ -10,12 +10,9 @@ jest.mock('react-redux');
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
-  beforeAll(() => {
-    useDispatch.mockReturnValue(dispatch);
-  });
-
   beforeEach(() => {
     dispatch.mockClear();
+    useDispatch.mockReturnValue(dispatch);
 
     useSelector.mockImplementation((selector) => selector({
       form: {
