@@ -6,7 +6,6 @@ export default function LoginForm({
 
   function handleChange(event) {
     const { target: { name, value } } = event;
-    console.log(value);
 
     onChange({ name, value });
   }
