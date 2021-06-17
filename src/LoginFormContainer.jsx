@@ -27,7 +27,7 @@ export default function LoginFormContainer() {
   return (
     <>
       {accessToken ? (
-        <LogoutForm />
+        <LogoutForm onClick={handleClick} />
       ) : (
         <LoginForm
           fields={{ email, password }}
