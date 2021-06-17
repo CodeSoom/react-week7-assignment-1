@@ -17,7 +17,7 @@ export default function App() {
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
     dispatch(setAccessToken(accessToken));
-  });
+  }, []);
 
   return (
     <div>
