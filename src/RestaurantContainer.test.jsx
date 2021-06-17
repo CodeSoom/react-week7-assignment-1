@@ -1,4 +1,4 @@
-import { render, fireEvent, queryAllByText } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,8 +16,12 @@ describe('RestaurantContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      restaurant: given.restaurant,
       accessToken: given.accessToken,
+      restaurant: given.restaurant,
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     }));
   });
 

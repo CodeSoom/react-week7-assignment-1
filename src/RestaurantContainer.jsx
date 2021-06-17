@@ -20,8 +20,8 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(loadRestaurant({ restaurantId }));
   }, []);
 
-  const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
+  const restaurant = useSelector(get('restaurant'));
 
   if (!restaurant) {
     return (
