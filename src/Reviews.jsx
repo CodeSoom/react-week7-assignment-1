@@ -1,7 +1,7 @@
 export default function Reviews() {
   return (
     <div>
-      <h2>리뷰</h2>
+      <h3>리뷰</h3>
     </div>
   );
 }
