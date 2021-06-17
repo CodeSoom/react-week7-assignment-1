@@ -47,7 +47,12 @@ describe('App', () => {
     });
 
     it('calls dispatch with setAccessToken action', () => {
-      expect(dispatch).toBeCalled();
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: { accessToken },
+      });
     });
   });
 
@@ -57,6 +62,8 @@ describe('App', () => {
     });
 
     it('no calls dispatch with action', () => {
+      renderApp({ path: '/' });
+
       expect(dispatch).not.toBeCalled();
     });
   });
