@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
 import ReviewForm from './ReviewForm';
+import RestaurantReviews from './RestaurantReviews';
 
 import {
   loadRestaurant,
@@ -28,7 +29,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   function handleSubmit() {
-    dispatch(sendReview());
+    dispatch(sendReview(restaurantId));
   }
 
   if (!restaurant) {
@@ -46,6 +47,7 @@ export default function RestaurantContainer({ restaurantId }) {
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
+      <RestaurantReviews reviews={restaurant.reviews} />
     </>
   );
 }
