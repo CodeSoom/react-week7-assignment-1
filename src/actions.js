@@ -127,6 +127,6 @@ export function sendReview(restaurantId) {
       accessToken, restaurantId, score, description,
     });
 
-    dispatch(loadRestaurants());
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }
