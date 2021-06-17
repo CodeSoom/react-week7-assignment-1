@@ -49,8 +49,8 @@ describe('RestaurantsPage', () => {
 
     expect(dispatch).toBeCalled();
 
-    expect(queryByText('서울')).not.toBeNull();
-    expect(queryByText('한식')).not.toBeNull();
+    expect(queryByText('서울')).toBeInTheDocument();
+    expect(queryByText('한식')).toBeInTheDocument();
   });
 
   context('when click restaurant', () => {

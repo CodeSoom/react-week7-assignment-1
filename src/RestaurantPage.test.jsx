@@ -26,12 +26,10 @@ describe('RestaurantPage', () => {
           },
         ],
       },
-
       form: {
         score: 'score',
         description: 'description',
       },
-
       accessToken: given.accessToken,
     }));
   });
