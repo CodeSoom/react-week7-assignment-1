@@ -6,6 +6,6 @@ describe('Reviews', () => {
   it('renders title', () => {
     const { container } = render(<Reviews />);
 
-    expect(container).toHaveTextContent('메뉴');
+    expect(container).toHaveTextContent('리뷰');
   });
 });
