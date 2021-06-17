@@ -1,33 +1,25 @@
+import TextField from './TextField';
+
 export default function LoginForm({
   email, password, onChange,
   onSubmit,
 }) {
-  function handleChange(event) {
-    const { target: { name, value } } = event;
-
-    onChange({ name, value });
-  }
-
   return (
     <>
-      <label>
-        E-mail
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handleChange}
-        />
-      </label>
+      <TextField
+        label="E-mail"
+        type="email"
+        name="email"
+        value={email}
+        onChange={onChange}
+      />
+      <TextField
+        label="Password"
+        type="password"
+        name="password"
+        value={password}
+        onChange={onChange}
+      />
       <button
         type="button"
         onClick={onSubmit}

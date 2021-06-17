@@ -35,23 +35,6 @@ describe('LoginForm', () => {
     expect(getByRole('button', { name: 'Log In' })).toBeInTheDocument();
   });
 
-  it('listens change event', () => {
-    const { getByLabelText } = renderLoginForm();
-
-    const controls = [
-      { label: 'E-mail', value: 'test@test.com', name: 'email' },
-      { label: 'Password', value: 'test', name: 'password' },
-    ];
-
-    controls.forEach(({ label, value, name }) => {
-      fireEvent.change(getByLabelText(label), {
-        target: { value },
-      });
-
-      expect(handleChange).toBeCalledWith({ name, value });
-    });
-  });
-
   it('listens click event', () => {
     const { getByRole } = renderLoginForm();
 
