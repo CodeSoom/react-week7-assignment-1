@@ -15,7 +15,6 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
-  const { reviews } = restaurant || { reviews: [] };
 
   if (!restaurant) {
     return (
@@ -26,7 +25,7 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <Reviews items={reviews} />
+      <Reviews items={restaurant?.reviews || []} />
     </>
   );
 }
