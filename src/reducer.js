@@ -60,7 +60,7 @@ const reducers = {
     return {
       ...state,
       loginFields: {
-        ...state.loginFileds,
+        ...state.loginFields,
         [name]: value,
       },
     };

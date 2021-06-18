@@ -131,12 +131,9 @@ describe('reducer', () => {
   });
 
   describe('changeLoginField', () => {
-    it('changes selected category', () => {
+    it('changes login field', () => {
       const initialState = {
-        loginFields: {
-          email: '',
-          password: '',
-        },
+        loginFields: {},
       };
 
       const state = reducer(
