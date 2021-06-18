@@ -1,5 +1,5 @@
 export default function TextField({
-  label, type = 'text', name, onChange,
+  label, type, name, onChange,
 }) {
   const id = `input-${name}`;
 

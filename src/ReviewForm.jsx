@@ -4,13 +4,14 @@ export default function ReviewForm({ onSubmit, onChange }) {
   return (
     <>
       <TextField
-        type="number"
         label="평점"
+        type="number"
         name="score"
         onChange={onChange}
       />
       <TextField
         label="리뷰 내용"
+        type="text"
         name="description"
         onChange={onChange}
       />
