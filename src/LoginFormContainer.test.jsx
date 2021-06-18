@@ -1,5 +1,6 @@
 import { fireEvent, render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
+import given from 'given2';
 
 import LoginFormContainer from './LoginFormContainer';
 
@@ -18,34 +19,58 @@ describe('LoginFormContainer', () => {
         email: '',
         password: '',
       },
+      accessToken: given.accessToken,
     }));
   });
 
-  it('listens change event', () => {
-    const { getByLabelText } = render((<LoginFormContainer />));
+  context('when logged in', () => {
+    beforeEach(() => {
+      given('accessToken', () => 'ACCESS_TOKEN');
+    });
 
-    const controls = [
-      { label: 'E-mail', name: 'email', value: 'test@test.com' },
-      { label: 'Password', name: 'password', value: 'test' },
-    ];
+    // 질문: 'it calls dispatch with "logout" action'가 test case에 더 적합한지 궁금합니다.
+    it('listens "Log Out" click event', () => {
+      const { getByRole } = render((<LoginFormContainer />));
 
-    controls.forEach(({ label, name, value }) => {
-      fireEvent.change(getByLabelText(label), {
-        target: { value },
-      });
+      fireEvent.click(getByRole('button', { name: 'Log Out' }));
 
       expect(dispatch).toBeCalledWith({
-        type: 'changeLoginField',
-        payload: { name, value },
+        type: 'logout',
       });
     });
   });
 
-  it('listens click event', () => {
-    const { getByRole } = render((<LoginFormContainer />));
+  context('when logged out', () => {
+    beforeEach(() => {
+      given('accessToken', () => '');
+    });
 
-    fireEvent.click(getByRole('button', { name: 'Log In' }));
+    it('listens change event', () => {
+      const { getByLabelText } = render((<LoginFormContainer />));
 
-    expect(dispatch).toBeCalled();
+      const controls = [
+        { label: 'E-mail', name: 'email', value: 'test@test.com' },
+        { label: 'Password', name: 'password', value: 'test' },
+      ];
+
+      controls.forEach(({ label, name, value }) => {
+        fireEvent.change(getByLabelText(label), {
+          target: { value },
+        });
+
+        expect(dispatch).toBeCalledWith({
+          type: 'changeLoginField',
+          payload: { name, value },
+        });
+      });
+    });
+
+    it('listens "Log In" click event', () => {
+      const { getByRole } = render((<LoginFormContainer />));
+
+      fireEvent.click(getByRole('button', { name: 'Log In' }));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 });
