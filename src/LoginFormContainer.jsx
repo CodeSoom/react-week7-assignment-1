@@ -17,12 +17,11 @@ export default function LoginFormContainer() {
     dispatch(setForm({ name, value }));
   }
 
-  function processLoginAndOut() {
-    if (!isLoggedIn) {
-      dispatch(requestLogin());
-      return;
-    }
+  function handleLogin() {
+    dispatch(requestLogin());
+  }
 
+  function handleLogout() {
     localStorage.setItem('accessToken', null);
 
     dispatch(setAccessToken(null));
@@ -33,7 +32,8 @@ export default function LoginFormContainer() {
     <LoginForm
       form={form}
       handleChange={handleChange}
-      handleSubmit={processLoginAndOut}
+      handleLogin={handleLogin}
+      handleLogout={handleLogout}
       isLoggedIn={isLoggedIn}
     />
   );

@@ -20,10 +20,4 @@ describe('LoginPage', () => {
 
     expect(container).toHaveTextContent('LogIn');
   });
-
-  it('renders login form', () => {
-    const { getAllByRole } = render(<LoginPage />);
-
-    expect(getAllByRole('textbox')).not.toHaveLength(0);
-  });
 });

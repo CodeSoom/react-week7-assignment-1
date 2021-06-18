@@ -23,20 +23,31 @@ describe('LoginFormContainer', () => {
     }));
   });
 
-  it('listens change events', () => {
-    const { getByRole } = render(<LoginFormContainer />);
+  context('when not logged in', () => {
+    given('accessToken', () => null);
 
-    const controls = [
-      { name: 'email', value: 'testing@test.com' },
-      { name: 'password', value: 'test' },
-    ];
+    it('listens change events', () => {
+      const { getByRole } = render(<LoginFormContainer />);
 
-    controls.forEach(({ name, value }) => {
-      const input = getByRole('textbox', { name });
+      const controls = [
+        { name: 'email', value: 'testing@test.com' },
+        { name: 'password', value: 'test' },
+      ];
 
-      fireEvent.change(input, { target: { value } });
+      controls.forEach(({ name, value }) => {
+        const input = getByRole('textbox', { name });
 
-      expect(dispatch).toBeCalledWith(setForm({ name, value }));
+        fireEvent.change(input, { target: { value } });
+
+        expect(dispatch).toBeCalledWith(setForm({ name, value }));
+      });
+    });
+
+    it('renders button for log in', () => {
+      const { getByRole } = render(<LoginFormContainer />);
+      fireEvent.click(getByRole('button', { name: 'Log In' }));
+
+      expect(dispatch).toBeCalled();
     });
   });
 
@@ -48,17 +59,6 @@ describe('LoginFormContainer', () => {
       fireEvent.click(getByRole('button', { name: 'Log out' }));
 
       expect(dispatch).toBeCalledWith(setAccessToken(null));
-    });
-  });
-
-  context('when not logged in', () => {
-    given('accessToken', () => null);
-
-    it('renders button for log in', () => {
-      const { getByRole } = render(<LoginFormContainer />);
-      fireEvent.click(getByRole('button', { name: 'Log In' }));
-
-      expect(dispatch).toBeCalled();
     });
   });
 });

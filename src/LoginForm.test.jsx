@@ -10,17 +10,19 @@ describe('LoginForm', () => {
   };
 
   const handleChange = jest.fn();
-  const handleSubmit = jest.fn();
+  const handleLogin = jest.fn();
+  const handleLogout = jest.fn();
 
   function renderLoginForm() {
-    return render(
+    return render((
       <LoginForm
         form={form}
         handleChange={handleChange}
-        handleSubmit={handleSubmit}
+        handleLogin={handleLogin}
+        handleLogout={handleLogout}
         isLoggedIn={given.isLoggedIn}
-      />,
-    );
+      />
+    ));
   }
 
   beforeEach(() => {
