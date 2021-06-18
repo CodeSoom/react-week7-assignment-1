@@ -29,10 +29,10 @@ describe('LoginFormContainer', () => {
     });
 
     // 질문: 'it calls dispatch with "logout" action'가 test case에 더 적합한지 궁금합니다.
-    it('listens "Log Out" click event', () => {
+    it('listens "Log out" click event', () => {
       const { getByRole } = render((<LoginFormContainer />));
 
-      fireEvent.click(getByRole('button', { name: 'Log Out' }));
+      fireEvent.click(getByRole('button', { name: 'Log out' }));
 
       expect(dispatch).toBeCalledWith({
         type: 'logout',
