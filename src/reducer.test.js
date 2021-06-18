@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer, { initialReviewFields } from './reducer';
 
 import {
   setRegions,
@@ -11,6 +11,8 @@ import {
   setAccessToken,
   changeReviewField,
   logout,
+  setReviews,
+  clearReviewFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -172,6 +174,36 @@ describe('reducer', () => {
     });
   });
 
+  describe('setReviews', () => {
+    it('changes reviews of the current restaurant', () => {
+      const reviews = [
+        {
+          id: 1,
+          name: '테스터',
+          score: 5,
+          description: '훌륭하다 훌륭하다 지구인놈들',
+        },
+        {
+          id: 2,
+          name: '동우',
+          score: 1,
+          description: '배탈남',
+        },
+      ];
+
+      const initialState = {
+        restaurant: {
+          reviews: [],
+        },
+      };
+
+      const state = reducer(initialState, setReviews(reviews));
+
+      // 자세하게 하고 싶으면 toEqual같은 것들도 사용가능
+      expect(state.restaurant.reviews).toHaveLength(reviews.length);
+    });
+  });
+
   describe('changeReviewField', () => {
     it('changes score and keeps remaining value', () => {
       const initialState = {
@@ -189,6 +221,7 @@ describe('reducer', () => {
       const { reviewFields: { score, description } } = state;
 
       expect(score).toBe('5');
+
       expect(description).toBe('');
     });
   });
@@ -203,6 +236,26 @@ describe('reducer', () => {
       const { accessToken, selectedCategory } = reducer(initialState, logout());
 
       expect(accessToken).toBe('');
+
+      expect(selectedCategory).toBeNull();
+    });
+  });
+
+  describe('clearReviewFields', () => {
+    it('clears fields of review and keeps remaining value', () => {
+      const initialState = {
+        reviewFields: {
+          ...initialReviewFields,
+        },
+        selectedCategory: null,
+      };
+
+      const { reviewFields, selectedCategory } = reducer(initialState, clearReviewFields());
+
+      Object.keys(reviewFields).forEach((reviewField) => {
+        expect(reviewFields[reviewField]).toBe('');
+      });
+
       expect(selectedCategory).toBeNull();
     });
   });
