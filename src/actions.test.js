@@ -18,6 +18,9 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+// 질문: 여기에도 jest.mock('./services/storage'); 이 부분을 추가해 줄 필요가 있을까요?
+// 만약 하지 않아도 jestdom의 global.localStorage때문에 에러는 나지 않는 것 같습니다.
+jest.mock('./services/storage');
 
 describe('actions', () => {
   let store;

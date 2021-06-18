@@ -7,6 +7,8 @@ import {
   postReview,
 } from './services/api';
 
+import { saveItemToLocalStorage } from './services/storage';
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -114,6 +116,8 @@ export function requestLogin() {
     const { loginFields: { email, password } } = getState();
 
     const accessToken = await postLogin({ email, password });
+
+    saveItemToLocalStorage('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
   };
