@@ -93,12 +93,12 @@ describe('RestaurantContainer', () => {
       });
     });
 
-    it('reders reivews list', () => {
+    it('reders reivews title and list', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('리뷰');
-      // expect(container).toHaveTextContent('5');
-      // expect(container).toHaveTextContent('훌륭하다 지구놈들');
+      expect(container).toHaveTextContent('5');
+      expect(container).toHaveTextContent('훌륭하다 지구놈들');
     });
   });
 
