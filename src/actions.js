@@ -44,6 +44,13 @@ export function setAccessToken(accessToken) {
   };
 }
 
+export function setReviews(reviews) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
+
 // select
 export function selectRegion(regionId) {
   return {
@@ -78,6 +85,13 @@ export function changeReviewField({ name, value }) {
 export function logout() {
   return {
     type: 'logout',
+  };
+}
+
+// clear
+export function clearReviewFields() {
+  return {
+    type: 'clearReviewFields',
   };
 }
 
@@ -121,6 +135,15 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
+export function loadReview({ restaurantId }) {
+  return async (dispatch) => {
+    const restaurant = await fetchRestaurant({ restaurantId });
+
+    // NOTE: UX면에서 리뷰같은경우 로딩이 돌지 않기 때문에 굳이 로딩 처리를 해주지 않는다
+    dispatch(setReviews(restaurant.reviews));
+  };
+}
+
 // thunk request
 export function requestLogin() {
   return async (dispatch, getState) => {
@@ -139,10 +162,19 @@ export function sendReview(restaurantId) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
 
+    // NOTE: reviewFields들을 초기화시키는 3가지 방법
+
+    // 1. 먼저 지운다
+
     await postReview({
       accessToken, restaurantId, score, description,
     });
 
-    dispatch(loadRestaurant({ restaurantId }));
+    // 2. 완료가 되면 지운다
+
+    dispatch(loadReview({ restaurantId }));
+
+    // 3. 업데이트되고 지운다
+    dispatch(clearReviewFields());
   };
 }

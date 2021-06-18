@@ -13,6 +13,8 @@ import {
   requestLogin,
   setAccessToken,
   sendReview,
+  clearReviewFields,
+  setReviews,
 } from './actions';
 
 const middlewares = [thunk];
@@ -135,7 +137,9 @@ describe('actions', () => {
           score: 5,
           description: '세상이 망할 맛',
         },
-        restaurant: {},
+        restaurant: {
+          reviews: [],
+        },
       });
     });
 
@@ -144,7 +148,8 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[0]).toEqual(clearReviewFields());
+      expect(actions[1]).toEqual(setReviews(undefined));
     });
   });
 });
