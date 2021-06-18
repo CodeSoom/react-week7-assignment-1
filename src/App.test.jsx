@@ -1,12 +1,11 @@
 import {
   MemoryRouter,
 } from 'react-router-dom';
-
 import { render } from '@testing-library/react';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
+
 import { loadItemToLocalStorage } from './services/storage';
 import { setAccessToken } from './actions';
 

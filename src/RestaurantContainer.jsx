@@ -1,18 +1,16 @@
 import { useEffect } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
-
-import RestaurantDetail from './RestaurantDetail';
-import ReviewForm from './ReviewForm';
-import RestaurantReviews from './RestaurantReviews';
 
 import {
   loadRestaurant,
   changeReviewField,
   sendReview,
 } from './actions';
-
 import { get } from './utils';
+
+import RestaurantDetail from './RestaurantDetail';
+import ReviewForm from './ReviewForm';
+import RestaurantReviews from './RestaurantReviews';
 
 export default function RestaurantContainer({ restaurantId }) {
   // TODO:
