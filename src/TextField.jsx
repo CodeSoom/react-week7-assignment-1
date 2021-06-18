@@ -15,7 +15,7 @@ export default function TextField({
       <label htmlFor={id}>
         {label}
       </label>
-      <inputput
+      <input
         type={type}
         id={id}
         name={name}

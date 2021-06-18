@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { fireEvent, getByLabelText, render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import LogoutForm from './LogoutForm';
 
