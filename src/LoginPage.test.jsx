@@ -16,23 +16,21 @@ describe('LoginPage', () => {
     }));
   });
 
-  it('renders Log-in title', () => {
-    const { container } = render(
+  function renderLoginPage() {
+    return render(
       <MemoryRouter>
         <LoginPage />
       </MemoryRouter>,
     );
+  }
 
+  it('renders Log-in title', () => {
+    const { container } = renderLoginPage();
     expect(container).toHaveTextContent('Log In');
   });
 
   it('renders input controls', () => {
-    const { getByLabelText } = render(
-      <MemoryRouter>
-        <LoginPage />
-      </MemoryRouter>,
-    );
-
+    const { getByLabelText } = renderLoginPage();
     expect(getByLabelText('E-mail')).not.toBeNull();
   });
 });
