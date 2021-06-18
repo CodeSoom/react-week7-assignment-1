@@ -1,3 +1,8 @@
 export default function Reviews({ reviews }) {
-  // Todo: ...
+  return (
+    <div>
+      <h3>리뷰</h3>
+      {reviews}
+    </div>
+  );
 }
