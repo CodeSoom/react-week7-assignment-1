@@ -19,7 +19,7 @@ export default function RestaurantContainer({ restaurantId }) {
   // 1. 로그인이 되었을 때, 안되었을 때 구분 X
   // 2. Logout 기능 구현 X
   // 3. accessToken을 localStorage에 저장 X
-  // 4. reducer, action 비슷한 것끼리 모아주기
+  // 4. reducer, action 비슷한 것끼리 모아주기 X
   // 5. 각 라인을 공백으로 의미 부여하기
 
   const dispatch = useDispatch();
