@@ -23,7 +23,7 @@ describe('Reviews', () => {
   });
 
   context('without reviews', () => {
-    it('renders no items message', () => {
+    it('renders no reviews message', () => {
       [[], null, undefined].forEach((reviews) => {
         const { container } = render(<Reviews reviews={reviews} />);
 

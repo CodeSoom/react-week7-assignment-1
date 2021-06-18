@@ -23,7 +23,7 @@ describe('LoginFormContainer', () => {
     }));
   });
 
-  describe('LoginForm', () => {
+  describe('when logout state', () => {
     given('accessToken', () => '');
 
     it('renders input controls', () => {
@@ -74,7 +74,7 @@ describe('LoginFormContainer', () => {
     });
   });
 
-  describe('LogoutForm', () => {
+  describe('when login state', () => {
     it('renders logout button', () => {
       given('accessToken', () => 'ACCESS_TOKEN');
 

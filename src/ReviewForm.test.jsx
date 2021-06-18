@@ -20,7 +20,7 @@ describe('ReviewForm', () => {
     );
   }
 
-  it('renders review write form', () => {
+  it('renders review fields', () => {
     const { queryByText } = renderReviewForm();
 
     expect(queryByText('평점')).not.toBeNull();

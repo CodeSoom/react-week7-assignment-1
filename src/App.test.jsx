@@ -42,14 +42,14 @@ describe('App', () => {
     );
   }
 
-  context('do login', () => {
+  context('when logged in', () => {
     const accessToken = 'TOKEN';
 
     beforeEach(() => {
       loadItem.mockImplementation(() => accessToken);
     });
 
-    it('calls dispatch with setAccessToken action', () => {
+    it('calls dispatch with action', () => {
       renderApp({ path: '/' });
 
       expect(dispatch).toBeCalledWith({
@@ -59,7 +59,7 @@ describe('App', () => {
     });
   });
 
-  context('do logout', () => {
+  context('when logged out', () => {
     beforeEach(() => {
       loadItem.mockImplementation(() => null);
     });

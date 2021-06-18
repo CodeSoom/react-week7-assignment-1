@@ -58,7 +58,7 @@ describe('RestaurantContainer', () => {
       });
     });
 
-    describe('Authentication success', () => {
+    context('Authentication success', () => {
       given('accessToken', () => 'ACCESS_TOKEN');
 
       it('renders review write form', () => {
@@ -68,7 +68,7 @@ describe('RestaurantContainer', () => {
         expect(container).toHaveTextContent('리뷰 내용');
       });
 
-      it('changes reviewFields', () => {
+      it('changes review fields', () => {
         const { getByLabelText } = renderRestaurantContainer();
 
         fireEvent.change(getByLabelText('평점'), {
