@@ -47,6 +47,13 @@ const reducers = {
     };
   },
 
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
+    };
+  },
+
   selectRegion(state, { payload: { regionId } }) {
     const { regions } = state;
     return {
@@ -80,13 +87,6 @@ const reducers = {
         ...state.reviewFields,
         [name]: value,
       },
-    };
-  },
-
-  setAccessToken(state, { payload: { accessToken } }) {
-    return {
-      ...state,
-      accessToken,
     };
   },
 

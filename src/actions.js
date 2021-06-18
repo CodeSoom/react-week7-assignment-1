@@ -9,6 +9,7 @@ import {
 
 import { saveItemToLocalStorage } from './services/storage';
 
+// set
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -37,6 +38,14 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+// select
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
@@ -51,6 +60,29 @@ export function selectCategory(categoryId) {
   };
 }
 
+// change
+export function changeLoginField({ name, value }) {
+  return {
+    type: 'changeLoginField',
+    payload: { name, value },
+  };
+}
+
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: { name, value },
+  };
+}
+
+// logout
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}
+
+// thunk load
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();
@@ -90,27 +122,7 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
-export function changeLoginField({ name, value }) {
-  return {
-    type: 'changeLoginField',
-    payload: { name, value },
-  };
-}
-
-export function changeReviewField({ name, value }) {
-  return {
-    type: 'changeReviewField',
-    payload: { name, value },
-  };
-}
-
-export function setAccessToken(accessToken) {
-  return {
-    type: 'setAccessToken',
-    payload: { accessToken },
-  };
-}
-
+// thunk request
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
@@ -123,6 +135,7 @@ export function requestLogin() {
   };
 }
 
+// thunk send
 export function sendReview(restaurantId) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
@@ -132,11 +145,5 @@ export function sendReview(restaurantId) {
     });
 
     dispatch(loadRestaurant({ restaurantId }));
-  };
-}
-
-export function logout() {
-  return {
-    type: 'logout',
   };
 }
