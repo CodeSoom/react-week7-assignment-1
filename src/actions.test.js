@@ -12,6 +12,7 @@ import {
   setRestaurant,
   requestLogin,
   setAccessToken,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -122,6 +123,28 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setAccessToken(''));
+    });
+  });
+
+  // 질문: thunk함수안에 thunk함수가 있다보니 어떻게 테스트를 해줘야 될지 잘모르겠습니다.
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+        reviewFields: {
+          score: 5,
+          description: '세상이 망할 맛',
+        },
+        restaurant: {},
+      });
+    });
+
+    it('dispatches sendReview', async () => {
+      await store.dispatch(sendReview(1));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
     });
   });
 });
