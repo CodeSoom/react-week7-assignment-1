@@ -8,6 +8,7 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   loginFields: {},
+  accessToken: '',
 };
 
 const reducers = {
@@ -62,6 +63,13 @@ const reducers = {
         ...state.loginFileds,
         [name]: value,
       },
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
     };
   },
 };
