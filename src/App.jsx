@@ -3,6 +3,7 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
@@ -10,8 +11,19 @@ import LoginPage from './LoginPage';
 import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
+import { loadItemToLocalStorage } from './services/storage';
+import { setAccessToken } from './actions';
 
 export default function App() {
+  const dispatch = useDispatch();
+
+  // 질문: 변수 할당문과 if문은 공백으로 의미를 부여했는데 트레이너님은 어떤 기준으로 공백을 사용하시나요?
+  const accessToken = loadItemToLocalStorage('accessToken');
+
+  if (accessToken) {
+    dispatch(setAccessToken(accessToken));
+  }
+
   return (
     <div>
       <header>
