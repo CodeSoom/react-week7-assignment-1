@@ -1,3 +1,5 @@
+import TextField from './TextField';
+
 export default function ReviewForm({ onSubmit, onChange }) {
   function handleChange(event) {
     const { target: { name, value } } = event;
@@ -6,19 +8,12 @@ export default function ReviewForm({ onSubmit, onChange }) {
 
   return (
     <>
-      <div>
-        <label
-          htmlFor="review-score"
-        >
-          평점
-        </label>
-        <input
-          type="number"
-          id="review-score"
-          name="score"
-          onChange={handleChange}
-        />
-      </div>
+      <TextField
+        type="number"
+        label="평점"
+        name="score"
+        onChange={handleChange}
+      />
       <div>
         <label
           htmlFor="review-description"
