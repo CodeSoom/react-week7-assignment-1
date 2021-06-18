@@ -18,17 +18,17 @@ describe('RestaurantReviews', () => {
     },
   ];
 
-  it('renders name and address', () => {
-    const { getByText } = render(
+  it('renders sorted reviews', () => {
+    const { getAllByTestId } = render(
       <RestaurantReviews reviews={reviews} />,
     );
 
-    reviews.forEach(({
-      name, score, description,
-    }) => {
-      expect(getByText(name)).toBeInTheDocument();
-      expect(getByText(score)).toBeInTheDocument();
-      expect(getByText(description)).toBeInTheDocument();
+    const sortedReviews = [...reviews].sort((a, b) => b.id - a.id);
+
+    sortedReviews.forEach((_, index) => {
+      expect(getAllByTestId('review-name')[index]).toHaveTextContent(sortedReviews[index].name);
+      expect(getAllByTestId('review-score')[index]).toHaveTextContent(sortedReviews[index].score);
+      expect(getAllByTestId('review-description')[index]).toHaveTextContent(sortedReviews[index].description);
     });
   });
 });
