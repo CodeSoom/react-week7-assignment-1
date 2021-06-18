@@ -130,3 +130,9 @@ export function sendReview(restaurantId) {
     dispatch(loadRestaurant({ restaurantId }));
   };
 }
+
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}
