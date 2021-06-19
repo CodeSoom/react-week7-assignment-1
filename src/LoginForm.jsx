@@ -30,7 +30,7 @@ export default function LoginForm({ fields, onChange, onSubmit }) {
           type="password"
           id="login-password"
           name="password"
-          vaule={password}
+          value={password}
           onChange={handleChange}
         />
       </div>

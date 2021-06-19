@@ -103,7 +103,7 @@ describe('App', () => {
     it('call dispatch with "setAccessToken" action', () => {
       renderApp({ path: '/' });
 
-      expect(dispatch).not.toBeCalled();
+      expect(dispatch).toBeCalledWith({ payload: { accessToken }, type: 'setAccessToken' });
     });
   });
 });

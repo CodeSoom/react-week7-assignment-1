@@ -6,12 +6,14 @@ import TextField from './TextField';
 
 describe('TextField', () => {
   context('without type', () => {
+    const label = '리뷰 설명';
+
     function renderTextField() {
       const handleChange = jest.fn();
 
       return render((
         <TextField
-          label="리뷰 설명"
+          label={label}
           name="description"
           onChange={handleChange}
         />
@@ -21,23 +23,25 @@ describe('TextField', () => {
     it('renders label and input control', () => {
       const { queryByLabelText } = renderTextField();
 
-      expect(queryByLabelText('리뷰 설명')).not.toBeNull();
+      expect(queryByLabelText(label)).not.toBeNull();
     });
 
     it('renders "text" input control', () => {
-      const { container } = renderTextField();
+      const { getByLabelText } = renderTextField();
 
-      expect(container).toContainerHTML('type="text"');
+      expect(getByLabelText(label)).toHaveAttribute('type', 'text');
     });
   });
 
   context('with type', () => {
+    const label = '평점';
+
     function renderTextField() {
       const handleChange = jest.fn();
 
       return render((
         <TextField
-          label="평점"
+          label={label}
           type="number"
           name="score"
           onChange={handleChange}
@@ -48,13 +52,13 @@ describe('TextField', () => {
     it('renders label and input control', () => {
       const { queryByLabelText } = renderTextField();
 
-      expect(queryByLabelText('평점')).not.toBeNull();
+      expect(queryByLabelText(label)).not.toBeNull();
     });
 
     it('renders "number" input control', () => {
-      const { container } = renderTextField();
+      const { getByLabelText } = renderTextField();
 
-      expect(container).toContainerHTML('type="number"');
+      expect(getByLabelText(label)).toHaveAttribute('type', 'number');
     });
   });
 

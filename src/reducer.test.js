@@ -16,12 +16,21 @@ import {
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      accessToken: '',
       regions: [],
       categories: [],
       restaurants: [],
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -177,13 +186,15 @@ describe('reducer', () => {
   });
 
   describe('logout', () => {
-    const initialState = {
-      setAccessToken: 'ACCESS_TOKEN',
-    };
+    it('returns empty token', () => {
+      const initialState = {
+        setAccessToken: 'ACCESS_TOKEN',
+      };
 
-    const state = reducer(initialState, logout());
+      const state = reducer(initialState, logout());
 
-    expect(state.accessToken).toBe();
+      expect(state.accessToken).toBe('');
+    });
   });
 
   describe('changeReviewField', () => {
