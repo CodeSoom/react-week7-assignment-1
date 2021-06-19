@@ -12,6 +12,7 @@ import {
 } from './actions';
 
 import { get } from './utils';
+import ReviewList from './ReviewList';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -41,10 +42,13 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail restaurant={restaurant} />
       {accessToken ? (
-        <ReviewForm
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-        />
+        <>
+          <ReviewForm
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+          />
+          <ReviewList />
+        </>
       ) : null}
     </>
   );
