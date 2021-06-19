@@ -4,10 +4,7 @@ import given from 'given2';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  const form = {
-    email: 'email@email.com',
-    password: 'paXXword',
-  };
+  let form;
 
   const handleChange = jest.fn();
   const handleLogin = jest.fn();
@@ -26,6 +23,11 @@ describe('LoginForm', () => {
   }
 
   beforeEach(() => {
+    form = {
+      email: 'email@email.com',
+      password: 'paXXword',
+    };
+
     jest.clearAllMocks();
   });
 
