@@ -3,7 +3,8 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
-} from './services/api';
+  postLogin,
+} from '../services/api';
 
 export function setRegions(regions) {
   return {
@@ -33,6 +34,13 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
@@ -46,6 +54,15 @@ export function selectCategory(categoryId) {
     payload: { categoryId },
   };
 }
+
+export function changeLoginField({ name, value }) {
+  return {
+    type: 'changeLoginFiled',
+    payload: { name, value },
+  };
+}
+
+/// 비동기 액션
 
 export function loadInitialData() {
   return async (dispatch) => {
@@ -78,10 +95,27 @@ export function loadRestaurants() {
 
 export function loadRestaurant({ restaurantId }) {
   return async (dispatch) => {
-    dispatch(setRestaurant(null));
-
+    dispatch(setRestaurant(null)); // 통신하는 동안 빈페이지 보여주기
     const restaurant = await fetchRestaurant({ restaurantId });
-
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    // post email, password
+    const {
+      loginFileds: { email, password },
+    } = getState();
+    const accessToken = await postLogin(email, password);
+    console.log('requestLogin() 확인>>>', email, password);
+    dispatch(setAccessToken(accessToken));
+    // 예외처리 추가 필요
+    // try {
+    //   const accessToken = await postLogin(email, password);
+    //   dispatch(setAccessToken(accessToken));
+    // } catch {
+    //   console.log('오류 : failed to get AccessToken');
+    // }
   };
 }

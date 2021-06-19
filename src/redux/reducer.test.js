@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer, { initialState as defaultState } from './reducer';
 
 import {
   setRegions,
@@ -7,18 +7,13 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginField,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
-    const initialState = {
-      regions: [],
-      categories: [],
-      restaurants: [],
-      restaurant: null,
-      selectedRegion: null,
-      selectedCategory: null,
-    };
+    const initialState = defaultState;
 
     it('returns initialState', () => {
       const state = reducer(undefined, { type: 'action' });
@@ -122,6 +117,38 @@ describe('reducer', () => {
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
+      });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('change acessToken', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, setAccessToken('TOKEN'));
+      expect(state.accessToken).toBe('TOKEN');
+    });
+  });
+
+  describe('changeLoginField', () => {
+    context('when email is changed', () => {
+      it('changes input value', () => {
+        const initialState = {
+          loginFileds: {
+            email: 'test@test',
+            password: '1234',
+          },
+        };
+
+        const state = reducer(
+          initialState,
+          changeLoginField({ name: 'email', value: 'test@test' }),
+        );
+
+        expect(state.loginFileds.email).toBe('test@test');
+        expect(state.loginFileds.password).toBe('1234');
       });
     });
   });
