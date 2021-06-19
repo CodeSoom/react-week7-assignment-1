@@ -2,6 +2,9 @@ import React from 'react';
 
 export default function ReviewList() {
   return (
-    <div>hi</div>
+    <>
+      <div>5</div>
+      <div>good</div>
+    </>
   );
 }
