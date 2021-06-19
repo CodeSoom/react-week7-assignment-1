@@ -5,7 +5,10 @@ import ReviewList from './ReviewList';
 describe('ReviewList', () => {
   describe('when has reviews', () => {
     it('renders reviews', () => {
-      render(<ReviewList />);
+      const { getByText } = render(<ReviewList />);
+
+      expect(getByText('good')).not.toBeNull();
+      expect(getByText('5')).not.toBeNull();
     });
   });
 
