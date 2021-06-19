@@ -4,7 +4,10 @@ import given from 'given2';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  let form;
+  given('form', () => ({
+    email: 'email@email.com',
+    password: 'paXXword',
+  }));
 
   const handleChange = jest.fn();
   const handleLogin = jest.fn();
@@ -13,7 +16,7 @@ describe('LoginForm', () => {
   function renderLoginForm() {
     return render((
       <LoginForm
-        form={form}
+        form={given.form}
         handleChange={handleChange}
         handleLogin={handleLogin}
         handleLogout={handleLogout}
@@ -23,11 +26,6 @@ describe('LoginForm', () => {
   }
 
   beforeEach(() => {
-    form = {
-      email: 'email@email.com',
-      password: 'paXXword',
-    };
-
     jest.clearAllMocks();
   });
 
