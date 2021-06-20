@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import TextField from './TextField';
 
 describe('TextField', () => {
-  describe('with "number" type', () => {
+  context('with "number" type', () => {
     function renderTextField() {
       const handleChange = jest.fn();
 
@@ -30,7 +30,7 @@ describe('TextField', () => {
     });
   });
 
-  describe('with "text" type', () => {
+  context('with "text" type', () => {
     function renderTextField() {
       const handleChange = jest.fn();
 
