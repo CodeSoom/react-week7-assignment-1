@@ -74,7 +74,7 @@ describe('actions', () => {
         });
       });
 
-      it('does\'nt run any actions', async () => {
+      it('does not run any actions', async () => {
         await store.dispatch(loadRestaurants());
 
         const actions = store.getActions();

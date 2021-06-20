@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useSelector } from 'react-redux';
 
 import RestaurantsContainer from './RestaurantsContainer';
 
-test('RestaurantsContainer', () => {
+describe('RestaurantsContainer', () => {
   useSelector.mockImplementation((selector) => selector({
     restaurants: [
       { id: 1, name: '마법사주방' },
@@ -12,9 +12,14 @@ test('RestaurantsContainer', () => {
   }));
 
   const handleClick = jest.fn();
-  const { container } = render(
-    <RestaurantsContainer onClickRestaurant={handleClick} />,
-  );
 
-  expect(container).toHaveTextContent('마법사주방');
+  it('renders restaurants list', () => {
+    const { container, getByText } = render(
+      <RestaurantsContainer onClickRestaurant={handleClick} />,
+    );
+
+    expect(container).toHaveTextContent('마법사주방');
+    fireEvent.click(getByText('마법사주방'));
+    expect(handleClick).toBeCalled();
+  });
 });

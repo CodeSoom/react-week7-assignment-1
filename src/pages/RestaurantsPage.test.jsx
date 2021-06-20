@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -41,5 +41,13 @@ describe('RestaurantsPage', () => {
     const { container } = renderRestaurantsPage();
 
     expect(container.innerHTML).toContain('<a href');
+  });
+
+  it('renders restaurant link & listens event', async () => {
+    const { getByText } = renderRestaurantsPage();
+
+    expect(getByText('마녀주방')).not.toBeNull();
+    fireEvent.click(getByText('마녀주방'));
+    // todo : 링크 이동한것 체크 (histor) : 클릭이벤트 발생한 것에 대해 커버 필요
   });
 });

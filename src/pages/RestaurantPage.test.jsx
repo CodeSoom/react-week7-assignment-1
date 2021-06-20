@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 
 import RestaurantPage from './RestaurantPage';
 
@@ -13,18 +14,42 @@ describe('RestaurantsPage', () => {
       accessToken: 'ACCESS_TOKEN',
     }));
   });
-  it('renders restaurant', () => {
-    // GET /restaurants/1
-    const params = { id: 1 };
-    const { container } = render(<RestaurantPage params={params} />);
 
-    expect(container).toHaveTextContent('마법사주방');
+  context('with params.id', () => {
+    function renderPageWithProps() {
+      const params = { id: 1 };
+      return render(<RestaurantPage params={params} />);
+    }
+    it('renders restaurant', () => {
+      const { container } = renderPageWithProps();
+      expect(container).toHaveTextContent('마법사주방');
+    });
+
+    it('renders review write form', () => {
+      const { queryByLabelText } = renderPageWithProps();
+      expect(queryByLabelText('평점')).not.toBeNull();
+    });
   });
 
-  it('renders review write form', () => {
-    const params = { id: 1 };
-    const { queryByLabelText } = render(<RestaurantPage params={params} />);
+  context('without params.id', () => {
+    function renderPageWithoutProps() {
+      // url: .../restaurants/1
+      return render(
+        <MemoryRouter initialEntries={['/restaurants/1']}>
+          <RestaurantPage />
+        </MemoryRouter>,
+      );
+    }
 
-    expect(queryByLabelText('평점')).not.toBeNull();
+    it('renders restaurant', () => {
+      const { container } = renderPageWithoutProps();
+      expect(container).toHaveTextContent('마법사주방');
+    });
+
+    it('renders review write form', () => {
+      const { queryByLabelText } = renderPageWithoutProps();
+
+      expect(queryByLabelText('평점')).not.toBeNull();
+    });
   });
 });

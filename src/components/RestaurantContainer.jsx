@@ -24,7 +24,7 @@ export default function RestaurantContainer({ restaurantId }) {
   const { reviews } = restaurant || { reviews: [] };
 
   if (!restaurant) {
-    return <p> Loding ... </p>;
+    return <p> Loading...</p>;
   }
 
   function handleChange({ name, value }) {

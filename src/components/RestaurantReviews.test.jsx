@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import RestaurantReviews from './RestaurantReviews';
 
@@ -26,7 +26,6 @@ describe('RestaurantReviews', () => {
     it('renders no reviews message', () => {
       const reviews = [];
       const { container } = render(<RestaurantReviews reviews={reviews} />);
-      screen.debug();
       expect(container).toHaveTextContent('리뷰가 없어요');
     });
   });
