@@ -1,14 +1,15 @@
 import { equal } from '../utils';
 
 export const initialState = {
+  accessToken: '',
   regions: [],
   categories: [],
   restaurants: [],
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
-  loginFileds: { email: '', password: '' },
-  accessToken: '',
+  loginFields: { email: '', password: '' },
+  reviewFields: { score: '', description: '' },
 };
 
 const reducers = {
@@ -46,6 +47,12 @@ const reducers = {
       accessToken,
     };
   },
+  logout(state) {
+    return {
+      ...state,
+      accessToken: '',
+    };
+  },
   selectRegion(state, { payload: { regionId } }) {
     const { regions } = state;
     return {
@@ -62,17 +69,27 @@ const reducers = {
     };
   },
 
-  changeLoginFiled(state, { payload: { name, value } }) {
-    const { loginFileds } = state;
+  changeLoginField(state, { payload: { name, value } }) {
+    const { loginFields } = state;
     return {
       ...state,
-      loginFileds: {
-        ...loginFileds,
+      loginFields: {
+        ...loginFields,
         [name]: value,
       },
     };
   },
 
+  changeReviewField(state, { payload: { name, value } }) {
+    const { reviewFields } = state;
+    return {
+      ...state,
+      reviewFields: {
+        ...reviewFields,
+        [name]: value,
+      },
+    };
+  },
 };
 
 function defaultReducer(state) {

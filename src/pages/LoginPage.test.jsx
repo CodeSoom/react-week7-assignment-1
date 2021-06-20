@@ -8,7 +8,7 @@ jest.mock('react-redux');
 describe('LoginPage', () => {
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
-      loginFileds: { email: 'tester@example.com', password: 'test' },
+      loginFields: { email: 'tester@example.com', password: 'test' },
       accessToken: '',
     }));
   });

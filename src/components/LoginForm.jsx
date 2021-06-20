@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LoginForm({ fileds: { email, password }, onChange, onSubmit }) {
+export default function LoginForm({ fields: { email, password }, onChange, onSubmit }) {
   function handleChange(event) {
     const { target: { name, value } } = event;
     onChange({ name, value });

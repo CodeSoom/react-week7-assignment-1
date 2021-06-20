@@ -4,7 +4,9 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from '../services/api';
+import { saveItem } from '../services/storage';
 
 export function setRegions(regions) {
   return {
@@ -57,8 +59,21 @@ export function selectCategory(categoryId) {
 
 export function changeLoginField({ name, value }) {
   return {
-    type: 'changeLoginFiled',
+    type: 'changeLoginField',
     payload: { name, value },
+  };
+}
+
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: { name, value },
+  };
+}
+
+export function logout() {
+  return {
+    type: 'logout',
   };
 }
 
@@ -105,17 +120,30 @@ export function requestLogin() {
   return async (dispatch, getState) => {
     // post email, password
     const {
-      loginFileds: { email, password },
+      loginFields: { email, password },
     } = getState();
-    const accessToken = await postLogin(email, password);
-    console.log('requestLogin() 확인>>>', email, password);
-    dispatch(setAccessToken(accessToken));
-    // 예외처리 추가 필요
-    // try {
-    //   const accessToken = await postLogin(email, password);
-    //   dispatch(setAccessToken(accessToken));
-    // } catch {
-    //   console.log('오류 : failed to get AccessToken');
-    // }
+
+    try {
+      const accessToken = await postLogin({ email, password });
+      dispatch(setAccessToken(accessToken));
+      // 로컬스토리지에 토큰 저장
+      saveItem('accessToken', accessToken);
+    } catch (e) {
+      console.log('오류 : failed to get AccessToken ', e);
+    }
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { accessToken, reviewFields: { score, description } } = getState();
+    await postReview({
+      accessToken,
+      restaurantId,
+      score,
+      description,
+    });
+
+    // Todo: dispatch(loadRestaurant) => 레스토랑 조회시 리뷰도 조회되도록
   };
 }

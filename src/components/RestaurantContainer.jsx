@@ -2,7 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
-import { loadRestaurant } from '../redux/actions';
+import ReviewForm from './ReviewForm';
+import {
+  loadRestaurant,
+  changeReviewField,
+  sendReview,
+} from '../redux/actions';
 import { get } from '../utils';
 
 export default function RestaurantContainer({ restaurantId }) {
@@ -14,6 +19,23 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
-  if (!restaurant) { return <p> Loding ... </p>; }
-  return <RestaurantDetail restaurant={restaurant} />;
+  const accessToken = useSelector(get('accessToken'));
+
+  if (!restaurant) {
+    return <p> Loding ... </p>;
+  }
+
+  function handleChange({ name, value }) {
+    dispatch(changeReviewField({ name, value }));
+  }
+  function handleSubmit() {
+    dispatch(sendReview({ restaurantId }));
+  }
+
+  return (
+    <>
+      <RestaurantDetail restaurant={restaurant} />
+      {accessToken ? (<ReviewForm onChange={handleChange} onSubmit={handleSubmit} />) : null}
+    </>
+  );
 }

@@ -8,10 +8,9 @@ describe('RestaurantsPage', () => {
     const dispatch = jest.fn();
     useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((state) => state({
-      restaurant: {
-        id: 1,
-        name: '마법사주방',
-      },
+      restaurant: { id: 1, name: '마법사주방', address: '서울시 강남구' },
+      reviewFields: { score: '', description: '' },
+      accessToken: 'ACCESS_TOKEN',
     }));
   });
   it('renders restaurant', () => {
@@ -20,5 +19,12 @@ describe('RestaurantsPage', () => {
     const { container } = render(<RestaurantPage params={params} />);
 
     expect(container).toHaveTextContent('마법사주방');
+  });
+
+  it('renders review write form', () => {
+    const params = { id: 1 };
+    const { queryByLabelText } = render(<RestaurantPage params={params} />);
+
+    expect(queryByLabelText('평점')).not.toBeNull();
   });
 });

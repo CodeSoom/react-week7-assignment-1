@@ -9,6 +9,8 @@ import {
   selectCategory,
   changeLoginField,
   setAccessToken,
+  changeReviewField,
+  logout,
 } from './actions';
 
 describe('reducer', () => {
@@ -132,11 +134,22 @@ describe('reducer', () => {
     });
   });
 
+  describe('logout', () => {
+    it('change acessToken', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+      };
+
+      const state = reducer(initialState, logout());
+      expect(state.accessToken).toBe('');
+    });
+  });
+
   describe('changeLoginField', () => {
     context('when email is changed', () => {
       it('changes input value', () => {
         const initialState = {
-          loginFileds: {
+          loginFields: {
             email: 'test@test',
             password: '1234',
           },
@@ -147,8 +160,28 @@ describe('reducer', () => {
           changeLoginField({ name: 'email', value: 'test@test' }),
         );
 
-        expect(state.loginFileds.email).toBe('test@test');
-        expect(state.loginFileds.password).toBe('1234');
+        expect(state.loginFields.email).toBe('test@test');
+        expect(state.loginFields.password).toBe('1234');
+      });
+    });
+  });
+
+  describe('changeReviewField', () => {
+    context('when review rate is changed', () => {
+      it('changes input value', () => {
+        const initialState = {
+          reviewFields: {
+            score: '',
+            description: '',
+          },
+        };
+
+        const state = reducer(
+          initialState,
+          changeReviewField({ name: 'score', value: '5' }),
+        );
+
+        expect(state.reviewFields.score).toBe('5');
       });
     });
   });

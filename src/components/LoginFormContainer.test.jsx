@@ -13,32 +13,53 @@ describe('LoginFormContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      loginFileds: { email: 'tester@example.com', password: 'test' },
-      accessToken: '',
+      loginFields: { email: 'tester@example.com', password: 'test' },
+      accessToken: given.accessToken,
     }));
   });
 
-  // todo : 렌더링 테스트, 리스닝 테스트 분리
-  it('listen change events', () => {
-    const { getByLabelText } = render(<LoginFormContainer />);
+  context('when logged out', () => {
+    given('accessToken', () => '');
+    it('listen change events', () => {
+      const { getByLabelText } = render(<LoginFormContainer />);
 
-    expect(getByLabelText('E-mail').value).toBe('tester@example.com');
+      expect(getByLabelText('E-mail').value).toBe('tester@example.com');
 
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'new email' },
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'new email' },
+      });
+
+      expect(dispatch).toBeCalledWith(
+        changeLoginField({
+          name: 'email',
+          value: 'new email',
+        }),
+      );
+
+      expect(getByLabelText('Password').value).toBe('test');
     });
 
-    expect(dispatch).toBeCalledWith(changeLoginField({
-      name: 'email',
-      value: 'new email',
-    }));
+    it('renders Log In Button', () => {
+      const { getByText } = render(<LoginFormContainer />);
 
-    expect(getByLabelText('Password').value).toBe('test');
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 
-  it('renders Log In Button', () => {
-    const { getByText } = render(<LoginFormContainer />);
-    fireEvent.click(getByText('Log In'));
-    expect(dispatch).toBeCalled();
+  context('when logged In', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
+
+    it('renders Logout Button and listens click event', () => {
+      const { container, getByText } = render(<LoginFormContainer />);
+
+      fireEvent.click(getByText('Logout'));
+
+      expect(container).toHaveTextContent('Logout');
+      expect(dispatch).toBeCalledWith({
+        type: 'logout',
+      });
+    });
   });
 });

@@ -2,11 +2,16 @@ import { render } from '@testing-library/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 
+import { loadItem } from './services/storage';
 import App from './App';
 
+jest.mock('react-redux');
+jest.mock('./services/storage.js');
+
 describe('App', () => {
+  const dispatch = jest.fn();
   beforeEach(() => {
-    const dispatch = jest.fn();
+    dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
@@ -52,6 +57,30 @@ describe('App', () => {
       const { container } = renderApp({ path: '/notfound' });
 
       expect(container).toHaveTextContent('404');
+    });
+  });
+
+  context('when logged in', () => {
+    const accessToken = 'ACCESS_TOKEN';
+    beforeEach(() => {
+      loadItem.mockImplementation(() => accessToken);
+    });
+
+    it('call dispatch with "setAccessToken" action', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalled();
+    });
+  });
+  context('when logged out', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it('dose not call dispatch with "setAccessToken" action', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
     });
   });
 });

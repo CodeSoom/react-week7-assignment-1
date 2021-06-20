@@ -10,7 +10,7 @@ describe('LoginForm', () => {
   function renderLoginForm({ email, password }) {
     return render(
       <LoginForm
-        fileds={{ email, password }}
+        fields={{ email, password }}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />,
