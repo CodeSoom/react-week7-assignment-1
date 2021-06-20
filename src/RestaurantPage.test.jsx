@@ -1,8 +1,7 @@
 import { MemoryRouter } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import { render } from '@testing-library/react';
+import given from 'given2';
 
 import RestaurantPage from './RestaurantPage';
 
@@ -17,7 +16,21 @@ describe('RestaurantPage', () => {
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
+        reviews: [
+          {
+            id: 1,
+            restaurantId: 1,
+            name: '테스터',
+            score: 5,
+            description: '훌륭하다',
+          },
+        ],
       },
+      form: {
+        score: 'score',
+        description: 'description',
+      },
+      accessToken: given.accessToken,
     }));
   });
 
@@ -42,6 +55,30 @@ describe('RestaurantPage', () => {
       );
 
       expect(container).toHaveTextContent('마법사주방');
+    });
+  });
+
+  context('with logged in', () => {
+    given('accessToken', () => 'TOKEN');
+
+    it('renders review form', () => {
+      const { getAllByRole } = render(
+        <RestaurantPage params={{ id: 1 }} />,
+      );
+
+      expect(getAllByRole('textbox')).toHaveLength(2);
+    });
+  });
+
+  context('with logged in', () => {
+    given('accessToken', () => null);
+
+    it("doesn't renders review form", () => {
+      const { queryByRole } = render(
+        <RestaurantPage params={{ id: 1 }} />,
+      );
+
+      expect(queryByRole('textbox')).not.toBeInTheDocument();
     });
   });
 });

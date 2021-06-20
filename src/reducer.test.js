@@ -7,6 +7,9 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  setForm,
+  setAccessToken,
+  resetAllForm,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +21,13 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      accessToken: null,
+      form: {
+        email: '',
+        password: '',
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -122,6 +132,60 @@ describe('reducer', () => {
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
+      });
+    });
+  });
+
+  describe('setForm', () => {
+    it('changes form field data', () => {
+      const initialState = {
+        form: {
+          email: 'email',
+          password: 'password',
+        },
+      };
+
+      const state = reducer(initialState, setForm(
+        { name: 'email', value: 'test@test' },
+      ));
+
+      expect(state.form).toEqual({
+        email: 'test@test',
+        password: 'password',
+      });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, setAccessToken('TOKEN'));
+
+      expect(state.accessToken).toBe('TOKEN');
+    });
+  });
+
+  describe('resetAllForm', () => {
+    it('resets all form fields to initial value', () => {
+      const initialState = {
+        form: {
+          email: 'email',
+          password: 'password',
+          score: 'score',
+          description: 'description',
+        },
+      };
+
+      const state = reducer(initialState, resetAllForm());
+
+      expect(state.form).toEqual({
+        email: '',
+        password: '',
+        score: '',
+        description: '',
       });
     });
   });

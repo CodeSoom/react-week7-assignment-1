@@ -7,6 +7,13 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  accessToken: null,
+  form: {
+    email: '',
+    password: '',
+    score: '',
+    description: '',
+  },
 };
 
 const reducers = {
@@ -51,6 +58,35 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  setForm(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      form: {
+        ...state.form,
+        [name]: value,
+      },
+    };
+  },
+
+  resetAllForm(state) {
+    return {
+      ...state,
+      form: {
+        email: '',
+        password: '',
+        score: '',
+        description: '',
+      },
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
     };
   },
 };

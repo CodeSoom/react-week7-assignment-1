@@ -1,7 +1,9 @@
 import MenuItems from './MenuItems';
 
 export default function RestaurantDetail({ restaurant }) {
-  const { name, address, menuItems } = restaurant;
+  const {
+    name, address, menuItems,
+  } = restaurant;
 
   return (
     <div>

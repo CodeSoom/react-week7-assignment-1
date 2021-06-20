@@ -3,6 +3,8 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
+  postReview,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -83,5 +85,59 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function setForm({ name, value }) {
+  return {
+    type: 'setForm',
+    payload: { name, value },
+  };
+}
+
+export function resetAllForm() {
+  return {
+    type: 'resetAllForm',
+    payload: null,
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const { form: { email, password } } = getState();
+
+    const accessToken = await postLogin({ email, password });
+
+    localStorage.setItem('accessToken', accessToken || null);
+    dispatch(setAccessToken(accessToken || null));
+
+    if (!accessToken) {
+      dispatch(resetAllForm());
+    }
+  };
+}
+
+export function sendReview() {
+  return async (dispatch, getState) => {
+    const {
+      restaurant: { id: restaurantId },
+      form: { score, description },
+      accessToken,
+    } = getState();
+
+    await postReview({
+      score, restaurantId, description, accessToken,
+    });
+
+    dispatch(resetAllForm());
+
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }
