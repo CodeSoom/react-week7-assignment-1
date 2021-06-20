@@ -159,12 +159,10 @@ describe('reducer', () => {
         },
       };
 
-      const { name, value } = {
+      const state = reducer(initialState, changeLoginField({
         name: 'email',
         value: 'tester@example.com',
-      };
-
-      const state = reducer(initialState, changeLoginField({ name, value }));
+      }));
 
       expect(state.loginFields.email).toBe('tester@example.com');
     });
@@ -179,12 +177,10 @@ describe('reducer', () => {
         },
       };
 
-      const { name, value } = {
+      const state = reducer(initialState, changeReviewField({
         name: 'score',
         value: '5',
-      };
-
-      const state = reducer(initialState, changeReviewField({ name, value }));
+      }));
 
       expect(state.reviewFields.score).toBe('5');
     });
