@@ -11,15 +11,14 @@ describe('LoginForm', () => {
     handleChange.mockClear();
   });
 
-  const fields = {
-    email: '',
-    password: '',
-  };
+  const email = '';
+  const password = '';
 
   function renderLoginForm() {
     return render(
       <LoginForm
-        fields={fields}
+        email={email}
+        password={password}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />,
@@ -36,7 +35,7 @@ describe('LoginForm', () => {
   it('renders login button', () => {
     const { queryByText } = renderLoginForm({});
 
-    expect(queryByText('Log in')).not.toBeNull();
+    expect(queryByText('Log In')).not.toBeNull();
   });
 
   it('listens change events', () => {
@@ -63,7 +62,7 @@ describe('LoginForm', () => {
   it('listens click event', () => {
     const { getByText } = renderLoginForm({});
 
-    fireEvent.click(getByText('Log in'));
+    fireEvent.click(getByText('Log In'));
 
     expect(handleSubmit).toBeCalled();
   });

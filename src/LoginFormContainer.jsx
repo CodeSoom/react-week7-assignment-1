@@ -11,6 +11,8 @@ import {
 
 import { get } from './utils';
 
+import { removeItem } from './services/storage';
+
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
@@ -27,6 +29,7 @@ export default function LoginFormContainer() {
 
   function handleClickLogout() {
     dispatch(setAccessToken(''));
+    removeItem('accessToken');
   }
 
   return (
@@ -35,7 +38,8 @@ export default function LoginFormContainer() {
         <LogoutForm onClick={handleClickLogout} />
       ) : (
         <LoginForm
-          fields={{ email, password }}
+          email={email}
+          password={password}
           onChange={handleChange}
           onSubmit={handleSubmit}
         />

@@ -36,7 +36,7 @@ describe('LoginFormContainer', () => {
     it('renders login button', () => {
       const { queryByText } = render(<LoginFormContainer />);
 
-      expect(queryByText('Log in')).not.toBeNull();
+      expect(queryByText('Log In')).not.toBeNull();
     });
 
     it('changes E-mail Field', () => {
@@ -68,7 +68,7 @@ describe('LoginFormContainer', () => {
     it('listens login click event', () => {
       const { getByText } = render(<LoginFormContainer />);
 
-      fireEvent.click(getByText('Log in'));
+      fireEvent.click(getByText('Log In'));
 
       expect(dispatch).toBeCalled();
     });
