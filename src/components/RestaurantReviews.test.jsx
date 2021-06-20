@@ -1,26 +1,33 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
-import RestaurantDetail from './RestaurantDetail';
+import RestaurantReviews from './RestaurantReviews';
 
-describe('RestaurantDetail', () => {
-  it('renders name and address', () => {
-    const restaurant = {
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-      reviews: [
+describe('RestaurantReviews', () => {
+  context('when reviews array is not empty', () => {
+    it('renders reviews', () => {
+      const reviews = [
         {
           id: 1,
           restaurantId: 1,
           name: '테스터',
           score: 5,
           description: '훌륭하다 훌륭하다 지구인놈들',
-        }],
-    };
-    const { container } = render(<RestaurantDetail restaurant={restaurant} />);
+        },
+      ];
+      const { container } = render(<RestaurantReviews reviews={reviews} />);
 
-    expect(container).toHaveTextContent('테스터');
-    expect(container).toHaveTextContent('5점');
-    expect(container).toHaveTextContent('훌륭하다 훌륭하다 지구인놈들');
+      expect(container).toHaveTextContent('테스터');
+      expect(container).toHaveTextContent('5점');
+      expect(container).toHaveTextContent('훌륭하다 훌륭하다 지구인놈들');
+    });
+  });
+
+  context('when reviews array is empty', () => {
+    it('renders no reviews message', () => {
+      const reviews = [];
+      const { container } = render(<RestaurantReviews reviews={reviews} />);
+      screen.debug();
+      expect(container).toHaveTextContent('리뷰가 없어요');
+    });
   });
 });

@@ -5,9 +5,9 @@ export const initialState = {
   regions: [],
   categories: [],
   restaurants: [],
-  restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  restaurant: { reviews: [] },
   loginFields: { email: '', password: '' },
   reviewFields: { score: '', description: '' },
 };

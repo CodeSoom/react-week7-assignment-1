@@ -21,6 +21,7 @@ export default function RestaurantContainer({ restaurantId }) {
 
   const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
+  const { reviews } = restaurant || { reviews: [] };
 
   if (!restaurant) {
     return <p> Loding ... </p>;
@@ -36,8 +37,10 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      {accessToken ? (<ReviewForm onChange={handleChange} onSubmit={handleSubmit} />) : null}
-      <RestaurantReviews />
+      {accessToken ? (
+        <ReviewForm onChange={handleChange} onSubmit={handleSubmit} />
+      ) : null}
+      <RestaurantReviews reviews={reviews} />
     </>
   );
 }
