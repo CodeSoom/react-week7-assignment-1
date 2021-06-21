@@ -36,6 +36,14 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function setReviews(reviews) {
+  //
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
+
 export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',
@@ -71,6 +79,11 @@ export function changeReviewField({ name, value }) {
   };
 }
 
+export function clearReviewFields() {
+  return {
+    type: 'clearReviewFields',
+  };
+}
 export function logout() {
   return {
     type: 'logout',
@@ -115,6 +128,15 @@ export function loadRestaurant({ restaurantId }) {
     dispatch(setRestaurant(restaurant));
   };
 }
+export function loadReview({ restaurantId }) {
+  // fetch restaurant 후 set Reviews (리뷰만 업데이트)
+  return async (dispatch) => {
+    const restaurant = await fetchRestaurant({ restaurantId });
+    const { reviews } = restaurant;
+
+    dispatch(setReviews(reviews));
+  };
+}
 
 export function requestLogin() {
   return async (dispatch, getState) => {
@@ -135,8 +157,13 @@ export function requestLogin() {
 }
 
 export function sendReview({ restaurantId }) {
+  // 리뷰값 입력 내용은 언제 삭제해줄까?
   return async (dispatch, getState) => {
-    const { accessToken, reviewFields: { score, description } } = getState();
+    const {
+      accessToken,
+      reviewFields: { score, description },
+    } = getState();
+    // 시점 1. postReview 전에 지운다.
     await postReview({
       accessToken,
       restaurantId,
@@ -144,6 +171,11 @@ export function sendReview({ restaurantId }) {
       description,
     });
 
-    // Todo: dispatch(loadRestaurant) => 레스토랑 조회시 리뷰도 조회되도록
+    // 시점 2. 리뷰 보내기가 완료되면 지운다.
+
+    dispatch(loadReview({ restaurantId })); // 리뷰 등록시, 리뷰만 업데이트
+
+    // 시점3. 업데이트가 완료되면 지운다
+    dispatch(clearReviewFields());
   };
 }

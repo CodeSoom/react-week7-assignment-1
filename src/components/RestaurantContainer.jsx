@@ -19,9 +19,10 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(loadRestaurant({ restaurantId }));
   }, []);
 
-  const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
-  const { reviews } = restaurant || { reviews: [] };
+  const restaurant = useSelector(get('restaurant'));
+  const reviewFields = useSelector(get('reviewFields'));
+  // const { reviews } = restaurant || { reviews: [] };
 
   if (!restaurant) {
     return <p> Loading...</p>;
@@ -38,9 +39,13 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail restaurant={restaurant} />
       {accessToken ? (
-        <ReviewForm onChange={handleChange} onSubmit={handleSubmit} />
+        <ReviewForm
+          fields={reviewFields}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
       ) : null}
-      <RestaurantReviews reviews={reviews} />
+      <RestaurantReviews reviews={restaurant.reviews} />
     </>
   );
 }

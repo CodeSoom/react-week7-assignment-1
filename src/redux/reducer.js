@@ -1,5 +1,7 @@
 import { equal } from '../utils';
 
+const initialReviewFields = { score: '', description: '' };
+
 export const initialState = {
   accessToken: '',
   regions: [],
@@ -9,7 +11,7 @@ export const initialState = {
   selectedCategory: null,
   restaurant: { reviews: [] },
   loginFields: { email: '', password: '' },
-  reviewFields: { score: '', description: '' },
+  reviewFields: { ...initialReviewFields },
 };
 
 const reducers = {
@@ -38,6 +40,13 @@ const reducers = {
     return {
       ...state,
       restaurant,
+    };
+  },
+  setReviews(state, { payload: { reviews } }) {
+    const { restaurant } = state;
+    return {
+      ...state,
+      restaurant: { ...restaurant, reviews },
     };
   },
 
@@ -87,6 +96,14 @@ const reducers = {
       reviewFields: {
         ...reviewFields,
         [name]: value,
+      },
+    };
+  },
+  clearReviewFields(state) {
+    return {
+      ...state,
+      reviewFields: {
+        ...initialReviewFields,
       },
     };
   },

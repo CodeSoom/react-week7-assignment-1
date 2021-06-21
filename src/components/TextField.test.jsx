@@ -5,7 +5,7 @@ import TextField from './TextField';
 describe('TextField', () => {
   const handleChange = jest.fn();
 
-  it('renders renders label and input control ', () => {
+  it('renders label and input control ', () => {
     const { queryByLabelText } = render(
       <TextField
         label="평점"
@@ -17,8 +17,9 @@ describe('TextField', () => {
 
     expect(queryByLabelText('평점')).not.toBeNull();
   });
+
   context('with type', () => {
-    it('renders renders "Text" input control ', () => {
+    it('renders "Text" input control ', () => {
       const { container } = render(
         <TextField
           label="평점"
@@ -30,8 +31,9 @@ describe('TextField', () => {
       expect(container).toContainHTML('type="number"');
     });
   });
+
   context('without type', () => {
-    it('renders renders "Text" input control ', () => {
+    it('renders "Text" input control ', () => {
       const { container } = render(
         <TextField
           label="리뷰내용"
@@ -58,5 +60,20 @@ describe('TextField', () => {
     fireEvent.change(getByLabelText('평점'), { target: { value } });
 
     expect(handleChange).toBeCalledWith({ name, value });
+  });
+
+  it('renders value ', () => {
+    const value = '5';
+    const { queryByLabelText } = render(
+      <TextField
+        label="평점"
+        type="number"
+        name="score"
+        value={value}
+        onChange={handleChange}
+      />,
+    );
+
+    expect(queryByLabelText('평점').value).toBe(value);
   });
 });

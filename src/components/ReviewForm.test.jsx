@@ -11,8 +11,14 @@ describe('ReviewForm', () => {
     handleSubmit.mockClear();
   });
 
-  function renderReviewForm() {
-    return render(<ReviewForm onChange={handleChange} onSubmit={handleSubmit} />);
+  function renderReviewForm({ score, description } = {}) {
+    return render(
+      <ReviewForm
+        fields={{ score, description }}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />,
+    );
   }
 
   it('renders review write fields ', () => {
@@ -20,6 +26,16 @@ describe('ReviewForm', () => {
 
     expect(queryByLabelText('평점')).not.toBeNull();
     expect(queryByLabelText('리뷰내용')).not.toBeNull();
+  });
+
+  it('renders value of fields ', () => {
+    const { queryByLabelText } = renderReviewForm({
+      score: '5',
+      description: '정말 최고',
+    });
+
+    expect(queryByLabelText('평점').value).toBe('5');
+    expect(queryByLabelText('리뷰내용').value).toBe('정말 최고');
   });
 
   it('listens description change events', () => {
@@ -38,7 +54,10 @@ describe('ReviewForm', () => {
   });
 
   it('renders "Send" button', () => {
-    const { getByText } = renderReviewForm();
+    const { getByText } = renderReviewForm({
+      score: '5',
+      description: '정말 최고',
+    });
 
     fireEvent.click(getByText('리뷰 남기기'));
     expect(handleSubmit).toBeCalled();
