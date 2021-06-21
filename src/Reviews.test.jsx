@@ -6,19 +6,36 @@ import REVIEWS from '../fixtures/reviews';
 
 describe('Reviews', () => {
   context('with reviews', () => {
-    const reviews = REVIEWS;
-
     it('reders reviews title', () => {
+      const reviews = REVIEWS;
+
       const { container } = render(<Reviews reviews={reviews} />);
 
       expect(container).toHaveTextContent('리뷰');
     });
 
     it('reders reivews list', () => {
+      const reviews = [
+        {
+          id: 10,
+          name: '새로운테스터',
+          score: '3',
+          description: '평범해요',
+        },
+        {
+          id: 1,
+          name: '테스터',
+          score: '5',
+          description: '훌륭해요',
+        },
+      ];
+
       const { container } = render(<Reviews reviews={reviews} />);
 
-      expect(container).toHaveTextContent('5');
-      expect(container).toHaveTextContent('훌륭하다 지구놈들');
+      reviews.forEach((review) => {
+        expect(container).toHaveTextContent(review.name);
+        expect(container).toHaveTextContent(review.description);
+      });
     });
   });
 
