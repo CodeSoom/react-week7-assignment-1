@@ -1,4 +1,4 @@
-export default {
+const restaurant = {
   id: 1,
   name: '마녀주방',
   address: '서울시 강남구',
@@ -6,3 +6,5 @@ export default {
     { id: 1, name: '떡볶이' },
   ],
 };
+
+export default restaurant;

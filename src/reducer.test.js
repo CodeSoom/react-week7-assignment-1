@@ -1,29 +1,53 @@
 import reducer from './reducer';
 
 import {
+  setAccessToken,
   setRegions,
   setCategories,
   setRestaurants,
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginField,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      accessToken: '',
       regions: [],
       categories: [],
       restaurants: [],
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
       const state = reducer(undefined, { type: 'action' });
 
       expect(state).toEqual(initialState);
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes setAccessToken', () => {
+      const initialState = {
+        accessToken: null,
+      };
+
+      const state = reducer(initialState, setAccessToken('TOKEN'));
+
+      expect(state.accessToken).toBe('TOKEN');
     });
   });
 
@@ -123,6 +147,42 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('changeLoginField', () => {
+    it('changes changeLoginField', () => {
+      const initialState = {
+        loginFields: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, changeLoginField({
+        name: 'email',
+        value: 'tester@example.com',
+      }));
+
+      expect(state.loginFields.email).toBe('tester@example.com');
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('changes changeReviewField', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(initialState, changeReviewField({
+        name: 'score',
+        value: '5',
+      }));
+
+      expect(state.reviewFields.score).toBe('5');
     });
   });
 });

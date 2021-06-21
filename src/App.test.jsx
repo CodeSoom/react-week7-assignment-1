@@ -8,7 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import { loadItem } from './services/storage';
+
+import REVIEWS from '../fixtures/reviews';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -19,12 +24,13 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      accessToken: null,
       regions: [
         { id: 1, name: '서울' },
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
+      restaurant: { id: 1, name: '마녀주방', reviews: REVIEWS },
     }));
   });
 
@@ -35,6 +41,35 @@ describe('App', () => {
       </MemoryRouter>,
     );
   }
+
+  context('when logged in', () => {
+    const accessToken = 'TOKEN';
+
+    beforeEach(() => {
+      loadItem.mockImplementation(() => accessToken);
+    });
+
+    it('calls dispatch with setAccessToken action', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: { accessToken },
+      });
+    });
+  });
+
+  context('when logged out', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it('no calls dispatch with action', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
 
   context('with path /', () => {
     it('renders the home page', () => {
