@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -48,6 +48,51 @@ describe('RestaurantContainer', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('Loading');
+    });
+  });
+
+  it('renders review write form', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
+
+    const { queryByLabelText } = render((
+      <RestaurantContainer restaurantId="1" />
+    ));
+
+    expect(queryByLabelText('평점')).not.toBeNull();
+    expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+  });
+
+  it('listens change events', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
+
+    const { getByLabelText } = render((
+      <RestaurantContainer restaurantId="1" />
+    ));
+
+    fireEvent.change(getByLabelText('평점'), {
+      target: { value: '5' },
+    });
+
+    expect(dispatch).toBeCalledWith({
+      type: 'changeReviewField',
+      payload: { name: 'score', value: '5' },
+    });
+
+    fireEvent.change(getByLabelText('리뷰 내용'), {
+      target: { value: '정말 최고!' },
+    });
+
+    expect(dispatch).toBeCalledWith({
+      type: 'changeReviewField',
+      payload: { name: 'description', value: '정말 최고!' },
     });
   });
 });
