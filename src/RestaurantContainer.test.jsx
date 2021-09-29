@@ -60,9 +60,9 @@ describe('RestaurantContainer', () => {
   });
 
   context('without logged-in', () => {
-    it('renders no review write form', () => {
-      given('restaurant', () => ({}));
+    given('accessToken', () => null);
 
+    it('renders no review write form', () => {
       const { queryByLabelText } = renderRestaurantContainer();
 
       expect(queryByLabelText('평점')).toBeNull();
@@ -105,7 +105,7 @@ describe('RestaurantContainer', () => {
       });
     });
 
-    it('renders "리뷰 남기기"', () => {
+    it('dispatches when "리뷰 남기기" clicked', () => {
       given('restaurant', () => ({}));
 
       const { getByText } = renderRestaurantContainer();
