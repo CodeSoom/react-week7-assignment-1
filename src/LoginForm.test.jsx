@@ -20,20 +20,15 @@ describe('LoginForm', () => {
   ));
 
   it('renders input controls', () => {
-    const email = 'test@test.com';
-    const password = '1234';
-
-    const { getByLabelText } = renderLoginForm({ email, password });
+    const { getByLabelText } = renderLoginForm({ });
 
     const controls = [
-      { label: 'E-mail', value: email },
-      { label: 'Password', value: password },
+      { label: 'E-mail' },
+      { label: 'Password' },
     ];
 
-    controls.forEach(({ label, value }) => {
-      const input = getByLabelText(label);
-
-      expect(input.value).toBe(value);
+    controls.forEach(({ label }) => {
+      expect(getByLabelText(label)).not.toBeNull();
     });
   });
 
