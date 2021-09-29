@@ -9,9 +9,7 @@ describe('RestaurantContainer', () => {
 
   function renderRestaurantContainer() {
     return render((
-      <RestaurantContainer
-        restaurantId="1"
-      />
+      <RestaurantContainer restaurantId="1" />
     ));
   }
 
