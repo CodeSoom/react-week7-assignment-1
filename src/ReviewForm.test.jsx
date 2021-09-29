@@ -45,6 +45,12 @@ describe('ReviewForm', () => {
   });
 
   it('renders "Send" button', () => {
+    const { container } = renderReviewForm();
+
+    expect(container).toHaveTextContent('리뷰 남기기');
+  });
+
+  it('listens click event', () => {
     const { getByText } = renderReviewForm();
 
     fireEvent.click(getByText('리뷰 남기기'));
