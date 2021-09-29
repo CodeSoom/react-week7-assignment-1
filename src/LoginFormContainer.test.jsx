@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
@@ -15,6 +15,13 @@ describe('LoginFormContainer', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      loginField: {
+        email: 'test@soom.com',
+        password: '1234',
+      },
+    }));
   });
 
   const renderLoginFormContainer = () => render(
@@ -26,21 +33,29 @@ describe('LoginFormContainer', () => {
   it('renders login field', () => {
     const { getByLabelText } = renderLoginFormContainer();
 
-    expect(getByLabelText('e-mail')).not.toBeNull();
-    expect(getByLabelText('password')).not.toBeNull();
+    expect(getByLabelText('e-mail').value).toBe('test@soom.com');
+    expect(getByLabelText('password').value).toBe('1234');
   });
 
   it('listens change events', () => {
     const { getByLabelText } = renderLoginFormContainer();
 
     fireEvent.change(getByLabelText('e-mail'), {
-      target: { value: 'smileguy' },
+      target: { value: 'smileguy@soom.com' },
     });
-    expect(dispatch).toBeCalledTimes(1);
+
+    expect(dispatch).toBeCalledWith({
+      type: 'changeLoginField',
+      payload: { name: 'email', value: 'smileguy@soom.com' },
+    });
 
     fireEvent.change(getByLabelText('password'), {
-      target: { value: '1234' },
+      target: { value: 'new password' },
     });
-    expect(dispatch).toBeCalledTimes(2);
+
+    expect(dispatch).toBeCalledWith({
+      type: 'changeLoginField',
+      payload: { name: 'password', value: 'new password' },
+    });
   });
 });

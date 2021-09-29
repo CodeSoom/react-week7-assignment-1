@@ -114,7 +114,10 @@ describe('reducer', () => {
 
   describe('changeLoginField', () => {
     it('changes e-mail input', () => {
-      const state = reducer(given.previousState, changeLoginField({ name: 'email', value: 'test@soom.com' }));
+      const state = reducer(
+        given.previousState,
+        changeLoginField({ name: 'email', value: 'test@soom.com' }),
+      );
 
       expect(state.loginField).toEqual({
         email: 'test@soom.com',
@@ -123,7 +126,10 @@ describe('reducer', () => {
     });
 
     it('changes password input', () => {
-      const state = reducer(given.previousState, changeLoginField({ name: 'password', value: '1234' }));
+      const state = reducer(
+        given.previousState,
+        changeLoginField({ name: 'password', value: '1234' }),
+      );
 
       expect(state.loginField).toEqual({
         email: '',
