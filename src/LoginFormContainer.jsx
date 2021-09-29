@@ -16,7 +16,7 @@ export default function LoginFormContainer() {
     dispatch(changeLoginField({ name, value }));
   };
 
-  const handleSubmit = () => {
+  const handleClick = () => {
     dispatch(requestLogin());
   };
 
@@ -25,7 +25,7 @@ export default function LoginFormContainer() {
       <LoginForm
         fields={{ email, password }}
         onChange={handleChange}
-        onSubmit={handleSubmit}
+        onClickLogin={handleClick}
       />
       <p>{accessToken}</p>
     </>
