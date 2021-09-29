@@ -61,18 +61,5 @@ describe('TextField', () => {
     ));
 
     fireEvent.change(getByLabelText('평점'), { target: { value, name } });
-
-    // const controls = [
-    //   { label: '평점', name: 'score', value: '5' },
-    //   { label: '리뷰 내용', name: 'description', value: '정말 최고 :)' },
-    // ];
-
-    // controls.forEach(({ label, name, value }) => {
-    //   fireEvent.change(getByLabelText(label), {
-    //     target: { value },
-    //   });
-
-    //   expect(handleChange).toBeCalledWith({ name, value });
-    // });
   });
 });
