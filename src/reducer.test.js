@@ -7,6 +7,8 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginFields,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +20,7 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {},
     };
 
     it('returns initialState', () => {
@@ -124,5 +127,37 @@ describe('reducer', () => {
         name: '한식',
       });
     });
+  });
+
+  describe('changeLoginFields', () => {
+    context.each`
+      name          | value
+      ${'email'}    | ${'test@test.com'}
+      ${'password'} | ${'test'}
+    `('when $name is changed', ({ name, value }) => {
+      const initialState = {
+        loginFields: {
+          email: 'email',
+          password: 'password',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        changeLoginFields({ name, value }),
+      );
+
+      expect(state.loginFields[name]).toBe(value);
+    });
+  });
+
+  describe('setAccessToken', () => {
+    const initialState = {
+      accessToken: '',
+    };
+
+    const state = reducer(initialState, setAccessToken('TOKEN'));
+
+    expect(state.accessToken).toBe('TOKEN');
   });
 });
