@@ -104,14 +104,56 @@ describe('actions', () => {
   });
 
   describe('requestLogin', () => {
-    it('renders setAccessToken', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginFields: {
+          email: 'test@test',
+          password: 'test',
+        },
+      });
+    });
 
+    it('renders setAccessToken', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'setAccessToken',
+        payload: { accessToken: '' },
+      });
     });
   });
 
   describe('sendReview', () => {
-    it('posts review', () => {
+    beforeEach(() => {
+      store = mockStore({
+        reviewFields: {
+          score: '5',
+          description: '정말 최고!!!',
+        },
+      });
+    });
 
+    it('posts review', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+    });
+
+    it('renders setRestaurant', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions).toEqual([
+        {
+          type: 'setRestaurant',
+          payload: { restaurant: null },
+        },
+        {
+          type: 'setRestaurant',
+          payload: { restaurant: {} },
+        },
+      ]);
     });
   });
 });
