@@ -58,4 +58,12 @@ describe('LoginFormContainer', () => {
       payload: { name: 'password', value: 'new password' },
     });
   });
+
+  it('listens submit events', () => {
+    const { getByText } = renderLoginFormContainer();
+
+    fireEvent.click(getByText('Log in'));
+
+    expect(dispatch).toBeCalled();
+  });
 });
