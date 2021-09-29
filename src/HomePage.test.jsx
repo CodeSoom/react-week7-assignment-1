@@ -5,7 +5,7 @@ import { render } from '@testing-library/react';
 import HomePage from './HomePage';
 
 describe('HomePage', () => {
-  const links = ['About', 'Restaurants'];
+  const links = ['About', 'Log in', 'Restaurants'];
 
   const renderHomePage = () => render(
     <MemoryRouter>
