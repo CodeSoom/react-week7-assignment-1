@@ -155,11 +155,10 @@ describe('reducer', () => {
   });
 
   describe('changeLoginField', () => {
-    context('when email is changes', () => {
+    it('changes email of loginFields', () => {
       const initialState = {
         loginFields: {
-          email: 'email',
-          password: 'password',
+          email: '',
         },
       };
 
@@ -167,19 +166,17 @@ describe('reducer', () => {
         initialState,
         changeLoginField({
           name: 'email',
-          value: 'test',
+          value: 'test@example.com',
         }),
       );
 
-      expect(state.loginFields.email).toBe('test');
-      expect(state.loginFields.password).toBe('password');
+      expect(state.loginFields.email).toBe('test@example.com');
     });
 
-    context('when password is changes', () => {
+    it('changes password of loginFields', () => {
       const initialState = {
         loginFields: {
-          email: 'email',
-          password: 'password',
+          password: '',
         },
       };
 
@@ -191,7 +188,6 @@ describe('reducer', () => {
         }),
       );
 
-      expect(state.loginFields.email).toBe('email');
       expect(state.loginFields.password).toBe('test');
     });
   });
