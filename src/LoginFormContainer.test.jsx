@@ -19,6 +19,7 @@ describe('LoginFormContainer', () => {
         email: 'test@test',
         password: '1234',
       },
+      accessToken: given.accessToken,
     }));
   });
 
@@ -26,31 +27,49 @@ describe('LoginFormContainer', () => {
     <LoginFormContainer />,
   );
 
-  it('renders input controls', () => {
-    const { getByLabelText } = renderLoginFormContainer();
+  context('when logged out', () => {
+    given('accessToken', () => '');
 
-    expect(getByLabelText('E-mail').value).toBe('test@test');
-    expect(getByLabelText('Password').value).toBe('1234');
-  });
+    it('renders input controls', () => {
+      const { getByLabelText } = renderLoginFormContainer();
 
-  it('listens change events', () => {
-    const { getByLabelText } = renderLoginFormContainer();
-
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'new email' },
+      expect(getByLabelText('E-mail').value).toBe('test@test');
+      expect(getByLabelText('Password').value).toBe('1234');
     });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: { name: 'email', value: 'new email' },
+    it('listens change events', () => {
+      const { getByLabelText } = renderLoginFormContainer();
+
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'new email' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: { name: 'email', value: 'new email' },
+      });
+    });
+
+    it('renders "Log In" button', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalled();
     });
   });
 
-  it('renders "Log In" button', () => {
-    const { getByText } = renderLoginFormContainer();
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-    fireEvent.click(getByText('Log In'));
+    it('renders “Log out” button', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
 
-    expect(dispatch).toBeCalled();
+      fireEvent.click(getByText('Log out'));
+
+      expect(dispatch).toBeCalledWith({ type: 'logout' });
+    });
   });
 });
