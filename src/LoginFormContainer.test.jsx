@@ -9,8 +9,6 @@ jest.mock('react-redux');
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
-  const handleChange = jest.fn();
-
   beforeEach(() => {
     dispatch.mockClear();
 
@@ -21,49 +19,71 @@ describe('LoginFormContainer', () => {
         email: 'test@soom.com',
         password: '1234',
       },
+      accessToken: given.accessToken,
     }));
   });
 
   const renderLoginFormContainer = () => render(
-    <LoginFormContainer
-      onChange={handleChange}
-    />,
+    <LoginFormContainer />,
   );
 
-  it('renders login field', () => {
-    const { getByLabelText } = renderLoginFormContainer();
+  context('when logged out', () => {
+    given('accessToken', () => '');
 
-    expect(getByLabelText('e-mail').value).toBe('test@soom.com');
-    expect(getByLabelText('password').value).toBe('1234');
+    it('renders login field', () => {
+      const { getByLabelText } = renderLoginFormContainer();
+
+      expect(getByLabelText('e-mail').value).toBe('test@soom.com');
+      expect(getByLabelText('password').value).toBe('1234');
+    });
+
+    it('listens change events', () => {
+      const { getByLabelText } = renderLoginFormContainer();
+
+      fireEvent.change(getByLabelText('e-mail'), {
+        target: { value: 'smileguy@soom.com' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: { name: 'email', value: 'smileguy@soom.com' },
+      });
+
+      fireEvent.change(getByLabelText('password'), {
+        target: { value: 'new password' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: { name: 'password', value: 'new password' },
+      });
+    });
+
+    it('listens submit events', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('Log in'));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 
-  it('listens change events', () => {
-    const { getByLabelText } = renderLoginFormContainer();
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-    fireEvent.change(getByLabelText('e-mail'), {
-      target: { value: 'smileguy@soom.com' },
+    it('renders no login field', () => {
+      const { queryByLabelText } = renderLoginFormContainer();
+
+      expect(queryByLabelText('e-mail')).toBeNull();
+      expect(queryByLabelText('password')).toBeNull();
     });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: { name: 'email', value: 'smileguy@soom.com' },
+    it('renders "log out" button', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('Log out'));
+
+      expect(dispatch).toBeCalledWith({ type: 'logout' });
     });
-
-    fireEvent.change(getByLabelText('password'), {
-      target: { value: 'new password' },
-    });
-
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: { name: 'password', value: 'new password' },
-    });
-  });
-
-  it('listens submit events', () => {
-    const { getByText } = renderLoginFormContainer();
-
-    fireEvent.click(getByText('Log in'));
-
-    expect(dispatch).toBeCalled();
   });
 });
