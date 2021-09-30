@@ -13,6 +13,7 @@ import {
   requestLogin,
   setAccessToken,
   sendReview,
+  clearReviewFields,
 } from './actions';
 
 const middlewares = [thunk];
@@ -142,7 +143,7 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      // expect(actions)
+      expect(actions[0]).toEqual(clearReviewFields());
     });
   });
 });
