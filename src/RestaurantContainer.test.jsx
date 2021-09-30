@@ -20,12 +20,6 @@ describe('RestaurantContainer', () => {
     }));
   });
 
-  it('dispatches action', () => {
-    renderRestaurantContainer();
-
-    expect(dispatch).toBeCalled();
-  });
-
   context('without restaurant', () => {
     given('restaurant', () => null);
 
@@ -71,6 +65,14 @@ describe('RestaurantContainer', () => {
         type: 'changeReviewField',
         payload: { name: 'description', value: 'good' },
       });
+    });
+
+    it('renders "리뷰 남기기" button', () => {
+      const { getByText } = renderRestaurantContainer();
+
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(dispatch).toBeCalledTimes(2);
     });
   });
 });

@@ -4,9 +4,15 @@ import ReviewForm from './ReviewForm';
 
 describe('ReviewForm', () => {
   const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
   function renderReviewForm() {
-    return render(<ReviewForm onChange={handleChange} />);
+    return render(
+      <ReviewForm
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />,
+    );
   }
 
   it('renders review form', () => {
@@ -28,5 +34,13 @@ describe('ReviewForm', () => {
       fireEvent.change(getByLabelText(label), { target: { value } });
       expect(handleChange).toBeCalledWith({ name, value });
     });
+  });
+
+  it('renders "리뷰 남기기" button', () => {
+    const { getByText } = renderReviewForm();
+
+    fireEvent.click(getByText('리뷰 남기기'));
+
+    expect(handleSubmit).toBeCalled();
   });
 });
