@@ -3,6 +3,8 @@ export default function Reviews({ reviews }) {
     return null;
   }
 
+  reviews.sort((a, b) => b.id - a.id);
+
   return ((
     <ul>
       {reviews.map((review) => (
