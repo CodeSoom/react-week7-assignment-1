@@ -129,6 +129,12 @@ export function changeReviewField({ name, value }) {
   };
 }
 
+export function clearReviewFields() {
+  return {
+    type: 'clearReviewFields',
+  };
+}
+
 export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
@@ -137,6 +143,7 @@ export function sendReview({ restaurantId }) {
       accessToken, restaurantId, score, description,
     });
 
-    // TODO: dispatch(loadRestaurant)
+    // TODO: dispatch(loadReview)
+    dispatch(clearReviewFields());
   };
 }
