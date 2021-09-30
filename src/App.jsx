@@ -18,7 +18,6 @@ import { setAccessToken } from './actions';
 import { loadItem } from './services/storage';
 
 export default function App() {
-  // TODO: localstorage에서 데이터 가져오기
   const dispatch = useDispatch();
 
   const accessToken = loadItem({ key: 'accessToken' });
