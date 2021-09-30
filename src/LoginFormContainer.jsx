@@ -17,6 +17,8 @@ export default function LoginFormContainer() {
   const { email, password } = useSelector(get('loginField'));
   const accessToken = useSelector(get('accessToken'));
 
+  console.log(accessToken);
+
   function handleChange({ name, value }) {
     dispatch(changeLoginField({ name, value }));
   }
