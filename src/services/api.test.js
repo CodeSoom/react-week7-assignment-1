@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -79,5 +80,9 @@ describe('api', () => {
 
       expect(accessToken).toEqual('TEST');
     });
+  });
+
+  describe('postReview', () => {
+
   });
 });
