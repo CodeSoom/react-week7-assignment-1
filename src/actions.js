@@ -112,3 +112,10 @@ export function requestLogin() {
     }
   };
 }
+
+export function changeReviewFields({ name, value }) {
+  return {
+    type: 'changeReviewFields',
+    payload: { name, value },
+  };
+}

@@ -1,6 +1,7 @@
 import reducer from './reducer';
 
 import {
+  setAccessToken,
   setRegions,
   setCategories,
   setRestaurants,
@@ -8,20 +9,27 @@ import {
   selectRegion,
   selectCategory,
   changeLoginFields,
-  setAccessToken,
+  changeReviewFields,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      accessToken: '',
       regions: [],
       categories: [],
       restaurants: [],
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
-      loginFields: {},
-      accessToken: '',
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -160,5 +168,26 @@ describe('reducer', () => {
     const state = reducer(initialState, setAccessToken('TOKEN'));
 
     expect(state.accessToken).toBe('TOKEN');
+  });
+
+  describe('changeReviewFields', () => {
+    context.each`
+      name             | value
+      ${'score'}       | ${'5'}
+      ${'description'} | ${'정말 최고에요'}
+    `('when $name is changed', ({ name, value }) => {
+      const initialState = {
+        reviewFields: {
+          [name]: '',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        changeReviewFields({ name, value }),
+      );
+
+      expect(state.reviewFields[name]).toBe(value);
+    });
   });
 });

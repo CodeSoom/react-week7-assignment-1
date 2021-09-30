@@ -43,5 +43,15 @@ describe('RestaurantPage', () => {
 
       expect(container).toHaveTextContent('마법사주방');
     });
+
+    it('renders review write form', () => {
+      const { getByLabelText } = render(
+        <MemoryRouter initialEntries={['/restaurants/1']}>
+          <RestaurantPage />
+        </MemoryRouter>,
+      );
+
+      expect(getByLabelText('평점')).not.toBeNull();
+    });
   });
 });
