@@ -7,6 +7,8 @@ import {
   postReview,
 } from './services/api';
 
+import { saveItem } from './services/storage';
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -53,6 +55,12 @@ export function changeReviewField({ name, value }) {
   return {
     type: 'changeReviewField',
     payload: { name, value },
+  };
+}
+
+export function logout() {
+  return {
+    type: 'logout',
   };
 }
 
@@ -112,7 +120,11 @@ export function setAccessToken(accessToken) {
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
+
     const accessToken = await postLogin({ email, password });
+
+    saveItem({ key: 'accessToken', value: accessToken });
+
     dispatch(setAccessToken(accessToken));
   };
 }

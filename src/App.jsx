@@ -4,6 +4,8 @@ import {
   Link,
 } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import LoginPage from './LoginPage';
@@ -11,7 +13,20 @@ import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
 
+import { setAccessToken } from './actions';
+
+import { loadItem } from './services/storage';
+
 export default function App() {
+  // TODO: localstorage에서 데이터 가져오기
+  const dispatch = useDispatch();
+
+  const accessToken = loadItem({ key: 'accessToken' });
+
+  if (accessToken) {
+    dispatch(setAccessToken(accessToken));
+  }
+
   return (
     <div>
       <header>
