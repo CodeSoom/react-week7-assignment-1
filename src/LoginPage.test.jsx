@@ -18,11 +18,11 @@ describe('LoginPage', () => {
     }));
   });
 
-  const renderLoginPage = () => render(
+  const renderLoginPage = () => render((
     <MemoryRouter>
       <LoginPage />
-    </MemoryRouter>,
-  );
+    </MemoryRouter>
+  ));
 
   it('renders Log-in title', () => {
     const { container } = renderLoginPage();
