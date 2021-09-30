@@ -113,7 +113,7 @@ describe('actions', () => {
       });
     });
 
-    it('renders setAccessToken', async () => {
+    it('gets accessToken for login', async () => {
       await store.dispatch(requestLogin());
 
       const actions = store.getActions();

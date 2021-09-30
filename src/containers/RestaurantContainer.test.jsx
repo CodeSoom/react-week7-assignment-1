@@ -25,7 +25,7 @@ describe('RestaurantContainer', () => {
     }));
   });
 
-  it('dispatches action', () => {
+  it('calls action to load restaurants', () => {
     renderRestaurantContainer();
 
     expect(dispatch).toBeCalled();
@@ -105,7 +105,7 @@ describe('RestaurantContainer', () => {
         });
       });
 
-      it('renders "리뷰 남기기" button', () => {
+      it('shows "리뷰 남기기" button clicked', () => {
         const { getByText } = render((
           <RestaurantContainer restaurantId="1" />
         ));
