@@ -83,6 +83,21 @@ describe('api', () => {
   });
 
   describe('postReview', () => {
+    beforeEach(() => {
+      global.fetch = jest.fn().mockResolvedValueOnce({
+        ok: true,
+      });
+    });
 
+    it('return response', async () => {
+      const response = await postReview({
+        score: '5',
+        description: '맛돌이에요!!!',
+        accessToken: 'TEST',
+        restaurantId: 1,
+      });
+
+      expect(response.ok).toBeTruthy();
+    });
   });
 });
