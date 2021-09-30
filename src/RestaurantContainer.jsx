@@ -46,6 +46,29 @@ export default function RestaurantContainer({ restaurantId }) {
           onSubmit={handleSubmit}
         />
       ) : null}
+      <Reviews reviews={restaurant.reviews} />
     </>
+  );
+}
+
+function Reviews({ reviews }) {
+  if (!(reviews || []).length) {
+    return (
+      <p>리뷰가 없어요!</p>
+    );
+  }
+
+  return (
+    <ul>
+      {reviews.map(({
+        id, name, description, score,
+      }) => (
+        <li key={id}>
+          <p>{name}</p>
+          <p>{score}</p>
+          <p>{description}</p>
+        </li>
+      ))}
+    </ul>
   );
 }
