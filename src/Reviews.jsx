@@ -1,3 +1,7 @@
 export default function Reviews() {
-  return null;
+  const reviews = [];
+
+  if (reviews.length === 0) {
+    return null;
+  }
 }
