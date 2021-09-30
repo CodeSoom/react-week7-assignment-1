@@ -22,8 +22,8 @@ describe('LoginForm', () => {
   }
 
   it('renders input controls', () => {
-    const email = 'test@test';
-    const password = '1234';
+    const email = '';
+    const password = '';
 
     const { getByLabelText } = renderLoginForm({ email, password });
 
@@ -57,6 +57,12 @@ describe('LoginForm', () => {
   });
 
   it('renders "Log In" button', () => {
+    const { getByText } = renderLoginForm();
+
+    expect(getByText('Log In')).not.toBeNull();
+  });
+
+  it('listens click events', () => {
     const { getByText } = renderLoginForm();
 
     fireEvent.click(getByText('Log In'));
