@@ -19,10 +19,14 @@ describe('ReviewForm', () => {
   it('listens change events', () => {
     const { getByLabelText } = renderReviewForm();
 
-    fireEvent.change(getByLabelText('평점'), { target: { value: 5 } });
-    expect(handleChange).toBeCalledWith({ name: 'score', value: '5' });
+    const controls = [
+      { label: '평점', name: 'score', value: '5' },
+      { label: '리뷰 내용', name: 'description', value: 'good' },
+    ];
 
-    fireEvent.change(getByLabelText('리뷰 내용'), { target: { value: 'good' } });
-    expect(handleChange).toBeCalledWith({ name: 'description', value: 'good' });
+    controls.forEach(({ label, name, value }) => {
+      fireEvent.change(getByLabelText(label), { target: { value } });
+      expect(handleChange).toBeCalledWith({ name, value });
+    });
   });
 });
