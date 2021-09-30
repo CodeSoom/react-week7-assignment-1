@@ -60,11 +60,17 @@ describe('RestaurantContainer', () => {
     it('listens change events', () => {
       const { getByLabelText } = renderRestaurantContainer();
 
-      fireEvent.change(getByLabelText('평점'));
-      expect(dispatch).toBeCalledTimes(2);
+      fireEvent.change(getByLabelText('평점'), { target: { value: 5 } });
+      expect(dispatch).toBeCalledWith({
+        type: 'changeReviewField',
+        payload: { name: 'score', value: '5' },
+      });
 
-      fireEvent.change(getByLabelText('리뷰 내용'));
-      expect(dispatch).toBeCalledTimes(3);
+      fireEvent.change(getByLabelText('리뷰 내용'), { target: { value: 'good' } });
+      expect(dispatch).toBeCalledWith({
+        type: 'changeReviewField',
+        payload: { name: 'description', value: 'good' },
+      });
     });
   });
 });
