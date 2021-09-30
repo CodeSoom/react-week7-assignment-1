@@ -26,8 +26,6 @@ export default function App() {
     dispatch(setAccessToken(accessToken));
   }
 
-  console.log('App', accessToken);
-
   return (
     <div>
       <header>
