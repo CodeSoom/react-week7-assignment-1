@@ -39,6 +39,13 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [{
+        description: '훌륭하다 훌륭하다 지구인놈들',
+        id: 1,
+        name: '테스터',
+        restaurantId: 1,
+        score: 5,
+      }],
     }));
 
     it('renders name and address', () => {
@@ -46,6 +53,14 @@ describe('RestaurantContainer', () => {
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+    });
+
+    it('renders review list', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('훌륭하다 훌륭하다 지구인놈들');
+      expect(container).toHaveTextContent('테스터');
+      expect(container).toHaveTextContent('5');
     });
   });
 
@@ -71,7 +86,6 @@ describe('RestaurantContainer', () => {
   });
 
   context('with logged-in', () => {
-    // TODO: accessToken 세팅
     given('accessToken', () => 'ACCESS_TOKEN');
 
     it('renders review write form', () => {
