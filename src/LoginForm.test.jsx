@@ -27,8 +27,15 @@ describe('LoginForm', () => {
       email, password,
     });
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    const controls = [
+      { label: 'E-mail', value: email },
+      { label: 'Password', value: password },
+    ];
+
+    controls.forEach(({ label, value }) => {
+      const input = getByLabelText(label);
+      expect(input.value).toBe(value);
+    });
   });
 
   it('사용자 입력시 입력 이벤트 처리 함수가 실행된다', () => {
@@ -37,30 +44,16 @@ describe('LoginForm', () => {
     });
 
     const controls = [
-      {
-        label: 'E-mail',
-        name: 'email',
-        origin: email,
-        value: 'tester@example.com',
-      },
-      {
-        label: 'Password',
-        name: 'password',
-        origin: password,
-        value: '1234',
-      },
+      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
+      { label: 'Password', name: 'password', value: '1234' },
     ];
 
     controls.forEach(({
-      label, name, origin, value,
+      label, name, value,
     }) => {
       const input = getByLabelText(label);
 
-      expect(input.value).toBe(origin);
-
-      fireEvent.change(getByLabelText(label), {
-        target: { value },
-      });
+      fireEvent.change(input, { target: { value } });
 
       expect(handleChange).toBeCalledWith({
         name,

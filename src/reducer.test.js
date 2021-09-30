@@ -21,6 +21,7 @@ describe('reducer', () => {
       selectedRegion: null,
       selectedCategory: null,
       loginFields: {},
+      accessToken: '',
     };
 
     it('returns initialState', () => {
