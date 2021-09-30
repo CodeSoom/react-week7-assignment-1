@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -26,6 +26,16 @@ describe('RestaurantContainer', () => {
     expect(dispatch).toBeCalled();
   });
 
+  context('without restaurant', () => {
+    given('restaurant', () => null);
+
+    it('renders loading', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('Loading');
+    });
+  });
+
   context('with restaurant', () => {
     given('restaurant', () => ({
       id: 1,
@@ -39,15 +49,22 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
     });
-  });
 
-  context('without restaurant', () => {
-    given('restaurant', () => null);
+    it('renders review form', () => {
+      const { getByLabelText } = renderRestaurantContainer();
 
-    it('renders loading', () => {
-      const { container } = renderRestaurantContainer();
+      expect(getByLabelText('평점')).not.toBeNull();
+      expect(getByLabelText('리뷰 내용')).not.toBeNull();
+    });
 
-      expect(container).toHaveTextContent('Loading');
+    it('listens change events', () => {
+      const { getByLabelText } = renderRestaurantContainer();
+
+      fireEvent.change(getByLabelText('평점'));
+      expect(dispatch).toBeCalledTimes(2);
+
+      fireEvent.change(getByLabelText('리뷰 내용'));
+      expect(dispatch).toBeCalledTimes(3);
     });
   });
 });
