@@ -1,3 +1,5 @@
+import { render } from '@testing-library/react';
+
 import Reviews from './Reviews';
 
 describe('Reviews', () => {
@@ -7,7 +9,7 @@ describe('Reviews', () => {
         <Reviews />
       ));
 
-      expect(container.innerHTML).toBeNull();
+      expect(container.innerHTML).toBe('');
     });
   });
 });
