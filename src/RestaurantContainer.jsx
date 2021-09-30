@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
 import ReviewForm from './ReviewForm';
+import ReviewItems from './ReviewItems';
 
 import {
   loadRestaurant,
@@ -46,29 +47,7 @@ export default function RestaurantContainer({ restaurantId }) {
           onSubmit={handleSubmit}
         />
       ) : null}
-      <Reviews reviews={restaurant.reviews} />
+      <ReviewItems reviewItems={restaurant.reviews} />
     </>
-  );
-}
-
-function Reviews({ reviews }) {
-  if (!(reviews || []).length) {
-    return (
-      <p>리뷰가 없어요!</p>
-    );
-  }
-
-  return (
-    <ul>
-      {reviews.map(({
-        id, name, description, score,
-      }) => (
-        <li key={id}>
-          <p>{name}</p>
-          <p>{score}</p>
-          <p>{description}</p>
-        </li>
-      ))}
-    </ul>
   );
 }
