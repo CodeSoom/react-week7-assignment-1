@@ -20,7 +20,7 @@ describe('LoginForm', () => {
   ));
 
   it('renders input controls', () => {
-    const { getByLabelText } = renderLoginForm();
+    const { queryByLabelText } = renderLoginForm();
 
     const controls = [
       { label: 'E-mail' },
@@ -28,7 +28,7 @@ describe('LoginForm', () => {
     ];
 
     controls.forEach(({ label }) => {
-      expect(getByLabelText(label)).not.toBeNull();
+      expect(queryByLabelText(label)).not.toBeNull();
     });
   });
 

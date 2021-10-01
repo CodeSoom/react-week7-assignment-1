@@ -28,10 +28,10 @@ describe('LoginFormContainer', () => {
     given('accessToken', () => '');
 
     it('renders input controls', () => {
-      const { getByLabelText } = renderLoginFormContainer();
+      const { queryByLabelText } = renderLoginFormContainer();
 
-      expect(getByLabelText('E-mail').value).toBe('test@test.com');
-      expect(getByLabelText('Password').value).toBe('1234');
+      expect(queryByLabelText('E-mail').value).toBe('test@test.com');
+      expect(queryByLabelText('Password').value).toBe('1234');
     });
 
     it('listens change event', () => {
