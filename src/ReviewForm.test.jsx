@@ -11,6 +11,7 @@ describe('ReviewForm', () => {
       <ReviewForm
         onChange={handleChange}
         onSubmit={handleSubmit}
+        reviewFields={{ name: '', value: '' }}
       />
     ));
   }

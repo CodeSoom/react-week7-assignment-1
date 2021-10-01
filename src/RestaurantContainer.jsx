@@ -23,6 +23,7 @@ export default function RestaurantContainer({ restaurantId }) {
 
   const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
+  const reviewFields = useSelector(get('reviewFields'));
 
   if (!restaurant) {
     return (
@@ -45,6 +46,7 @@ export default function RestaurantContainer({ restaurantId }) {
         <ReviewForm
           onChange={handleChange}
           onSubmit={handleSubmit}
+          reviewFields={reviewFields}
         />
       ) : null}
       <ReviewItems reviewItems={restaurant.reviews} />
