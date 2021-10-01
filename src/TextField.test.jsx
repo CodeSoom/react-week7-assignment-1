@@ -61,5 +61,7 @@ describe('TextField', () => {
     ));
 
     fireEvent.change(getByLabelText('평점'), { target: { value, name } });
+
+    expect(handleChange).toBeCalled();
   });
 });
