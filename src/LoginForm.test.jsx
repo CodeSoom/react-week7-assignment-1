@@ -11,16 +11,16 @@ describe('LoginForm', () => {
     handleClick.mockClear();
   });
 
-  const renderLoginForm = ({ email, password }) => render((
+  const renderLoginForm = () => render((
     <LoginForm
-      fields={{ email, password }}
+      fields={{ email: '', password: '' }}
       onChange={handleChange}
       onClickLogin={handleClick}
     />
   ));
 
   it('renders input controls', () => {
-    const { getByLabelText } = renderLoginForm({ });
+    const { getByLabelText } = renderLoginForm();
 
     const controls = [
       { label: 'E-mail' },
@@ -33,7 +33,7 @@ describe('LoginForm', () => {
   });
 
   it('listens change event', () => {
-    const { getByLabelText } = renderLoginForm({ });
+    const { getByLabelText } = renderLoginForm();
 
     const controls = [
       { label: 'E-mail', name: 'email', value: 'tester@example.com' },
@@ -50,7 +50,7 @@ describe('LoginForm', () => {
   });
 
   it('listens click event', () => {
-    const { getByText } = renderLoginForm({ });
+    const { getByText } = renderLoginForm();
 
     fireEvent.click(getByText('Log In'));
 
