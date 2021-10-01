@@ -40,7 +40,10 @@ const reducers = {
   setRestaurant(state, { payload: { restaurant } }) {
     return {
       ...state,
-      restaurant,
+      restaurant: {
+        ...restaurant,
+        reviews: restaurant?.reviews?.reverse(),
+      },
     };
   },
   selectRegion(state, { payload: { regionId } }) {
