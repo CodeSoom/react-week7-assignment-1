@@ -11,7 +11,10 @@ describe('LoginForm', () => {
     handleSubmit.mockClear();
   });
 
-  function renderLoginForm({ email, password }) {
+  function renderLoginForm() {
+    const email = 'test@test';
+    const password = '1234';
+
     return render((
       <LoginForm
         fields={{ email, password }}
@@ -22,14 +25,11 @@ describe('LoginForm', () => {
   }
 
   it('renders input controls', () => {
-    const email = 'test@test';
-    const password = '1234';
-
-    const { getByLabelText } = renderLoginForm({ email, password });
+    const { getByLabelText } = renderLoginForm();
 
     const controls = [
-      { label: 'e-mail', value: email },
-      { label: 'password', value: password },
+      { label: 'e-mail', value: 'test@test' },
+      { label: 'password', value: '1234' },
     ];
 
     controls.forEach(({ label, value }) => {
@@ -40,7 +40,7 @@ describe('LoginForm', () => {
   });
 
   it('listens change events', () => {
-    const { getByLabelText } = renderLoginForm({});
+    const { getByLabelText } = renderLoginForm();
 
     const controls = [
       { label: 'e-mail', name: 'email', value: 'tester@example.com' },
@@ -57,7 +57,7 @@ describe('LoginForm', () => {
   });
 
   it('renders "Log in" button', () => {
-    const { getByText } = renderLoginForm({});
+    const { getByText } = renderLoginForm();
 
     fireEvent.click(getByText('Log in'));
 
