@@ -29,6 +29,8 @@ describe('App', () => {
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
     }));
+
+    loadItem.mockImplementation(() => given.accessToken);
   });
 
   function renderApp({ path }) {
@@ -80,11 +82,9 @@ describe('App', () => {
   });
 
   context('when logged out', () => {
-    beforeEach(() => {
-      loadItem.mockImplementation(() => null);
-    });
+    given('accessToken', () => null);
 
-    it("doesn't call dispatch with setAccessToken action", () => {
+    it("doesn't call action to load access token", () => {
       renderApp({ path: '/' });
 
       expect(dispatch).not.toBeCalled();
@@ -92,12 +92,9 @@ describe('App', () => {
   });
 
   context('when logged in', () => {
-    const accessToken = 'ACCESS_TOKEN';
-    beforeEach(() => {
-      loadItem.mockImplementation(() => accessToken);
-    });
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-    it('call dispatch with "setAccessToken" action', () => {
+    it('calls action to load access token ', () => {
       renderApp({ path: '/' });
 
       expect(dispatch).toBeCalled();
