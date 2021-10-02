@@ -64,7 +64,7 @@ describe('LoginFormContainer', () => {
         <LoginFormContainer />,
       );
 
-      fireEvent.click(getByText('Log in'));
+      fireEvent.click(getByText('Log In'));
 
       expect(dispatch).toBeCalled();
     });

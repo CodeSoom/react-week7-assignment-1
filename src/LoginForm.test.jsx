@@ -56,10 +56,10 @@ describe('LoginForm', () => {
     });
   });
 
-  it('renders "Log in" button', () => {
+  it('renders "Log In" button', () => {
     const { getByText } = renderLoginForm();
 
-    fireEvent.click(getByText('Log in'));
+    fireEvent.click(getByText('Log In'));
 
     expect(handleSubmit).toBeCalled();
   });
