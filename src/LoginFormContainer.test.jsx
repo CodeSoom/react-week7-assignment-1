@@ -23,22 +23,22 @@ describe('LoginFormContainer', () => {
     }));
   });
 
-  const renderLoginFormContainer = () => render(
-    <LoginFormContainer />,
-  );
-
   context('when logged out', () => {
     given('accessToken', () => '');
 
     it('renders login field', () => {
-      const { getByLabelText } = renderLoginFormContainer();
+      const { getByLabelText } = render(
+        <LoginFormContainer />,
+      );
 
       expect(getByLabelText('e-mail').value).toBe('test@soom.com');
       expect(getByLabelText('password').value).toBe('1234');
     });
 
     it('listens change events', () => {
-      const { getByLabelText } = renderLoginFormContainer();
+      const { getByLabelText } = render(
+        <LoginFormContainer />,
+      );
 
       fireEvent.change(getByLabelText('e-mail'), {
         target: { value: 'smileguy@soom.com' },
@@ -60,7 +60,9 @@ describe('LoginFormContainer', () => {
     });
 
     it('listens submit events', () => {
-      const { getByText } = renderLoginFormContainer();
+      const { getByText } = render(
+        <LoginFormContainer />,
+      );
 
       fireEvent.click(getByText('Log in'));
 
@@ -72,14 +74,18 @@ describe('LoginFormContainer', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
 
     it('renders no login field', () => {
-      const { queryByLabelText } = renderLoginFormContainer();
+      const { queryByLabelText } = render(
+        <LoginFormContainer />,
+      );
 
       expect(queryByLabelText('e-mail')).toBeNull();
       expect(queryByLabelText('password')).toBeNull();
     });
 
     it('renders "log out" button', () => {
-      const { getByText } = renderLoginFormContainer();
+      const { getByText } = render(
+        <LoginFormContainer />,
+      );
 
       fireEvent.click(getByText('Log out'));
 
