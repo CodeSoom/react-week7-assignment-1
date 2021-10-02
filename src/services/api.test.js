@@ -86,10 +86,6 @@ describe('api', () => {
   });
 
   describe('postReview', () => {
-    beforeEach(() => {
-      mockFetch({});
-    });
-
     it('returns accessToken', async () => {
       const response = await postReview({
         accessToken: 'ACCESS_TOKEN',
