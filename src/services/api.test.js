@@ -86,7 +86,7 @@ describe('api', () => {
   });
 
   describe('postReview', () => {
-    it('returns accessToken', async () => {
+    it('returns response', async () => {
       const response = await postReview({
         accessToken: 'ACCESS_TOKEN',
         restaurantId: 1,
