@@ -59,4 +59,6 @@ export async function postReview({
   });
 
   await response.json();
+
+  return response;
 }

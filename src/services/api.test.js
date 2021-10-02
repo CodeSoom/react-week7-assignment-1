@@ -70,39 +70,35 @@ describe('api', () => {
     });
   });
 
-  // describe('postLogin', () => {
-  //   const TOKEN = 'ACCESS_TOKEN';
+  describe('postLogin', () => {
+    beforeEach(() => {
+      mockFetch({ accessToken: 'ACCESS_TOKEN' });
+    });
 
-  //   beforeEach(() => {
-  //     mockFetch(TOKEN);
-  //   });
+    it('returns accessToken', async () => {
+      const accessToken = await postLogin({
+        email: 'tester@example.com',
+        password: 'test',
+      });
 
-  //   it('returns accessToken', async () => {
-  //     const accessToken = await postLogin({
-  //       email: 'tester@example.com',
-  //       password: 'test',
-  //     });
+      expect(accessToken).toEqual('ACCESS_TOKEN');
+    });
+  });
 
-  //     expect(accessToken).toEqual(TOKEN);
-  //   });
-  // });
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch({});
+    });
 
-  // describe('postReview', () => {
-  //   const RESPONSE = {};
+    it('returns accessToken', async () => {
+      const response = await postReview({
+        accessToken: 'ACCESS_TOKEN',
+        restaurantId: 1,
+        score: '5',
+        description: 'Good',
+      });
 
-  //   beforeEach(() => {
-  //     mockFetch(RESPONSE);
-  //   });
-
-  //   it('returns accessToken', async () => {
-  //     const response = await postReview({
-  //       accessToken: 'ACCESS_TOKEN',
-  //       restaurantId: 1,
-  //       score: '5',
-  //       description: 'Good',
-  //     });
-
-  //     expect(response).toEqual(RESPONSE);
-  //   });
-  // });
+      expect(response).not.toBeNull();
+    });
+  });
 });
