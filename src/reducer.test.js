@@ -11,6 +11,8 @@ import {
   setAccessToken,
   logout,
   changeReviewField,
+  setReviews,
+  clearReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,22 +20,26 @@ describe('reducer', () => {
     regions: given.regions,
     categories: given.categories,
     restaurants: [],
-    restaurant: null,
+    restaurant: {
+      reviews: [],
+    },
     selectedRegion: null,
     selectedCategory: null,
-    accessToken: '',
+    accessToken: given.accessToken,
     loginField: {
       email: '',
       password: '',
     },
-    reviewField: {
-      score: 0,
-      description: '',
-    },
+    reviewField: given.reviewField,
   }));
 
   given('regions', () => []);
   given('categories', () => []);
+  given('accessToken', () => '');
+  given('reviewField', () => ({
+    score: '',
+    description: '',
+  }));
 
   context('when previous state is undefined', () => {
     it('returns initialState', () => {
@@ -155,24 +161,61 @@ describe('reducer', () => {
   });
 
   describe('logout', () => {
-    const initialState = {
-      accessToken: 'ACCESS_TOKEN',
-    };
+    it('makes user logged out', () => {
+      given('accessToken', () => 'ACCESS_TOKEN');
 
-    const state = reducer(initialState, logout());
+      const state = reducer(given.previousState, logout());
 
-    expect(state.accessToken).toBe('');
+      expect(state.accessToken).toBe('');
+    });
+  });
+
+  describe('setReviews', () => {
+    const reviews = [
+      {
+        id: 1,
+        name: '테스터',
+        description: 'good',
+        score: 1,
+      },
+    ];
+    it('changes reviews', () => {
+      const state = reducer(given.previousState, setReviews(reviews));
+
+      expect(state.restaurant.reviews).toHaveLength(reviews.length);
+    });
   });
 
   describe('changeReviewField', () => {
-    const state = reducer(
-      given.previousState,
-      changeReviewField({ name: 'score', value: 5 }),
-    );
+    it('changes review field', () => {
+      const state = reducer(
+        given.previousState,
+        changeReviewField({ name: 'score', value: 5 }),
+      );
 
-    expect(state.reviewField).toEqual({
-      score: 5,
-      description: '',
+      expect(state.reviewField).toEqual({
+        score: 5,
+        description: '',
+      });
+    });
+  });
+
+  describe('clearReviewField', () => {
+    it('clears review field', () => {
+      given('reviewField', () => ({
+        score: '5',
+        description: 'very ultra super good',
+      }));
+
+      const state = reducer(
+        given.previousState,
+        clearReviewField(),
+      );
+
+      expect(state.reviewField).toEqual({
+        score: '',
+        description: '',
+      });
     });
   });
 });

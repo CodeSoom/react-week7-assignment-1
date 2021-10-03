@@ -11,6 +11,7 @@ describe('ReviewInput', () => {
         label={label}
         type={type}
         inputName={name}
+        inputValue=""
         onChange={handleChange}
       />,
     );

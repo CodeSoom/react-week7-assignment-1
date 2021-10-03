@@ -4,7 +4,9 @@ const initialState = {
   regions: [],
   categories: [],
   restaurants: [],
-  restaurant: null,
+  restaurant: {
+    reviews: [],
+  },
   selectedRegion: null,
   selectedCategory: null,
   accessToken: '',
@@ -13,7 +15,7 @@ const initialState = {
     password: '',
   },
   reviewField: {
-    score: 0,
+    score: '',
     description: '',
   },
 };
@@ -78,12 +80,30 @@ const reducers = {
       accessToken: '',
     };
   },
+  setReviews(state, { payload: { reviews } }) {
+    return {
+      ...state,
+      restaurant: {
+        ...state.restaurant,
+        reviews,
+      },
+    };
+  },
   changeReviewField(state, { payload: { name, value } }) {
     return {
       ...state,
       reviewField: {
         ...state.reviewField,
         [name]: value,
+      },
+    };
+  },
+  clearReviewField(state) {
+    return {
+      ...state,
+      reviewField: {
+        score: '',
+        description: '',
       },
     };
   },

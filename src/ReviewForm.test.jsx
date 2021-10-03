@@ -9,6 +9,7 @@ describe('ReviewForm', () => {
   function renderReviewForm() {
     return render(
       <ReviewForm
+        fields={{ score: '', description: '' }}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />,

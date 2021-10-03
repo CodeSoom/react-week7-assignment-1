@@ -1,5 +1,5 @@
 export default function ReviewInput({
-  label, type = 'text', inputName, onChange,
+  label, type = 'text', inputValue, inputName, onChange,
 }) {
   const id = `input-${inputName}`;
 
@@ -17,6 +17,7 @@ export default function ReviewInput({
         type={type}
         id={id}
         name={inputName}
+        value={inputValue}
         onChange={handleChange}
       />
     </div>
