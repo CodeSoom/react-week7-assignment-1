@@ -29,6 +29,8 @@ describe('App', () => {
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
     }));
+
+    loadItem.mockImplementation(() => given.accessToken);
   });
 
   function renderApp({ path }) {
@@ -80,9 +82,7 @@ describe('App', () => {
   });
 
   context('when logged out', () => {
-    beforeEach(() => {
-      loadItem.mockImplementation(() => null);
-    });
+    given('accessToken', () => null);
 
     it("doesn't call dispatch with 'setAccessToken' action", () => {
       renderApp({ path: '/' });
@@ -94,9 +94,7 @@ describe('App', () => {
   context('when logged in', () => {
     const accessToken = 'ACCESS_TOKEN';
 
-    beforeEach(() => {
-      loadItem.mockImplementation(() => accessToken);
-    });
+    given('accessToken', () => accessToken);
 
     it('calls dispatch with "setAccessToken" action', () => {
       renderApp({ path: '/' });
