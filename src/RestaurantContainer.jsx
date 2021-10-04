@@ -13,6 +13,7 @@ import {
 } from './actions';
 
 import { get } from './utils';
+import Reviews from './Reviews';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function RestaurantContainer({ restaurantId }) {
 
   const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
+  const reviewFields = useSelector(get('reviewFields'));
 
   if (!restaurant) {
     return (
@@ -36,7 +38,6 @@ export default function RestaurantContainer({ restaurantId }) {
 
   function handleSubmit() {
     dispatch(sendReview({ restaurantId }));
-    // TODO: 로컬스토리지저장
   }
 
   return (
@@ -45,11 +46,13 @@ export default function RestaurantContainer({ restaurantId }) {
       {
         accessToken ? (
           <ReviewForm
+            fields={reviewFields}
             onChange={handleChange}
             onSubmit={handleSubmit}
           />
         ) : null
       }
+      <Reviews reviews={restaurant.reviews} />
     </>
   );
 }

@@ -123,15 +123,37 @@ export function changeReviewField({ name, value }) {
   };
 }
 
+export function clearReviewFields() {
+  return {
+    type: 'clearReviewFields',
+  };
+}
+
+export function setReviews({ reviews }) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
+
+export function loadReview({ restaurantId }) {
+  return async (dispatch) => {
+    const restaurant = await fetchRestaurant({ restaurantId });
+
+    dispatch(setReviews({ reviews: restaurant.reviews }));
+  };
+}
+
 export function sendReview({ restaurantId }) {
-  return async (dispath, getState) => {
+  return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
 
     await postReview({
       accessToken, restaurantId, score, description,
     });
 
-    // TODO: dispatch(loadRestaurant)
+    dispatch(loadReview({ restaurantId }));
+    dispatch(clearReviewFields());
   };
 }
 
