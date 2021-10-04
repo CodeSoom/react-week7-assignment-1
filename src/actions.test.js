@@ -132,12 +132,6 @@ describe('actions', () => {
       });
     });
 
-    // it('posts review', async () => {
-    //   await store.dispatch(sendReview({ restaurantId: 1 }));
-
-    //   const actions = store.getActions();
-    // });
-
     it('dispatches clearReviewFields', async () => {
       await store.dispatch(sendReview({ restaurantId: 1 }));
 
