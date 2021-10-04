@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,13 +30,14 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
-  const handleChange = ({ name, value }) => {
+  function handleChange({ name, value }) {
     dispatch(changeReviewField({ name, value }));
-  };
+  }
 
-  const handleSubmit = () => {
+  function handleSubmit() {
     dispatch(sendReview({ restaurantId }));
-  };
+    // TODO: 로컬스토리지저장
+  }
 
   return (
     <>
