@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import { useEffect } from 'react';
 
 import { useHistory } from 'react-router-dom';
