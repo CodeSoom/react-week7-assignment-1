@@ -8,7 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import { loadItem } from './services/storage';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -26,6 +29,8 @@ describe('App', () => {
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
     }));
+
+    loadItem.mockImplementation(() => given.accessToken);
   });
 
   function renderApp({ path }) {
@@ -73,6 +78,31 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('when logged out', () => {
+    given('accessToken', () => null);
+
+    it("doesn't call dispatch with 'setAccessToken' action", () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
+
+  context('when logged in', () => {
+    const accessToken = 'ACCESS_TOKEN';
+
+    given('accessToken', () => accessToken);
+
+    it('calls dispatch with "setAccessToken" action', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: { accessToken },
+      });
     });
   });
 });

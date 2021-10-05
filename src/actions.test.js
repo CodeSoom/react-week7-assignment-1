@@ -1,3 +1,4 @@
+/* eslint-disable no-proto */
 import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
@@ -10,6 +11,9 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
+  sendReview,
+  setAccessToken,
 } from './actions';
 
 const middlewares = [thunk];
@@ -93,6 +97,55 @@ describe('actions', () => {
 
     it('dispatchs setRestaurant', async () => {
       await store.dispatch(loadRestaurant({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginFields: {
+          email: 'test@test.com',
+          password: 'test',
+        },
+      });
+    });
+
+    jest.spyOn(localStorage.__proto__, 'setItem');
+    localStorage.__proto__.setItem = jest.fn();
+
+    it('saves accessToken in localStorage', async () => {
+      await store.dispatch(requestLogin());
+
+      expect(localStorage.setItem).toHaveBeenCalled();
+    });
+
+    it('dispatches setAccessToken', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken({}));
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+        reviewFields: {
+          score: '5',
+          description: '존맛',
+        },
+      });
+    });
+
+    it('dispatches setRestaurant', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
 
       const actions = store.getActions();
 
