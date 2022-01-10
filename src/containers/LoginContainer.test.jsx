@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import LoginContainer from './LoginContainer';
 
+import { changeLoginField } from '../modules/actions';
+
 jest.mock('react-redux');
 
 describe('LoginContainer', () => {
@@ -15,7 +17,6 @@ describe('LoginContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
   });
 
-  // 근데 이거는 컴포넌트 테스트 아닌가?
   it('renders email and password inputs and "Log In" button', () => {
     const { queryByLabelText, queryByRole } = render((
       <LoginContainer />
@@ -28,7 +29,7 @@ describe('LoginContainer', () => {
   });
 
   // TODO: 이메일 입력 => 리덕스 상태 변경 액션 호출(dispatch)
-  it('types E-mail and Password, calls dispatch', () => {
+  it('types E-mail and Password, calls dispatch with changeLoginField', () => {
     const { getByLabelText } = render((
       <LoginContainer />
     ));
@@ -37,25 +38,17 @@ describe('LoginContainer', () => {
       target: { value: 'changed email' },
     });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: {
-        name: 'email',
-        value: 'changed email',
-      },
-    });
+    expect(dispatch).toBeCalledWith(
+      changeLoginField({ name: 'email', value: 'changed email' }),
+    );
 
     fireEvent.change(getByLabelText('Password'), {
       target: { value: 'changed password' },
     });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: {
-        name: 'password',
-        value: 'changed password',
-      },
-    });
+    expect(dispatch).toBeCalledWith(
+      changeLoginField({ name: 'password', value: 'changed password' }),
+    );
   });
 
   // TODO: 입력하면 input 값이 입력한 값으로 변함
