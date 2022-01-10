@@ -117,6 +117,8 @@ export function requestLogin() {
 }
 
 export function logout() {
+  // TODO: localStorage AccessToken 제거
+
   return {
     type: 'logout',
   };
