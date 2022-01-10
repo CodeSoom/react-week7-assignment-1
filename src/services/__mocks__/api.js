@@ -14,9 +14,8 @@ export async function fetchRestaurant() {
   return {};
 }
 
-export async function postLogin({ email, password }) {
+export async function postLogin() {
   return {
-    email,
-    password,
+    accessToken: 'ACCESS_TOKEN',
   };
 }
