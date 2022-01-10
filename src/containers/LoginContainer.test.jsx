@@ -51,6 +51,14 @@ describe('LoginContainer', () => {
     );
   });
 
-  // TODO: 입력하면 input 값이 입력한 값으로 변함
   // TODO: 로그인 버튼 클릭하면 로그인 이벤트 호출(dispatch login 기능)
+  it('clicks "Log In" button, calls dispatch', () => {
+    const { getByRole } = render((
+      <LoginContainer />
+    ));
+
+    fireEvent.click(getByRole('button', { name: 'Log In' }));
+
+    expect(dispatch).toBeCalled();
+  });
 });
