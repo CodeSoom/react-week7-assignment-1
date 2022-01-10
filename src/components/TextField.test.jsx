@@ -16,6 +16,7 @@ describe('TextField', () => {
           label="E-mail"
           type="email"
           name="email"
+          id="email"
           onChange={handleChange}
         />
       ));
@@ -40,6 +41,7 @@ describe('TextField', () => {
         <TextField
           label="리뷰 설명"
           name="description"
+          id="description"
           onChange={handleChange}
         />
       ));
@@ -64,6 +66,7 @@ describe('TextField', () => {
         label="E-mail"
         type="email"
         name="email"
+        id="email"
         onChange={handleChange}
       />
     ));
