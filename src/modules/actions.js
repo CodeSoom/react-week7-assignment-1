@@ -6,7 +6,10 @@ import {
   postLogin,
 } from '../services/api';
 
-import { saveItem } from '../services/storage';
+import {
+  saveItem,
+  removeItem,
+} from '../services/storage';
 
 export function setAccessToken(accessToken) {
   return {
@@ -117,7 +120,7 @@ export function requestLogin() {
 }
 
 export function logout() {
-  // TODO: localStorage AccessToken 제거
+  removeItem('accessToken');
 
   return {
     type: 'logout',
