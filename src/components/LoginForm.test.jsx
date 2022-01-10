@@ -7,8 +7,7 @@ describe('LoginForm', () => {
   const handleSubmit = jest.fn();
 
   beforeEach(() => {
-    handleChange.mockClear();
-    handleSubmit.mockClear();
+    jest.clearAllMocks();
   });
 
   function renderLoginForm() {

@@ -9,7 +9,7 @@ describe('LoginPage', () => {
     expect(container).toHaveTextContent('Log In');
   });
 
-  it('renders email and password inputs and "Log In" button', () => {
+  it('renders email and password inputs and login button', () => {
     const { queryByLabelText, queryByRole } = render((
       <LoginPage />
     ));

@@ -74,7 +74,7 @@ describe('api', () => {
       mockFetch({ accessToken: 'ACCESS_TOKEN' });
     });
 
-    it('returns "ACCESS_TOKEN"', async () => {
+    it('returns accessToken', async () => {
       const accessToken = await postLogin({
         email: 'tester@example.com',
         assword: 'test',

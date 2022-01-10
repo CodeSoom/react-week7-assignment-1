@@ -180,7 +180,7 @@ describe('reducer', () => {
         );
 
         expect(state.loginFields.email).toBe('changed email');
-        expect(state.loginFields.password).toBe('password');
+        expect(state.loginFields.password).toBe(initialState.loginFields.password);
       });
     });
 
