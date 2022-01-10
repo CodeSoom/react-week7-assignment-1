@@ -3,7 +3,15 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
 } from '../services/api';
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
 
 export function setRegions(regions) {
   return {
@@ -90,5 +98,21 @@ export function changeLoginField({ name, value }) {
   return {
     type: 'changeLoginField',
     payload: { name, value },
+  };
+}
+
+export function requestLogin() {
+  // inputFields 에서 email, password 가져옴
+  // 로그인 api 요청,
+  // 성공시, accessToken 상태 업데이트
+
+  // TODO: email, password 없으면 동작안하는 테스트? 추가?
+  return async (dispatch, getState) => {
+    const { loginFields: { email, password } } = getState();
+
+    const accessToken = await postLogin({ email, password });
+    if (accessToken) {
+      dispatch(setAccessToken(accessToken));
+    }
   };
 }

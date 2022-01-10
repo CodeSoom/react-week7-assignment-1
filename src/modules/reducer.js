@@ -1,6 +1,7 @@
 import { equal } from '../utils';
 
 const initialState = {
+  accessToken: '',
   regions: [],
   categories: [],
   restaurants: [],
@@ -14,6 +15,13 @@ const initialState = {
 };
 
 const reducers = {
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
+    };
+  },
+
   setRegions(state, { payload: { regions } }) {
     return {
       ...state,
