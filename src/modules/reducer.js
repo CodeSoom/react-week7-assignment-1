@@ -22,6 +22,13 @@ const reducers = {
     };
   },
 
+  logout(state) {
+    return {
+      ...state,
+      accessToken: '',
+    };
+  },
+
   setRegions(state, { payload: { regions } }) {
     return {
       ...state,
