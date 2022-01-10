@@ -1,10 +1,13 @@
 import { fireEvent, render } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginContainer from './LoginContainer';
 
-import { changeLoginField } from '../modules/actions';
+import {
+  changeLoginField,
+  logout,
+} from '../modules/actions';
 
 jest.mock('react-redux');
 
@@ -14,51 +17,81 @@ describe('LoginContainer', () => {
   beforeEach(() => {
     dispatch.mockClear();
 
+    useSelector.mockImplementation((selector) => selector({
+      accessToken: given.accessToken,
+    }));
+
     useDispatch.mockImplementation(() => dispatch);
   });
 
-  it('renders email and password inputs and "Log In" button', () => {
-    const { queryByLabelText, queryByRole } = render((
-      <LoginContainer />
-    ));
+  context('when logged out', () => {
+    given('accessToken', () => null);
 
-    expect(queryByLabelText('E-mail')).toBeInTheDocument();
-    expect(queryByLabelText('Password')).toBeInTheDocument();
+    it('renders email and password inputs and "Log In" button', () => {
+      const { queryByLabelText, queryByRole } = render((
+        <LoginContainer />
+      ));
 
-    expect(queryByRole('button', { name: 'Log In' })).toBeInTheDocument();
-  });
+      expect(queryByLabelText('E-mail')).toBeInTheDocument();
+      expect(queryByLabelText('Password')).toBeInTheDocument();
 
-  // TODO: 이메일 입력 => 리덕스 상태 변경 액션 호출(dispatch)
-  it('types E-mail and Password, calls dispatch with changeLoginField', () => {
-    const { getByLabelText } = render((
-      <LoginContainer />
-    ));
-
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'changed email' },
+      expect(queryByRole('button', { name: 'Log In' })).toBeInTheDocument();
     });
 
-    expect(dispatch).toBeCalledWith(
-      changeLoginField({ name: 'email', value: 'changed email' }),
-    );
+    // TODO: 이메일 입력 => 리덕스 상태 변경 액션 호출(dispatch)
+    it('types E-mail and Password, calls dispatch with changeLoginField', () => {
+      const { getByLabelText } = render((
+        <LoginContainer />
+      ));
 
-    fireEvent.change(getByLabelText('Password'), {
-      target: { value: 'changed password' },
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'changed email' },
+      });
+
+      expect(dispatch).toBeCalledWith(
+        changeLoginField({ name: 'email', value: 'changed email' }),
+      );
+
+      fireEvent.change(getByLabelText('Password'), {
+        target: { value: 'changed password' },
+      });
+
+      expect(dispatch).toBeCalledWith(
+        changeLoginField({ name: 'password', value: 'changed password' }),
+      );
     });
 
-    expect(dispatch).toBeCalledWith(
-      changeLoginField({ name: 'password', value: 'changed password' }),
-    );
+    // TODO: 로그인 버튼 클릭하면 로그인 이벤트 호출(dispatch login 기능)
+    it('clicks "Log In" button, calls dispatch', () => {
+      const { getByRole } = render((
+        <LoginContainer />
+      ));
+
+      fireEvent.click(getByRole('button', { name: 'Log In' }));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 
-  // TODO: 로그인 버튼 클릭하면 로그인 이벤트 호출(dispatch login 기능)
-  it('clicks "Log In" button, calls dispatch', () => {
-    const { getByRole } = render((
-      <LoginContainer />
-    ));
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-    fireEvent.click(getByRole('button', { name: 'Log In' }));
+    it('renders "Log out" button', () => {
+      const { queryByRole } = render((
+        <LoginContainer />
+      ));
 
-    expect(dispatch).toBeCalled();
+      expect(queryByRole('button', { name: 'Log out' })).toBeInTheDocument();
+    });
+
+    it('clicks "Log out" button, calls dispatch with logout action', () => {
+      const { getByRole } = render((
+        <LoginContainer />
+      ));
+
+      fireEvent.click(getByRole('button', { name: 'Log out' }));
+
+      expect(dispatch).toBeCalledWith(logout());
+    });
   });
 });
