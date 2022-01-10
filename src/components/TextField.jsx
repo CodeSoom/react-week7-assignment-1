@@ -1,5 +1,5 @@
 export default function TextField({
-  label, type = 'text', name, onChange,
+  label, type = 'text', name, id, onChange,
 }) {
   function handleChange(event) {
     const { target: { value } } = event;
@@ -8,13 +8,13 @@ export default function TextField({
 
   return (
     <>
-      <label htmlFor="login-email">
+      <label htmlFor={id}>
         {label}
       </label>
       <input
         type={type}
-        id="login-email"
-        name="email"
+        id={id}
+        name={name}
         onChange={handleChange}
       />
     </>
