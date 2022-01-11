@@ -2,9 +2,11 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { render, fireEvent } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
+
+jest.mock('react-redux');
 
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
@@ -12,6 +14,12 @@ describe('LoginFormContainer', () => {
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: 'test@test',
+        password: '1234',
+      },
+    }));
   });
 
   it('input control들을 렌더링한다.', () => {
@@ -21,8 +29,8 @@ describe('LoginFormContainer', () => {
       </MemoryRouter>
     ));
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    expect(getByLabelText('E-mail').value).toBe('test@test');
+    expect(getByLabelText('Password').value).toBe('1234');
   });
 
   it('"Login" 버튼을 렌더링한다.', () => {

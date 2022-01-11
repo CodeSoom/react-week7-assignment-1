@@ -3,22 +3,50 @@ import { render, fireEvent } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  it('input control들을 렌더링하고, 이벤트 변화를 감지한다.', () => {
-    const handleChange = jest.fn();
+  const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
-    const { getByLabelText } = render((
-      <LoginForm onChange={handleChange} />
+  beforeEach(() => {
+    handleChange.mockClear();
+    handleSubmit.mockClear();
+  });
+
+  function renderLoginForm({ email, password }) {
+    return render((
+      <LoginForm
+        fields={{ email, password }}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
     ));
+  }
+  it('input control들을 렌더링하고, 이벤트 변화를 감지한다.', () => {
+    const email = 'test@test';
+    const password = '1234';
+
+    const { getByLabelText } = renderLoginForm({ email, password });
 
     const controls = [
-      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
-      { label: 'Password', name: 'password', value: 'tester' },
+      {
+        label: 'E-mail',
+        name: 'email',
+        origin: email,
+        value: 'tester@example.com',
+      },
+      {
+        label: 'Password',
+        name: 'password',
+        origin: password,
+        value: 'tester',
+      },
     ];
 
-    controls.forEach(({ label, name, value }) => {
+    controls.forEach(({
+      label, name, origin, value,
+    }) => {
       const input = getByLabelText(label);
 
-      expect(input).not.toBeNull();
+      expect(input.value).toBe(origin);
 
       fireEvent.change(input, {
         target: { value },
@@ -31,11 +59,7 @@ describe('LoginForm', () => {
   });
 
   it('Login 버튼을 렌더링한다.', () => {
-    const handleSubmit = jest.fn();
-
-    const { queryByText } = render((
-      <LoginForm onSubmit={handleSubmit} />
-    ));
+    const { queryByText } = renderLoginForm({ });
 
     fireEvent.click(queryByText('Login'));
     expect(handleSubmit).toBeCalled();

@@ -1,11 +1,18 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { requestLogin } from './actions';
+import { get } from './utils';
+
+import {
+  requestLogin,
+  changeLoginField,
+} from './actions';
 
 import LoginForm from './LoginForm';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
+
+  const { email, password } = useSelector(get('loginFields'));
 
   function handleSubmit() {
     // 로그인은 비동기로 요청처리
@@ -14,10 +21,16 @@ export default function LoginFormContainer() {
     dispatch(requestLogin());
   }
 
+  function handleChange({ name, value }) {
+    dispatch(changeLoginField({ name, value }));
+  }
+
   return (
     <>
       <LoginForm
+        fields={{ email, password }}
         onSubmit={handleSubmit}
+        onChange={handleChange}
       />
     </>
   );

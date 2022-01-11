@@ -93,3 +93,10 @@ export function requestLogin() {
     // dispatch(setAccessToken(accessToken));
   };
 }
+
+export function changeLoginField({ name, value }) {
+  return {
+    type: 'changeLoginField',
+    payload: { name, value },
+  };
+}
