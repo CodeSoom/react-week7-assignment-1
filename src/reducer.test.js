@@ -5,6 +5,7 @@ import {
   setCategories,
   setRestaurants,
   setRestaurant,
+  setToken,
   selectRegion,
   selectCategory,
 } from './actions';
@@ -16,6 +17,7 @@ describe('reducer', () => {
       categories: [],
       restaurants: [],
       restaurant: null,
+      token: '',
       selectedRegion: null,
       selectedCategory: null,
     };
@@ -87,6 +89,20 @@ describe('reducer', () => {
 
       expect(state.restaurant.id).toBe(1);
       expect(state.restaurant.name).toBe('마법사주방');
+    });
+  });
+
+  describe('setToken', () => {
+    it('changes token', () => {
+      const initialState = {
+        token: '',
+      };
+
+      const token = 'TOKEN';
+
+      const state = reducer(initialState, setToken(token));
+
+      expect(state.token).toBe('TOKEN');
     });
   });
 

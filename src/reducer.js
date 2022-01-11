@@ -5,6 +5,7 @@ const initialState = {
   categories: [],
   restaurants: [],
   restaurant: null,
+  token: '',
   selectedRegion: null,
   selectedCategory: null,
 };
@@ -35,6 +36,13 @@ const reducers = {
     return {
       ...state,
       restaurant,
+    };
+  },
+
+  setToken(state, { payload: { token } }) {
+    return {
+      ...state,
+      token,
     };
   },
 

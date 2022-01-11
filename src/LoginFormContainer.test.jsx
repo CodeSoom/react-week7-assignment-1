@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import LoginFormContainer from './LoginFormContainer';
 
 describe('LoginFormContainer', () => {
-  const dispatch = useDispatch();
+  const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
 
