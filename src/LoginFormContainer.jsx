@@ -13,6 +13,7 @@ export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
   const { email, password } = useSelector(get('loginFields'));
+  const accessToken = useSelector(get('accessToken'));
 
   function handleSubmit() {
     // 로그인은 비동기로 요청처리
@@ -32,6 +33,7 @@ export default function LoginFormContainer() {
         onSubmit={handleSubmit}
         onChange={handleChange}
       />
+      <p>{accessToken}</p>
     </>
   );
 }
