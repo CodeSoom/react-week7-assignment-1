@@ -14,4 +14,14 @@ describe('LoginPage', () => {
 
     expect(container).toHaveTextContent('Login');
   });
+
+  it('LoginFormContainer를 렌더링 한다.', () => {
+    const { container } = render((
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>
+    ));
+
+    expect(container).toHaveTextContent('E-mail');
+  });
 });
