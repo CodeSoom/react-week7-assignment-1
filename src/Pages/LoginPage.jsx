@@ -1,8 +1,7 @@
 export default function LoginPage() {
   return (
     <div>
-      <h2>About 페이지</h2>
-      <p>About 페이지입니다.</p>
+      <h2>Login 페이지</h2>
     </div>
   );
 }
