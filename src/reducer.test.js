@@ -7,6 +7,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginField,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +19,7 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      changeLoginField: null,
     };
 
     it('returns initialState', () => {
@@ -123,6 +125,42 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('changeLoginField', () => {
+    context('when email is changed', () => {
+      const initialState = {
+        loginFields: {
+          email: 'blahblah',
+          password: '1234',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        changeLoginField({ name: 'email', value: 'test' }),
+      );
+
+      expect(state.loginFields.email).toBe('test');
+      expect(state.loginFields.password).toBe('1234');
+    });
+
+    context('when password is changed', () => {
+      const initialState = {
+        loginFields: {
+          email: 'blahblah',
+          password: '1234',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        changeLoginField({ name: 'password', value: 'test' }),
+      );
+
+      expect(state.loginFields.email).toBe('blahblah');
+      expect(state.loginFields.password).toBe('test');
     });
   });
 });
