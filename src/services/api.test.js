@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  // postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -83,4 +84,21 @@ describe('api', () => {
       expect(accessToken).toEqual('ACCESS_TOKEN');
     });
   });
+
+  // THINK: postReview 도 테스트해야하나?
+  // 반환 값이 없음.. 반환 값을 state 값으로 보고 테스트해야하나?
+  // describe('postReview', () => {
+  //   beforeEach(() => {
+  //     mockFetch({ accessToken: 'ACCESS_TOKEN' });
+  //   });
+
+  //   it('returns none?', async () => {
+  //     await postReview({
+  //       accessToken: 'ACCESS_TOKEN',
+  //       restaurantId: '1',
+  //       score: '5',
+  //       description: 'GYU TEST',
+  //     });
+  //   });
+  // });
 });
