@@ -28,6 +28,9 @@ describe('LoginForm', () => {
       target: { value: 'test@example.com' },
     });
 
-    expect(handleChange).toBeCalled();
+    expect(handleChange).toBeCalledWith({
+      name: 'email',
+      value: 'test@example.com',
+    });
   });
 });
