@@ -11,7 +11,8 @@ describe('LoginForm', () => {
     ));
 
     const controls = [
-      { label: 'E-mail', name: 'E-mail', value: 'tester@example.com' },
+      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
+      { label: 'Password', name: 'password', value: 'tester' },
     ];
 
     controls.forEach(({ label, name, value }) => {
@@ -23,8 +24,8 @@ describe('LoginForm', () => {
         target: { value },
       });
       expect(handleChange).toBeCalledWith({
-        name: 'email',
-        value: 'tester@example.com',
+        name,
+        value,
       });
     });
   });
