@@ -38,7 +38,6 @@ describe('LoginContainer', () => {
       expect(queryByRole('button', { name: 'Log In' })).toBeInTheDocument();
     });
 
-    // TODO: 이메일 입력 => 리덕스 상태 변경 액션 호출(dispatch)
     it('types E-mail and Password, calls dispatch with changeLoginField', () => {
       const { getByLabelText } = render((
         <LoginContainer />
@@ -61,7 +60,6 @@ describe('LoginContainer', () => {
       );
     });
 
-    // TODO: 로그인 버튼 클릭하면 로그인 이벤트 호출(dispatch login 기능)
     it('clicks "Log In" button, calls dispatch', () => {
       const { getByRole } = render((
         <LoginContainer />
