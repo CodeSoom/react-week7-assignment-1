@@ -9,5 +9,5 @@ export default function LoginFormContainer() {
     dispatch();
   }
 
-  return ((<LoginForm onSubmit={handleSubmit} />));
+  return (<LoginForm onSubmit={handleSubmit} />);
 }

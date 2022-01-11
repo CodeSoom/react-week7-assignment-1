@@ -1,8 +1,5 @@
-export default function LoginFormContainer() {
-  function handleClick() {
-  }
-
-  return ((
+export default function LoginForm({ onSubmit }) {
+  return (
     <>
       <label htmlFor="login-email">
         Username
@@ -14,10 +11,10 @@ export default function LoginFormContainer() {
       <input type="password" id="login-password" />
       <button
         type="button"
-        onClick={handleClick}
+        onClick={onSubmit}
       >
         Log In
       </button>
     </>
-  ));
+  );
 }
