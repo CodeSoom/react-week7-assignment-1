@@ -17,7 +17,12 @@ export default function LoginForm({ onChange, onSubmit }) {
       <label htmlFor="login-password">
         Password
       </label>
-      <input type="password" id="login-password" />
+      <input
+        type="password"
+        id="login-password"
+        name="password"
+        onChange={handleChange}
+      />
       <button
         type="button"
         onClick={onSubmit}
