@@ -6,7 +6,7 @@ describe('LoginFormContainer', () => {
   it('renders input controls', () => {
     const { getByLabelText } = render(<LoginFormContainer />);
 
-    expect(getByLabelText('Username')).toBe();
-    expect(getByLabelText('Password')).toBe();
+    expect(getByLabelText('Username')).not.toBeNull();
+    expect(getByLabelText('Password')).not.toBeNull();
   });
 });

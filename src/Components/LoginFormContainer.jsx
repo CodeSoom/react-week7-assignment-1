@@ -1,3 +1,14 @@
 export default function LoginFormContainer() {
-  return ((<></>));
+  return ((
+    <>
+      <label htmlFor="login-email">
+        Username
+      </label>
+      <input type="email" id="login-email" />
+      <label htmlFor="login-password">
+        Password
+      </label>
+      <input type="password" id="login-password" />
+    </>
+  ));
 }
