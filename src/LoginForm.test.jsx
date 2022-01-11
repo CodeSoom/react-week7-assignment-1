@@ -4,16 +4,33 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const handleSubmit = jest.fn();
+  const handleChange = jest.fn();
 
   const renderLoginForm = () => render(
-    <LoginForm onSubmit={handleSubmit} />,
+    <LoginForm onSubmit={handleSubmit} onChange={handleChange} />,
   );
 
-  it('renders input controls', () => {
+  it('renders input controls and listens change events', () => {
     const { getByLabelText } = renderLoginForm();
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    const controls = [
+      {
+        label: 'E-mail', name: 'email', value: 'tester@example.com',
+      },
+      {
+        label: 'Password', name: 'password', value: 'test',
+      },
+    ];
+
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
+
+      expect(input).not.toBeNull();
+
+      fireEvent.change(getByLabelText(label), { target: { value } });
+
+      expect(handleChange).toBeCalledWith({ name, value });
+    });
   });
 
   it('renders "Log In" button', () => {
