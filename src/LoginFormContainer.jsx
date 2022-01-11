@@ -14,6 +14,20 @@ export default function LoginFormContainer() {
   // ToDo onChange 로 아이디, 비번 값 받아서 저장하기
   return (
     <div>
+      <label htmlFor="email-input">
+        E-mail
+      </label>
+      <input
+        id="email-input"
+        type="email"
+      />
+      <label htmlFor="password-input">
+        Password
+      </label>
+      <input
+        id="password-input"
+        type="password"
+      />
       <button
         type="button"
         onClick={handleClick}
