@@ -8,7 +8,11 @@ import LoginFormContainer from './LoginFormContainer';
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => dispatch);
+  beforeEach(() => {
+    dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
+  });
 
   it('renders "Submit" button', () => {
     const { getByText } = render((
@@ -37,5 +41,22 @@ describe('LoginFormContainer', () => {
 
     expect(getByLabelText('E-mail')).toBeInTheDocument();
     expect(getByLabelText('Password')).toBeInTheDocument();
+  });
+
+  context('with onChange event', () => {
+    it('calls dispatch to change state', () => {
+      const { getByLabelText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.click(getByLabelText('E-mail'), {
+        target: { value: 'test@mail' },
+      });
+      fireEvent.click(getByLabelText('Password'), {
+        target: { value: '123' },
+      });
+
+      expect(dispatch).toBeCalled();
+    });
   });
 });
