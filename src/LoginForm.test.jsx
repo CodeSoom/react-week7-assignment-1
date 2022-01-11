@@ -16,7 +16,10 @@ describe('LoginForm', () => {
     fireEvent.change(getByLabelText('E-mail'), {
       target: { value: 'tester@example.com' },
     });
-    expect(handleChange).toBeCalled();
+    expect(handleChange).toBeCalledWith({
+      name: 'email',
+      value: 'tester@example.com',
+    });
   });
 
   it('Login 버튼을 렌더링한다.', () => {
