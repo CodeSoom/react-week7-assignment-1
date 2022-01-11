@@ -8,6 +8,7 @@ import {
   selectRegion,
   selectCategory,
   changeLoginField,
+  changeReviewField,
   setAccessToken,
   logout,
 } from './actions';
@@ -204,6 +205,46 @@ describe('reducer', () => {
 
         expect(state.loginFields.email).toBe('email');
         expect(state.loginFields.password).toBe('changed password');
+      });
+    });
+  });
+
+  describe('changeReviewField', () => {
+    context('when score is changed', () => {
+      it('changes score of reviewFields', () => {
+        const initialState = {
+          reviewFields: {
+            score: '0',
+            description: 'description',
+          },
+        };
+
+        const state = reducer(
+          initialState,
+          changeReviewField({ name: 'score', value: '5' }),
+        );
+
+        expect(state.reviewFields.score).toBe('5');
+        expect(state.reviewFields.description).toBe(initialState.reviewFields.description);
+      });
+    });
+
+    context('when password is changed', () => {
+      it('changes password of loginFields', () => {
+        const initialState = {
+          reviewFields: {
+            score: '0',
+            description: 'description',
+          },
+        };
+
+        const state = reducer(
+          initialState,
+          changeReviewField({ name: 'description', value: 'changed description' }),
+        );
+
+        expect(state.reviewFields.score).toBe(initialState.reviewFields.score);
+        expect(state.reviewFields.description).toBe('changed description');
       });
     });
   });
