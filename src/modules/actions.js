@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from '../services/api';
 
 import {
@@ -106,6 +107,13 @@ export function changeLoginField({ name, value }) {
   };
 }
 
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: { name, value },
+  };
+}
+
 export function requestLogin() {
   // TODO: email, password 없으면 동작안하는 테스트? 추가?
   return async (dispatch, getState) => {
@@ -116,6 +124,21 @@ export function requestLogin() {
     saveItem('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { accessToken, reviewFields: { score, description } } = getState();
+
+    // post
+    await postReview({
+      accessToken, restaurantId, score, description,
+    });
+
+    const restaurant = await fetchRestaurant({ restaurantId });
+
+    dispatch(setRestaurant(restaurant));
   };
 }
 
