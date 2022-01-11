@@ -6,31 +6,34 @@ describe('LoginForm', () => {
   const handleSubmit = jest.fn();
   const handleChange = jest.fn();
 
-  it('renders input controls', () => {
-    const { getByLabelText } = render(<LoginForm />);
+  it('renders input controls and listens change events', () => {
+    const { getByLabelText } = render((
+      <LoginForm onChange={handleChange} />
+    ));
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    const controls = [
+      { label: 'E-mail', name: 'email', value: 'test@example.com' },
+      { label: 'Password', name: 'password', value: 'test' },
+    ];
+
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
+
+      expect(input).not.toBeNull();
+
+      fireEvent.change(input, { target: { value } });
+
+      expect(handleChange).toBeCalledWith({ name, value });
+    });
   });
 
   it('renders "Log in" button', () => {
-    const { getByText } = render(<LoginForm onSubmit={handleSubmit} />);
+    const { getByText } = render((
+      <LoginForm onSubmit={handleSubmit} />
+    ));
 
     fireEvent.click(getByText('Log In'));
 
     expect(handleSubmit).toBeCalled();
-  });
-
-  it('listens change events', () => {
-    const { getByLabelText } = render(<LoginForm onChange={handleChange} />);
-
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'test@example.com' },
-    });
-
-    expect(handleChange).toBeCalledWith({
-      name: 'email',
-      value: 'test@example.com',
-    });
   });
 });
