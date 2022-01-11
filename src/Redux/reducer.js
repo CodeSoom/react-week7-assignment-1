@@ -1,4 +1,4 @@
-import { equal } from './utils';
+import { equal } from '../Utils/utils';
 
 const initialState = {
   regions: [],

@@ -6,9 +6,9 @@ import {
 
 import { Provider } from 'react-redux';
 
-import App from './App';
+import App from './Components/App';
 
-import store from './store';
+import store from './Redux/store';
 
 ReactDOM.render(
   (
