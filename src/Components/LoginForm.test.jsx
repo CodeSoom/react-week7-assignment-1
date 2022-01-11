@@ -9,7 +9,7 @@ describe('LoginForm', () => {
   it('renders input controls', () => {
     const { getByLabelText } = render(<LoginForm />);
 
-    expect(getByLabelText('Username')).not.toBeNull();
+    expect(getByLabelText('E-mail')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
   });
 
@@ -24,7 +24,7 @@ describe('LoginForm', () => {
   it('listens change events', () => {
     const { getByLabelText } = render(<LoginForm onChange={handleChange} />);
 
-    fireEvent.change(getByLabelText('Username'), {
+    fireEvent.change(getByLabelText('E-mail'), {
       target: { value: 'test@example.com' },
     });
 
