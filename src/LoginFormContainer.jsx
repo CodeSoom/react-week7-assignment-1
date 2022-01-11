@@ -1,4 +1,14 @@
+import { useDispatch } from 'react-redux';
+
+import { requestLogin } from './actions';
+
 export default function LoginFormContainer() {
+  const dispatch = useDispatch();
+
+  function handleClick() {
+    dispatch(requestLogin());
+  }
+
   return (
     <div>
       <div>
@@ -8,6 +18,9 @@ export default function LoginFormContainer() {
       <div>
         <label htmlFor="login-password">Password</label>
         <input id="login-password" type="password" name="password" />
+      </div>
+      <div>
+        <button type="button" onClick={handleClick}>Log In</button>
       </div>
     </div>
   );
