@@ -11,29 +11,43 @@ export default function LoginFormContainer() {
     dispatch(requestLogin());
   }
 
-  // ToDo onChange 로 아이디, 비번 값 받아서 저장하기
+  // ToDo onChange 로 이메일, 비번 값 받아서 저장하기
+  function handleChange() {
+    //
+  }
+
   return (
     <div>
-      <label htmlFor="email-input">
-        E-mail
-      </label>
-      <input
-        id="email-input"
-        type="email"
-      />
-      <label htmlFor="password-input">
-        Password
-      </label>
-      <input
-        id="password-input"
-        type="password"
-      />
-      <button
-        type="button"
-        onClick={handleClick}
-      >
-        Submit
-      </button>
+      <div>
+        <label htmlFor="email-input">
+          E-mail
+        </label>
+        <input
+          onChange={handleChange}
+          name="email"
+          id="email-input"
+          type="email"
+        />
+      </div>
+      <div>
+        <label htmlFor="password-input">
+          Password
+        </label>
+        <input
+          onChange={handleChange}
+          name="password"
+          id="password-input"
+          type="password"
+        />
+      </div>
+      <div>
+        <button
+          type="button"
+          onClick={handleClick}
+        >
+          Submit
+        </button>
+      </div>
     </div>
   );
 }
