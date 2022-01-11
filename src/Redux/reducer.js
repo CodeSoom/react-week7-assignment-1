@@ -64,7 +64,7 @@ const reducers = {
       ...state,
       loginFields: {
         ...loginFields,
-        email: 'test',
+        [name]: value,
       },
     };
   },
