@@ -4,7 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
-  // postReview,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -85,20 +85,21 @@ describe('api', () => {
     });
   });
 
-  // THINK: postReview 도 테스트해야하나?
-  // 반환 값이 없음.. 반환 값을 state 값으로 보고 테스트해야하나?
-  // describe('postReview', () => {
-  //   beforeEach(() => {
-  //     mockFetch({ accessToken: 'ACCESS_TOKEN' });
-  //   });
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch({ accessToken: 'ACCESS_TOKEN' });
+    });
 
-  //   it('returns none?', async () => {
-  //     await postReview({
-  //       accessToken: 'ACCESS_TOKEN',
-  //       restaurantId: '1',
-  //       score: '5',
-  //       description: 'GYU TEST',
-  //     });
-  //   });
-  // });
+    it('not return', async () => {
+      const result = await postReview({
+        accessToken: 'ACCESS_TOKEN',
+        restaurantId: '1',
+        score: '5',
+        description: 'GYU TEST',
+      });
+
+      // 반환하지 않는 경우 테스트
+      expect(result).toBeUndefined();
+    });
+  });
 });
