@@ -10,6 +10,7 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -98,6 +99,31 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+        reviewFields: {
+          score: '5',
+          description: '맛있어요 :)',
+        },
+      });
+    });
+
+    // THINK? postReview, fetchRestaurant api 요청 후
+    // 잘되면 dispatch 로  setRestaurant 하는데
+    // api 도 확인해야하는지? dispatch 만 확인하면 되는지 궁금
+    it('dispatchs setRestaurant', async () => {
+      const restaurantId = '1';
+
+      await store.dispatch(sendReview({ restaurantId }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant({}));
     });
   });
 });
