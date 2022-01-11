@@ -6,11 +6,12 @@ import { requestLogin } from './actions';
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  // ToDo 클릭하면 이메일과 비번을 줄것임.
+  // ToDo 클릭하면 기존상태에서 가져온 이메일과 비번을 주고, 토큰을 받을 것이다.
   function handleClick() {
     dispatch(requestLogin());
   }
 
+  // ToDo onChange 로 아이디, 비번 값 받아서 저장하기
   return (
     <div>
       <button

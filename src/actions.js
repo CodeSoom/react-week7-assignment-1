@@ -94,6 +94,7 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
+// ToDo 클릭하면 기존상태에서 가져온 이메일과 비번을 주고, 토큰을 받을 것이다.
 export function requestLogin() {
   return async (dispatch) => {
     const token = await fetchToken();

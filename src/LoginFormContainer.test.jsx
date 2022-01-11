@@ -29,4 +29,13 @@ describe('LoginFormContainer', () => {
       expect(dispatch).toBeCalled();
     });
   });
+
+  it('renders "E-mail, Password" input', () => {
+    const { getByLabelText } = render((
+      <LoginFormContainer />
+    ));
+
+    expect(getByLabelText('E-mail')).toBeInTheDocument();
+    expect(getByLabelText('Password')).toBeInTheDocument();
+  });
 });
