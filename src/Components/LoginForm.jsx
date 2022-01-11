@@ -6,7 +6,7 @@ export default function LoginForm({ onChange, onSubmit }) {
   return (
     <>
       <label htmlFor="login-email">
-        Username
+        E-mail
       </label>
       <input
         type="email"

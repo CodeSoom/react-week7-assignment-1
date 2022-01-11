@@ -13,6 +13,6 @@ describe('LoginPage', () => {
   it('renders input controls', () => {
     const { getByLabelText } = renderLoginPage();
 
-    expect(getByLabelText('Username')).not.toBeNull();
+    expect(getByLabelText('E-mail')).not.toBeNull();
   });
 });
