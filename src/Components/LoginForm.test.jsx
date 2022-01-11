@@ -4,6 +4,7 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const handleSubmit = jest.fn();
+  const handleChange = jest.fn();
 
   it('renders input controls', () => {
     const { getByLabelText } = render(<LoginForm />);
@@ -18,5 +19,15 @@ describe('LoginForm', () => {
     fireEvent.click(getByText('Log In'));
 
     expect(handleSubmit).toBeCalled();
+  });
+
+  it('listens change events', () => {
+    const { getByLabelText } = render(<LoginForm onChange={handleChange} />);
+
+    fireEvent.change(getByLabelText('Username'), {
+      target: { value: 'test@example.com' },
+    });
+
+    expect(handleChange).toBeCalled();
   });
 });
