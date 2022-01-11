@@ -2,6 +2,12 @@
 
 export default function LoginFormContainer() {
   return (
-    <div>d</div>
+    <div>
+      <button
+        type="button"
+      >
+        Submit
+      </button>
+    </div>
   );
 }
