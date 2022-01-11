@@ -1,38 +1,25 @@
-import { MemoryRouter } from 'react-router-dom';
-
 import { render, fireEvent } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import LoginForm from './LoginForm';
 
-import LoginFormContainer from './LoginFormContainer';
-
-describe('LoginFormContainer', () => {
-  const dispatch = jest.fn();
-
-  beforeEach(() => {
-    dispatch.mockClear();
-    useDispatch.mockImplementation(() => dispatch);
-  });
-
+describe('LoginForm', () => {
   it('input control들을 렌더링한다.', () => {
     const { getByLabelText } = render((
-      <MemoryRouter>
-        <LoginFormContainer />
-      </MemoryRouter>
+      <LoginForm />
     ));
 
     expect(getByLabelText('E-mail')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
   });
 
-  it('"Login" 버튼을 렌더링한다.', () => {
-    const { getByText } = render((
-      <MemoryRouter>
-        <LoginFormContainer />
-      </MemoryRouter>
+  it('Login 버튼을 렌더링한다.', () => {
+    const handleSubmit = jest.fn();
+
+    const { queryByText } = render((
+      <LoginForm onSubmit={handleSubmit} />
     ));
 
-    fireEvent.click(getByText('Login'));
-    expect(dispatch).toBeCalled();
+    fireEvent.click(queryByText('Login'));
+    expect(handleSubmit).toBeCalled();
   });
 });
