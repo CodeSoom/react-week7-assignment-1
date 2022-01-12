@@ -22,8 +22,8 @@ describe('reducer', () => {
       selectedRegion: null,
       selectedCategory: null,
       inputField: {
-        name: '',
-        value: '',
+        email: '',
+        password: '',
       },
     };
 
@@ -151,8 +151,8 @@ describe('reducer', () => {
     it('sets input value to name of input', () => {
       const initialState = {
         inputField: {
-          name: '',
-          value: '',
+          name: 'email',
+          value: 'test@mail',
         },
       };
 

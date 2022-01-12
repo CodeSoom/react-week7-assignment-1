@@ -3,7 +3,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
-  fetchToken,
+  postLogin,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -101,10 +101,17 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
-// ToDo 클릭하면 기존상태에서 가져온 이메일과 비번을 주고, 토큰을 받을 것이다.
+// ToDo 스토어에서 가져온 이메일과 비번(inputField)을 주고, 토큰을 받을 것이다.
 export function requestLogin() {
-  return async (dispatch) => {
-    const token = await fetchToken();
-    dispatch(setToken(token));
+  return async (dispatch, getState) => {
+    const {
+      inputField: { email, password },
+    } = getState();
+
+    const token = await postLogin({ email, password });
+
+    dispatch(setToken(token)); // 토큰사용하는 setToken 액션발동
+
+    // ToDo Promise로 실패했을때 처리 추가
   };
 }

@@ -23,7 +23,7 @@ describe('LoginFormContainer', () => {
   });
 
   context('with onClick event', () => {
-    it('calls dispatch to change state', () => {
+    it('calls dispatch to get token', () => {
       const { getByText } = render((
         <LoginFormContainer />
       ));
@@ -44,7 +44,7 @@ describe('LoginFormContainer', () => {
   });
 
   context('with onChange event', () => {
-    it('calls dispatch to change state', () => {
+    it('calls dispatch to set name for value', () => {
       const { getByLabelText } = render((
         <LoginFormContainer />
       ));

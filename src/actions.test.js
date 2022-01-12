@@ -20,6 +20,8 @@ jest.mock('./services/api');
 describe('actions', () => {
   let store;
 
+  // ToDo requestLogin 테스트 만들기
+
   describe('loadInitialData', () => {
     beforeEach(() => {
       store = mockStore({});

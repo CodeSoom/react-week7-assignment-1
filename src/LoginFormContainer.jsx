@@ -1,30 +1,38 @@
 // 관심사: 리덕스 (상태변화 및 상태 불러오기)
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './LoginForm';
+
+import { get } from './utils';
 
 import {
   requestLogin,
   changeInputField,
+  setToken,
 } from './actions';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  // ToDo 클릭하면 기존상태에서 가져온 이메일과 비번을 주고, 토큰을 받을 것이다.
+  const setToken = useSelector(get('setToken'));
+
+  // 토큰을 받을 것이다.
   function handleClick() {
     dispatch(requestLogin());
   }
 
-  // ToDo { name, value } 보내줘서 name에 value 할당하기 -> 왜?
+  // email: test111@mail.com 형식 만들기 완료
   function handleChange({ name, value }) {
     dispatch(changeInputField({ name, value }));
   }
 
   return (
-    <LoginForm
-      onClick={handleClick}
-      onChange={handleChange}
-    />
+    <div>
+      <LoginForm
+        onClick={handleClick}
+        onChange={handleChange}
+      />
+      <p>{setToken}</p>
+    </div>
   );
 }

@@ -9,8 +9,8 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   inputField: {
-    name: '',
-    value: '',
+    email: '',
+    password: '',
   },
 };
 

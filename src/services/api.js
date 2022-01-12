@@ -28,9 +28,15 @@ export async function fetchRestaurant({ restaurantId }) {
   return data;
 }
 
-export async function fetchToken() {
-  const url = '';
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
+export async function postLogin({ email, password }) {
+  const url = 'https://eatgo-login-api.ahastudio.com/session';
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  }); // 노이해
+  const { token } = await response.json(); // 노이해2
+  return token;
 }
