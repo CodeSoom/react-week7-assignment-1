@@ -1,7 +1,7 @@
 // 관심사: 리덕스 (상태변화 및 상태 불러오기)
 import { render, fireEvent } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
@@ -12,7 +12,15 @@ describe('LoginFormContainer', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      inputField: {
+        email: '',
+        password: '',
+      },
+    }));
   });
+  // ToDo input Field 관련 테스트 추가
 
   it('renders "Submit" button', () => {
     const { getByText } = render((

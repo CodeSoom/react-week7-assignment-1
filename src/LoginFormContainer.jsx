@@ -12,6 +12,7 @@ import {
 
 export default function LoginFormContainer() {
   const setToken = useSelector(get('setToken'));
+  const { email, password } = useSelector(get('inputField'));
 
   const dispatch = useDispatch();
 
@@ -28,6 +29,7 @@ export default function LoginFormContainer() {
   return (
     <div>
       <LoginForm
+        field={{ email, password }}
         onClick={handleClick}
         onChange={handleChange}
       />
