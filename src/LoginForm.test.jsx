@@ -4,11 +4,16 @@ import { render, fireEvent } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
+  const field = {
+    email: '',
+    password: '',
+  };
   const handleClick = jest.fn();
   const handleChange = jest.fn();
 
   const renderLoginForm = () => render((
     <LoginForm
+      field={field}
       onClick={handleClick}
       onChange={handleChange}
     />
@@ -17,6 +22,7 @@ describe('LoginForm', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
+  // ToDo field 관련 테스트 추가
 
   it('renders "Submit" button to call onClick event', () => {
     const { getByText } = renderLoginForm();

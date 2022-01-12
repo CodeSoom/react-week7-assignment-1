@@ -1,5 +1,7 @@
 // 관심사: 로그인 폼을 화면에 나타내기
-export default function LoginForm({ onChange, onClick }) {
+export default function LoginForm({ field, onChange, onClick }) {
+  const { email, password } = field;
+
   function handleChange(event) {
     const { target: { name, value } } = event;
     onChange({ name, value });
@@ -14,6 +16,7 @@ export default function LoginForm({ onChange, onClick }) {
         <input
           onChange={handleChange}
           name="email"
+          value={email}
           id="email-input"
           type="email"
         />
@@ -25,6 +28,7 @@ export default function LoginForm({ onChange, onClick }) {
         <input
           onChange={handleChange}
           name="password"
+          value={password}
           id="password-input"
           type="password"
         />
