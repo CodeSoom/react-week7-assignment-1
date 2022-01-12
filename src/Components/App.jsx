@@ -6,6 +6,7 @@ import {
 
 import HomePage from '../Pages/HomePage';
 import AboutPage from '../Pages/AboutPage';
+import LoginPage from '../Pages/LoginPage';
 import RestaurantsPage from '../Pages/RestaurantsPage';
 import RestaurantPage from '../Pages/RestaurantPage';
 import NotFoundPage from '../Pages/NotFoundPage';
@@ -21,6 +22,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
+        <Route path="/login" component={LoginPage} />
         <Route exact path="/restaurants" component={RestaurantsPage} />
         <Route path="/restaurants/:id" component={RestaurantPage} />
         <Route component={NotFoundPage} />
