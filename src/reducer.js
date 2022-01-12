@@ -8,7 +8,10 @@ const initialState = {
   token: '',
   selectedRegion: null,
   selectedCategory: null,
-  inputField: {},
+  inputField: {
+    name: '',
+    value: '',
+  },
 };
 
 const reducers = {
@@ -67,7 +70,8 @@ const reducers = {
     return {
       ...state,
       inputField: {
-        email: 'test111@mail',
+        ...state.inputField, // const {inpuField} = state 대신 사용하는 것인지?
+        [name]: value, // 형식을 이해하기 위해서 모던 자바스크립트 튜토리얼에서 어떤 부분을 참고하면 될지?
       },
     };
   },

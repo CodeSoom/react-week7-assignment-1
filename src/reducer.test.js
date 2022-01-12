@@ -21,7 +21,10 @@ describe('reducer', () => {
       token: '',
       selectedRegion: null,
       selectedCategory: null,
-      inputField: {},
+      inputField: {
+        name: '',
+        value: '',
+      },
     };
 
     it('returns initialState', () => {
