@@ -151,8 +151,8 @@ describe('reducer', () => {
     it('sets input value to name of input', () => {
       const initialState = {
         inputField: {
-          name: 'email',
-          value: 'test@mail',
+          email: 'test@mail',
+          password: '111',
         },
       };
 

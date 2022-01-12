@@ -8,13 +8,12 @@ import { get } from './utils';
 import {
   requestLogin,
   changeInputField,
-  setToken,
 } from './actions';
 
 export default function LoginFormContainer() {
-  const dispatch = useDispatch();
-
   const setToken = useSelector(get('setToken'));
+
+  const dispatch = useDispatch();
 
   // 토큰을 받을 것이다.
   function handleClick() {
