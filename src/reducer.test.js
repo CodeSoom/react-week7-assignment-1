@@ -8,6 +8,7 @@ import {
   setToken,
   selectRegion,
   selectCategory,
+  changeInputField,
 } from './actions';
 
 describe('reducer', () => {
@@ -20,6 +21,7 @@ describe('reducer', () => {
       token: '',
       selectedRegion: null,
       selectedCategory: null,
+      inputField: {},
     };
 
     it('returns initialState', () => {
@@ -139,6 +141,24 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('changeInputField', () => {
+    it('sets input value to name of input', () => {
+      const initialState = {
+        inputField: {
+          name: '',
+          value: '',
+        },
+      };
+
+      const state = reducer(initialState, changeInputField({
+        name: 'email',
+        value: 'test111@mail',
+      }));
+
+      expect(state.inputField.email).toBe('test111@mail');
     });
   });
 });

@@ -1,7 +1,12 @@
 // 관심사: 리덕스 (상태변화 및 상태 불러오기)
 import { useDispatch } from 'react-redux';
 
-import { requestLogin } from './actions';
+import LoginForm from './LoginForm';
+
+import {
+  requestLogin,
+  changeInputField,
+} from './actions';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
@@ -11,43 +16,15 @@ export default function LoginFormContainer() {
     dispatch(requestLogin());
   }
 
-  // ToDo onChange 로 이메일, 비번 값 받아서 저장하기
-  function handleChange() {
-    //
+  // ToDo { name, value } 보내줘서 name에 value 할당하기 -> 왜?
+  function handleChange({ name, value }) {
+    dispatch(changeInputField({ name, value }));
   }
 
   return (
-    <div>
-      <div>
-        <label htmlFor="email-input">
-          E-mail
-        </label>
-        <input
-          onChange={handleChange}
-          name="email"
-          id="email-input"
-          type="email"
-        />
-      </div>
-      <div>
-        <label htmlFor="password-input">
-          Password
-        </label>
-        <input
-          onChange={handleChange}
-          name="password"
-          id="password-input"
-          type="password"
-        />
-      </div>
-      <div>
-        <button
-          type="button"
-          onClick={handleClick}
-        >
-          Submit
-        </button>
-      </div>
-    </div>
+    <LoginForm
+      onClick={handleClick}
+      onChange={handleChange}
+    />
   );
 }

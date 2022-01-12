@@ -55,6 +55,13 @@ export function selectCategory(categoryId) {
   };
 }
 
+export function changeInputField({ name, value }) {
+  return {
+    type: 'changeInputField',
+    payload: { name, value },
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();

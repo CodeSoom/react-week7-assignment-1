@@ -49,11 +49,17 @@ describe('LoginFormContainer', () => {
         <LoginFormContainer />
       ));
 
-      fireEvent.click(getByLabelText('E-mail'), {
-        target: { value: 'test@mail' },
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: {
+          name: 'email',
+          value: 'test@mail',
+        },
       });
-      fireEvent.click(getByLabelText('Password'), {
-        target: { value: '123' },
+      fireEvent.change(getByLabelText('Password'), {
+        target: {
+          name: 'password',
+          value: '123',
+        },
       });
 
       expect(dispatch).toBeCalled();

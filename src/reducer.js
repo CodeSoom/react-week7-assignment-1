@@ -8,6 +8,7 @@ const initialState = {
   token: '',
   selectedRegion: null,
   selectedCategory: null,
+  inputField: {},
 };
 
 const reducers = {
@@ -59,6 +60,15 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  changeInputField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      inputField: {
+        email: 'test111@mail',
+      },
     };
   },
 };
