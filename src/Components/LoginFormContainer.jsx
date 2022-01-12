@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   changeLoginField,
+  requestLogin,
 } from '../Redux/actions';
 
 import { get } from '../Utils/utils';
@@ -18,7 +19,7 @@ export default function LoginFormContainer() {
   }
 
   function handleSubmit() {
-    dispatch();
+    dispatch(requestLogin());
   }
 
   return (
