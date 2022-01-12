@@ -230,7 +230,7 @@ describe('reducer', () => {
     });
 
     context('when password is changed', () => {
-      it('changes password of loginFields', () => {
+      it('changes password of reviewFields', () => {
         const initialState = {
           reviewFields: {
             score: '0',
