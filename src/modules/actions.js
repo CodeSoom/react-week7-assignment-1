@@ -115,7 +115,6 @@ export function changeReviewField({ name, value }) {
 }
 
 export function requestLogin() {
-  // TODO: email, password 없으면 동작안하는 테스트? 추가?
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
 
@@ -131,7 +130,6 @@ export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
 
-    // post
     await postReview({
       accessToken, restaurantId, score, description,
     });

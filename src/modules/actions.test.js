@@ -135,9 +135,6 @@ describe('actions', () => {
       });
     });
 
-    // THINK? postReview, fetchRestaurant api 요청 후
-    // 잘되면 dispatch 로  setRestaurant 하는데
-    // api 도 확인해야하는지? dispatch 만 확인하면 되는지 궁금
     it('dispatchs setRestaurant', async () => {
       const restaurantId = '1';
 
