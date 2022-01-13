@@ -47,10 +47,7 @@ describe('RestaurantPage', () => {
 
       expect(container).toHaveTextContent('마법사주방');
     });
-  });
 
-  // ToDo without reviews
-  context('with review', () => {
     it('renders input with "평점" label', () => {
       const { queryByLabelText } = renderRestaurantPage({
         path: '/restaurants/1',
@@ -59,12 +56,20 @@ describe('RestaurantPage', () => {
       expect(queryByLabelText('평점')).not.toBeNull();
     });
 
-    it('renders input with "리뷰" label', () => {
+    it('renders input with "리뷰 내용" label', () => {
       const { queryByLabelText } = renderRestaurantPage({
         path: '/restaurants/1',
       });
 
-      expect(queryByLabelText('리뷰')).not.toBeNull();
+      expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+    });
+
+    it('renders "리뷰 남기기" button ', () => {
+      const { queryByText } = renderRestaurantPage({
+        path: '/restaurants/1',
+      });
+
+      expect(queryByText('리뷰 남기기')).not.toBeNull();
     });
   });
 });

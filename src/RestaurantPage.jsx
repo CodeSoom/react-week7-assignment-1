@@ -20,11 +20,11 @@ export default function RestaurantPage({ params }) {
       </div>
       <div>
         <label htmlFor="review-input">
-          리뷰
+          리뷰 내용
         </label>
         <input
           id="review-input"
-          type="number"
+          type="text"
           name="review"
         />
       </div>
