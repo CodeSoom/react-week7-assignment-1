@@ -18,6 +18,7 @@ describe('RestaurantContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
       reviewFields: given.reviewFields,
+      accessToken: given.accessToken,
     }));
   });
 
@@ -79,17 +80,34 @@ describe('RestaurantContainer', () => {
     });
   });
 
-  it('renders review submit button', () => {
+  context('without logged-in', () => {
     given('restaurant', () => ({
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
     }));
 
-    const { getByText } = renderRestaurantContainer();
+    it('renders review write form', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
 
-    fireEvent.click(getByText('리뷰 남기기'));
+      expect(queryByLabelText('평점')).toBeNull();
+      expect(queryByLabelText('리뷰 내용')).toBeNull();
+    });
+  });
 
-    expect(dispatch).toBeCalledTimes(2);
+  context('with logged-in', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
+    given('accessToken', () => 'AccessToken');
+
+    it('renders review write form', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
+
+      expect(queryByLabelText('평점')).not.toBeNull();
+      expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+    });
   });
 });
