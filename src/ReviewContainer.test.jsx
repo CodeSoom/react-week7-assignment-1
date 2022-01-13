@@ -26,7 +26,7 @@ describe('ReviewContainer', () => {
         },
       });
 
-      expect(dispatch).toBeCalled();
+      expect(dispatch).toBeCalledWith();
     });
 
     it('renders input with "리뷰 내용" label to call dispatch', () => {
@@ -44,10 +44,14 @@ describe('ReviewContainer', () => {
       expect(dispatch).toBeCalled();
     });
 
-    it('renders "리뷰 남기기" button ', () => {
+    it('renders "리뷰 남기기" button to call dispatch', () => {
       const { getByText } = render(<ReviewContainer />);
 
       expect(getByText('리뷰 남기기')).not.toBeNull();
+
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(dispatch).toBeCalled();
     });
   });
 });
