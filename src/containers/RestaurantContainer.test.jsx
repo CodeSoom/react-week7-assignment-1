@@ -89,23 +89,19 @@ describe('RestaurantContainer', () => {
         expect(queryByRole('button', { name: '리뷰 남기기' })).toBeInTheDocument();
       });
 
-      it('types input, calls dispath with changeReviewField', () => {
+      it.each([
+        { label: '평점', name: 'score', value: '5' },
+        { label: '리뷰 내용', name: 'description', value: '맛있어요!' },
+      ])('types input, calls dispath with changeReviewField', ({ label, name, value }) => {
         const { getByLabelText } = renderRestaurantContainer();
 
-        const controls = [
-          { label: '평점', name: 'score', value: '5' },
-          { label: '리뷰 내용', name: 'description', value: '맛있어요!' },
-        ];
-
-        controls.forEach(({ label, name, value }) => {
-          fireEvent.change(getByLabelText(label), {
-            target: { value },
-          });
-
-          expect(dispatch).toBeCalledWith(
-            changeReviewField({ name, value }),
-          );
+        fireEvent.change(getByLabelText(label), {
+          target: { value },
         });
+
+        expect(dispatch).toBeCalledWith(
+          changeReviewField({ name, value }),
+        );
       });
 
       it('clicks button, calls dispatch', async () => {

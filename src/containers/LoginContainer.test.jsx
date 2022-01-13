@@ -24,13 +24,17 @@ describe('LoginContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
   });
 
+  function rednerLoginContainer() {
+    return render((
+      <LoginContainer />
+    ));
+  }
+
   context('when logged out', () => {
     given('accessToken', () => null);
 
     it('renders email and password inputs and "Log In" button', () => {
-      const { queryByLabelText, queryByRole } = render((
-        <LoginContainer />
-      ));
+      const { queryByLabelText, queryByRole } = rednerLoginContainer();
 
       expect(queryByLabelText('E-mail')).toBeInTheDocument();
       expect(queryByLabelText('Password')).toBeInTheDocument();
@@ -38,9 +42,7 @@ describe('LoginContainer', () => {
     });
 
     it('types E-mail and Password, calls dispatch with changeLoginField', () => {
-      const { getByLabelText } = render((
-        <LoginContainer />
-      ));
+      const { getByLabelText } = rednerLoginContainer();
 
       fireEvent.change(getByLabelText('E-mail'), {
         target: { value: 'changed email' },
@@ -60,9 +62,7 @@ describe('LoginContainer', () => {
     });
 
     it('clicks "Log In" button, calls dispatch', () => {
-      const { getByRole } = render((
-        <LoginContainer />
-      ));
+      const { getByRole } = rednerLoginContainer();
 
       fireEvent.click(getByRole('button', { name: 'Log In' }));
 
@@ -74,17 +74,13 @@ describe('LoginContainer', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
 
     it('renders "Log out" button', () => {
-      const { queryByRole } = render((
-        <LoginContainer />
-      ));
+      const { queryByRole } = rednerLoginContainer();
 
       expect(queryByRole('button', { name: 'Log out' })).toBeInTheDocument();
     });
 
     it('clicks "Log out" button, calls dispatch with logout action', () => {
-      const { getByRole } = render((
-        <LoginContainer />
-      ));
+      const { getByRole } = rednerLoginContainer();
 
       fireEvent.click(getByRole('button', { name: 'Log out' }));
 
