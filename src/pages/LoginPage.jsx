@@ -1,15 +1,16 @@
 import { useDispatch } from 'react-redux';
-import { changeLoginField } from '../modules/actions';
-// import { get } from "../modules/utils";
+import { changeLoginField, requestLogin } from '../modules/actions';
 
 export default function LoginPage() {
   const dispatch = useDispatch();
 
-  // const { email, password } = useSelector(get('loginField'))
-
   function handleChagne(event) {
     const { target: { name, value } } = event;
     dispatch(changeLoginField({ name, value }));
+  }
+
+  function handleSubmit() {
+    dispatch(requestLogin());
   }
 
   return (
@@ -27,8 +28,7 @@ export default function LoginPage() {
         </label>
         <input type="password" id="login-password" name="password" onChange={handleChagne} />
       </div>
-      <button type="button">Log in</button>
-
+      <button type="button" onClick={handleSubmit}>Log in</button>
     </>
   );
 }

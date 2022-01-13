@@ -26,6 +26,13 @@ describe('LoginPage', () => {
     expect(getByRole('button', { name: 'Log in' })).not.toBeNull();
   });
 
+  it(' "Log in" button works', () => {
+    const { getByRole } = render(<LoginPage />);
+
+    fireEvent.click(getByRole('button', { name: 'Log in' }));
+    expect(dispatch).toBeCalled();
+  });
+
   it('email input works', () => {
     given('email', () => 'tester@example.com');
     const { getByLabelText } = render(<LoginPage />);
