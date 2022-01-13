@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
-import ReviewForm from './ReviewForm';
 
 import {
   loadRestaurant,
@@ -28,9 +27,8 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   return (
-    <>
-      <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm />
-    </>
+    <RestaurantDetail
+      restaurant={restaurant}
+    />
   );
 }
