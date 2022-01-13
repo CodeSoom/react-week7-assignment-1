@@ -25,12 +25,14 @@ describe('Reviews', () => {
   });
 
   context('without reviews item', () => {
-    it.each([
-      [[], null, undefined],
-    ])('renders no items message', (reviews) => {
-      const { container } = render(<ReviewItems reviews={reviews} />);
+    // THINK
+    // it.each 패턴으로 하면 커버리지 충족안됨.? 왜? *찾아보기
+    it('renders no items message', () => {
+      [[], null, undefined].forEach((reviews) => {
+        const { container } = render(<ReviewItems reviews={reviews} />);
 
-      expect(container).toHaveTextContent('리뷰가 없어요');
+        expect(container).toHaveTextContent('리뷰가 없어요');
+      });
     });
   });
 });
