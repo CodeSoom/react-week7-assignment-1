@@ -65,11 +65,11 @@ describe('RestaurantPage', () => {
     });
 
     it('renders "리뷰 남기기" button ', () => {
-      const { queryByText } = renderRestaurantPage({
+      const { queryAllByText } = renderRestaurantPage({
         path: '/restaurants/1',
       });
 
-      expect(queryByText('리뷰 남기기')).not.toBeNull();
+      expect(queryAllByText('리뷰 남기기')).not.toBeNull();
     });
   });
 });
