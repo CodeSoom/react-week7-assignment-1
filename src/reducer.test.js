@@ -194,13 +194,13 @@ describe('reducer', () => {
       const initialState = {
         reviewField: {
           rating: '1',
-          description: '',
+          description: '노맛',
         },
       };
 
       const state = reducer(initialState, changeReviewField({
-        rating: '5',
-        description: '존맛탱',
+        name: 'rating',
+        value: '5',
       }));
 
       expect(state.reviewField.rating).toBe('5');

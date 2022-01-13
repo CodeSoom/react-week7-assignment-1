@@ -1,7 +1,7 @@
 // 관심사: 상태바꿔주기
 import { render, fireEvent } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import ReviewContainer from './ReviewContainer';
 
@@ -10,7 +10,23 @@ describe('ReviewContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
+
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      reviewField: {
+        rating: '5',
+        description: '짱맛',
+      },
+    }));
+  });
+
+  // ToDo: 구현??
+  it('renders name and value of input', () => {
+    const { getByLabelText } = render(<ReviewContainer />);
+
+    expect(getByLabelText('평점').name).toBe('rating');
+    expect(getByLabelText('리뷰 내용').name).toBe('description');
   });
 
   describe('rendering input and button"', () => {

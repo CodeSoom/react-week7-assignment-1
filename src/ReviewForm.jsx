@@ -19,13 +19,13 @@ export default function ReviewForm({ onChangeField, onClickSubmit }) {
         />
       </div>
       <div>
-        <label htmlFor="review-input">
+        <label htmlFor="description-input">
           리뷰 내용
         </label>
         <input
-          id="review-input"
+          id="description-input"
           type="text"
-          name="review"
+          name="description"
           onChange={handleChange}
         />
       </div>
