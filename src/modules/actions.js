@@ -5,6 +5,7 @@ import {
   fetchRestaurant,
   postLogin,
 } from '../services/api';
+import { saveItem } from '../services/storage';
 
 export function setRegions(regions) {
   return {
@@ -110,6 +111,8 @@ export function requestLogin() {
     const { loginField: { email, password } } = getAction();
     try {
       const accessToken = await postLogin({ email, password });
+      saveItem('accessToken', accessToken);
+
       dispatch(setAccessToken({ accessToken }));
     } catch (e) {
       console.error(e);
@@ -118,6 +121,8 @@ export function requestLogin() {
 }
 
 export function logout() {
+  saveItem('accessToken', null);
+
   return {
     type: 'logout',
   };
