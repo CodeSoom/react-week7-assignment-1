@@ -1,6 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
+import LoginForm from '../components/LoginForm';
+import LogoutForm from '../components/LogoutForm';
 
 import { changeLoginField, requestLogin, logout } from '../modules/actions';
+
 import { get } from '../modules/utils';
 
 export default function LoginPage() {
@@ -8,8 +11,7 @@ export default function LoginPage() {
 
   const accessToken = useSelector(get('accessToken'));
 
-  function handleChagne(event) {
-    const { target: { name, value } } = event;
+  function handleChagne({ name, value }) {
     dispatch(changeLoginField({ name, value }));
   }
 
@@ -26,26 +28,15 @@ export default function LoginPage() {
       <h2>Log In</h2>
       {accessToken
         ? (
-          <div>
-            <button type="button" onClick={handleClickLogout}>Log out</button>
-          </div>
+          <LogoutForm
+            onClick={handleClickLogout}
+          />
         )
         : (
-          <div>
-            <div>
-              <label htmlFor="login-email">
-                E-mail
-              </label>
-              <input type="email" id="login-email" name="email" onChange={handleChagne} />
-            </div>
-            <div>
-              <label htmlFor="login-password">
-                Password
-              </label>
-              <input type="password" id="login-password" name="password" onChange={handleChagne} />
-            </div>
-            <button type="button" onClick={handleSubmit}>Log in</button>
-          </div>
+          <LoginForm
+            onChange={handleChagne}
+            onSubmit={handleSubmit}
+          />
         )}
 
       <p>{accessToken}</p>
