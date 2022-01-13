@@ -6,11 +6,12 @@ import restaurant from '../../../fixtures/restaurant';
 describe('Reviews', () => {
   it('리뷰 목록을 보여준다.', () => {
     const { reviews } = restaurant;
-    const { getByText } = render(<Reviews reviews={reviews} />);
+    const { queryAllByText } = render(<Reviews reviews={reviews} />);
+
     reviews.forEach(({ name, description, score }) => {
-      expect(getByText(name)).toBeInTheDocument();
-      expect(getByText(description)).toBeInTheDocument();
-      expect(getByText(score)).toBeInTheDocument();
+      expect(queryAllByText(name)).not.toBeNull();
+      expect(queryAllByText(description)).not.toBeNull();
+      expect(queryAllByText(score)).not.toBeNull();
     });
   });
 });
