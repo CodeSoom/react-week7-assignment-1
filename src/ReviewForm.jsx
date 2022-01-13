@@ -1,5 +1,10 @@
 // 관심사: 상태그려주기
-export default function ReviewForm() {
+export default function ReviewForm({ onChangeField }) {
+  function handleChange(event) {
+    const { target: { name, value } } = event;
+    onChangeField({ name, value });
+  }
+
   return (
     <>
       <div>
@@ -10,6 +15,7 @@ export default function ReviewForm() {
           id="rating-input"
           type="number"
           name="rating"
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -20,6 +26,7 @@ export default function ReviewForm() {
           id="review-input"
           type="text"
           name="review"
+          onChange={handleChange}
         />
       </div>
       <button
