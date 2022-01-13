@@ -36,7 +36,7 @@ export async function postLogin({ email, password }) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
-  }); // 노이해
-  const { token } = await response.json(); // 노이해2
-  return token;
+  });
+  const { accessToken } = await response.json();
+  return accessToken;
 }

@@ -1,4 +1,5 @@
 // 관심사: 라우터
+// ToDo accessToken 관련 테스트 추가
 import { render } from '@testing-library/react';
 
 import { useSelector } from 'react-redux';
@@ -11,6 +12,7 @@ describe('LoginPage', () => {
       email: '',
       password: '',
     },
+    accessToken: '',
   }));
 
   it('renders "Log In" title', () => {

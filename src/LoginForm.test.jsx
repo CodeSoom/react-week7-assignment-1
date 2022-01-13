@@ -1,4 +1,5 @@
 // 관심사: 로그인 폼을 화면에 나타내기
+// ToDo field 관련 테스트 추가
 import { render, fireEvent } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
@@ -15,14 +16,13 @@ describe('LoginForm', () => {
     <LoginForm
       field={field}
       onClick={handleClick}
-      onChange={handleChange}
+      onChangeField={handleChange}
     />
   ));
 
   beforeEach(() => {
     jest.clearAllMocks();
   });
-  // ToDo field 관련 테스트 추가
 
   it('renders "Submit" button to call onClick event', () => {
     const { getByText } = renderLoginForm();

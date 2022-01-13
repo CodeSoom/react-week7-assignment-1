@@ -1,3 +1,4 @@
+// ToDo 비슷한 기능끼리 정렬해서 정리하기
 import reducer from './reducer';
 
 import {
@@ -5,7 +6,7 @@ import {
   setCategories,
   setRestaurants,
   setRestaurant,
-  setToken,
+  setAccessToken,
   selectRegion,
   selectCategory,
   changeInputField,
@@ -18,7 +19,7 @@ describe('reducer', () => {
       categories: [],
       restaurants: [],
       restaurant: null,
-      token: '',
+      accessToken: '',
       selectedRegion: null,
       selectedCategory: null,
       inputField: {
@@ -97,17 +98,17 @@ describe('reducer', () => {
     });
   });
 
-  describe('setToken', () => {
+  describe('setAccessToken', () => {
     it('changes token', () => {
       const initialState = {
-        token: '',
+        accessToken: '',
       };
 
-      const token = 'TOKEN';
+      const accessToken = 'TOKEN';
 
-      const state = reducer(initialState, setToken(token));
+      const state = reducer(initialState, setAccessToken(accessToken));
 
-      expect(state.token).toBe('TOKEN');
+      expect(state.accessToken).toBe('TOKEN');
     });
   });
 

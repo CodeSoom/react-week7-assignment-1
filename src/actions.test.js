@@ -1,3 +1,5 @@
+// ToDo requestLogin 테스트 만들기
+
 import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
@@ -19,8 +21,6 @@ jest.mock('./services/api');
 
 describe('actions', () => {
   let store;
-
-  // ToDo requestLogin 테스트 만들기
 
   describe('loadInitialData', () => {
     beforeEach(() => {

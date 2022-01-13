@@ -1,3 +1,4 @@
+// ToDo 비슷한 기능끼리 정렬해서 정리하기
 import { equal } from './utils';
 
 const initialState = {
@@ -5,7 +6,7 @@ const initialState = {
   categories: [],
   restaurants: [],
   restaurant: null,
-  token: '',
+  accessToken: '',
   selectedRegion: null,
   selectedCategory: null,
   inputField: {
@@ -43,10 +44,10 @@ const reducers = {
     };
   },
 
-  setToken(state, { payload: { token } }) {
+  setAccessToken(state, { payload: { accessToken } }) {
     return {
       ...state,
-      token,
+      accessToken,
     };
   },
 
@@ -70,8 +71,8 @@ const reducers = {
     return {
       ...state,
       inputField: {
-        ...state.inputField, // const {inpuField} = state 대신 사용하는 것인지?
-        [name]: value, // 형식을 이해하기 위해서 모던 자바스크립트 튜토리얼에서 어떤 부분을 참고하면 될지?
+        ...state.inputField,
+        [name]: value,
       },
     };
   },

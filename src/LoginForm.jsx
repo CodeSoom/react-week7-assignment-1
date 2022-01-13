@@ -1,10 +1,10 @@
 // 관심사: 로그인 폼을 화면에 나타내기
-export default function LoginForm({ field, onChange, onClick }) {
+export default function LoginForm({ field, onChangeField, onClick }) {
   const { email, password } = field;
 
   function handleChange(event) {
     const { target: { name, value } } = event;
-    onChange({ name, value });
+    onChangeField({ name, value });
   }
 
   return (

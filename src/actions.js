@@ -1,3 +1,4 @@
+// ToDo 비슷한 기능끼리 정렬해서 정리하기
 import {
   fetchRegions,
   fetchCategories,
@@ -34,10 +35,10 @@ export function setRestaurant(restaurant) {
   };
 }
 
-export function setToken(token) {
+export function setAccessToken(accessToken) {
   return {
-    type: 'setToken',
-    payload: { token },
+    type: 'setAccessToken',
+    payload: { accessToken },
   };
 }
 
@@ -108,9 +109,9 @@ export function requestLogin() {
       inputField: { email, password },
     } = getState();
 
-    const token = await postLogin({ email, password });
+    const accessToken = await postLogin({ email, password });
 
-    dispatch(setToken(token)); // 토큰사용하는 setToken 액션발동
+    dispatch(setAccessToken(accessToken)); // 토큰사용하는 setAccessToken 액션발동
 
     // ToDo Promise로 실패했을때 처리 추가
   };

@@ -1,4 +1,6 @@
 // 관심사: 리덕스 (상태변화 및 상태 불러오기)
+// ToDo input Field 관련 테스트 추가
+// ToDo accessToken 관련 테스트 추가
 import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,9 +20,9 @@ describe('LoginFormContainer', () => {
         email: '',
         password: '',
       },
+      accessToken: '',
     }));
   });
-  // ToDo input Field 관련 테스트 추가
 
   it('renders "Submit" button', () => {
     const { getByText } = render((
@@ -31,7 +33,7 @@ describe('LoginFormContainer', () => {
   });
 
   context('with onClick event', () => {
-    it('calls dispatch to get token', () => {
+    it('calls dispatch to get accessToken', () => {
       const { getByText } = render((
         <LoginFormContainer />
       ));

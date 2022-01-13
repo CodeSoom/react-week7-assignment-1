@@ -11,19 +11,18 @@ import {
 } from './actions';
 
 export default function LoginFormContainer() {
-  const setToken = useSelector(get('setToken'));
+  const accessToken = useSelector(get('accessToken'));
+
   const { email, password } = useSelector(get('inputField'));
 
   const dispatch = useDispatch();
 
-  // 토큰을 받을 것이다.
-  function handleClick() {
-    dispatch(requestLogin());
+  function handleChangeField({ name, value }) {
+    dispatch(changeInputField({ name, value }));
   }
 
-  // email: test111@mail.com 형식 만들기 완료
-  function handleChange({ name, value }) {
-    dispatch(changeInputField({ name, value }));
+  function handleClick() {
+    dispatch(requestLogin());
   }
 
   return (
@@ -31,9 +30,9 @@ export default function LoginFormContainer() {
       <LoginForm
         field={{ email, password }}
         onClick={handleClick}
-        onChange={handleChange}
+        onChangeField={handleChangeField}
       />
-      <p>{setToken}</p>
+      <p>{accessToken}</p>
     </div>
   );
 }

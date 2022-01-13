@@ -29,6 +29,7 @@ describe('App', () => {
         email: '',
         password: '',
       },
+      accessToken: '',
     }));
   });
 
