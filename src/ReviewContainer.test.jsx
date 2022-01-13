@@ -26,7 +26,7 @@ describe('ReviewContainer', () => {
         },
       });
 
-      expect(dispatch).toBeCalledWith();
+      expect(dispatch).toBeCalled();
     });
 
     it('renders input with "리뷰 내용" label to call dispatch', () => {

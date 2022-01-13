@@ -5,6 +5,7 @@ import ReviewForm from './ReviewForm';
 
 import {
   changeReviewField,
+  sendReview,
 } from './actions';
 
 export default function ReviewContainer() {
@@ -14,9 +15,14 @@ export default function ReviewContainer() {
     dispatch(changeReviewField({ name, value }));
   }
 
+  function handleClickSubmit() {
+    dispatch(sendReview());
+  }
+
   return (
     <ReviewForm
       onChangeField={handleChangeField}
+      onClickSubmit={handleClickSubmit}
     />
   );
 }
