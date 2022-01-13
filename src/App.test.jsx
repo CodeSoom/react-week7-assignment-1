@@ -72,7 +72,7 @@ describe('App', () => {
     it('renders the login page', () => {
       const { container } = renderApp({ path: '/login' });
 
-      expect(container).toHaveTextContent('Login');
+      expect(container).toHaveTextContent('Log In');
     });
   });
 

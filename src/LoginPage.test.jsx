@@ -4,10 +4,10 @@ import LoginPage from './LoginPage';
 
 describe('LoginPage', () => {
   it('renders title', () => {
-    const { getByText } = render(
+    const { container } = render(
       <LoginPage />,
     );
 
-    expect(getByText('Login')).toBeInTheDocument();
+    expect(container).toHaveTextContent('Log In');
   });
 });
