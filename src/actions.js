@@ -5,6 +5,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -39,6 +40,13 @@ export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',
     payload: { accessToken },
+  };
+}
+
+export function setReview(review) {
+  return {
+    type: 'setReview',
+    payload: { review },
   };
 }
 
@@ -109,7 +117,6 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
-// ToDo 스토어에서 가져온 이메일과 비번(inputField)을 주고, 토큰을 받을 것이다.
 export function requestLogin() {
   return async (dispatch, getState) => {
     const {
@@ -118,8 +125,21 @@ export function requestLogin() {
 
     const accessToken = await postLogin({ email, password });
 
-    dispatch(setAccessToken(accessToken)); // 토큰사용하는 setAccessToken 액션발동
+    dispatch(setAccessToken(accessToken));
 
     // ToDo Promise로 실패했을때 처리 추가
+  };
+}
+
+export function sendReview() {
+  return async (dispatch, getState) => {
+    const {
+      reviewField:
+      { rating, description },
+    } = getState();
+
+    const review = await postReview({ rating, description });
+
+    dispatch(setReview(review));
   };
 }

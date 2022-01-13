@@ -86,7 +86,7 @@ const reducers = {
       ...state,
       reviewField: {
         ...state.reviewField,
-        rating: '5',
+        [name]: value,
       },
     };
   },
