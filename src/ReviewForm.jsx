@@ -1,5 +1,5 @@
 // 관심사: 상태그려주기
-export default function RestaurantForm() {
+export default function ReviewForm() {
   return (
     <>
       <div>
