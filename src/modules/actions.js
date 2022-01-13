@@ -121,7 +121,7 @@ export function requestLogin() {
 }
 
 export function logout() {
-  saveItem('accessToken', null);
+  saveItem('accessToken', '');
 
   return {
     type: 'logout',
