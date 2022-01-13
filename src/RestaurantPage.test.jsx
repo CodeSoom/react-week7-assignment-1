@@ -44,4 +44,18 @@ describe('RestaurantPage', () => {
       expect(container).toHaveTextContent('마법사주방');
     });
   });
+
+  context('with review', () => {
+    it('renders input with "평점" label', () => {
+      const { queryByLabelText } = render(
+        <MemoryRouter initialEntries={['/restaurants/1/review']}>
+          <RestaurantPage />
+        </MemoryRouter>,
+      );
+
+      expect(queryByLabelText('평점')).not.toBeNull();
+    });
+  });
+
+  // ToDo without review
 });
