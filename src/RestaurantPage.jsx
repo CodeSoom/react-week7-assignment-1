@@ -8,10 +8,14 @@ export default function RestaurantPage({ params }) {
   return (
     <div>
       <RestaurantContainer restaurantId={id} />
-      <label htmlFor="rate-input">
+      <label htmlFor="rating-input">
         평점
       </label>
-      <input id="rate-input" />
+      <input
+        id="rating-input"
+        type="number"
+        name="rating"
+      />
     </div>
   );
 }

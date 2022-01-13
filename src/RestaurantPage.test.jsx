@@ -7,6 +7,12 @@ import { render } from '@testing-library/react';
 import RestaurantPage from './RestaurantPage';
 
 describe('RestaurantPage', () => {
+  const renderRestaurantPage = ({ path }) => render((
+    <MemoryRouter initialEntries={[path]}>
+      <RestaurantPage />
+    </MemoryRouter>
+  ));
+
   beforeEach(() => {
     const dispatch = jest.fn();
 
@@ -35,27 +41,30 @@ describe('RestaurantPage', () => {
 
   context('without params props', () => {
     it('renders name', () => {
-      const { container } = render(
-        <MemoryRouter initialEntries={['/restaurants/1']}>
-          <RestaurantPage />
-        </MemoryRouter>,
-      );
+      const { container } = renderRestaurantPage({
+        path: '/restaurants/1',
+      });
 
       expect(container).toHaveTextContent('마법사주방');
     });
   });
 
+  // ToDo without reviews
   context('with review', () => {
     it('renders input with "평점" label', () => {
-      const { queryByLabelText } = render(
-        <MemoryRouter initialEntries={['/restaurants/1/review']}>
-          <RestaurantPage />
-        </MemoryRouter>,
-      );
+      const { queryByLabelText } = renderRestaurantPage({
+        path: '/restaurants/1',
+      });
 
       expect(queryByLabelText('평점')).not.toBeNull();
     });
-  });
 
-  // ToDo without review
+    it('renders input with "리뷰" label', () => {
+      const { queryByLabelText } = renderRestaurantPage({
+        path: '/restaurants/1',
+      });
+
+      expect(queryByLabelText('리뷰')).not.toBeNull();
+    });
+  });
 });
