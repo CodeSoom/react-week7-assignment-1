@@ -17,6 +17,7 @@ const initialState = {
     rating: '',
     description: '',
   },
+  review: '',
 };
 
 const reducers = {
@@ -52,6 +53,13 @@ const reducers = {
     return {
       ...state,
       accessToken,
+    };
+  },
+
+  setReview(state, { payload: { review } }) {
+    return {
+      ...state,
+      review,
     };
   },
 

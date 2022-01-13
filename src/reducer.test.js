@@ -7,8 +7,11 @@ import {
   setRestaurants,
   setRestaurant,
   setAccessToken,
+  setReview,
+
   selectRegion,
   selectCategory,
+
   changeInputField,
   changeReviewField,
 } from './actions';
@@ -31,6 +34,7 @@ describe('reducer', () => {
         rating: '',
         description: '',
       },
+      review: '',
     };
 
     it('returns initialState', () => {
@@ -117,6 +121,20 @@ describe('reducer', () => {
     });
   });
 
+  describe('setReview', () => {
+    it('changes review', () => {
+      const initialState = {
+        review: '',
+      };
+
+      const review = '짱맛';
+
+      const state = reducer(initialState, setReview(review));
+
+      expect(state.review).toBe('짱맛');
+    });
+  });
+
   describe('selectRegion', () => {
     it('changes selected region', () => {
       const initialState = {
@@ -175,7 +193,7 @@ describe('reducer', () => {
     it('sets input value to name of input', () => {
       const initialState = {
         reviewField: {
-          rating: '',
+          rating: '1',
           description: '',
         },
       };
