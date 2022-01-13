@@ -6,33 +6,6 @@ export default function RestaurantPage({ params }) {
   const { id } = params || useParams();
 
   return (
-    <div>
-      <RestaurantContainer restaurantId={id} />
-      <div>
-        <label htmlFor="rating-input">
-          평점
-        </label>
-        <input
-          id="rating-input"
-          type="number"
-          name="rating"
-        />
-      </div>
-      <div>
-        <label htmlFor="review-input">
-          리뷰 내용
-        </label>
-        <input
-          id="review-input"
-          type="text"
-          name="review"
-        />
-      </div>
-      <button
-        type="button"
-      >
-        리뷰 남기기
-      </button>
-    </div>
+    <RestaurantContainer restaurantId={id} />
   );
 }
