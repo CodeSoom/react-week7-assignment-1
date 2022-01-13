@@ -107,8 +107,8 @@ export function requestLogin() {
     const { loginFields: { email, password } } = getState();
 
     try {
-      const accessTocken = await postLogin({ email, password });
-      dispatch(setAccessToken(accessTocken));
+      const accessToken = await postLogin({ email, password });
+      dispatch(setAccessToken(accessToken));
     } catch {
       console.log('Login failed');
     }
@@ -124,7 +124,9 @@ export function changeReviewField({ name, value }) {
 
 export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
-    const { accessTocken, reviewFields: { score, description } } = getState();
-    await postReview(accessTocken, restaurantId, score, description);
+    const { accessToken, reviewFields: { score, description } } = getState();
+    await postReview({
+      accessToken, restaurantId, score, description,
+    });
   };
 }
