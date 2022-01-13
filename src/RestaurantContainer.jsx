@@ -1,3 +1,4 @@
+// 관심사: 상태바꿔주기
 import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
