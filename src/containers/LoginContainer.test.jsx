@@ -34,7 +34,6 @@ describe('LoginContainer', () => {
 
       expect(queryByLabelText('E-mail')).toBeInTheDocument();
       expect(queryByLabelText('Password')).toBeInTheDocument();
-
       expect(queryByRole('button', { name: 'Log In' })).toBeInTheDocument();
     });
 

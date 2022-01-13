@@ -17,7 +17,7 @@ describe('Reviews', () => {
 
       const { container } = render(<ReviewItems reviews={reviews} />);
 
-      const review = reviews[0];
+      const [review] = reviews;
       expect(container).toHaveTextContent(review.name);
       expect(container).toHaveTextContent(`${review.score}점`);
       expect(container).toHaveTextContent(review.description);
@@ -25,12 +25,12 @@ describe('Reviews', () => {
   });
 
   context('without reviews item', () => {
-    it('renders no items message', () => {
-      [[], null, undefined].forEach((reviews) => {
-        const { container } = render(<ReviewItems reviews={reviews} />);
+    it.each([
+      [[], null, undefined],
+    ])('renders no items message', (reviews) => {
+      const { container } = render(<ReviewItems reviews={reviews} />);
 
-        expect(container).toHaveTextContent('리뷰가 없어요');
-      });
+      expect(container).toHaveTextContent('리뷰가 없어요');
     });
   });
 });
