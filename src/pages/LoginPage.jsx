@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
-import LoginForm from '../components/LoginForm';
+
 import LogoutForm from '../components/LogoutForm';
+import LoginForm from '../components/LoginForm';
 
 import { changeLoginField, requestLogin, logout } from '../modules/actions';
 
