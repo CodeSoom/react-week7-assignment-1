@@ -6,11 +6,16 @@ import RestaurantDetail from './RestaurantDetail';
 
 import {
   loadRestaurant,
+  changeReviewField,
 } from '../Redux/actions';
 
 import { get } from '../Utils/utils';
 
-function ReviewForm() {
+function ReviewForm({ onChange }) {
+  function handleChange(event) {
+    const { target: { name, value } } = event;
+    onChange({ name, value });
+  }
   return (
     <>
       <div>
@@ -20,6 +25,7 @@ function ReviewForm() {
         <input
           type="number"
           id="review-store"
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -29,6 +35,7 @@ function ReviewForm() {
         <input
           type="text"
           id="review-description"
+          onChange={handleChange}
         />
       </div>
     </>
@@ -50,10 +57,14 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
+  function handleChange({ name, value }) {
+    dispatch(changeReviewField({ name, value }));
+  }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm />
+      <ReviewForm onChange={handleChange} />
     </>
   );
 }
