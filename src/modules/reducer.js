@@ -58,6 +58,7 @@ const reducers = {
     return {
       ...state,
       loginField: {
+        ...state.loginField,
         [name]: value,
       },
     };
