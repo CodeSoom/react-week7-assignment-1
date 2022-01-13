@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -41,9 +41,15 @@ describe('RestaurantContainer', () => {
     });
 
     it('renders review write form', () => {
-      const { queryByLabelText } = renderRestaurantContainer();
+      const { getByLabelText } = renderRestaurantContainer();
 
-      expect(queryByLabelText('평점')).not.toBeNull();
+      fireEvent.change(getByLabelText('평점'), {
+        target: { value: '5' },
+      });
+
+      fireEvent.change(getByLabelText('리뷰 내용'), {
+        target: { value: '정말 최고' },
+      });
     });
   });
 
