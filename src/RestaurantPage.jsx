@@ -28,6 +28,11 @@ export default function RestaurantPage({ params }) {
           name="review"
         />
       </div>
+      <button
+        type="button"
+      >
+        리뷰 남기기
+      </button>
     </div>
   );
 }
