@@ -120,3 +120,9 @@ export function changeReviewField({ name, value }) {
     payload: { name, value },
   };
 }
+
+export function postReview() {
+  return async (dispatch, getState) => {
+
+  };
+}

@@ -8,6 +8,7 @@ import ReviewForm from './ReviewForm';
 import {
   loadRestaurant,
   changeReviewField,
+  postReview,
 } from '../Redux/actions';
 
 import { get } from '../Utils/utils';
@@ -31,10 +32,17 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(changeReviewField({ name, value }));
   }
 
+  function handleSubmit() {
+    dispatch(postReview());
+  }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm onChange={handleChange} />
+      <ReviewForm
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
     </>
   );
 }
