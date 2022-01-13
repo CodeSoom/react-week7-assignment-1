@@ -17,6 +17,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviewFields: given.reviewFields,
     }));
   });
 
@@ -89,6 +90,6 @@ describe('RestaurantContainer', () => {
 
     fireEvent.click(getByText('리뷰 남기기'));
 
-    expect(dispatch).toBeChecked();
+    expect(dispatch).toBeCalledTimes(2);
   });
 });
