@@ -1,0 +1,34 @@
+import { fireEvent, render } from '@testing-library/react';
+
+import TextField from './TextField';
+
+describe('TextField', () => {
+  const onChange = jest.fn();
+
+  const rendersTextField = () => (render((
+    <TextField
+      id="id"
+      label="label"
+      name="name"
+      onChange={onChange}
+    />
+  )));
+
+  it('renders label and input', () => {
+    const { container, getByRole } = rendersTextField();
+
+    expect(getByRole('textbox', { name: 'label' })).not.toBeNull();
+  });
+
+  it('input works', () => {
+    const { getByRole } = rendersTextField();
+
+    fireEvent.change(getByRole('textbox', { name: 'label' }), {
+      target: {
+        value: 'test',
+      },
+    });
+
+    expect(onChange).toBeCalled();
+  });
+});
