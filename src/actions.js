@@ -136,9 +136,15 @@ export function sendReview() {
     const {
       reviewField:
       { rating, description },
+      accessToken,
+      restaurant: { id },
     } = getState();
 
-    const review = await postReview({ rating, description });
+    const restaurantId = id;
+
+    const review = await postReview({
+      restaurantId, accessToken, rating, description,
+    });
 
     dispatch(setReview(review));
   };
