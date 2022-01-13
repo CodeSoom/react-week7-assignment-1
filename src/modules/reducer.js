@@ -70,6 +70,12 @@ const reducers = {
       accessToken,
     };
   },
+  logout(state) {
+    return {
+      ...state,
+      accessToken: null,
+    };
+  },
 };
 
 function defaultReducer(state) {
