@@ -26,6 +26,10 @@ describe('reducer', () => {
         password: '',
       },
       accessToken: '',
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -175,19 +179,19 @@ describe('reducer', () => {
 
   describe('changeReviewField', () => {
     const initialState = {
-      reviewField: {
+      reviewFields: {
         score: '',
         description: '',
       },
     };
 
-    it('changes accessToken', () => {
+    it('changes score', () => {
       const state = reducer(
         initialState,
         changeReviewField({ name: 'score', value: '5' }),
       );
 
-      expect(state.reviewField.score).toBe('5');
+      expect(state.reviewFields.score).toBe('5');
     });
   });
 });

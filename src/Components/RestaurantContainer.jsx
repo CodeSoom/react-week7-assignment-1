@@ -25,6 +25,7 @@ function ReviewForm({ onChange }) {
         <input
           type="number"
           id="review-store"
+          name="score"
           onChange={handleChange}
         />
       </div>
@@ -35,6 +36,7 @@ function ReviewForm({ onChange }) {
         <input
           type="text"
           id="review-description"
+          name="description"
           onChange={handleChange}
         />
       </div>

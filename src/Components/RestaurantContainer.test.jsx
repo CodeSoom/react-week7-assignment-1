@@ -41,6 +41,13 @@ describe('RestaurantContainer', () => {
     });
 
     it('renders review write form', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
+
+      expect(queryByLabelText('평점')).not.toBeNull();
+      expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+    });
+
+    it('listens change events', () => {
       const { getByLabelText } = renderRestaurantContainer();
 
       fireEvent.change(getByLabelText('평점'), {
