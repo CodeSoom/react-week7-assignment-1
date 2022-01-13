@@ -42,29 +42,42 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('서울시');
     });
 
-    it('renders review write form', () => {
-      const { queryByLabelText } = renderRestaurantContainer();
+    context('without logged-in', () => {
+      it('renders no review write form', () => {
+        const { queryByLabelText } = renderRestaurantContainer();
 
-      expect(queryByLabelText('평점')).not.toBeNull();
-      expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+        expect(queryByLabelText('평점')).toBeNull();
+        expect(queryByLabelText('리뷰 내용')).toBeNull();
+      });
     });
 
-    it('listens change events', () => {
-      const { getByLabelText } = renderRestaurantContainer();
+    context('with logged-in', () => {
+      given('accessToken', () => 'AccessToken');
 
-      const controls = [
-        { label: '평점', name: 'score', value: '5' },
-        { label: '리뷰 내용', name: 'description', value: '정말 최고 :)' },
-      ];
+      it('renders review write form', () => {
+        const { queryByLabelText } = renderRestaurantContainer();
 
-      controls.forEach(({ label, name, value }) => {
-        fireEvent.change(getByLabelText(label), {
-          target: { value },
-        });
+        expect(queryByLabelText('평점')).not.toBeNull();
+        expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+      });
 
-        expect(dispatch).toBeCalledWith({
-          type: 'changeReviewField',
-          payload: { name, value },
+      it('listens change events', () => {
+        const { getByLabelText } = renderRestaurantContainer();
+
+        const controls = [
+          { label: '평점', name: 'score', value: '5' },
+          { label: '리뷰 내용', name: 'description', value: '정말 최고 :)' },
+        ];
+
+        controls.forEach(({ label, name, value }) => {
+          fireEvent.change(getByLabelText(label), {
+            target: { value },
+          });
+
+          expect(dispatch).toBeCalledWith({
+            type: 'changeReviewField',
+            payload: { name, value },
+          });
         });
       });
     });
@@ -77,37 +90,6 @@ describe('RestaurantContainer', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('Loading');
-    });
-  });
-
-  context('without logged-in', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
-
-    it('renders review write form', () => {
-      const { queryByLabelText } = renderRestaurantContainer();
-
-      expect(queryByLabelText('평점')).toBeNull();
-      expect(queryByLabelText('리뷰 내용')).toBeNull();
-    });
-  });
-
-  context('with logged-in', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
-    given('accessToken', () => 'AccessToken');
-
-    it('renders review write form', () => {
-      const { queryByLabelText } = renderRestaurantContainer();
-
-      expect(queryByLabelText('평점')).not.toBeNull();
-      expect(queryByLabelText('리뷰 내용')).not.toBeNull();
     });
   });
 });
