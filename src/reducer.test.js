@@ -10,6 +10,7 @@ import {
   selectRegion,
   selectCategory,
   changeInputField,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -25,6 +26,10 @@ describe('reducer', () => {
       inputField: {
         email: '',
         password: '',
+      },
+      reviewField: {
+        rating: '',
+        description: '',
       },
     };
 
@@ -163,6 +168,24 @@ describe('reducer', () => {
       }));
 
       expect(state.inputField.email).toBe('test111@mail');
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('sets input value to name of input', () => {
+      const initialState = {
+        reviewField: {
+          rating: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(initialState, changeReviewField({
+        rating: '5',
+        description: '존맛탱',
+      }));
+
+      expect(state.reviewField.rating).toBe('5');
     });
   });
 });

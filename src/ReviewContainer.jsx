@@ -1,13 +1,22 @@
 // 관심사: 상태바꿔주기
-
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import ReviewForm from './ReviewForm';
 
+import {
+  changeReviewField,
+} from './actions';
+
 export default function ReviewContainer() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
+  function handleChangeField({ name, value }) {
+    dispatch(changeReviewField({ name, value }));
+  }
 
   return (
-    <ReviewForm />
+    <ReviewForm
+      onChangeField={handleChangeField}
+    />
   );
 }
