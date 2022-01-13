@@ -6,6 +6,12 @@ export default function RestaurantPage({ params }) {
   const { id } = params || useParams();
 
   return (
-    <RestaurantContainer restaurantId={id} />
+    <div>
+      <RestaurantContainer restaurantId={id} />
+      <label htmlFor="rate-input">
+        평점
+      </label>
+      <input id="rate-input" />
+    </div>
   );
 }
