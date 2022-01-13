@@ -1,17 +1,20 @@
-export default function TextField({ onChange }) {
+export default function TextField({
+  label, type = 'text', name, onChange,
+}) {
+  const id = `input-${name}`;
   function handleChange(event) {
-    const { target: { name, value } } = event;
+    const { target: { value } } = event;
     onChange({ name, value });
   }
   return (
     <div>
-      <label htmlFor="review-store">
-        평점
+      <label htmlFor={id}>
+        {label}
       </label>
       <input
-        type="number"
-        id="review-store"
-        name="score"
+        type={type}
+        id={id}
+        name={name}
         onChange={handleChange}
       />
     </div>
