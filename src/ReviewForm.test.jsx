@@ -33,7 +33,7 @@ describe('ReviewForm', () => {
     expect(handleChange).toBeCalled();
   });
 
-  it('renders input with "리뷰 내용" label', () => {
+  it('renders input with "리뷰 내용" label to call onChange event', () => {
     const { getByLabelText } = renderReviewForm();
 
     expect(getByLabelText('리뷰 내용')).toBeInTheDocument();
@@ -48,7 +48,7 @@ describe('ReviewForm', () => {
     expect(handleChange).toBeCalled();
   });
 
-  it('renders "리뷰 남기기" button ', () => {
+  it('renders "리뷰 남기기" button to call onClick event', () => {
     const { getByText } = renderReviewForm();
 
     expect(getByText('리뷰 남기기')).toBeInTheDocument();

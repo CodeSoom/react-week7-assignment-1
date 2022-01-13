@@ -1,5 +1,5 @@
 // 관심사: 상태그려주기
-export default function ReviewForm({ onChangeField }) {
+export default function ReviewForm({ onChangeField, onClickSubmit }) {
   function handleChange(event) {
     const { target: { name, value } } = event;
     onChangeField({ name, value });
@@ -31,6 +31,7 @@ export default function ReviewForm({ onChangeField }) {
       </div>
       <button
         type="button"
+        onClick={onClickSubmit}
       >
         리뷰 남기기
       </button>
