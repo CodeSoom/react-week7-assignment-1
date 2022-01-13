@@ -116,3 +116,9 @@ export function requestLogin() {
     }
   };
 }
+
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}
