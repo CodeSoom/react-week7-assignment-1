@@ -3,16 +3,16 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
+import TextField from './TextField';
+import Reviews from './Reviews';
 
 import {
   changeReviewField,
-  loadRestaurant, sendReview,
+  loadRestaurant,
+  sendReview,
 } from '../modules/actions';
 
 import { get } from '../modules/utils';
-
-import TextField from './TextField';
-import Reviews from './Reviews';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ export default function RestaurantContainer({ restaurantId }) {
         )
         : null}
       <Reviews
-        reviews={restaurant.reviews.slice(-10).sort((a, b) => (Number(b.id) - Number(a.id)))}
+        reviews={restaurant.reviews}
       />
     </>
   );

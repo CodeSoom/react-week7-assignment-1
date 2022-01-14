@@ -1,4 +1,4 @@
-import { get, equal } from './utils';
+import { get, equal, reviewsTo10 } from './utils';
 
 test('get', () => {
   const state = {
@@ -23,3 +23,9 @@ test('equal', () => {
   expect(f(state)).toBeTruthy();
   expect(g(state)).toBeFalsy();
 });
+
+test('reviewsTo10', () => {
+  const state = [{ id: 1 }, { id: 2 }, { id: 3 }]
+
+  expect(reviewsTo10(state)).toEqual([{ id: 3 }, { id: 2 }, { id: 1 }])
+})
