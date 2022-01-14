@@ -12,7 +12,7 @@ import {
   sendReview,
 } from '../modules/actions';
 
-import { get } from '../modules/utils';
+import { get } from '../utils';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();

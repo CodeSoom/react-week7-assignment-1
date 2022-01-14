@@ -1,4 +1,4 @@
-import { reviewsTo10 } from '../modules/utils';
+import { reviewsTo10 } from '../utils';
 
 export default function Reviews({ reviews }) {
   const sortedReviews = reviewsTo10(reviews);

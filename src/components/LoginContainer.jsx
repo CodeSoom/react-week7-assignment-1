@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { changeLoginField, logout, requestLogin } from '../modules/actions';
 
-import { get } from '../modules/utils';
+import { get } from '../utils';
 import LoginForm from './LoginForm';
 import LogoutForm from './LogoutForm';
 

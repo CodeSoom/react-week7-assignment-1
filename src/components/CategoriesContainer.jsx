@@ -5,7 +5,7 @@ import {
   loadRestaurants,
 } from '../modules/actions';
 
-import { get } from '../modules/utils';
+import { get } from '../utils';
 import Categories from './Categories';
 
 export default function CategoriesContainer() {
