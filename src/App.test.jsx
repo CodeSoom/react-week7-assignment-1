@@ -7,7 +7,9 @@ import { render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
+
 import { setAccessToken } from './modules/actions';
+
 import { loadItem } from './services/storage';
 
 jest.mock('react-redux');

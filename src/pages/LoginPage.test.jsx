@@ -20,6 +20,7 @@ describe('LoginPage', () => {
   beforeEach(() => {
     dispatch.mockClear();
   });
+
   context('when not logged in', () => {
     it('renders "Log In" button', () => {
       const { container, getByRole } = render(<LoginPage />);

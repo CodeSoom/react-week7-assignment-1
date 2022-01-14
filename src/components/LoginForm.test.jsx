@@ -22,11 +22,13 @@ describe('LoginForm', () => {
     const { getByRole } = rendersLoginForm();
 
     fireEvent.click(getByRole('button', { name: 'Log In' }));
+
     expect(onSubmit).toBeCalled();
   });
 
   it('email input calls onChage', () => {
     given('email', () => 'tester@example.com');
+
     const { getByLabelText } = rendersLoginForm();
 
     fireEvent.change(getByLabelText('E-mail'), {
