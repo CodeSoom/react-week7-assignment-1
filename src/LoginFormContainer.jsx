@@ -29,14 +29,14 @@ export default function LoginFormContainer() {
   return (
     <>
       {accessToken
-        ? (
+        ? <LogoutForm />
+        : (
           <LoginForm
             field={{ email, password }}
             onClick={handleClickLogin}
             onChangeField={handleChangeField}
           />
-        )
-        : <LogoutForm />}
+        )}
     </>
   );
 }
