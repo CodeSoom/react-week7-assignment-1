@@ -94,7 +94,11 @@ export function changeLoginField({ name, value }) {
 }
 
 export function requestLogin() {
-  return {
-    type: 'requestLogin',
+  return (dispatch, getState) => {
+    // TODO
   };
+}
+
+export function setAccessToken() {
+  // TODO
 }
