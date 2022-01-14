@@ -56,6 +56,13 @@ const reducers = {
     };
   },
 
+  logout(state) {
+    return {
+      ...state,
+      accessToken: '',
+    };
+  },
+
   setReview(state, { payload: { review } }) {
     return {
       ...state,
