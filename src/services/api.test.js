@@ -83,4 +83,23 @@ describe('api', () => {
       expect(accessToken).toEqual('ACCESS_TOKEN');
     });
   });
+
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch({});
+    });
+
+    it('returns undefined', async () => {
+      const result = await postLogin({
+        reveiwField: {
+          score: 5,
+          description: '룰루랄라',
+        },
+        accessToken: 'ACCESS_TOKEN',
+        restaurantId: 1,
+      });
+
+      expect(result).toEqual(undefined);
+    });
+  });
 });
