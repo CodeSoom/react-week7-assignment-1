@@ -12,6 +12,8 @@ import LoginPage from './LoginPage';
 import NotFoundPage from './NotFoundPage';
 
 export default function App() {
+  localStorage.getItem('accessToken');
+
   return (
     <div>
       <header>

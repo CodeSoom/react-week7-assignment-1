@@ -1,7 +1,9 @@
 // 관심사: 상태바꿔주기
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import ReviewForm from './ReviewForm';
+
+import { get } from './utils';
 
 import {
   changeReviewField,
@@ -9,6 +11,8 @@ import {
 } from './actions';
 
 export default function ReviewContainer() {
+  const accessToken = useSelector(get('accessToken'));
+
   const dispatch = useDispatch();
 
   function handleChangeField({ name, value }) {
@@ -19,13 +23,14 @@ export default function ReviewContainer() {
     dispatch(sendReview());
   }
 
-  // ToDo accessToken 있을때만 보이게 하기
   return (
     <>
-      <ReviewForm
-        onChangeField={handleChangeField}
-        onClickSubmit={handleClickSubmit}
-      />
+      {accessToken ? (
+        <ReviewForm
+          onChangeField={handleChangeField}
+          onClickSubmit={handleClickSubmit}
+        />
+      ) : null}
     </>
   );
 }
