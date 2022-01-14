@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux';
+
 import {
   Switch,
   Route,
@@ -11,8 +13,16 @@ import RestaurantPage from './RestaurantPage';
 import LoginPage from './LoginPage';
 import NotFoundPage from './NotFoundPage';
 
+import { setAccessToken } from './actions';
+
 export default function App() {
-  localStorage.getItem('accessToken');
+  const dispatch = useDispatch();
+
+  const accessToken = localStorage.getItem('accessToken');
+
+  if (accessToken) {
+    dispatch(setAccessToken(accessToken));
+  }
 
   return (
     <div>

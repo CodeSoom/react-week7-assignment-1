@@ -1,4 +1,4 @@
-// ToDo localStorage에서 accessToken 가져오기 테스트
+// ToDo localStorage setItem, getItem 모킹
 import {
   MemoryRouter,
 } from 'react-router-dom';
@@ -30,7 +30,7 @@ describe('App', () => {
         email: '',
         password: '',
       },
-      accessToken: '',
+      accessToken: 'ACCESS_TOKEN',
     }));
   });
 
@@ -42,48 +42,38 @@ describe('App', () => {
     );
   }
 
-  context('with path /', () => {
-    it('renders the home page', () => {
+  context('when logged in', () => {
+    it('renders the home page with path "/"', () => {
       const { container } = renderApp({ path: '/' });
 
       expect(container).toHaveTextContent('Home');
     });
-  });
 
-  context('with path /about', () => {
-    it('renders the about page', () => {
+    it('renders the about page with path "/about"', () => {
       const { container } = renderApp({ path: '/about' });
 
       expect(container).toHaveTextContent('About 페이지');
     });
-  });
 
-  context('with path /restaurants', () => {
-    it('renders the restaurants page', () => {
+    it('renders the restaurants page with path "/restaurants"', () => {
       const { container } = renderApp({ path: '/restaurants' });
 
       expect(container).toHaveTextContent('서울');
     });
-  });
 
-  context('with path /restaurants/:id', () => {
-    it('renders the restaurant page', () => {
+    it('renders the restaurant page with path "/restaurants/:id"', () => {
       const { container } = renderApp({ path: '/restaurants/1' });
 
       expect(container).toHaveTextContent('마녀주방');
     });
-  });
 
-  context('with path /login', () => {
-    it('renders the login page', () => {
+    it('renders the login page with path "/login"', () => {
       const { container } = renderApp({ path: '/login' });
 
       expect(container).toHaveTextContent('Log In');
     });
-  });
 
-  context('with invalid path', () => {
-    it('renders the not found page', () => {
+    it('renders the not found page with "invalid" path', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
