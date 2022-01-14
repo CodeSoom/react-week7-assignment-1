@@ -8,6 +8,7 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   loginField: {},
+  reviewField: {},
   accessToken: '',
 };
 
@@ -60,6 +61,15 @@ const reducers = {
       ...state,
       loginField: {
         ...state.loginField,
+        [name]: value,
+      },
+    };
+  },
+  changeReviewField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewField: {
+        ...state.reviewField,
         [name]: value,
       },
     };

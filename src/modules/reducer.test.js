@@ -10,6 +10,7 @@ import {
   changeLoginField,
   setAccessToken,
   logout,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -22,6 +23,7 @@ describe('reducer', () => {
       selectedRegion: null,
       selectedCategory: null,
       loginField: {},
+      reviewField: {},
       accessToken: '',
     };
 
@@ -181,6 +183,34 @@ describe('reducer', () => {
       const state = reducer(initialState, logout(initialState));
 
       expect(state.accessToken).toBe(null);
+    });
+  });
+  describe('changeReviewField', () => {
+    const initialState = {
+      reviewField: {
+        score: '',
+        description: '',
+      },
+    };
+
+    it('changes score', () => {
+      const state = reducer(initialState,
+        changeReviewField({
+          name: 'score',
+          value: 3,
+        }));
+
+      expect(state.reviewField.score).toBe(3);
+    });
+
+    it('changes description', () => {
+      const state = reducer(initialState,
+        changeReviewField({
+          name: 'description',
+          value: 'test',
+        }));
+
+      expect(state.reviewField.description).toBe('test');
     });
   });
 });
