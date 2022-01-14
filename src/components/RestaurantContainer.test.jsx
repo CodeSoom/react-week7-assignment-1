@@ -1,6 +1,7 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { changeReviewField } from '../modules/actions';
 
 import RestaurantContainer from './RestaurantContainer';
 
@@ -67,8 +68,34 @@ describe('RestaurantContainer', () => {
 
         expect(queryByRole('textbox')).not.toBeNull();
       });
+
+      it.each([
+        { label: 'Score', name: 'score', value: '3' },
+        { label: 'Description', name: 'description', value: 'not Bad' },
+      ])('types input, handleChange calls dispatch with changeReviewField', ({
+        label, name, value,
+      }) => {
+        const { getByLabelText } = renderRestaurantContainer();
+
+        fireEvent.change(getByLabelText(label), {
+          target: { value },
+        });
+
+        expect(dispatch).toBeCalledWith(changeReviewField({
+          name, value,
+        }));
+      });
+
+      it('clicks button,  calls dispatch with sendReview', () => {
+        const { getByText } = renderRestaurantContainer();
+
+        fireEvent.click(getByText('리뷰 남기기'));
+
+        expect(dispatch).toBeCalledTimes(2);
+      });
     });
-    context('when logged ', () => {
+
+    context('when logged out', () => {
       given('accessToken', () => '');
 
       it('renders input  ', () => {
