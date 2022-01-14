@@ -25,7 +25,7 @@ test('equal', () => {
 });
 
 test('reviewsTo10', () => {
-  const state = [{ id: 1 }, { id: 2 }, { id: 3 }]
+  const state = [{ id: 1 }, { id: 2 }, { id: 3 }];
 
-  expect(reviewsTo10(state)).toEqual([{ id: 3 }, { id: 2 }, { id: 1 }])
-})
+  expect(reviewsTo10(state)).toEqual([{ id: 3 }, { id: 2 }, { id: 1 }]);
+});
