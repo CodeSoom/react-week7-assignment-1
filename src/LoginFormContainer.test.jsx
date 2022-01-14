@@ -20,7 +20,7 @@ describe('LoginFormContainer', () => {
         email: '',
         password: '',
       },
-      accessToken: 'ACCESS_TOKEN',
+      accessToken: '',
     }));
   });
 
@@ -32,8 +32,8 @@ describe('LoginFormContainer', () => {
     expect(getByText('Submit')).toBeInTheDocument();
   });
 
-  context('with onClick event', () => {
-    it('calls dispatch to get accessToken', () => {
+  context('when logged in', () => {
+    it('calls onClick event with dispatch', () => {
       const { getByText } = render((
         <LoginFormContainer />
       ));
@@ -42,19 +42,17 @@ describe('LoginFormContainer', () => {
 
       expect(dispatch).toBeCalled();
     });
-  });
 
-  it('renders "E-mail, Password" input', () => {
-    const { getByLabelText } = render((
-      <LoginFormContainer />
-    ));
+    it('renders "E-mail, Password" input', () => {
+      const { getByLabelText } = render((
+        <LoginFormContainer />
+      ));
 
-    expect(getByLabelText('E-mail')).toBeInTheDocument();
-    expect(getByLabelText('Password')).toBeInTheDocument();
-  });
+      expect(getByLabelText('E-mail')).toBeInTheDocument();
+      expect(getByLabelText('Password')).toBeInTheDocument();
+    });
 
-  context('with onChange event', () => {
-    it('calls dispatch to set name for value', () => {
+    it('calls onChange event with dispatch', () => {
       const { getByLabelText } = render((
         <LoginFormContainer />
       ));
