@@ -6,6 +6,12 @@ import RestaurantContainer from './RestaurantContainer';
 
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
+  useDispatch.mockImplementation(() => dispatch);
+
+  useSelector.mockImplementation((selector) => selector({
+    restaurant: given.restaurant,
+    accessToken: given.accessToken,
+  }));
 
   function renderRestaurantContainer() {
     return render(<RestaurantContainer restaurantId="1" />);
@@ -13,11 +19,6 @@ describe('RestaurantContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
-    useDispatch.mockImplementation(() => dispatch);
-
-    useSelector.mockImplementation((selector) => selector({
-      restaurant: given.restaurant,
-    }));
   });
 
   it('dispatches action', () => {
@@ -31,6 +32,14 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [
+        {
+          id: 10,
+          name: 'tester',
+          score: 2,
+          description: '맛좋아!',
+        },
+      ],
     }));
 
     it('renders name and address', () => {
@@ -38,6 +47,31 @@ describe('RestaurantContainer', () => {
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+    });
+
+    it('renders 리뷰', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('리뷰');
+    });
+
+    context('when logged in', () => {
+      given('accessToken', () => 'ACCESS_TOKEN');
+
+      it('renders input  ', () => {
+        const { queryByRole } = renderRestaurantContainer();
+
+        expect(queryByRole('textbox')).not.toBeNull();
+      });
+    });
+    context('when logged ', () => {
+      given('accessToken', () => '');
+
+      it('renders input  ', () => {
+        const { queryByRole } = renderRestaurantContainer();
+
+        expect(queryByRole('textbox')).toBeNull();
+      });
     });
   });
 
