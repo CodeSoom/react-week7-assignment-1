@@ -17,6 +17,14 @@ describe('RestaurantPage', () => {
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
+        reviews: [
+          {
+            id: 10,
+            name: 'tester',
+            score: 2,
+            description: '맛좋아!',
+          },
+        ],
       },
     }));
   });

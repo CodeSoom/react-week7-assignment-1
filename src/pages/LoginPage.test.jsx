@@ -21,18 +21,18 @@ describe('LoginPage', () => {
     dispatch.mockClear();
   });
   context('when not logged in', () => {
-    it('renders "Log in" button', () => {
+    it('renders "Log In" button', () => {
       const { container, getByRole } = render(<LoginPage />);
 
       expect(container).toHaveTextContent('Log In');
 
-      expect(getByRole('button', { name: 'Log in' })).not.toBeNull();
+      expect(getByRole('button', { name: 'Log In' })).not.toBeNull();
     });
 
     it(' "Log in" button works', () => {
       const { getByRole } = render(<LoginPage />);
 
-      fireEvent.click(getByRole('button', { name: 'Log in' }));
+      fireEvent.click(getByRole('button', { name: 'Log In' }));
       expect(dispatch).toBeCalled();
     });
 
@@ -65,11 +65,13 @@ describe('LoginPage', () => {
 
   context('when logged in', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
+
     it('renders "Log out" button', () => {
       const { getByRole } = render(<LoginPage />);
 
       expect(getByRole('button', { name: 'Log out' })).not.toBeNull();
     });
+
     it('"Log out" button works', () => {
       const { getByRole } = render(<LoginPage />);
       fireEvent.click(getByRole('button', { name: 'Log out' }));

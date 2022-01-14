@@ -24,7 +24,18 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
+      restaurant: {
+        id: 1,
+        name: '마녀주방',
+        reviews: [
+          {
+            id: 10,
+            name: 'tester',
+            score: 2,
+            description: '맛좋아!',
+          },
+        ],
+      },
       loginField: {},
     }));
   });
