@@ -5,9 +5,8 @@ export default function TextField({
   name,
   onChange,
 }) {
-
   function handleChange(event) {
-    const { target: { name, value } } = event;
+    const { target: { value } } = event;
     onChange({ name, value });
   }
 

@@ -115,17 +115,14 @@ export function changeReviewField({ name, value }) {
 }
 
 export function requestLogin() {
-  return async (dispatch, getAction) => {
-    const { loginField: { email, password } } = getAction();
-    try {
-      const accessToken = await postLogin({ email, password });
+  return async (dispatch, getState) => {
+    const { loginField: { email, password } } = getState();
 
-      saveItem('accessToken', accessToken);
+    const accessToken = await postLogin({ email, password });
 
-      dispatch(setAccessToken({ accessToken }));
-    } catch (e) {
-      console.error(e);
-    }
+    saveItem('accessToken', accessToken);
+
+    dispatch(setAccessToken({ accessToken }));
   };
 }
 
@@ -141,11 +138,8 @@ export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const { reviewField, accessToken } = getState();
 
-    try {
-      await postReview({ reviewField, accessToken, restaurantId });
-    } catch (e) {
-      console.error(e);
-    }
+    await postReview({ reviewField, accessToken, restaurantId });
+
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
