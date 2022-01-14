@@ -49,10 +49,14 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('서울시');
     });
 
-    it('renders 리뷰', () => {
+    it('renders reviews', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('리뷰');
+
+      given.restaurant.reviews.forEach((reivew) => {
+        expect(reivew).not.toBeNull();
+      });
     });
 
     context('when logged in', () => {

@@ -10,7 +10,9 @@ import {
 } from '../modules/actions';
 
 import { get } from '../modules/utils';
+
 import TextField from './TextField';
+import Reviews from './Reviews';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -59,18 +61,9 @@ export default function RestaurantContainer({ restaurantId }) {
           </>
         )
         : null}
-      <h2>리뷰</h2>
-      <ul>
-        {restaurant.reviews.slice(-10).sort((a, b) => (Number(b.id) - Number(a.id))).map(({
-          id, name, score, description,
-        }) => (
-          <li key={id}>
-            <div>{name}</div>
-            <div>{score}</div>
-            <div>{description}</div>
-          </li>
-        ))}
-      </ul>
+      <Reviews
+        reviews={restaurant.reviews.slice(-10).sort((a, b) => (Number(b.id) - Number(a.id)))}
+      />
     </>
   );
 }
