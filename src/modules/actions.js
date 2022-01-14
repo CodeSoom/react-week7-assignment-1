@@ -92,7 +92,6 @@ export function loadRestaurant({ restaurantId }) {
     dispatch(setRestaurant(null));
 
     const restaurant = await fetchRestaurant({ restaurantId });
-
     dispatch(setRestaurant(restaurant));
   };
 }
@@ -105,12 +104,21 @@ export function changeLoginField({ name, value }) {
     },
   };
 }
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: {
+      name, value,
+    },
+  };
+}
 
 export function requestLogin() {
   return async (dispatch, getAction) => {
     const { loginField: { email, password } } = getAction();
     try {
       const accessToken = await postLogin({ email, password });
+
       saveItem('accessToken', accessToken);
 
       dispatch(setAccessToken({ accessToken }));
