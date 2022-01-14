@@ -15,7 +15,7 @@ describe('ReviewContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       reviewField: {
-        rating: '5',
+        score: '5',
         description: '짱맛',
       },
     }));
@@ -25,7 +25,7 @@ describe('ReviewContainer', () => {
   it('renders name and value of input', () => {
     const { getByLabelText } = render(<ReviewContainer />);
 
-    expect(getByLabelText('평점').name).toBe('rating');
+    expect(getByLabelText('평점').name).toBe('score');
     expect(getByLabelText('리뷰 내용').name).toBe('description');
   });
 
@@ -37,7 +37,7 @@ describe('ReviewContainer', () => {
 
       fireEvent.change(getByLabelText('평점'), {
         target: {
-          name: 'rating',
+          name: 'score',
           value: '5',
         },
       });

@@ -31,7 +31,7 @@ describe('reducer', () => {
         password: '',
       },
       reviewField: {
-        rating: '',
+        score: '',
         description: '',
       },
       review: '',
@@ -193,17 +193,17 @@ describe('reducer', () => {
     it('sets input value to name of input', () => {
       const initialState = {
         reviewField: {
-          rating: '1',
+          score: '1',
           description: '노맛',
         },
       };
 
       const state = reducer(initialState, changeReviewField({
-        name: 'rating',
+        name: 'score',
         value: '5',
       }));
 
-      expect(state.reviewField.rating).toBe('5');
+      expect(state.reviewField.score).toBe('5');
     });
   });
 });

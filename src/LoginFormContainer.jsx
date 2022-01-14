@@ -21,7 +21,7 @@ export default function LoginFormContainer() {
     dispatch(changeInputField({ name, value }));
   }
 
-  function handleClick() {
+  function handleClickLogin() {
     dispatch(requestLogin());
   }
 
@@ -29,7 +29,7 @@ export default function LoginFormContainer() {
     <div>
       <LoginForm
         field={{ email, password }}
-        onClick={handleClick}
+        onClick={handleClickLogin}
         onChangeField={handleChangeField}
       />
       <p>{accessToken}</p>

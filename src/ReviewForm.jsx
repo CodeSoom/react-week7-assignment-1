@@ -8,13 +8,13 @@ export default function ReviewForm({ onChangeField, onClickSubmit }) {
   return (
     <>
       <div>
-        <label htmlFor="rating-input">
+        <label htmlFor="score-input">
           평점
         </label>
         <input
-          id="rating-input"
+          id="score-input"
           type="number"
-          name="rating"
+          name="score"
           onChange={handleChange}
         />
       </div>

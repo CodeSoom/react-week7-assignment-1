@@ -14,7 +14,7 @@ const initialState = {
     password: '',
   },
   reviewField: {
-    rating: '',
+    score: '',
     description: '',
   },
   review: '',

@@ -125,9 +125,11 @@ export function requestLogin() {
 
     const accessToken = await postLogin({ email, password });
 
+    localStorage.setItem('accessToken', accessToken);
+
     dispatch(setAccessToken(accessToken));
 
-    // ToDo Promise로 실패했을때 처리 추가
+    // ToDo Promise로 실패했을때 처리 추가 (나의 선택)
   };
 }
 
@@ -135,7 +137,7 @@ export function sendReview() {
   return async (dispatch, getState) => {
     const {
       reviewField:
-      { rating, description },
+      { score, description },
       accessToken,
       restaurant: { id },
     } = getState();
@@ -143,7 +145,7 @@ export function sendReview() {
     const restaurantId = id;
 
     const review = await postReview({
-      restaurantId, accessToken, rating, description,
+      restaurantId, accessToken, score, description,
     });
 
     dispatch(setReview(review));
