@@ -15,10 +15,12 @@ import NotFoundPage from './NotFoundPage';
 
 import { setAccessToken } from './actions';
 
+import { loadItems } from './services/storage';
+
 export default function App() {
   const dispatch = useDispatch();
 
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = loadItems('accessToken');
 
   if (accessToken) {
     dispatch(setAccessToken(accessToken));
