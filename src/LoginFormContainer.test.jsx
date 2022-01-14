@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import {
   changeLoginField,
+  requestLogin,
 } from './actions';
 
 import LoginFormContainer from './LoginFormContainer';
@@ -35,5 +36,13 @@ describe('LoginFormContainer', () => {
     fireEvent.change(getByLabelText('Password'), { target: { value: '123456' } });
 
     expect(dispatch).toBeCalledWith(changeLoginField({ name: 'password', value: '123456' }));
+  });
+
+  it('renders login button to request login', () => {
+    const { getByRole } = render(<LoginFormContainer />);
+
+    fireEvent.click(getByRole('button', { target: { name: 'Log In' } }));
+
+    expect(dispatch).toBeCalledWith(requestLogin());
   });
 });
