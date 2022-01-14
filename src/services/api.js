@@ -30,5 +30,5 @@ export async function fetchRestaurant({ restaurantId }) {
 
 export async function postLogin({ email, password }) {
   // TODO
-  return {};
+  return 'myToken';
 }
