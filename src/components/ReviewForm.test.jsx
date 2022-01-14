@@ -10,7 +10,8 @@ describe('ReviewForms', () => {
       <ReviewForm
         onChange={onChange}
         onSubmit={onSubmit}
-      />);
+      />,
+    );
   }
 
   beforeEach(() => {

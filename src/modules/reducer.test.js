@@ -166,6 +166,7 @@ describe('reducer', () => {
     const initialState = {
       accessToken: '',
     };
+
     it('set accessToken', () => {
       const state = reducer(initialState, setAccessToken({
         accessToken: 'ACCESS_TOKEN',
@@ -179,12 +180,14 @@ describe('reducer', () => {
     const initialState = {
       accessToken: 'ACCESS_TOKEN',
     };
+
     it('logout', () => {
       const state = reducer(initialState, logout(initialState));
 
       expect(state.accessToken).toBe(null);
     });
   });
+
   describe('changeReviewField', () => {
     const initialState = {
       reviewField: {

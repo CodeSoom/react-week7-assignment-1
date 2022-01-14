@@ -5,13 +5,16 @@ import {
 } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
+
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import RestaurantsPage from './pages/RestaurantsPage';
 import RestaurantPage from './pages/RestaurantPage';
 import NotFoundPage from './pages/NotFoundPage';
 import LoginPage from './pages/LoginPage';
+
 import { loadItem } from './services/storage';
+
 import { setAccessToken } from './modules/actions';
 
 export default function App() {
