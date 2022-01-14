@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
-import TextField from './TextField';
+import ReviewForm from './ReviewForm';
 import Reviews from './Reviews';
 
 import {
@@ -43,22 +43,10 @@ export default function RestaurantContainer({ restaurantId }) {
       <RestaurantDetail restaurant={restaurant} />
       {accessToken
         ? (
-          <>
-            <TextField
-              id="review-score"
-              label="Score"
-              type="number"
-              name="score"
-              onChange={handleChange}
-            />
-            <TextField
-              id="review-description"
-              label="Description"
-              name="description"
-              onChange={handleChange}
-            />
-            <button type="button" onClick={handleSubmit}>리뷰 남기기</button>
-          </>
+          <ReviewForm
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+          />
         )
         : null}
       <Reviews
