@@ -19,16 +19,11 @@ describe('ReviewContainer', () => {
         score: '5',
         description: '짱맛',
       },
+      accessToken: given.accessToken,
     }));
   });
 
-  // ToDo: 구현??
-  it('renders name and value of input', () => {
-    const { getByLabelText } = render(<ReviewContainer />);
-
-    expect(getByLabelText('평점').name).toBe('score');
-    expect(getByLabelText('리뷰 내용').name).toBe('description');
-  });
+  given('accessToken', () => 'ACCESS_TOKEN');
 
   describe('rendering input and button"', () => {
     it('renders input with "평점" label to call dispatch', () => {
