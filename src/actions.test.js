@@ -1,4 +1,3 @@
-// ToDo requestLogin 테스트 만들기
 // ToDo changeReviewField 테스트 만들기
 // ToDo sendReview 테스트 만들기
 // ToDo localStorage에 accessToken 저장하는 테스트 만들기
@@ -15,12 +14,16 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  setAccessToken,
 } from './actions';
+
+import { saveItems } from './services/storage';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/storage');
 
 describe('actions', () => {
   let store;
@@ -105,4 +108,22 @@ describe('actions', () => {
       expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
+
+  /* ToDo: 완성
+  describe('requestLogin', () => {
+    const accessToken = 'ACCESS_TOKEN';
+
+    beforeEach(() => {
+      saveItems.mockImplementation(() => (accessToken));
+    });
+
+    it('dispatchs setAccessToken', async () => {
+      await store.dispatch(setAccessToken(accessToken));
+
+      const actions = store.getActions();
+
+      expect(actions[3]).toEqual(setAccessToken('ACCESS_TOKEN'));
+    });
+  });
+  */
 });

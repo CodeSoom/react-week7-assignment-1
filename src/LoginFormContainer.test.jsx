@@ -20,7 +20,7 @@ describe('LoginFormContainer', () => {
         email: '',
         password: '',
       },
-      accessToken: '',
+      accessToken: 'ACCESS_TOKEN',
     }));
   });
 
