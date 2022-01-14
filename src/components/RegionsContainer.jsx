@@ -6,6 +6,7 @@ import {
 } from '../modules/actions';
 
 import { get } from '../modules/utils';
+import Regions from './Regions';
 
 export default function RegionsContainer() {
   const dispatch = useDispatch();
@@ -19,22 +20,10 @@ export default function RegionsContainer() {
   }
 
   return (
-    <ul>
-      {regions.map((region) => (
-        <li key={region.id}>
-          <button
-            type="button"
-            onClick={() => handleClick(region.id)}
-          >
-            {region.name}
-            {selectedRegion ? (
-              <>
-                {region.id === selectedRegion.id ? '(V)' : null}
-              </>
-            ) : null}
-          </button>
-        </li>
-      ))}
-    </ul>
+    <Regions
+      regions={regions}
+      selectedRegion={selectedRegion}
+      onClick={handleClick}
+    />
   );
 }
