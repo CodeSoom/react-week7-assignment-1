@@ -15,13 +15,13 @@ describe('LoginForm', () => {
   it('renders "Log in" button', () => {
     const { getByRole } = rendersLoginForm();
 
-    expect(getByRole('button', { name: 'Log in' })).not.toBeNull();
+    expect(getByRole('button', { name: 'Log In' })).not.toBeNull();
   });
 
   it(' "Log in" button works', () => {
     const { getByRole } = rendersLoginForm();
 
-    fireEvent.click(getByRole('button', { name: 'Log in' }));
+    fireEvent.click(getByRole('button', { name: 'Log In' }));
     expect(onSubmit).toBeCalled();
   });
 
