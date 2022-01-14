@@ -45,6 +45,12 @@ export function setAccessToken(accessToken) {
   };
 }
 
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}
+
 export function setReview(review) {
   return {
     type: 'setReview',
