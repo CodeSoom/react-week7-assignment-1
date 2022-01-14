@@ -53,6 +53,5 @@ export async function postReview({ reviewField, accessToken, restaurantId }) {
     },
     body: JSON.stringify({ score, description }),
   });
-  const result = await response.json();
-  return result;
+  await response.json();
 }

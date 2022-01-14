@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -86,12 +87,12 @@ describe('api', () => {
 
   describe('postReview', () => {
     beforeEach(() => {
-      mockFetch({});
+      mockFetch(undefined);
     });
 
     it('returns undefined', async () => {
-      const result = await postLogin({
-        reveiwField: {
+      const result = await postReview({
+        reviewField: {
           score: 5,
           description: '룰루랄라',
         },
