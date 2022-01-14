@@ -2,14 +2,16 @@
 // ToDo field 관련 테스트 추가
 import { render } from '@testing-library/react';
 
-import LogoutForm from './LoginForm';
+import LogoutForm from './LogoutForm';
 
 describe('LogoutForm', () => {
   const renderLogoutForm = () => render((
     <LogoutForm />
   ));
 
-  it('///', () => {
-    renderLogoutForm();
+  it('renders "Submit" button', () => {
+    const { getByText } = renderLogoutForm();
+
+    expect(getByText('Log Out')).toBeInTheDocument();
   });
 });
