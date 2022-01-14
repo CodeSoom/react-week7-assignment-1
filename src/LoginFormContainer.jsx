@@ -9,6 +9,7 @@ import { get } from './utils';
 import {
   requestLogin,
   changeInputField,
+  logout,
 } from './actions';
 
 export default function LoginFormContainer() {
@@ -26,11 +27,17 @@ export default function LoginFormContainer() {
     dispatch(requestLogin());
   }
 
+  function handleClickLogout() {
+    dispatch(logout());
+  }
+
   return (
     <>
       {accessToken
         ? (
-          <LogoutForm />
+          <LogoutForm
+            onClickLogout={handleClickLogout}
+          />
         )
         : (
           <LoginForm

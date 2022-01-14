@@ -26,7 +26,7 @@ describe('LoginFormContainer', () => {
   context('when logged in', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
 
-    it('renders "Log Out" button to call dispatch with "setAccessToken"', () => {
+    it('renders "Log Out" button to call dispatch with "logout" action', () => {
       const { getByText } = render((
         <LoginFormContainer />
       ));
