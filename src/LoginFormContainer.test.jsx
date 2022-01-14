@@ -28,11 +28,11 @@ describe('LoginFormContainer', () => {
   it('renders input fields to change the input value', () => {
     const { getByLabelText } = render(<LoginFormContainer />);
 
-    fireEvent.change(getByLabelText('E-mail', { target: { value: 'test@test.com' } }));
+    fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test@test.com' } });
 
     expect(dispatch).toBeCalledWith(changeLoginField({ name: 'email', value: 'test@test.com' }));
 
-    fireEvent.change(getByLabelText('Password', { target: { value: '123456' } }));
+    fireEvent.change(getByLabelText('Password'), { target: { value: '123456' } });
 
     expect(dispatch).toBeCalledWith(changeLoginField({ name: 'password', value: '123456' }));
   });
