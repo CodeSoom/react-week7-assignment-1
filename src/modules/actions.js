@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from '../services/api';
 import { saveItem } from '../services/storage';
 
@@ -133,5 +134,20 @@ export function logout() {
 
   return {
     type: 'logout',
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { reviewField, accessToken } = getState();
+
+    try {
+      await postReview({ reviewField, accessToken, restaurantId });
+    } catch (e) {
+      console.error(e);
+    }
+    const restaurant = await fetchRestaurant({ restaurantId });
+
+    dispatch(setRestaurant(restaurant));
   };
 }
