@@ -87,5 +87,8 @@ export function loadRestaurant({ restaurantId }) {
 }
 
 export function changeLoginField({ name, value }) {
-  // TODO
+  return {
+    type: 'changeLoginField',
+    payload: { name, value },
+  };
 }
