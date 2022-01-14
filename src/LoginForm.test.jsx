@@ -4,23 +4,32 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const handleClick = jest.fn();
+  const handleChange = jest.fn();
 
   beforeEach(() => {
-    handleClick.mockClear();
+    jest.clearAllMocks();
   });
 
-  it('renders input field with value', () => {
-    const { getByDisplayValue } = render(
-      <LoginForm onClick={handleClick} />,
+  it('renders input field to handle onChange', () => {
+    const { getByLabelText } = render(
+      <LoginForm
+        onClick={handleClick}
+        onChange={handleChange}
+      />,
     );
 
-    expect(getByDisplayValue('test@test.com')).not.toBeNull();
-    expect(getByDisplayValue('123456')).not.toBeNull();
+    fireEvent.change(getByLabelText('E-mail', { target: { value: 'test@test.com' } }));
+    fireEvent.change(getByLabelText('Password', { target: { value: '123456' } }));
+
+    expect(handleChange).toBeCalledTimes(2);
   });
 
   it('renders login button to handle onClick', () => {
     const { getByRole } = render(
-      <LoginForm onClick={handleClick} />,
+      <LoginForm
+        onClick={handleClick}
+        onChange={handleChange}
+      />,
     );
 
     expect(getByRole('button', { name: 'Log In' })).not.toBeNull();

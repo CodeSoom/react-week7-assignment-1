@@ -1,14 +1,28 @@
-export default function LoginForm({ onClick }) {
+export default function LoginForm({ onClick, onChange }) {
   return (
     <>
-      <input
-        type="text"
-        value="test@test.com"
-      />
-      <input
-        type="text"
-        value="123456"
-      />
+      <div>
+        <label htmlFor="login-email">
+          E-mail
+        </label>
+        <input
+          id="login-email"
+          type="email"
+          name="email"
+          onChange={onChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="login-password">
+          Password
+        </label>
+        <input
+          id="login-password"
+          type="password"
+          name="password"
+          onChange={onChange}
+        />
+      </div>
       <button
         type="button"
         onClick={onClick}
