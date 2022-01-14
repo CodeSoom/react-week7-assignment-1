@@ -5,7 +5,7 @@ export default function LoginForm({
   onSubmit,
 }) {
   return (
-    <>
+    <form action="#">
       <TextField
         id="login-email"
         label="E-mail"
@@ -21,6 +21,6 @@ export default function LoginForm({
         onChange={onChange}
       />
       <button type="button" onClick={onSubmit}>Log In</button>
-    </>
+    </form>
   );
 }
