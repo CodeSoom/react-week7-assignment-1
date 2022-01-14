@@ -20,7 +20,7 @@ describe('TextField', () => {
     expect(getByRole('textbox', { name: 'label' })).not.toBeNull();
   });
 
-  it('input works', () => {
+  it('input calls onChage', () => {
     const { getByRole } = rendersTextField();
 
     fireEvent.change(getByRole('textbox', { name: 'label' }), {

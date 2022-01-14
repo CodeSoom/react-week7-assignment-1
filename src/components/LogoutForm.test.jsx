@@ -17,7 +17,7 @@ describe('LogoutForm', () => {
     expect(getByRole('button', { name: 'Log out' })).not.toBeNull();
   });
 
-  it('"Log out" button works', () => {
+  it('"Log out" button calls onClick', () => {
     const { getByRole } = rendersLogoutForm();
 
     fireEvent.click(getByRole('button', { name: 'Log out' }));

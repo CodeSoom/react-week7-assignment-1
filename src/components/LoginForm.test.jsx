@@ -18,14 +18,14 @@ describe('LoginForm', () => {
     expect(getByRole('button', { name: 'Log In' })).not.toBeNull();
   });
 
-  it(' "Log in" button works', () => {
+  it(' "Log in" button calls onSubmit', () => {
     const { getByRole } = rendersLoginForm();
 
     fireEvent.click(getByRole('button', { name: 'Log In' }));
     expect(onSubmit).toBeCalled();
   });
 
-  it('email input works', () => {
+  it('email input calls onChage', () => {
     given('email', () => 'tester@example.com');
     const { getByLabelText } = rendersLoginForm();
 
@@ -36,7 +36,7 @@ describe('LoginForm', () => {
     expect(onChange).toBeCalled();
   });
 
-  it('password input works', () => {
+  it('password input calls onChage', () => {
     given('password', () => 'test');
 
     const { getByLabelText } = rendersLoginForm();

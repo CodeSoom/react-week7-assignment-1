@@ -29,15 +29,16 @@ describe('LoginPage', () => {
       expect(getByRole('button', { name: 'Log In' })).not.toBeNull();
     });
 
-    it(' "Log in" button works', () => {
+    it(' "Log in" button calls dispatch', () => {
       const { getByRole } = render(<LoginPage />);
 
       fireEvent.click(getByRole('button', { name: 'Log In' }));
       expect(dispatch).toBeCalled();
     });
 
-    it('email input works', () => {
+    it('email input calls dispatch ', () => {
       given('email', () => 'tester@example.com');
+
       const { getByLabelText } = render(<LoginPage />);
 
       fireEvent.change(getByLabelText('E-mail'), {
@@ -49,10 +50,11 @@ describe('LoginPage', () => {
       );
     });
 
-    it('password input works', () => {
+    it('password input calls dispatch ', () => {
       given('password', () => 'test');
 
       const { getByLabelText } = render(<LoginPage />);
+
       fireEvent.change(getByLabelText('Password'), {
         target: { value: given.password },
       });
@@ -72,7 +74,7 @@ describe('LoginPage', () => {
       expect(getByRole('button', { name: 'Log out' })).not.toBeNull();
     });
 
-    it('"Log out" button works', () => {
+    it('"Log out" button calls dispatch', () => {
       const { getByRole } = render(<LoginPage />);
       fireEvent.click(getByRole('button', { name: 'Log out' }));
 
