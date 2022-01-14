@@ -6,9 +6,9 @@ import RestaurantDetail from './RestaurantDetail';
 
 import {
   loadRestaurant,
-} from './actions';
+} from '../../store/actions';
 
-import { get } from './utils';
+import { get } from '../../utils';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();

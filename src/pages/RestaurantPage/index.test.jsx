@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { render } from '@testing-library/react';
 
-import RestaurantPage from './RestaurantPage';
+import RestaurantPage from '.';
 
 describe('RestaurantPage', () => {
   beforeEach(() => {
