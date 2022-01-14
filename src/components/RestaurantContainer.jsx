@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import RestaurantDetail from './RestaurantDetail';
 
 import {
-  loadRestaurant, setRestaurant,
+  changeReviewField,
+  loadRestaurant, sendReview,
 } from '../modules/actions';
 
 import { get } from '../modules/utils';
 import TextField from './TextField';
-import { fetchRestaurant, postReview } from '../services/api';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -28,46 +28,12 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
-  // const ascendingOrderedReviews = restaurant.reviews.slice(-10).sort((a, b) => (Number(b.id) - Number(a.id)))
-
   function handleChange({ name, value }) {
-    dispatch({
-      type: 'changeReviewField',
-      payload: {
-        name, value,
-      },
-    });
+    dispatch(changeReviewField({ name, value }));
   }
 
   function handleSubmit() {
-    dispatch(async (dispatch, getState) => {
-      const { reviewField, accessToken } = getState();
-
-      try {
-        await postReview({ reviewField, accessToken, restaurantId });
-      } catch (e) {
-        console.error(e);
-      }
-      const restaurant = await fetchRestaurant({ restaurantId });
-
-      dispatch(setRestaurant(restaurant));
-    });
-
-    dispatch({
-      type: 'changeReviewField',
-      payload: {
-        name: 'score',
-        value: null,
-      },
-    });
-
-    dispatch({
-      type: 'changeReviewField',
-      payload: {
-        name: 'description',
-        value: '',
-      },
-    });
+    dispatch(sendReview({ restaurantId }));
   }
 
   return (
