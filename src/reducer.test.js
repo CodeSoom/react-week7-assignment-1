@@ -19,7 +19,8 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
-      loginfields: {
+      accessToken: '',
+      loginFields: {
         email: '',
         password: '',
       },
@@ -133,7 +134,7 @@ describe('reducer', () => {
 
   describe('changeLoginField', () => {
     const initialState = {
-      loginfields: {
+      loginFields: {
         email: '',
         password: '',
       },
@@ -142,13 +143,13 @@ describe('reducer', () => {
     it('changes email', () => {
       const state = reducer(initialState, changeLoginField({ name: 'email', value: 'test@test' }));
 
-      expect(state.loginfields.email).toBe('test@test');
+      expect(state.loginFields.email).toBe('test@test');
     });
 
     it('changes password', () => {
       const state = reducer(initialState, changeLoginField({ name: 'password', value: '123456' }));
 
-      expect(state.loginfields.password).toBe('123456');
+      expect(state.loginFields.password).toBe('123456');
     });
   });
 });
