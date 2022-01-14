@@ -15,7 +15,6 @@ describe('TextField', () => {
   )));
 
   it('renders label and input', () => {
-
     const { getByRole } = rendersTextField();
 
     expect(getByRole('textbox', { name: 'label' })).not.toBeNull();
