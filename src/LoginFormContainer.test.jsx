@@ -23,6 +23,22 @@ describe('LoginFormContainer', () => {
     }));
   });
 
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
+
+    it('renders "Log Out" button to call dispatch with "setAccessToken"', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
+
+      expect(getByText('Log Out')).toBeInTheDocument();
+
+      fireEvent.click(getByText('Log Out'));
+
+      expect(dispatch).toBeCalledWith({ type: 'logout' });
+    });
+  });
+
   context('when logged out', () => {
     given('accessToken', () => '');
 
@@ -34,7 +50,7 @@ describe('LoginFormContainer', () => {
       expect(getByText('Submit')).toBeInTheDocument();
     });
 
-    it('calls onClick event with dispatch', () => {
+    it('calls onClick event to call dispatch with "requestLogin" action', () => {
       const { getByText } = render((
         <LoginFormContainer />
       ));
@@ -53,7 +69,7 @@ describe('LoginFormContainer', () => {
       expect(getByLabelText('Password')).toBeInTheDocument();
     });
 
-    it('calls onChange event with dispatch', () => {
+    it('calls onChange event to call dispatch with "changeInputField" action', () => {
       const { getByLabelText } = render((
         <LoginFormContainer />
       ));
