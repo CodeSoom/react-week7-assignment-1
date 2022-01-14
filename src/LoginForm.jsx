@@ -1,4 +1,4 @@
-export default function LoginForm({ onClick, onChange }) {
+export default function LoginForm({ onSubmit, onChange }) {
   return (
     <>
       <div>
@@ -25,7 +25,7 @@ export default function LoginForm({ onClick, onChange }) {
       </div>
       <button
         type="button"
-        onClick={onClick}
+        onClick={onSubmit}
       >
         Log In
       </button>

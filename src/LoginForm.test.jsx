@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  const handleClick = jest.fn();
+  const handleSubmit = jest.fn();
   const handleChange = jest.fn();
 
   beforeEach(() => {
@@ -13,7 +13,7 @@ describe('LoginForm', () => {
   it('renders input field to handle onChange', () => {
     const { getByLabelText } = render(
       <LoginForm
-        onClick={handleClick}
+        onSubmit={handleSubmit}
         onChange={handleChange}
       />,
     );
@@ -24,10 +24,10 @@ describe('LoginForm', () => {
     expect(handleChange).toBeCalledTimes(2);
   });
 
-  it('renders login button to handle onClick', () => {
+  it('renders login button to handle onSubmit', () => {
     const { getByRole } = render(
       <LoginForm
-        onClick={handleClick}
+        onSubmit={handleSubmit}
         onChange={handleChange}
       />,
     );
@@ -36,6 +36,6 @@ describe('LoginForm', () => {
 
     fireEvent.click(getByRole('button', { name: 'Log In' }));
 
-    expect(handleClick).toBeCalled();
+    expect(handleSubmit).toBeCalled();
   });
 });

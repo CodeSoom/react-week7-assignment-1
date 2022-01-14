@@ -1,10 +1,10 @@
-import LoginForm from './LoginForm';
+import LoginFormContainer from './LoginFormContainer';
 
 export default function LoginPage() {
   return (
     <div>
       <h2>Log In</h2>
-      <LoginForm />
+      <LoginFormContainer />
     </div>
   );
 }
