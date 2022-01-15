@@ -44,5 +44,14 @@ export async function postLogin({ email, password }) {
 export async function postReview({
   accessToken, restaurantId, score, description,
 }) {
-  // TODO: 토큰으로 restaurants/reviews/{restaurantId}에 접근해서 {score, description}을 POST로 넘기기
+  const url = `https://eatgo-customer-api.ahastudio.com/restaurants/${restaurantId}/reviews`;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({ score, description }),
+  });
+  await response.json();
 }
