@@ -6,9 +6,11 @@ import ReviewForm from './ReviewForm';
 describe('ReviewForm', () => {
   const handleChange = jest.fn();
   const handleClick = jest.fn();
+  const reviews = [{ score: 5, description: '짱맛' }];
 
   const renderReviewForm = () => render((
     <ReviewForm
+      reviews={reviews}
       onChangeField={handleChange}
       onClickSubmit={handleClick}
     />
