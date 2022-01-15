@@ -85,3 +85,12 @@ export function loadRestaurant({ restaurantId }) {
     dispatch(setRestaurant(restaurant));
   };
 }
+
+export function postLogin({ email, password }) {
+  return async (dispatch) => {
+    console.log(email, password);
+    // const user = await fetchLogin({ email, password });
+
+    // dispatch(setUser(user));
+  };
+}
