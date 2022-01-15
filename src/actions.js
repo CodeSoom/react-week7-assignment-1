@@ -129,6 +129,7 @@ export function requestLogin() {
   return async (dispatch, getState) => {
     const {
       inputField: { email, password },
+      restaurant: { reviews },
     } = getState();
 
     const accessToken = await postLogin({ email, password });
@@ -136,27 +137,23 @@ export function requestLogin() {
     saveItems('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
-
-    // ToDo Promise로 실패했을때 처리 추가 (나의 선택)
+    dispatch(setReviews(reviews));
   };
 }
 
 export function sendReview() {
-  return async (dispatch, getState) => {
+  return async (getState) => {
     const {
       reviewField:
       { score, description },
       accessToken,
-      restaurant,
+      restaurant: { id },
     } = getState();
 
-    const restaurantId = restaurant.id;
-    const { reviews } = restaurant;
+    const restaurantId = id;
 
     await postReview({
       restaurantId, accessToken, score, description,
     });
-
-    dispatch(setReviews(reviews));
   };
 }
