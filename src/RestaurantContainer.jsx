@@ -19,6 +19,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
+  const reviews = useSelector(get('reviews'));
 
   if (!restaurant) {
     return (
@@ -27,8 +28,11 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   return (
-    <RestaurantDetail
-      restaurant={restaurant}
-    />
+    <>
+      <RestaurantDetail
+        restaurant={restaurant}
+        reviews={reviews}
+      />
+    </>
   );
 }
