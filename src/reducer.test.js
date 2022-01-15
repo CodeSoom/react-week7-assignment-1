@@ -8,7 +8,9 @@ import {
   selectRegion,
   selectCategory,
   handleLoginForm,
+  setAccessToken,
 } from './actions';
+import token from '../fixtures/loginToken';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -137,6 +139,17 @@ describe('reducer', () => {
       const state = reducer(initState, handleLoginForm('id', 'testId'));
 
       expect(state.loginForm.id).toBe('testId');
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('accessToken을 변경한다..', () => {
+      const initState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initState, setAccessToken(token));
+      expect(state.accessToken).toBe(token);
     });
   });
 });

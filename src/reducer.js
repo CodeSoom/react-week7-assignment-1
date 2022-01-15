@@ -62,6 +62,12 @@ const reducers = {
       loginForm: { ...loginForm, [key]: value },
     };
   },
+  setAccessToken(state, { payload: { token } }) {
+    return {
+      ...state,
+      accessToken: token,
+    };
+  },
 };
 
 function defaultReducer(state) {

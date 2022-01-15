@@ -10,7 +10,10 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
+  setAccessToken,
 } from './actions';
+import token from '../fixtures/loginToken';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -98,6 +101,20 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({ loginForm: { id: '', pw: '' } });
+    });
+
+    it('dispatch requestLogin', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken(token));
     });
   });
 });

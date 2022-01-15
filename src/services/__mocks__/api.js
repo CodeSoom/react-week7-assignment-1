@@ -1,3 +1,5 @@
+import token from '../../../fixtures/loginToken';
+
 export async function fetchRegions() {
   return [];
 }
@@ -12,4 +14,8 @@ export async function fetchRestaurants() {
 
 export async function fetchRestaurant() {
   return {};
+}
+
+export async function fetchLogin() {
+  return token;
 }
