@@ -3,7 +3,8 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
-  fetchAccessToken,
+  postAccessToken,
+  postReview,
 } from '../services/api';
 
 export function setRegions(regions) {
@@ -102,8 +103,19 @@ export function logout() {
 
 export function postLogin({ email, password }) {
   return async (dispatch) => {
-    const { accessToken } = await fetchAccessToken({ email, password });
+    const { accessToken } = await postAccessToken({ email, password });
 
     dispatch(login({ accessToken }));
+  };
+}
+
+export function postNewReview({ restaurantId, review }) {
+  return async (dispatch, getState) => {
+    const { accessToken } = getState();
+
+    await postReview({ restaurantId, accessToken, review });
+
+    const restaurant = fetchRestaurant({ restaurantId });
+    dispatch(setRestaurant(restaurant));
   };
 }

@@ -28,12 +28,28 @@ export async function fetchRestaurant({ restaurantId }) {
   return data;
 }
 
-export async function fetchAccessToken({ email, password }) {
+export async function postAccessToken({ email, password }) {
   const url = 'https://eatgo-login-api.ahastudio.com/session';
   const response = await fetch(url, {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
     body: JSON.stringify({ email, password }),
+  });
+  const data = await response.json();
+  return data;
+}
+
+export async function postReview({
+  accessToken, restaurantId, review,
+}) {
+  const url = `https://eatgo-customer-api.ahastudio.com/restaurants/${restaurantId}/reviews`;
+  const response = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    method: 'POST',
+    body: JSON.stringify(review),
   });
   const data = await response.json();
   return data;
