@@ -144,7 +144,7 @@ export function requestLogin() {
 }
 
 export function sendReview() {
-  return async (getState) => {
+  return async (dispatch, getState) => {
     const {
       reviewField:
       { score, description },
@@ -157,5 +157,13 @@ export function sendReview() {
     await postReview({
       restaurantId, accessToken, score, description,
     });
+
+    const restaurant = await fetchRestaurant({ restaurantId });
+
+    dispatch(setRestaurant(restaurant));
+
+    const { reviews } = restaurant;
+
+    dispatch(setReviews(reviews));
   };
 }
