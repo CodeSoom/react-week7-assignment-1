@@ -13,14 +13,22 @@ describe('Reviews', () => {
           restaurantId: 1,
           score: 5,
         },
+        {
+          description: '훌륭하다 훌륭하다 지구인놈들 2',
+          id: 2,
+          name: '테스터',
+          restaurantId: 1,
+          score: 5,
+        },
       ];
 
       const { container } = render(<ReviewItems reviews={reviews} />);
 
-      const [review] = reviews;
-      expect(container).toHaveTextContent(review.name);
-      expect(container).toHaveTextContent(`${review.score}점`);
-      expect(container).toHaveTextContent(review.description);
+      reviews.forEach((review) => {
+        expect(container).toHaveTextContent(review.name);
+        expect(container).toHaveTextContent(`${review.score}점`);
+        expect(container).toHaveTextContent(review.description);
+      });
     });
   });
 
