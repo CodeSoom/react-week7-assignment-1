@@ -6,9 +6,9 @@ describe('LoginForm', () => {
   const handleSubmit = jest.fn();
   const handleChange = jest.fn();
 
-  const renderLoginForm = ({ values }) => render(
+  const renderLoginForm = ({ initialValues }) => render(
     <LoginForm
-      values={values}
+      initialValues={initialValues}
       onChange={handleChange}
       onSubmit={handleSubmit}
     />,
@@ -16,13 +16,14 @@ describe('LoginForm', () => {
 
   beforeEach(() => {
     handleSubmit.mockClear();
+    handleChange.mockClear();
   });
 
-  it('renders email & password', () => {
+  it('renders initial values', () => {
     const email = 'test@test.com';
     const password = 'pass';
 
-    const { getByLabelText } = renderLoginForm({ values: { email, password } });
+    const { getByLabelText } = renderLoginForm({ initialValues: { email, password } });
 
     expect(getByLabelText('E-mail')).toHaveValue(email);
     expect(getByLabelText('Password')).toHaveValue(password);
@@ -33,7 +34,7 @@ describe('LoginForm', () => {
       const email = 'test@test.com';
       const password = 'pass';
 
-      const { getByLabelText } = renderLoginForm({ values: { email, password } });
+      const { getByLabelText } = renderLoginForm({ initialValues: { email, password } });
 
       const newEmail = 'new@new.com';
       fireEvent.change(getByLabelText('E-mail'), { target: { value: newEmail } });
@@ -41,7 +42,7 @@ describe('LoginForm', () => {
 
       const newPassword = 'newpass';
       fireEvent.change(getByLabelText('Password'), { target: { value: newPassword } });
-      expect(handleChange).toBeCalledWith({ email, password: newPassword });
+      expect(handleChange).toBeCalledWith({ email: newEmail, password: newPassword });
     });
   });
 
@@ -50,7 +51,7 @@ describe('LoginForm', () => {
       const email = 'test@test.com';
       const password = 'pass';
 
-      const { getByRole } = renderLoginForm({ values: { email, password } });
+      const { getByRole } = renderLoginForm({ initialValues: { email, password } });
 
       fireEvent.click(getByRole('button'));
 
