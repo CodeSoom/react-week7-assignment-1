@@ -8,6 +8,7 @@ import {
   selectRegion,
   selectCategory,
   login,
+  logout,
 } from './actions';
 
 describe('reducer', () => {
@@ -135,5 +136,15 @@ describe('login', () => {
     const state = reducer(initialState, login({ accessToken: 'accessToken' }));
 
     expect(state.accessToken).toBe('accessToken');
+  });
+});
+
+describe('logout', () => {
+  it('clear access token', () => {
+    const initialState = { accessToken: 'accessToken' };
+
+    const state = reducer(initialState, logout({ accessToken: 'accessToken' }));
+
+    expect(state.accessToken).toBe(null);
   });
 });

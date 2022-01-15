@@ -94,6 +94,12 @@ export function login({ accessToken }) {
   };
 }
 
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}
+
 export function postLogin({ email, password }) {
   return async (dispatch) => {
     const { accessToken } = await fetchAccessToken({ email, password });
