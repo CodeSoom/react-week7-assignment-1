@@ -29,4 +29,11 @@ describe('LoginForm', () => {
     fireEvent.change(pwInput, { target: { value: mockPw } });
     expect(onChange).toBeCalledWith('pw', mockPw);
   });
+
+  it('로그인 버튼을 누른 경우 onSubmit함수를 실행한다.', () => {
+    const onSubmit = jest.fn();
+    const { getByText } = render(<LoginForm onSubmit={onSubmit} />);
+    fireEvent.click(getByText('로그인'));
+    expect(onSubmit).toBeCalled();
+  });
 });
