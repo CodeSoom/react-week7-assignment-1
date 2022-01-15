@@ -51,9 +51,9 @@ export function logout() {
   };
 }
 
-export function setReview(reviews) {
+export function setReviews(reviews) {
   return {
-    type: 'setReview',
+    type: 'setReviews',
     payload: { reviews },
   };
 }
@@ -157,6 +157,6 @@ export function sendReview() {
       restaurantId, accessToken, score, description,
     });
 
-    dispatch(setReview(reviews));
+    dispatch(setReviews(reviews));
   };
 }

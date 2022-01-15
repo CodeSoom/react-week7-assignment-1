@@ -1,7 +1,8 @@
 // ToDo changeReviewField 테스트 만들기
 // ToDo sendReview 테스트 만들기
-// ToDo localStorage에 accessToken 저장하는 테스트 만들기
+// ToDo localStorage에 accessToken 저장 및 불러오는 테스트
 // ToDo logout 테스트 만들기
+// ToDo setReviews 테스트 만들기
 
 import thunk from 'redux-thunk';
 
@@ -15,10 +16,7 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
-  setAccessToken,
 } from './actions';
-
-import { saveItems } from './services/storage';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -109,22 +107,4 @@ describe('actions', () => {
       expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
-
-  /* ToDo: 완성
-  describe('requestLogin', () => {
-    const accessToken = 'ACCESS_TOKEN';
-
-    beforeEach(() => {
-      saveItems.mockImplementation(() => (accessToken));
-    });
-
-    it('dispatchs setAccessToken', async () => {
-      await store.dispatch(setAccessToken(accessToken));
-
-      const actions = store.getActions();
-
-      expect(actions[3]).toEqual(setAccessToken('ACCESS_TOKEN'));
-    });
-  });
-  */
 });
