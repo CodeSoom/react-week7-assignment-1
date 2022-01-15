@@ -62,7 +62,7 @@ describe('RestaurantContainer', () => {
       expect(dispatch).toBeCalledWith({
         type: 'changeReviewField',
         payload: {
-          name: 'discription',
+          name: 'description',
           value: '존맛탱',
         },
       });

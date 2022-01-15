@@ -32,13 +32,13 @@ function ReviewForm({ onChange }) {
         />
       </div>
       <div>
-        <label htmlFor="reivew-discription">
+        <label htmlFor="reivew-description">
           리뷰 내용
         </label>
         <input
           type="text"
-          id="reivew-discription"
-          name="discription"
+          id="reivew-description"
+          name="description"
           onChange={handleChange}
         />
       </div>
