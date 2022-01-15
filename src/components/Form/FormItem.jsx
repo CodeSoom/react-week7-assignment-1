@@ -19,7 +19,7 @@ export default function FormItem({ label, name, children }) {
         {children}
       </div>
     </FormItemContext.Provider>
-  ), [value]);
+  ), [value, label, name]);
 
   return (
     <>
