@@ -7,6 +7,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +19,7 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      accessToken: '',
     };
 
     it('returns initialState', () => {
@@ -87,6 +89,20 @@ describe('reducer', () => {
 
       expect(state.restaurant.id).toBe(1);
       expect(state.restaurant.name).toBe('마법사주방');
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('accessToken 값으로 업데이트한다.', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const accessToken = '1234';
+
+      const state = reducer(initialState, setAccessToken(accessToken));
+
+      expect(state.accessToken).toBe('1234');
     });
   });
 
