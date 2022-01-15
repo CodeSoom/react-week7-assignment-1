@@ -10,6 +10,15 @@ import {
 
 import { get } from './utils';
 
+function ReviewForm() {
+  return (
+    <div>
+      <label htmlFor="reivew-score">평점</label>
+      <input type="text" id="reivew-score" />
+    </div>
+  );
+}
+
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
@@ -28,6 +37,7 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
+      <ReviewForm />
     </>
   );
 }
