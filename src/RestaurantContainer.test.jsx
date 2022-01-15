@@ -14,7 +14,11 @@ describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
   function renderRestaurantContainer() {
-    return render(<RestaurantContainer restaurantId="1" />);
+    return render(
+      <RestaurantContainer
+        restaurantId="1"
+      />,
+    );
   }
 
   beforeEach(() => {
@@ -23,6 +27,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      accessToken: given.accessToken,
     }));
   });
 
@@ -64,31 +69,58 @@ describe('RestaurantContainer', () => {
       useDispatch.mockImplementation(() => dispatch);
     });
 
-    it('renders input fields to listen change events', () => {
-      const controls = [
-        { label: '평점', name: 'score', value: '10' },
-        { label: '리뷰 내용', name: 'description', value: 'good~' },
-      ];
+    context('without an accessToken', () => {
+      given('accessToken', () => '');
 
-      const { getByLabelText } = renderRestaurantContainer();
+      it('doesnt render review input field', () => {
+        const { queryByLabelText } = renderRestaurantContainer();
 
-      controls.forEach(({ label, name, value }) => {
-        expect(getByLabelText(label)).not.toBeNull();
+        const controls = [
+          { label: '평점', name: 'score', value: '10' },
+          { label: '리뷰 내용', name: 'description', value: 'good~' },
+        ];
 
-        fireEvent.change(getByLabelText(label), { target: { name, value } });
+        controls.forEach(({ label }) => {
+          expect(queryByLabelText(label)).toBeNull();
+        });
+      });
 
-        expect(dispatch).toBeCalledWith(changeReviewField({ name, value }));
+      it('doesnt render review submit button', () => {
+        const { queryByRole } = renderRestaurantContainer();
+
+        expect(queryByRole('button', { name: '리뷰 남기기' })).toBeNull();
       });
     });
 
-    it('renders a button to listen submit event', () => {
-      const { getByRole } = renderRestaurantContainer();
+    context('with an accessToken', () => {
+      given('accessToken', () => 'ACCESS_TOKEN');
 
-      expect(getByRole('button', { name: '리뷰 남기기' })).not.toBeNull();
+      it('renders input fields to listen change events', () => {
+        const controls = [
+          { label: '평점', name: 'score', value: '10' },
+          { label: '리뷰 내용', name: 'description', value: 'good~' },
+        ];
 
-      fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
+        const { getByLabelText } = renderRestaurantContainer();
 
-      expect(dispatch).toBeCalled();
+        controls.forEach(({ label, name, value }) => {
+          expect(getByLabelText(label)).not.toBeNull();
+
+          fireEvent.change(getByLabelText(label), { target: { name, value } });
+
+          expect(dispatch).toBeCalledWith(changeReviewField({ name, value }));
+        });
+      });
+
+      it('renders a button to listen submit event', () => {
+        const { getByRole } = renderRestaurantContainer();
+
+        expect(getByRole('button', { name: '리뷰 남기기' })).not.toBeNull();
+
+        fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
+
+        expect(dispatch).toBeCalled();
+      });
     });
   });
 });
