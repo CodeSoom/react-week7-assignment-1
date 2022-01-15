@@ -75,14 +75,8 @@ describe('RestaurantContainer', () => {
       it('doesnt render review input field', () => {
         const { queryByLabelText } = renderRestaurantContainer();
 
-        const controls = [
-          { label: '평점', name: 'score', value: '10' },
-          { label: '리뷰 내용', name: 'description', value: 'good~' },
-        ];
-
-        controls.forEach(({ label }) => {
-          expect(queryByLabelText(label)).toBeNull();
-        });
+        expect(queryByLabelText('평점')).toBeNull();
+        expect(queryByLabelText('리뷰 내용')).toBeNull();
       });
 
       it('doesnt render review submit button', () => {
