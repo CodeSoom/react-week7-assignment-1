@@ -26,10 +26,21 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
+  function handleSubmit() {
+    // TODO
+  }
+
+  function handleChange() {
+    // TODO
+  }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm />
+      <ReviewForm
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+      />
     </>
   );
 }

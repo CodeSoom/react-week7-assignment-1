@@ -108,3 +108,7 @@ export function requestLogin() {
     dispatch(setAccessToken(accessToken));
   };
 }
+
+export function changeReviewField({ name, value }) {
+  // TODO
+}
