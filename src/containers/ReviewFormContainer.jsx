@@ -13,13 +13,6 @@ export default function ReviewFormContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
   const accessToken = useSelector(get('accessToken'));
-  const restaurant = useSelector(get('restaurant'));
-
-  if (!restaurant) {
-    return (
-      <p>Loading...</p>
-    );
-  }
 
   function handleChangeReviewField({ name, value }) {
     dispatch(changeReviewField({ name, value }));
