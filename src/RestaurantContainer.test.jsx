@@ -6,7 +6,6 @@ import RestaurantContainer from './RestaurantContainer';
 
 import {
   changeReviewField,
-  sendReview,
 } from './actions';
 
 import RESTAURANT from '../fixtures/restaurant';
@@ -57,9 +56,15 @@ describe('RestaurantContainer', () => {
   });
 
   describe('ReviewForm Component', () => {
-    it('renders input fields to listen change events', () => {
-      given('restaurant', () => (RESTAURANT));
+    given('restaurant', () => (RESTAURANT));
 
+    beforeEach(() => {
+      dispatch.mockClear();
+
+      useDispatch.mockImplementation(() => dispatch);
+    });
+
+    it('renders input fields to listen change events', () => {
       const controls = [
         { label: '평점', name: 'score', value: '10' },
         { label: '리뷰 내용', name: 'description', value: 'good~' },
@@ -77,15 +82,13 @@ describe('RestaurantContainer', () => {
     });
 
     it('renders a button to listen submit event', () => {
-      given('restaurant', () => (RESTAURANT));
-
       const { getByRole } = renderRestaurantContainer();
 
       expect(getByRole('button', { name: '리뷰 남기기' })).not.toBeNull();
 
       fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
 
-      expect(dispatch).toBeCalledWith(sendReview({ restaurantId: 1 }));
+      expect(dispatch).toBeCalled();
     });
   });
 });

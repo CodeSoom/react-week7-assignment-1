@@ -40,3 +40,9 @@ export async function postLogin({ email, password }) {
   const { accessToken } = await response.json();
   return accessToken;
 }
+
+export async function postReview({
+  accessToken, restaurantId, score, description,
+}) {
+  // TODO: 토큰으로 restaurants/reviews/{restaurantId}에 접근해서 {score, description}을 POST로 넘기기
+}
