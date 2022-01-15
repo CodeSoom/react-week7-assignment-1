@@ -9,12 +9,9 @@ describe('RestaurantDetail', () => {
     address: '서울시 강남구',
   };
 
-  const reviews = [{ score: 5, description: '짱맛' }];
-
   const renderRestaurantDetail = () => render((
     <RestaurantDetail
       restaurant={restaurant}
-      reviews={reviews}
     />
   ));
 
@@ -23,6 +20,5 @@ describe('RestaurantDetail', () => {
 
     expect(container).toHaveTextContent('마법사주방');
     expect(container).toHaveTextContent('서울시');
-    expect(container).toHaveTextContent('짱맛');
   });
 });
