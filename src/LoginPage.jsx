@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
 import LoginFormContainer from './components/LoginFormContainer/LoginFormContainer';
 
 export default function LoginPage() {
@@ -12,6 +13,7 @@ export default function LoginPage() {
       history.push('/');
     }
   }, [token]);
+
   return (
     <div>
       <h1>Login</h1>

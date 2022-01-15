@@ -4,30 +4,30 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   it('아이디, 비밀번호 폼을 보여준다.', () => {
-    const mockId = 'testId';
-    const mockPw = 'testPw';
-    const { getByLabelText, getByDisplayValue } = render(<LoginForm id={mockId} pw={mockPw} />);
+    const id = 'testId';
+    const pw = 'testPw';
+    const { getByLabelText, getByDisplayValue } = render(<LoginForm id={id} pw={pw} />);
 
     expect(getByLabelText(/아이디/)).not.toBeNull();
     expect(getByLabelText(/비밀번호/)).not.toBeNull();
-    expect(getByDisplayValue(mockId)).not.toBeNull();
-    expect(getByDisplayValue(mockPw)).not.toBeNull();
+    expect(getByDisplayValue(id)).not.toBeNull();
+    expect(getByDisplayValue(pw)).not.toBeNull();
   });
 
   it('input 상태를 변경하는 경우 onChange함수를 실행한다.', () => {
-    const mockId = 'testId';
-    const mockPw = 'testPw';
+    const id = 'testId';
+    const pw = 'testPw';
     const onChange = jest.fn();
     const { getByLabelText } = render(<LoginForm onChange={onChange} />);
 
     const idInput = getByLabelText(/아이디/);
     const pwInput = getByLabelText(/비밀번호/);
 
-    fireEvent.change(idInput, { target: { value: mockId } });
-    expect(onChange).toBeCalledWith('id', mockId);
+    fireEvent.change(idInput, { target: { value: id } });
+    expect(onChange).toBeCalledWith('id', id);
 
-    fireEvent.change(pwInput, { target: { value: mockPw } });
-    expect(onChange).toBeCalledWith('pw', mockPw);
+    fireEvent.change(pwInput, { target: { value: pw } });
+    expect(onChange).toBeCalledWith('pw', pw);
   });
 
   it('로그인 버튼을 누른 경우 onSubmit함수를 실행한다.', () => {

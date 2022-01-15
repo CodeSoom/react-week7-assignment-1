@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom';
+
 import { setAccessToken } from './actions';
 
 export default function LogoutPage() {
@@ -8,6 +9,7 @@ export default function LogoutPage() {
 
   const handleClick = () => {
     dispatch(setAccessToken(''));
+
     history.push('/login');
   };
 

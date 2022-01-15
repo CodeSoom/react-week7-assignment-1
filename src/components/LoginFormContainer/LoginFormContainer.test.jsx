@@ -31,10 +31,10 @@ describe('LoginFormContainer', () => {
     const { getByLabelText } = render((<LoginFormContainer />));
 
     const idInput = getByLabelText('아이디');
-    const mockId = 'testId';
+    const id = 'testId';
 
-    fireEvent.change(idInput, { target: { value: mockId } });
+    fireEvent.change(idInput, { target: { value: id } });
 
-    expect(dispatch).toBeCalledWith(handleLoginForm('id', mockId));
+    expect(dispatch).toBeCalledWith(handleLoginForm('id', id));
   });
 });
