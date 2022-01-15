@@ -116,6 +116,8 @@ export function changeReviewField({ name, value }) {
   };
 }
 
-export function sendReview() {
-  // TODO
+export function sendReview({ restaurantId }) {
+  return (dispatch, getState) => {
+    // TODO
+  };
 }
