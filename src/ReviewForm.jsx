@@ -36,9 +36,10 @@ export default function ReviewForm({ reviews, onChangeField, onClickSubmit }) {
         리뷰 남기기
       </button>
       <ul>
+        <h2>리뷰</h2>
         {reviews.map((review) => (
           <li key={review.id}>
-            {`${review.score} | ${review.description}`}
+            {`${review.name} | ${review.score} | ${review.description}`}
           </li>
         ))}
       </ul>
