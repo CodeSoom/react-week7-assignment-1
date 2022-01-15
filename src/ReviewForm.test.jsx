@@ -6,11 +6,9 @@ import ReviewForm from './ReviewForm';
 describe('ReviewForm', () => {
   const handleChange = jest.fn();
   const handleClick = jest.fn();
-  const reviews = [{ score: 5, description: '짱맛' }];
 
   const renderReviewForm = () => render((
     <ReviewForm
-      reviews={reviews}
       onChangeField={handleChange}
       onClickSubmit={handleClick}
     />
@@ -21,9 +19,8 @@ describe('ReviewForm', () => {
   });
 
   it('renders input with "평점" label to call onChange event', () => {
-    const { container, getByLabelText } = renderReviewForm();
+    const { getByLabelText } = renderReviewForm();
 
-    expect(container).toHaveTextContent('짱맛');
     expect(getByLabelText('평점')).toBeInTheDocument();
 
     fireEvent.change(getByLabelText('평점'), {

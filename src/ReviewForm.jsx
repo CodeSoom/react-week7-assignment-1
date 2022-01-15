@@ -1,5 +1,5 @@
 // 관심사: 상태그려주기
-export default function ReviewForm({ reviews, onChangeField, onClickSubmit }) {
+export default function ReviewForm({ onChangeField, onClickSubmit }) {
   function handleChange(event) {
     const { target: { name, value } } = event;
     onChangeField({ name, value });
@@ -35,14 +35,6 @@ export default function ReviewForm({ reviews, onChangeField, onClickSubmit }) {
       >
         리뷰 남기기
       </button>
-      <h2>리뷰</h2>
-      <ul>
-        {reviews.map((review) => (
-          <li key={review.id}>
-            {`${review.name} | ${review.score} | ${review.description}`}
-          </li>
-        ))}
-      </ul>
     </>
   );
 }
