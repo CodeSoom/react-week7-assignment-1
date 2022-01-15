@@ -112,3 +112,13 @@ export function changeLoginField({ name, value }) {
     payload: { name, value },
   };
 }
+
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: {
+      name,
+      value,
+    },
+  };
+}

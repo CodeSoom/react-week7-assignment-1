@@ -6,16 +6,43 @@ import RestaurantDetail from './RestaurantDetail';
 
 import {
   loadRestaurant,
+  changeReviewField,
 } from './actions';
 
 import { get } from './utils';
 
-function ReviewForm() {
+function ReviewForm({ onChange }) {
+  function handleChange(event) {
+    const { target: { name, value } } = event;
+
+    onChange({ name, value });
+  }
+
   return (
-    <div>
-      <label htmlFor="reivew-score">평점</label>
-      <input type="text" id="reivew-score" />
-    </div>
+    <>
+      <div>
+        <label htmlFor="reivew-score">
+          평점
+        </label>
+        <input
+          type="number"
+          id="reivew-score"
+          name="score"
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="reivew-discription">
+          리뷰 내용
+        </label>
+        <input
+          type="text"
+          id="reivew-discription"
+          name="discription"
+          onChange={handleChange}
+        />
+      </div>
+    </>
   );
 }
 
@@ -28,6 +55,10 @@ export default function RestaurantContainer({ restaurantId }) {
 
   const restaurant = useSelector(get('restaurant'));
 
+  function handleChange({ name, value }) {
+    dispatch(changeReviewField({ name, value }));
+  }
+
   if (!restaurant) {
     return (
       <p>Loading...</p>
@@ -37,7 +68,7 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm />
+      <ReviewForm onChange={handleChange} />
     </>
   );
 }
