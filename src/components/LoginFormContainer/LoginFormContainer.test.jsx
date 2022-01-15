@@ -2,21 +2,39 @@ import { render, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
+import { handleLoginForm } from '../../actions';
 
-test('LoginFormContainer', () => {
+describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => dispatch);
-  useSelector.mockImplementation((selector) => selector({
-    loginForm: {
-      id: '',
-      pw: '',
-    },
-  }));
+  beforeEach(() => {
+    dispatch.mockClear();
 
-  const { getByText } = render((<LoginFormContainer />));
+    useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      loginForm: {
+        id: '',
+        pw: '',
+      },
+    }));
+  });
 
-  fireEvent.click(getByText('로그인'));
+  it('로그인 버튼 클릭시 로그인 요청을 보낸다.', () => {
+    const { getByText } = render((<LoginFormContainer />));
 
-  expect(dispatch).toBeCalled();
+    fireEvent.click(getByText('로그인'));
+
+    expect(dispatch).toBeCalled();
+  });
+
+  it('로그인 폼을 수정시 폼 상태를 변경하는 디스패치를 실행한다.', () => {
+    const { getByLabelText } = render((<LoginFormContainer />));
+
+    const idInput = getByLabelText('아이디');
+    const mockId = 'testId';
+
+    fireEvent.change(idInput, { target: { value: mockId } });
+
+    expect(dispatch).toBeCalledWith(handleLoginForm('id', mockId));
+  });
 });
