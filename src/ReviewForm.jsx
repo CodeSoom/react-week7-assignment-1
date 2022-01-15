@@ -16,7 +16,7 @@ export default function ReviewForm({ onSubmit, onChange }) {
           type="number"
           name="score"
           id="review-score"
-          onChange={onChange}
+          onChange={handleChange}
         />
       </div>
       <div>

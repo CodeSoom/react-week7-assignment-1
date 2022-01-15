@@ -85,7 +85,7 @@ describe('RestaurantContainer', () => {
 
       fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
 
-      expect(dispatch).toBeCalledWith(sendReview());
+      expect(dispatch).toBeCalledWith(sendReview({ restaurantId: 1 }));
     });
   });
 });

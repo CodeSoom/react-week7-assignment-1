@@ -110,7 +110,10 @@ export function requestLogin() {
 }
 
 export function changeReviewField({ name, value }) {
-  // TODO
+  return {
+    type: 'changeReviewField',
+    payload: { name, value },
+  };
 }
 
 export function sendReview() {
