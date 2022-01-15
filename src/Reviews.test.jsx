@@ -2,14 +2,16 @@ import { render } from '@testing-library/react';
 
 import Reviews from './Reviews';
 
-import REIVEWS from '../fixtures/reviews';
+import restaurant from '../fixtures/restaurant';
 
 describe('Reviews', () => {
-  it('renders reviews', () => {
-    const { container } = render(<Reviews reviews={REIVEWS} />);
+  const { reviews } = restaurant;
 
-    expect(container).toHaveTextContent('냥냥이');
-    expect(container).toHaveTextContent('1점');
-    expect(container).toHaveTextContent('good');
+  it('renders reviews', () => {
+    const { getByText } = render(<Reviews reviews={reviews} />);
+
+    expect(getByText('냥냥이')).not.toBeNull();
+    expect(getByText('1점')).not.toBeNull();
+    expect(getByText('good')).not.toBeNull();
   });
 });

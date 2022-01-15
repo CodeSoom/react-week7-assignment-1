@@ -14,9 +14,6 @@ import {
 
 import { get } from './utils';
 
-// TODO: DELETE
-import REIVEWS from '../fixtures/reviews';
-
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
@@ -26,7 +23,6 @@ export default function RestaurantContainer({ restaurantId }) {
 
   const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
-  const reviews = useSelector(get('reviews'));
 
   if (!restaurant) {
     return (
@@ -51,7 +47,7 @@ export default function RestaurantContainer({ restaurantId }) {
           onChange={handleChange}
         />
       ) : null}
-      <Reviews reviews={REIVEWS} />
+      <Reviews reviews={restaurant.reviews} />
     </>
   );
 }

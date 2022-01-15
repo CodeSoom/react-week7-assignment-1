@@ -9,7 +9,6 @@ import {
 } from './actions';
 
 import RESTAURANT from '../fixtures/restaurant';
-import REIVEWS from '../fixtures/reviews';
 
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
@@ -29,7 +28,6 @@ describe('RestaurantContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
       accessToken: given.accessToken,
-      reviews: given.reviews,
     }));
   });
 
@@ -64,12 +62,6 @@ describe('RestaurantContainer', () => {
 
   describe('ReviewForm Component', () => {
     given('restaurant', () => (RESTAURANT));
-
-    beforeEach(() => {
-      dispatch.mockClear();
-
-      useDispatch.mockImplementation(() => dispatch);
-    });
 
     context('without an accessToken', () => {
       given('accessToken', () => '');
@@ -122,18 +114,13 @@ describe('RestaurantContainer', () => {
 
   describe('Reviews Component', () => {
     given('restaurant', () => (RESTAURANT));
-    given('reviews', () => REIVEWS);
 
     it('renders reviews', () => {
-      REIVEWS.forEach((review) => {
-        const { name, score, description } = review;
+      const { getByText } = renderRestaurantContainer();
 
-        const { container } = renderRestaurantContainer();
-
-        expect(container).toHaveTextContent(name);
-        expect(container).toHaveTextContent(score);
-        expect(container).toHaveTextContent(description);
-      });
+      expect(getByText('냥냥이')).not.toBeNull();
+      expect(getByText('1점')).not.toBeNull();
+      expect(getByText('good')).not.toBeNull();
     });
   });
 });

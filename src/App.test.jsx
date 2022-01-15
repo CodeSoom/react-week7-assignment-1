@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import RESTAURANT from '../fixtures/restaurant';
+
 jest.mock('react-redux');
 
 describe('App', () => {
@@ -24,7 +26,7 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
+      restaurant: RESTAURANT,
     }));
   });
 
@@ -64,7 +66,10 @@ describe('App', () => {
     it('renders the restaurant page', () => {
       const { container } = renderApp({ path: '/restaurants/1' });
 
-      expect(container).toHaveTextContent('마녀주방');
+      expect(container).toHaveTextContent('마법사주방');
+      expect(container).toHaveTextContent('떡볶이');
+      expect(container).toHaveTextContent('냥냥이');
+      expect(container).toHaveTextContent('가지말자');
     });
   });
 
