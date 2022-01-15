@@ -10,6 +10,8 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  login,
+  setAccessToken,
 } from './actions';
 
 const middlewares = [thunk];
@@ -98,6 +100,23 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('login', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    const email = 'tester@example.com';
+    const password = 'test';
+
+    it('setAccessToken 액션을 디스패치 한다.', async () => {
+      await store.dispatch(login({ email, password }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken('ACCESS_TOKEN'));
     });
   });
 });

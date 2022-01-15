@@ -3,7 +3,9 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLoginForm,
 } from './services/api';
+import { setLocalStorageItem } from './utils';
 
 export function setRegions(regions) {
   return {
@@ -47,6 +49,13 @@ export function selectCategory(categoryId) {
   };
 }
 
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();
@@ -83,5 +92,14 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function login({ email, password }) {
+  return async (dispatch) => {
+    const { accessToken } = await postLoginForm({ email, password });
+
+    dispatch(setAccessToken(accessToken));
+    setLocalStorageItem('accessToken', accessToken);
   };
 }
