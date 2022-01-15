@@ -1,31 +1,19 @@
 import { render } from '@testing-library/react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import ReviewsContainer from './ReviewsContainer';
 
 describe('ReviewsContainer', () => {
-  const dispatch = jest.fn();
-
   function renderReviewsContainer() {
-    return render(<ReviewsContainer restaurantId="1" />);
+    return render(<ReviewsContainer />);
   }
 
   beforeEach(() => {
-    dispatch.mockClear();
-
-    useDispatch.mockImplementation(() => dispatch);
-
     useSelector.mockImplementation((selector) => selector({
       accessToken: given.accessToken,
       restaurant: given.restaurant,
     }));
-  });
-
-  it('dispatches action', () => {
-    renderReviewsContainer();
-
-    expect(dispatch).toBeCalled();
   });
 
   context('with reviews', () => {
