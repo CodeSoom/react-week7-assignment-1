@@ -1,37 +1,42 @@
-import { useMemo } from 'react';
+// eslint-disable-next-line no-unused-vars
+import { useEffect } from 'react';
+
 import Form from '../../components/Form';
+import FormItem from '../../components/Form/FormItem';
+import useForm from '../../hooks/useForm';
+import Input from '../../components/Input';
 
-export default function LoginForm({ values, onChange, onSubmit }) {
+/**
+ * @export
+ * @param {{
+ *  initialValues?: { email: string; password: string };
+ *  onChange?: (values: { email: string, password: string }) => void,
+ *  onSubmit?: (values: { email: string, password: string }) => void,
+ * }} { onSubmit }
+ * @return {ReactElement} LoginForm
+ */
+export default function LoginForm({ initialValues = {}, onChange, onSubmit }) {
+  const form = useForm({ initialValues: { email: initialValues.email || '', password: initialValues.password || '' } });
+
   const handleSubmit = () => {
-    onSubmit(values);
+    onSubmit?.({ email: form.values.email, password: form.values.password });
   };
 
-  const handleChange = ({ target }) => {
-    onChange({
-      ...values,
-      [target.name]: target.value,
-    });
-  };
-
-  const emailFormItem = useMemo(() => (
-    <div>
-      <label htmlFor="email">E-mail</label>
-      <input id="email" name="email" value={values.email} onChange={handleChange} />
-    </div>
-  ), [values.email]);
-
-  const passwordFormItem = useMemo(() => (
-    <div>
-      <label htmlFor="password">Password</label>
-      <input id="password" name="password" value={values.password} onChange={handleChange} />
-    </div>
-  ), [values.password]);
+  useEffect(() => {
+    onChange?.(form.values);
+  }, [form.values, onChange]);
 
   return (
-    <Form onSubmit={handleSubmit}>
-      {emailFormItem}
-      {passwordFormItem}
-      <button type="submit">Log In</button>
-    </Form>
+    <>
+      <Form form={form} onSubmit={handleSubmit}>
+        <FormItem label="E-mail" name="email">
+          <Input />
+        </FormItem>
+        <FormItem label="Password" name="password">
+          <Input />
+        </FormItem>
+        <button type="submit">Log In</button>
+      </Form>
+    </>
   );
 }
