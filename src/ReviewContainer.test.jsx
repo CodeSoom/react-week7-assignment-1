@@ -20,50 +20,59 @@ describe('ReviewContainer', () => {
         description: '짱맛',
       },
       accessToken: given.accessToken,
+      reviews: [{ score: 5, description: '짱맛' }],
     }));
   });
 
-  given('accessToken', () => 'ACCESS_TOKEN');
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-  describe('rendering input and button"', () => {
-    it('renders input with "평점" label to call dispatch', () => {
-      const { getByLabelText } = render(<ReviewContainer />);
+    it('renders list of reviews', () => {
+      const { container } = render(<ReviewContainer />);
 
-      expect(getByLabelText('평점')).toBeInTheDocument();
-
-      fireEvent.change(getByLabelText('평점'), {
-        target: {
-          name: 'score',
-          value: '5',
-        },
-      });
-
-      expect(dispatch).toBeCalled();
+      expect(container).toHaveTextContent('짱맛');
     });
 
-    it('renders input with "리뷰 내용" label to call dispatch', () => {
-      const { getByLabelText } = render(<ReviewContainer />);
+    describe('with "평점", "리뷰 내용"input and "리뷰 남기기"button"', () => {
+      it('calls dispatch with "changeReviewField" action', () => {
+        const { getByLabelText } = render(<ReviewContainer />);
 
-      expect(getByLabelText('리뷰 내용')).toBeInTheDocument();
+        expect(getByLabelText('평점')).toBeInTheDocument();
 
-      fireEvent.change(getByLabelText('리뷰 내용'), {
-        target: {
-          name: 'description',
-          value: '짱맛존맛',
-        },
+        fireEvent.change(getByLabelText('평점'), {
+          target: {
+            name: 'score',
+            value: '5',
+          },
+        });
+
+        expect(dispatch).toBeCalled();
       });
 
-      expect(dispatch).toBeCalled();
-    });
+      it('calls dispatch with "changeReviewField" action', () => {
+        const { getByLabelText } = render(<ReviewContainer />);
 
-    it('renders "리뷰 남기기" button to call dispatch', () => {
-      const { getByText } = render(<ReviewContainer />);
+        expect(getByLabelText('리뷰 내용')).toBeInTheDocument();
 
-      expect(getByText('리뷰 남기기')).not.toBeNull();
+        fireEvent.change(getByLabelText('리뷰 내용'), {
+          target: {
+            name: 'description',
+            value: '짱맛존맛',
+          },
+        });
 
-      fireEvent.click(getByText('리뷰 남기기'));
+        expect(dispatch).toBeCalled();
+      });
 
-      expect(dispatch).toBeCalled();
+      it('calls dispatch with "sendReview" action', () => {
+        const { getByText } = render(<ReviewContainer />);
+
+        expect(getByText('리뷰 남기기')).not.toBeNull();
+
+        fireEvent.click(getByText('리뷰 남기기'));
+
+        expect(dispatch).toBeCalled();
+      });
     });
   });
 });
