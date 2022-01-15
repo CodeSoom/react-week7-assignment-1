@@ -34,7 +34,7 @@ describe('reducer', () => {
         score: '',
         description: '',
       },
-      review: '',
+      reviews: [],
     };
 
     it('returns initialState', () => {
@@ -124,14 +124,16 @@ describe('reducer', () => {
   describe('setReview', () => {
     it('changes review', () => {
       const initialState = {
-        review: '',
+        reviews: [],
       };
 
-      const review = '짱맛';
+      const reviews = [
+        { score: 5, description: '짱맛!' },
+      ];
 
-      const state = reducer(initialState, setReview(review));
+      const state = reducer(initialState, setReview(reviews));
 
-      expect(state.review).toBe('짱맛');
+      expect(state.reviews).toHaveLength(1);
     });
   });
 

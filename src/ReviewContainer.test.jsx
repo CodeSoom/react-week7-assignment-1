@@ -1,4 +1,5 @@
 // 관심사: 상태바꿔주기
+// ToDo: 테스트 이름을 구체적으로 어떤 것에 대한 테스트인지 명확히하기
 import { render, fireEvent } from '@testing-library/react';
 
 import { useSelector, useDispatch } from 'react-redux';

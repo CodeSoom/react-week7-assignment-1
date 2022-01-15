@@ -17,7 +17,7 @@ const initialState = {
     score: '',
     description: '',
   },
-  review: '',
+  reviews: [],
 };
 
 const reducers = {
@@ -63,10 +63,10 @@ const reducers = {
     };
   },
 
-  setReview(state, { payload: { review } }) {
+  setReview(state, { payload: { reviews } }) {
     return {
       ...state,
-      review,
+      reviews,
     };
   },
 

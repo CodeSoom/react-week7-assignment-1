@@ -51,10 +51,10 @@ export function logout() {
   };
 }
 
-export function setReview(review) {
+export function setReview(reviews) {
   return {
     type: 'setReview',
-    payload: { review },
+    payload: { reviews },
   };
 }
 
@@ -147,15 +147,16 @@ export function sendReview() {
       reviewField:
       { score, description },
       accessToken,
-      restaurant: { id },
+      restaurant,
     } = getState();
 
-    const restaurantId = id;
+    const restaurantId = restaurant.id;
+    const { reviews } = restaurant;
 
-    const review = await postReview({
+    await postReview({
       restaurantId, accessToken, score, description,
     });
 
-    dispatch(setReview(review));
+    dispatch(setReview(reviews));
   };
 }
