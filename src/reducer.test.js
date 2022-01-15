@@ -7,6 +7,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  handleLoginForm,
 } from './actions';
 
 describe('reducer', () => {
@@ -123,6 +124,18 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('handleLoginForm', () => {
+    it('loginForm을 변경한다.', () => {
+      const initState = {
+        loginForm: { id: '', pw: '' },
+      };
+
+      const state = reducer(initState, handleLoginForm('id', 'testId'));
+
+      expect(state.loginForm.id).toBe('testId');
     });
   });
 });
