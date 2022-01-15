@@ -1,8 +1,8 @@
 import Form from '../../components/Form';
 
-export default function LoginForm({ email, password, onSubmit }) {
+export default function LoginForm({ values, onChange, onSubmit }) {
   const handleSubmit = () => {
-    onSubmit({ email, password });
+    onSubmit(values);
   };
 
   return (
