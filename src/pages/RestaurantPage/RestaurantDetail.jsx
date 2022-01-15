@@ -1,7 +1,11 @@
 import MenuItems from './MenuItems';
+import ReviewForm from './ReviewForm';
+import ReviewsList from './ReviewsList';
 
-export default function RestaurantDetail({ restaurant }) {
-  const { name, address, menuItems } = restaurant;
+export default function RestaurantDetail({ restaurant, onAddReview }) {
+  const {
+    name, address, menuItems, reviews,
+  } = restaurant;
 
   return (
     <div>
@@ -13,6 +17,8 @@ export default function RestaurantDetail({ restaurant }) {
       </p>
       <h3>메뉴</h3>
       <MenuItems menuItems={menuItems} />
+      <ReviewForm onSubmit={onAddReview} />
+      <ReviewsList reviews={reviews} />
     </div>
   );
 }
