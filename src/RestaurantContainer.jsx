@@ -17,6 +17,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get("restaurant"));
+  const { score, description } = useSelector(get("reviewField"));
 
   if (!restaurant) {
     return <p>Loading...</p>;
@@ -26,7 +27,7 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail restaurant={restaurant} />
       <ReviewForm
-        reviewField={{ name, value }}
+        reviewField={{ score, description }}
         onChange={handleReviewChange}
         onClick={handleReviewSubmit}
       />
