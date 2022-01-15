@@ -5,9 +5,11 @@ export default function ReviewItems({ reviews }) {
     );
   }
 
+  const sortedReviews = [...reviews].sort((a, b) => b.id - a.id);
+
   return (
     <ul>
-      {reviews.map(({
+      {sortedReviews.map(({
         id, name, score, description,
       }) => (
         <li key={id}>
