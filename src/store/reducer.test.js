@@ -7,6 +7,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  login,
 } from './actions';
 
 describe('reducer', () => {
@@ -124,5 +125,15 @@ describe('reducer', () => {
         name: '한식',
       });
     });
+  });
+});
+
+describe('login', () => {
+  it('changes access token', () => {
+    const initialState = {};
+
+    const state = reducer(initialState, login({ accessToken: 'accessToken' }));
+
+    expect(state.accessToken).toBe('accessToken');
   });
 });
