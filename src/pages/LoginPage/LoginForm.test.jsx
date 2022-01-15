@@ -22,7 +22,7 @@ describe('LoginForm', () => {
 
     const { getByLabelText } = renderLoginForm({ values: { email, password } });
 
-    expect(getByLabelText('Email')).toHaveValue(email);
+    expect(getByLabelText('E-mail')).toHaveValue(email);
     expect(getByLabelText('Password')).toHaveValue(password);
   });
 
