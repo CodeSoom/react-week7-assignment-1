@@ -21,8 +21,9 @@ describe('ReviewForm', () => {
   });
 
   it('renders input with "평점" label to call onChange event', () => {
-    const { getByLabelText } = renderReviewForm();
+    const { container, getByLabelText } = renderReviewForm();
 
+    expect(container).toHaveTextContent('짱맛');
     expect(getByLabelText('평점')).toBeInTheDocument();
 
     fireEvent.change(getByLabelText('평점'), {

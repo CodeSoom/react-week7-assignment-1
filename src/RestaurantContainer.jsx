@@ -39,28 +39,22 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
+  // ToDo: reviews는 Reviews 에 따로 빼서 넘겨주기
   return (
     <>
+      <RestaurantDetail
+        restaurant={restaurant}
+        reviews={reviews}
+      />
       {accessToken
         ? (
-          <>
-            <RestaurantDetail
-              restaurant={restaurant}
-              reviews={reviews}
-            />
-            <ReviewForm
-              onChangeField={handleChangeField}
-              onClickSubmit={handleClickSubmit}
-              reviews={reviews}
-            />
-          </>
-        )
-        : (
-          <RestaurantDetail
-            restaurant={restaurant}
+          <ReviewForm
+            onChangeField={handleChangeField}
+            onClickSubmit={handleClickSubmit}
             reviews={reviews}
           />
-        )}
+        )
+        : null}
     </>
   );
 }

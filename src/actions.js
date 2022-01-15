@@ -111,6 +111,7 @@ export function loadRestaurants() {
       regionName: region.name,
       categoryId: category.id,
     });
+
     dispatch(setRestaurants(restaurants));
   };
 }
@@ -158,12 +159,6 @@ export function sendReview() {
       restaurantId, accessToken, score, description,
     });
 
-    const restaurant = await fetchRestaurant({ restaurantId });
-
-    dispatch(setRestaurant(restaurant));
-
-    const { reviews } = restaurant;
-
-    dispatch(setReviews(reviews));
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }
