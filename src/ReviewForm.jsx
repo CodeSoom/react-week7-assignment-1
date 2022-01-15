@@ -1,33 +1,35 @@
-export default function ReviewForm({ onClick }) {
+export default function ReviewForm({ onSubmit, onChange }) {
   return (
     <>
       <div>
         <label
-          name="score"
           htmlFor="review-score"
         >
           평점
         </label>
         <input
-          type="text"
+          type="number"
+          name="score"
           id="review-score"
+          onChange={onChange}
         />
       </div>
       <div>
         <label
-          name="score"
-          htmlFor="review-score"
+          htmlFor="review-description"
         >
           리뷰 내용
         </label>
         <input
           type="text"
-          id="review-score"
+          name="description"
+          id="review-description"
+          onChange={onChange}
         />
       </div>
       <button
         type="button"
-        onClick={onClick}
+        onClick={onSubmit}
       >
         리뷰 남기기
       </button>
