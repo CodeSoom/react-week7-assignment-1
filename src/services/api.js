@@ -30,7 +30,11 @@ export async function fetchRestaurant({ restaurantId }) {
 
 export async function fetchAccessToken({ email, password }) {
   const url = 'https://eatgo-login-api.ahastudio.com/session';
-  const response = await fetch(url, { method: 'POST', body: JSON.stringify({ email, password }) });
+  const response = await fetch(url, {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+  });
   const data = await response.json();
   return data;
 }
