@@ -3,46 +3,46 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
-} from './services/api';
+} from "./services/api";
 
 export function setRegions(regions) {
   return {
-    type: 'setRegions',
+    type: "setRegions",
     payload: { regions },
   };
 }
 
 export function setCategories(categories) {
   return {
-    type: 'setCategories',
+    type: "setCategories",
     payload: { categories },
   };
 }
 
 export function setRestaurants(restaurants) {
   return {
-    type: 'setRestaurants',
+    type: "setRestaurants",
     payload: { restaurants },
   };
 }
 
 export function setRestaurant(restaurant) {
   return {
-    type: 'setRestaurant',
+    type: "setRestaurant",
     payload: { restaurant },
   };
 }
 
 export function selectRegion(regionId) {
   return {
-    type: 'selectRegion',
+    type: "selectRegion",
     payload: { regionId },
   };
 }
 
 export function selectCategory(categoryId) {
   return {
-    type: 'selectCategory',
+    type: "selectCategory",
     payload: { categoryId },
   };
 }
@@ -59,10 +59,7 @@ export function loadInitialData() {
 
 export function loadRestaurants() {
   return async (dispatch, getState) => {
-    const {
-      selectedRegion: region,
-      selectedCategory: category,
-    } = getState();
+    const { selectedRegion: region, selectedCategory: category } = getState();
 
     if (!region || !category) {
       return;
@@ -83,5 +80,29 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function changeLoginField({ name, value }) {
+  return {
+    type: "changeLoginField",
+    payload: { name, value },
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const {
+      loginField: { email, password },
+    } = getState();
+    const accessToken = await postLogin({ email, password });
+    dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: "setAccessToken",
+    payload: { accessToken },
   };
 }

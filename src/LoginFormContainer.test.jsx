@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 
-import LoginContainer from "./LoginContainer";
+import LoginFormContainer from "./LoginFormContainer";
 
 import { useDispatch, useSelector } from "react-redux";
 /*
@@ -9,9 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 3. button 누르면 requestLogin()이 dispatch 된다
 */
 
-describe("LoginContainer", () => {
+describe("LoginFormContainer", () => {
   const dispatch = jest.fn();
-  beforEach(() => {
+  beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) =>
@@ -25,7 +25,7 @@ describe("LoginContainer", () => {
   });
 
   it("renders Id, Password controls and listens changeEvent", () => {
-    const { getByLabelText } = render(<LoginContainer />);
+    const { getByLabelText } = render(<LoginFormContainer />);
 
     expect(getByLabelText("Email").value).toBe("test@naver.com");
 
@@ -42,7 +42,7 @@ describe("LoginContainer", () => {
   });
 
   it("renders Login button and submit LoginField", () => {
-    const { getByText } = render(<LoginContainer />);
+    const { getByText } = render(<LoginFormContainer />);
 
     fireEvent.click(getByText("Log In"));
 

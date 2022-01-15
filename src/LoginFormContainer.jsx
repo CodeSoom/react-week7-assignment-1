@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 
-export default function LoginContainer() {
-  const { email, password } = useSelecltor((state) => ({
+export default function LoginFormContainer() {
+  const { email, password } = useSelector((state) => ({
     email: state.Email,
     password: state.Password,
   }));
@@ -10,6 +10,7 @@ export default function LoginContainer() {
   function handleChange(name, value) {
     dispatch(changeLoginField({ name, value }));
   }
+
   function handleClick() {
     dispatch(requestLogin());
   }
