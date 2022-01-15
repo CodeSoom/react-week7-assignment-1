@@ -9,6 +9,8 @@ const initialState = {
   selectedCategory: null,
   changeLoginField: null,
   setAccessToken: null,
+  loginFields: {},
+  accessToken: '',
 };
 
 const reducers = {

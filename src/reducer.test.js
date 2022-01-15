@@ -22,6 +22,8 @@ describe('reducer', () => {
       selectedCategory: null,
       changeLoginField: null,
       setAccessToken: null,
+      loginFields: {},
+      accessToken: '',
     };
 
     it('returns initialState', () => {
