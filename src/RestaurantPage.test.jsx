@@ -25,6 +25,7 @@ describe('RestaurantPage', () => {
         address: '서울시 강남구',
       },
       accessToken: 'ACCESS_TOKEN',
+      reviews: [],
     }));
   });
 

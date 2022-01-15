@@ -34,6 +34,7 @@ describe('App', () => {
         password: '',
       },
       accessToken: 'ACCESS_TOKEN',
+      reviews: [],
     }));
   });
 
