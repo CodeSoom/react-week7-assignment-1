@@ -55,4 +55,14 @@ describe('ReviewsContainer', () => {
       expect(container).toHaveTextContent('리뷰가 없어요');
     });
   });
+
+  context('without restaurant', () => {
+    given('restaurant', () => null);
+
+    it('renders no restaurant message', () => {
+      const { container } = renderReviewsContainer();
+
+      expect(container).toHaveTextContent('Loading...');
+    });
+  });
 });
