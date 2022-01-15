@@ -17,7 +17,6 @@ describe('LoginFormContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
         email: 'test@test',
-        password: '1234',
       },
     }));
   });
@@ -30,16 +29,6 @@ describe('LoginFormContainer', () => {
     ));
 
     expect(getByLabelText('E-mail').value).toBe('test@test');
-
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: {
-        value: 'new email',
-      },
-    });
-
-    expect(dispatch).toBeCalled();
-
-    expect(getByLabelText('Password').value).toBe('1234');
   });
 
   it('"Login" 버튼을 렌더링한다.', () => {
