@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { render } from '@testing-library/react';
 
 import RestaurantPage from './RestaurantPage';
+import restaurant from '../fixtures/restaurant';
 
 describe('RestaurantPage', () => {
   beforeEach(() => {
@@ -13,11 +14,7 @@ describe('RestaurantPage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((state) => state({
-      restaurant: {
-        id: 1,
-        name: '마법사주방',
-        address: '서울시 강남구',
-      },
+      restaurant,
     }));
   });
 
@@ -25,23 +22,23 @@ describe('RestaurantPage', () => {
     it('renders name', () => {
       const params = { id: '1' };
 
-      const { container } = render(
+      const { findByText } = render(
         <RestaurantPage params={params} />,
       );
 
-      expect(container).toHaveTextContent('마법사주방');
+      expect(findByText(/마법사주방/)).not.toBeNull();
     });
   });
 
   context('without params props', () => {
     it('renders name', () => {
-      const { container } = render(
+      const { findByText } = render(
         <MemoryRouter initialEntries={['/restaurants/1']}>
           <RestaurantPage />
         </MemoryRouter>,
       );
 
-      expect(container).toHaveTextContent('마법사주방');
+      expect(findByText(/마법사주방/)).not.toBeNull();
     });
   });
 });

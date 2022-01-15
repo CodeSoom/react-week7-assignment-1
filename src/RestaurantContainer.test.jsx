@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
+import restaurant from '../fixtures/restaurant';
 
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
@@ -27,17 +28,13 @@ describe('RestaurantContainer', () => {
   });
 
   context('with restaurant', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
+    given('restaurant', () => restaurant);
 
     it('renders name and address', () => {
-      const { container } = renderRestaurantContainer();
+      const { findByText } = renderRestaurantContainer();
 
-      expect(container).toHaveTextContent('마법사주방');
-      expect(container).toHaveTextContent('서울시');
+      expect(findByText(/마법사주방/)).not.toBeNull();
+      expect(findByText(/서울시/)).not.toBeNull();
     });
   });
 
