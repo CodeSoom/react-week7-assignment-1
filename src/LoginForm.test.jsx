@@ -58,7 +58,7 @@ describe('LoginForm', () => {
     });
   });
 
-  it('Login 버튼을 렌더링한다.', () => {
+  it('Login 버튼을 누르면 handleSubmit이 실행된다.', () => {
     const { queryByText } = renderLoginForm({ });
 
     fireEvent.click(queryByText('Login'));
