@@ -68,6 +68,22 @@ describe('App', () => {
     });
   });
 
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Login');
+    });
+  });
+
+  context('with path /logout', () => {
+    it('renders the logout page', () => {
+      const { container } = renderApp({ path: '/logout' });
+
+      expect(container).toHaveTextContent('Logout');
+    });
+  });
+
   context('with invalid path', () => {
     it('renders the not found page', () => {
       const { container } = renderApp({ path: '/xxx' });
