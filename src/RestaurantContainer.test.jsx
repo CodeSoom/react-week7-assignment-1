@@ -118,9 +118,9 @@ describe('RestaurantContainer', () => {
     it('renders reviews', () => {
       const { getByText } = renderRestaurantContainer();
 
-      expect(getByText('냥냥이')).not.toBeNull();
-      expect(getByText('1점')).not.toBeNull();
-      expect(getByText('good')).not.toBeNull();
+      expect(getByText(/냥냥이/)).not.toBeNull();
+      expect(getByText(/1점/)).not.toBeNull();
+      expect(getByText(/good/)).not.toBeNull();
     });
   });
 });

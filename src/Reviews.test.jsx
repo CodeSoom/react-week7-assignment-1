@@ -10,8 +10,8 @@ describe('Reviews', () => {
   it('renders reviews', () => {
     const { getByText } = render(<Reviews reviews={reviews} />);
 
-    expect(getByText('냥냥이')).not.toBeNull();
-    expect(getByText('1점')).not.toBeNull();
-    expect(getByText('good')).not.toBeNull();
+    expect(getByText(/냥냥이/)).not.toBeNull();
+    expect(getByText(/1점/)).not.toBeNull();
+    expect(getByText(/good/)).not.toBeNull();
   });
 });
