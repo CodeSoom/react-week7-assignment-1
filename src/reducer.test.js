@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer from "./reducer";
 
 import {
   setRegions,
@@ -7,10 +7,10 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
-} from './actions';
+} from "./actions";
 
-describe('reducer', () => {
-  context('when previous state is undefined', () => {
+describe("reducer", () => {
+  context("when previous state is undefined", () => {
     const initialState = {
       regions: [],
       categories: [],
@@ -18,24 +18,27 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      accessToken: "",
+      loginField: {
+        email: "",
+        password: "",
+      },
     };
 
-    it('returns initialState', () => {
-      const state = reducer(undefined, { type: 'action' });
+    it("returns initialState", () => {
+      const state = reducer(undefined, { type: "action" });
 
       expect(state).toEqual(initialState);
     });
   });
 
-  describe('setRegions', () => {
-    it('changes regions', () => {
+  describe("setRegions", () => {
+    it("changes regions", () => {
       const initialState = {
         regions: [],
       };
 
-      const regions = [
-        { id: 1, name: '서울' },
-      ];
+      const regions = [{ id: 1, name: "서울" }];
 
       const state = reducer(initialState, setRegions(regions));
 
@@ -43,15 +46,13 @@ describe('reducer', () => {
     });
   });
 
-  describe('setCategories', () => {
-    it('changes categories', () => {
+  describe("setCategories", () => {
+    it("changes categories", () => {
       const initialState = {
         categories: [],
       };
 
-      const categories = [
-        { id: 1, name: '한식' },
-      ];
+      const categories = [{ id: 1, name: "한식" }];
 
       const state = reducer(initialState, setCategories(categories));
 
@@ -59,15 +60,13 @@ describe('reducer', () => {
     });
   });
 
-  describe('setRestaurants', () => {
-    it('changes restaurants', () => {
+  describe("setRestaurants", () => {
+    it("changes restaurants", () => {
       const initialState = {
         restaurants: [],
       };
 
-      const restaurants = [
-        { id: 1, name: '마법사주방' },
-      ];
+      const restaurants = [{ id: 1, name: "마법사주방" }];
 
       const state = reducer(initialState, setRestaurants(restaurants));
 
@@ -75,27 +74,25 @@ describe('reducer', () => {
     });
   });
 
-  describe('setRestaurant', () => {
-    it('changes restaurant', () => {
+  describe("setRestaurant", () => {
+    it("changes restaurant", () => {
       const initialState = {
         restaurant: null,
       };
 
-      const restaurant = { id: 1, name: '마법사주방' };
+      const restaurant = { id: 1, name: "마법사주방" };
 
       const state = reducer(initialState, setRestaurant(restaurant));
 
       expect(state.restaurant.id).toBe(1);
-      expect(state.restaurant.name).toBe('마법사주방');
+      expect(state.restaurant.name).toBe("마법사주방");
     });
   });
 
-  describe('selectRegion', () => {
-    it('changes selected region', () => {
+  describe("selectRegion", () => {
+    it("changes selected region", () => {
       const initialState = {
-        regions: [
-          { id: 1, name: '서울' },
-        ],
+        regions: [{ id: 1, name: "서울" }],
         selectedRegion: null,
       };
 
@@ -103,17 +100,15 @@ describe('reducer', () => {
 
       expect(state.selectedRegion).toEqual({
         id: 1,
-        name: '서울',
+        name: "서울",
       });
     });
   });
 
-  describe('selectCategory', () => {
-    it('changes selected category', () => {
+  describe("selectCategory", () => {
+    it("changes selected category", () => {
       const initialState = {
-        categories: [
-          { id: 1, name: '한식' },
-        ],
+        categories: [{ id: 1, name: "한식" }],
         selectedCategory: null,
       };
 
@@ -121,7 +116,7 @@ describe('reducer', () => {
 
       expect(state.selectedCategory).toEqual({
         id: 1,
-        name: '한식',
+        name: "한식",
       });
     });
   });

@@ -49,7 +49,6 @@ describe("actions", () => {
         await store.dispatch(loadRestaurants());
 
         const actions = store.getActions();
-        console.log(actions);
         expect(actions[0]).toEqual(setRestaurants([]));
       });
     });

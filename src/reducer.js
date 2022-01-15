@@ -10,7 +10,6 @@ const initialState = {
   loginField: {
     email: "",
     password: "",
-    name: "",
   },
   accessToken: "",
 };
@@ -64,8 +63,7 @@ const reducers = {
     return {
       ...state,
       loginField: {
-        ...state,
-        loginField,
+        ...state.loginField,
         [name]: value,
       },
     };

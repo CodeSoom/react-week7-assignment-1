@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react";
 
 import LoginFormContainer from "./LoginFormContainer";
-
+import { changeLoginField } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 /*
 1. id, password input 보인다
@@ -16,9 +16,9 @@ describe("LoginFormContainer", () => {
     useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) =>
       selector({
-        LoginField: {
-          Email: "test@naver.com",
-          Password: "1234",
+        loginField: {
+          email: "test@naver.com",
+          password: "1234",
         },
       })
     );
@@ -34,9 +34,10 @@ describe("LoginFormContainer", () => {
     });
 
     expect(dispatch).toBeCalledWith(
-      changeLoginField("Email", "test2@daum.net")
+      changeLoginField({ name: "email", value: "test2@daum.net" })
     );
-    expect(getByLabelText("Email").value).toBe("test2@daum.net");
+    // LoginFormContainer의 관심사가 아니다
+    // expect(getByLabelText("Email").value).toBe("test2@daum.net");
 
     expect(getByLabelText("Password").value).toBe("1234");
   });
@@ -46,6 +47,7 @@ describe("LoginFormContainer", () => {
 
     fireEvent.click(getByText("Log In"));
 
-    expect(dispatch).toBeCalledWith(requestLogin());
+    //toBeCalledWith(requestLogin())은 매번 다른 accessToken이 나오므로 toEqual로 비교할수 없다
+    expect(dispatch).toBeCalled();
   });
 });

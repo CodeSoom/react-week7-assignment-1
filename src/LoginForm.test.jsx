@@ -1,9 +1,6 @@
-import { fireEvent, getByDisplayValue, render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 
 import LoginForm from "./LoginForm";
-
-import { useDispatch, useSelector } from "react-redux";
-
 /*
 1. renders input controls and listens change
 2. renders login button
@@ -13,12 +10,17 @@ describe("LoginForm", () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
 
+  beforeEach(() => {
+    handleChange.mockClear();
+    handleSubmit.mockClear();
+  });
+
   function renderLoginForm({ email, password } = {}) {
     return render(
       <LoginForm
         loginField={{ email, password }}
         onChange={handleChange}
-        onClick={handleClick}
+        onSubmit={handleSubmit}
       />
     );
   }
@@ -28,8 +30,8 @@ describe("LoginForm", () => {
     const { getByLabelText } = renderLoginForm({ email, password });
     const controls = [
       // 각각의 input의 속성을 정리해둔 변수
-      { label: "Email", name: "Email", origin: email, value: "test@naver.com" },
-      { label: "Password", name: "Password", origin: password, value: "1234" },
+      { label: "Email", name: "email", origin: email, value: "test2@daum.net" },
+      { label: "Password", name: "password", origin: password, value: "5555" },
     ];
 
     controls.forEach((control) => {
@@ -40,8 +42,10 @@ describe("LoginForm", () => {
 
       fireEvent.change(input, { target: { value } });
 
-      expect(input.value).toBe(value);
-      expect(handleChange).toBeCalled({ name, value });
+      expect(handleChange).toBeCalledWith({ name, value });
+
+      // handleChange는 mocking으로 실제구현함수가 아니라서 value값을 변경시켜주진 못한다
+      // expect(input.value).toBe(value);
     });
   });
 
