@@ -73,6 +73,8 @@ describe('RestaurantContainer', () => {
       const { getByLabelText } = renderRestaurantContainer();
 
       controls.forEach(({ label, name, value }) => {
+        expect(getByLabelText(label)).not.toBeNull();
+
         fireEvent.change(getByLabelText(label), { target: { name, value } });
 
         expect(dispatch).toBeCalledWith(changeReviewField({ name, value }));

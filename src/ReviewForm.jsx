@@ -1,4 +1,9 @@
 export default function ReviewForm({ onSubmit, onChange }) {
+  function handleChange(event) {
+    const { target: { name, value } } = event;
+    onChange({ name, value });
+  }
+
   return (
     <>
       <div>
@@ -24,7 +29,7 @@ export default function ReviewForm({ onSubmit, onChange }) {
           type="text"
           name="description"
           id="review-description"
-          onChange={onChange}
+          onChange={handleChange}
         />
       </div>
       <button
