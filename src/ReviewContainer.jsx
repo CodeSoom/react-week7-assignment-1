@@ -12,6 +12,7 @@ import {
 
 export default function ReviewContainer() {
   const accessToken = useSelector(get('accessToken'));
+  const reviews = useSelector(get('reviews'));
 
   const dispatch = useDispatch();
 
@@ -25,12 +26,15 @@ export default function ReviewContainer() {
 
   return (
     <>
-      {accessToken ? (
-        <ReviewForm
-          onChangeField={handleChangeField}
-          onClickSubmit={handleClickSubmit}
-        />
-      ) : null}
+      {accessToken
+        ? (
+          <ReviewForm
+            onChangeField={handleChangeField}
+            onClickSubmit={handleClickSubmit}
+            reviews={reviews}
+          />
+        )
+        : null}
     </>
   );
 }
