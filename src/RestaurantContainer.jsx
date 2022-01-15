@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
 import ReviewForm from './ReviewForm';
+import Reviews from './Reviews';
 
 import {
   loadRestaurant,
@@ -12,6 +13,9 @@ import {
 } from './actions';
 
 import { get } from './utils';
+
+// TODO: DELETE
+import REIVEWS from '../fixtures/reviews';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -46,6 +50,7 @@ export default function RestaurantContainer({ restaurantId }) {
           onChange={handleChange}
         />
       ) : null}
+      <Reviews reviews={REIVEWS} />
     </>
   );
 }
