@@ -26,7 +26,14 @@ describe('RestaurantContainer', () => {
       id: 1,
       name: '마법사주방',
       address: '서울시 강남구',
+      reviews: [{ score: 5, description: '짱맛' }],
     }));
+
+    it('renders list of reviews', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('짱맛');
+    });
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();

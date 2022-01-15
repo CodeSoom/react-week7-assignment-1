@@ -20,18 +20,11 @@ describe('ReviewContainer', () => {
         description: '짱맛',
       },
       accessToken: given.accessToken,
-      reviews: [{ score: 5, description: '짱맛' }],
     }));
   });
 
   context('when logged in', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
-
-    it('renders list of reviews', () => {
-      const { container } = render(<ReviewContainer />);
-
-      expect(container).toHaveTextContent('짱맛');
-    });
 
     describe('with "평점", "리뷰 내용"input and "리뷰 남기기"button"', () => {
       it('calls dispatch with "changeReviewField" action', () => {
