@@ -27,3 +27,13 @@ export async function fetchRestaurant({ restaurantId }) {
   const data = await response.json();
   return data;
 }
+
+export async function fetchLogin({ id: email, pw: password }) {
+  const url = 'https://eatgo-customer-api.ahastudio.com/session';
+  const response = await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+  });
+  const data = await response.json();
+  return data;
+}
