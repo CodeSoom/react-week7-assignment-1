@@ -1,4 +1,4 @@
-export default function ReviewForm() {
+export default function ReviewForm({ onClick }) {
   return (
     <>
       <div>
@@ -27,6 +27,7 @@ export default function ReviewForm() {
       </div>
       <button
         type="button"
+        onClick={onClick}
       >
         리뷰 남기기
       </button>

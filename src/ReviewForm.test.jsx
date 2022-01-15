@@ -1,15 +1,13 @@
 import { fireEvent, render } from '@testing-library/react';
-import { useDispatch } from 'react-redux';
 
 import ReviewForm from './ReviewForm';
 
 describe('ReviewForm', () => {
-  const dispatch = jest.fn();
+  const handleSubmit = jest.fn();
+  const handleChange = jest.fn();
 
   beforeEach(() => {
-    dispatch.mockClear();
-
-    useDispatch.mockImplementation(() => dispatch);
+    jest.clearAllMocks();
   });
 
   it('renders review input fields', () => {
@@ -19,13 +17,31 @@ describe('ReviewForm', () => {
     expect(getByText('리뷰 내용')).not.toBeNull();
   });
 
+  it('renders input field to handle onChange', () => {
+    const { getByLabelText } = render(
+      <ReviewForm
+        onChange={handleChange}
+      />,
+    );
+
+    fireEvent.change(getByLabelText('평점'), { target: { value: 10 } });
+    expect(handleChange).toBeCalledTimes(1);
+
+    fireEvent.change(getByLabelText('리뷰 내용'), { target: { value: 'good~' } });
+    expect(handleChange).toBeCalledTimes(1);
+  });
+
   it('renders a button to handle onSubmit', () => {
-    const { getByRole } = render(<ReviewForm />);
+    const { getByRole } = render(
+      <ReviewForm
+        onSubmit={handleSubmit}
+      />,
+    );
 
     expect(getByRole('button', { name: '리뷰 남기기' })).not.toBeNull();
 
     fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
 
-    expect(dispatch).toBeCalled();
+    expect(handleSubmit).toBeCalled();
   });
 });
