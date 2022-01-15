@@ -7,6 +7,7 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginForm: { id: '', pw: '' },
 };
 
 const reducers = {
@@ -51,6 +52,14 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  handleLoginForm(state, { payload: { key, value } }) {
+    const { loginForm } = state;
+    return {
+      ...state,
+      loginForm: { ...loginForm, [key]: value },
     };
   },
 };

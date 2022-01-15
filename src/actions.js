@@ -47,6 +47,13 @@ export function selectCategory(categoryId) {
   };
 }
 
+export function handleLoginForm(key, value) {
+  return {
+    type: 'handleLoginForm',
+    payload: { key, value },
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();
