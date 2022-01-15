@@ -9,6 +9,7 @@ import {
 } from './actions';
 
 import RESTAURANT from '../fixtures/restaurant';
+import REIVEWS from '../fixtures/reviews';
 
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
@@ -28,6 +29,7 @@ describe('RestaurantContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
       accessToken: given.accessToken,
+      reviews: given.reviews,
     }));
   });
 
@@ -114,6 +116,23 @@ describe('RestaurantContainer', () => {
         fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
 
         expect(dispatch).toBeCalled();
+      });
+    });
+  });
+
+  describe('Reviews Component', () => {
+    given('restaurant', () => (RESTAURANT));
+    given('reviews', () => REIVEWS);
+
+    it('renders reviews', () => {
+      REIVEWS.forEach((review) => {
+        const { name, score, description } = review;
+
+        const { container } = renderRestaurantContainer();
+
+        expect(container).toHaveTextContent(name);
+        expect(container).toHaveTextContent(score);
+        expect(container).toHaveTextContent(description);
       });
     });
   });

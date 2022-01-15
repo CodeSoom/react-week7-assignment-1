@@ -26,6 +26,7 @@ export default function RestaurantContainer({ restaurantId }) {
 
   const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
+  const reviews = useSelector(get('reviews'));
 
   if (!restaurant) {
     return (
