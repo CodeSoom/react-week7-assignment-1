@@ -3,19 +3,19 @@ import { fireEvent, render } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  const handleSubmit = jest.fn();
+  const handleLogin = jest.fn();
   const handleChange = jest.fn();
 
   const renderLoginForm = ({ initialValues }) => render(
     <LoginForm
       initialValues={initialValues}
       onChange={handleChange}
-      onSubmit={handleSubmit}
+      onLogin={handleLogin}
     />,
   );
 
   beforeEach(() => {
-    handleSubmit.mockClear();
+    handleLogin.mockClear();
     handleChange.mockClear();
   });
 
@@ -55,7 +55,7 @@ describe('LoginForm', () => {
 
       fireEvent.click(getByRole('button'));
 
-      expect(handleSubmit).toBeCalledWith({ email, password });
+      expect(handleLogin).toBeCalledWith({ email, password });
     });
   });
 });

@@ -11,24 +11,36 @@ import Input from '../../components/Input';
  * @param {{
  *  initialValues?: { email: string; password: string };
  *  onChange?: (values: { email: string, password: string }) => void,
- *  onSubmit?: (values: { email: string, password: string }) => void,
- * }} { onSubmit }
+ *  onLogin?: (values: { email: string, password: string }) => void,
+ * }} { onLogin }
  * @return {ReactElement} LoginForm
  */
-export default function LoginForm({ initialValues = {}, onChange, onSubmit }) {
+export default function LoginForm({
+  accessToken, initialValues = {}, onChange, onLogin, onLogout,
+}) {
   const form = useForm({ initialValues: { email: initialValues.email || '', password: initialValues.password || '' } });
 
-  const handleSubmit = () => {
-    onSubmit?.({ email: form.values.email, password: form.values.password });
+  const handleLogin = () => {
+    onLogin?.({ email: form.values.email, password: form.values.password });
+  };
+
+  const handleLogout = () => {
+    onLogout?.();
   };
 
   useEffect(() => {
     onChange?.(form.values);
   }, [form.values, onChange]);
 
+  if (accessToken) {
+    return (
+      <button type="button" onClick={handleLogout}>Log out</button>
+    );
+  }
+
   return (
     <>
-      <Form form={form} onSubmit={handleSubmit}>
+      <Form form={form} onSubmit={handleLogin}>
         <FormItem label="E-mail" name="email">
           <Input />
         </FormItem>

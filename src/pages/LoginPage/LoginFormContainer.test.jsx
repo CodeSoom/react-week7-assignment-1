@@ -1,5 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import useForm from '../../hooks/useForm';
 import { postLogin } from '../../store/actions';
@@ -21,6 +21,7 @@ describe('LoginFormContainer', () => {
   });
 
   useDispatch.mockImplementation(() => dispatch);
+  useSelector.mockImplementation((selector) => selector({ accessToken: null }));
 
   context('when clicks submit button', () => {
     it('calls dispatch and postLogin with email and password', () => {
