@@ -122,6 +122,10 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+
+    const { reviews } = restaurant;
+
+    dispatch(setReviews(reviews));
   };
 }
 
@@ -129,7 +133,6 @@ export function requestLogin() {
   return async (dispatch, getState) => {
     const {
       inputField: { email, password },
-      restaurant: { reviews },
     } = getState();
 
     const accessToken = await postLogin({ email, password });
@@ -137,7 +140,6 @@ export function requestLogin() {
     saveItems('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
-    dispatch(setReviews(reviews));
   };
 }
 
