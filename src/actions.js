@@ -112,3 +112,7 @@ export function requestLogin() {
 export function changeReviewField({ name, value }) {
   // TODO
 }
+
+export function sendReview() {
+  // TODO
+}

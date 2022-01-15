@@ -6,7 +6,10 @@ import RestaurantContainer from './RestaurantContainer';
 
 import {
   changeReviewField,
+  sendReview,
 } from './actions';
+
+import RESTAURANT from '../fixtures/restaurant';
 
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
@@ -32,11 +35,7 @@ describe('RestaurantContainer', () => {
 
   describe('RestaurantDetail Component', () => {
     context('with restaurant', () => {
-      given('restaurant', () => ({
-        id: 1,
-        name: '마법사주방',
-        address: '서울시 강남구',
-      }));
+      given('restaurant', () => (RESTAURANT));
 
       it('renders name and address', () => {
         const { container } = renderRestaurantContainer();
@@ -58,12 +57,8 @@ describe('RestaurantContainer', () => {
   });
 
   describe('ReviewForm Component', () => {
-    it('renders input fields to change the input value', () => {
-      given('restaurant', () => ({
-        id: 1,
-        name: '마법사주방',
-        address: '서울시 강남구',
-      }));
+    it('renders input fields to listen change events', () => {
+      given('restaurant', () => (RESTAURANT));
 
       const controls = [
         { label: '평점', name: 'score', value: '10' },
@@ -79,6 +74,18 @@ describe('RestaurantContainer', () => {
 
         expect(dispatch).toBeCalledWith(changeReviewField({ name, value }));
       });
+    });
+
+    it('renders a button to listen submit event', () => {
+      given('restaurant', () => (RESTAURANT));
+
+      const { getByRole } = renderRestaurantContainer();
+
+      expect(getByRole('button', { name: '리뷰 남기기' })).not.toBeNull();
+
+      fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
+
+      expect(dispatch).toBeCalledWith(sendReview());
     });
   });
 });

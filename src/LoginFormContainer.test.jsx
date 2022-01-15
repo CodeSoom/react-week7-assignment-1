@@ -25,7 +25,7 @@ describe('LoginFormContainer', () => {
     expect(getByRole('button', { name: 'Log In' })).not.toBeNull();
   });
 
-  it('renders input fields to change the input value', () => {
+  it('renders input fields to listen change events', () => {
     const { getByLabelText } = render(<LoginFormContainer />);
 
     fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test@test.com' } });
@@ -37,10 +37,10 @@ describe('LoginFormContainer', () => {
     expect(dispatch).toBeCalledWith(changeLoginField({ name: 'password', value: '123456' }));
   });
 
-  it('renders login button to request login', () => {
+  it('renders login button to listen submit event', () => {
     const { getByRole } = render(<LoginFormContainer />);
 
-    fireEvent.click(getByRole('button', { target: { name: 'Log In' } }));
+    fireEvent.click(getByRole('button', { name: 'Log In' }));
 
     expect(dispatch).toBeCalled();
   });
