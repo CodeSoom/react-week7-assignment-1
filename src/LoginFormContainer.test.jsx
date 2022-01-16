@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   changeLoginField,
@@ -15,33 +15,66 @@ describe('LoginFormContainer', () => {
     jest.clearAllMocks();
 
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      accessToken: given.accessToken,
+    }));
   });
 
-  it('renders login components', () => {
-    const { getByLabelText, getByRole } = render(<LoginFormContainer />);
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-    expect(getByLabelText('E-mail', { name: 'email' })).not.toBeNull();
-    expect(getByLabelText('Password', { name: 'password' })).not.toBeNull();
-    expect(getByRole('button', { name: 'Log In' })).not.toBeNull();
+    it('renders logout components', () => {
+      const { getByRole } = render(<LoginFormContainer />);
+
+      expect(getByRole('button', { name: 'Log out' })).not.toBeNull();
+    });
+
+    it('renders logout button to listen logout click event', () => {
+      const { getByRole } = render(<LoginFormContainer />);
+
+      fireEvent.click(getByRole('button', { name: 'Log out' }));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 
-  it('renders input fields to listen change events', () => {
-    const { getByLabelText } = render(<LoginFormContainer />);
+  context('when logged out', () => {
+    given('accessToken', () => '');
 
-    fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test@test.com' } });
+    it('renders login components', () => {
+      const { getByText, getByRole } = render(<LoginFormContainer />);
 
-    expect(dispatch).toBeCalledWith(changeLoginField({ name: 'email', value: 'test@test.com' }));
+      expect(getByText('E-mail')).not.toBeNull();
+      expect(getByText('Password')).not.toBeNull();
+      expect(getByRole('button', { name: 'Log In' })).not.toBeNull();
+    });
 
-    fireEvent.change(getByLabelText('Password'), { target: { value: '123456' } });
+    it('renders input fields to listen change events', () => {
+      const { getByLabelText } = render(<LoginFormContainer />);
 
-    expect(dispatch).toBeCalledWith(changeLoginField({ name: 'password', value: '123456' }));
-  });
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'test@test.com' },
+      });
 
-  it('renders login button to listen submit event', () => {
-    const { getByRole } = render(<LoginFormContainer />);
+      expect(dispatch).toBeCalledWith(
+        changeLoginField({ name: 'email', value: 'test@test.com' }),
+      );
 
-    fireEvent.click(getByRole('button', { name: 'Log In' }));
+      fireEvent.change(getByLabelText('Password'),
+        { target: { value: '123456' } });
 
-    expect(dispatch).toBeCalled();
+      expect(dispatch).toBeCalledWith(
+        changeLoginField({ name: 'password', value: '123456' }),
+      );
+    });
+
+    it('renders login button to listen submit event', () => {
+      const { getByRole } = render(<LoginFormContainer />);
+
+      fireEvent.click(getByRole('button', { name: 'Log In' }));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 });

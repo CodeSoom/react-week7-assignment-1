@@ -12,6 +12,8 @@ import NotFoundPage from './NotFoundPage';
 import LoginPage from './LoginPage';
 
 export default function App() {
+  // TODO: localStorage에서 accessToken 가져오기
+
   return (
     <div>
       <header>

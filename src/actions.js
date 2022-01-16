@@ -106,6 +106,7 @@ export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
     const accessToken = await postLogin({ email, password });
+    // TODO: localStorage에 저장하기
     dispatch(setAccessToken(accessToken));
   };
 }
@@ -124,6 +125,7 @@ export function sendReview({ restaurantId }) {
       accessToken, restaurantId, score, description,
     });
 
+    // TODO: loadReview > setReviews로 분리하기
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));

@@ -24,8 +24,12 @@ describe('ReviewForm', () => {
       />,
     );
 
-    fireEvent.change(getByLabelText('평점'), { target: { value: 10 } });
-    fireEvent.change(getByLabelText('리뷰 내용'), { target: { value: 'good~' } });
+    fireEvent.change(getByLabelText('평점'), {
+      target: { value: 10 },
+    });
+    fireEvent.change(getByLabelText('리뷰 내용'), {
+      target: { value: 'good~' },
+    });
 
     expect(handleChange).toBeCalledTimes(2);
   });

@@ -18,8 +18,12 @@ describe('LoginForm', () => {
       />,
     );
 
-    fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test@test.com' } });
-    fireEvent.change(getByLabelText('Password'), { target: { value: '123456' } });
+    fireEvent.change(getByLabelText('E-mail'), {
+      target: { value: 'test@test.com' },
+    });
+    fireEvent.change(getByLabelText('Password'), {
+      target: { value: '123456' },
+    });
 
     expect(handleChange).toBeCalledTimes(2);
   });

@@ -23,6 +23,7 @@ describe('RestaurantContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
+
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
@@ -92,9 +93,9 @@ describe('RestaurantContainer', () => {
         const { getByLabelText } = renderRestaurantContainer();
 
         controls.forEach(({ label, name, value }) => {
-          expect(getByLabelText(label)).not.toBeNull();
-
-          fireEvent.change(getByLabelText(label), { target: { name, value } });
+          fireEvent.change(getByLabelText(label), {
+            target: { value: { value } },
+          });
 
           expect(dispatch).toBeCalledWith(changeReviewField({ name, value }));
         });
@@ -102,8 +103,6 @@ describe('RestaurantContainer', () => {
 
       it('renders a button to listen submit event', () => {
         const { getByRole } = renderRestaurantContainer();
-
-        expect(getByRole('button', { name: '리뷰 남기기' })).not.toBeNull();
 
         fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
 
