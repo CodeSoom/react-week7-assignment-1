@@ -136,3 +136,7 @@ export function sendReview({ restaurantId }) {
     dispatch(setRestaurant(restaurant));
   };
 }
+
+export function logout() {
+  // TODO
+}

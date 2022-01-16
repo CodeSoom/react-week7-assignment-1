@@ -19,8 +19,6 @@ import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
 import LoginPage from './LoginPage';
 
-jest.mock('./services/storage');
-
 export default function App() {
   const dispatch = useDispatch();
 

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   changeLoginField,
+  logout,
 } from './actions';
 
 import LoginFormContainer from './LoginFormContainer';
@@ -74,7 +75,7 @@ describe('LoginFormContainer', () => {
 
       fireEvent.click(getByRole('button', { name: 'Log In' }));
 
-      expect(dispatch).toBeCalled();
+      expect(dispatch).toBeCalledWith(logout());
     });
   });
 });

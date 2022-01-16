@@ -6,6 +6,7 @@ import LogoutForm from './LogoutForm';
 import {
   changeLoginField,
   requestLogin,
+  logout,
 } from './actions';
 
 import { get } from './utils';
@@ -24,8 +25,7 @@ export default function LoginFormContainer() {
   }
 
   function handleClickLogout() {
-    // TODO
-    dispatch();
+    dispatch(logout());
   }
 
   return (
