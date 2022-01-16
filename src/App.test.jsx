@@ -6,17 +6,22 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { loadItem } from './services/storage';
+
 import App from './App';
 
 import RESTAURANT from '../fixtures/restaurant';
 
+import { setAccessToken } from './actions';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
-    dispatch.mockClear();
+    jest.clearAllMocks();
 
     useDispatch.mockImplementation(() => dispatch);
 
@@ -86,6 +91,30 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('when accessToken is in localStorage', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => 'ACCESS_TOKEN');
+    });
+
+    it('dispatchs setAccessToken', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith(setAccessToken('ACCESS_TOKEN'));
+    });
+  });
+
+  context('when accessToken is not in localStorage', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => '');
+    });
+
+    it("doesn't dispatch setAccessToken", () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
     });
   });
 });
