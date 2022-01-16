@@ -7,6 +7,7 @@ import {
   loadRestaurant, sendReview,
 } from '../actions';
 import { get } from '../utils';
+import ReviewDetail from '../components/ReviewDetail';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -28,6 +29,11 @@ export default function RestaurantContainer({ restaurantId }) {
   const handleSubmit = () => {
     const { score, description } = reviewForm;
 
+    setReviewForm({
+      score: '',
+      description: '',
+    });
+
     dispatch(sendReview({ restaurantId, score, description }));
   };
 
@@ -47,6 +53,7 @@ export default function RestaurantContainer({ restaurantId }) {
       {accessToken ? (
         <ReviewForm onChange={handleChange} onSubmit={handleSubmit} />
       ) : null}
+      <ReviewDetail reviews={restaurant.reviews || []} />
     </>
   );
 }
