@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLoginForm,
+  postReviewForm,
 } from './services/api';
 import { setLocalStorageItem } from './utils';
 
@@ -101,5 +102,20 @@ export function login({ email, password }) {
 
     dispatch(setAccessToken(accessToken));
     setLocalStorageItem('accessToken', accessToken);
+  };
+}
+
+export function sendReview({ restaurantId, score, description }) {
+  return async (dispatch, getState) => {
+    const { accessToken } = getState();
+
+    await postReviewForm({
+      accessToken,
+      restaurantId,
+      score,
+      description,
+    });
+
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }
