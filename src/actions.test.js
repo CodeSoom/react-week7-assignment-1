@@ -10,6 +10,8 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  sendReview,
+  LoadReviews,
 } from "./actions";
 
 const middlewares = [thunk];
@@ -98,6 +100,29 @@ describe("actions", () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe("sendReview", () => {
+    const score = 5;
+    const description = "분위기 좋아요";
+
+    beforeEach(() => {
+      store = mockStore({
+        reviewField: {
+          score,
+          description,
+        },
+      });
+    });
+
+    it("dispatchs setReview", async () => {
+      await store.dispatch(sendReview());
+
+      const actions = store.getActions();
+
+      //왜 []로 해주는걸까? mocking 이기 때문에?
+      expect(actions[0]).toEqual(LoadReviews([]));
     });
   });
 });

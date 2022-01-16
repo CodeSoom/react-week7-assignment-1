@@ -4,6 +4,8 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
+  fetchReview,
 } from "./services/api";
 
 export function setRegions(regions) {
@@ -105,5 +107,30 @@ export function setAccessToken(accessToken) {
   return {
     type: "setAccessToken",
     payload: { accessToken },
+  };
+}
+
+//// 리뷰
+
+export function changeReviewField({ name, value }) {
+  return {
+    type: "changeReviewField",
+    payload: { name, value },
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const {
+      reviewField: { score, description },
+      accessToken,
+    } = getState();
+    try {
+      await postReview({ accessToken, restaurantId, score, description });
+      dispatch(loadRestaurant({ restaurantId }));
+    } catch (err) {
+      //응답이 돌아오지 않으면 에러
+      console.error(err);
+    }
   };
 }

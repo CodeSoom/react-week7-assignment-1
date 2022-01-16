@@ -7,6 +7,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeReviewField,
 } from "./actions";
 
 describe("reducer", () => {
@@ -22,6 +23,10 @@ describe("reducer", () => {
       loginField: {
         email: "",
         password: "",
+      },
+      reviewField: {
+        score: "",
+        description: "",
       },
     };
 
@@ -118,6 +123,25 @@ describe("reducer", () => {
         id: 1,
         name: "한식",
       });
+    });
+  });
+
+  describe("changeReviewField", () => {
+    it("changes Review Field", () => {
+      const initialState = {
+        reviewField: {
+          score: "",
+          description: "",
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        changeReviewField({ score: 5, description: "정말 분위기 좋아요" })
+      );
+
+      expect(state.reviewField.score).toBe(5);
+      expect(state.reviewField.description).toBe("정말 분위기 좋아요");
     });
   });
 });
