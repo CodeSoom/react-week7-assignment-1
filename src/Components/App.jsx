@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux';
+
 import {
   Switch,
   Route,
@@ -11,7 +13,19 @@ import RestaurantsPage from '../Pages/RestaurantsPage';
 import RestaurantPage from '../Pages/RestaurantPage';
 import NotFoundPage from '../Pages/NotFoundPage';
 
+import { setAccessToken } from '../Redux/actions';
+
+import { loadItem } from '../services/storage';
+
 export default function App() {
+  const dispatch = useDispatch();
+
+  const accessToken = loadItem('accessToken');
+
+  if (accessToken) {
+    dispatch(setAccessToken(accessToken));
+  }
+
   return (
     <div>
       <header>
