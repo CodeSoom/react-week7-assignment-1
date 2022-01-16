@@ -7,16 +7,15 @@ import RestaurantContainer from './RestaurantContainer';
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
-  function renderRestaurantContainer() {
-    return render(<RestaurantContainer restaurantId="1" />);
-  }
+  const renderRestaurantContainer = () => render(<RestaurantContainer restaurantId="1" />);
 
   beforeEach(() => {
     dispatch.mockClear();
-    useDispatch.mockImplementation(() => dispatch);
 
+    useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      accessToken: given.accessToken,
     }));
   });
 
@@ -38,6 +37,26 @@ describe('RestaurantContainer', () => {
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+    });
+
+    context('로그인이 되었을 때,', () => {
+      given('accessToken', () => 'ACCESS_TOKEN');
+
+      it('리뷰 폼이 화면에 나타난다.', () => {
+        const { queryByLabelText } = renderRestaurantContainer();
+
+        expect(queryByLabelText('평점')).not.toBeNull();
+        expect(queryByLabelText('리뷰')).not.toBeNull();
+      });
+    });
+
+    context('로그인이 안되었을 때,', () => {
+      it('리뷰 폼이 화면에 나타나지 않는다.', () => {
+        const { queryByLabelText } = renderRestaurantContainer();
+
+        expect(queryByLabelText('평점')).toBeNull();
+        expect(queryByLabelText('리뷰')).toBeNull();
+      });
     });
   });
 
