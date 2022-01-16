@@ -8,7 +8,7 @@ describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
   function renderRestaurantContainer() {
-    return render(<RestaurantContainer restaurantId="1" />);
+    return render(<RestaurantContainer restaurantId={1} />);
   }
 
   beforeEach(() => {

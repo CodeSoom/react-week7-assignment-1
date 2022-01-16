@@ -40,12 +40,12 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      {accessToken ? (
+      {accessToken && (
         <ReviewForm
           onChange={handleChange}
           onSubmit={handleSubmit}
         />
-      ) : null}
+      )}
     </>
   );
 }
