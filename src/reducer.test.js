@@ -8,6 +8,9 @@ import {
   selectRegion,
   selectCategory,
   changeReviewField,
+  requestLogout,
+  changeLoginField,
+  setAccessToken,
 } from "./actions";
 
 describe("reducer", () => {
@@ -125,6 +128,41 @@ describe("reducer", () => {
       });
     });
   });
+  changeLoginField;
+  setAccessToken;
+
+  describe("changeLoginField", () => {
+    it("changes Login Field", () => {
+      const initialState = {
+        loginField: {
+          email: "",
+          password: "",
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        changeLoginField({ name: "email", value: "test@test" })
+      );
+
+      expect(state.loginField).toEqual({
+        email: "test@test",
+        password: "",
+      });
+    });
+  });
+
+  describe("setAccessToken", () => {
+    it("set accessToken in state", () => {
+      const initialState = {
+        accessToken: "",
+      };
+
+      const state = reducer(initialState, setAccessToken("accessToken"));
+
+      expect(state.accessToken).toBe("accessToken");
+    });
+  });
 
   describe("changeReviewField", () => {
     it("changes Review Field", () => {
@@ -137,11 +175,22 @@ describe("reducer", () => {
 
       const state = reducer(
         initialState,
-        changeReviewField({ score: 5, description: "정말 분위기 좋아요" })
+        changeReviewField({ name: "score", value: 5 })
       );
 
       expect(state.reviewField.score).toBe(5);
-      expect(state.reviewField.description).toBe("정말 분위기 좋아요");
+    });
+  });
+
+  describe("requestLogout", () => {
+    it("logout done", () => {
+      const initialState = {
+        accessToken: "accessToken",
+      };
+
+      const state = reducer(initialState, requestLogout());
+
+      expect(state.accessToken).toBe("");
     });
   });
 });

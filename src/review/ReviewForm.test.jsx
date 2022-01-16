@@ -46,7 +46,8 @@ describe("ReviewForm", () => {
 
       fireEvent.change(input, { target: { value } });
 
-      expect(handleReviewChange).toBeCalledWith({name, value})
+      expect(handleReviewChange).toBeCalledWith({ name, value });
+    });
   });
 
   it("review write Form submitted", () => {

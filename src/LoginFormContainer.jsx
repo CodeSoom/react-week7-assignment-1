@@ -19,9 +19,7 @@ export default function LoginFormContainer() {
 
   function handleLogout() {
     dispatch(requestLogout());
-    console.log(accessToken);
   }
-  console.log(accessToken);
 
   return (
     <>

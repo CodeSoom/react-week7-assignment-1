@@ -11,7 +11,7 @@ describe("Reviews", () => {
     { name: "테스터", score: 5, description: "정말 최고입니다" },
     { name: "테스터", score: 3, description: "위생상태가 별로예요" },
   ];
-  const { container } = rendr(<Reviews reviews={reviews} />);
+  const { container } = render(<Reviews reviews={reviews} />);
 
   reviews.forEach(({ name, score, description }) => {
     expect(container).toHaveTextContent(name);
