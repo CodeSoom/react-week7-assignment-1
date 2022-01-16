@@ -105,6 +105,8 @@ export function setAccessToken(accessToken) {
 }
 
 export function logout() {
+  saveItem('accessToken', '');
+
   return {
     type: 'logout',
   };
