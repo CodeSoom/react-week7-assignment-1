@@ -151,6 +151,9 @@ export function sendReview({ restaurantId }) {
       accessToken, restaurantId, score, description,
     });
     dispatch(loadReviews({ restaurantId }));
+
+    dispatch(changeReviewField({ name: 'score', value: '' }));
+    dispatch(changeReviewField({ name: 'description', value: '' }));
   };
 }
 

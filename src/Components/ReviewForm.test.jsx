@@ -10,9 +10,10 @@ describe('ReviewForm', () => {
     jest.clearAllMocks();
   });
 
-  function renderRevieForm() {
+  function renderRevieForm({ score, description } = {}) {
     return render((
       <ReviewForm
+        fields={{ score, description }}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
@@ -24,6 +25,15 @@ describe('ReviewForm', () => {
 
     expect(queryByLabelText('평점')).not.toBeNull();
     expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+  });
+
+  it('renders values of fields', () => {
+    const { queryByLabelText } = renderRevieForm({
+      score: 5, description: '맛있어요',
+    });
+
+    expect(queryByLabelText('평점').value).toBe(5);
+    expect(queryByLabelText('리뷰 내용').value).toBeNull('맛있어요');
   });
 
   it('listens change events', () => {
