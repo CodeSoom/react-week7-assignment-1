@@ -1,12 +1,13 @@
 import reducer from './reducer';
 
 import {
-  setRegions,
-  setCategories,
-  setRestaurants,
-  setRestaurant,
-  selectRegion,
   selectCategory,
+  selectRegion,
+  setCategories,
+  setLoginField,
+  setRegions,
+  setRestaurant,
+  setRestaurants,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +19,10 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginField: {
+        email: '',
+        password: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -122,6 +127,24 @@ describe('reducer', () => {
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
+      });
+    });
+  });
+
+  describe('setLoginField', () => {
+    it('changes login iuput Field', () => {
+      const initialState = {
+        loginField: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, setLoginField({ name: 'email', value: 'test' }));
+
+      expect(state.loginField).toEqual({
+        email: 'test',
+        password: '',
       });
     });
   });

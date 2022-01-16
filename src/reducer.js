@@ -7,6 +7,10 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginField: {
+    email: '',
+    password: '',
+  },
 };
 
 const reducers = {
@@ -51,6 +55,17 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+  setLoginField(state, { payload: { name, value } }) {
+    const { loginField } = state;
+
+    return {
+      ...state,
+      loginField: {
+        ...loginField,
+        [name]: value,
+      },
     };
   },
 };

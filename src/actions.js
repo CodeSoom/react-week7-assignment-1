@@ -1,9 +1,8 @@
 import {
-  fetchRegions,
-  fetchCategories,
-  fetchRestaurants,
-  fetchRestaurant,
+  fetchCategories, fetchRegions, fetchRestaurant, fetchRestaurants,
 } from './services/api';
+
+export const SET_LOGIN_FIELD = 'setLoginField';
 
 export function setRegions(regions) {
   return {
@@ -83,5 +82,15 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function setLoginField({ name, value }) {
+  return {
+    type: SET_LOGIN_FIELD,
+    payload: {
+      name,
+      value,
+    },
   };
 }
