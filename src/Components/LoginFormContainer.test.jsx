@@ -42,9 +42,16 @@ describe('LoginFormContainer', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
 
     it('renders log out button', () => {
-      const { container } = renderLoginFormContainer();
+      const { container, getByText } = renderLoginFormContainer();
 
       expect(container).toHaveTextContent('Log out');
+
+      fireEvent.click(getByText('Log out'));
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: { accessToken: '' },
+      });
     });
   });
 });

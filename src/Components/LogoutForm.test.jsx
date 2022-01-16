@@ -12,13 +12,8 @@ describe('LogoutForm', () => {
       />
     ));
 
-    fireEvent.change(getByText('Log out'));
+    fireEvent.click(getByText('Log out'));
 
-    expect(handleClick).toBeCalledWith({
-      type: 'setAccessToken',
-      payload: {
-        accessToken: '',
-      },
-    });
+    expect(handleClick).toBeCalled();
   });
 });
