@@ -63,6 +63,13 @@ const reducers = {
     };
   },
 
+  logout(state) {
+    return {
+      ...state,
+      accessToken: '',
+    };
+  },
+
   changeLoginField(state, { payload: { name, value } }) {
     const { loginFields } = state;
     loginFields[name] = value;

@@ -36,7 +36,7 @@ describe('LoginFormContainer', () => {
 
       fireEvent.click(getByRole('button', { name: 'Log out' }));
 
-      expect(dispatch).toBeCalled();
+      expect(dispatch).toBeCalledWith(logout());
     });
   });
 
@@ -75,7 +75,7 @@ describe('LoginFormContainer', () => {
 
       fireEvent.click(getByRole('button', { name: 'Log In' }));
 
-      expect(dispatch).toBeCalledWith(logout());
+      expect(dispatch).toBeCalled();
     });
   });
 });

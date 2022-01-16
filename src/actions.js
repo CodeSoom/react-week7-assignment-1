@@ -104,6 +104,12 @@ export function setAccessToken(accessToken) {
   };
 }
 
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}
+
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
@@ -135,8 +141,4 @@ export function sendReview({ restaurantId }) {
 
     dispatch(setRestaurant(restaurant));
   };
-}
-
-export function logout() {
-  // TODO
 }
