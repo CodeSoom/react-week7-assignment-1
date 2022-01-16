@@ -10,7 +10,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (accessToken) {
-      history.push('/');
+      history.push('/logout');
     }
   }, [accessToken]);
 
