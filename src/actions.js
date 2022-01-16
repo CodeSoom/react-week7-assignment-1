@@ -6,7 +6,7 @@ import {
   postLoginForm,
   postReviewForm,
 } from './services/api';
-import { setLocalStorageItem } from './utils';
+import { setLocalStorageItem } from './services/storage';
 
 export function setRegions(regions) {
   return {

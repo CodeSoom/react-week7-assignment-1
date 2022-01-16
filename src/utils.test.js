@@ -23,7 +23,3 @@ test('equal', () => {
   expect(f(state)).toBeTruthy();
   expect(g(state)).toBeFalsy();
 });
-
-// TODO: getLocalStorageItem Test
-
-// TODO: setLocalStorageItem Test
