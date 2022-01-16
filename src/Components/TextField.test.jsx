@@ -36,6 +36,22 @@ describe('TextField', () => {
     });
   });
 
+  it('redners input with value', () => {
+    const name = 'score';
+    const value = 5;
+    const { getByLabelText } = render((
+      <TextField
+        label="평점"
+        type="number"
+        name={name}
+        value={value}
+        onChange={handleChange}
+      />
+    ));
+
+    expect(getByLabelText('평점').value).toBe(5);
+  });
+
   it('listens change events', () => {
     const name = 'score';
     const value = '5';
