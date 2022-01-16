@@ -128,7 +128,12 @@ export function changeReviewField({ name, value }) {
 }
 
 export function setReviews({ reviews }) {
-  
+  return {
+    type: 'setReviews',
+    payload: {
+      reviews,
+    },
+  };
 }
 
 export function loadReviews({ restaurantId }) {

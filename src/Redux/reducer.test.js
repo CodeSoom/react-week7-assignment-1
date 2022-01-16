@@ -217,12 +217,12 @@ describe('reducer', () => {
         },
       };
 
-      const reviews = {
+      const reviews = [{
         id: '1',
         name: '테스터',
         description: '맛있어요',
         score: 1,
-      };
+      }];
 
       const state = reducer(initialState, setReviews({ reviews }));
 

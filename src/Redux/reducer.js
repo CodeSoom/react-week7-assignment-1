@@ -98,6 +98,16 @@ const reducers = {
       accessToken: '',
     };
   },
+
+  setReviews(state, { payload: { reviews } }) {
+    return {
+      ...state,
+      restaurant: {
+        ...state.restaurant,
+        reviews,
+      },
+    };
+  },
 };
 
 function defaultReducer(state) {
