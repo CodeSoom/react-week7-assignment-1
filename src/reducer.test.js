@@ -10,7 +10,7 @@ import {
   logout,
   changeLoginField,
   setAccessToken,
-  changeReviewField,
+  changeReviewFields,
   setReviews,
   clearReviewFields,
 } from './actions';
@@ -31,7 +31,7 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
-      reviewField: {
+      reviewFields: {
         score: '',
         description: '',
       },
@@ -210,9 +210,9 @@ describe('reducer', () => {
     });
   });
 
-  describe('changeReviewField', () => {
+  describe('changeReviewFields', () => {
     const initialState = {
-      reviewField: {
+      reviewFields: {
         score: '',
         description: '',
       },
@@ -220,28 +220,28 @@ describe('reducer', () => {
 
     it('changes score', () => {
       const state = reducer(initialState,
-        changeReviewField({
+        changeReviewFields({
           name: 'score',
           value: 10,
         }));
 
-      expect(state.reviewField.score).toEqual(10);
+      expect(state.reviewFields.score).toEqual(10);
     });
 
     it('changes description', () => {
       const state = reducer(initialState,
-        changeReviewField({
+        changeReviewFields({
           name: 'description',
           value: 'good~',
         }));
 
-      expect(state.reviewField.description).toEqual('good~');
+      expect(state.reviewFields.description).toEqual('good~');
     });
   });
 
   describe('clearReviewFields', () => {
     const initialState = {
-      reviewField: {
+      reviewFields: {
         score: 5,
         description: 'JMT',
       },
@@ -250,7 +250,7 @@ describe('reducer', () => {
     it('clears review fields', () => {
       const state = reducer(initialState, clearReviewFields());
 
-      const { reviewField: { score, description } } = state;
+      const { reviewFields: { score, description } } = state;
       expect(score).toEqual('');
       expect(description).toEqual('');
     });

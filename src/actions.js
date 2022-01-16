@@ -124,9 +124,9 @@ export function requestLogin() {
   };
 }
 
-export function changeReviewField({ name, value }) {
+export function changeReviewFields({ name, value }) {
   return {
-    type: 'changeReviewField',
+    type: 'changeReviewFields',
     payload: { name, value },
   };
 }
@@ -156,7 +156,7 @@ export function clearReviewFields() {
 
 export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
-    const { accessToken, reviewField: { score, description } } = getState();
+    const { accessToken, reviewFields: { score, description } } = getState();
 
     await postReview({
       accessToken, restaurantId, score, description,

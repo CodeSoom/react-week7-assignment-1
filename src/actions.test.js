@@ -130,7 +130,7 @@ describe('actions', () => {
     beforeEach(() => {
       store = mockStore({
         accessToken: 'ACCESS_TOKEN',
-        reviewField: {
+        reviewFields: {
           score: 5,
           description: 'good~',
         },

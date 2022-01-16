@@ -14,7 +14,7 @@ const initialState = {
     email: '',
     password: '',
   },
-  reviewField: {
+  reviewFields: {
     score: '',
     description: '',
   },
@@ -99,20 +99,20 @@ const reducers = {
     };
   },
 
-  changeReviewField(state, { payload: { name, value } }) {
-    const { reviewField } = state;
-    reviewField[name] = value;
+  changeReviewFields(state, { payload: { name, value } }) {
+    const { reviewFields } = state;
+    reviewFields[name] = value;
 
     return {
       ...state,
-      reviewField,
+      reviewFields,
     };
   },
 
   clearReviewFields(state) {
     return {
       ...state,
-      reviewField: {
+      reviewFields: {
         score: '',
         description: '',
       },

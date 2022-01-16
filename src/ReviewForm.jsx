@@ -1,5 +1,5 @@
-export default function ReviewForm({ fields, onSubmit, onChange }) {
-  const { score, description } = fields;
+export default function ReviewForm({ reviewFields, onSubmit, onChange }) {
+  const { score, description } = reviewFields;
 
   function handleChange(event) {
     const { target: { name, value } } = event;

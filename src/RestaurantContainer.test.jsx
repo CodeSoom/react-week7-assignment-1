@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import RestaurantContainer from './RestaurantContainer';
 
 import {
-  changeReviewField,
+  changeReviewFields,
 } from './actions';
 
 import RESTAURANT from '../fixtures/restaurant';
@@ -29,6 +29,7 @@ describe('RestaurantContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
       accessToken: given.accessToken,
+      reviewFields: given.reviewFields,
     }));
   });
 
@@ -83,6 +84,17 @@ describe('RestaurantContainer', () => {
 
     context('with an accessToken', () => {
       given('accessToken', () => 'ACCESS_TOKEN');
+      given('reviewFields', () => ({
+        score: 5,
+        description: '좋아요',
+      }));
+
+      it('renders input fields with review fields', () => {
+        const { getByDisplayValue } = renderRestaurantContainer();
+
+        expect(getByDisplayValue(given.reviewFields.score)).not.toBeNull();
+        expect(getByDisplayValue(given.reviewFields.description)).not.toBeNull();
+      });
 
       it('renders input fields to listen change events', () => {
         const controls = [
@@ -97,7 +109,7 @@ describe('RestaurantContainer', () => {
             target: { value },
           });
 
-          expect(dispatch).toBeCalledWith(changeReviewField({ name, value }));
+          expect(dispatch).toBeCalledWith(changeReviewFields({ name, value }));
         });
       });
 
