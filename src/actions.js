@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   fetchLogin,
+  fetchAddReview,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -55,10 +56,23 @@ export function handleLoginForm(key, value) {
   };
 }
 
+export function handleReviewForm(key, value) {
+  return {
+    type: 'handleReviewForm',
+    payload: { key, value },
+  };
+}
+
 export function setAccessToken(token) {
   return {
     type: 'setAccessToken',
     payload: { token },
+  };
+}
+
+export function resetReviewForm() {
+  return {
+    type: 'resetReviewForm',
   };
 }
 
@@ -99,6 +113,17 @@ export function requestLogin() {
 
     const token = await fetchLogin(loginForm);
     dispatch(setAccessToken(token));
+  };
+}
+
+export function requestReviewPost() {
+  return async (dispatch, getState) => {
+    const {
+      reviewForm,
+    } = getState();
+
+    await fetchAddReview(reviewForm);
+    dispatch(resetReviewForm());
   };
 }
 

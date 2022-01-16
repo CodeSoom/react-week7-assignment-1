@@ -19,6 +19,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviewForm: { score: 0, name: '', description: '' },
     }));
   });
 
@@ -49,10 +50,10 @@ describe('RestaurantContainer', () => {
     it('리뷰 작성 폼을 수정시 폼 상태를 변경하는 디스패치를 실행한다.', () => {
       const { getByLabelText } = renderRestaurantContainer();
 
-      const idInput = getByLabelText('평점');
+      const scoreInput = getByLabelText('평점');
       const score = 5;
 
-      fireEvent.change(idInput, { target: { value: score } });
+      fireEvent.change(scoreInput, { target: { value: score } });
 
       expect(dispatch).toBeCalledWith(handleReviewForm('score', score));
     });

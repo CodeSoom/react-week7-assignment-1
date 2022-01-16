@@ -8,6 +8,7 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   loginForm: { id: '', pw: '' },
+  reviewForm: { score: 0, name: '', description: '' },
   accessToken: '',
 };
 
@@ -61,6 +62,19 @@ const reducers = {
     return {
       ...state,
       loginForm: { ...loginForm, [key]: value },
+    };
+  },
+  handleReviewForm(state, { payload: { key, value } }) {
+    const { reviewForm } = state;
+    return {
+      ...state,
+      reviewForm: { ...reviewForm, [key]: value },
+    };
+  },
+  resetReviwForm(state) {
+    return {
+      ...state,
+      reviewForm: { score: 0, name: '', description: '' },
     };
   },
   setAccessToken(state, { payload: { token } }) {
