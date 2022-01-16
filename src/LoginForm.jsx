@@ -5,8 +5,8 @@ export default function LoginForm({
 }) {
   return (
     <form onSubmit={onSubmit}>
-      <TextField value={email} name="email" label="E-mail" handleChange={onChange} />
-      <TextField value={password} name="password" label="Password" handleChange={onChange} />
+      <TextField value={email} name="email" label="E-mail" onChange={onChange} />
+      <TextField value={password} name="password" label="Password" onChange={onChange} type="password" />
       <>
         <button type="submit">Log in</button>
       </>
