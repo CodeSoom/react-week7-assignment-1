@@ -92,6 +92,16 @@ const reducers = {
     };
   },
 
+  clearReviewFields(state) {
+    return {
+      ...state,
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+    };
+  },
+
   logout(state) {
     return {
       ...state,
