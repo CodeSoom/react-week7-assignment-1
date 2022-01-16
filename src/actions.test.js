@@ -15,6 +15,7 @@ import {
   sendReview,
   loadReviews,
   setReviews,
+  clearReviewFields,
 } from './actions';
 
 const middlewares = [thunk];
@@ -142,6 +143,7 @@ describe('actions', () => {
         const actions = store.getActions();
 
         expect(actions[0]).toEqual(loadReviews({}));
+        expect(actions[1]).toEqual(clearReviewFields({}));
       });
     });
   });
