@@ -15,18 +15,29 @@ describe('RestaurantPage', () => {
 
     useSelector.mockImplementation((state) => state({
       restaurant,
+      reviewForm: { name: '', description: '', score: '' },
     }));
   });
 
   context('with params props', () => {
-    it('renders name', () => {
-      const params = { id: '1' };
+    const params = { id: '1' };
 
+    it('renders name', () => {
       const { findByText } = render(
         <RestaurantPage params={params} />,
       );
 
       expect(findByText(/마법사주방/)).not.toBeNull();
+    });
+
+    it('리뷰 작성 폼을 보여준다.', () => {
+      const { getByLabelText } = render(
+        (<RestaurantPage params={params} />),
+      );
+
+      expect(getByLabelText('평점')).not.toBeNull();
+      expect(getByLabelText('이름')).not.toBeNull();
+      expect(getByLabelText('후기')).not.toBeNull();
     });
   });
 
