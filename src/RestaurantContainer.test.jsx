@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 import restaurant from '../fixtures/restaurant';
+import reviewForm from '../fixtures/reviewForm';
 import { handleReviewForm } from './actions';
 
 describe('RestaurantContainer', () => {
@@ -19,7 +20,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
-      reviewForm: { score: 0, name: '', description: '' },
+      reviewForm,
     }));
   });
 

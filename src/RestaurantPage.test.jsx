@@ -6,6 +6,7 @@ import { render } from '@testing-library/react';
 
 import RestaurantPage from './RestaurantPage';
 import restaurant from '../fixtures/restaurant';
+import reviewForm from '../fixtures/reviewForm';
 
 describe('RestaurantPage', () => {
   beforeEach(() => {
@@ -15,7 +16,7 @@ describe('RestaurantPage', () => {
 
     useSelector.mockImplementation((state) => state({
       restaurant,
-      reviewForm: { name: '', description: '', score: '' },
+      reviewForm,
     }));
   });
 
