@@ -35,7 +35,7 @@ describe('RestaurantContainer', () => {
       address: '서울시 강남구',
       reviews: [
         {
-          id: '1',
+          id: 1,
           name: '테스터',
           description: '맛있어요',
           score: 1,
