@@ -5,14 +5,18 @@ import { useHistory } from 'react-router-dom';
 import LoginFormContainer from './components/LoginFormContainer/LoginFormContainer';
 
 export default function LoginPage() {
-  const token = useSelector((state) => state.token);
+  const accessToken = useSelector((state) => state.accessToken);
   const history = useHistory();
 
   useEffect(() => {
-    if (token) {
+    if (accessToken) {
       history.push('/');
     }
-  }, [token]);
+  }, [accessToken]);
+
+  if (accessToken) {
+    return (null);
+  }
 
   return (
     <div>

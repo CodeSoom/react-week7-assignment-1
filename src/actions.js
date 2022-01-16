@@ -94,12 +94,10 @@ export function loadRestaurants() {
 export function requestLogin() {
   return async (dispatch, getState) => {
     const {
-      loginForm: { id: email, pw: password },
+      loginForm,
     } = getState();
 
-    const token = await fetchLogin({
-      email, password,
-    });
+    const token = await fetchLogin(loginForm);
     dispatch(setAccessToken(token));
   };
 }

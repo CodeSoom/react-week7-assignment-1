@@ -8,6 +8,7 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   loginForm: { id: '', pw: '' },
+  accessToken: '',
 };
 
 const reducers = {
