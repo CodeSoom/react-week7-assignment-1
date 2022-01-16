@@ -15,8 +15,9 @@ describe('RestaurantPage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((state) => state({
-      restaurant,
       accessToken: 'AccessToken',
+      restaurant,
+      reviewFields: { score: '', description: '' },
     }));
   });
 

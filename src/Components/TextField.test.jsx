@@ -38,7 +38,7 @@ describe('TextField', () => {
 
   it('redners input with value', () => {
     const name = 'score';
-    const value = 5;
+    const value = '5';
     const { getByLabelText } = render((
       <TextField
         label="평점"
@@ -49,7 +49,7 @@ describe('TextField', () => {
       />
     ));
 
-    expect(getByLabelText('평점').value).toBe(5);
+    expect(getByLabelText('평점').value).toBe('5');
   });
 
   it('listens change events', () => {

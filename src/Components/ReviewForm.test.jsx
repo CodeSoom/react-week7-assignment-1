@@ -29,11 +29,11 @@ describe('ReviewForm', () => {
 
   it('renders values of fields', () => {
     const { queryByLabelText } = renderRevieForm({
-      score: 5, description: '맛있어요',
+      score: '5', description: '맛있어요',
     });
 
-    expect(queryByLabelText('평점').value).toBe(5);
-    expect(queryByLabelText('리뷰 내용').value).toBeNull('맛있어요');
+    expect(queryByLabelText('평점').value).toBe('5');
+    expect(queryByLabelText('리뷰 내용').value).toBe('맛있어요');
   });
 
   it('listens change events', () => {
