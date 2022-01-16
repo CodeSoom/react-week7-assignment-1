@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setLoginField } from './actions';
+import { login, setLoginField } from './actions';
 
 export default function LoginContainer() {
   const { email, password } = useSelector((state) => state.loginField);
@@ -7,7 +7,8 @@ export default function LoginContainer() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    //
+
+    dispatch(login());
   }
 
   function handleChange({ target }) {

@@ -33,4 +33,11 @@ describe('LoginContainer', () => {
 
     expect(dispatch).toBeCalled();
   });
+
+  it('when submit form dispatch called', () => {
+    const { getByRole } = render(<LoginContainer />);
+    fireEvent.click(getByRole('button', { name: 'Log in' }));
+
+    expect(dispatch).toBeCalled();
+  });
 });
