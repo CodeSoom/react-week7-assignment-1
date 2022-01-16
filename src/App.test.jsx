@@ -7,14 +7,17 @@ import { render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
+import { getStorage } from './util/storage';
 
 jest.mock('react-redux');
+jest.mock('./util/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
     dispatch.mockClear();
+    getStorage.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
 
@@ -90,6 +93,28 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('로그아웃 상태일 때', () => {
+    beforeEach(() => {
+      getStorage.mockImplementation(() => null);
+    });
+
+    it('dispatch를 실행하지 않는다.', () => {
+      renderApp({ path: '/' });
+      expect(dispatch).not.toBeCalled();
+    });
+  });
+
+  context('로그인 상태일 때', () => {
+    beforeEach(() => {
+      getStorage.mockImplementation(() => 'accessToken');
+    });
+
+    it('dispatch를 실행한다.', () => {
+      renderApp({ path: '/' });
+      expect(dispatch).toBeCalled();
     });
   });
 });
