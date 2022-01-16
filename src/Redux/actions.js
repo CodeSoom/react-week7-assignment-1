@@ -127,6 +127,10 @@ export function changeReviewField({ name, value }) {
   };
 }
 
+export function clearReviewFields() {
+  return { type: 'clearReviewFields' };
+}
+
 export function setReviews({ reviews }) {
   return {
     type: 'setReviews',
@@ -150,10 +154,9 @@ export function sendReview({ restaurantId }) {
     await postReview({
       accessToken, restaurantId, score, description,
     });
-    dispatch(loadReviews({ restaurantId }));
 
-    dispatch(changeReviewField({ name: 'score', value: '' }));
-    dispatch(changeReviewField({ name: 'description', value: '' }));
+    dispatch(loadReviews({ restaurantId }));
+    dispatch(clearReviewFields());
   };
 }
 

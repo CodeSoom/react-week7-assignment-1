@@ -10,6 +10,7 @@ import {
   changeLoginField,
   setAccessToken,
   changeReviewField,
+  clearReviewFields,
   logout,
   setReviews,
 } from './actions';
@@ -194,6 +195,25 @@ describe('reducer', () => {
       );
 
       expect(state.reviewFields.score).toBe('5');
+    });
+  });
+
+  describe('clearReviewFields', () => {
+    const initialState = {
+      reviewFields: {
+        score: '5',
+        description: '맛있어요',
+      },
+    };
+
+    it('clear review fields', () => {
+      const state = reducer(
+        initialState,
+        clearReviewFields(),
+      );
+
+      expect(state.reviewFields.score).toBe('');
+      expect(state.reviewFields.description).toBe('');
     });
   });
 
