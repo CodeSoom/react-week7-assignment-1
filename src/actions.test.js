@@ -140,5 +140,24 @@ describe('actions', () => {
         expect(actions).toHaveLength(0);
       });
     });
+
+    context('without password', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginField: {
+            email: 'email',
+            password: '',
+          },
+        });
+      });
+
+      it('does not run anyway action', async () => {
+        await store.dispatch(login());
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
+    });
   });
 });

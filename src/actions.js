@@ -107,6 +107,10 @@ export function login() {
   return async (dispatch, getState) => {
     const { loginField: { email, password } } = getState();
 
+    if (!email || !password) {
+      return;
+    }
+
     const authorizedToken = await api.login({ email, password });
 
     dispatch(setAuthorizedToken(authorizedToken));
