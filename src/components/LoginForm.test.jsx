@@ -6,14 +6,14 @@ describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
 
+  const renderLoginForm = () => (
+    render(<LoginForm onChange={handleChange} onSubmit={handleSubmit} />)
+  );
+
   beforeEach(() => {
     handleChange.mockClear();
     handleSubmit.mockClear();
   });
-
-  const renderLoginForm = () => (
-    render(<LoginForm onChange={handleChange} onSubmit={handleSubmit} />)
-  );
 
   it('화면에 로그인 입력 폼이 존재한다.', () => {
     const { getByText, getByRole, getByLabelText } = renderLoginForm();

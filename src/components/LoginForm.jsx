@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function LoginForm({ onChange, onSubmit }) {
   return (
     <div>
