@@ -5,20 +5,18 @@ import { get } from './utils';
 import {
   requestLogin,
   changeLoginField,
+  logout,
 } from './actions';
 
 import LoginForm from './LoginForm';
+import LogoutForm from './LogoutForm';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
-
   const { email, password } = useSelector(get('loginFields'));
   const accessToken = useSelector(get('accessToken'));
 
   function handleSubmit() {
-    // 로그인은 비동기로 요청처리
-    // requestLogin 하는데, 안에 있는 상태를 활용하게 하면 됨
-    // 그 상태는 리덕스에서 처리
     dispatch(requestLogin());
   }
 
@@ -26,14 +24,21 @@ export default function LoginFormContainer() {
     dispatch(changeLoginField({ name, value }));
   }
 
+  function handleClickLogout() {
+    dispatch(logout());
+  }
+
   return (
     <>
-      <LoginForm
-        fields={{ email, password }}
-        onSubmit={handleSubmit}
-        onChange={handleChange}
-      />
-      <p>{accessToken}</p>
+      {accessToken ? (
+        <LogoutForm onClick={handleClickLogout} />
+      ) : (
+        <LoginForm
+          fields={{ email, password }}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
+      )}
     </>
   );
 }

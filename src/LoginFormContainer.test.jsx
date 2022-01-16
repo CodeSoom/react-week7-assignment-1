@@ -1,10 +1,10 @@
-import { MemoryRouter } from 'react-router-dom';
-
 import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
+
+import { changeLoginField } from './actions';
 
 jest.mock('react-redux');
 
@@ -14,31 +14,64 @@ describe('LoginFormContainer', () => {
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
+
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
-        email: 'test@test',
+        email: 'tester@example.com',
+        password: 'test',
       },
+      accessToken: given.accessToken,
     }));
   });
 
-  it('input control들을 렌더링한다.', () => {
-    const { getByLabelText } = render((
-      <MemoryRouter>
-        <LoginFormContainer />
-      </MemoryRouter>
-    ));
+  context('when logged out', () => {
+    given('accessToken', () => '');
+    it('listen change events', () => {
+      const { getByLabelText } = render(
+        <LoginFormContainer />,
+      );
 
-    expect(getByLabelText('E-mail').value).toBe('test@test');
+      expect(getByLabelText('E-mail').value).toBe('tester@example.com');
+
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'new email' },
+      });
+
+      expect(dispatch).toBeCalledWith(
+        changeLoginField({
+          name: 'email',
+          value: 'new email',
+        }),
+      );
+
+      expect(getByLabelText('Password').value).toBe('test');
+    });
+
+    it('renders Log In Button', () => {
+      const { getByText } = render(
+        <LoginFormContainer />,
+      );
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 
-  it('"Login" 버튼을 렌더링한다.', () => {
-    const { getByText } = render((
-      <MemoryRouter>
-        <LoginFormContainer />
-      </MemoryRouter>
-    ));
+  context('when logged In', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-    fireEvent.click(getByText('Login'));
-    expect(dispatch).toBeCalled();
+    it('renders Logout Button and listens click event', () => {
+      const { container, getByText } = render(
+        <LoginFormContainer />,
+      );
+
+      fireEvent.click(getByText('Logout'));
+
+      expect(container).toHaveTextContent('Logout');
+      expect(dispatch).toBeCalledWith({
+        type: 'logout',
+      });
+    });
   });
 });

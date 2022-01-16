@@ -4,7 +4,10 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
+
+import { saveItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -34,6 +37,20 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function setReviews(reviews) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
@@ -48,6 +65,33 @@ export function selectCategory(categoryId) {
   };
 }
 
+export function changeLoginField({ name, value }) {
+  return {
+    type: 'changeLoginField',
+    payload: { name, value },
+  };
+}
+
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: { name, value },
+  };
+}
+
+export function clearReviewFields() {
+  return {
+    type: 'clearReviewFields',
+  };
+}
+
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}
+
+// Asynchronous
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();
@@ -80,45 +124,52 @@ export function loadRestaurants() {
 export function loadRestaurant({ restaurantId }) {
   return async (dispatch) => {
     dispatch(setRestaurant(null));
-
     const restaurant = await fetchRestaurant({ restaurantId });
-
     dispatch(setRestaurant(restaurant));
   };
 }
 
-export function setAccessToken(accessToken) {
-  return {
-    type: 'setAccessToken',
-    payload: {
-      accessToken,
-    },
+export function loadReview({ restaurantId }) {
+  return async (dispatch) => {
+    const restaurant = await fetchRestaurant({ restaurantId });
+    const { reviews } = restaurant;
+
+    dispatch(setReviews(reviews));
   };
 }
 
 export function requestLogin() {
   return async (dispatch, getState) => {
-    // state = email, password <- 이메일 입력할 때마다 바뀌고 하는 것들을 또 처리해줘야함
-    // HTTP POST <- email, password (getState)
-    const { loginFields: { email, password } } = getState();
-    const { accessToken } = await postLogin({ email, password });
-    dispatch(setAccessToken(accessToken));
+    const {
+      loginFields: { email, password },
+    } = getState();
+
+    try {
+      const accessToken = await postLogin({ email, password });
+      dispatch(setAccessToken(accessToken));
+      saveItem('accessToken', accessToken);
+    } catch (e) {
+      alert('error: failed to get AccessToken ', e);
+    }
   };
 }
 
-export function changeLoginField({ name, value }) {
-  return {
-    type: 'changeLoginField',
-    payload: { name, value },
-  };
-}
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const {
+      accessToken,
+      reviewFields: { score, description },
+    } = getState();
 
-export function changeReviewField({ name, value }) {
-  return {
-    type: 'changeReviewField',
-    payload: {
-      name,
-      value,
-    },
+    await postReview({
+      accessToken,
+      restaurantId,
+      score,
+      description,
+    });
+
+    dispatch(loadReview({ restaurantId }));
+
+    dispatch(clearReviewFields());
   };
 }

@@ -25,7 +25,7 @@ describe('LoginPage', () => {
       </MemoryRouter>
     ));
 
-    expect(container).toHaveTextContent('Login');
+    expect(container).toHaveTextContent('Log In');
   });
 
   it('LoginFormContainer를 렌더링 한다.', () => {
@@ -34,7 +34,7 @@ describe('LoginPage', () => {
         <LoginPage />
       </MemoryRouter>
     ));
-
     expect(container).toHaveTextContent('E-mail');
+    expect(container).toHaveTextContent('Password');
   });
 });

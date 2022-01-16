@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer, { initialState as defaultState } from './reducer';
 
 import {
   setRegions,
@@ -10,26 +10,14 @@ import {
   changeLoginField,
   setAccessToken,
   changeReviewField,
+  logout,
+  setReviews,
+  clearReviewFields,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
-    const initialState = {
-      regions: [],
-      categories: [],
-      restaurants: [],
-      restaurant: null,
-      selectedRegion: null,
-      selectedCategory: null,
-      changeLoginField: null,
-      setAccessToken: null,
-      loginFields: {},
-      accessToken: '',
-      reviewFields: {
-        score: '',
-        description: '',
-      },
-    };
+    const initialState = defaultState;
 
     it('returns initialState', () => {
       const state = reducer(undefined, { type: 'action' });
@@ -101,6 +89,25 @@ describe('reducer', () => {
     });
   });
 
+  describe('setReviews', () => {
+    it('changes reviews of the current restaurant', () => {
+      const initialState = {
+        restaurant: {
+          reviews: [],
+        },
+      };
+
+      const reviews = [{
+        id: 1, name: '테스터', description: '맛있어요', score: '5',
+      }];
+
+      const state = reducer(initialState, setReviews(reviews));
+
+      expect(state.restaurant.reviews).toHaveLength(reviews.length);
+      expect(state.restaurant.reviews[0]).toEqual(reviews[0]);
+    });
+  });
+
   describe('selectRegion', () => {
     it('changes selected region', () => {
       const initialState = {
@@ -137,65 +144,79 @@ describe('reducer', () => {
     });
   });
 
-  describe('changeLoginField', () => {
-    context('when email is changed', () => {
+  describe('setAccessToken', () => {
+    it('change acessToken', () => {
       const initialState = {
-        loginFields: {
-          email: 'blahblah',
-          password: '1234',
-        },
+        accessToken: '',
       };
 
-      const state = reducer(
-        initialState,
-        changeLoginField({ name: 'email', value: 'test' }),
-      );
-
-      expect(state.loginFields.email).toBe('test');
-      expect(state.loginFields.password).toBe('1234');
-    });
-
-    context('when password is changed', () => {
-      const initialState = {
-        loginFields: {
-          email: 'blahblah',
-          password: '1234',
-        },
-      };
-
-      const state = reducer(
-        initialState,
-        changeLoginField({ name: 'password', value: 'test' }),
-      );
-
-      expect(state.loginFields.email).toBe('blahblah');
-      expect(state.loginFields.password).toBe('test');
+      const state = reducer(initialState, setAccessToken('TOKEN'));
+      expect(state.accessToken).toBe('TOKEN');
     });
   });
 
-  describe('setAccessToken', () => {
-    const initialState = {
-      accessToken: '',
-    };
+  describe('logout', () => {
+    it('change acessToken', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+      };
 
-    const state = reducer(initialState, setAccessToken('TOKEN'));
+      const state = reducer(initialState, logout());
+      expect(state.accessToken).toBe('');
+    });
+  });
 
-    expect(state.accessToken).toBe('TOKEN');
+  describe('changeLoginField', () => {
+    context('when email is changed', () => {
+      it('changes input value', () => {
+        const initialState = {
+          loginFields: {
+            email: 'test@test',
+            password: '1234',
+          },
+        };
+
+        const state = reducer(
+          initialState,
+          changeLoginField({ name: 'email', value: 'test@tester' }),
+        );
+
+        expect(state.loginFields.email).toBe('test@tester');
+        expect(state.loginFields.password).toBe('1234');
+      });
+    });
   });
 
   describe('changeReviewField', () => {
-    const initialState = {
-      reviewFields: {
-        score: '0',
-        description: '',
-      },
-    };
+    context('when review rate is changed', () => {
+      it('changes input value', () => {
+        const initialState = {
+          reviewFields: {
+            score: '',
+            description: '',
+          },
+        };
 
-    const state = reducer(
-      initialState,
-      changeReviewField({ name: 'score', value: '5' }),
-    );
+        const state = reducer(
+          initialState,
+          changeReviewField({ name: 'score', value: '5' }),
+        );
 
-    expect(state.reviewFields.score).toBe('5');
+        expect(state.reviewFields.score).toBe('5');
+      });
+    });
+  });
+
+  describe('clearReviewFields', () => {
+    it('clears fields of review', () => {
+      const initialState = {
+        reviewFields: { score: '4', description: 'good' },
+      };
+
+      const state = reducer(initialState, clearReviewFields());
+
+      expect(state.reviewFields.score).toBe('');
+      expect(state.reviewFields.description).toBe('');
+    });
   });
 });

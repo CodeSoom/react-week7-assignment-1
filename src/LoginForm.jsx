@@ -7,28 +7,30 @@ export default function LoginForm({ fields, onChange, onSubmit }) {
   }
   return (
     <>
-      <label htmlFor="login-email">
-        E-mail
-      </label>
+      <label htmlFor="login-email">E-mail</label>
       <input
         type="email"
         id="login-email"
-        onChange={handleChange}
         name="email"
         value={email}
+        onChange={(e) => {
+          handleChange(e);
+        }}
       />
-      <label htmlFor="login-password">
-        Password
-      </label>
+
+      <label htmlFor="login-password">Password</label>
       <input
         type="password"
         id="login-password"
-        onChange={handleChange}
         name="password"
         value={password}
+        onChange={(e) => {
+          handleChange(e);
+        }}
       />
+
       <button type="button" onClick={onSubmit}>
-        Login
+        Log In
       </button>
     </>
   );

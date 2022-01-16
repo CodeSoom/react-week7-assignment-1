@@ -1,20 +1,17 @@
 import { equal } from './utils';
 
-const initialState = {
+const initialReviewFields = { score: '', description: '' };
+
+export const initialState = {
+  accessToken: '',
   regions: [],
   categories: [],
   restaurants: [],
-  restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
-  changeLoginField: null,
-  setAccessToken: null,
-  loginFields: {},
-  accessToken: '',
-  reviewFields: {
-    score: '',
-    description: '',
-  },
+  restaurant: { reviews: [] },
+  loginFields: { email: '', password: '' },
+  reviewFields: { ...initialReviewFields },
 };
 
 const reducers = {
@@ -45,6 +42,27 @@ const reducers = {
       restaurant,
     };
   },
+  setReviews(state, { payload: { reviews } }) {
+    const { restaurant } = state;
+    return {
+      ...state,
+      restaurant: { ...restaurant, reviews },
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
+    };
+  },
+
+  logout(state) {
+    return {
+      ...state,
+      accessToken: '',
+    };
+  },
 
   selectRegion(state, { payload: { regionId } }) {
     const { regions } = state;
@@ -63,28 +81,32 @@ const reducers = {
   },
 
   changeLoginField(state, { payload: { name, value } }) {
+    const { loginFields } = state;
     return {
       ...state,
       loginFields: {
-        ...state.loginFields,
+        ...loginFields,
         [name]: value,
       },
     };
   },
 
-  setAccessToken(state, { payload: { accessToken } }) {
-    return {
-      ...state,
-      accessToken,
-    };
-  },
-
   changeReviewField(state, { payload: { name, value } }) {
+    const { reviewFields } = state;
     return {
       ...state,
       reviewFields: {
-        ...state.reviewFields,
+        ...reviewFields,
         [name]: value,
+      },
+    };
+  },
+
+  clearReviewFields(state) {
+    return {
+      ...state,
+      reviewFields: {
+        ...initialReviewFields,
       },
     };
   },

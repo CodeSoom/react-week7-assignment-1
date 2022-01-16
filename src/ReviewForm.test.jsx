@@ -11,7 +11,7 @@ describe('ReviewForm', () => {
     handleSubmit.mockClear();
   });
 
-  function renderReviewForm({ score, description }) {
+  function renderReviewForm({ score, description } = {}) {
     return render(
       <ReviewForm
         fields={{ score, description }}
@@ -21,37 +21,45 @@ describe('ReviewForm', () => {
     );
   }
 
-  it('renders input controls and listens change events', () => {
-    const score = '0';
-    const description = '';
+  it('renders review write fields ', () => {
+    const { queryByLabelText } = renderReviewForm();
 
-    const { getByLabelText } = renderReviewForm({ score, description });
+    expect(queryByLabelText('평점')).not.toBeNull();
+    expect(queryByLabelText('리뷰내용')).not.toBeNull();
+  });
+
+  it('renders value of fields ', () => {
+    const { queryByLabelText } = renderReviewForm({
+      score: '4',
+      description: '굿굿',
+    });
+
+    expect(queryByLabelText('평점').value).toBe('4');
+    expect(queryByLabelText('리뷰내용').value).toBe('굿굿');
+  });
+
+  it('listens description change events', () => {
+    const { getByLabelText } = renderReviewForm();
 
     const controls = [
-      { label: '평점', name: 'score', value: '5' },
-      { label: '리뷰 내용', name: 'description', value: '존맛탱' },
+      { label: '평점', name: 'score', value: '4' },
+      { label: '리뷰내용', name: 'description', value: '굿굿' },
     ];
 
-    controls.forEach(({
-      label, name, origin, value,
-    }) => {
-      const input = getByLabelText(label);
-
-      expect(input.value).toBe(origin);
-
-      fireEvent.change(input, {
-        target: { value },
-      });
+    controls.forEach(({ label, name, value }) => {
+      fireEvent.change(getByLabelText(label), { target: { value } });
 
       expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 
   it('renders "Send" button', () => {
-    const { getByText } = renderReviewForm({});
+    const { getByText } = renderReviewForm({
+      score: '4',
+      description: '굿굿',
+    });
 
     fireEvent.click(getByText('리뷰 남기기'));
-
     expect(handleSubmit).toBeCalled();
   });
 });

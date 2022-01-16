@@ -1,4 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
+import { useSelector } from 'react-redux';
 
 import LoginForm from './LoginForm';
 
@@ -20,12 +21,17 @@ describe('LoginForm', () => {
       />
     ));
   }
-  it('input control들을 렌더링하고, 이벤트 변화를 감지한다.', () => {
+
+  it('renders input controls and listens change events', () => {
     const email = 'test@test';
     const password = '1234';
+    useSelector.mockImplementation((selector) => selector({
+      regions: [],
+      categories: [],
+      restaurants: [],
+    }));
 
     const { getByLabelText } = renderLoginForm({ email, password });
-
     const controls = [
       {
         label: 'E-mail',
@@ -51,17 +57,16 @@ describe('LoginForm', () => {
       fireEvent.change(input, {
         target: { value },
       });
-      expect(handleChange).toBeCalledWith({
-        name,
-        value,
-      });
+
+      expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 
-  it('Login 버튼을 누르면 handleSubmit이 실행된다.', () => {
-    const { queryByText } = renderLoginForm({ });
+  it('renders Log In Button', () => {
+    const { getByText } = renderLoginForm({});
 
-    fireEvent.click(queryByText('Login'));
+    fireEvent.click(getByText('Log In'));
+
     expect(handleSubmit).toBeCalled();
   });
 });
