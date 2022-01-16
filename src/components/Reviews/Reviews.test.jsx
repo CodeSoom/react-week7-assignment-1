@@ -4,8 +4,8 @@ import Reviews from './Reviews';
 import restaurant from '../../../fixtures/restaurant';
 
 describe('Reviews', () => {
-  context('리뷰 목록이', () => {
-    it('있으면 리뷰들을 보여준다.', () => {
+  context('리뷰 목록이 있으면', () => {
+    it('리뷰들을 보여준다', () => {
       const { reviews } = restaurant;
       const { queryAllByText } = render(<Reviews reviews={reviews} />);
 
@@ -15,8 +15,10 @@ describe('Reviews', () => {
         expect(queryAllByText(score)).not.toBeNull();
       });
     });
+  });
 
-    it('있으면 "리뷰가 존재하지 않습니다."를 보여준다', () => {
+  context('리뷰 목록이 없으면', () => {
+    it('"리뷰가 존재하지 않습니다."를 보여준다', () => {
       const { getByText } = render(<Reviews reviews={[]} />);
 
       expect(getByText(/리뷰가 존재하지 않습니다\./)).not.toBeNull();
