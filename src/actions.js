@@ -1,8 +1,7 @@
-import {
-  fetchCategories, fetchRegions, fetchRestaurant, fetchRestaurants,
-} from './services/api';
+import * as api from './services/api';
 
 export const SET_LOGIN_FIELD = 'setLoginField';
+export const SET_AUTHORIZED_TOKEN = 'setAuthorizedToken';
 
 export function setRegions(regions) {
   return {
@@ -48,10 +47,10 @@ export function selectCategory(categoryId) {
 
 export function loadInitialData() {
   return async (dispatch) => {
-    const regions = await fetchRegions();
+    const regions = await api.fetchRegions();
     dispatch(setRegions(regions));
 
-    const categories = await fetchCategories();
+    const categories = await api.fetchCategories();
     dispatch(setCategories(categories));
   };
 }
@@ -67,7 +66,7 @@ export function loadRestaurants() {
       return;
     }
 
-    const restaurants = await fetchRestaurants({
+    const restaurants = await api.fetchRestaurants({
       regionName: region.name,
       categoryId: category.id,
     });
@@ -79,7 +78,7 @@ export function loadRestaurant({ restaurantId }) {
   return async (dispatch) => {
     dispatch(setRestaurant(null));
 
-    const restaurant = await fetchRestaurant({ restaurantId });
+    const restaurant = await api.fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
   };
@@ -92,5 +91,24 @@ export function setLoginField({ name, value }) {
       name,
       value,
     },
+  };
+}
+
+export function setAuthorizedToken(token) {
+  return {
+    type: SET_AUTHORIZED_TOKEN,
+    payload: {
+      token,
+    },
+  };
+}
+
+export function login() {
+  return async (dispatch, getState) => {
+    const { loginField: { email, password } } = getState();
+
+    const authorizedToken = await api.login({ email, password });
+
+    dispatch(setAuthorizedToken(authorizedToken));
   };
 }

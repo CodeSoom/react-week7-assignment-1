@@ -5,8 +5,9 @@ export default function LoginContainer() {
   const { email, password } = useSelector((state) => state.loginField);
   const dispatch = useDispatch();
 
-  function handleSubmit() {
-    // dispatch();
+  function handleSubmit(event) {
+    event.preventDefault();
+    //
   }
 
   function handleChange({ target }) {
