@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
 import ReviewForm from './ReviewForm';
+import Reviews from './Reviews';
 
 import {
   loadRestaurant,
@@ -12,12 +13,6 @@ import {
 } from '../Redux/actions';
 
 import { get } from '../Utils/utils';
-
-function Reviews() {
-  return (
-    <p>맛있어요</p>
-  );
-}
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
