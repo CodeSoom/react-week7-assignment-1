@@ -21,7 +21,7 @@ describe('App', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
 
