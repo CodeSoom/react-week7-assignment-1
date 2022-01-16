@@ -10,6 +10,7 @@ import {
   changeLoginField,
   setAccessToken,
   changeReviewField,
+  logout,
 } from './actions';
 
 describe('reducer', () => {
@@ -192,6 +193,18 @@ describe('reducer', () => {
       );
 
       expect(state.reviewFields.score).toBe('5');
+    });
+  });
+
+  describe('logout', () => {
+    const initialState = {
+      accessToken: 'ACCESS_TOKEN',
+    };
+
+    it('changes accessToken', () => {
+      const state = reducer(initialState, logout());
+
+      expect(state.accessToken).toBe('');
     });
   });
 });
