@@ -10,6 +10,8 @@ import App from './App';
 
 import { loadItem } from '../services/storage';
 
+import restaurant from '../../fixtures/restaurant';
+
 jest.mock('react-redux');
 jest.mock('../services/storage');
 
@@ -27,7 +29,7 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
+      restaurant,
       loginFields: {
         email: '',
         password: '',
@@ -79,7 +81,7 @@ describe('App', () => {
     it('renders the restaurant page', () => {
       const { container } = renderApp({ path: '/restaurants/1' });
 
-      expect(container).toHaveTextContent('마녀주방');
+      expect(container).toHaveTextContent(restaurant.name);
     });
   });
 

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
+import restaurant from '../../fixtures/restaurant';
+
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
@@ -29,19 +31,7 @@ describe('RestaurantContainer', () => {
   });
 
   context('with restaurant', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-      reviews: [
-        {
-          id: 1,
-          name: '테스터',
-          description: '맛있어요',
-          score: 1,
-        },
-      ],
-    }));
+    given('restaurant', () => restaurant);
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();

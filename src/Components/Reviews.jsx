@@ -1,5 +1,14 @@
-export default function Reviews() {
+export default function Reviews({ reviews }) {
   return (
-    <p>맛있어요</p>
+    <ul>
+      {reviews.map(({
+        id, name, description, score,
+      }) => (
+        <li key={id}>
+          {score}
+          {`${name}: ${description}`}
+        </li>
+      ))}
+    </ul>
   );
 }

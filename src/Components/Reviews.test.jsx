@@ -6,7 +6,7 @@ import restaurant from '../../fixtures/restaurant';
 
 describe('Reviews', () => {
   function renderReviews() {
-    return render(<Reviews restaurant={restaurant.reviews} />);
+    return render(<Reviews reviews={restaurant.reviews} />);
   }
 
   it('renders reviews', () => {
