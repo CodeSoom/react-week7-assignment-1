@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import {
   Switch,
   Route,
   Link,
 } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -10,8 +12,20 @@ import RestaurantsPage from './pages/RestaurantsPage';
 import RestaurantPage from './pages/RestaurantPage';
 import NotFoundPage from './pages/NotFoundPage';
 import LoginPage from './pages/LoginPage';
+import { getLocalStorageItem } from './services/storage';
+import { setAccessToken } from './actions';
 
 export default function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const accessToken = getLocalStorageItem('accessToken');
+
+    if (accessToken) {
+      dispatch(setAccessToken(accessToken));
+    }
+  }, []);
+
   return (
     <div>
       <header>

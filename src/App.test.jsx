@@ -1,14 +1,15 @@
 import {
   MemoryRouter,
 } from 'react-router-dom';
-
 import { render } from '@testing-library/react';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
+import { getLocalStorageItem } from './services/storage';
+import { setAccessToken } from './actions';
 
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -17,7 +18,6 @@ describe('App', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
-
     useSelector.mockImplementation((selector) => selector({
       regions: [
         { id: 1, name: '서울' },
@@ -25,6 +25,7 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      accessToken: '',
     }));
   });
 
@@ -73,6 +74,15 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('로컬스토리지에 accessToken이 있으면', () => {
+    it('setAccessToken 액션을 디스패치한다.', () => {
+      getLocalStorageItem.mockImplementation(() => 'ACCESS_TOKEN');
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith(setAccessToken('ACCESS_TOKEN'));
     });
   });
 });
