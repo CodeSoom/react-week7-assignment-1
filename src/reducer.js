@@ -74,11 +74,13 @@ const reducers = {
 
   changeLoginField(state, { payload: { name, value } }) {
     const { loginFields } = state;
-    loginFields[name] = value;
 
     return {
       ...state,
-      loginFields,
+      loginFields: {
+        ...loginFields,
+        [name]: value,
+      },
     };
   },
 
@@ -101,11 +103,13 @@ const reducers = {
 
   changeReviewFields(state, { payload: { name, value } }) {
     const { reviewFields } = state;
-    reviewFields[name] = value;
 
     return {
       ...state,
-      reviewFields,
+      reviewFields: {
+        ...reviewFields,
+        [name]: value,
+      },
     };
   },
 
