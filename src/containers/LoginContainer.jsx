@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { login } from '../actions';
+import { login, setAccessToken } from '../actions';
 
 import LoginForm from '../components/LoginForm';
 
@@ -31,15 +31,22 @@ export default function LoginContainer() {
     dispatch(login({ email, password }));
   };
 
+  const handleClickLogout = () => {
+    dispatch(setAccessToken(''));
+  };
+
   return (
-    <>
-      {accessToken ? (
-        <button type="button">
-          logout
-        </button>
-      ) : (
-        <LoginForm onChange={handleChange} onSubmit={handleSubmit} />
-      )}
-    </>
+    <div>
+      <h2>Login</h2>
+      <div>
+        {accessToken ? (
+          <button type="button" onClick={handleClickLogout}>
+            logout
+          </button>
+        ) : (
+          <LoginForm onChange={handleChange} onSubmit={handleSubmit} />
+        )}
+      </div>
+    </div>
   );
 }
