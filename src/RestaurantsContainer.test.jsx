@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import RestaurantsContainer from './RestaurantsContainer';
 
-test('RestaurantsContainer', () => {
+describe('RestaurantsContainer', () => {
   useSelector.mockImplementation((selector) => selector({
     restaurants: [
       { id: 1, name: '마법사주방' },
@@ -13,13 +13,13 @@ test('RestaurantsContainer', () => {
 
   const handleClick = jest.fn();
 
-  const { container, getByText } = render(
-    <RestaurantsContainer onClickRestaurant={handleClick} />,
-  );
+  it('renders restaurants, click restaurant', () => {
+    const { container, getByText } = render(
+      <RestaurantsContainer onClickRestaurant={handleClick} />,
+    );
 
-  expect(container).toHaveTextContent('마법사주방');
-
-  fireEvent.click(getByText('마법사주방'));
-
-  expect(handleClick).toBeCalledWith({ id: 1, name: '마법사주방' });
+    expect(container).toHaveTextContent('마법사주방');
+    fireEvent.click(getByText('마법사주방'));
+    expect(handleClick).toBeCalled();
+  });
 });

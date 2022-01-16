@@ -1,5 +1,3 @@
-import { MemoryRouter } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import { render } from '@testing-library/react';
@@ -21,27 +19,13 @@ describe('RestaurantPage', () => {
     }));
   });
 
-  context('with params props', () => {
-    it('renders name', () => {
-      const params = { id: '1' };
+  it('renders review write form', () => {
+    const params = { id: '1' };
 
-      const { container } = render(
-        <RestaurantPage params={params} />,
-      );
+    const { container } = render(
+      <RestaurantPage params={params} />,
+    );
 
-      expect(container).toHaveTextContent('마법사주방');
-    });
-  });
-
-  context('without params props', () => {
-    it('renders name', () => {
-      const { container } = render(
-        <MemoryRouter initialEntries={['/restaurants/1']}>
-          <RestaurantPage />
-        </MemoryRouter>,
-      );
-
-      expect(container).toHaveTextContent('마법사주방');
-    });
+    expect(container).toHaveTextContent('리뷰');
   });
 });

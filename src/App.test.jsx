@@ -4,11 +4,14 @@ import {
 
 import { render } from '@testing-library/react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { loadItem } from './services/storage';
 
 import App from './App';
 
 jest.mock('react-redux');
+jest.mock('./services/storage.js');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -35,7 +38,6 @@ describe('App', () => {
       </MemoryRouter>,
     );
   }
-
   context('with path /', () => {
     it('renders the home page', () => {
       const { container } = renderApp({ path: '/' });
@@ -67,12 +69,36 @@ describe('App', () => {
       expect(container).toHaveTextContent('마녀주방');
     });
   });
-
   context('with invalid path', () => {
     it('renders the not found page', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('when logged in', () => {
+    const accessToken = 'ACCESS_TOKEN';
+    beforeEach(() => {
+      loadItem.mockImplementation(() => accessToken);
+    });
+
+    it('call dispatch with "setAccessToken" action', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalled();
+    });
+  });
+
+  context('when logged out', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it('dose not call dispatch with "setAccessToken" action', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
     });
   });
 });
