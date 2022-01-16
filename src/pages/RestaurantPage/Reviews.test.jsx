@@ -1,13 +1,17 @@
 import { render } from '@testing-library/react';
 
-import ReviewsList from './ReviewsList';
+import Reviews from './Reviews';
 
-describe('ReviewsList', () => {
+describe('Reviews', () => {
   it('renders reviews', () => {
-    const { getByText } = render(<ReviewsList reviews={[{
-      id: 1, name: '테스터', score: 5, description: '좋아요',
-    }]}
-    />);
+    const { getByText } = render(
+      <Reviews reviews={[
+        {
+          id: 1, name: '테스터', score: 5, description: '좋아요',
+        },
+      ]}
+      />,
+    );
 
     expect(getByText('테스터')).toBeInTheDocument();
     expect(getByText('5')).toBeInTheDocument();

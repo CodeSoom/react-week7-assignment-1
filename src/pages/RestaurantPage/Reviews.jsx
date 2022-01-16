@@ -1,6 +1,6 @@
 import Review from './Review';
 
-export default function ReviewsList({ reviews }) {
+export default function Reviews({ reviews }) {
   return (
     <ul>
       {reviews.map((review) => (

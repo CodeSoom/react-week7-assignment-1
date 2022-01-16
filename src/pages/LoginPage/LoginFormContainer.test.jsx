@@ -25,9 +25,9 @@ describe('LoginFormContainer', () => {
 
   context('when clicks submit button', () => {
     it('calls dispatch and postLogin with email and password', () => {
-      const { container } = renderLoginFormContainer();
+      const { getByText } = renderLoginFormContainer();
 
-      fireEvent.click(container.querySelector('button[type="submit"]'));
+      fireEvent.click(getByText('Log In'));
 
       expect(dispatch).toBeCalled();
       expect(postLogin).toBeCalledWith({ email: 'test@email.com', password: 'pass' });
