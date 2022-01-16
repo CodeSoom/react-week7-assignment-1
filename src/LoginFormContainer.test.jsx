@@ -12,10 +12,11 @@ import { useDispatch, useSelector } from "react-redux";
 describe("LoginFormContainer", () => {
   const dispatch = jest.fn();
   beforeEach(() => {
-    dispatch.mockClear();
+    jest.clearAllMocks();
     useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) =>
       selector({
+        accessToken: given.accessToken,
         loginField: {
           email: "test@naver.com",
           password: "1234",
@@ -25,6 +26,7 @@ describe("LoginFormContainer", () => {
   });
 
   it("renders Id, Password controls and listens changeEvent", () => {
+    given("accessToken", () => "");
     const { getByLabelText } = render(<LoginFormContainer />);
 
     expect(getByLabelText("Email").value).toBe("test@naver.com");
@@ -42,12 +44,22 @@ describe("LoginFormContainer", () => {
     expect(getByLabelText("Password").value).toBe("1234");
   });
 
-  it("renders Login button and submit LoginField", () => {
+  it("renders Login button and listen Login click Event", () => {
+    given("accessToken", () => "");
     const { getByText } = render(<LoginFormContainer />);
 
     fireEvent.click(getByText("Log In"));
 
     //toBeCalledWith(requestLogin())은 매번 다른 accessToken이 나오므로 toEqual로 비교할수 없다
+    expect(dispatch).toBeCalled();
+  });
+
+  it("renders logout button and listen Logout click Event", () => {
+    given("accessToken", () => "accessToken");
+    const { getByText } = render(<LoginFormContainer />);
+
+    fireEvent.click(getByText("Log out"));
+
     expect(dispatch).toBeCalled();
   });
 });

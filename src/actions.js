@@ -5,7 +5,6 @@ import {
   fetchRestaurant,
   postLogin,
   postReview,
-  fetchReview,
 } from "./services/api";
 
 export function setRegions(regions) {
@@ -100,6 +99,12 @@ export function requestLogin() {
     } = getState();
     const accessToken = await postLogin({ email, password });
     dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function requestLogout() {
+  return {
+    type: "requestLogout",
   };
 }
 
