@@ -94,7 +94,7 @@ describe('RestaurantContainer', () => {
 
         controls.forEach(({ label, name, value }) => {
           fireEvent.change(getByLabelText(label), {
-            target: { value: { value } },
+            target: { value },
           });
 
           expect(dispatch).toBeCalledWith(changeReviewField({ name, value }));
@@ -106,7 +106,7 @@ describe('RestaurantContainer', () => {
 
         fireEvent.click(getByRole('button', { name: '리뷰 남기기' }));
 
-        expect(dispatch).toBeCalled();
+        expect(dispatch).toBeCalledTimes(2);
       });
     });
   });
