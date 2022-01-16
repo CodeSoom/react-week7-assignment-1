@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { login, setLoginField } from './actions';
+import LoginForm from './LoginForm';
 
 export default function LoginContainer() {
   const { email, password } = useSelector((state) => state.loginField);
@@ -19,19 +20,12 @@ export default function LoginContainer() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="input-email">E-mail</label>
-          <input type="text" id="input-email" name="email" value={email} onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor="input-password">Password</label>
-          <input type="password" id="input-password" name="password" value={password} onChange={handleChange} />
-        </div>
-        <>
-          <button type="submit">Log in</button>
-        </>
-      </form>
+      <LoginForm
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+        email={email}
+        password={password}
+      />
     </>
   );
 }
