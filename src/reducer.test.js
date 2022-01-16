@@ -11,6 +11,7 @@ import {
   changeLoginField,
   setAccessToken,
   changeReviewField,
+  setReviews,
 } from './actions';
 
 describe('reducer', () => {
@@ -19,7 +20,9 @@ describe('reducer', () => {
       regions: [],
       categories: [],
       restaurants: [],
-      restaurant: null,
+      restaurant: {
+        reviews: [],
+      },
       selectedRegion: null,
       selectedCategory: null,
       accessToken: '',
@@ -169,6 +172,26 @@ describe('reducer', () => {
       const state = reducer(initialState, changeLoginField({ name: 'password', value: '123456' }));
 
       expect(state.loginFields.password).toBe('123456');
+    });
+  });
+
+  describe('setReviews', () => {
+    const initialState = {
+      restaurant: {
+        reviews: [],
+      },
+    };
+
+    const reviews = [
+      {
+        id: 1, name: '냥냥이', score: 5, description: 'good',
+      },
+    ];
+
+    it('adds a new review and changes reviews', () => {
+      const state = reducer(initialState, setReviews({ reviews }));
+
+      expect(state.restaurant.reviews).toEqual(reviews);
     });
   });
 

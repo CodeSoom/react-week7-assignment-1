@@ -131,16 +131,33 @@ export function changeReviewField({ name, value }) {
   };
 }
 
+export function setReviews({ reviews }) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
+
+export function loadReviews(restaurantId) {
+  return async (dispatch) => {
+    const restaurant = await fetchRestaurant({ restaurantId });
+
+    const { reviews } = restaurant;
+
+    dispatch(setReviews({ reviews }));
+  };
+}
+
 export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const { accessToken, reviewField: { score, description } } = getState();
+
     await postReview({
       accessToken, restaurantId, score, description,
     });
 
-    // TODO: loadReview > setReviews로 분리하기
-    const restaurant = await fetchRestaurant({ restaurantId });
-
-    dispatch(setRestaurant(restaurant));
+    dispatch(loadReviews(restaurantId));
+    // TODO:
+    // dispatch(clearReviewFields());
   };
 }
