@@ -16,21 +16,35 @@ describe('LoginFormContainer', () => {
         email: 'test@test.com',
         password: '1234',
       },
+      accessToken: given.accessToken,
     }));
   });
 
-  it('renders input controls', () => {
-    const { getByLabelText } = renderLoginFormContainer();
+  context('when logged out', () => {
+    given('accessToken', () => '');
+    it('renders input controls', () => {
+      const { getByLabelText } = renderLoginFormContainer();
 
-    expect(getByLabelText('E-mail').value).toBe('test@test.com');
-    expect(getByLabelText('Password').value).toBe('1234');
+      expect(getByLabelText('E-mail').value).toBe('test@test.com');
+      expect(getByLabelText('Password').value).toBe('1234');
+    });
+
+    it('renders "Log in" button', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 
-  it('renders "Log in" button', () => {
-    const { getByText } = renderLoginFormContainer();
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-    fireEvent.click(getByText('Log In'));
+    it('renders log out button', () => {
+      const { container } = renderLoginFormContainer();
 
-    expect(dispatch).toBeCalled();
+      expect(container).toHaveTextContent('Log out');
+    });
   });
 });
