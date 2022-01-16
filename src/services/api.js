@@ -1,3 +1,5 @@
+import { setStorage } from '../util/storage';
+
 export async function fetchRegions() {
   const url = 'https://eatgo-customer-api.ahastudio.com/regions';
   const response = await fetch(url);
@@ -38,5 +40,7 @@ export async function fetchLogin({ id: email, pw: password }) {
     body: JSON.stringify({ email, password }),
   });
   const { accessToken } = await response.json();
+
+  setStorage('accessToken', accessToken);
   return accessToken;
 }
