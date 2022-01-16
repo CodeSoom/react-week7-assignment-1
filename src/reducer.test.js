@@ -1,8 +1,10 @@
 import reducer from './reducer';
 
 import {
+  logout,
   selectCategory,
   selectRegion,
+  setAuthorizedToken,
   setCategories,
   setLoginField,
   setRegions,
@@ -23,6 +25,7 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
+      authorizedToken: '',
     };
 
     it('returns initialState', () => {
@@ -146,6 +149,30 @@ describe('reducer', () => {
         email: 'test',
         password: '',
       });
+    });
+  });
+
+  describe('setAuthorizedToken', () => {
+    it('change authorizedToken', () => {
+      const initialState = {
+        authorizedToken: '',
+      };
+
+      const state = reducer(initialState, setAuthorizedToken('TOKEN'));
+
+      expect(state.authorizedToken).toBe('TOKEN');
+    });
+  });
+
+  describe('logout', () => {
+    it('set authorizedToken empty', () => {
+      const initialState = {
+        authorizedToken: 'TOKEN',
+      };
+
+      const state = reducer(initialState, logout());
+
+      expect(state.authorizedToken).toBe('');
     });
   });
 });

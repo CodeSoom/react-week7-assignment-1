@@ -9,35 +9,55 @@ describe('LoginContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
-    useSelector.mockImplementation(() => ({
-      loginField: {
-        email: '',
-        password: '',
-      },
-    }));
-
-    useDispatch.mockImplementation(() => dispatch);
   });
 
-  it('renders inputs and submit button', () => {
-    const { getByLabelText, getByRole } = render(<LoginContainer />);
+  context('without authorizedToken', () => {
+    beforeEach(() => {
+      useSelector.mockImplementation(() => ({
+        loginField: {
+          email: '',
+          password: '',
+        },
+        authorizedToken: '',
+      }));
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
-    expect(getByRole('button', { name: 'Log in' })).not.toBeNull();
+      useDispatch.mockImplementation(() => dispatch);
+    });
+
+    it('renders inputs and submit button', () => {
+      const { getByLabelText, getByRole } = render(<LoginContainer />);
+
+      expect(getByLabelText('E-mail')).not.toBeNull();
+      expect(getByLabelText('Password')).not.toBeNull();
+      expect(getByRole('button', { name: 'Log in' })).not.toBeNull();
+    });
+
+    it('when change inputs dispatch called', () => {
+      const { getByLabelText } = render(<LoginContainer />);
+      fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test' } });
+
+      expect(dispatch).toBeCalled();
+    });
+
+    it('when submit form dispatch called', () => {
+      const { getByRole } = render(<LoginContainer />);
+      fireEvent.click(getByRole('button', { name: 'Log in' }));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 
-  it('when change inputs dispatch called', () => {
-    const { getByLabelText } = render(<LoginContainer />);
-    fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test' } });
+  context('with authorizedToken', () => {
+    beforeEach(() => {
+      useSelector.mockImplementation(() => ({
+        loginField: {
+          email: '',
+          password: '',
+        },
+        authorizedToken: 'TOKEN',
+      }));
 
-    expect(dispatch).toBeCalled();
-  });
-
-  it('when submit form dispatch called', () => {
-    const { getByRole } = render(<LoginContainer />);
-    fireEvent.click(getByRole('button', { name: 'Log in' }));
-
-    expect(dispatch).toBeCalled();
+      useDispatch.mockImplementation(() => dispatch);
+    });
   });
 });

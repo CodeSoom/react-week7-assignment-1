@@ -1,7 +1,9 @@
 import * as api from './services/api';
+import { setStorage } from './services/storage';
 
 export const SET_LOGIN_FIELD = 'setLoginField';
 export const SET_AUTHORIZED_TOKEN = 'setAuthorizedToken';
+export const LOGOUT = 'logout';
 
 export function setRegions(regions) {
   return {
@@ -103,6 +105,14 @@ export function setAuthorizedToken(token) {
   };
 }
 
+export function logout() {
+  setStorage('AuthorizedToken', '');
+
+  return {
+    type: LOGOUT,
+  };
+}
+
 export function login() {
   return async (dispatch, getState) => {
     const { loginField: { email, password } } = getState();
@@ -114,5 +124,7 @@ export function login() {
     const authorizedToken = await api.login({ email, password });
 
     dispatch(setAuthorizedToken(authorizedToken));
+
+    setStorage('AuthorizedToken', authorizedToken);
   };
 }

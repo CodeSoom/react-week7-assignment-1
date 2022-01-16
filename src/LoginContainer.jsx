@@ -1,9 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { login, setLoginField } from './actions';
 import LoginForm from './LoginForm';
+import LogoutContainer from './LogoutContainer';
 
 export default function LoginContainer() {
-  const { email, password } = useSelector((state) => state.loginField);
+  const { email, password, authorizedToken } = useSelector((state) => ({
+    email: state.loginField.email,
+    password: state.loginField.password,
+    authorizedToken: state.authorizedToken,
+  }));
   const dispatch = useDispatch();
 
   function handleSubmit(event) {
@@ -20,12 +25,18 @@ export default function LoginContainer() {
 
   return (
     <>
-      <LoginForm
-        onSubmit={handleSubmit}
-        onChange={handleChange}
-        email={email}
-        password={password}
-      />
+      {
+        authorizedToken
+          ? <LogoutContainer />
+          : (
+            <LoginForm
+              onSubmit={handleSubmit}
+              onChange={handleChange}
+              email={email}
+              password={password}
+            />
+          )
+      }
     </>
   );
 }

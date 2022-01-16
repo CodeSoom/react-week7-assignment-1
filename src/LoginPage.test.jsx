@@ -14,6 +14,7 @@ describe('LoginPage', () => {
         email: '',
         password: '',
       },
+      authorizedToken: '',
     }));
 
     useDispatch.mockImplementation(() => dispatch);
