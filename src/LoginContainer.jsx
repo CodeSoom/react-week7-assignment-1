@@ -1,10 +1,15 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function LoginController() {
+export default function LoginContainer() {
+  const { email, password } = useSelector((state) => state.loginField);
   const dispatch = useDispatch();
 
   function handleSubmit() {
-    dispatch();
+    // dispatch();
+  }
+
+  function handleChange() {
+
   }
 
   return (
