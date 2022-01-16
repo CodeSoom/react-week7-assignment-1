@@ -121,5 +121,24 @@ describe('actions', () => {
         expect(actions[0]).toEqual(setAuthorizedToken('TOKEN'));
       });
     });
+
+    context('without email', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginField: {
+            email: '',
+            password: 'test',
+          },
+        });
+      });
+
+      it('does not run anyway action', async () => {
+        await store.dispatch(login());
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
+    });
   });
 });
