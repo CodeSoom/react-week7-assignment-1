@@ -12,6 +12,7 @@ import {
   setAccessToken,
   changeReviewField,
   setReviews,
+  clearReviewFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -235,6 +236,23 @@ describe('reducer', () => {
         }));
 
       expect(state.reviewField.description).toEqual('good~');
+    });
+  });
+
+  describe('clearReviewFields', () => {
+    const initialState = {
+      reviewField: {
+        score: 5,
+        description: 'JMT',
+      },
+    };
+
+    it('clears review fields', () => {
+      const state = reducer(initialState, clearReviewFields());
+
+      const { reviewField: { score, description } } = state;
+      expect(score).toEqual('');
+      expect(description).toEqual('');
     });
   });
 });

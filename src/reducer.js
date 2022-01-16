@@ -108,6 +108,16 @@ const reducers = {
       reviewField,
     };
   },
+
+  clearReviewFields(state) {
+    return {
+      ...state,
+      reviewField: {
+        score: '',
+        description: '',
+      },
+    };
+  },
 };
 
 function defaultReducer(state) {
