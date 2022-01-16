@@ -67,7 +67,6 @@ export async function postReview({
 export async function fetchReview({ restaurantId }) {
   const url = `https://eatgo-customer-api.ahastudio.com/restaurants/${restaurantId}`;
   const response = await fetch(url);
-  console.log(response);
   const reviewData = await response.json();
   return reviewData;
 }
