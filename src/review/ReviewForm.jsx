@@ -11,26 +11,26 @@ export default function ReviewForm({ reviewField, onChange, onClick }) {
   return (
     <>
       <div>
-        <label htmlFor='review-score'>평점</label>
+        <label htmlFor="review-score">평점</label>
         <input
-          type='number'
-          id='review-score'
-          name='score'
+          type="number"
+          id="review-score"
+          name="score"
           value={score}
           onChange={handleReviewChange}
         />
       </div>
       <div>
-        <label htmlFor='review-description'>리뷰내용</label>
+        <label htmlFor="review-description">리뷰내용</label>
         <input
-          type='text'
-          id='review-description'
-          name='description'
+          type="text"
+          id="review-description"
+          name="description"
           value={description}
           onChange={handleReviewChange}
         />
       </div>
-      <button type='button' onClick={onClick}>
+      <button type="button" onClick={onClick}>
         리뷰 남기기
       </button>
     </>

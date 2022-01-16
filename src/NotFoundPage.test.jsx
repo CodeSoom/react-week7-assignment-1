@@ -1,9 +1,9 @@
-import { render } from "@testing-library/react";
+import { render } from '@testing-library/react';
 
-import NotFoundPage from "./NotFoundPage";
+import NotFoundPage from './NotFoundPage';
 
-test("NotFoundPage", () => {
+test('NotFoundPage', () => {
   const { container } = render(<NotFoundPage />);
 
-  expect(container).toHaveTextContent("404 Not Found");
+  expect(container).toHaveTextContent('404 Not Found');
 });

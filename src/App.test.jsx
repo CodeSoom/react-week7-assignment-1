@@ -1,6 +1,4 @@
-import {
-  MemoryRouter,
-} from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import { render } from '@testing-library/react';
 
@@ -19,12 +17,18 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      regions: [
-        { id: 1, name: '서울' },
-      ],
+      regions: [{ id: 1, name: '서울' }],
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      loginField: {
+        email: '',
+        password: '',
+      },
+      reviewField: {
+        score: '',
+        description: '',
+      },
     }));
   });
 

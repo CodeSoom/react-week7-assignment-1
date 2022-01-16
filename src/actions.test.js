@@ -1,6 +1,6 @@
-import thunk from "redux-thunk";
+import thunk from 'redux-thunk';
 
-import configureStore from "redux-mock-store";
+import configureStore from 'redux-mock-store';
 
 import {
   loadInitialData,
@@ -11,24 +11,23 @@ import {
   setRestaurants,
   setRestaurant,
   sendReview,
-  LoadReviews,
-} from "./actions";
+} from './actions';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-//fetch같은 코어 노드모듈을 명시적으로 수동모의 해주어야 한다
-jest.mock("./services/api");
+// fetch같은 코어 노드모듈을 명시적으로 수동모의 해주어야 한다
+jest.mock('./services/api');
 
-describe("actions", () => {
+describe('actions', () => {
   let store;
 
-  describe("loadInitialData", () => {
+  describe('loadInitialData', () => {
     beforeEach(() => {
       store = mockStore({});
     });
 
-    it("runs setRegions and setCategories", async () => {
+    it('runs setRegions and setCategories', async () => {
       await store.dispatch(loadInitialData());
 
       const actions = store.getActions();
@@ -38,16 +37,16 @@ describe("actions", () => {
     });
   });
 
-  describe("loadRestaurants", () => {
-    context("with selectedRegion and selectedCategory", () => {
+  describe('loadRestaurants', () => {
+    context('with selectedRegion and selectedCategory', () => {
       beforeEach(() => {
         store = mockStore({
-          selectedRegion: { id: 1, name: "서울" },
-          selectedCategory: { id: 1, name: "한식" },
+          selectedRegion: { id: 1, name: '서울' },
+          selectedCategory: { id: 1, name: '한식' },
         });
       });
 
-      it("runs setRestaurants", async () => {
+      it('runs setRestaurants', async () => {
         await store.dispatch(loadRestaurants());
 
         const actions = store.getActions();
@@ -55,10 +54,10 @@ describe("actions", () => {
       });
     });
 
-    context("without selectedRegion", () => {
+    context('without selectedRegion', () => {
       beforeEach(() => {
         store = mockStore({
-          selectedCategory: { id: 1, name: "한식" },
+          selectedCategory: { id: 1, name: '한식' },
         });
       });
 
@@ -71,10 +70,10 @@ describe("actions", () => {
       });
     });
 
-    context("without selectedCategory", () => {
+    context('without selectedCategory', () => {
       beforeEach(() => {
         store = mockStore({
-          selectedRegion: { id: 1, name: "서울" },
+          selectedRegion: { id: 1, name: '서울' },
         });
       });
 
@@ -88,12 +87,12 @@ describe("actions", () => {
     });
   });
 
-  describe("loadRestaurant", () => {
+  describe('loadRestaurant', () => {
     beforeEach(() => {
       store = mockStore({});
     });
 
-    it("dispatchs setRestaurant", async () => {
+    it('dispatchs setRestaurant', async () => {
       await store.dispatch(loadRestaurant({ restaurantId: 1 }));
 
       const actions = store.getActions();
@@ -103,26 +102,22 @@ describe("actions", () => {
     });
   });
 
-  describe("sendReview", () => {
-    const score = 5;
-    const description = "분위기 좋아요";
-
+  describe('sendReview', () => {
     beforeEach(() => {
       store = mockStore({
         reviewField: {
-          score,
-          description,
+          score: 5,
+          description: '분위기가 좋아요',
         },
       });
     });
 
-    it("dispatchs setReview", async () => {
-      await store.dispatch(sendReview());
+    it('dispatchs setReview', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
 
       const actions = store.getActions();
-
-      //왜 []로 해주는걸까? mocking 이기 때문에?
-      expect(actions[0]).toEqual(LoadReviews([]));
+      // actions[0]은 null로 만들어주는 action이니깐
+      expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
 });

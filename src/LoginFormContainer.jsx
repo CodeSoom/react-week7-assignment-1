@@ -1,11 +1,11 @@
-import { useSelector, useDispatch } from "react-redux";
-import { changeLoginField, requestLogin, requestLogout } from "./actions";
-import LoginForm from "./LoginForm";
-import { get } from "./utils";
+import { useSelector, useDispatch } from 'react-redux';
+import { changeLoginField, requestLogin, requestLogout } from './actions';
+import LoginForm from './LoginForm';
+import { get } from './utils';
 
 export default function LoginFormContainer() {
-  const { email, password } = useSelector(get("loginField"));
-  const accessToken = useSelector(get("accessToken"));
+  const { email, password } = useSelector(get('loginField'));
+  const accessToken = useSelector(get('accessToken'));
 
   const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ export default function LoginFormContainer() {
           onSubmit={handleLogin}
         />
       ) : (
-        <button type='button' onClick={handleLogout}>
+        <button type="button" onClick={handleLogout}>
           Log out
         </button>
       )}

@@ -5,46 +5,46 @@ import {
   fetchRestaurant,
   postLogin,
   postReview,
-} from "./services/api";
+} from './services/api';
 
 export function setRegions(regions) {
   return {
-    type: "setRegions",
+    type: 'setRegions',
     payload: { regions },
   };
 }
 
 export function setCategories(categories) {
   return {
-    type: "setCategories",
+    type: 'setCategories',
     payload: { categories },
   };
 }
 
 export function setRestaurants(restaurants) {
   return {
-    type: "setRestaurants",
+    type: 'setRestaurants',
     payload: { restaurants },
   };
 }
 
 export function setRestaurant(restaurant) {
   return {
-    type: "setRestaurant",
+    type: 'setRestaurant',
     payload: { restaurant },
   };
 }
 
 export function selectRegion(regionId) {
   return {
-    type: "selectRegion",
+    type: 'selectRegion',
     payload: { regionId },
   };
 }
 
 export function selectCategory(categoryId) {
   return {
-    type: "selectCategory",
+    type: 'selectCategory',
     payload: { categoryId },
   };
 }
@@ -87,8 +87,15 @@ export function loadRestaurant({ restaurantId }) {
 
 export function changeLoginField({ name, value }) {
   return {
-    type: "changeLoginField",
+    type: 'changeLoginField',
     payload: { name, value },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
   };
 }
 
@@ -104,22 +111,14 @@ export function requestLogin() {
 
 export function requestLogout() {
   return {
-    type: "requestLogout",
+    type: 'requestLogout',
   };
 }
-
-export function setAccessToken(accessToken) {
-  return {
-    type: "setAccessToken",
-    payload: { accessToken },
-  };
-}
-
-//// 리뷰
+/// / 리뷰
 
 export function changeReviewField({ name, value }) {
   return {
-    type: "changeReviewField",
+    type: 'changeReviewField',
     payload: { name, value },
   };
 }
@@ -130,12 +129,13 @@ export function sendReview({ restaurantId }) {
       reviewField: { score, description },
       accessToken,
     } = getState();
-    try {
-      await postReview({ accessToken, restaurantId, score, description });
-      dispatch(loadRestaurant({ restaurantId }));
-    } catch (err) {
-      //응답이 돌아오지 않으면 에러
-      console.error(err);
-    }
+
+    await postReview({
+      accessToken,
+      restaurantId,
+      score,
+      description,
+    });
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }

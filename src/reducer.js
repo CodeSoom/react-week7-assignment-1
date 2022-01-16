@@ -1,7 +1,7 @@
-import { equal } from "./utils";
+import { equal } from './utils';
 
 const initialState = {
-  accessToken: "",
+  accessToken: '',
   regions: [],
   categories: [],
   restaurants: [],
@@ -9,12 +9,12 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   loginField: {
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   },
   reviewField: {
-    score: "",
-    description: "",
+    score: '',
+    description: '',
   },
 };
 
@@ -51,7 +51,7 @@ const reducers = {
     const { regions } = state;
     return {
       ...state,
-      selectedRegion: regions.find(equal("id", regionId)),
+      selectedRegion: regions.find(equal('id', regionId)),
     };
   },
 
@@ -59,7 +59,7 @@ const reducers = {
     const { categories } = state;
     return {
       ...state,
-      selectedCategory: categories.find(equal("id", categoryId)),
+      selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
 
@@ -93,7 +93,7 @@ const reducers = {
   requestLogout(state) {
     return {
       ...state,
-      accessToken: "",
+      accessToken: '',
     };
   },
 };
