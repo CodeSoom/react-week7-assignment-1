@@ -16,6 +16,8 @@ describe('LogoutForm', () => {
       />,
     );
 
+    expect(getByRole('button', { name: 'Log out' })).not.toBeNull();
+
     fireEvent.click(getByRole('button', { name: 'Log out' }));
 
     expect(handleClick).toBeCalledTimes(1);

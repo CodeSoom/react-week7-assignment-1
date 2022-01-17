@@ -33,6 +33,8 @@ describe('App', () => {
       restaurants: [],
       restaurant: RESTAURANT,
     }));
+
+    loadItem.mockImplementation(() => given.loadItem);
   });
 
   function renderApp({ path }) {
@@ -95,9 +97,7 @@ describe('App', () => {
   });
 
   context('when accessToken is in localStorage', () => {
-    beforeEach(() => {
-      loadItem.mockImplementation(() => 'ACCESS_TOKEN');
-    });
+    given('loadItem', () => 'ACCESS_TOKEN');
 
     it('dispatchs setAccessToken', () => {
       renderApp({ path: '/' });
@@ -107,9 +107,7 @@ describe('App', () => {
   });
 
   context('when accessToken is not in localStorage', () => {
-    beforeEach(() => {
-      loadItem.mockImplementation(() => '');
-    });
+    given('loadItem', () => '');
 
     it("doesn't dispatch setAccessToken", () => {
       renderApp({ path: '/' });

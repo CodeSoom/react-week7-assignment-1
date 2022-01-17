@@ -127,6 +127,16 @@ describe('actions', () => {
     });
   });
 
+  describe('loadReviews', () => {
+    it('dispatchs setReviews', async () => {
+      await store.dispatch(loadReviews({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[1]).toEqual(setReviews({}));
+    });
+  });
+
   describe('sendReview', () => {
     beforeEach(() => {
       store = mockStore({
@@ -142,19 +152,9 @@ describe('actions', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(loadReviews({}));
-        expect(actions[1]).toEqual(clearReviewFields({}));
+        expect(actions[0]).toBe(loadReviews());
+        expect(actions[1]).toBe(clearReviewFields());
       });
-    });
-  });
-
-  describe('loadReviews', () => {
-    it('dispatchs setReviews', async () => {
-      await store.dispatch(loadReviews({ restaurantId: 1 }));
-
-      const actions = store.getActions();
-
-      expect(actions[1]).toEqual(setReviews({}));
     });
   });
 });

@@ -43,7 +43,7 @@ describe('LoginFormContainer', () => {
   context('when logged out', () => {
     given('accessToken', () => '');
 
-    it('renders login components', () => {
+    it('renders login title and button', () => {
       const { getByText, getByRole } = render(<LoginFormContainer />);
 
       expect(getByText('E-mail')).not.toBeNull();
