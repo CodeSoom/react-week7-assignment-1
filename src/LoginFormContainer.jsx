@@ -28,20 +28,18 @@ export default function LoginFormContainer() {
     dispatch(logout());
   }
 
+  if (accessToken) {
+    return (
+      <LogoutForm
+        onClick={handleClickLogout}
+      />
+    );
+  }
+
   return (
-    <>
-      {accessToken
-        ? (
-          <LogoutForm
-            onClick={handleClickLogout}
-          />
-        )
-        : (
-          <LoginForm
-            onSubmit={handleSubmit}
-            onChange={handleChange}
-          />
-        )}
-    </>
+    <LoginForm
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+    />
   );
 }
