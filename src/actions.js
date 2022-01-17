@@ -6,6 +6,7 @@ import {
   postLogin,
   postReview,
 } from './services/api';
+import { setItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -105,18 +106,19 @@ export function requestLogin() {
       loginField: { email, password },
     } = getState();
     const accessToken = await postLogin({ email, password });
-    // localStorage.setItem('accessToken', accessToken)
+    setItem('accessToken', accessToken);
     dispatch(setAccessToken(accessToken));
   };
 }
 
 export function requestLogout() {
+  localStorage.removeItem('accessToken');
   return {
     type: 'requestLogout',
   };
 }
-/// / 리뷰
 
+// 리뷰
 export function changeReviewField({ name, value }) {
   return {
     type: 'changeReviewField',

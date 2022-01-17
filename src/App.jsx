@@ -9,8 +9,15 @@ import LoginPage from './LoginPage';
 
 import { useDispatch } from 'react-redux';
 import { setAccessToken } from './actions';
+import { getItem } from './services/storage';
 
 export default function App() {
+  const dispatch = useDispatch();
+  const accessToken = getItem('accessToken');
+  if (accessToken) {
+    dispatch(setAccessToken(accessToken));
+  }
+
   return (
     <div>
       <header>

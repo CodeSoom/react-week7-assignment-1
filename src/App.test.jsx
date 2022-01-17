@@ -1,15 +1,15 @@
 import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
-
 import App from './App';
 
 import { setAccessToken } from './actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { getItem } from './services/storage';
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
-
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
@@ -81,24 +81,35 @@ describe('App', () => {
 
   context('with accessToken', () => {
     const accessToken = 'accessToken';
+
     beforeEach(() => {
-      jest
-        .spyOn(globalThis.localStorage, 'getItem')
-        .mockImplementation(() => accessToken);
+      getItem.mockImplementation(() => accessToken);
     });
 
     it('dispatch setAccessToken action', () => {
+      renderApp({ path: '/' });
+
       expect(dispatch).toBeCalledWith(setAccessToken(accessToken));
     });
   });
 
-  // context('without accessToken', () => {
-  //   it('not dispatch setAccessToken action');
-  // });
+  context('without accessToken', () => {
+    beforeEach(() => {
+      getItem.mockImplementation(() => null);
+    });
+    it('not dispatch setAccessToken action', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
 });
 
-// const dispatch = useDispatch;
-// const accessToken = localStorage.getItem('accessToken');
-// if (accessToken) {
-//   dispatch(setAccessToken);
-// }
+// it('dispatch setAccessToken action', () => {
+//   setItem(accessToken, accessToken);
+//   renderApp({ path: '/' });
+
+//   expect(getItem(accessToken)).toBe(accessToken);
+
+//   expect(dispatch).toBeCalledWith(setAccessToken(accessToken));
+// });
