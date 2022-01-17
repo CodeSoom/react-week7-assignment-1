@@ -11,8 +11,10 @@ import { changeLoginField } from './actions';
 
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
+
   beforeEach(() => {
     jest.clearAllMocks();
+
     useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) => selector({
       accessToken: given.accessToken,

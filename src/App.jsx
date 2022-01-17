@@ -1,5 +1,6 @@
 import { Switch, Route, Link } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import RestaurantsPage from './RestaurantsPage';
@@ -7,7 +8,6 @@ import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
 import LoginPage from './LoginPage';
 
-import { useDispatch } from 'react-redux';
 import { setAccessToken } from './actions';
 import { getItem } from './services/storage';
 
