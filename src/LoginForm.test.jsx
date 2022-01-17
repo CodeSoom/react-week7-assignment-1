@@ -1,12 +1,12 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render } from '@testing-library/react';
 
-import LoginForm from "./LoginForm";
+import LoginForm from './LoginForm';
 /*
 1. renders input controls and listens change
 2. renders login button
 */
 
-describe("LoginForm", () => {
+describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
 
@@ -20,31 +20,33 @@ describe("LoginForm", () => {
         loginField={{ email, password }}
         onChange={handleChange}
         onSubmit={handleSubmit}
-      />
+      />,
     );
   }
-  it("renders input controls and listens changeEvent", () => {
-    const email = "test@naver.com";
-    const password = "1234";
+  it('renders input controls and listens changeEvent', () => {
+    const email = 'test@naver.com';
+    const password = '1234';
     const { getByLabelText } = renderLoginForm({ email, password });
     const controls = [
       // 각각의 input의 속성을 정리해둔 변수
       {
-        label: "Email",
-        name: "email",
+        label: 'Email',
+        name: 'email',
         origin: email,
-        value: "test2@daum.net",
+        value: 'test2@daum.net',
       },
       {
-        label: "Password",
-        name: "password",
+        label: 'Password',
+        name: 'password',
         origin: password,
-        value: "5555",
+        value: '5555',
       },
     ];
 
     controls.forEach((control) => {
-      const { label, origin, name, value } = control;
+      const {
+        label, origin, name, value,
+      } = control;
       const input = getByLabelText(label);
 
       expect(input.value).toBe(origin);
@@ -61,7 +63,7 @@ describe("LoginForm", () => {
   it("renders 'Login' button and listen submitEvent", () => {
     const { getByText } = renderLoginForm();
 
-    fireEvent.click(getByText("Log In"));
+    fireEvent.click(getByText('Log In'));
 
     expect(handleSubmit).toBeCalled();
   });
