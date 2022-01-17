@@ -1,6 +1,6 @@
-import thunk from 'redux-thunk';
+import thunk from "redux-thunk";
 
-import configureStore from 'redux-mock-store';
+import configureStore from "redux-mock-store";
 
 import {
   loadInitialData,
@@ -11,23 +11,25 @@ import {
   setRestaurants,
   setRestaurant,
   sendReview,
-} from './actions';
+  requestLogin,
+  setAccessToken,
+} from "./actions";
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 // fetch같은 코어 노드모듈을 명시적으로 수동모의 해주어야 한다
-jest.mock('./services/api');
+jest.mock("./services/api");
 
-describe('actions', () => {
+describe("actions", () => {
   let store;
 
-  describe('loadInitialData', () => {
+  describe("loadInitialData", () => {
     beforeEach(() => {
       store = mockStore({});
     });
 
-    it('runs setRegions and setCategories', async () => {
+    it("runs setRegions and setCategories", async () => {
       await store.dispatch(loadInitialData());
 
       const actions = store.getActions();
@@ -37,16 +39,16 @@ describe('actions', () => {
     });
   });
 
-  describe('loadRestaurants', () => {
-    context('with selectedRegion and selectedCategory', () => {
+  describe("loadRestaurants", () => {
+    context("with selectedRegion and selectedCategory", () => {
       beforeEach(() => {
         store = mockStore({
-          selectedRegion: { id: 1, name: '서울' },
-          selectedCategory: { id: 1, name: '한식' },
+          selectedRegion: { id: 1, name: "서울" },
+          selectedCategory: { id: 1, name: "한식" },
         });
       });
 
-      it('runs setRestaurants', async () => {
+      it("runs setRestaurants", async () => {
         await store.dispatch(loadRestaurants());
 
         const actions = store.getActions();
@@ -54,10 +56,10 @@ describe('actions', () => {
       });
     });
 
-    context('without selectedRegion', () => {
+    context("without selectedRegion", () => {
       beforeEach(() => {
         store = mockStore({
-          selectedCategory: { id: 1, name: '한식' },
+          selectedCategory: { id: 1, name: "한식" },
         });
       });
 
@@ -70,10 +72,10 @@ describe('actions', () => {
       });
     });
 
-    context('without selectedCategory', () => {
+    context("without selectedCategory", () => {
       beforeEach(() => {
         store = mockStore({
-          selectedRegion: { id: 1, name: '서울' },
+          selectedRegion: { id: 1, name: "서울" },
         });
       });
 
@@ -87,12 +89,12 @@ describe('actions', () => {
     });
   });
 
-  describe('loadRestaurant', () => {
+  describe("loadRestaurant", () => {
     beforeEach(() => {
       store = mockStore({});
     });
 
-    it('dispatchs setRestaurant', async () => {
+    it("dispatchs setRestaurant", async () => {
       await store.dispatch(loadRestaurant({ restaurantId: 1 }));
 
       const actions = store.getActions();
@@ -102,17 +104,36 @@ describe('actions', () => {
     });
   });
 
-  describe('sendReview', () => {
+  describe("requestLogin", () => {
     beforeEach(() => {
       store = mockStore({
-        reviewField: {
-          score: 5,
-          description: '분위기가 좋아요',
+        loginField: {
+          email: "test@test",
+          password: "1234",
         },
       });
     });
 
-    it('dispatchs setReview', async () => {
+    it("dispatch setAccessToken", async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken({}));
+    });
+  });
+
+  describe("sendReview", () => {
+    beforeEach(() => {
+      store = mockStore({
+        reviewField: {
+          score: 5,
+          description: "분위기가 좋아요",
+        },
+      });
+    });
+
+    it("dispatchs setReview", async () => {
       await store.dispatch(sendReview({ restaurantId: 1 }));
 
       const actions = store.getActions();
