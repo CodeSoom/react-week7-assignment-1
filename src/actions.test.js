@@ -1,3 +1,9 @@
+// ToDo changeReviewField 테스트 만들기
+// ToDo sendReview 테스트 만들기
+// ToDo localStorage에 accessToken 저장 및 불러오는 테스트
+// ToDo logout 테스트 만들기
+// ToDo setReviews 테스트 만들기
+
 import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
@@ -16,6 +22,7 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/storage');
 
 describe('actions', () => {
   let store;

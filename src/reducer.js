@@ -1,3 +1,4 @@
+// ToDo 비슷한 기능끼리 정렬해서 정리하기
 import { equal } from './utils';
 
 const initialState = {
@@ -5,8 +6,18 @@ const initialState = {
   categories: [],
   restaurants: [],
   restaurant: null,
+  accessToken: '',
   selectedRegion: null,
   selectedCategory: null,
+  inputField: {
+    email: '',
+    password: '',
+  },
+  reviewField: {
+    score: '',
+    description: '',
+  },
+  reviews: [],
 };
 
 const reducers = {
@@ -38,6 +49,27 @@ const reducers = {
     };
   },
 
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
+    };
+  },
+
+  logout(state) {
+    return {
+      ...state,
+      accessToken: '',
+    };
+  },
+
+  setReviews(state, { payload: { reviews } }) {
+    return {
+      ...state,
+      reviews,
+    };
+  },
+
   selectRegion(state, { payload: { regionId } }) {
     const { regions } = state;
     return {
@@ -51,6 +83,26 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  changeInputField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      inputField: {
+        ...state.inputField,
+        [name]: value,
+      },
+    };
+  },
+
+  changeReviewField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewField: {
+        ...state.reviewField,
+        [name]: value,
+      },
     };
   },
 };

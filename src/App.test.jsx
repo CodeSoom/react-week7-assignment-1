@@ -1,3 +1,4 @@
+// ToDo localStorage setItem, getItem 모킹
 import {
   MemoryRouter,
 } from 'react-router-dom';
@@ -6,9 +7,12 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { loadItems } from './services/storage';
+
 import App from './App';
 
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -25,6 +29,12 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      inputField: {
+        email: '',
+        password: '',
+      },
+      accessToken: 'ACCESS_TOKEN',
+      reviews: [],
     }));
   });
 
@@ -36,43 +46,68 @@ describe('App', () => {
     );
   }
 
-  context('with path /', () => {
-    it('renders the home page', () => {
-      const { container } = renderApp({ path: '/' });
+  context('when logged in', () => {
+    const accessToken = 'ACCESS_TOKEN';
 
-      expect(container).toHaveTextContent('Home');
+    beforeEach(() => {
+      loadItems.mockImplementation(() => accessToken);
+    });
+
+    it('calls dispatch with "setAccessToken" action.', () => {
+      renderApp({ path: '/login' });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: { accessToken },
+      });
     });
   });
 
-  context('with path /about', () => {
-    it('renders the about page', () => {
-      const { container } = renderApp({ path: '/about' });
+  context('when logged out', () => {
+    beforeEach(() => {
+      loadItems.mockImplementation(() => null);
+    });
 
-      expect(container).toHaveTextContent('About 페이지');
+    it("dosen't call dispatch with 'setAccessToken' action.", () => {
+      renderApp({ path: '/login' });
+
+      expect(dispatch).not.toBeCalled();
     });
   });
 
-  context('with path /restaurants', () => {
-    it('renders the restaurants page', () => {
-      const { container } = renderApp({ path: '/restaurants' });
+  it('renders the home page with path "/"', () => {
+    const { container } = renderApp({ path: '/' });
 
-      expect(container).toHaveTextContent('서울');
-    });
+    expect(container).toHaveTextContent('Home');
   });
 
-  context('with path /restaurants/:id', () => {
-    it('renders the restaurant page', () => {
-      const { container } = renderApp({ path: '/restaurants/1' });
+  it('renders the about page with path "/about"', () => {
+    const { container } = renderApp({ path: '/about' });
 
-      expect(container).toHaveTextContent('마녀주방');
-    });
+    expect(container).toHaveTextContent('About 페이지');
   });
 
-  context('with invalid path', () => {
-    it('renders the not found page', () => {
-      const { container } = renderApp({ path: '/xxx' });
+  it('renders the restaurants page with path "/restaurants"', () => {
+    const { container } = renderApp({ path: '/restaurants' });
 
-      expect(container).toHaveTextContent('Not Found');
-    });
+    expect(container).toHaveTextContent('서울');
+  });
+
+  it('renders the restaurant page with path "/restaurants/:id"', () => {
+    const { container } = renderApp({ path: '/restaurants/1' });
+
+    expect(container).toHaveTextContent('마녀주방');
+  });
+
+  it('renders the login page with path "/login"', () => {
+    const { container } = renderApp({ path: '/login' });
+
+    expect(container).toHaveTextContent('Log In');
+  });
+
+  it('renders the not found page with "invalid" path', () => {
+    const { container } = renderApp({ path: '/xxx' });
+
+    expect(container).toHaveTextContent('Not Found');
   });
 });

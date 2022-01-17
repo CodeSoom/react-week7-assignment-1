@@ -1,3 +1,4 @@
+// ToDo 비슷한 기능끼리 정렬해서 정리하기
 import reducer from './reducer';
 
 import {
@@ -5,8 +6,14 @@ import {
   setCategories,
   setRestaurants,
   setRestaurant,
+  setAccessToken,
+  setReviews,
+
   selectRegion,
   selectCategory,
+
+  changeInputField,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -16,8 +23,18 @@ describe('reducer', () => {
       categories: [],
       restaurants: [],
       restaurant: null,
+      accessToken: '',
       selectedRegion: null,
       selectedCategory: null,
+      inputField: {
+        email: '',
+        password: '',
+      },
+      reviewField: {
+        score: '',
+        description: '',
+      },
+      reviews: [],
     };
 
     it('returns initialState', () => {
@@ -90,6 +107,36 @@ describe('reducer', () => {
     });
   });
 
+  describe('setAccessToken', () => {
+    it('changes token', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const accessToken = 'TOKEN';
+
+      const state = reducer(initialState, setAccessToken(accessToken));
+
+      expect(state.accessToken).toBe('TOKEN');
+    });
+  });
+
+  describe('setReviews', () => {
+    it('changes review', () => {
+      const initialState = {
+        reviews: [],
+      };
+
+      const reviews = [
+        { score: 5, description: '짱맛!' },
+      ];
+
+      const state = reducer(initialState, setReviews(reviews));
+
+      expect(state.reviews).toHaveLength(1);
+    });
+  });
+
   describe('selectRegion', () => {
     it('changes selected region', () => {
       const initialState = {
@@ -123,6 +170,42 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('changeInputField', () => {
+    it('sets input value to name of input', () => {
+      const initialState = {
+        inputField: {
+          email: 'test@mail',
+          password: '111',
+        },
+      };
+
+      const state = reducer(initialState, changeInputField({
+        name: 'email',
+        value: 'test111@mail',
+      }));
+
+      expect(state.inputField.email).toBe('test111@mail');
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('sets input value to name of input', () => {
+      const initialState = {
+        reviewField: {
+          score: '1',
+          description: '노맛',
+        },
+      };
+
+      const state = reducer(initialState, changeReviewField({
+        name: 'score',
+        value: '5',
+      }));
+
+      expect(state.reviewField.score).toBe('5');
     });
   });
 });

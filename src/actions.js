@@ -1,9 +1,14 @@
+// ToDo 비슷한 기능끼리 정렬해서 정리하기
 import {
   fetchRegions,
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
+  postReview,
 } from './services/api';
+
+import { saveItems } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -33,6 +38,26 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}
+
+export function setReviews(reviews) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
+
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
@@ -44,6 +69,20 @@ export function selectCategory(categoryId) {
   return {
     type: 'selectCategory',
     payload: { categoryId },
+  };
+}
+
+export function changeInputField({ name, value }) {
+  return {
+    type: 'changeInputField',
+    payload: { name, value },
+  };
+}
+
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: { name, value },
   };
 }
 
@@ -72,6 +111,7 @@ export function loadRestaurants() {
       regionName: region.name,
       categoryId: category.id,
     });
+
     dispatch(setRestaurants(restaurants));
   };
 }
@@ -83,5 +123,42 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+
+    const { reviews } = restaurant;
+
+    dispatch(setReviews(reviews));
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const {
+      inputField: { email, password },
+    } = getState();
+
+    const accessToken = await postLogin({ email, password });
+
+    saveItems('accessToken', accessToken);
+
+    dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function sendReview() {
+  return async (dispatch, getState) => {
+    const {
+      reviewField:
+      { score, description },
+      accessToken,
+      restaurant: { id },
+    } = getState();
+
+    const restaurantId = id;
+
+    await postReview({
+      restaurantId, accessToken, score, description,
+    });
+
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }

@@ -6,6 +6,8 @@ export default function RestaurantPage({ params }) {
   const { id } = params || useParams();
 
   return (
-    <RestaurantContainer restaurantId={id} />
+    <>
+      <RestaurantContainer restaurantId={id} />
+    </>
   );
 }
