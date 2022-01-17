@@ -7,6 +7,9 @@ import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
 import LoginPage from './LoginPage';
 
+import { useDispatch } from 'react-redux';
+import { setAccessToken } from './actions';
+
 export default function App() {
   return (
     <div>
