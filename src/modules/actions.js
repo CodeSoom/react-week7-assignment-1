@@ -35,6 +35,14 @@ export function setRestaurant(restaurant) {
     payload: { restaurant },
   };
 }
+export function setReviews(reviews) {
+  return {
+    type: 'setReviews',
+    payload: {
+      reviews,
+    },
+  };
+}
 
 export function selectRegion(regionId) {
   return {
@@ -114,6 +122,12 @@ export function changeReviewField({ name, value }) {
   };
 }
 
+export function clearReviewsFields() {
+  return {
+    type: 'clearReviewsFields',
+  };
+}
+
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginField: { email, password } } = getState();
@@ -134,14 +148,22 @@ export function logout() {
   };
 }
 
+export function loadReviews({ restaurantId }) {
+  return async (dispatch) => {
+    const restaurant = await fetchRestaurant({ restaurantId });
+
+    dispatch(setReviews(restaurant.reviews));
+  };
+}
+
 export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const { reviewField, accessToken } = getState();
 
     await postReview({ reviewField, accessToken, restaurantId });
 
-    const restaurant = await fetchRestaurant({ restaurantId });
+    dispatch(loadReviews({ restaurantId }));
 
-    dispatch(setRestaurant(restaurant));
+    dispatch(clearReviewsFields());
   };
 }
