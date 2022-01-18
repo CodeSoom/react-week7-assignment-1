@@ -5,7 +5,7 @@ import TextField from './TextField';
 describe('TextField', () => {
   const onChange = jest.fn();
 
-  const rendersTextField = () => (render((
+  const rendersTextField = () => render((
     <TextField
       id="id"
       label="label"
@@ -13,7 +13,7 @@ describe('TextField', () => {
       value="value"
       onChange={onChange}
     />
-  )));
+  ));
 
   it('renders label and input', () => {
     const { getByRole } = rendersTextField();
