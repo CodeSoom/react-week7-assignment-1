@@ -33,6 +33,7 @@ describe('LoginContainer', () => {
       const { getByRole } = render(<LoginContainer />);
 
       fireEvent.click(getByRole('button', { name: 'Log In' }));
+
       expect(dispatch).toBeCalled();
     });
 
