@@ -10,6 +10,7 @@ describe('TextField', () => {
       id="id"
       label="label"
       name="name"
+      value='value'
       onChange={onChange}
     />
   )));
@@ -18,6 +19,7 @@ describe('TextField', () => {
     const { getByRole } = rendersTextField();
 
     expect(getByRole('textbox', { name: 'label' })).not.toBeNull();
+
   });
 
   it('input calls onChage', () => {

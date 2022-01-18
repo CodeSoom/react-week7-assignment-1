@@ -3,11 +3,11 @@ export default function TextField({
   label,
   type = 'text',
   name,
+  value,
   onChange,
 }) {
-  function handleChange(event) {
-    const { target: { value } } = event;
-    onChange({ name, value });
+  function handleChange({ target }) {
+    onChange({ name, value: target.value });
   }
 
   return (
@@ -19,6 +19,7 @@ export default function TextField({
         type={type}
         id={id}
         name={name}
+        value={value}
         onChange={handleChange}
       />
     </div>
