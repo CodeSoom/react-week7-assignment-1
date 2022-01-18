@@ -2,26 +2,35 @@ import { render } from '@testing-library/react';
 import Reviews from './Reviews';
 
 describe('Reviews', () => {
-  given('reviews', () => ([
-    {
-      id: 10,
-      name: 'tester',
-      score: 2,
-      description: '맛좋아!',
-    },
-  ]));
+  const rendersReviews = () => render((
+    <Reviews
+      reviews={given.reviews}
+    />
+  ));
+  context('with reviews', () => {
+    given('reviews', () => ([
+      {
+        id: 10,
+        name: 'tester',
+        score: 2,
+        description: '맛좋아!',
+      },
+    ]));
 
-  it('renders reviews', () => {
-    const { container } = render((
-      <Reviews
-        reviews={given.reviews}
-      />
-    ));
+    it('renders reviews', () => {
+      const { container } = rendersReviews();
+      expect(container).toHaveTextContent('리뷰');
 
-    expect(container).toHaveTextContent('리뷰');
+      given.reviews.forEach((review) => {
+        expect(review).not.toBeNull();
+      });
+    });
+  });
 
-    given.reviews.forEach((review) => {
-      expect(review).not.toBeNull();
+  context('without reviews', () => {
+    given('reviews', () => (null));
+    it('renders nothing', () => {
+      rendersReviews();
     });
   });
 });
