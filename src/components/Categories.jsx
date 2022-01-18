@@ -10,11 +10,11 @@ export default function Categories(
             onClick={() => onClick(category.id)}
           >
             {category.name}
-            {selectedCategory ? (
+            {selectedCategory && (
               <>
-                {category.id === selectedCategory.id ? '(V)' : null}
+                {category.id === selectedCategory.id && '(V)'}
               </>
-            ) : null}
+            )}
           </button>
         </li>
       ))}
