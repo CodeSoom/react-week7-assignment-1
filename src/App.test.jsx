@@ -6,9 +6,16 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { loadItem } from './services/storage';
+
 import App from './App';
 
+import RESTAURANT from '../fixtures/restaurant';
+
+import { setAccessToken } from './actions';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -24,8 +31,10 @@ describe('App', () => {
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
+      restaurant: RESTAURANT,
     }));
+
+    loadItem.mockImplementation(() => given.loadItem);
   });
 
   function renderApp({ path }) {
@@ -64,7 +73,18 @@ describe('App', () => {
     it('renders the restaurant page', () => {
       const { container } = renderApp({ path: '/restaurants/1' });
 
-      expect(container).toHaveTextContent('마녀주방');
+      expect(container).toHaveTextContent('마법사주방');
+      expect(container).toHaveTextContent('떡볶이');
+      expect(container).toHaveTextContent('냥냥이');
+      expect(container).toHaveTextContent('가지말자');
+    });
+  });
+
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
     });
   });
 
@@ -73,6 +93,26 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('when accessToken is in localStorage', () => {
+    given('loadItem', () => 'ACCESS_TOKEN');
+
+    it('dispatchs setAccessToken', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith(setAccessToken('ACCESS_TOKEN'));
+    });
+  });
+
+  context('when accessToken is not in localStorage', () => {
+    given('loadItem', () => '');
+
+    it("doesn't dispatch setAccessToken", () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
     });
   });
 });
