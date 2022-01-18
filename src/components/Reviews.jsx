@@ -1,7 +1,9 @@
-import { reviewsTo10 } from '../utils';
-
 export default function Reviews({ reviews }) {
-  const sortedReviews = reviewsTo10(reviews);
+  if (!reviews || !reviews.length) {
+    return null;
+  }
+
+  const sortedReviews = [...[...reviews].sort((a, b) => b.id - a.id)].slice(0, 10);
 
   return (
     <>
@@ -11,8 +13,10 @@ export default function Reviews({ reviews }) {
           id, name, score, description,
         }) => (
           <li key={id}>
-            {name}<br />
-            {score}<br />
+            {name}
+            <br />
+            {score}
+            <br />
             {description}
           </li>
         ))}
