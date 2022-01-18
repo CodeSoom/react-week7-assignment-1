@@ -5,13 +5,17 @@ describe('ReviewForms', () => {
   const onChange = jest.fn();
   const onSubmit = jest.fn();
 
-  function renderReviewForms() {
-    return render(
+  function renderReviewForms({ score, description } = {}) {
+    return render((
       <ReviewForm
         onChange={onChange}
         onSubmit={onSubmit}
-      />,
-    );
+        reviewField={{
+          score,
+          description,
+        }}
+      />
+    ));
   }
 
   beforeEach(() => {
@@ -19,10 +23,20 @@ describe('ReviewForms', () => {
     onSubmit.mockClear();
   });
 
-  it('renders input  ', () => {
+  it('renders review write fields  ', () => {
     const { queryByRole } = renderReviewForms();
 
     expect(queryByRole('textbox')).not.toBeNull();
+  });
+
+  it('renders values of fields', () => {
+    const { getByLabelText } = renderReviewForms({
+      score: '3',
+      description: '맛있어요',
+    });
+
+    expect(getByLabelText('Score').value).toBe('3');
+    expect(getByLabelText('Description').value).toBe('맛있어요');
   });
 
   it.each([
@@ -31,7 +45,10 @@ describe('ReviewForms', () => {
   ])('types input, handleChange calls dispatch with changeReviewField', ({
     label, value,
   }) => {
-    const { getByLabelText } = renderReviewForms();
+    const { getByLabelText } = renderReviewForms({
+      score: '',
+      description: '',
+    });
 
     fireEvent.change(getByLabelText(label), {
       target: { value },
