@@ -1,6 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
+
 import { changeReviewField } from '../modules/actions';
 
 import RestaurantContainer from './RestaurantContainer';
@@ -12,6 +13,10 @@ describe('RestaurantContainer', () => {
   useSelector.mockImplementation((selector) => selector({
     restaurant: given.restaurant,
     accessToken: given.accessToken,
+    reviewField: {
+      score: '',
+      description: '',
+    },
   }));
 
   function renderRestaurantContainer() {
@@ -86,7 +91,7 @@ describe('RestaurantContainer', () => {
         }));
       });
 
-      it('clicks button,  calls dispatch with sendReview', () => {
+      it('renders "리뷰 남기기" button', () => {
         const { getByText } = renderRestaurantContainer();
 
         fireEvent.click(getByText('리뷰 남기기'));
