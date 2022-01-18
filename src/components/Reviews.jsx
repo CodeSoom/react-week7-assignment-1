@@ -1,15 +1,17 @@
+import { tenOfRecentReviews } from '../utils';
+
 export default function Reviews({ reviews }) {
   if (!reviews || !reviews.length) {
     return null;
   }
 
-  const sortedReviews = [...[...reviews].sort((a, b) => b.id - a.id)].slice(0, 10);
+  const tenOfSortedReviews = tenOfRecentReviews(reviews);
 
   return (
     <>
       <h2>리뷰</h2>
       <ul>
-        {sortedReviews.map(({
+        {tenOfSortedReviews.map(({
           id, name, score, description,
         }) => (
           <li key={id}>
