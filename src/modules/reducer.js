@@ -1,5 +1,9 @@
-import { equal } from './utils';
+import { equal } from '../utils';
 
+const initailReviewFields = {
+  score: '',
+  description: '',
+};
 const initialState = {
   regions: [],
   categories: [],
@@ -7,6 +11,11 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginField: {},
+  reviewField: {
+    ...initailReviewFields,
+  },
+  accessToken: '',
 };
 
 const reducers = {
@@ -37,6 +46,15 @@ const reducers = {
       restaurant,
     };
   },
+  setReviews(state, { payload: { reviews } }) {
+    return {
+      ...state,
+      restaurant: {
+        ...state.restaurant,
+        reviews,
+      },
+    };
+  },
 
   selectRegion(state, { payload: { regionId } }) {
     const { regions } = state;
@@ -51,6 +69,49 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  changeLoginField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      loginField: {
+        ...state.loginField,
+        [name]: value,
+      },
+    };
+  },
+
+  changeReviewField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewField: {
+        ...state.reviewField,
+        [name]: value,
+      },
+    };
+  },
+
+  clearReviewsFields(state) {
+    return {
+      ...state,
+      reviewField: {
+        ...initailReviewFields,
+      },
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
+    };
+  },
+
+  logout(state) {
+    return {
+      ...state,
+      accessToken: null,
     };
   },
 };

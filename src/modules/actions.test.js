@@ -10,12 +10,17 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
+  setAccessToken,
+  sendReview,
+  loadReviews,
+  setReviews,
 } from './actions';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-jest.mock('./services/api');
+jest.mock('../services/api');
 
 describe('actions', () => {
   let store;
@@ -98,6 +103,58 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginField: {
+          email: 'tester@example.com',
+          password: 'test',
+        },
+      });
+    });
+
+    it('dispatchs setAccessToken', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken({ accessToken: {} }));
+    });
+  });
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        reviewField: {
+          score: 1,
+          description: 'test',
+        },
+        accessToken: 'ACCESS_TOKEN',
+      });
+    });
+    it('dispatchs setRestaurant', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+    });
+  });
+
+  describe('loadReviews', () => {
+    beforeEach(() => {
+      store = mockStore({
+        reviewField: {
+          score: 1,
+          description: 'test',
+        },
+        accessToken: 'ACCESS_TOKEN',
+      });
+    });
+    it('dispatches setReviews', async () => {
+      await store.dispatch(loadReviews({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setReviews({}.reviews));
     });
   });
 });
