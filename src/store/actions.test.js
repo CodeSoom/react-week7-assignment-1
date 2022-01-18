@@ -10,12 +10,14 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  postLogin,
+  login,
 } from './actions';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-jest.mock('./services/api');
+jest.mock('../services/api');
 
 describe('actions', () => {
   let store;
@@ -53,6 +55,8 @@ describe('actions', () => {
       });
     });
 
+    // tester@example.com
+    // test
     context('without selectedRegion', () => {
       beforeEach(() => {
         store = mockStore({
@@ -98,6 +102,19 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+  describe('postLogin', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('dispatches login', async () => {
+      await store.dispatch(postLogin({ email: '', password: '' }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(login({ accessToken: '' }));
     });
   });
 });

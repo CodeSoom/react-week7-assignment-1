@@ -6,9 +6,10 @@ import RestaurantDetail from './RestaurantDetail';
 
 import {
   loadRestaurant,
-} from './actions';
+  postNewReview,
+} from '../../store/actions';
 
-import { get } from './utils';
+import { get } from '../../utils';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -16,6 +17,10 @@ export default function RestaurantContainer({ restaurantId }) {
   useEffect(() => {
     dispatch(loadRestaurant({ restaurantId }));
   }, []);
+
+  const handleAddReview = (review) => {
+    dispatch(postNewReview({ restaurantId, review }));
+  };
 
   const restaurant = useSelector(get('restaurant'));
 
@@ -27,7 +32,7 @@ export default function RestaurantContainer({ restaurantId }) {
 
   return (
     <>
-      <RestaurantDetail restaurant={restaurant} />
+      <RestaurantDetail restaurant={restaurant} onAddReview={handleAddReview} />
     </>
   );
 }

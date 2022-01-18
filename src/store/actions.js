@@ -3,7 +3,9 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
-} from './services/api';
+  postAccessToken,
+  postReview,
+} from '../services/api';
 
 export function setRegions(regions) {
   return {
@@ -82,6 +84,38 @@ export function loadRestaurant({ restaurantId }) {
 
     const restaurant = await fetchRestaurant({ restaurantId });
 
+    dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function login({ accessToken }) {
+  return {
+    type: 'login',
+    payload: { accessToken },
+  };
+}
+
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}
+
+export function postLogin({ email, password }) {
+  return async (dispatch) => {
+    const { accessToken } = await postAccessToken({ email, password });
+
+    dispatch(login({ accessToken }));
+  };
+}
+
+export function postNewReview({ restaurantId, review }) {
+  return async (dispatch, getState) => {
+    const { accessToken } = getState();
+
+    await postReview({ restaurantId, accessToken, review });
+
+    const restaurant = fetchRestaurant({ restaurantId });
     dispatch(setRestaurant(restaurant));
   };
 }

@@ -7,6 +7,8 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  login,
+  logout,
 } from './actions';
 
 describe('reducer', () => {
@@ -124,5 +126,25 @@ describe('reducer', () => {
         name: '한식',
       });
     });
+  });
+});
+
+describe('login', () => {
+  it('changes access token', () => {
+    const initialState = {};
+
+    const state = reducer(initialState, login({ accessToken: 'accessToken' }));
+
+    expect(state.accessToken).toBe('accessToken');
+  });
+});
+
+describe('logout', () => {
+  it('clear access token', () => {
+    const initialState = { accessToken: 'accessToken' };
+
+    const state = reducer(initialState, logout({ accessToken: 'accessToken' }));
+
+    expect(state.accessToken).toBe(null);
   });
 });

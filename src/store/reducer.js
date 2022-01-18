@@ -1,4 +1,4 @@
-import { equal } from './utils';
+import { equal } from '../utils';
 
 const initialState = {
   regions: [],
@@ -51,6 +51,20 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  login(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
+    };
+  },
+
+  logout(state) {
+    return {
+      ...state,
+      accessToken: null,
     };
   },
 };
