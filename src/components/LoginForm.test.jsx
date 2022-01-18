@@ -3,13 +3,13 @@ import { fireEvent, render } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  const onChange = jest.fn();
-  const onSubmit = jest.fn();
+  const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
   const rendersLoginForm = () => render((
     <LoginForm
-      onChange={onChange}
-      onSubmit={onSubmit}
+      onChange={handleChange}
+      onSubmit={handleSubmit}
     />));
 
   it('renders "Log in" button', () => {
@@ -23,7 +23,7 @@ describe('LoginForm', () => {
 
     fireEvent.click(getByRole('button', { name: 'Log In' }));
 
-    expect(onSubmit).toBeCalled();
+    expect(handleSubmit).toBeCalled();
   });
 
   it('email input calls onChage', () => {
@@ -35,7 +35,7 @@ describe('LoginForm', () => {
       target: { value: given.email },
     });
 
-    expect(onChange).toBeCalled();
+    expect(handleChange).toBeCalled();
   });
 
   it('password input calls onChage', () => {
@@ -47,6 +47,6 @@ describe('LoginForm', () => {
       target: { value: given.password },
     });
 
-    expect(onChange).toBeCalled();
+    expect(handleChange).toBeCalled();
   });
 });
