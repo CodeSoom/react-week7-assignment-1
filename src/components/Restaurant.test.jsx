@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 
-import RestaurantDetail from './RestaurantDetail';
+import Restaurant from './Restaurant';
 
-describe('RestaurantDetail', () => {
+describe('Restaurant', () => {
   const restaurant = {
     id: 1,
     name: '마법사주방',
@@ -11,7 +11,7 @@ describe('RestaurantDetail', () => {
 
   it('renders name and address', () => {
     const { container } = render(
-      <RestaurantDetail restaurant={restaurant} />,
+      <Restaurant restaurant={restaurant} />,
     );
 
     expect(container).toHaveTextContent('마법사주방');

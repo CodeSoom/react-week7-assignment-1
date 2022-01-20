@@ -16,12 +16,11 @@ describe('MenuItems', () => {
   });
 
   context('without menu item', () => {
-    it('renders no items message', () => {
-      [[], null, undefined].forEach((menuItems) => {
-        const { container } = render(<MenuItems menuItems={menuItems} />);
-
-        expect(container).toHaveTextContent('메뉴가 없어요');
-      });
+    it.each([
+      [[], null, undefined],
+    ])('renders no items message', (menuItems) => {
+      const { container } = render(<MenuItems menuItems={menuItems} />);
+      expect(container).toHaveTextContent('메뉴가 없어요');
     });
   });
 });

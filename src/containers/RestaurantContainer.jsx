@@ -2,13 +2,11 @@ import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import RestaurantDetail from './RestaurantDetail';
+import Restaurant from '../components/Restaurant';
 
-import {
-  loadRestaurant,
-} from './actions';
+import { loadRestaurant } from '../modules/actions';
 
-import { get } from './utils';
+import { get } from '../utils';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -27,7 +25,7 @@ export default function RestaurantContainer({ restaurantId }) {
 
   return (
     <>
-      <RestaurantDetail restaurant={restaurant} />
+      <Restaurant restaurant={restaurant} />
     </>
   );
 }
