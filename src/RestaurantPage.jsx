@@ -4,8 +4,5 @@ import RestaurantContainer from './RestaurantContainer';
 
 export default function RestaurantPage({ params }) {
   const { id } = params || useParams();
-
-  return (
-    <RestaurantContainer restaurantId={id} />
-  );
+  return <RestaurantContainer restaurantId={id} />;
 }

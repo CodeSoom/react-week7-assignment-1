@@ -7,6 +7,10 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeReviewField,
+  requestLogout,
+  changeLoginField,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +22,15 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      accessToken: '',
+      loginField: {
+        email: '',
+        password: '',
+      },
+      reviewField: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -33,9 +46,7 @@ describe('reducer', () => {
         regions: [],
       };
 
-      const regions = [
-        { id: 1, name: '서울' },
-      ];
+      const regions = [{ id: 1, name: '서울' }];
 
       const state = reducer(initialState, setRegions(regions));
 
@@ -49,9 +60,7 @@ describe('reducer', () => {
         categories: [],
       };
 
-      const categories = [
-        { id: 1, name: '한식' },
-      ];
+      const categories = [{ id: 1, name: '한식' }];
 
       const state = reducer(initialState, setCategories(categories));
 
@@ -65,9 +74,7 @@ describe('reducer', () => {
         restaurants: [],
       };
 
-      const restaurants = [
-        { id: 1, name: '마법사주방' },
-      ];
+      const restaurants = [{ id: 1, name: '마법사주방' }];
 
       const state = reducer(initialState, setRestaurants(restaurants));
 
@@ -93,9 +100,7 @@ describe('reducer', () => {
   describe('selectRegion', () => {
     it('changes selected region', () => {
       const initialState = {
-        regions: [
-          { id: 1, name: '서울' },
-        ],
+        regions: [{ id: 1, name: '서울' }],
         selectedRegion: null,
       };
 
@@ -111,9 +116,7 @@ describe('reducer', () => {
   describe('selectCategory', () => {
     it('changes selected category', () => {
       const initialState = {
-        categories: [
-          { id: 1, name: '한식' },
-        ],
+        categories: [{ id: 1, name: '한식' }],
         selectedCategory: null,
       };
 
@@ -123,6 +126,69 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('changeLoginField', () => {
+    it('changes Login Field', () => {
+      const initialState = {
+        loginField: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        changeLoginField({ name: 'email', value: 'test@test' }),
+      );
+
+      expect(state.loginField).toEqual({
+        email: 'test@test',
+        password: '',
+      });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('set accessToken in state', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, setAccessToken('accessToken'));
+
+      expect(state.accessToken).toBe('accessToken');
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('changes Review Field', () => {
+      const initialState = {
+        reviewField: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        changeReviewField({ name: 'score', value: 5 }),
+      );
+
+      expect(state.reviewField.score).toBe(5);
+    });
+  });
+
+  describe('requestLogout', () => {
+    it('logout done', () => {
+      const initialState = {
+        accessToken: 'accessToken',
+      };
+
+      const state = reducer(initialState, requestLogout());
+
+      expect(state.accessToken).toBe('');
     });
   });
 });

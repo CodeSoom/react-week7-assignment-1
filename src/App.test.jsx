@@ -1,30 +1,32 @@
-import {
-  MemoryRouter,
-} from 'react-router-dom';
-
+import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import App from './App';
 
+import { setAccessToken } from './actions';
+import { getItem } from './services/storage';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
-
   beforeEach(() => {
     dispatch.mockClear();
-
     useDispatch.mockImplementation(() => dispatch);
-
     useSelector.mockImplementation((selector) => selector({
-      regions: [
-        { id: 1, name: '서울' },
-      ],
+      regions: [{ id: 1, name: '서울' }],
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      loginField: {
+        email: '',
+        password: '',
+      },
+      reviewField: {
+        score: '',
+        description: '',
+      },
     }));
   });
 
@@ -75,4 +77,38 @@ describe('App', () => {
       expect(container).toHaveTextContent('Not Found');
     });
   });
+
+  context('with accessToken', () => {
+    const accessToken = 'accessToken';
+
+    beforeEach(() => {
+      getItem.mockImplementation(() => accessToken);
+    });
+
+    it('dispatch setAccessToken action', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith(setAccessToken(accessToken));
+    });
+  });
+
+  context('without accessToken', () => {
+    beforeEach(() => {
+      getItem.mockImplementation(() => null);
+    });
+    it('not dispatch setAccessToken action', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
 });
+
+// it('dispatch setAccessToken action', () => {
+//   setItem(accessToken, accessToken);
+//   renderApp({ path: '/' });
+
+//   expect(getItem(accessToken)).toBe(accessToken);
+
+//   expect(dispatch).toBeCalledWith(setAccessToken(accessToken));
+// });
