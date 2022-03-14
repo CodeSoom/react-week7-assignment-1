@@ -1,4 +1,5 @@
 import { equal } from './utils';
+import { LOGOUT, SET_AUTHORIZED_TOKEN, SET_LOGIN_FIELD } from './actions';
 
 const initialState = {
   regions: [],
@@ -7,6 +8,11 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginField: {
+    email: '',
+    password: '',
+  },
+  authorizedToken: '',
 };
 
 const reducers = {
@@ -51,6 +57,29 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+  [SET_LOGIN_FIELD](state, { payload: { name, value } }) {
+    const { loginField } = state;
+
+    return {
+      ...state,
+      loginField: {
+        ...loginField,
+        [name]: value,
+      },
+    };
+  },
+  [SET_AUTHORIZED_TOKEN](state, { payload: { token } }) {
+    return {
+      ...state,
+      authorizedToken: token,
+    };
+  },
+  [LOGOUT](state) {
+    return {
+      ...state,
+      authorizedToken: '',
     };
   },
 };

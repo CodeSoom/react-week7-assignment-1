@@ -1,12 +1,15 @@
 import reducer from './reducer';
 
 import {
-  setRegions,
-  setCategories,
-  setRestaurants,
-  setRestaurant,
-  selectRegion,
+  logout,
   selectCategory,
+  selectRegion,
+  setAuthorizedToken,
+  setCategories,
+  setLoginField,
+  setRegions,
+  setRestaurant,
+  setRestaurants,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +21,11 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginField: {
+        email: '',
+        password: '',
+      },
+      authorizedToken: '',
     };
 
     it('returns initialState', () => {
@@ -123,6 +131,48 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('setLoginField', () => {
+    it('changes login iuput Field', () => {
+      const initialState = {
+        loginField: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, setLoginField({ name: 'email', value: 'test' }));
+
+      expect(state.loginField).toEqual({
+        email: 'test',
+        password: '',
+      });
+    });
+  });
+
+  describe('setAuthorizedToken', () => {
+    it('change authorizedToken', () => {
+      const initialState = {
+        authorizedToken: '',
+      };
+
+      const state = reducer(initialState, setAuthorizedToken('TOKEN'));
+
+      expect(state.authorizedToken).toBe('TOKEN');
+    });
+  });
+
+  describe('logout', () => {
+    it('set authorizedToken empty', () => {
+      const initialState = {
+        authorizedToken: 'TOKEN',
+      };
+
+      const state = reducer(initialState, logout());
+
+      expect(state.authorizedToken).toBe('');
     });
   });
 });

@@ -4,12 +4,14 @@ import configureStore from 'redux-mock-store';
 
 import {
   loadInitialData,
-  setRegions,
-  setCategories,
-  loadRestaurants,
   loadRestaurant,
-  setRestaurants,
+  loadRestaurants,
+  login,
+  setAuthorizedToken,
+  setCategories,
+  setRegions,
   setRestaurant,
+  setRestaurants,
 } from './actions';
 
 const middlewares = [thunk];
@@ -98,6 +100,64 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('login', () => {
+    context('with email and password', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginField: {
+            email: 'test',
+            password: 'test',
+          },
+        });
+      });
+      it('dispatchs setAuthorizedToken', async () => {
+        await store.dispatch(login());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setAuthorizedToken('TOKEN'));
+      });
+    });
+
+    context('without email', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginField: {
+            email: '',
+            password: 'test',
+          },
+        });
+      });
+
+      it('does not run anyway action', async () => {
+        await store.dispatch(login());
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
+    });
+
+    context('without password', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginField: {
+            email: 'email',
+            password: '',
+          },
+        });
+      });
+
+      it('does not run anyway action', async () => {
+        await store.dispatch(login());
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
     });
   });
 });
