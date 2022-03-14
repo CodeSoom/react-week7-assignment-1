@@ -4,13 +4,29 @@ import {
   Link,
 } from 'react-router-dom';
 
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
+import LoginPage from './LoginPage';
+import LogoutPage from './LogoutPage';
+import { getStorage } from './util/storage';
+import { setAccessToken } from './actions';
 
 export default function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const accessToken = getStorage('accessToken');
+
+    if (accessToken) {
+      dispatch(setAccessToken(accessToken));
+    }
+  }, []);
+
   return (
     <div>
       <header>
@@ -23,6 +39,8 @@ export default function App() {
         <Route path="/about" component={AboutPage} />
         <Route exact path="/restaurants" component={RestaurantsPage} />
         <Route path="/restaurants/:id" component={RestaurantPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/logout" component={LogoutPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

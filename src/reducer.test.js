@@ -7,7 +7,10 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  handleLoginForm,
+  setAccessToken,
 } from './actions';
+import token from '../fixtures/loginToken';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -18,6 +21,7 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginForm: { id: '', pw: '' },
     };
 
     it('returns initialState', () => {
@@ -123,6 +127,29 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('handleLoginForm', () => {
+    it('loginForm을 변경한다.', () => {
+      const initState = {
+        loginForm: { id: '', pw: '' },
+      };
+
+      const state = reducer(initState, handleLoginForm('id', 'testId'));
+
+      expect(state.loginForm.id).toBe('testId');
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('accessToken을 변경한다..', () => {
+      const initState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initState, setAccessToken(token));
+      expect(state.accessToken).toBe(token);
     });
   });
 });

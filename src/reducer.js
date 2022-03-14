@@ -7,6 +7,9 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginForm: { id: '', pw: '' },
+  reviewForm: { score: 0, name: '', description: '' },
+  accessToken: '',
 };
 
 const reducers = {
@@ -51,6 +54,33 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  handleLoginForm(state, { payload: { key, value } }) {
+    const { loginForm } = state;
+    return {
+      ...state,
+      loginForm: { ...loginForm, [key]: value },
+    };
+  },
+  handleReviewForm(state, { payload: { key, value } }) {
+    const { reviewForm } = state;
+    return {
+      ...state,
+      reviewForm: { ...reviewForm, [key]: value },
+    };
+  },
+  resetReviwForm(state) {
+    return {
+      ...state,
+      reviewForm: { score: 0, name: '', description: '' },
+    };
+  },
+  setAccessToken(state, { payload: { token } }) {
+    return {
+      ...state,
+      accessToken: token,
     };
   },
 };
