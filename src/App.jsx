@@ -5,8 +5,7 @@ import {
 } from 'react-router-dom';
 
 import HomePage from './HomePage';
-// Todo: separate loginpage
-// import LoginPage from './LoginPage';
+import LoginPage from './LoginPage';
 import AboutPage from './AboutPage';
 import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
