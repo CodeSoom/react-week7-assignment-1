@@ -5,10 +5,10 @@ import { render } from '@testing-library/react';
 import HomePage from './HomePage';
 
 describe('HomePage', () => {
-  const links = ['About', 'Restaurants'];
+  const links = ['About', 'Restaurants', 'Login'];
 
   const renderHomePage = () => render(
-    <MemoryRouter>
+    <MemoryRouter initialEntries={['/']}>
       <HomePage />
     </MemoryRouter>,
   );
