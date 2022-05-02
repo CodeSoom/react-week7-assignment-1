@@ -44,6 +44,14 @@ describe('App', () => {
     });
   });
 
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
+    });
+  });
+
   context('with path /about', () => {
     it('renders the about page', () => {
       const { container } = renderApp({ path: '/about' });
