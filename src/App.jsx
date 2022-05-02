@@ -11,12 +11,6 @@ import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
 
-function LoginPage() {
-  return (
-    <h2>Log In</h2>
-  );
-}
-
 export default function App() {
   return (
     <div>
