@@ -3,7 +3,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
-  pushLogin,
+  postLogin,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -105,7 +105,7 @@ export function requestSession() {
   return async (dispatch, getState) => {
     const { loginField: { email, password } } = getState();
 
-    const accessToken = await pushLogin({ email, password });
+    const accessToken = await postLogin({ email, password });
 
     dispatch(setAccessToken({ accessToken }));
   };
