@@ -16,6 +16,7 @@ describe('LoginFormContainer', () => {
       email: '',
       password: '',
     },
+    accessToken: given.accessToken,
   }));
 
   const renderLoginFormContainer = () => render(
@@ -28,36 +29,62 @@ describe('LoginFormContainer', () => {
     jest.clearAllMocks();
   });
 
-  it('renders title', () => {
-    const { container } = renderLoginFormContainer();
+  context('when logged-in', () => {
+    beforeEach(() => {
+      given('accessToken', () => 'TOKEN');
+    });
 
-    expect(container).toHaveTextContent('Log In');
-  });
+    it('renders title', () => {
+      const { container } = renderLoginFormContainer();
 
-  it('renders login form', () => {
-    const { queryByLabelText } = renderLoginFormContainer();
+      expect(container).toHaveTextContent('Log In');
+    });
 
-    expect(queryByLabelText('E-mail')).not.toBeNull();
-    expect(queryByLabelText('Password')).not.toBeNull();
-  });
+    it('renders login form', () => {
+      const { queryByLabelText } = renderLoginFormContainer();
 
-  it('calls dispatch', () => {
-    const { getByText, getByLabelText } = renderLoginFormContainer();
+      expect(queryByLabelText('E-mail')).not.toBeNull();
+      expect(queryByLabelText('Password')).not.toBeNull();
+    });
 
-    fireEvent.click(getByText('login'));
+    it('calls dispatch', () => {
+      const { getByText, getByLabelText } = renderLoginFormContainer();
 
-    expect(dispatch).toBeCalled();
+      fireEvent.click(getByText('login'));
 
-    fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test@email.com' } });
+      expect(dispatch).toBeCalled();
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginFields',
-      payload: {
-        loginFields: {
-          name: 'email',
-          value: 'test@email.com',
+      fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test@email.com' } });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginFields',
+        payload: {
+          loginFields: {
+            name: 'email',
+            value: 'test@email.com',
+          },
         },
-      },
+      });
+    });
+  });
+
+  context('when logged-out', () => {
+    beforeEach(() => {
+      given('accessToken', () => '');
+    });
+
+    it('renders title', () => {
+      const { container } = renderLoginFormContainer();
+
+      expect(container).toHaveTextContent('Log Out');
+    });
+
+    it('calls dispatch', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('Log out'));
+
+      expect(dispatch).toBeCalledWith({ type: 'logout' });
     });
   });
 });
