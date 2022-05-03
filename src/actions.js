@@ -33,10 +33,17 @@ export function setRestaurant(restaurant) {
   };
 }
 
-export function setLoginField(loginField) {
+export function changeLoginField(loginField) {
   return {
-    type: 'setLoginField',
+    type: 'changeLoginField',
     payload: { loginField },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
   };
 }
 
@@ -95,4 +102,7 @@ export function loadRestaurant({ restaurantId }) {
 
 export function requestLogin() {
   // TODO: request login and set token
+  return async (dispatch) => {
+    dispatch(setAccessToken(''));
+  };
 }
