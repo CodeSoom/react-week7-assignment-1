@@ -85,6 +85,13 @@ describe('LoginForm', () => {
   context('with login', () => {
     given('isLogin', () => true);
 
+    it("doesn't render email and password input field", () => {
+      const { queryByLabelText } = renderLoginForm();
+
+      expect(queryByLabelText('E-mail')).toBeNull();
+      expect(queryByLabelText('Password')).toBeNull();
+    });
+
     it('renders "log-out" button', () => {
       const { container } = renderLoginForm();
 
