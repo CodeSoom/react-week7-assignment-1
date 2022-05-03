@@ -9,6 +9,7 @@ import {
   selectRegion,
   selectCategory,
   changeLoginFields,
+  logout,
 } from './actions';
 
 describe('reducer', () => {
@@ -164,6 +165,18 @@ describe('reducer', () => {
       const state = reducer(initialState, changeLoginFields(loginFields));
 
       expect(state.loginFields.email).toBe('test@example.com');
+    });
+  });
+
+  describe('logout', () => {
+    it('removes access token', () => {
+      const initialState = {
+        accessToken: 'TOKEN',
+      };
+
+      const state = reducer(initialState, logout());
+
+      expect(state.accessToken).toBe('');
     });
   });
 });
