@@ -10,6 +10,7 @@ import {
   loadRestaurant,
   changeReviewField,
   sendReview,
+  setRestaurant,
 } from './actions';
 
 import { get } from './utils';
@@ -19,6 +20,10 @@ export default function RestaurantContainer({ restaurantId }) {
 
   useEffect(() => {
     dispatch(loadRestaurant({ restaurantId }));
+
+    return () => {
+      dispatch(setRestaurant(null));
+    };
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
