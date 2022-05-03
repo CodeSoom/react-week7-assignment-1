@@ -37,6 +37,26 @@ describe('LoginFormContainer', () => {
     it('renders title', () => {
       const { container } = renderLoginFormContainer();
 
+      expect(container).toHaveTextContent('Log Out');
+    });
+
+    it('calls dispatch', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('Log out'));
+
+      expect(dispatch).toBeCalledWith({ type: 'logout' });
+    });
+  });
+
+  context('when logged-out', () => {
+    beforeEach(() => {
+      given('accessToken', () => '');
+    });
+
+    it('renders title', () => {
+      const { container } = renderLoginFormContainer();
+
       expect(container).toHaveTextContent('Log In');
     });
 
@@ -65,26 +85,6 @@ describe('LoginFormContainer', () => {
           },
         },
       });
-    });
-  });
-
-  context('when logged-out', () => {
-    beforeEach(() => {
-      given('accessToken', () => '');
-    });
-
-    it('renders title', () => {
-      const { container } = renderLoginFormContainer();
-
-      expect(container).toHaveTextContent('Log Out');
-    });
-
-    it('calls dispatch', () => {
-      const { getByText } = renderLoginFormContainer();
-
-      fireEvent.click(getByText('Log out'));
-
-      expect(dispatch).toBeCalledWith({ type: 'logout' });
     });
   });
 });

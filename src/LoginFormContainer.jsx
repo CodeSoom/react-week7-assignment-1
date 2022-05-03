@@ -6,6 +6,16 @@ import { requestLogin, changeLoginFields } from './actions';
 
 import { get } from './utils';
 
+function LogoutForm() {
+  return (
+    <button
+      type="button"
+    >
+      Log out
+    </button>
+  );
+}
+
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
@@ -22,12 +32,15 @@ export default function LoginFormContainer() {
 
   return (
     <>
-      <LoginForm
-        fields={loginFields}
-        onSubmit={handleSubmit}
-        onChange={handleChange}
-      />
-      <p>{accessToken}</p>
+      {accessToken ? (
+        <LogoutForm />
+      ) : (
+        <LoginForm
+          fields={loginFields}
+          onSubmit={handleSubmit}
+          onChange={handleChange}
+        />
+      )}
     </>
   );
 }
