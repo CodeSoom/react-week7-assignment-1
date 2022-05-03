@@ -10,6 +10,8 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestSession,
+  setAccessToken,
 } from './actions';
 
 const middlewares = [thunk];
@@ -114,9 +116,9 @@ describe('actions', () => {
     it('dispatch requrestSession', async () => {
       await store.dispatch(requestSession());
 
-      const actions = store.actions();
+      const actions = store.getActions();
 
-      expect(actions).toEqual(setAceessToken('ACCESS_TOKEN'));
+      expect(actions).toEqual([setAccessToken({ accessToken: 'ACCESS_TOKEN' })]);
     });
   });
 });
