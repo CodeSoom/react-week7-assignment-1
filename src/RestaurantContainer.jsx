@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
+import ReviewForm from './ReviewForm';
 
 import {
   loadRestaurant,
@@ -11,6 +12,7 @@ import {
 } from './actions';
 
 import { get } from './utils';
+import ReviewList from './ReviewList';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -37,13 +39,28 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
+  if (accessToken) {
+    return (
+      <>
+        <RestaurantDetail
+          restaurant={restaurant}
+        />
+        <ReviewForm
+          fields={reviewFields}
+          onSubmit={handleSubmit}
+          onChange={handleChange}
+        />
+        <ReviewList reviews={restaurant.reviews} />
+      </>
+    );
+  }
+
   return (
-    <RestaurantDetail
-      restaurant={restaurant}
-      accessToken={accessToken}
-      fields={reviewFields}
-      onSubmit={handleSubmit}
-      onChange={handleChange}
-    />
+    <>
+      <RestaurantDetail
+        restaurant={restaurant}
+      />
+      <ReviewList reviews={restaurant.reviews} />
+    </>
   );
 }

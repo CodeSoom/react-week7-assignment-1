@@ -19,8 +19,5 @@ describe('RestaurantDetail', () => {
 
     expect(container).toHaveTextContent('마법사주방');
     expect(container).toHaveTextContent('서울시');
-    expect(container).toHaveTextContent('user1');
-    expect(container).toHaveTextContent('4');
-    expect(container).toHaveTextContent('짱맛있어요');
   });
 });
