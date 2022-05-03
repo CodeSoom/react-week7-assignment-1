@@ -139,12 +139,37 @@ describe('reducer', () => {
       },
     };
 
-    it('returns changed email value', () => {
+    it('returns email value', () => {
       const state = reducer(initialState, setLoginField({ name: 'email', value: 'tester@example.com' }));
 
       expect(state.loginField).toEqual({
         email: 'tester@example.com',
         password: '',
+      });
+    });
+
+    it('returns password value', () => {
+      const state = reducer(initialState, setLoginField({ name: 'password', value: 'tester' }));
+
+      expect(state.loginField).toEqual({
+        email: '',
+        password: 'tester',
+      });
+    });
+
+    it('returns email and password value', () => {
+      const previousState = {
+        loginField: {
+          email: 'tester@example.com',
+          password: '',
+        },
+      };
+
+      const state = reducer(previousState, setLoginField({ name: 'password', value: 'tester' }));
+
+      expect(state.loginField).toEqual({
+        email: 'tester@example.com',
+        password: 'tester',
       });
     });
   });
