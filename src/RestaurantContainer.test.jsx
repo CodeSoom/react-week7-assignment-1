@@ -66,9 +66,7 @@ describe('RestaurantContainer', () => {
         address: '서울시 강남구',
       }));
 
-      const { queryByLabelText } = render(<RestaurantContainer
-        restaurantId="1"
-      />);
+      const { queryByLabelText } = renderRestaurantContainer();
 
       expect(queryByLabelText('평점')).toBeNull();
       expect(queryByLabelText('리뷰 내용')).toBeNull();
@@ -85,9 +83,7 @@ describe('RestaurantContainer', () => {
         address: '서울시 강남구',
       }));
 
-      const { queryByLabelText } = render(<RestaurantContainer
-        restaurantId="1"
-      />);
+      const { queryByLabelText } = renderRestaurantContainer();
 
       expect(queryByLabelText('평점')).not.toBeNull();
       expect(queryByLabelText('리뷰 내용')).not.toBeNull();
@@ -100,9 +96,7 @@ describe('RestaurantContainer', () => {
         address: '서울시 강남구',
       }));
 
-      const { getByLabelText } = render(<RestaurantContainer
-        restaurantId="1"
-      />);
+      const { getByLabelText } = renderRestaurantContainer();
 
       const controls = [
         { label: '평점', name: 'score', value: '5' },
@@ -128,34 +122,23 @@ describe('RestaurantContainer', () => {
         address: '서울시 강남구',
       }));
 
-      const { getByText } = render(
-        <RestaurantContainer
-          restaurantId="1"
-        />,
-      );
+      const { getByText } = renderRestaurantContainer();
 
       expect(getByText('리뷰 남기기')).not.toBeNull();
     });
-  });
-
-  context('score와 description을 입력했을 때', () => {
-    given('accessToken', () => 'ACCESS_TOEKEN');
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
-    given('reviewFields', () => ({
-      score: '5',
-      description: '피카츄 강력해요.',
-    }));
 
     it('"리뷰 남기기"버튼을 클릭하면 리뷰를 생성하고, reviewFields가 초기화 된다.', () => {
-      const { getByText } = render(
-        <RestaurantContainer
-          restaurantId="1"
-        />,
-      );
+      given('restaurant', () => ({
+        id: 1,
+        name: '마법사주방',
+        address: '서울시 강남구',
+      }));
+      given('reviewFields', () => ({
+        score: '5',
+        description: '피카츄 강력해요.',
+      }));
+
+      const { getByText } = renderRestaurantContainer();
 
       fireEvent.change(getByText('리뷰 남기기'));
 
@@ -185,9 +168,7 @@ describe('RestaurantContainer', () => {
     }));
 
     it('리뷰를 출력한다.', () => {
-      const { queryByText } = render(<RestaurantContainer
-        restaurantId="1"
-      />);
+      const { queryByText } = renderRestaurantContainer();
 
       expect(queryByText('리뷰')).not.toBeNull();
       expect(queryByText('피카츄')).not.toBeNull();
@@ -205,9 +186,7 @@ describe('RestaurantContainer', () => {
     }));
 
     it('"리뷰가 없어요!"를 출력한다.', () => {
-      const { queryByText } = render(<RestaurantContainer
-        restaurantId="1"
-      />);
+      const { queryByText } = renderRestaurantContainer();
 
       expect(queryByText('리뷰가 없어요!')).not.toBeNull();
     });
