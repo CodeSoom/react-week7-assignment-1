@@ -1,10 +1,10 @@
 export default function LoginForm({
-  onChange, label, name, type = 'text',
+  onChange, label, name, type = 'text', value,
 }) {
   function handleChange(event) {
-    const { target: { value } } = event;
+    const { target } = event;
 
-    onChange({ name, value });
+    onChange({ name: target.name, value: target.value });
   }
 
   return (
@@ -15,6 +15,7 @@ export default function LoginForm({
         type={type}
         name={name}
         onChange={handleChange}
+        value={value}
       />
     </div>
   );

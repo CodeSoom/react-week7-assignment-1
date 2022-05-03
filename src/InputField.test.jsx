@@ -1,9 +1,11 @@
 import { fireEvent, render } from '@testing-library/react';
+import given from 'given2';
 
 import InputField from './InputField';
 
 describe('InputField', () => {
   beforeEach(() => {
+    given('value', () => '');
     jest.clearAllMocks();
   });
 
@@ -15,6 +17,7 @@ describe('InputField', () => {
       label="E-mail"
       name="email"
       type="email"
+      value={given.value}
     />
   ));
 
@@ -22,6 +25,14 @@ describe('InputField', () => {
     const { queryByLabelText } = renderInputField();
 
     expect(queryByLabelText('E-mail')).not.toBeNull();
+  });
+
+  it('renders value', () => {
+    given('value', () => 'tester@example.com');
+
+    const { queryByDisplayValue } = renderInputField();
+
+    expect(queryByDisplayValue('tester@example.com')).not.toBeNull();
   });
 
   it('listens for change events', () => {
