@@ -13,6 +13,8 @@ describe('LoginFormContainer', () => {
       password: '',
     }));
 
+    given('accessToken', () => '');
+
     jest.clearAllMocks();
   });
 
@@ -22,63 +24,76 @@ describe('LoginFormContainer', () => {
 
   useSelector.mockImplementation((selector) => selector({
     loginFields: given.loginFields,
+    accessToken: given.accessToken,
   }));
 
   const renderLoginFormContainer = () => render((
     <LoginFormContainer />
   ));
 
-  it('renders login form', () => {
-    const { queryByLabelText } = renderLoginFormContainer();
+  context('without accessToken', () => {
+    it('renders login form', () => {
+      const { queryByLabelText } = renderLoginFormContainer();
 
-    expect(queryByLabelText('E-mail')).not.toBeNull();
-    expect(queryByLabelText('Password')).not.toBeNull();
-  });
+      expect(queryByLabelText('E-mail')).not.toBeNull();
+      expect(queryByLabelText('Password')).not.toBeNull();
+    });
 
-  it('renders login fields', () => {
-    given('loginFields', () => ({
-      email: 'tester@example.com',
-      password: 'tester',
-    }));
+    it('renders login fields', () => {
+      given('loginFields', () => ({
+        email: 'tester@example.com',
+        password: 'tester',
+      }));
 
-    const { queryByDisplayValue } = renderLoginFormContainer();
+      const { queryByDisplayValue } = renderLoginFormContainer();
 
-    expect(queryByDisplayValue('tester@example.com')).not.toBeNull();
-    expect(queryByDisplayValue('tester')).not.toBeNull();
-  });
+      expect(queryByDisplayValue('tester@example.com')).not.toBeNull();
+      expect(queryByDisplayValue('tester')).not.toBeNull();
+    });
 
-  it('listens for change event', () => {
-    const controls = [
-      { label: 'E-mail', value: 'tester@example.com', name: 'email' },
-      { label: 'Password', value: 'tester', name: 'password' },
-    ];
+    it('listens for change event', () => {
+      const controls = [
+        { label: 'E-mail', value: 'tester@example.com', name: 'email' },
+        { label: 'Password', value: 'tester', name: 'password' },
+      ];
 
-    const { getByLabelText } = renderLoginFormContainer();
+      const { getByLabelText } = renderLoginFormContainer();
 
-    controls.forEach(({ label, name, value }) => {
-      fireEvent.change(
-        getByLabelText(label),
-        { target: { value, name } },
-      );
+      controls.forEach(({ label, name, value }) => {
+        fireEvent.change(
+          getByLabelText(label),
+          { target: { value, name } },
+        );
 
-      expect(dispatch).toBeCalledWith({
-        type: 'setLoginFields',
-        payload: { name, value },
+        expect(dispatch).toBeCalledWith({
+          type: 'setLoginFields',
+          payload: { name, value },
+        });
       });
+    });
+
+    it('renders "log in" button', () => {
+      const { container } = renderLoginFormContainer();
+
+      expect(container).toHaveTextContent('log in');
+    });
+
+    it('listens for click event on submit login', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('log in'));
+
+      expect(dispatch).toBeCalled();
     });
   });
 
-  it('renders "log in" button', () => {
-    const { container } = renderLoginFormContainer();
+  context('with accessToken', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-    expect(container).toHaveTextContent('log in');
-  });
+    it('renders "log-out" button', () => {
+      const { container } = renderLoginFormContainer();
 
-  it('listens for click event on submit login', () => {
-    const { getByText } = renderLoginFormContainer();
-
-    fireEvent.click(getByText('log in'));
-
-    expect(dispatch).toBeCalled();
+      expect(container).toHaveTextContent('log out');
+    });
   });
 });
