@@ -114,6 +114,13 @@ export function sendReview({ restaurantId }) {
   };
 }
 
+export function changeReviewFields(reviewFields) {
+  return {
+    type: 'changeReviewFields',
+    payload: { reviewFields },
+  };
+}
+
 export function changeLoginFields(loginFields) {
   return {
     type: 'changeLoginFields',

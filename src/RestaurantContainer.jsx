@@ -6,6 +6,7 @@ import RestaurantDetail from './RestaurantDetail';
 
 import {
   loadRestaurant,
+  sendReview,
 } from './actions';
 
 import { get } from './utils';
@@ -24,7 +25,7 @@ export default function RestaurantContainer({ restaurantId }) {
   const reviewFields = { score: 3, description: '맛있어요' };
 
   function handleSubmit() {
-    // dispatch(sendReview());
+    dispatch(sendReview());
   }
 
   function handleChange({ name, value }) {

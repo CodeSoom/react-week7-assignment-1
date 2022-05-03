@@ -16,6 +16,7 @@ describe('RestaurantContainer', () => {
   useSelector.mockImplementation((selector) => selector({
     restaurant: given.restaurant,
     accessToken: given.accessToken,
+    reviewFields: given.reviewFields,
   }));
 
   beforeEach(() => {
@@ -62,6 +63,11 @@ describe('RestaurantContainer', () => {
       }));
 
       given('accessToken', () => 'TOKEN');
+
+      given('reviewFields', () => ({
+        score: 3,
+        description: '맛있어요',
+      }));
     });
 
     it('renders review form', () => {

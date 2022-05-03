@@ -8,6 +8,7 @@ import {
   setAccessToken,
   selectRegion,
   selectCategory,
+  changeReviewFields,
   changeLoginFields,
   logout,
 } from './actions';
@@ -145,6 +146,27 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('changeReviewFields', () => {
+    it('changes review fields', () => {
+      const initialState = {
+        reviewFields: {
+          score: null,
+          description: null,
+        },
+      };
+
+      const reviewFields = {
+        score: 3,
+        description: 'good',
+      };
+
+      const state = reducer(initialState, changeReviewFields(reviewFields));
+
+      expect(state.reviewFields.score).toBe(3);
+      expect(state.reviewFields.description).toBe('good');
     });
   });
 
