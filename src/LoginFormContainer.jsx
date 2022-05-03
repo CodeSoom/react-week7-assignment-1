@@ -5,6 +5,8 @@ import LogoutForm from './LogoutForm';
 
 import { requestLogin, changeLoginFields, logout } from './actions';
 
+import { saveItem } from './services/storage';
+
 import { get } from './utils';
 
 export default function LoginFormContainer() {
@@ -22,10 +24,11 @@ export default function LoginFormContainer() {
   }
 
   function handleClickLogOut() {
+    saveItem('accessToken', '');
     dispatch(logout());
   }
 
-  if (accessToken) {
+  if (accessToken?.length) {
     return (
       <LogoutForm
         onClick={handleClickLogOut}

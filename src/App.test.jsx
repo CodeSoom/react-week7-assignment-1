@@ -105,7 +105,7 @@ describe('App', () => {
 
   context('without accessToken in localStorage', () => {
     beforeEach(() => {
-      loadItem.mockImplementation(() => null);
+      loadItem.mockImplementation(() => '');
     });
 
     it("doesn't call dispatch", () => {

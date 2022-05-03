@@ -97,6 +97,13 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
+export function setErrorMessage(errorMessage) {
+  return {
+    type: 'setErrorMessage',
+    payload: { errorMessage },
+  };
+}
+
 export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields } = getState();
@@ -136,11 +143,17 @@ export function requestLogin() {
     try {
       const accessToken = await postLogin({ email, password });
 
-      saveItem({ key: 'accessToken', value: accessToken });
+      if (accessToken?.length) {
+        saveItem({ key: 'accessToken', value: accessToken });
 
-      dispatch(setAccessToken(accessToken));
+        dispatch(setAccessToken(accessToken));
+
+        return;
+      }
+
+      dispatch(setErrorMessage('로그인 정보를 다시 입력해 주세요.'));
     } catch (e) {
-      // TODO: seterrormessage
+      dispatch(setErrorMessage(e.message));
     }
   };
 }

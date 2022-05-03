@@ -8,6 +8,7 @@ import {
   setAccessToken,
   selectRegion,
   selectCategory,
+  setErrorMessage,
   changeReviewFields,
   changeLoginFields,
   logout,
@@ -20,7 +21,7 @@ describe('reducer', () => {
       categories: [],
       restaurants: [],
       restaurant: null,
-      accessToken: null,
+      accessToken: '',
       selectedRegion: null,
       selectedCategory: null,
       reviewFields: {
@@ -153,6 +154,19 @@ describe('reducer', () => {
     });
   });
 
+  describe('setErrorMessage', () => {
+    it('changes error message', () => {
+      const initialState = {
+        errorMessage: '',
+      };
+
+      const errorMessage = 'ERROR';
+
+      const state = reducer(initialState, setErrorMessage(errorMessage));
+
+      expect(state.errorMessage).toBe('ERROR');
+    });
+  });
   describe('changeReviewFields', () => {
     it('changes review fields', () => {
       const initialState = {

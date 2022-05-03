@@ -39,16 +39,11 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
-  if (accessToken) {
+  if (!accessToken?.length) {
     return (
       <>
         <RestaurantDetail
           restaurant={restaurant}
-        />
-        <ReviewForm
-          fields={reviewFields}
-          onSubmit={handleSubmit}
-          onChange={handleChange}
         />
         <ReviewList reviews={restaurant.reviews} />
       </>
@@ -59,6 +54,11 @@ export default function RestaurantContainer({ restaurantId }) {
     <>
       <RestaurantDetail
         restaurant={restaurant}
+      />
+      <ReviewForm
+        fields={reviewFields}
+        onSubmit={handleSubmit}
+        onChange={handleChange}
       />
       <ReviewList reviews={restaurant.reviews} />
     </>

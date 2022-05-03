@@ -13,7 +13,10 @@ import {
   setRestaurants,
   setRestaurant,
   setAccessToken,
+  setErrorMessage,
 } from './actions';
+
+import { postLogin } from './services/api';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -114,18 +117,34 @@ describe('actions', () => {
     beforeEach(() => {
       store = mockStore({
         loginFields: {
-          email: 'test@example.com',
+          email: 'tester@example.com',
           password: 'test',
         },
       });
     });
 
-    it('dispatchs setAccessToken', async () => {
-      await store.dispatch(requestLogin());
+    context('when the request succeeded', () => {
+      it('dispatchs setAccessToken', async () => {
+        postLogin.mockImplementation(() => 'TOKEN');
 
-      const actions = store.getActions();
+        await store.dispatch(requestLogin());
 
-      expect(actions[0]).toEqual(setAccessToken(''));
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setAccessToken('TOKEN'));
+      });
+    });
+
+    context('when the request failed', () => {
+      it('dispatchs setErrorMessage', async () => {
+        postLogin.mockImplementation(() => '');
+
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setErrorMessage('로그인 정보를 다시 입력해 주세요.'));
+      });
     });
   });
 

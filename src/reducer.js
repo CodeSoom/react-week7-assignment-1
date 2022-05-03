@@ -5,7 +5,7 @@ const initialState = {
   categories: [],
   restaurants: [],
   restaurant: null,
-  accessToken: null,
+  accessToken: '',
   selectedRegion: null,
   selectedCategory: null,
   reviewFields: {
