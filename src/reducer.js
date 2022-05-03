@@ -11,6 +11,7 @@ const initialState = {
     email: '',
     password: '',
   },
+  accessToken: '',
 };
 
 const reducers = {
