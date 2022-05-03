@@ -1,4 +1,7 @@
-export default function LoginFormContainer({ onClick }) {
+export default function LoginFormContainer() {
+  function handleClick() {
+    // login
+  }
   return (
     <>
       <h2>Log In</h2>
@@ -24,7 +27,7 @@ export default function LoginFormContainer({ onClick }) {
       </div>
       <button
         type="button"
-        onClick={onClick}
+        onClick={handleClick}
       >
         login
       </button>
