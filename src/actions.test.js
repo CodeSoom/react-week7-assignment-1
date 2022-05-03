@@ -8,6 +8,7 @@ import {
   setCategories,
   loadRestaurants,
   loadRestaurant,
+  sendReview,
   requestLogin,
   setRestaurants,
   setRestaurant,
@@ -143,7 +144,7 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(loadRestaurant({}));
+      expect(actions[0]).toEqual(setRestaurant(null));
     });
   });
 });

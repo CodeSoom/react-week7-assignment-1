@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
 
 import { saveItem } from './services/storage';
@@ -93,6 +94,23 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { accessToken, reviewFields } = getState();
+    const { score, description } = reviewFields;
+
+    try {
+      await postReview({
+        accessToken, restaurantId, score, description,
+      });
+
+      dispatch(loadRestaurant({ restaurantId }));
+    } catch (e) {
+      // TODO: seterrormessage
+    }
   };
 }
 
