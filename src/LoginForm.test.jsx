@@ -8,9 +8,15 @@ describe('LoginForm', () => {
   const handleClick = jest.fn();
   const handleChange = jest.fn();
 
+  const loginFields = {
+    email: 'test@example.com',
+    password: '1234',
+  };
+
   const renderLoginForm = () => render(
     <MemoryRouter initialEntries={['/login']}>
       <LoginForm
+        fields={loginFields}
         onSubmit={handleClick}
         onChange={handleChange}
       />
@@ -28,6 +34,8 @@ describe('LoginForm', () => {
 
     expect(queryByLabelText('E-mail')).not.toBeNull();
     expect(queryByLabelText('Password')).not.toBeNull();
+    expect(queryByLabelText('E-mail').value).toBe('test@example.com');
+    expect(queryByLabelText('Password').value).toBe('1234');
   });
 
   it('listens click event', () => {
