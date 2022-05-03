@@ -7,6 +7,7 @@ import LoginFormContainer from './LoginFormContainer';
 
 describe('LoginFormContainer', () => {
   beforeEach(() => {
+    jest.clearAllMocks();
     given('email', () => '');
     given('password', () => '');
   });
@@ -52,5 +53,19 @@ describe('LoginFormContainer', () => {
         payload: { [name]: value },
       });
     });
+  });
+
+  it('renders "log in" button', () => {
+    const { container } = renderLoginFormContainer();
+
+    expect(container).toHaveTextContent('log in');
+  });
+
+  it('listens for click event on submit login', () => {
+    const { getByText } = renderLoginFormContainer();
+
+    fireEvent.click(getByText('log in'));
+
+    expect(dispatch).toBeCalled();
   });
 });
