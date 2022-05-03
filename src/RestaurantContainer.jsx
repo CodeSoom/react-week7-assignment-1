@@ -18,7 +18,8 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
-
+  const accessToken = useSelector(get('accessToken'));
+  console.log(accessToken);
   if (!restaurant) {
     return (
       <p>Loading...</p>
@@ -26,8 +27,9 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   return (
-    <>
-      <RestaurantDetail restaurant={restaurant} />
-    </>
+    <RestaurantDetail
+      restaurant={restaurant}
+      accessToken={accessToken}
+    />
   );
 }

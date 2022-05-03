@@ -11,14 +11,15 @@ describe('RestaurantContainer', () => {
     return render(<RestaurantContainer restaurantId="1" />);
   }
 
-  beforeEach(() => {
-    dispatch.mockClear();
-    useDispatch.mockImplementation(() => dispatch);
+  useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation((selector) => selector({
-      restaurant: given.restaurant,
-      accessToken: given.accessToken,
-    }));
+  useSelector.mockImplementation((selector) => selector({
+    restaurant: given.restaurant,
+    accessToken: given.accessToken,
+  }));
+
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
   it('dispatches action', () => {
@@ -54,6 +55,12 @@ describe('RestaurantContainer', () => {
 
   context('when logged-in', () => {
     beforeEach(() => {
+      given('restaurant', () => ({
+        id: 1,
+        name: '마법사주방',
+        address: '서울시 강남구',
+      }));
+
       given('accessToken', () => 'TOKEN');
     });
 
@@ -69,12 +76,18 @@ describe('RestaurantContainer', () => {
 
       fireEvent.click(getByText('리뷰 남기기'));
 
-      expect(dispatch).toBeCalled();
+      expect(dispatch).toBeCalledTimes(2);
     });
   });
 
   context('when logged-out', () => {
     beforeEach(() => {
+      given('restaurant', () => ({
+        id: 1,
+        name: '마법사주방',
+        address: '서울시 강남구',
+      }));
+
       given('accessToken', () => '');
     });
 
