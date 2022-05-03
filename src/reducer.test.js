@@ -7,6 +7,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  setLoginField,
 } from './actions';
 
 describe('reducer', () => {
@@ -122,6 +123,24 @@ describe('reducer', () => {
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
+      });
+    });
+  });
+
+  describe('setLoginField', () => {
+    const initialState = {
+      loginField: {
+        email: '',
+        password: '',
+      },
+    };
+
+    it('returns changed email value', () => {
+      const state = reducer(initialState, setLoginField({ name: 'email', value: 'tester@example.com' }));
+
+      expect(state.loginField).toEqual({
+        email: 'tester@example.com',
+        password: '',
       });
     });
   });
