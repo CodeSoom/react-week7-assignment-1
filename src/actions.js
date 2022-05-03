@@ -48,10 +48,10 @@ export function selectCategory(categoryId) {
   };
 }
 
-export function setLoginField({ name, value }) {
+export function setLoginFields({ name, value }) {
   return {
-    type: 'setLoginField',
-    payload: { [name]: value },
+    type: 'setLoginFields',
+    payload: { name, value },
   };
 }
 
@@ -103,7 +103,7 @@ export function setAccessToken({ accessToken }) {
 
 export function requestSession() {
   return async (dispatch, getState) => {
-    const { loginField: { email, password } } = getState();
+    const { loginFields: { email, password } } = getState();
 
     const accessToken = await postLogin({ email, password });
 

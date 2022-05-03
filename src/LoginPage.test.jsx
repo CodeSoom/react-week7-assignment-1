@@ -10,7 +10,7 @@ describe('LoginPage', () => {
   useDispatch.mockImplementation(() => dispatch);
 
   useSelector.mockImplementation((selector) => selector({
-    loginField: {
+    loginFields: {
       email: '',
       password: '',
     },

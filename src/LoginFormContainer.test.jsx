@@ -2,10 +2,17 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import given from 'given2';
+
 import LoginFormContainer from './LoginFormContainer';
 
 describe('LoginFormContainer', () => {
   beforeEach(() => {
+    given('loginFields', () => ({
+      email: '',
+      password: '',
+    }));
+
     jest.clearAllMocks();
   });
 
@@ -14,10 +21,7 @@ describe('LoginFormContainer', () => {
   useDispatch.mockImplementation(() => dispatch);
 
   useSelector.mockImplementation((selector) => selector({
-    loginField: {
-      email: '',
-      password: '',
-    },
+    loginFields: given.loginFields,
   }));
 
   const renderLoginFormContainer = () => render((
@@ -46,8 +50,8 @@ describe('LoginFormContainer', () => {
       );
 
       expect(dispatch).toBeCalledWith({
-        type: 'setLoginField',
-        payload: { [name]: value },
+        type: 'setLoginFields',
+        payload: { name, value },
       });
     });
   });

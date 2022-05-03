@@ -7,7 +7,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
-  setLoginField,
+  setLoginFields,
   setAccessToken,
 } from './actions';
 
@@ -20,7 +20,7 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
-      loginField: {
+      loginFields: {
         email: '',
         password: '',
       },
@@ -133,18 +133,18 @@ describe('reducer', () => {
     });
   });
 
-  describe('setLoginField', () => {
+  describe('setLoginFields', () => {
     it('changes email value', () => {
       const initialState = {
-        loginField: {
+        loginFields: {
           email: '',
           password: '',
         },
       };
 
-      const state = reducer(initialState, setLoginField({ name: 'email', value: 'tester@example.com' }));
+      const state = reducer(initialState, setLoginFields({ name: 'email', value: 'tester@example.com' }));
 
-      expect(state.loginField).toEqual({
+      expect(state.loginFields).toEqual({
         email: 'tester@example.com',
         password: '',
       });
@@ -152,15 +152,15 @@ describe('reducer', () => {
 
     it('changes password value', () => {
       const previousState = {
-        loginField: {
+        loginFields: {
           email: 'tester@example.com',
           password: '',
         },
       };
 
-      const state = reducer(previousState, setLoginField({ name: 'password', value: 'tester' }));
+      const state = reducer(previousState, setLoginFields({ name: 'password', value: 'tester' }));
 
-      expect(state.loginField).toEqual({
+      expect(state.loginFields).toEqual({
         email: 'tester@example.com',
         password: 'tester',
       });

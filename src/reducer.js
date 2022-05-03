@@ -7,7 +7,7 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
-  loginField: {
+  loginFields: {
     email: '',
     password: '',
   },
@@ -59,15 +59,16 @@ const reducers = {
     };
   },
 
-  setLoginField(state, { payload: { ...loginField } }) {
+  setLoginFields(state, { payload: { name, value } }) {
     return {
       ...state,
-      loginField: {
-        ...state.loginField,
-        ...loginField,
+      loginFields: {
+        ...state.loginFields,
+        [name]: value,
       },
     };
   },
+
   setAccessToken(state, { payload: { accessToken } }) {
     return {
       ...state,
