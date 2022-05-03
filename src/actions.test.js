@@ -127,4 +127,23 @@ describe('actions', () => {
       expect(actions[0]).toEqual(setAccessToken(''));
     });
   });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        reviewFields: {
+          score: 5,
+          description: '최고예요',
+        },
+      });
+    });
+
+    it('dispatchs loadRestaurant', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(loadRestaurant({}));
+    });
+  });
 });
