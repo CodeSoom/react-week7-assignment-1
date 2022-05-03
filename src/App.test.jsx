@@ -56,7 +56,7 @@ describe('App', () => {
     it('renders the login page', () => {
       const { container } = renderApp({ path: '/login' });
 
-      expect(container).toHaveTextContext('Login 페이지');
+      expect(container).toHaveTextContent('Login 페이지');
     });
   });
 
