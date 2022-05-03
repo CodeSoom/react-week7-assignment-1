@@ -6,6 +6,8 @@ import {
   postLogin,
 } from './services/api';
 
+import { saveItem } from './services/storage';
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -108,6 +110,8 @@ export function requestLogin() {
 
     try {
       const accessToken = await postLogin({ email, password });
+
+      saveItem({ key: 'accessToken', value: accessToken });
 
       dispatch(setAccessToken(accessToken));
     } catch (e) {

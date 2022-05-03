@@ -8,28 +8,31 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import { loadItem } from './services/storage';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
 
+  useDispatch.mockImplementation(() => dispatch);
+
+  useSelector.mockImplementation((selector) => selector({
+    regions: [
+      { id: 1, name: '서울' },
+    ],
+    categories: [],
+    restaurants: [],
+    restaurant: { id: 1, name: '마녀주방' },
+    loginFields: {
+      email: '',
+      password: '',
+    },
+  }));
+
   beforeEach(() => {
-    dispatch.mockClear();
-
-    useDispatch.mockImplementation(() => dispatch);
-
-    useSelector.mockImplementation((selector) => selector({
-      regions: [
-        { id: 1, name: '서울' },
-      ],
-      categories: [],
-      restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
-      loginFields: {
-        email: '',
-        password: '',
-      },
-    }));
+    jest.clearAllMocks();
   });
 
   function renderApp({ path }) {
@@ -85,6 +88,30 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('with accessToken in localStorage', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => 'TOKEN');
+    });
+
+    it('calls dispatch', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalled();
+    });
+  });
+
+  context('without accessToken in localStorage', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it("doesn't call dispatch", () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
     });
   });
 });

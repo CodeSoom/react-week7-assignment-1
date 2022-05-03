@@ -2,8 +2,6 @@ import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
 
-import axios from 'axios';
-
 import {
   loadInitialData,
   setRegions,
@@ -20,6 +18,8 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/storage');
+jest.mock('axios');
 
 describe('actions', () => {
   let store;
