@@ -1,10 +1,8 @@
 import MenuItems from './MenuItems';
 import ReviewList from './ReviewList';
 
-export default function RestaurantDetail({ restaurant }) {
+export default function RestaurantDetail({ restaurant, reviews }) {
   const { name, address, menuItems } = restaurant;
-  // TODO: get reviews from parent
-  const reviews = [];
 
   return (
     <div>
