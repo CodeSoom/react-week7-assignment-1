@@ -1,4 +1,4 @@
-export default function LoginForm({ onChange }) {
+export default function LoginForm({ onChange, onSubmit }) {
   function handleChange(event) {
     const { target: { name, value } } = event;
 
@@ -27,7 +27,11 @@ export default function LoginForm({ onChange }) {
         />
       </div>
 
-      <button type="button" name="login">
+      <button
+        type="button"
+        name="login"
+        onClick={onSubmit}
+      >
         log in
       </button>
     </>
