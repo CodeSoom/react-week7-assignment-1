@@ -7,6 +7,11 @@ import RestaurantContainer from './RestaurantContainer';
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
+  given('reviewFields', () => ({
+    score: '',
+    description: '',
+  }));
+
   function renderRestaurantContainer() {
     return render(<RestaurantContainer restaurantId="1" />);
   }
@@ -17,10 +22,7 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
-      reviewFields: {
-        score: '',
-        description: '',
-      },
+      reviewFields: given.reviewFields,
       accessToken: given.accessToken,
     }));
   });
@@ -74,8 +76,8 @@ describe('RestaurantContainer', () => {
   });
 
   context('로그인 했을 때', () => {
-    // TODO: accessToken 세팅
     given('accessToken', () => 'ACCESS_TOEKEN');
+
     it('리뷰 폼을 렌더한다.', () => {
       given('restaurant', () => ({
         id: 1,
@@ -132,9 +134,32 @@ describe('RestaurantContainer', () => {
         />,
       );
 
+      expect(getByText('리뷰 남기기')).not.toBeNull();
+    });
+  });
+
+  context('score와 description을 입력했을 때', () => {
+    given('accessToken', () => 'ACCESS_TOEKEN');
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
+    given('reviewFields', () => ({
+      score: '5',
+      description: '피카츄 강력해요.',
+    }));
+
+    it('"리뷰 남기기"버튼을 클릭하면 리뷰를 생성하고, reviewFields가 초기화 된다.', () => {
+      const { getByText } = render(
+        <RestaurantContainer
+          restaurantId="1"
+        />,
+      );
+
       fireEvent.change(getByText('리뷰 남기기'));
 
-      expect(dispatch).toBeCalledTimes(1);
+      expect(dispatch).toBeCalled();
     });
   });
 
