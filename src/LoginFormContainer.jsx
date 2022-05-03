@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './LoginForm';
 import LogoutForm from './LogoutForm';
 
-import { requestLogin, changeLoginFields } from './actions';
+import { requestLogin, changeLoginFields, logout } from './actions';
 
 import { get } from './utils';
 
@@ -22,7 +22,7 @@ export default function LoginFormContainer() {
   }
 
   function handleClickLogOut() {
-    // dispatch(logout());
+    dispatch(logout());
   }
 
   return (
