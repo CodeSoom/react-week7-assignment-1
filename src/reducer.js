@@ -112,6 +112,16 @@ const reducers = {
     };
   },
 
+  emptyLoginFields(state) {
+    return {
+      ...state,
+      loginFields: {
+        email: '',
+        password: '',
+      },
+    };
+  },
+
   logout(state) {
     saveItem({ key: 'accessToken', value: '' });
     return {

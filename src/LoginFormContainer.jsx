@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './LoginForm';
 import LogoutForm from './LogoutForm';
 
-import { requestLogin, changeLoginFields, logout } from './actions';
+import {
+  requestLogin,
+  changeLoginFields,
+  emptyLoginFields,
+  logout,
+} from './actions';
 
 import { saveItem } from './services/storage';
 
@@ -18,6 +23,7 @@ export default function LoginFormContainer() {
 
   function handleSubmit() {
     dispatch(requestLogin());
+    dispatch(emptyLoginFields());
   }
 
   function handleChange({ name, value }) {
