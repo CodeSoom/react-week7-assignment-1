@@ -39,7 +39,7 @@ describe('LoginForm', () => {
   it('listens click event', () => {
     const { getByText } = renderLoginForm({});
 
-    fireEvent.click(getByText('login'));
+    fireEvent.click(getByText('Log In'));
     expect(handleClick).toBeCalled();
   });
 

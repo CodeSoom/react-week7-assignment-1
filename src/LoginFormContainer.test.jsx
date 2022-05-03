@@ -50,7 +50,7 @@ describe('LoginFormContainer', () => {
     it('calls dispatch', () => {
       const { getByText, getByLabelText } = renderLoginFormContainer();
 
-      fireEvent.click(getByText('login'));
+      fireEvent.click(getByText('Log In'));
 
       expect(dispatch).toBeCalled();
 

@@ -8,7 +8,7 @@ export default function LoginForm({ fields, onSubmit, onChange }) {
 
   return (
     <>
-      <h2>Log In</h2>
+      <h2>LogIn</h2>
       <div>
         <label htmlFor="email-input">
           E-mail
@@ -37,7 +37,7 @@ export default function LoginForm({ fields, onSubmit, onChange }) {
         type="button"
         onClick={onSubmit}
       >
-        login
+        Log In
       </button>
     </>
   );
