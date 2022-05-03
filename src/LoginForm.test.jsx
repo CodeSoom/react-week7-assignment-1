@@ -37,4 +37,10 @@ describe('LoginForm', () => {
       expect(onChange).toBeCalledWith({ name, value });
     });
   });
+
+  it('renders "log in" button', () => {
+    const { container } = renderLoginForm();
+
+    expect(container).toHaveTextContent('log in');
+  });
 });
