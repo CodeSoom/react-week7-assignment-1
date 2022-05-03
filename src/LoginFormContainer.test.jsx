@@ -2,14 +2,11 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import given from 'given2';
 import LoginFormContainer from './LoginFormContainer';
 
 describe('LoginFormContainer', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    given('email', () => '');
-    given('password', () => '');
   });
 
   const dispatch = jest.fn();
@@ -18,8 +15,8 @@ describe('LoginFormContainer', () => {
 
   useSelector.mockImplementation((selector) => selector({
     loginField: {
-      email: given.email,
-      password: given.password,
+      email: '',
+      password: '',
     },
   }));
 

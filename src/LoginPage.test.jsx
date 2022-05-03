@@ -5,19 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoginPage from './LoginPage';
 
 describe('LoginPage', () => {
-  beforeEach(() => {
-    given('email', () => '');
-    given('password', () => '');
-  });
-
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
 
   useSelector.mockImplementation((selector) => selector({
     loginField: {
-      email: given.email,
-      password: given.password,
+      email: '',
+      password: '',
     },
   }));
 
