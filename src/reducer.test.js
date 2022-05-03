@@ -157,14 +157,13 @@ describe('reducer', () => {
       };
 
       const loginFields = {
-        email: 'test@example.com',
-        password: '1234',
+        name: 'email',
+        value: 'test@example.com',
       };
 
       const state = reducer(initialState, changeLoginFields(loginFields));
 
       expect(state.loginFields.email).toBe('test@example.com');
-      expect(state.loginFields.password).toBe('1234');
     });
   });
 });

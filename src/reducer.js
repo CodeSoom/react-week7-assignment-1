@@ -5,8 +5,13 @@ const initialState = {
   categories: [],
   restaurants: [],
   restaurant: null,
+  accessToken: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginFields: {
+    email: null,
+    password: null,
+  },
 };
 
 const reducers = {
@@ -38,6 +43,13 @@ const reducers = {
     };
   },
 
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
+    };
+  },
+
   selectRegion(state, { payload: { regionId } }) {
     const { regions } = state;
     return {
@@ -51,6 +63,17 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  changeLoginFields(state, { payload: { loginFields } }) {
+    const { name, value } = loginFields;
+    return {
+      ...state,
+      loginFields: {
+        ...state.loginFields,
+        [name]: value,
+      },
     };
   },
 };
