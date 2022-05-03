@@ -1,4 +1,6 @@
-export default function LoginForm({ onSubmit, onChange }) {
+export default function LoginForm({ fields, onSubmit, onChange }) {
+  const { email, password } = fields;
+
   function handleChange(event) {
     const { name, value } = event.target;
     onChange({ name, value });
@@ -15,6 +17,7 @@ export default function LoginForm({ onSubmit, onChange }) {
           type="email"
           name="email"
           id="email-input"
+          value={email || ''}
           onChange={handleChange}
         />
       </div>
@@ -26,6 +29,7 @@ export default function LoginForm({ onSubmit, onChange }) {
           type="password"
           name="password"
           id="password-input"
+          value={password || ''}
           onChange={handleChange}
         />
       </div>

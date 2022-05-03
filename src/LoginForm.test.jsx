@@ -8,15 +8,10 @@ describe('LoginForm', () => {
   const handleClick = jest.fn();
   const handleChange = jest.fn();
 
-  const loginFields = {
-    email: 'test@example.com',
-    password: '1234',
-  };
-
-  const renderLoginForm = () => render(
+  const renderLoginForm = (fields) => render(
     <MemoryRouter initialEntries={['/login']}>
       <LoginForm
-        fields={loginFields}
+        fields={fields}
         onSubmit={handleClick}
         onChange={handleChange}
       />
@@ -24,29 +19,32 @@ describe('LoginForm', () => {
   );
 
   it('renders title', () => {
-    const { container } = renderLoginForm();
+    const { container } = renderLoginForm({});
 
     expect(container).toHaveTextContent('Log In');
   });
 
   it('renders login form', () => {
-    const { queryByLabelText } = renderLoginForm();
+    const loginFields = {
+      email: 'test@example.com',
+      password: '1234',
+    };
 
-    expect(queryByLabelText('E-mail')).not.toBeNull();
-    expect(queryByLabelText('Password')).not.toBeNull();
+    const { queryByLabelText } = renderLoginForm(loginFields);
+
     expect(queryByLabelText('E-mail').value).toBe('test@example.com');
     expect(queryByLabelText('Password').value).toBe('1234');
   });
 
   it('listens click event', () => {
-    const { getByText } = renderLoginForm();
+    const { getByText } = renderLoginForm({});
 
     fireEvent.click(getByText('login'));
     expect(handleClick).toBeCalled();
   });
 
   it('listens change event', () => {
-    const { getByLabelText } = renderLoginForm();
+    const { getByLabelText } = renderLoginForm({});
 
     const controls = [
       { label: 'E-mail', name: 'email', value: 'test@email.com' },

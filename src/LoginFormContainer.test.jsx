@@ -1,6 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { render, fireEvent } from '@testing-library/react';
 
@@ -10,6 +10,13 @@ describe('LoginPage', () => {
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
+
+  useSelector.mockImplementation((selector) => selector({
+    loginFields: {
+      email: '',
+      password: '',
+    },
+  }));
 
   const renderLoginPage = () => render(
     <MemoryRouter initialEntries={['/login']}>
