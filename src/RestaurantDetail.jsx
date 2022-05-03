@@ -1,7 +1,10 @@
 import MenuItems from './MenuItems';
+import ReviewList from './ReviewList';
 
 export default function RestaurantDetail({ restaurant }) {
   const { name, address, menuItems } = restaurant;
+  // TODO: get reviews from parent
+  const reviews = [];
 
   return (
     <div>
@@ -13,6 +16,7 @@ export default function RestaurantDetail({ restaurant }) {
       </p>
       <h3>메뉴</h3>
       <MenuItems menuItems={menuItems} />
+      <ReviewList reviews={reviews} />
     </div>
   );
 }
