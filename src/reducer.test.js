@@ -181,7 +181,7 @@ describe('reducer', () => {
     };
 
     it('returns access token', () => {
-      const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
+      const state = reducer(initialState, setAccessToken({ accessToken: 'ACCESS_TOKEN' }));
 
       expect(state.accessToken).toEqual('ACCESS_TOKEN');
     });
