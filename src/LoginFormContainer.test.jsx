@@ -45,6 +45,12 @@ describe('LoginPage', () => {
 
     expect(dispatch).toBeCalledWith({
       type: 'setLoginField',
+      payload: {
+        loginField: {
+          name: 'email',
+          value: 'test@email.com',
+        },
+      },
     });
   });
 });

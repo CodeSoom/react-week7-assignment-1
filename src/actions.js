@@ -33,6 +33,13 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function setLoginField(loginField) {
+  return {
+    type: 'setLoginField',
+    payload: { loginField },
+  };
+}
+
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
@@ -84,4 +91,8 @@ export function loadRestaurant({ restaurantId }) {
 
     dispatch(setRestaurant(restaurant));
   };
+}
+
+export function requestLogin() {
+  // TODO: request login and set token
 }
