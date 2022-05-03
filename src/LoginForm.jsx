@@ -1,6 +1,7 @@
-export default function LoginForm() {
-  function handleClick() {
-    // TODO
+export default function LoginForm({ onSubmit }) {
+  function handleClick(event) {
+    const { name, value } = event.target;
+    onSubmit({ name, value });
   }
 
   return (
