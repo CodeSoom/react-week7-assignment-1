@@ -1,13 +1,15 @@
 import { MemoryRouter } from 'react-router-dom';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import LoginPage from './LoginPage';
 
 describe('LoginPage', () => {
+  const handleClick = jest.fn();
+
   const renderLoginPage = () => render(
     <MemoryRouter initialEntries={['/login']}>
-      <LoginPage />
+      <LoginPage onClick={handleClick} />
     </MemoryRouter>,
   );
 
@@ -17,10 +19,18 @@ describe('LoginPage', () => {
     expect(container).toHaveTextContent('Log In');
   });
 
-  it('renders form', () => {
+  it('renders login form', () => {
     const { queryByLabelText } = renderLoginPage();
 
     expect(queryByLabelText('E-mail')).not.toBeNull();
     expect(queryByLabelText('Password')).not.toBeNull();
+  });
+
+  it('renders login button', () => {
+    const { getByText } = renderLoginPage();
+
+    fireEvent.click(getByText('login'));
+
+    expect(handleClick).toBeCalled();
   });
 });
