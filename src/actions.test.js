@@ -100,4 +100,23 @@ describe('actions', () => {
       expect(actions[1]).toEqual(setRestaurant({}));
     });
   });
+
+  describe('requestSession', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginField: {
+          email: 'tester@example.com',
+          password: 'tester',
+        },
+      });
+    });
+
+    it('dispatch requrestSession', async () => {
+      await store.dispatch(requestSession());
+
+      const actions = store.actions();
+
+      expect(actions).toEqual(setAceessToken('ACCESS_TOKEN'));
+    });
+  });
 });
