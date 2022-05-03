@@ -19,6 +19,10 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginField: {
+        email: '',
+        password: '',
+      },
     };
 
     it('returns initialState', () => {
