@@ -17,6 +17,7 @@ describe('LoginForm', () => {
 
   const onChange = jest.fn();
   const onSubmit = jest.fn();
+  const onLogout = jest.fn();
 
   const renderLoginForm = () => render((
     <LoginForm
@@ -24,6 +25,7 @@ describe('LoginForm', () => {
       isLogin={given.isLogin}
       onChange={onChange}
       onSubmit={onSubmit}
+      onLogout={onLogout}
     />
   ));
 
@@ -96,6 +98,14 @@ describe('LoginForm', () => {
       const { container } = renderLoginForm();
 
       expect(container).toHaveTextContent('log out');
+    });
+
+    it('listens for click event on log-out', () => {
+      const { getByText } = renderLoginForm();
+
+      fireEvent.click(getByText('log out'));
+
+      expect(onLogout).toBeCalled();
     });
   });
 });
