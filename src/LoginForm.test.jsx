@@ -10,6 +10,7 @@ describe('LoginForm', () => {
       email: '',
       password: '',
     }));
+    given('isLogin', () => false);
 
     jest.clearAllMocks();
   });
@@ -20,6 +21,7 @@ describe('LoginForm', () => {
   const renderLoginForm = () => render((
     <LoginForm
       fields={given.fields}
+      isLogin={given.isLogin}
       onChange={onChange}
       onSubmit={onSubmit}
     />
@@ -84,7 +86,7 @@ describe('LoginForm', () => {
     given('isLogin', () => true);
 
     it('renders "log-out" button', () => {
-      const { container } = render();
+      const { container } = renderLoginForm();
 
       expect(container).toHaveTextContent('log out');
     });
