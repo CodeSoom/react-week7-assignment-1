@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import LoginForm from './LoginForm';
 
-import { requestLogin, changeLoginField } from './actions';
+import { requestLogin, changeLoginFields } from './actions';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ export default function LoginFormContainer() {
   }
 
   function handleChange({ name, value }) {
-    dispatch(changeLoginField({ name, value }));
+    dispatch(changeLoginFields({ name, value }));
   }
 
   return (

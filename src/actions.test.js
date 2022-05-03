@@ -106,7 +106,7 @@ describe('actions', () => {
   describe('requestLogin', () => {
     beforeEach(() => {
       store = mockStore({
-        loginField: {
+        loginFields: {
           email: 'test@email.com',
           password: '1234',
         },

@@ -44,9 +44,9 @@ describe('LoginPage', () => {
     fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test@email.com' } });
 
     expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
+      type: 'changeLoginFields',
       payload: {
-        loginField: {
+        loginFields: {
           name: 'email',
           value: 'test@email.com',
         },

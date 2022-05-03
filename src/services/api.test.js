@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import {
   fetchRegions,
   fetchCategories,
@@ -18,6 +20,10 @@ describe('api', () => {
       async json() { return data; },
     });
   };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
   describe('fetchRegions', () => {
     beforeEach(() => {
@@ -72,11 +78,18 @@ describe('api', () => {
 
   describe('postLogin', () => {
     beforeEach(() => {
-      mockFetch(ACCESS_TOKEN);
+      axios.mockImplementation(() => Promise.resolve({
+        data: {
+          accessToken: ACCESS_TOKEN,
+        },
+      }));
     });
 
     it('returns token for access', async () => {
-      const accessToken = await postLogin({ email: 'test@email.com', password: '1234' });
+      const accessToken = await postLogin({
+        email: 'tester@example.com',
+        password: 'test',
+      });
 
       expect(accessToken).toEqual(ACCESS_TOKEN);
     });
