@@ -2,6 +2,8 @@ import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
 
+import axios from 'axios';
+
 import {
   loadInitialData,
   setRegions,
@@ -21,6 +23,10 @@ jest.mock('./services/api');
 
 describe('actions', () => {
   let store;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
   describe('loadInitialData', () => {
     beforeEach(() => {
@@ -107,8 +113,8 @@ describe('actions', () => {
     beforeEach(() => {
       store = mockStore({
         loginFields: {
-          email: 'test@email.com',
-          password: '1234',
+          email: 'test@example.com',
+          password: 'test',
         },
       });
     });

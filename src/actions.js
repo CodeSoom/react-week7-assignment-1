@@ -105,6 +105,7 @@ export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields } = getState();
     const { email, password } = loginFields;
+
     try {
       const accessToken = await postLogin({ email, password });
 
