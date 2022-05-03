@@ -17,6 +17,7 @@ describe('LoginFormContainer', () => {
       password: '',
     },
     accessToken: given.accessToken,
+    errorMessage: given.errorMessage,
   }));
 
   const renderLoginFormContainer = () => render(
@@ -81,6 +82,16 @@ describe('LoginFormContainer', () => {
           },
         },
       });
+    });
+  });
+
+  context('when the error is thrown', () => {
+    given('errorMessage', () => 'Error');
+
+    it('renders the error message', () => {
+      const { container } = renderLoginFormContainer();
+
+      expect(container).toHaveTextContent('Error');
     });
   });
 });

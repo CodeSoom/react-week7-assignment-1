@@ -131,7 +131,8 @@ describe('actions', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(setAccessToken('TOKEN'));
+        expect(actions[0]).toEqual(setErrorMessage(''));
+        expect(actions[1]).toEqual(setAccessToken('TOKEN'));
       });
     });
 
@@ -169,18 +170,34 @@ describe('actions', () => {
           score: 5,
           description: '최고예요',
         },
+        accessToken: 'TOKEN',
       });
     });
 
-    it('dispatchs loadRestaurant', async () => {
+    it('dispatchs setRestaurant', async () => {
+      postReview.mockImplementation(() => ('review'));
+
       await store.dispatch(sendReview({ restaurantId: 1 }));
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[0]).toEqual(setErrorMessage(''));
+      expect(actions[1]).toEqual(setRestaurant(null));
     });
 
-    context('when the request failed', () => {
+    context('when the request failed from api', () => {
+      it('dispatchs setErrorMessage', async () => {
+        postReview.mockImplementation(() => '');
+
+        await store.dispatch(sendReview({ restaurantId: 1 }));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setErrorMessage('리뷰 정보를 다시 입력해 주세요.'));
+      });
+    });
+
+    context('when the request failed from action', () => {
       it('dispatchs setErrorMessage', async () => {
         postReview.mockImplementation(() => {
           throw new Error('Error');

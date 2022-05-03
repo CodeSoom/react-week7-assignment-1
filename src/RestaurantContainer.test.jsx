@@ -17,6 +17,7 @@ describe('RestaurantContainer', () => {
     restaurant: given.restaurant,
     accessToken: given.accessToken,
     reviewFields: given.reviewFields,
+    errorMessage: given.errorMessage,
   }));
 
   beforeEach(() => {
@@ -110,6 +111,29 @@ describe('RestaurantContainer', () => {
 
       expect(queryByLabelText('평점')).toBeNull();
       expect(queryByLabelText('리뷰 내용')).toBeNull();
+    });
+  });
+
+  context('when the error is thrown', () => {
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
+
+    given('accessToken', () => 'TOKEN');
+
+    given('reviewFields', () => ({
+      score: 3,
+      description: '맛있어요',
+    }));
+
+    given('errorMessage', () => 'Error');
+
+    it('renders the error message', () => {
+      const { container } = renderRestaurantContainer();
+
+      expect(container).toHaveTextContent('Error');
     });
   });
 });

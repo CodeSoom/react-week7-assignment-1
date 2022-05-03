@@ -110,11 +110,18 @@ export function sendReview({ restaurantId }) {
     const { score, description } = reviewFields;
 
     try {
-      await postReview({
+      const data = await postReview({
         accessToken, restaurantId, score, description,
       });
 
-      dispatch(loadRestaurant({ restaurantId }));
+      if (data) {
+        dispatch(setErrorMessage(''));
+        dispatch(loadRestaurant({ restaurantId }));
+
+        return;
+      }
+
+      dispatch(setErrorMessage('리뷰 정보를 다시 입력해 주세요.'));
     } catch (e) {
       dispatch(setErrorMessage(e.message));
     }
@@ -144,6 +151,7 @@ export function requestLogin() {
       const accessToken = await postLogin({ email, password });
 
       if (accessToken?.length) {
+        dispatch(setErrorMessage(''));
         saveItem({ key: 'accessToken', value: accessToken });
 
         dispatch(setAccessToken(accessToken));

@@ -24,6 +24,7 @@ export default function RestaurantContainer({ restaurantId }) {
   const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
   const reviewFields = useSelector(get('reviewFields'));
+  const errorMessage = useSelector(get('errorMessage'));
 
   function handleSubmit() {
     dispatch(sendReview({ restaurantId }));
@@ -60,6 +61,7 @@ export default function RestaurantContainer({ restaurantId }) {
         onSubmit={handleSubmit}
         onChange={handleChange}
       />
+      <p>{errorMessage}</p>
       <ReviewList reviews={restaurant.reviews} />
     </>
   );
