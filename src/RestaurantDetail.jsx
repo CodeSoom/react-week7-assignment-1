@@ -1,8 +1,10 @@
 import MenuItems from './MenuItems';
 import ReviewList from './ReviewList';
 
-export default function RestaurantDetail({ restaurant, reviews }) {
-  const { name, address, menuItems } = restaurant;
+export default function RestaurantDetail({ restaurant }) {
+  const {
+    name, address, menuItems, reviews,
+  } = restaurant;
 
   return (
     <div>

@@ -18,8 +18,6 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
-  // TODO: fetch data
-  const reviews = [];
 
   if (!restaurant) {
     return (
@@ -29,7 +27,7 @@ export default function RestaurantContainer({ restaurantId }) {
 
   return (
     <>
-      <RestaurantDetail restaurant={restaurant} reviews={reviews} />
+      <RestaurantDetail restaurant={restaurant} />
     </>
   );
 }

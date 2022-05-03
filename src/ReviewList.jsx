@@ -2,7 +2,7 @@ export default function ReviewList({ reviews }) {
   return (
     <>
       <h3>리뷰</h3>
-      {reviews.map(({
+      {reviews?.map(({
         id, name, score, description,
       }) => (
         <li key={id}>
