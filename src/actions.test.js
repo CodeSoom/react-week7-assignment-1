@@ -113,7 +113,7 @@ describe('actions', () => {
       });
     });
 
-    it('dispatch requrestSession', async () => {
+    it('dispatchs requrestSession', async () => {
       await store.dispatch(requestSession());
 
       const actions = store.getActions();
