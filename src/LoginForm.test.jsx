@@ -25,56 +25,68 @@ describe('LoginForm', () => {
     />
   ));
 
-  it('renders login form', () => {
-    const { queryByLabelText } = renderLoginForm();
+  context('without login', () => {
+    it('renders login form', () => {
+      const { queryByLabelText } = renderLoginForm();
 
-    expect(queryByLabelText('E-mail')).not.toBeNull();
-    expect(queryByLabelText('Password')).not.toBeNull();
-  });
+      expect(queryByLabelText('E-mail')).not.toBeNull();
+      expect(queryByLabelText('Password')).not.toBeNull();
+    });
 
-  it('listens for change events', () => {
-    const controls = [
-      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
-      { label: 'Password', name: 'password', value: 'tester' },
-    ];
+    it('listens for change events', () => {
+      const controls = [
+        { label: 'E-mail', name: 'email', value: 'tester@example.com' },
+        { label: 'Password', name: 'password', value: 'tester' },
+      ];
 
-    const { getByLabelText } = renderLoginForm();
+      const { getByLabelText } = renderLoginForm();
 
-    controls.forEach(({ label, name, value }) => {
-      fireEvent.change(
-        getByLabelText(label),
-        { target: { value } },
-      );
+      controls.forEach(({ label, name, value }) => {
+        fireEvent.change(
+          getByLabelText(label),
+          { target: { value } },
+        );
 
-      expect(onChange).toBeCalledWith({ name, value });
+        expect(onChange).toBeCalledWith({ name, value });
+      });
+    });
+
+    it('renders "log in" button', () => {
+      const { container } = renderLoginForm();
+
+      expect(container).toHaveTextContent('log in');
+    });
+
+    it('listens for click event on submit', () => {
+      const { getByText } = renderLoginForm();
+
+      fireEvent.click(getByText('log in'));
+
+      expect(onSubmit).toHaveBeenCalled();
+    });
+
+    context('with fields value', () => {
+      given('fields', () => ({
+        email: 'tester@example.com',
+        password: 'tester',
+      }));
+
+      it('renders fields value', () => {
+        const { queryByDisplayValue } = renderLoginForm();
+
+        expect(queryByDisplayValue('tester@example.com')).not.toBeNull();
+        expect(queryByDisplayValue('tester')).not.toBeNull();
+      });
     });
   });
 
-  it('renders "log in" button', () => {
-    const { container } = renderLoginForm();
+  context('with login', () => {
+    given('isLogin', () => true);
 
-    expect(container).toHaveTextContent('log in');
-  });
+    it('renders "log-out" button', () => {
+      const { container } = render();
 
-  it('listens for click event on submit', () => {
-    const { getByText } = renderLoginForm();
-
-    fireEvent.click(getByText('log in'));
-
-    expect(onSubmit).toHaveBeenCalled();
-  });
-
-  context('with fields value', () => {
-    given('fields', () => ({
-      email: 'tester@example.com',
-      password: 'tester',
-    }));
-
-    it('renders fields value', () => {
-      const { queryByDisplayValue } = renderLoginForm();
-
-      expect(queryByDisplayValue('tester@example.com')).not.toBeNull();
-      expect(queryByDisplayValue('tester')).not.toBeNull();
+      expect(container).toHaveTextContent('log out');
     });
   });
 });
