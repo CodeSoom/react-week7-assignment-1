@@ -10,6 +10,8 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
+  setAccessToken,
 } from './actions';
 
 const middlewares = [thunk];
@@ -97,6 +99,68 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    context('email, password 입력 했을 때', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: 'test@test.com',
+            password: 'test',
+          },
+        });
+      });
+
+      it('runs setAccessToken', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setAccessToken({
+          email: 'test@test.com',
+          password: 'test',
+        }));
+      });
+    });
+
+    context('email만 입력 했을 때', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: 'test@test.com',
+            password: '',
+          },
+        });
+      });
+
+      it('아무 액션도 일어나지 않는다.', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
+    });
+
+    context('password만 입력 했을 때', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: '',
+            password: 'test',
+          },
+        });
+      });
+
+      it('아무 액션도 일어나지 않는다.', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
     });
   });
 });
