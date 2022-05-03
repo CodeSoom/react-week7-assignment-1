@@ -32,6 +32,7 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
+      errorMessage: '',
     };
 
     it('returns initialState', () => {

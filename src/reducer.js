@@ -16,6 +16,7 @@ const initialState = {
     email: '',
     password: '',
   },
+  errorMessage: '',
 };
 
 const reducers = {
@@ -67,6 +68,13 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  setErrorMessage(state, { payload: { errorMessage } }) {
+    return {
+      ...state,
+      errorMessage,
     };
   },
 

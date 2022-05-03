@@ -135,7 +135,7 @@ describe('actions', () => {
       });
     });
 
-    context('when the request failed', () => {
+    context('when the request failed from api', () => {
       it('dispatchs setErrorMessage', async () => {
         postLogin.mockImplementation(() => '');
 
@@ -144,6 +144,20 @@ describe('actions', () => {
         const actions = store.getActions();
 
         expect(actions[0]).toEqual(setErrorMessage('로그인 정보를 다시 입력해 주세요.'));
+      });
+    });
+
+    context('when the request failed from action', () => {
+      it('dispatchs setErrorMessage', async () => {
+        postLogin.mockImplementation(() => {
+          throw new Error('Error');
+        });
+
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setErrorMessage('Error'));
       });
     });
   });
