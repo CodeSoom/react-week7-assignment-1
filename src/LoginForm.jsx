@@ -1,13 +1,13 @@
 import InputField from './InputField';
 
 export default function LoginForm({
-  onChange, onSubmit, fields = {}, isLogin,
+  onChange, onSubmit, fields = {}, isLogin, onLogout,
 }) {
   const { email, password } = fields;
 
   if (isLogin) {
     return (
-      <button type="button">
+      <button type="button" onClick={onLogout}>
         log out
       </button>
     );
