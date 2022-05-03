@@ -1,4 +1,4 @@
-export default function LoginPage() {
+export default function LoginPage({ onClick }) {
   return (
     <>
       <h2>Log In</h2>
@@ -22,6 +22,12 @@ export default function LoginPage() {
           id="password-input"
         />
       </div>
+      <button
+        type="button"
+        onClick={onClick}
+      >
+        login
+      </button>
     </>
   );
 }
