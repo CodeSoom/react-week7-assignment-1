@@ -9,6 +9,7 @@ import {
   selectCategory,
   setLoginFields,
   setAccessToken,
+  clearSession,
 } from './actions';
 
 describe('reducer', () => {
@@ -172,10 +173,22 @@ describe('reducer', () => {
       accessToken: '',
     };
 
-    it('returns access token', () => {
+    it('changes access token', () => {
       const state = reducer(initialState, setAccessToken({ accessToken: 'ACCESS_TOKEN' }));
 
       expect(state.accessToken).toEqual('ACCESS_TOKEN');
+    });
+  });
+
+  describe('clearSession', () => {
+    const initialState = {
+      accessToken: 'ACCESS_TOKEN',
+    };
+
+    it('clears acessToken', () => {
+      const state = reducer(initialState, clearSession());
+
+      expect(state.accessToken).toEqual('');
     });
   });
 });

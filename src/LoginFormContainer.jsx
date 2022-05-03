@@ -1,8 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { requestSession, setLoginFields } from './actions';
-
 import LoginForm from './LoginForm';
+
+import {
+  requestSession,
+  setLoginFields,
+  clearSession,
+} from './actions';
 
 import { get } from './utils';
 
@@ -20,12 +24,17 @@ export default function LoginFormContainer() {
     dispatch(requestSession(loginFields));
   }
 
+  function handleLogOutClick() {
+    dispatch(clearSession());
+  }
+
   return (
     <LoginForm
       fields={loginFields}
       isLogin={!!accessToken}
       onChange={handleChange}
       onSubmit={handleLoginClick}
+      onLogout={handleLogOutClick}
     />
   );
 }

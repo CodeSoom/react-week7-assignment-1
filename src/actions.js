@@ -110,3 +110,9 @@ export function requestSession() {
     dispatch(setAccessToken({ accessToken }));
   };
 }
+
+export function clearSession() {
+  return {
+    type: 'clearSession',
+  };
+}

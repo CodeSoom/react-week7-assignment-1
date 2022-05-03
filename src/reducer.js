@@ -75,6 +75,13 @@ const reducers = {
       accessToken,
     };
   },
+
+  clearSession(state) {
+    return {
+      ...state,
+      accessToken: '',
+    };
+  },
 };
 
 function defaultReducer(state) {
