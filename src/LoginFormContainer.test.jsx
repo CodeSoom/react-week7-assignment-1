@@ -41,10 +41,10 @@ describe('LoginFormContainer', () => {
       password: 'tester',
     }));
 
-    const { queryByLabelText } = render();
+    const { queryByDisplayValue } = renderLoginFormContainer();
 
-    expect(queryByLabelText('tester@example.com')).not.toBeNull();
-    expect(queryByLabelText('tester')).not.toBeNull();
+    expect(queryByDisplayValue('tester@example.com')).not.toBeNull();
+    expect(queryByDisplayValue('tester')).not.toBeNull();
   });
 
   it('listens for change event', () => {

@@ -9,7 +9,7 @@ import { get } from './utils';
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  const { loginFields } = useSelector(get('loginFields'));
+  const loginFields = useSelector(get('loginFields'));
 
   function handleChange({ name, value }) {
     dispatch(setLoginFields({ name, value }));
@@ -21,6 +21,7 @@ export default function LoginFormContainer() {
 
   return (
     <LoginForm
+      fields={loginFields}
       onChange={handleChange}
       onSubmit={handleLoginClick}
     />
