@@ -6,6 +6,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -111,6 +112,42 @@ describe('api', () => {
       });
 
       expect(accessToken).toEqual('');
+    });
+  });
+
+  describe('postReview', () => {
+    context('when request succeeded', () => {
+      const data = { restaurant: RESTAURANT };
+
+      beforeEach(() => {
+        axios.mockImplementation(() => Promise.resolve({
+          data,
+        }));
+      });
+
+      it('returns restaurant data', async () => {
+        const requestedData = await postReview({
+          accessToken: 'TOKEN', restaurantId: 1, score: 3, description: '맛있어요',
+        });
+
+        expect(requestedData).toEqual(data);
+      });
+    });
+  });
+
+  context('when request failed', () => {
+    beforeEach(() => {
+      axios.mockImplementation(() => Promise.reject(
+        new Error('request failed'),
+      ));
+    });
+
+    it('returns empty string', async () => {
+      const requestedData = await postReview({
+        accessToken: 'TOKEN', restaurantId: 1, score: 3, description: '맛있어요',
+      });
+
+      expect(requestedData).toEqual('');
     });
   });
 });
