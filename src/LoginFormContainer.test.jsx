@@ -35,6 +35,18 @@ describe('LoginFormContainer', () => {
     expect(queryByLabelText('Password')).not.toBeNull();
   });
 
+  it('renders login fields', () => {
+    given('loginFields', () => ({
+      email: 'tester@example.com',
+      password: 'tester',
+    }));
+
+    const { queryByLabelText } = render();
+
+    expect(queryByLabelText('tester@example.com')).not.toBeNull();
+    expect(queryByLabelText('tester')).not.toBeNull();
+  });
+
   it('listens for change event', () => {
     const controls = [
       { label: 'E-mail', value: 'tester@example.com', name: 'email' },
