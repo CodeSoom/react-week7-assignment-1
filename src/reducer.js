@@ -8,6 +8,10 @@ const initialState = {
   accessToken: null,
   selectedRegion: null,
   selectedCategory: null,
+  reviewFields: {
+    score: null,
+    description: null,
+  },
   loginFields: {
     email: null,
     password: null,
@@ -63,6 +67,17 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  changeReviewFields(state, { payload: { reviewFields } }) {
+    const { name, value } = reviewFields;
+    return {
+      ...state,
+      reviewFields: {
+        ...state.reviewFields,
+        [name]: value,
+      },
     };
   },
 

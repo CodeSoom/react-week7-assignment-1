@@ -23,6 +23,10 @@ describe('reducer', () => {
       accessToken: null,
       selectedRegion: null,
       selectedCategory: null,
+      reviewFields: {
+        score: null,
+        description: null,
+      },
       loginFields: {
         email: null,
         password: null,
@@ -159,14 +163,13 @@ describe('reducer', () => {
       };
 
       const reviewFields = {
-        score: 3,
-        description: 'good',
+        name: 'score',
+        value: 3,
       };
 
       const state = reducer(initialState, changeReviewFields(reviewFields));
 
       expect(state.reviewFields.score).toBe(3);
-      expect(state.reviewFields.description).toBe('good');
     });
   });
 
