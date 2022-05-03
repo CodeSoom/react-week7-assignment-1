@@ -1,20 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './LoginForm';
+import LogoutForm from './LogoutForm';
 
 import { requestLogin, changeLoginFields } from './actions';
 
 import { get } from './utils';
-
-function LogoutForm() {
-  return (
-    <button
-      type="button"
-    >
-      Log out
-    </button>
-  );
-}
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
@@ -30,10 +21,16 @@ export default function LoginFormContainer() {
     dispatch(changeLoginFields({ name, value }));
   }
 
+  function handleClickLogOut() {
+    // dispatch(logout());
+  }
+
   return (
     <>
       {accessToken ? (
-        <LogoutForm />
+        <LogoutForm
+          onClick={handleClickLogOut}
+        />
       ) : (
         <LoginForm
           fields={loginFields}
