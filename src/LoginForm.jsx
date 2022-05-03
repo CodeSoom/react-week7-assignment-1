@@ -1,12 +1,6 @@
 import InputField from './InputField';
 
 export default function LoginForm({ onChange, onSubmit }) {
-  function handleChange(event) {
-    const { target: { name, value } } = event;
-
-    onChange({ name, value });
-  }
-
   return (
     <>
       <InputField
