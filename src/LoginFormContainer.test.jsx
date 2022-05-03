@@ -95,5 +95,13 @@ describe('LoginFormContainer', () => {
 
       expect(container).toHaveTextContent('log out');
     });
+
+    it('listens for click event on log out', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('log out'));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 });
