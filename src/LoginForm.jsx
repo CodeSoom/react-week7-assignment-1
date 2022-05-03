@@ -1,7 +1,9 @@
-export default function LoginFormContainer() {
-  function handleClick() {
-    // login
+export default function LoginForm({ onSubmit, onChange }) {
+  function handleChange(event) {
+    const { name, value } = event.target;
+    onChange({ name, value });
   }
+
   return (
     <>
       <h2>Log In</h2>
@@ -13,6 +15,7 @@ export default function LoginFormContainer() {
           type="email"
           name="email"
           id="email-input"
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -23,11 +26,12 @@ export default function LoginFormContainer() {
           type="password"
           name="password"
           id="password-input"
+          onChange={handleChange}
         />
       </div>
       <button
         type="button"
-        onClick={handleClick}
+        onClick={onSubmit}
       >
         login
       </button>
