@@ -78,11 +78,23 @@ describe('RestaurantContainer', () => {
     });
 
     it('calls dispatch', () => {
-      const { getByText } = renderRestaurantContainer();
+      const { getByText, getByLabelText } = renderRestaurantContainer();
 
       fireEvent.click(getByText('리뷰 남기기'));
 
       expect(dispatch).toBeCalledTimes(2);
+
+      fireEvent.change(getByLabelText('평점'), { target: { value: 5 } });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeReviewFields',
+        payload: {
+          reviewFields: {
+            name: 'score',
+            value: '5',
+          },
+        },
+      });
     });
   });
 
