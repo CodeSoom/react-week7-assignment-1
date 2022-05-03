@@ -69,18 +69,16 @@ describe('LoginForm', () => {
       expect(onSubmit).toHaveBeenCalled();
     });
 
-    context('with fields value', () => {
+    it('renders fields value', () => {
       given('fields', () => ({
         email: 'tester@example.com',
         password: 'tester',
       }));
 
-      it('renders fields value', () => {
-        const { queryByDisplayValue } = renderLoginForm();
+      const { queryByDisplayValue } = renderLoginForm();
 
-        expect(queryByDisplayValue('tester@example.com')).not.toBeNull();
-        expect(queryByDisplayValue('tester')).not.toBeNull();
-      });
+      expect(queryByDisplayValue('tester@example.com')).not.toBeNull();
+      expect(queryByDisplayValue('tester')).not.toBeNull();
     });
   });
 
