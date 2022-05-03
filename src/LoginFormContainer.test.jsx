@@ -30,9 +30,7 @@ describe('LoginFormContainer', () => {
   });
 
   context('when logged-in', () => {
-    beforeEach(() => {
-      given('accessToken', () => 'TOKEN');
-    });
+    given('accessToken', () => 'TOKEN');
 
     it('renders title', () => {
       const { container } = renderLoginFormContainer();
@@ -50,9 +48,7 @@ describe('LoginFormContainer', () => {
   });
 
   context('when logged-out', () => {
-    beforeEach(() => {
-      given('accessToken', () => '');
-    });
+    given('accessToken', () => '');
 
     it('renders title', () => {
       const { container } = renderLoginFormContainer();

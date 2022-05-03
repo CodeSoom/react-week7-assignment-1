@@ -55,20 +55,18 @@ describe('RestaurantContainer', () => {
   });
 
   context('when logged-in', () => {
-    beforeEach(() => {
-      given('restaurant', () => ({
-        id: 1,
-        name: '마법사주방',
-        address: '서울시 강남구',
-      }));
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
 
-      given('accessToken', () => 'TOKEN');
+    given('accessToken', () => 'TOKEN');
 
-      given('reviewFields', () => ({
-        score: 3,
-        description: '맛있어요',
-      }));
-    });
+    given('reviewFields', () => ({
+      score: 3,
+      description: '맛있어요',
+    }));
 
     it('renders review form', () => {
       const { queryByLabelText } = renderRestaurantContainer();
@@ -99,15 +97,13 @@ describe('RestaurantContainer', () => {
   });
 
   context('when logged-out', () => {
-    beforeEach(() => {
-      given('restaurant', () => ({
-        id: 1,
-        name: '마법사주방',
-        address: '서울시 강남구',
-      }));
+    given('restaurant', () => ({
+      id: 1,
+      name: '마법사주방',
+      address: '서울시 강남구',
+    }));
 
-      given('accessToken', () => '');
-    });
+    given('accessToken', () => '');
 
     it("doesn't render review form", () => {
       const { queryByLabelText } = renderRestaurantContainer();
