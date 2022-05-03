@@ -9,34 +9,32 @@ describe('LoginForm', () => {
 
   const onChange = jest.fn();
 
-  const renderLoginForm = render((
+  const renderLoginForm = () => render((
     <LoginForm onChange={onChange} />
   ));
 
   it('renders login form', () => {
-    const { queryByLabelText } = render(<LoginForm />);
+    const { queryByLabelText } = renderLoginForm();
 
     expect(queryByLabelText('E-mail')).not.toBeNull();
     expect(queryByLabelText('Password')).not.toBeNull();
   });
 
-  it('listens for change event', () => {
-    const { getByLabelText } = render(<LoginForm />);
-
+  it('listens for change events', () => {
     const controls = [
       { label: 'E-mail', name: 'email', value: 'tester@example.com' },
       { label: 'Password', name: 'password', value: 'tester' },
     ];
 
+    const { getByLabelText } = renderLoginForm();
+
     controls.forEach(({ label, name, value }) => {
       fireEvent.change(
         getByLabelText(label),
-        { tartget: { value } },
+        { target: { value } },
       );
 
-      expect(onChange).toBeCalledWith({
-        target: { name, label },
-      });
+      expect(onChange).toBeCalledWith({ name, value });
     });
   });
 });
