@@ -12,6 +12,7 @@ import {
   changeReviewFields,
   emptyReviewFields,
   changeLoginFields,
+  emptyLoginFields,
   logout,
 } from './actions';
 
@@ -223,6 +224,22 @@ describe('reducer', () => {
       const state = reducer(initialState, changeLoginFields(loginFields));
 
       expect(state.loginFields.email).toBe('test@example.com');
+    });
+  });
+
+  describe('emptyLoginFields', () => {
+    it('make login fields empty', () => {
+      const initialState = {
+        loginFields: {
+          email: 'test@example.com',
+          password: '1234',
+        },
+      };
+
+      const state = reducer(initialState, emptyLoginFields());
+
+      expect(state.loginFields.email).toBe('');
+      expect(state.loginFields.password).toBe('');
     });
   });
 

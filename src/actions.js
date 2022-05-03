@@ -148,6 +148,12 @@ export function changeLoginFields(loginFields) {
   };
 }
 
+export function emptyLoginFields() {
+  return {
+    type: 'emptyLoginFields',
+  };
+}
+
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields } = getState();
