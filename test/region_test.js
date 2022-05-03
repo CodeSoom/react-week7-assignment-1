@@ -11,8 +11,8 @@ Scenario('지역 목록을 볼 수 있습니다.', ({ I }) => {
 Scenario('지역을 선택하면 선택됨을 표시합니다.', ({ I }) => {
   I.amOnPage('/restaurants');
 
-  regions.forEach(async (region) => {
+  regions.forEach((region) => {
     I.click(`${region}`);
-    await I.see(`${region}(V)`);
+    I.see(`${region}(V)`);
   });
 });
