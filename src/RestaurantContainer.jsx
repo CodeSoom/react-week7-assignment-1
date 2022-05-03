@@ -23,6 +23,7 @@ export default function RestaurantContainer({ restaurantId }) {
 
   const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
+  const reviewFields = useSelector(get('reviewFields'));
 
   if (!restaurant) {
     return (
@@ -36,6 +37,9 @@ export default function RestaurantContainer({ restaurantId }) {
 
   function handleSubmit() {
     dispatch(sendReview({ restaurantId }));
+
+    dispatch(changeReviewField({ name: 'score', value: '' }));
+    dispatch(changeReviewField({ name: 'description', value: '' }));
   }
 
   return (
@@ -44,6 +48,7 @@ export default function RestaurantContainer({ restaurantId }) {
       {accessToken
         ? (
           <ReviewForm
+            reviewFields={reviewFields}
             onChange={handleChange}
             onSubmit={handleSubmit}
           />
