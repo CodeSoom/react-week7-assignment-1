@@ -135,10 +135,9 @@ export function changeReviewFields(reviewFields) {
   };
 }
 
-export function emptyReviewFields(reviewFields) {
+export function emptyReviewFields() {
   return {
     type: 'emptyReviewFields',
-    payload: { reviewFields },
   };
 }
 

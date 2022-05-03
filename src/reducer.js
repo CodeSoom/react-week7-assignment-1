@@ -91,6 +91,16 @@ const reducers = {
     };
   },
 
+  emptyReviewFields(state) {
+    return {
+      ...state,
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+    };
+  },
+
   changeLoginFields(state, { payload: { loginFields } }) {
     const { name, value } = loginFields;
     return {

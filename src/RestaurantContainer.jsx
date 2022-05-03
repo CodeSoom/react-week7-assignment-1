@@ -9,6 +9,7 @@ import {
   loadRestaurant,
   sendReview,
   changeReviewFields,
+  emptyReviewFields,
 } from './actions';
 
 import { get } from './utils';
@@ -28,12 +29,7 @@ export default function RestaurantContainer({ restaurantId }) {
 
   function handleSubmit() {
     dispatch(sendReview({ restaurantId }));
-    dispatch(changeReviewFields({
-      reviewFields: {
-        score: '',
-        description: '',
-      },
-    }));
+    dispatch(emptyReviewFields());
   }
 
   function handleChange({ name, value }) {
