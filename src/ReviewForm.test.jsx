@@ -8,6 +8,11 @@ describe('ReviewForm', () => {
   const handleClick = jest.fn();
   const handleChange = jest.fn();
 
+  const reviewFields = {
+    score: 3,
+    description: '맛있어요',
+  };
+
   const renderReviewForm = (fields) => render(
     <MemoryRouter initialEntries={['/restaurants/1']}>
       <ReviewForm
@@ -18,6 +23,10 @@ describe('ReviewForm', () => {
     </MemoryRouter>,
   );
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('renders title', () => {
     const { container } = renderReviewForm({});
 
@@ -25,14 +34,9 @@ describe('ReviewForm', () => {
   });
 
   it('renders review form', () => {
-    const reviewFields = {
-      score: 3,
-      description: '맛있어요',
-    };
-
     const { queryByLabelText } = renderReviewForm(reviewFields);
 
-    expect(queryByLabelText('평점').value).toBe(3);
+    expect(queryByLabelText('평점').value).toBe('3');
     expect(queryByLabelText('리뷰 내용').value).toBe('맛있어요');
   });
 
@@ -44,11 +48,11 @@ describe('ReviewForm', () => {
   });
 
   it('listens change event', () => {
-    const { getByLabelText } = renderReviewForm({});
+    const { getByLabelText } = renderReviewForm(reviewFields);
 
     const controls = [
-      { label: '평점', name: 'score', value: 3 },
-      { label: '리뷰 내용', name: 'description', value: '맛있어요' },
+      { label: '평점', name: 'score', value: '4' },
+      { label: '리뷰 내용', name: 'description', value: '짱맛있어요' },
     ];
 
     controls.forEach(({ label, name, value }) => {

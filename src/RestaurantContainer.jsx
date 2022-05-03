@@ -19,6 +19,17 @@ export default function RestaurantContainer({ restaurantId }) {
 
   const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
+  // const reviewFields = useSelector(get('reviewFields'));
+
+  const reviewFields = { score: 3, description: '맛있어요' };
+
+  function handleSubmit() {
+    // dispatch(postReview());
+  }
+
+  function handleChange({ name, value }) {
+    // dispatch(changeReviewFields({ name, value }));
+  }
 
   if (!restaurant) {
     return (
@@ -30,6 +41,9 @@ export default function RestaurantContainer({ restaurantId }) {
     <RestaurantDetail
       restaurant={restaurant}
       accessToken={accessToken}
+      fields={reviewFields}
+      onSubmit={handleSubmit}
+      onChange={handleChange}
     />
   );
 }
