@@ -28,6 +28,12 @@ export default function RestaurantContainer({ restaurantId }) {
 
   function handleSubmit() {
     dispatch(sendReview({ restaurantId }));
+    dispatch(changeReviewFields({
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+    }));
   }
 
   function handleChange({ name, value }) {
