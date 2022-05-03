@@ -20,7 +20,7 @@ describe('LoginPage', () => {
   it('renders form', () => {
     const { queryByLabelText } = renderLoginPage();
 
-    expect(queryByLabelText('email')).not.toBeNull();
-    expect(queryByLabelText('password')).not.toBeNull();
+    expect(queryByLabelText('E-mail')).not.toBeNull();
+    expect(queryByLabelText('Password')).not.toBeNull();
   });
 });
