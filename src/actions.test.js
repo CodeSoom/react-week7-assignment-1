@@ -12,6 +12,7 @@ import {
   setRestaurant,
   requestLogin,
   setAccessToken,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -156,6 +157,68 @@ describe('actions', () => {
 
       it('아무 액션도 일어나지 않는다.', async () => {
         await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
+    });
+  });
+
+  describe('sendReview', () => {
+    context('score, description 입력 했을 때', () => {
+      beforeEach(() => {
+        store = mockStore({
+          accessToken: 'ACCESS_TOKEN',
+          reviewFields: {
+            score: '5',
+            description: '반갑다 친구들아',
+          },
+        });
+      });
+
+      it('runs setRestaurant', async () => {
+        await store.dispatch(sendReview({ restaurantId: '1' }));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setRestaurant({}));
+      });
+    });
+
+    context('score만 입력 했을 때', () => {
+      beforeEach(() => {
+        store = mockStore({
+          accessToken: 'ACCESS_TOKEN',
+          reviewFields: {
+            score: '5',
+            description: '',
+          },
+        });
+      });
+
+      it('아무 액션도 일어나지 않는다.', async () => {
+        await store.dispatch(sendReview({ restaurantId: '1' }));
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
+    });
+
+    context('description만 입력 했을 때', () => {
+      beforeEach(() => {
+        store = mockStore({
+          accessToken: 'ACCESS_TOKEN',
+          reviewFields: {
+            score: '',
+            description: '반갑다 친구들아',
+          },
+        });
+      });
+
+      it('아무 액션도 일어나지 않는다.', async () => {
+        await store.dispatch(sendReview({ restaurantId: '1' }));
 
         const actions = store.getActions();
 
