@@ -104,6 +104,7 @@ export function setAccessToken(accessToken) {
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
+
     if (!email || !password) return;
 
     const accessToken = await postLogin({ email, password });
@@ -130,6 +131,8 @@ export function changeReviewField({ name, value }) {
 export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const { accessToken, reviewFields: { score, description } } = getState();
+
+    if (!score || !description) return;
 
     await postReview({
       accessToken, restaurantId, score, description,
