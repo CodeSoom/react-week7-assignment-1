@@ -36,7 +36,7 @@ export default function LoginForm({ fields, onChange, onSubmit }) {
         type="button"
         onClick={onSubmit}
       >
-        로그인
+        Log In
       </button>
     </>
   );

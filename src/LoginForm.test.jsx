@@ -65,10 +65,10 @@ describe('LoginForm', () => {
     });
   });
 
-  it('"로그인" 버튼을 렌더한다.', () => {
+  it('"Log In" 버튼을 렌더한다.', () => {
     const { getByText } = renderLoginForm({ });
 
-    fireEvent.click(getByText('로그인'));
+    fireEvent.click(getByText('Log In'));
 
     expect(handleSubmit).toBeCalled();
   });
