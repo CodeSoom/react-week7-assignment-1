@@ -8,9 +8,10 @@ describe('LoginForm', () => {
   });
 
   const onChange = jest.fn();
+  const onSubmit = jest.fn();
 
   const renderLoginForm = () => render((
-    <LoginForm onChange={onChange} />
+    <LoginForm onChange={onChange} onSubmit={onSubmit} />
   ));
 
   it('renders login form', () => {
@@ -42,5 +43,13 @@ describe('LoginForm', () => {
     const { container } = renderLoginForm();
 
     expect(container).toHaveTextContent('log in');
+  });
+
+  it('listens for click event on submit', () => {
+    const { getByText } = renderLoginForm();
+
+    fireEvent.click(getByText('log in'));
+
+    expect(onSubmit).toHaveBeenCalled();
   });
 });
