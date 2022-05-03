@@ -10,6 +10,7 @@ import {
   selectCategory,
   setErrorMessage,
   changeReviewFields,
+  emptyReviewFields,
   changeLoginFields,
   logout,
 } from './actions';
@@ -168,12 +169,13 @@ describe('reducer', () => {
       expect(state.errorMessage).toBe('ERROR');
     });
   });
+
   describe('changeReviewFields', () => {
     it('changes review fields', () => {
       const initialState = {
         reviewFields: {
-          score: null,
-          description: null,
+          score: '',
+          description: '',
         },
       };
 
@@ -188,12 +190,28 @@ describe('reducer', () => {
     });
   });
 
+  describe('emptyReviewFields', () => {
+    it('make review fields empty', () => {
+      const initialState = {
+        reviewFields: {
+          score: 5,
+          description: '좋아요',
+        },
+      };
+
+      const state = reducer(initialState, emptyReviewFields());
+
+      expect(state.reviewFields.score).toBe('');
+      expect(state.reviewFields.description).toBe('');
+    });
+  });
+
   describe('changeLoginFields', () => {
     it('changes login fields', () => {
       const initialState = {
         loginFields: {
-          email: null,
-          password: null,
+          email: '',
+          password: '',
         },
       };
 

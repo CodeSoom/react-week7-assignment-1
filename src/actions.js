@@ -135,6 +135,13 @@ export function changeReviewFields(reviewFields) {
   };
 }
 
+export function emptyReviewFields(reviewFields) {
+  return {
+    type: 'emptyReviewFields',
+    payload: { reviewFields },
+  };
+}
+
 export function changeLoginFields(loginFields) {
   return {
     type: 'changeLoginFields',
