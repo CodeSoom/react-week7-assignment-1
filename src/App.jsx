@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import {
   Routes,
   Route,
@@ -17,20 +15,14 @@ import NotFoundPage from './NotFoundPage';
 
 import { setAccessToken } from './actions';
 
-import { saveItem, loadItem } from './services/storage';
+import { loadItem } from './services/storage';
 
 export default function App() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    saveItem('accessToken', '');
-  }, []);
-
   const accessToken = loadItem('accessToken');
 
   if (accessToken?.length) {
-    console.log('app');
-    console.log(accessToken);
     dispatch(setAccessToken(accessToken));
   }
 

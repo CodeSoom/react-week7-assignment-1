@@ -1,3 +1,5 @@
+import { saveItem } from './services/storage';
+
 import { equal } from './utils';
 
 const initialState = {
@@ -101,6 +103,7 @@ const reducers = {
   },
 
   logout(state) {
+    saveItem({ key: 'accessToken', value: '' });
     return {
       ...state,
       accessToken: '',
