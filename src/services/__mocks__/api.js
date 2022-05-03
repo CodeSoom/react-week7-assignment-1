@@ -16,6 +16,4 @@ export async function fetchRestaurant() {
 
 export const postLogin = jest.fn();
 
-export async function postReview() {
-  return '';
-}
+export const postReview = jest.fn();

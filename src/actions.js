@@ -116,7 +116,7 @@ export function sendReview({ restaurantId }) {
 
       dispatch(loadRestaurant({ restaurantId }));
     } catch (e) {
-      // TODO: seterrormessage
+      dispatch(setErrorMessage(e.message));
     }
   };
 }

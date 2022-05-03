@@ -16,7 +16,7 @@ import {
   setErrorMessage,
 } from './actions';
 
-import { postLogin } from './services/api';
+import { postLogin, postReview } from './services/api';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -178,6 +178,20 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setRestaurant(null));
+    });
+
+    context('when the request failed', () => {
+      it('dispatchs setErrorMessage', async () => {
+        postReview.mockImplementation(() => {
+          throw new Error('Error');
+        });
+
+        await store.dispatch(sendReview({ restaurantId: 1 }));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setErrorMessage('Error'));
+      });
     });
   });
 });
