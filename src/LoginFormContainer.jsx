@@ -10,7 +10,7 @@ export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
   const loginFields = useSelector(get('loginFields'));
-  const token = useSelector(get('accessToken'));
+  const accessToken = useSelector(get('accessToken'));
 
   function handleSubmit() {
     dispatch(requestLogin());
@@ -27,7 +27,7 @@ export default function LoginFormContainer() {
         onSubmit={handleSubmit}
         onChange={handleChange}
       />
-      <p>{token}</p>
+      <p>{accessToken}</p>
     </>
   );
 }

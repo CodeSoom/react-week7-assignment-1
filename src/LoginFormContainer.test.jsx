@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { render, fireEvent } from '@testing-library/react';
 
-import LoginPage from './LoginPage';
+import LoginFormContainer from './LoginFormContainer';
 
-describe('LoginPage', () => {
+describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
@@ -18,9 +18,9 @@ describe('LoginPage', () => {
     },
   }));
 
-  const renderLoginPage = () => render(
+  const renderLoginFormContainer = () => render(
     <MemoryRouter initialEntries={['/login']}>
-      <LoginPage />
+      <LoginFormContainer />
     </MemoryRouter>,
   );
 
@@ -29,20 +29,20 @@ describe('LoginPage', () => {
   });
 
   it('renders title', () => {
-    const { container } = renderLoginPage();
+    const { container } = renderLoginFormContainer();
 
     expect(container).toHaveTextContent('Log In');
   });
 
   it('renders login form', () => {
-    const { queryByLabelText } = renderLoginPage();
+    const { queryByLabelText } = renderLoginFormContainer();
 
     expect(queryByLabelText('E-mail')).not.toBeNull();
     expect(queryByLabelText('Password')).not.toBeNull();
   });
 
   it('calls dispatch', () => {
-    const { getByText, getByLabelText } = renderLoginPage();
+    const { getByText, getByLabelText } = renderLoginFormContainer();
 
     fireEvent.click(getByText('login'));
 
