@@ -11,8 +11,8 @@
     "test:e2e": "codeceptjs run --steps",
     "test": "npm run coverage && start-server-and-test start http://localhost:8080 test:e2e",
     "lint": "eslint --ext js,jsx .",
-    "predeploy": "webpack build && mv ./dist/main.js ./main.js",
-    "deploy": "gh-pages -d . && rm ./main.js"
+    "predeploy": "webpack build && mv ./dist/main.js ./public/main.js",
+    "deploy": "gh-pages -d public && rm ./public/main.js"
   },
   "homepage": "https://0407chan.github.io/react-week7-assignment-1",
   "keywords": [],
