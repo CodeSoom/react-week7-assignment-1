@@ -9,12 +9,12 @@ const initialState = {
   selectedRegion: null,
   selectedCategory: null,
   reviewFields: {
-    score: null,
-    description: null,
+    score: '',
+    description: '',
   },
   loginFields: {
-    email: null,
-    password: null,
+    email: '',
+    password: '',
   },
 };
 

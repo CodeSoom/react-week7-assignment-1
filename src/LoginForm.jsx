@@ -10,14 +10,14 @@ export default function LoginForm({ fields, onSubmit, onChange }) {
         label="E-mail"
         type="email"
         name="email"
-        value={email || ''}
+        value={email}
         onChange={onChange}
       />
       <TextField
         label="Password"
         type="password"
         name="password"
-        value={password || ''}
+        value={password}
         onChange={onChange}
       />
       <button
