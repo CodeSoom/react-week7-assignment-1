@@ -77,21 +77,40 @@ describe('api', () => {
   });
 
   describe('postLogin', () => {
+    context('when request succeeded', () => {
+      beforeEach(() => {
+        axios.mockImplementation(() => Promise.resolve({
+          data: {
+            accessToken: ACCESS_TOKEN,
+          },
+        }));
+      });
+
+      it('returns token for access', async () => {
+        const accessToken = await postLogin({
+          email: 'tester@example.com',
+          password: 'test',
+        });
+
+        expect(accessToken).toEqual(ACCESS_TOKEN);
+      });
+    });
+  });
+
+  context('when request failed', () => {
     beforeEach(() => {
-      axios.mockImplementation(() => Promise.resolve({
-        data: {
-          accessToken: ACCESS_TOKEN,
-        },
-      }));
+      axios.mockImplementation(() => Promise.reject(
+        new Error('request failed'),
+      ));
     });
 
-    it('returns token for access', async () => {
+    it('returns empty string', async () => {
       const accessToken = await postLogin({
         email: 'tester@example.com',
         password: 'test',
       });
 
-      expect(accessToken).toEqual(ACCESS_TOKEN);
+      expect(accessToken).toEqual('');
     });
   });
 });
