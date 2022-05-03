@@ -1,9 +1,16 @@
 import { fireEvent, render } from '@testing-library/react';
 
+import given from 'given2';
+
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   beforeEach(() => {
+    given('fields', () => ({
+      email: '',
+      password: '',
+    }));
+
     jest.clearAllMocks();
   });
 
@@ -11,7 +18,11 @@ describe('LoginForm', () => {
   const onSubmit = jest.fn();
 
   const renderLoginForm = () => render((
-    <LoginForm onChange={onChange} onSubmit={onSubmit} />
+    <LoginForm
+      fields={given.fields}
+      onChange={onChange}
+      onSubmit={onSubmit}
+    />
   ));
 
   it('renders login form', () => {
@@ -51,5 +62,19 @@ describe('LoginForm', () => {
     fireEvent.click(getByText('log in'));
 
     expect(onSubmit).toHaveBeenCalled();
+  });
+
+  context('with fields value', () => {
+    given('fields', () => ({
+      email: 'tester@example.com',
+      password: 'tester',
+    }));
+
+    it('renders fields value', () => {
+      const { queryByDisplayValue } = renderLoginForm();
+
+      expect(queryByDisplayValue('tester@example.com')).not.toBeNull();
+      expect(queryByDisplayValue('tester')).not.toBeNull();
+    });
   });
 });
