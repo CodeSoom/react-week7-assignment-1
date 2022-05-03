@@ -47,3 +47,27 @@ export async function postLogin({ email, password }) {
     return '';
   }
 }
+
+export async function postReview({
+  accessToken, restaurantId, score, description,
+}) {
+  const url = 'https://eatgo-customer-api.ahastudio.com'
+  + `/restaurants/${restaurantId}/reviews`;
+  const Authorization = `Bearer ${accessToken}`;
+  try {
+    const response = await axios({
+      method: 'post',
+      headers: {
+        Authorization,
+      },
+      url,
+      data: {
+        score,
+        description,
+      },
+    });
+    return response.data;
+  } catch (e) {
+    return '';
+  }
+}
