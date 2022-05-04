@@ -3,19 +3,30 @@ import { fireEvent, render } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  it('renders input controls and change events', () => {
-    const handleChange = jest.fn();
+  const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
+  beforeEach(() => {
+    handleChange.mockClear();
+    handleSubmit.mockClear();
+  });
+
+  function renderLoginForm({ email, password }) {
+    return render((
+      <LoginForm
+        loginFiels={{ email, password }}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
+    ));
+  }
+
+  it('renders input controls and change events', () => {
     // - 변경 이전값으로 사용할 email, password (previousValue)
     const email = 'test@test';
     const password = '1234';
 
-    const { queryByLabelText } = render((
-      <LoginForm
-        loginFiels={{ email, password }}
-        onChange={handleChange}
-      />
-    ));
+    const { queryByLabelText } = renderLoginForm({ email, password });
 
     // - 강의[1] 29:21 : 테스트할 input 이 여러 개일 때, 아래와 같이 반복문으로 테스트할 수 있다.
     const controls = [
@@ -47,11 +58,7 @@ describe('LoginForm', () => {
   });
 
   it('renders login button', () => {
-    const handleSubmit = jest.fn();
-
-    const { getByText } = render((
-      <LoginForm onSubmit={handleSubmit} />
-    ));
+    const { getByText } = renderLoginForm({ });
 
     fireEvent.click(getByText('Log In'));
 
