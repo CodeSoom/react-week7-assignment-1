@@ -115,3 +115,10 @@ export function requestLogin() {
     }
   };
 }
+
+export function updateReviewField({ name, value }) {
+  return {
+    type: 'updateReviewField',
+    payload: { name, value },
+  };
+}

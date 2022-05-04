@@ -6,11 +6,17 @@ import RestaurantDetail from './RestaurantDetail';
 
 import {
   loadRestaurant,
+  updateReviewField,
 } from './actions';
 
 import { get } from './utils';
 
-function ReviewForm() {
+function ReviewForm({ onChange }) {
+  function handleChange(event) {
+    const { target: { name, value } } = event;
+    onChange({ name, value });
+  }
+
   return (
     <>
       <div>
@@ -21,6 +27,7 @@ function ReviewForm() {
           id="review-score"
           placeholder="리뷰 평점을 입력해주세요."
           value=""
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -31,6 +38,7 @@ function ReviewForm() {
           id="review-description"
           placeholder="리뷰 내용을 입력해주세요."
           value=""
+          onChange={handleChange}
         />
       </div>
     </>
@@ -52,10 +60,14 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
+  function handleChange({ name, value }) {
+    dispatch(updateReviewField({ name, value }));
+  }
+
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm />
+      <ReviewForm onChange={handleChange} />
     </>
   );
 }
