@@ -7,7 +7,10 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
-  loginFields: {},
+  loginFields: {
+    email: '',
+    password: '',
+  },
   accessToken: '',
 };
 
