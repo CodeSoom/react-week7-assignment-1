@@ -86,6 +86,14 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
+export function updateLoginField({ name, value }) {
+  // TODO: 이메일, 비밀번호 상태를 변경하는 액션
+  return {
+    type: 'updateLoginField',
+    payload: { name, value },
+  };
+}
+
 export function requestLogin() {
   return async (dispatch, getState) => {
     // state <- email, password
