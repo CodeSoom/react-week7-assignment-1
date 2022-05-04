@@ -53,7 +53,7 @@ describe('RestaurantContainer', () => {
 
       expect(dispatch).toBeCalledWith({
         type: 'updateReviewField',
-        payload: { name: 'review-score', value: '5' },
+        payload: { name: 'score', value: '5' },
       });
 
       // TODO : 리뷰 내용(description) 입력에 대한 onChange
@@ -63,7 +63,7 @@ describe('RestaurantContainer', () => {
 
       expect(dispatch).toBeCalledWith({
         type: 'updateReviewField',
-        payload: { name: 'review-description', value: '맛있어요' },
+        payload: { name: 'description', value: '맛있어요' },
       });
     });
   });
