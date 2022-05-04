@@ -7,6 +7,7 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginFields: {},
 };
 
 const reducers = {
@@ -53,6 +54,15 @@ const reducers = {
       selectedCategory: categories.find(equal('id', categoryId)),
     };
   },
+
+  // TODO : add updateLoginField 46:26
+  updateLoginField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      loginFields: { email: 'test@test' },
+    };
+  },
+
 };
 
 function defaultReducer(state) {
