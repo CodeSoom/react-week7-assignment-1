@@ -16,8 +16,8 @@ describe('LoginFormContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
-        email: '',
-        password: '',
+        email: 'test@test',
+        password: '1234',
       },
     }));
   });
@@ -27,10 +27,10 @@ describe('LoginFormContainer', () => {
   );
 
   it('renders input controls', () => {
-    const { getByText } = renderLoginFormContainer();
+    const { getByLabelText } = renderLoginFormContainer();
 
-    expect(getByText('email').value).toBe('test@test');
-    expect(getByText('password').value).toBe('1234');
+    expect(getByLabelText('email').value).toBe('test@test');
+    expect(getByLabelText('password').value).toBe('1234');
   });
 
   it('renders login button', () => {
