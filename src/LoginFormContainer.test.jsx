@@ -27,10 +27,10 @@ describe('LoginFormContainer', () => {
   );
 
   it('renders input controls', () => {
-    const { queryByText } = renderLoginFormContainer();
+    const { getByText } = renderLoginFormContainer();
 
-    expect(queryByText('email')).not.toBeNull();
-    expect(queryByText('password')).not.toBeNull();
+    expect(getByText('email').value).toBe('test@test');
+    expect(getByText('password').value).toBe('1234');
   });
 
   it('renders login button', () => {
