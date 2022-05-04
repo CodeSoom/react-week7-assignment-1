@@ -59,7 +59,10 @@ const reducers = {
   updateLoginField(state, { payload: { name, value } }) {
     return {
       ...state,
-      loginFields: { email: 'test@test' },
+      loginFields: {
+        ...state.loginFields,
+        [name]: value,
+      },
     };
   },
 
