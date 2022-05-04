@@ -27,3 +27,8 @@ export async function fetchRestaurant({ restaurantId }) {
   const data = await response.json();
   return data;
 }
+
+export async function postLogin() {
+  // TODO : api 서버에 로그인 요청
+  return {};
+}
