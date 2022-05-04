@@ -6,18 +6,25 @@ describe('LoginForm', () => {
   it('renders input controls and change events', () => {
     const handleChange = jest.fn();
 
-    const { getByLabelText } = render((
+    const { queryByLabelText } = render((
       <LoginForm onChange={handleChange} />
     ));
 
-    expect(getByLabelText('email')).not.toBeNull();
-    expect(getByLabelText('password')).not.toBeNull();
+    // - 강의[1] 29:21 : 테스트할 input 이 여러 개일 때, 아래와 같이 반복문으로 테스트할 수 있다.
+    const controls = [
+      { label: 'email', name: 'email', value: 'tester@example.com' },
+      { label: 'password', name: 'password', value: 'test' },
+    ];
 
-    fireEvent.change(getByLabelText('email'), {
-      target: { value: 'tester@example.com' },
+    controls.forEach(({ label, name, value }) => {
+      const input = queryByLabelText(label);
+
+      expect(input).not.toBeNull();
+
+      fireEvent.change(input, { target: { value } });
+
+      expect(handleChange).toBeCalled();
     });
-
-    expect(handleChange).toBeCalled();
   });
 
   it('renders login button', () => {
