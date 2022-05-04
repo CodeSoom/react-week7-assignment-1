@@ -9,6 +9,7 @@ import {
   selectCategory,
   updateLoginField,
   setAccessToken,
+  updateReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -177,5 +178,39 @@ describe('reducer', () => {
     const state = reducer(initialState, setAccessToken('token'));
 
     expect(state.accessToken).toBe('token');
+  });
+
+  describe('updateReviewField', () => {
+    context('when score changes', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        updateReviewField({ name: 'score', value: 5 }),
+      );
+
+      expect(state.reviewFields.score).toBe(5);
+    });
+
+    context('when description changes', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        updateReviewField({ name: 'description', value: '맛있어요' }),
+      );
+
+      expect(state.reviewFields.description).toBe('맛있어요');
+    });
   });
 });
