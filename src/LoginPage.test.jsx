@@ -31,9 +31,9 @@ describe('LoginPage', () => {
   });
 
   it('renders input controls', () => {
-    const { getByLabelText } = renderLoginPage();
+    const { queryByText } = renderLoginPage();
 
-    expect(getByLabelText('email')).not.toBeNull();
-    expect(getByLabelText('password')).not.toBeNull();
+    expect(queryByText('email')).not.toBeNull();
+    expect(queryByText('password')).not.toBeNull();
   });
 });
