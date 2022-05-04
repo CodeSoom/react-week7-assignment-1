@@ -26,14 +26,14 @@ describe('LoginForm', () => {
 
   it('renders login form', () => {
     const loginFields = {
-      email: 'test@example.com',
-      password: '1234',
+      email: '',
+      password: '',
     };
 
     const { queryByLabelText } = renderLoginForm(loginFields);
 
-    expect(queryByLabelText('E-mail').value).toBe('test@example.com');
-    expect(queryByLabelText('Password').value).toBe('1234');
+    expect(queryByLabelText('E-mail').value).toBe('');
+    expect(queryByLabelText('Password').value).toBe('');
   });
 
   it('listens click event', () => {

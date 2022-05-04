@@ -91,7 +91,7 @@ describe('App', () => {
     });
   });
 
-  context('with accessToken in localStorage', () => {
+  context('with accessToken', () => {
     beforeEach(() => {
       loadItem.mockImplementation(() => 'TOKEN');
     });
@@ -103,7 +103,7 @@ describe('App', () => {
     });
   });
 
-  context('without accessToken in localStorage', () => {
+  context('without accessToken', () => {
     beforeEach(() => {
       loadItem.mockImplementation(() => '');
     });

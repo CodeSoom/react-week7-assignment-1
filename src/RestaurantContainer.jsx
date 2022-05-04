@@ -42,28 +42,23 @@ export default function RestaurantContainer({ restaurantId }) {
     );
   }
 
-  if (!accessToken?.length) {
-    return (
-      <>
-        <RestaurantDetail
-          restaurant={restaurant}
-        />
-        <ReviewList reviews={restaurant.reviews} />
-      </>
-    );
-  }
-
   return (
     <>
       <RestaurantDetail
         restaurant={restaurant}
       />
-      <ReviewForm
-        fields={reviewFields}
-        onSubmit={handleSubmit}
-        onChange={handleChange}
-      />
-      <p>{errorMessage}</p>
+      {accessToken?.length ? (
+        <>
+          <ReviewForm
+            fields={reviewFields}
+            onSubmit={handleSubmit}
+            onChange={handleChange}
+          />
+          <p>{errorMessage}</p>
+        </>
+      ) : (
+        null
+      )}
       <ReviewList reviews={restaurant.reviews} />
     </>
   );
