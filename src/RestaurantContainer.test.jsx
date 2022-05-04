@@ -34,6 +34,12 @@ describe('RestaurantContainer', () => {
     }));
 
     it('renders name and address', () => {
+      const { queryByLabelText } = renderRestaurantContainer();
+
+      expect(queryByLabelText('평점')).not.toBeNull();
+    });
+
+    it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent('마법사주방');
