@@ -23,7 +23,7 @@ function ReviewForm({ onChange }) {
         <label htmlFor="review-score">평점</label>
         <input
           type="number"
-          name="review-score"
+          name="score"
           id="review-score"
           placeholder="리뷰 평점을 입력해주세요."
           value=""
@@ -34,7 +34,7 @@ function ReviewForm({ onChange }) {
         <label htmlFor="review-description">리뷰 내용</label>
         <input
           type="text"
-          name="review-description"
+          name="description"
           id="review-description"
           placeholder="리뷰 내용을 입력해주세요."
           value=""
