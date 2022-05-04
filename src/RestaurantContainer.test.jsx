@@ -41,19 +41,29 @@ describe('RestaurantContainer', () => {
     });
 
     it('renders review write form', () => {
-      const { queryByLabelText } = renderRestaurantContainer();
+      const { queryByLabelText, getByLabelText } = renderRestaurantContainer();
 
       expect(queryByLabelText('평점')).not.toBeNull();
       expect(queryByLabelText('리뷰 내용')).not.toBeNull();
 
       // TODO : 평점(score) 입력에 대한 onChange
-      fireEvent.change(queryByLabelText('평점'), {
+      fireEvent.change(getByLabelText('평점'), {
         target: { value: '5' },
       });
 
+      expect(dispatch).toBeCalledWith({
+        type: 'updateReviewField',
+        payload: { name: 'review-score', value: '5' },
+      });
+
       // TODO : 리뷰 내용(description) 입력에 대한 onChange
-      fireEvent.change(queryByLabelText('리뷰 내용'), {
+      fireEvent.change(getByLabelText('리뷰 내용'), {
         target: { value: '맛있어요' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'updateReviewField',
+        payload: { name: 'review-description', value: '맛있어요' },
       });
     });
   });
