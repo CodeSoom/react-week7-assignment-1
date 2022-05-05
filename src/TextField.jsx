@@ -1,4 +1,6 @@
-export default function TextField({ label, name, onChange }) {
+export default function TextField({
+  label, type, name, onChange,
+}) {
   const id = `input-${name}`;
 
   function handleChange(event) {
@@ -12,10 +14,10 @@ export default function TextField({ label, name, onChange }) {
         {label}
       </label>
       <input
-        type="number"
+        type={type || 'text'}
         name={name}
         id={id}
-        placeholder="리뷰 평점을 입력해주세요."
+        placeholder={`${label}을 입력해주세요.`}
         value=""
         onChange={handleChange}
       />
