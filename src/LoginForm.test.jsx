@@ -29,6 +29,17 @@ describe('LoginForm', () => {
     />
   ));
 
+  context('without fields', () => {
+    given('fields', () => undefined);
+
+    it('renders login form', () => {
+      const { queryByLabelText } = renderLoginForm();
+
+      expect(queryByLabelText('E-mail')).not.toBeNull();
+      expect(queryByLabelText('Password')).not.toBeNull();
+    });
+  });
+
   context('without login', () => {
     it('renders login form', () => {
       const { queryByLabelText } = renderLoginForm();

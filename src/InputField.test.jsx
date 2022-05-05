@@ -21,9 +21,25 @@ describe('InputField', () => {
     />
   ));
 
-  it('renders login form', () => {
-    const { queryByLabelText } = renderInputField();
+  context('without type value', () => {
+    it('renders text type input field', () => {
+      const { container } = render((
+        <InputField
+          onChange={onChange}
+          label="Text"
+          name="text"
+          value=""
+        />
+      ));
 
+      expect(container).toContainHTML('type="text"');
+    });
+  });
+
+  it('renders login form', () => {
+    const { queryByLabelText, container } = renderInputField();
+
+    expect(container).toContainHTML('type="email"');
     expect(queryByLabelText('E-mail')).not.toBeNull();
   });
 
