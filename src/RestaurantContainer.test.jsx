@@ -40,30 +40,24 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('서울시');
     });
 
-    it('renders review write form', () => {
+    it('listens change events', () => {
       const { queryByLabelText, getByLabelText } = renderRestaurantContainer();
 
       expect(queryByLabelText('평점')).not.toBeNull();
       expect(queryByLabelText('리뷰 내용')).not.toBeNull();
 
-      // TODO : 평점(score) 입력에 대한 onChange
-      fireEvent.change(getByLabelText('평점'), {
-        target: { value: '5' },
-      });
+      const controls = [
+        { label: '평점', name: 'score', value: '5' },
+        { label: '리뷰 내용', name: 'description', value: '맛있어요' },
+      ];
 
-      expect(dispatch).toBeCalledWith({
-        type: 'updateReviewField',
-        payload: { name: 'score', value: '5' },
-      });
+      controls.forEach(({ label, name, value }) => {
+        fireEvent.change(getByLabelText(label), { target: { value } });
 
-      // TODO : 리뷰 내용(description) 입력에 대한 onChange
-      fireEvent.change(getByLabelText('리뷰 내용'), {
-        target: { value: '맛있어요' },
-      });
-
-      expect(dispatch).toBeCalledWith({
-        type: 'updateReviewField',
-        payload: { name: 'description', value: '맛있어요' },
+        expect(dispatch).toBeCalledWith({
+          type: 'updateReviewField',
+          payload: { name, value },
+        });
       });
     });
   });
