@@ -9,8 +9,10 @@ describe('TextField', () => {
 
       return render(
         <TextField
+          type="text"
           label="리뷰 설명"
           name="description"
+          inputValue=""
           onChange={handleChange}
         />,
       );
@@ -38,6 +40,7 @@ describe('TextField', () => {
           label="평점"
           type="number"
           name="score"
+          inputValue=""
           onChange={handleChange}
         />,
       );
@@ -67,6 +70,7 @@ describe('TextField', () => {
         label="평점"
         type="number"
         name={name}
+        inputValue=""
         onChange={handleChange}
       />,
     );
