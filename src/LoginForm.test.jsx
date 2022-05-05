@@ -10,10 +10,10 @@ describe('LoginForm', () => {
     handleSubmit.mockClear();
   });
 
-  function renderLoginForm({ email, password } = {}) {
+  function renderLoginForm() {
     return render(
       <LoginForm
-        fields={{ email, password }}
+        fields={{ email: '', password: '' }}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />,
@@ -24,14 +24,8 @@ describe('LoginForm', () => {
     const { getByLabelText } = renderLoginForm();
 
     const controls = [
-      {
-        label: 'E-mail',
-        value: '',
-      },
-      {
-        label: 'Password',
-        value: '',
-      },
+      { label: 'E-mail' },
+      { label: 'Password' },
     ];
 
     controls.forEach(({
