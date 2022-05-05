@@ -39,16 +39,4 @@ describe('ReviewForm', () => {
       expect(handleChange).toBeCalledWith({ name, value });
     });
   });
-
-  it('renders "Send" button ', () => {
-    const handleChange = jest.fn();
-
-    const { queryByLabelText } = render((
-      <ReviewForm
-        onChange={handleChange}
-      />
-    ));
-
-    expect(queryByLabelText('Send')).not.toBeNull();
-  });
 });
