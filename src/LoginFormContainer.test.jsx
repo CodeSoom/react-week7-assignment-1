@@ -72,16 +72,16 @@ describe('LoginFormContainer', () => {
       });
     });
 
-    it('renders "log in" button', () => {
+    it('renders "Log In" button', () => {
       const { container } = renderLoginFormContainer();
 
-      expect(container).toHaveTextContent('log in');
+      expect(container).toHaveTextContent('Log In');
     });
 
-    it('listens for click event on submit login', () => {
+    it('listens for click event on submit Login', () => {
       const { getByText } = renderLoginFormContainer();
 
-      fireEvent.click(getByText('log in'));
+      fireEvent.click(getByText('Log In'));
 
       expect(dispatch).toBeCalled();
     });
@@ -93,13 +93,13 @@ describe('LoginFormContainer', () => {
     it('renders "log-out" button', () => {
       const { container } = renderLoginFormContainer();
 
-      expect(container).toHaveTextContent('log out');
+      expect(container).toHaveTextContent('Log out');
     });
 
     it('listens for click event on log out', () => {
       const { getByText } = renderLoginFormContainer();
 
-      fireEvent.click(getByText('log out'));
+      fireEvent.click(getByText('Log out'));
 
       expect(dispatch).toBeCalled();
     });

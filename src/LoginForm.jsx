@@ -8,7 +8,7 @@ export default function LoginForm({
   if (isLogin) {
     return (
       <button type="button" onClick={onLogout}>
-        log out
+        Log out
       </button>
     );
   }
@@ -34,7 +34,7 @@ export default function LoginForm({
         name="login"
         onClick={onSubmit}
       >
-        log in
+        Log In
       </button>
     </>
   );

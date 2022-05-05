@@ -66,16 +66,16 @@ describe('LoginForm', () => {
       });
     });
 
-    it('renders "log in" button', () => {
+    it('renders "Log In" button', () => {
       const { container } = renderLoginForm();
 
-      expect(container).toHaveTextContent('log in');
+      expect(container).toHaveTextContent('Log In');
     });
 
     it('listens for click event on submit', () => {
       const { getByText } = renderLoginForm();
 
-      fireEvent.click(getByText('log in'));
+      fireEvent.click(getByText('Log In'));
 
       expect(onSubmit).toHaveBeenCalled();
     });
@@ -103,16 +103,16 @@ describe('LoginForm', () => {
       expect(queryByLabelText('Password')).toBeNull();
     });
 
-    it('renders "log-out" button', () => {
+    it('renders "Log out" button', () => {
       const { container } = renderLoginForm();
 
-      expect(container).toHaveTextContent('log out');
+      expect(container).toHaveTextContent('Log out');
     });
 
-    it('listens for click event on log-out', () => {
+    it('listens for click event on Log out', () => {
       const { getByText } = renderLoginForm();
 
-      fireEvent.click(getByText('log out'));
+      fireEvent.click(getByText('Log out'));
 
       expect(onLogout).toBeCalled();
     });
