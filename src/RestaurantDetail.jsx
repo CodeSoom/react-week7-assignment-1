@@ -1,8 +1,9 @@
 import MenuItems from './MenuItems';
+import Reviews from './Reviews';
 
 export default function RestaurantDetail({ restaurant }) {
   const {
-    name, address, menuItems, reviews = [],
+    name, address, menuItems, reviews,
   } = restaurant;
 
   return (
@@ -16,17 +17,7 @@ export default function RestaurantDetail({ restaurant }) {
       <h3>메뉴</h3>
       <MenuItems menuItems={menuItems} />
       <h3>리뷰</h3>
-      <ul>
-        {reviews.map(({
-          id, name: reviewerName, score, description,
-        }) => (
-          <li key={id}>
-            {`${reviewerName}
-            ${score}
-            ${description}`}
-          </li>
-        ))}
-      </ul>
+      <Reviews reviews={reviews} />
     </div>
   );
 }
