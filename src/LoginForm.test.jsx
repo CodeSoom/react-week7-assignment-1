@@ -21,28 +21,25 @@ describe('LoginForm', () => {
   }
 
   it('로그인 폼을 렌더한다.', () => {
-    const email = 'test@test';
-    const password = '1234';
-
-    const { getByLabelText } = renderLoginForm({ email, password });
+    const { getByLabelText } = renderLoginForm();
 
     const controls = [
       {
         label: 'E-mail',
-        value: email,
+        value: '',
       },
       {
         label: 'Password',
-        value: password,
+        value: '',
       },
     ];
 
     controls.forEach(({
-      label, value,
+      label,
     }) => {
       const input = getByLabelText(label);
 
-      expect(input.value).toBe(value);
+      expect(input).not.toBeNull();
     });
   });
 
