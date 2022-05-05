@@ -140,7 +140,7 @@ describe('reducer', () => {
   });
 
   describe('changLoginField', () => {
-    context('email을 변경 할 때', () => {
+    it('name의 value를 변경한다.', () => {
       const initialState = {
         loginFields: {
           email: 'email',
@@ -154,24 +154,6 @@ describe('reducer', () => {
       );
 
       expect(state.loginFields.email).toBe('test');
-      expect(state.loginFields.password).toBe('password');
-    });
-
-    context('password를 변경 할 때', () => {
-      const initialState = {
-        loginFields: {
-          email: 'email',
-          password: 'password',
-        },
-      };
-
-      const state = reducer(
-        initialState,
-        changeLoginField({ name: 'password', value: 'test' }),
-      );
-
-      expect(state.loginFields.email).toBe('email');
-      expect(state.loginFields.password).toBe('test');
     });
   });
 
