@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantDetail from './RestaurantDetail';
+import RestaurantReviews from './RestaurantReviews';
 
 import {
   loadRestaurant,
@@ -28,6 +29,7 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
+      <RestaurantReviews reviews={restaurant.reviews} />
     </>
   );
 }

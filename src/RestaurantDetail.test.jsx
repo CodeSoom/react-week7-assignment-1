@@ -35,12 +35,4 @@ describe('RestaurantDetail', () => {
 
     expect(container).toHaveTextContent('스파이시 머쉬룸 버거');
   });
-
-  it('renders reviews', () => {
-    const { container } = renderRestaurantDetail();
-
-    expect(container).toHaveTextContent('테스터');
-    expect(container).toHaveTextContent('5');
-    expect(container).toHaveTextContent('훌륭하다');
-  });
 });
