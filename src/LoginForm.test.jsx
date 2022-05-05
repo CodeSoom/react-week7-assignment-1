@@ -65,7 +65,7 @@ describe('LoginForm', () => {
     });
   });
 
-  it('"Log In" 버튼을 렌더한다.', () => {
+  it('"Log In" 버튼을 렌더하고 클릭이벤트를 감지한다.', () => {
     const { getByText } = renderLoginForm({ });
 
     fireEvent.click(getByText('Log In'));
