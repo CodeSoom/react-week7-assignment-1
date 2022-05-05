@@ -91,6 +91,7 @@ describe('App', () => {
       expect(dispatch).not.toBeCalled();
     });
   });
+
   context('로그인일 때', () => {
     const accessToken = 'ACCESS_TOKEN';
     beforeEach(() => {
