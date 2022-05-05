@@ -1,15 +1,19 @@
-export default function MenuItems({ menuItems }) {
-  if (!(menuItems || []).length) {
+export default function Reviews({ reviews }) {
+  if (!(reviews || []).length) {
     return (
-      <p>메뉴가 없어요!</p>
+      <p>리뷰가 없습니다! 첫번째 리뷰를 남겨주세요.</p>
     );
   }
 
   return (
     <ul>
-      {menuItems.map((menuItem) => (
-        <li key={menuItem.id}>
-          {menuItem.name}
+      {reviews.map(({
+        id, name, score, description,
+      }) => (
+        <li key={id}>
+          {`${name}
+        ${score}
+        ${description}`}
         </li>
       ))}
     </ul>
