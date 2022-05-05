@@ -61,6 +61,24 @@ describe('RestaurantContainer', () => {
       expect(container).toHaveTextContent('5');
       expect(container).toHaveTextContent('훌륭하다');
     });
+
+    context('with accessToken(log in)', () => {
+      given('accessToken', () => 'ACCESS_TOKEN');
+
+      /**
+       * 평점
+       * 리뷰 내용
+       * 리뷰 남기기
+       *
+       */
+
+      it('renders review form', () => {
+        const { queryByLabelText } = renderRestaurantContainer();
+
+        expect(queryByLabelText('평점')).not.toBeNull();
+        expect(queryByLabelText('리뷰 내용')).not.toBeNull();
+      });
+    });
   });
 
   context('without restaurant', () => {
