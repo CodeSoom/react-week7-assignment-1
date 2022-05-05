@@ -140,9 +140,16 @@ describe('RestaurantContainer', () => {
 
       const { getByText } = renderRestaurantContainer();
 
-      fireEvent.change(getByText('리뷰 남기기'));
+      fireEvent.click(getByText('리뷰 남기기'));
 
-      expect(dispatch).toBeCalled();
+      expect(dispatch).toBeCalledWith({
+        type: 'changeReviewField',
+        payload: { name: 'score', value: '' },
+      });
+      expect(dispatch).toBeCalledWith({
+        type: 'changeReviewField',
+        payload: { name: 'description', value: '' },
+      });
     });
   });
 
