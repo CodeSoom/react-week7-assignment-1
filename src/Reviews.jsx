@@ -11,9 +11,11 @@ export default function Reviews({ reviews }) {
         id, name, score, description,
       }) => (
         <li key={id}>
-          {`${name}
-        ${score}
-        ${description}`}
+          {name}
+          <br />
+          {score}
+          <br />
+          {description}
         </li>
       ))}
     </ul>
