@@ -4,9 +4,6 @@ function saveItem(key, value) {
 
 function getItem(key) {
   const value = localStorage.getItem(key);
-
-  console.log(value);
-
   return JSON.parse(value);
 }
 
