@@ -27,7 +27,8 @@ export default function App() {
     if (accessToken) {
       dispatch(setAccessToken({ accessToken }));
     }
-  });
+  }, []);
+
   return (
     <div>
       <header>
