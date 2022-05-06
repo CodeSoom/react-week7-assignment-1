@@ -80,7 +80,7 @@ const reducers = {
     return {
       ...state,
       reviewFields: {
-        ...state.reivewFields,
+        ...state.reviewFields,
         [name]: value,
       },
     };

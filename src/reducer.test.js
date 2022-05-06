@@ -194,15 +194,30 @@ describe('reducer', () => {
   });
 
   describe('setReviewFields', () => {
-    const initialState = {
-      review: {},
-    };
-
     it('changes review value', () => {
+      const initialState = {
+        reviewFields: {},
+      };
+
       const state = reducer(initialState, setReviewFields({ name: 'score', value: '5' }));
 
       expect(state.reviewFields).toEqual({
         score: '5',
+      });
+    });
+
+    it('changes description value', () => {
+      const initialState = {
+        reviewFields: {
+          score: '5',
+        },
+      };
+
+      const state = reducer(initialState, setReviewFields({ name: 'description', value: '훌륭하다 훌륭해!' }));
+
+      expect(state.reviewFields).toEqual({
+        score: '5',
+        description: '훌륭하다 훌륭해!',
       });
     });
   });
