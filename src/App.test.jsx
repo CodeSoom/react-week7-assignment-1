@@ -106,4 +106,16 @@ describe('App', () => {
       });
     });
   });
+
+  context('when logged out', () => {
+    beforeEach(() => {
+      getItem.mockImplementation(() => undefined);
+    });
+
+    it("doesn't call dispatch", () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
 });
