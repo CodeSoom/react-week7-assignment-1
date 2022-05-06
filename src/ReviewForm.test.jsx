@@ -1,5 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 
+import given from 'given2';
+
 import ReviewForm from './ReviewForm';
 
 describe('ReviewForm', () => {
@@ -10,11 +12,13 @@ describe('ReviewForm', () => {
     <ReviewForm
       onChange={onChange}
       onSubmit={onSubmit}
+      fields={given.fields}
     />
   ));
 
   beforeEach(() => {
-    onChange.mockClear();
+    jest.clearAllMocks();
+    given('fields', () => undefined);
   });
 
   it('renders labels', () => {
@@ -54,5 +58,19 @@ describe('ReviewForm', () => {
     fireEvent.click(getByText('평가 남기기'));
 
     expect(onSubmit).toBeCalled();
+  });
+
+  context('with field values', () => {
+    given('fields', () => ({
+      score: '5',
+      description: '훌륭하다 훌륭해!',
+    }));
+
+    it('renders field values', () => {
+      const { queryByDisplayValue } = renderReviewForm();
+
+      expect(queryByDisplayValue('5')).not.toBeNull();
+      expect(queryByDisplayValue('훌륭하다 훌륭해!')).not.toBeNull();
+    });
   });
 });
