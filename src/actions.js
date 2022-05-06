@@ -55,6 +55,13 @@ export function setLoginFields({ name, value }) {
   };
 }
 
+export function setReviewFields({ name, value }) {
+  return {
+    type: 'setReviewFields',
+    payload: { name, value },
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();

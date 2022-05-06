@@ -1,6 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { setReviewFields } from './actions';
 
 import RestaurantContainer from './RestaurantContainer';
 
@@ -91,7 +92,7 @@ describe('RestaurantContainer', () => {
       it('listens for change event on write review', () => {
         const controls = [
           { label: '평점', name: 'score', value: '5' },
-          { label: '리뷰 내용', name: 'desciption', value: '훌륭하다 훌륭해!' },
+          { label: '리뷰 내용', name: 'description', value: '훌륭하다 훌륭해!' },
         ];
         const { getByLabelText } = renderRestaurantContainer();
 
@@ -101,7 +102,7 @@ describe('RestaurantContainer', () => {
             { target: { value } },
           );
 
-          expect(dispatch).toBeCalledWith({ name, value });
+          expect(dispatch).toBeCalledWith(setReviewFields({ name, value }));
         });
       });
     });

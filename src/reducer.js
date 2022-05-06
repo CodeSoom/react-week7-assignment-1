@@ -76,6 +76,16 @@ const reducers = {
     };
   },
 
+  setReviewFields(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewFields: {
+        ...state.reivewFields,
+        [name]: value,
+      },
+    };
+  },
+
   clearSession(state) {
     return {
       ...state,

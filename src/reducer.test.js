@@ -10,6 +10,7 @@ import {
   setLoginFields,
   setAccessToken,
   clearSession,
+  setReviewFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -189,6 +190,20 @@ describe('reducer', () => {
       const state = reducer(initialState, clearSession());
 
       expect(state.accessToken).toEqual('');
+    });
+  });
+
+  describe('setReviewFields', () => {
+    const initialState = {
+      review: {},
+    };
+
+    it('changes review value', () => {
+      const state = reducer(initialState, setReviewFields({ name: 'score', value: '5' }));
+
+      expect(state.reviewFields).toEqual({
+        score: '5',
+      });
     });
   });
 });
