@@ -105,6 +105,14 @@ describe('RestaurantContainer', () => {
           expect(dispatch).toBeCalledWith(setReviewFields({ name, value }));
         });
       });
+
+      it('listens for click event on submit review', () => {
+        const { getByText } = renderRestaurantContainer();
+
+        fireEvent.click(getByText('평가 남기기'));
+
+        expect(dispatch).toBeCalledTimes(2);
+      });
     });
   });
 
