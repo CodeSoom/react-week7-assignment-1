@@ -1,4 +1,4 @@
-import { saveItem, getItem } from './storage';
+import { saveItem, getItem, clear } from './storage';
 
 describe('storage', () => {
   beforeEach(() => {
@@ -7,6 +7,7 @@ describe('storage', () => {
 
   const mockSetItem = jest.spyOn(Storage.prototype, 'setItem');
   const mockGetItem = jest.spyOn(Storage.prototype, 'getItem');
+  const mockClear = jest.spyOn(Storage.prototype, 'clear');
 
   describe('saveItem', () => {
     it('calls "setItem"', () => {
@@ -25,6 +26,14 @@ describe('storage', () => {
       const storageItem = getItem('accessToken');
 
       expect(storageItem).toEqual('ACCESS_TOKEN');
+    });
+  });
+
+  describe('clear', () => {
+    it('called storage clear', () => {
+      clear();
+
+      expect(mockClear).toBeCalled();
     });
   });
 });

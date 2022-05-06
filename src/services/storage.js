@@ -7,4 +7,8 @@ function getItem(key) {
   return JSON.parse(value);
 }
 
-export { saveItem, getItem };
+function clear() {
+  localStorage.clear();
+}
+
+export { saveItem, getItem, clear };

@@ -13,6 +13,10 @@ import {
   setReviewFields,
 } from './actions';
 
+import { clear } from './services/storage';
+
+jest.mock('./services/storage');
+
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
@@ -182,14 +186,28 @@ describe('reducer', () => {
   });
 
   describe('clearSession', () => {
+    const mockClear = jest.fn();
+
+    clear.mockImplementation(() => mockClear);
+
     const initialState = {
       accessToken: 'ACCESS_TOKEN',
     };
+
+    beforeEach(() => {
+      mockClear.mockClear();
+    });
 
     it('clears acessToken', () => {
       const state = reducer(initialState, clearSession());
 
       expect(state.accessToken).toEqual('');
+    });
+
+    it('calls clear storage', () => {
+      reducer(initialState, clearSession());
+
+      expect(clear).toBeCalled();
     });
   });
 
