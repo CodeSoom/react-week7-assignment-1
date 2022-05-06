@@ -7,18 +7,20 @@ import RestaurantContainer from './RestaurantContainer';
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
+  beforeEach(() => {
+    dispatch.mockClear();
+  });
+
+  useDispatch.mockImplementation(() => dispatch);
+
+  useSelector.mockImplementation((selector) => selector({
+    restaurant: given.restaurant,
+    accessToken: given.accessToken,
+  }));
+
   function renderRestaurantContainer() {
     return render(<RestaurantContainer restaurantId="1" />);
   }
-
-  beforeEach(() => {
-    dispatch.mockClear();
-    useDispatch.mockImplementation(() => dispatch);
-
-    useSelector.mockImplementation((selector) => selector({
-      restaurant: given.restaurant,
-    }));
-  });
 
   it('dispatches action', () => {
     renderRestaurantContainer();
