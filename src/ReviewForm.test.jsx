@@ -4,10 +4,12 @@ import ReviewForm from './ReviewForm';
 
 describe('ReviewForm', () => {
   const onChange = jest.fn();
+  const onSubmit = jest.fn();
 
   const renderReviewForm = () => render((
     <ReviewForm
       onChange={onChange}
+      onSubmit={onSubmit}
     />
   ));
 
@@ -44,5 +46,13 @@ describe('ReviewForm', () => {
     const { container } = renderReviewForm();
 
     expect(container).toHaveTextContent('평가 남기기');
+  });
+
+  it('listens for click event', () => {
+    const { getByText } = renderReviewForm();
+
+    fireEvent.click(getByText('평가 남기기'));
+
+    expect(onSubmit).toBeCalled();
   });
 });
