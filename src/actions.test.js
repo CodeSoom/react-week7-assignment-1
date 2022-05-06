@@ -17,7 +17,7 @@ import {
 
 import RESTAURANT from '../fixtures/restaurant';
 
-import { saveItem } from './services/storage';
+import { setItem } from './services/storage';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -130,7 +130,7 @@ describe('actions', () => {
     it('calls setItem for storage access token', async () => {
       await store.dispatch(requestSession());
 
-      expect(saveItem).toBeCalledWith('accessToken', 'ACCESS_TOKEN');
+      expect(setItem).toBeCalledWith('accessToken', 'ACCESS_TOKEN');
     });
   });
 

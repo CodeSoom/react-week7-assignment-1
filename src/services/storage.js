@@ -1,4 +1,4 @@
-function saveItem(key, value) {
+function setItem(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
@@ -11,4 +11,4 @@ function clear() {
   localStorage.clear();
 }
 
-export { saveItem, getItem, clear };
+export { setItem, getItem, clear };

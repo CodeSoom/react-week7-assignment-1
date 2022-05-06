@@ -6,7 +6,7 @@ import {
   postLogin,
   postReview,
 } from './services/api';
-import { clear, saveItem } from './services/storage';
+import { clear, setItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -116,7 +116,7 @@ export function requestSession() {
 
     const { accessToken } = await postLogin({ email, password });
 
-    saveItem('accessToken', accessToken);
+    setItem('accessToken', accessToken);
 
     dispatch(setAccessToken({ accessToken }));
   };
