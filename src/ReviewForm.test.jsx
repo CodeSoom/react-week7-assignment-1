@@ -3,12 +3,6 @@ import { fireEvent, render } from '@testing-library/react';
 import ReviewForm from './ReviewForm';
 
 describe('ReviewForm', () => {
-  /**
-   * 평점
-   * 리뷰 내용
-   * 리뷰 남기기
-    */
-
   const onChange = jest.fn();
 
   const renderReviewForm = () => render((
@@ -44,5 +38,11 @@ describe('ReviewForm', () => {
 
       expect(onChange).toBeCalledWith({ name, value });
     });
+  });
+
+  it('renders "평가 남기기" buttons', () => {
+    const { container } = renderReviewForm();
+
+    expect(container).toHaveTextContent('평가 남기기');
   });
 });
