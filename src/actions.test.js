@@ -17,10 +17,13 @@ import {
 
 import RESTAURANT from '../fixtures/restaurant';
 
+import { saveItem } from './services/storage';
+
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/storage');
 
 describe('actions', () => {
   let store;
@@ -122,6 +125,12 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions).toEqual([setAccessToken({ accessToken: 'ACCESS_TOKEN' })]);
+    });
+
+    it('calls setItem for storage access token', async () => {
+      await store.dispatch(requestSession());
+
+      expect(saveItem).toBeCalledWith('accessToken', 'ACCESS_TOKEN');
     });
   });
 
