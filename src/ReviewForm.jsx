@@ -17,6 +17,9 @@ export default function ReviewForm({ onChange, fields = {} }) {
         name="description"
         value={description}
       />
+      <button type="button">
+        평가 남기기
+      </button>
     </div>
   );
 }
