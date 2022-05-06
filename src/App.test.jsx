@@ -98,7 +98,7 @@ describe('App', () => {
     });
 
     it('calls dispatch with "setAccessToken" action', () => {
-      renderApp();
+      renderApp({ path: '/' });
 
       expect(dispatch).toBeCalledWith({
         type: 'setAccessToken',
