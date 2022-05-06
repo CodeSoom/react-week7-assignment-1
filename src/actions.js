@@ -6,7 +6,7 @@ import {
   postLogin,
   postReview,
 } from './services/api';
-import { saveItem } from './services/storage';
+import { clear, saveItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -123,6 +123,8 @@ export function requestSession() {
 }
 
 export function clearSession() {
+  clear();
+
   return {
     type: 'clearSession',
   };
