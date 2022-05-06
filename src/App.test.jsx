@@ -1,13 +1,14 @@
+import { render } from '@testing-library/react';
+
 import {
   MemoryRouter,
 } from 'react-router-dom';
 
-import { render } from '@testing-library/react';
-
 import { useDispatch, useSelector } from 'react-redux';
 
-import App from './App';
 import { getItem } from './services/storage';
+
+import App from './App';
 
 jest.mock('react-redux');
 jest.mock('./services/storage');

@@ -2,6 +2,7 @@ import InputField from './InputField';
 
 export default function ReviewForm({ onChange, onSubmit, fields = {} }) {
   const { score, description } = fields;
+
   return (
     <div>
       <InputField

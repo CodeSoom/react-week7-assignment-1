@@ -11,6 +11,10 @@ const initialState = {
     email: '',
     password: '',
   },
+  reviewFields: {
+    score: '',
+    description: '',
+  },
   accessToken: '',
 };
 

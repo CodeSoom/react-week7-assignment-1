@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import LoginForm from './LoginForm';
-
 import {
   requestSession,
   setLoginFields,
@@ -9,6 +7,8 @@ import {
 } from './actions';
 
 import { get } from './utils';
+
+import LoginForm from './LoginForm';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();

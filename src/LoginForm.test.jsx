@@ -1,5 +1,4 @@
 import { fireEvent, render } from '@testing-library/react';
-
 import given from 'given2';
 
 import LoginForm from './LoginForm';
