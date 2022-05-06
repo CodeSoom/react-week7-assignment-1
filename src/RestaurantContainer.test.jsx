@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,6 +9,7 @@ describe('RestaurantContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
+    given('accessToken', () => undefined);
   });
 
   useDispatch.mockImplementation(() => dispatch);
@@ -85,6 +86,23 @@ describe('RestaurantContainer', () => {
         expect(queryByLabelText('평점')).not.toBeNull();
         expect(queryByLabelText('리뷰 내용')).not.toBeNull();
         expect(queryByText('평가 남기기')).not.toBeNull();
+      });
+
+      it('listens for change event on write review', () => {
+        const controls = [
+          { label: '평점', name: 'score', value: '5' },
+          { label: '리뷰 내용', name: 'desciption', value: '훌륭하다 훌륭해!' },
+        ];
+        const { getByLabelText } = renderRestaurantContainer();
+
+        controls.forEach(({ label, name, value }) => {
+          fireEvent.change(
+            getByLabelText(label),
+            { target: { value } },
+          );
+
+          expect(dispatch).toBeCalledWith({ name, value });
+        });
       });
     });
   });
