@@ -46,16 +46,16 @@ describe('ReviewForm', () => {
     });
   });
 
-  it('renders "평가 남기기" buttons', () => {
+  it('renders "리뷰 남기기" buttons', () => {
     const { container } = renderReviewForm();
 
-    expect(container).toHaveTextContent('평가 남기기');
+    expect(container).toHaveTextContent('리뷰 남기기');
   });
 
   it('listens for click event', () => {
     const { getByText } = renderReviewForm();
 
-    fireEvent.click(getByText('평가 남기기'));
+    fireEvent.click(getByText('리뷰 남기기'));
 
     expect(onSubmit).toBeCalled();
   });

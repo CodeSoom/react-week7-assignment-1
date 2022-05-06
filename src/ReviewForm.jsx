@@ -21,7 +21,7 @@ export default function ReviewForm({ onChange, onSubmit, fields = {} }) {
         type="button"
         onClick={onSubmit}
       >
-        평가 남기기
+        리뷰 남기기
       </button>
     </div>
   );

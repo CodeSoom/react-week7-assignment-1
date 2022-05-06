@@ -74,7 +74,7 @@ describe('RestaurantContainer', () => {
 
         expect(queryByLabelText('평점')).toBeNull();
         expect(queryByLabelText('리뷰 내용')).toBeNull();
-        expect(queryByText('평가 남기기')).toBeNull();
+        expect(queryByText('리뷰 남기기')).toBeNull();
       });
     });
 
@@ -86,7 +86,7 @@ describe('RestaurantContainer', () => {
 
         expect(queryByLabelText('평점')).not.toBeNull();
         expect(queryByLabelText('리뷰 내용')).not.toBeNull();
-        expect(queryByText('평가 남기기')).not.toBeNull();
+        expect(queryByText('리뷰 남기기')).not.toBeNull();
       });
 
       it('listens for change event on write review', () => {
@@ -109,7 +109,7 @@ describe('RestaurantContainer', () => {
       it('listens for click event on submit review', () => {
         const { getByText } = renderRestaurantContainer();
 
-        fireEvent.click(getByText('평가 남기기'));
+        fireEvent.click(getByText('리뷰 남기기'));
 
         expect(dispatch).toBeCalledTimes(2);
       });
