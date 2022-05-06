@@ -12,7 +12,10 @@ import {
   setRestaurant,
   requestSession,
   setAccessToken,
+  submitReview,
 } from './actions';
+
+import RESTAURANT from '../fixtures/restaurant';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -119,6 +122,35 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions).toEqual([setAccessToken({ accessToken: 'ACCESS_TOKEN' })]);
+    });
+  });
+
+  describe('submitReView', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+        reviewFields: {
+          score: '5',
+          description: '훌륭하다 훌륭해!',
+        },
+        restaurant: RESTAURANT,
+      });
+    });
+
+    it('dispatchs submitReview', async () => {
+      await store.dispatch(submitReview());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant({
+        ...RESTAURANT,
+        reviews: [
+          {
+            id: 2, restaurantId: 1, name: '테스터', score: 5, description: '훌륭하다 훌륭해!',
+          },
+          ...RESTAURANT.reviews,
+        ],
+      }));
     });
   });
 });

@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -121,5 +122,37 @@ export function requestSession() {
 export function clearSession() {
   return {
     type: 'clearSession',
+  };
+}
+
+export function submitReview() {
+  return async (dispatch, getState) => {
+    const {
+      accessToken,
+      restaurant,
+      reviewFields: { score, description },
+    } = getState();
+
+    await postReview({
+      accessToken, restaurantId: restaurant.id, score, description,
+    });
+
+    const lastReview = restaurant.reviews.slice(-1).pop();
+
+    const review = {
+      id: lastReview.id + 1,
+      restaurantId: restaurant.id,
+      name: '테스터',
+      score: parseInt(score, 10),
+      description,
+    };
+
+    dispatch(setRestaurant({
+      ...restaurant,
+      reviews: [
+        review,
+        ...restaurant.reviews,
+      ],
+    }));
   };
 }

@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -80,6 +81,23 @@ describe('api', () => {
       expect(data).toEqual({
         accessToken: 'ACCESS_TOKEN',
       });
+    });
+  });
+
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch(undefined);
+    });
+
+    it('returns restaurants', async () => {
+      const data = await postReview({
+        accessToken: 'ACCESS_TOKEN',
+        score: '5',
+        description: '훌륭하다 훌륭해!',
+        restaurantId: 1,
+      });
+
+      expect(data).toEqual(undefined);
     });
   });
 });
