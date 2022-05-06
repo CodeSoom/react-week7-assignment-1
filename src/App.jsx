@@ -6,14 +6,17 @@ import {
 
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+
+import { setAccessToken } from './actions';
+
+import { getItem } from './services/storage';
+
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import LoginPage from './LoginPage';
 import RestaurantsPage from './RestaurantsPage';
 import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
-import { getItem } from './services/storage';
-import { setAccessToken } from './actions';
 
 export default function App() {
   const dispatch = useDispatch();
