@@ -7,16 +7,22 @@ describe('ReviewForm', () => {
    * 평점
    * 리뷰 내용
    * 리뷰 남기기
-   */
+    */
 
   const onChange = jest.fn();
+
+  const renderReviewForm = () => render((
+    <ReviewForm
+      onChange={onChange}
+    />
+  ));
 
   beforeEach(() => {
     onChange.mockClear();
   });
 
   it('renders labels', () => {
-    const { queryByLabelText } = render(<ReviewForm onChange={onChange} />);
+    const { queryByLabelText } = renderReviewForm();
 
     expect(queryByLabelText('평점')).not.toBeNull();
     expect(queryByLabelText('리뷰 내용')).not.toBeNull();
@@ -28,7 +34,7 @@ describe('ReviewForm', () => {
       { label: '리뷰 내용', name: 'description', value: '훌륭하다 훌륭해!' },
     ];
 
-    const { getByLabelText } = render(<ReviewForm onChange={onChange} />);
+    const { getByLabelText } = renderReviewForm();
 
     controls.forEach(({ label, name, value }) => {
       fireEvent.change(
