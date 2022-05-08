@@ -7,6 +7,9 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  updateLoginField,
+  setAccessToken,
+  updateReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +21,15 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      accessToken: '',
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -123,6 +135,86 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('updateLoginField', () => {
+    context('when email changes', () => {
+      const initialState = {
+        loginFields: {
+          email: 'previousEmail',
+          password: 'previousPassword',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        updateLoginField({ name: 'email', value: 'test@test' }),
+      );
+
+      expect(state.loginFields.email).toBe('test@test');
+      expect(state.loginFields.password).toBe('previousPassword');
+    });
+
+    context('when password changes', () => {
+      const initialState = {
+        loginFields: {
+          email: 'previousEmail',
+          password: 'previousPassword',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        updateLoginField({ name: 'password', value: '1234' }),
+      );
+
+      expect(state.loginFields.email).toBe('previousEmail');
+      expect(state.loginFields.password).toBe('1234');
+    });
+  });
+
+  describe('setAccessToken', () => {
+    const initialState = {
+      accessToken: '',
+    };
+
+    const state = reducer(initialState, setAccessToken('token'));
+
+    expect(state.accessToken).toBe('token');
+  });
+
+  describe('updateReviewField', () => {
+    context('when score changes', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        updateReviewField({ name: 'score', value: 5 }),
+      );
+
+      expect(state.reviewFields.score).toBe(5);
+    });
+
+    context('when description changes', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        updateReviewField({ name: 'description', value: '맛있어요' }),
+      );
+
+      expect(state.reviewFields.description).toBe('맛있어요');
     });
   });
 });

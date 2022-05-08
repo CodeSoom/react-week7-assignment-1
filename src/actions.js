@@ -3,6 +3,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -83,5 +84,41 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function updateLoginField({ name, value }) {
+  // TODO: 이메일, 비밀번호 상태를 변경하는 액션
+  return {
+    type: 'updateLoginField',
+    payload: { name, value },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  // TODO : 로그인 요청으로 얻은 access token 을 저장?하기
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const { loginFields: { email, password } } = getState();
+
+    try {
+      const accessToken = await postLogin({ email, password });
+      dispatch(setAccessToken(accessToken));
+    } catch (e) {
+      // TODO : 에러 처리
+    }
+  };
+}
+
+export function updateReviewField({ name, value }) {
+  return {
+    type: 'updateReviewField',
+    payload: { name, value },
   };
 }
