@@ -2,17 +2,17 @@ const assert = require('assert');
 
 Feature('Restaurant');
 
-Scenario('카테고리와 지역을 모두 선택하면 레스토랑 목록을 볼 수 있습니다.', ({ I }) => {
+Scenario('카테고리와 지역을 모두 선택하면 레스토랑 목록을 볼 수 있습니다.', async ({ I }) => {
   I.amOnPage('/restaurants');
 
   I.click('서울');
   I.click('한식');
 
-  I.see('양천주가');
-  I.see('한국식 초밥');
+  await I.see('양천주가');
+  await I.see('한국식 초밥');
 
-  I.click('부산');
-  I.see('밀면넘어져요');
+  await I.click('부산');
+  await I.see('밀면넘어져요');
 });
 
 Scenario('레스토랑 상세 페이지로 이동합니다.', async ({ I }) => {

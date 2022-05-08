@@ -8,17 +8,29 @@ import {
   setCategories,
   loadRestaurants,
   loadRestaurant,
+  sendReview,
+  requestLogin,
   setRestaurants,
   setRestaurant,
+  setAccessToken,
+  setErrorMessage,
 } from './actions';
+
+import { postLogin, postReview } from './services/api';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/storage');
+jest.mock('axios');
 
 describe('actions', () => {
   let store;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
   describe('loadInitialData', () => {
     beforeEach(() => {
@@ -98,6 +110,105 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginFields: {
+          email: 'tester@example.com',
+          password: 'test',
+        },
+      });
+    });
+
+    context('when the request succeeded', () => {
+      it('dispatchs setAccessToken', async () => {
+        postLogin.mockImplementation(() => 'TOKEN');
+
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setErrorMessage(''));
+        expect(actions[1]).toEqual(setAccessToken('TOKEN'));
+      });
+    });
+
+    context('when the request failed from api', () => {
+      it('dispatchs setErrorMessage', async () => {
+        postLogin.mockImplementation(() => '');
+
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setErrorMessage('로그인 정보를 다시 입력해 주세요.'));
+      });
+    });
+
+    context('when the request failed from action', () => {
+      it('dispatchs setErrorMessage', async () => {
+        postLogin.mockImplementation(() => {
+          throw new Error('Error');
+        });
+
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setErrorMessage('Error'));
+      });
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        reviewFields: {
+          score: 5,
+          description: '최고예요',
+        },
+        accessToken: 'TOKEN',
+      });
+    });
+
+    it('dispatchs setRestaurant', async () => {
+      postReview.mockImplementation(() => ('review'));
+
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setErrorMessage(''));
+      expect(actions[1]).toEqual(setRestaurant(null));
+    });
+
+    context('when the request failed from api', () => {
+      it('dispatchs setErrorMessage', async () => {
+        postReview.mockImplementation(() => '');
+
+        await store.dispatch(sendReview({ restaurantId: 1 }));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setErrorMessage('리뷰 정보를 다시 입력해 주세요.'));
+      });
+    });
+
+    context('when the request failed from action', () => {
+      it('dispatchs setErrorMessage', async () => {
+        postReview.mockImplementation(() => {
+          throw new Error('Error');
+        });
+
+        await store.dispatch(sendReview({ restaurantId: 1 }));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setErrorMessage('Error'));
+      });
     });
   });
 });

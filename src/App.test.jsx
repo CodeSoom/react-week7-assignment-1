@@ -8,32 +8,39 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import { loadItem } from './services/storage';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
 
+  useDispatch.mockImplementation(() => dispatch);
+
+  useSelector.mockImplementation((selector) => selector({
+    regions: [
+      { id: 1, name: '서울' },
+    ],
+    categories: [],
+    restaurants: [],
+    restaurant: { id: 1, name: '마녀주방' },
+    loginFields: {
+      email: '',
+      password: '',
+    },
+  }));
+
   beforeEach(() => {
-    dispatch.mockClear();
-
-    useDispatch.mockImplementation(() => dispatch);
-
-    useSelector.mockImplementation((selector) => selector({
-      regions: [
-        { id: 1, name: '서울' },
-      ],
-      categories: [],
-      restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
-    }));
+    jest.clearAllMocks();
   });
 
   function renderApp({ path }) {
-    return render(
+    return render((
       <MemoryRouter initialEntries={[path]}>
         <App />
-      </MemoryRouter>,
-    );
+      </MemoryRouter>
+    ));
   }
 
   context('with path /', () => {
@@ -41,6 +48,14 @@ describe('App', () => {
       const { container } = renderApp({ path: '/' });
 
       expect(container).toHaveTextContent('Home');
+    });
+  });
+
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
     });
   });
 
@@ -73,6 +88,30 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('with accessToken', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => 'TOKEN');
+    });
+
+    it('calls dispatch', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalled();
+    });
+  });
+
+  context('without accessToken', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => '');
+    });
+
+    it("doesn't call dispatch", () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
     });
   });
 });

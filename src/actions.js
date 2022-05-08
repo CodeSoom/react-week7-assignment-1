@@ -3,7 +3,11 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
+  postReview,
 } from './services/api';
+
+import { saveItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -30,6 +34,13 @@ export function setRestaurant(restaurant) {
   return {
     type: 'setRestaurant',
     payload: { restaurant },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
   };
 }
 
@@ -83,5 +94,92 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function setErrorMessage(errorMessage) {
+  return {
+    type: 'setErrorMessage',
+    payload: { errorMessage },
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { accessToken, reviewFields } = getState();
+    const { score, description } = reviewFields;
+
+    try {
+      const data = await postReview({
+        accessToken, restaurantId, score, description,
+      });
+
+      if (data) {
+        dispatch(setErrorMessage(''));
+        dispatch(loadRestaurant({ restaurantId }));
+
+        return;
+      }
+
+      dispatch(setErrorMessage('리뷰 정보를 다시 입력해 주세요.'));
+    } catch (e) {
+      dispatch(setErrorMessage(e.message));
+    }
+  };
+}
+
+export function changeReviewFields(reviewFields) {
+  return {
+    type: 'changeReviewFields',
+    payload: { reviewFields },
+  };
+}
+
+export function emptyReviewFields() {
+  return {
+    type: 'emptyReviewFields',
+  };
+}
+
+export function changeLoginFields(loginFields) {
+  return {
+    type: 'changeLoginFields',
+    payload: { loginFields },
+  };
+}
+
+export function emptyLoginFields() {
+  return {
+    type: 'emptyLoginFields',
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const { loginFields } = getState();
+    const { email, password } = loginFields;
+
+    try {
+      const accessToken = await postLogin({ email, password });
+
+      if (accessToken?.length) {
+        dispatch(setErrorMessage(''));
+        saveItem({ key: 'accessToken', value: accessToken });
+
+        dispatch(setAccessToken(accessToken));
+
+        return;
+      }
+
+      dispatch(setErrorMessage('로그인 정보를 다시 입력해 주세요.'));
+    } catch (e) {
+      dispatch(setErrorMessage(e.message));
+    }
+  };
+}
+
+export function logout() {
+  return {
+    type: 'logout',
   };
 }

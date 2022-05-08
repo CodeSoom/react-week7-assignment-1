@@ -1,3 +1,5 @@
+import reviews from './reviews';
+
 export default {
   id: 1,
   name: '마녀주방',
@@ -5,4 +7,5 @@ export default {
   menuItems: [
     { id: 1, name: '떡볶이' },
   ],
+  reviews,
 };

@@ -13,3 +13,7 @@ export async function fetchRestaurants() {
 export async function fetchRestaurant() {
   return {};
 }
+
+export const postLogin = jest.fn();
+
+export const postReview = jest.fn();

@@ -1,3 +1,5 @@
+import { saveItem } from './services/storage';
+
 import { equal } from './utils';
 
 const initialState = {
@@ -5,8 +7,18 @@ const initialState = {
   categories: [],
   restaurants: [],
   restaurant: null,
+  accessToken: '',
   selectedRegion: null,
   selectedCategory: null,
+  reviewFields: {
+    score: '',
+    description: '',
+  },
+  loginFields: {
+    email: '',
+    password: '',
+  },
+  errorMessage: '',
 };
 
 const reducers = {
@@ -38,6 +50,13 @@ const reducers = {
     };
   },
 
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
+    };
+  },
+
   selectRegion(state, { payload: { regionId } }) {
     const { regions } = state;
     return {
@@ -51,6 +70,63 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  setErrorMessage(state, { payload: { errorMessage } }) {
+    return {
+      ...state,
+      errorMessage,
+    };
+  },
+
+  changeReviewFields(state, { payload: { reviewFields } }) {
+    const { name, value } = reviewFields;
+    return {
+      ...state,
+      reviewFields: {
+        ...state.reviewFields,
+        [name]: value,
+      },
+    };
+  },
+
+  emptyReviewFields(state) {
+    return {
+      ...state,
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+    };
+  },
+
+  changeLoginFields(state, { payload: { loginFields } }) {
+    const { name, value } = loginFields;
+    return {
+      ...state,
+      loginFields: {
+        ...state.loginFields,
+        [name]: value,
+      },
+    };
+  },
+
+  emptyLoginFields(state) {
+    return {
+      ...state,
+      loginFields: {
+        email: '',
+        password: '',
+      },
+    };
+  },
+
+  logout(state) {
+    saveItem({ key: 'accessToken', value: '' });
+    return {
+      ...state,
+      accessToken: '',
     };
   },
 };
