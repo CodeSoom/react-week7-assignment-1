@@ -1,14 +1,17 @@
+import { render } from '@testing-library/react';
+
 import {
   MemoryRouter,
 } from 'react-router-dom';
 
-import { render } from '@testing-library/react';
-
 import { useDispatch, useSelector } from 'react-redux';
+
+import { getItem } from './services/storage';
 
 import App from './App';
 
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -25,6 +28,10 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      loginFields: {
+        email: '',
+        password: '',
+      },
     }));
   });
 
@@ -52,6 +59,14 @@ describe('App', () => {
     });
   });
 
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Login 페이지');
+    });
+  });
+
   context('with path /restaurants', () => {
     it('renders the restaurants page', () => {
       const { container } = renderApp({ path: '/restaurants' });
@@ -73,6 +88,35 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('when logged in', () => {
+    const accessToken = 'ACCESS_TOKEN';
+
+    beforeEach(() => {
+      getItem.mockImplementation(() => accessToken);
+    });
+
+    it('calls dispatch with "setAccessToken" action', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: { accessToken },
+      });
+    });
+  });
+
+  context('when logged out', () => {
+    beforeEach(() => {
+      getItem.mockImplementation(() => undefined);
+    });
+
+    it("doesn't call dispatch", () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
     });
   });
 });

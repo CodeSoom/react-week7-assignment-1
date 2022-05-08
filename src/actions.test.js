@@ -10,12 +10,20 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestSession,
+  setAccessToken,
+  submitReview,
 } from './actions';
+
+import RESTAURANT from '../fixtures/restaurant';
+
+import { setItem } from './services/storage';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./services/storage');
 
 describe('actions', () => {
   let store;
@@ -98,6 +106,60 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestSession', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginFields: {
+          email: 'tester@example.com',
+          password: 'tester',
+        },
+      });
+    });
+
+    it('dispatchs requrestSession', async () => {
+      await store.dispatch(requestSession());
+
+      const actions = store.getActions();
+
+      expect(actions).toEqual([setAccessToken({ accessToken: 'ACCESS_TOKEN' })]);
+    });
+
+    it('calls setItem for storage access token', async () => {
+      await store.dispatch(requestSession());
+
+      expect(setItem).toBeCalledWith('accessToken', 'ACCESS_TOKEN');
+    });
+  });
+
+  describe('submitReView', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+        reviewFields: {
+          score: '5',
+          description: '훌륭하다 훌륭해!',
+        },
+        restaurant: RESTAURANT,
+      });
+    });
+
+    it('dispatchs submitReview', async () => {
+      await store.dispatch(submitReview());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant({
+        ...RESTAURANT,
+        reviews: [
+          {
+            id: 2, restaurantId: 1, name: '테스터', score: 5, description: '훌륭하다 훌륭해!',
+          },
+          ...RESTAURANT.reviews,
+        ],
+      }));
     });
   });
 });
