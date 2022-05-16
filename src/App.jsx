@@ -1,7 +1,7 @@
 import {
-  Switch,
   Route,
   Link,
+  Routes,
 } from 'react-router-dom';
 
 import HomePage from './HomePage';
@@ -18,13 +18,13 @@ export default function App() {
           <Link to="/">헤더</Link>
         </h1>
       </header>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/about" component={AboutPage} />
-        <Route exact path="/restaurants" component={RestaurantsPage} />
-        <Route path="/restaurants/:id" component={RestaurantPage} />
-        <Route component={NotFoundPage} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="restaurants" element={<RestaurantsPage />} />
+        <Route path="restaurants/:id" element={<RestaurantPage />} />
+        <Route component={<NotFoundPage />} />
+      </Routes>
     </div>
   );
 }
