@@ -1,0 +1,15 @@
+@regionName = 서울
+@categoryId = 1
+@restaurantId = 1
+
+### GET Categories Data
+GET https://eatgo-customer-api.ahastudio.com/categories
+
+### GET Regions Data
+GET https://eatgo-customer-api.ahastudio.com/regions
+
+### GET Restaurants Data
+GET https://eatgo-customer-api.ahastudio.com/restaurants?region={{regionName}}&category={{categoryId}}
+
+### GET Restaurant Detail Data
+GET https://eatgo-customer-api.ahastudio.com/restaurants/{{restaurantId}}
