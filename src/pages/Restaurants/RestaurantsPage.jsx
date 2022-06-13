@@ -4,13 +4,11 @@ import { useHistory } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
-import RegionsContainer from './RegionsContainer';
-import CategoriesContainer from './CategoriesContainer';
-import RestaurantsContainer from './RestaurantsContainer';
+import RegionsContainer from '../../containers/Regions/RegionsContainer';
+import CategoriesContainer from '../../containers/categories/CategoriesContainer';
+import RestaurantsContainer from '../../containers/Restaurants/RestaurantsContainer';
 
-import {
-  loadInitialData,
-} from './actions';
+import { loadInitialData } from '../../actions';
 
 export default function RestaurantsPage() {
   const history = useHistory();

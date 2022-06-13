@@ -1,4 +1,4 @@
-import MenuItems from './MenuItems';
+import MenuItems from '../../MenuItems';
 
 export default function RestaurantDetail({ restaurant }) {
   const { name, address, menuItems } = restaurant;
@@ -8,7 +8,6 @@ export default function RestaurantDetail({ restaurant }) {
       <h2>{name}</h2>
       <p>
         주소:
-        {' '}
         {address}
       </p>
       <h3>메뉴</h3>
