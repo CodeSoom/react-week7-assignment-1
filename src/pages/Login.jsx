@@ -6,7 +6,9 @@ import { get } from '../apps/utils';
 
 export default function Login() {
   const { email, password } = useSelector(get('loginFields'));
-  const { isLoading, isError, errorMessage } = useSelector(get('auth'));
+  const {
+    isLogin, isLoading, isError, errorMessage,
+  } = useSelector(get('auth'));
 
   const dispatch = useDispatch();
 
@@ -23,6 +25,9 @@ export default function Login() {
   if (isLoading) return <div>로딩중...</div>;
   if (isError) return <div>{errorMessage}</div>;
 
+  if (isLogin) {
+    return <button type="button">로그아웃</button>;
+  }
   return (
     <div>
       <h2>Login</h2>
