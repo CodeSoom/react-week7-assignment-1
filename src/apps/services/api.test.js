@@ -1,3 +1,5 @@
+import mockAxios from 'jest-mock-axios';
+
 import {
   fetchRegions,
   fetchCategories,
@@ -11,13 +13,11 @@ import CATEGORIES from '../../../fixtures/categories';
 import RESTAURANTS from '../../../fixtures/restaurants';
 import RESTAURANT_DETAIL from '../../../fixtures/restaurantDetail';
 
+jest.mock('axios');
+
 describe('api', () => {
-  const mockFetch = (data) => {
-    global.fetch = jest.fn().mockResolvedValue({
-      async json() { return data; },
-      status: 201,
-    });
-  };
+  const mockFetch = (data) => mockAxios.get.mockResolvedValue({ data });
+  const mockLogin = (data) => mockAxios.post.mockResolvedValue({ data, status: 201 });
 
   describe('fetchRegions', () => {
     beforeEach(() => {
@@ -72,7 +72,7 @@ describe('api', () => {
 
   describe('login', () => {
     beforeEach(() => {
-      mockFetch({
+      mockLogin({
         accessToken: 'accessToken',
       });
     });
