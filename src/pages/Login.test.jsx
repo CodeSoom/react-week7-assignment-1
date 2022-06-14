@@ -22,6 +22,11 @@ describe('LoginForm', () => {
       email: '',
       password: '',
     },
+    auth: {
+      isLoading: false,
+      isError: false,
+      errorMessage: '',
+    },
   }));
   it('renders input controls', () => {
     const { getByLabelText, getByRole } = render((
