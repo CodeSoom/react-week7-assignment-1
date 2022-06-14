@@ -49,6 +49,7 @@ describe('reducer', () => {
         },
         auth: {
           accessToken: null,
+          isLogin: false,
           isLoading: false,
           isError: false,
           errorMessage: '',
@@ -92,6 +93,7 @@ describe('reducer', () => {
       },
       auth: {
         accessToken: null,
+        isLogin: false,
         isLoading: false,
         isError: false,
         errorMessage: '',
