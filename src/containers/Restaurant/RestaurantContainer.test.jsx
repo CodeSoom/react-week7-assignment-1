@@ -8,7 +8,7 @@ describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
   function renderRestaurantContainer() {
-    return render(<RestaurantContainer restaurantId="1" />);
+    return render(<RestaurantContainer restaurantId='1' />);
   }
 
   beforeEach(() => {
@@ -16,14 +16,16 @@ describe('RestaurantContainer', () => {
 
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation((selector) => selector({
-      restaurant: given.restaurant,
-      reviewFields: {
-        score: '',
-        description: '',
-      },
-      accessToken: given.accessToken,
-    }));
+    useSelector.mockImplementation((selector) =>
+      selector({
+        restaurant: given.restaurant,
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+        accessToken: given.accessToken,
+      })
+    );
   });
 
   context('with restaurant', () => {
