@@ -7,8 +7,10 @@ import {
   setRestaurantDetail,
   setLoading,
   setError,
+  setAccessToken,
   selectRegion,
   selectCategory,
+  setLoginFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -41,9 +43,16 @@ describe('reducer', () => {
         },
         selectedRegion: null,
         selectedCategory: null,
-        isLoading: false,
-        isError: false,
-        errorMessage: '',
+        loginFields: {
+          email: '',
+          password: '',
+        },
+        auth: {
+          accessToken: null,
+          isLoading: false,
+          isError: false,
+          errorMessage: '',
+        },
       };
       const state = reducer();
       expect(state).toEqual(initialState);
@@ -77,9 +86,16 @@ describe('reducer', () => {
       },
       selectedRegion: null,
       selectedCategory: null,
-      isLoading: false,
-      isError: false,
-      errorMessage: '',
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      auth: {
+        accessToken: null,
+        isLoading: false,
+        isError: false,
+        errorMessage: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -256,6 +272,38 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('set accessToken and initialize status', () => {
+      const initialState = {
+        auth: {
+          accessToken: null,
+          isLoading: false,
+          isError: false,
+          errorMessage: '',
+        },
+      };
+
+      const state = reducer(initialState, setAccessToken('accessToken'));
+
+      expect(state.auth.accessToken).toBe('accessToken');
+    });
+  });
+
+  describe('setLoginFields', () => {
+    it('change login field', () => {
+      const initialState = {
+        loginFields: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, setLoginFields('email', 'tester@example.com'));
+
+      expect(state.loginFields.email).toBe('tester@example.com');
     });
   });
 });
