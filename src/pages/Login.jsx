@@ -1,18 +1,28 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setLoginFields } from '../apps/store/actions';
+import { login, setLoginFields } from '../apps/store/actions';
 
 import { get } from '../apps/utils';
 
 export default function Login() {
   const { email, password } = useSelector(get('loginFields'));
+  const { isLoading, isError, errorMessage } = useSelector(get('auth'));
 
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    dispatch(setLoginFields({ [name]: value }));
+    dispatch(setLoginFields(name, value));
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(login());
+  };
+
+  if (isLoading) return <div>로딩중...</div>;
+  if (isError) return <div>{errorMessage}</div>;
+
   return (
     <div>
       <h2>Login</h2>
@@ -24,7 +34,7 @@ export default function Login() {
         <label htmlFor="password">Password</label>
         <input type="password" name="password" id="password" value={password} onChange={handleChange} />
       </div>
-      <button type="button">Login</button>
+      <button type="button" onClick={handleSubmit}>Login</button>
     </div>
   );
 }
