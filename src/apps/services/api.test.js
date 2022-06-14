@@ -15,6 +15,7 @@ describe('api', () => {
   const mockFetch = (data) => {
     global.fetch = jest.fn().mockResolvedValue({
       async json() { return data; },
+      status: 201,
     });
   };
 
@@ -77,9 +78,9 @@ describe('api', () => {
     });
 
     it('returns accessToken', async () => {
-      const data = await authorize('tester@example.com', 'test');
+      const response = await authorize('tester@example.com', 'test');
 
-      expect(data.accessToken).toEqual('accessToken');
+      expect(response.accessToken).toEqual('accessToken');
     });
   });
 });
