@@ -11,9 +11,12 @@ import {
   loadRestaurantDetail,
   setRestaurantDetail,
   setError,
+  setAccessToken,
+  login,
 } from './actions';
 
 import {
+  authorize,
   fetchCategories, fetchRegions, fetchRestaurantById, fetchRestaurants,
 } from '../services/api';
 
@@ -255,6 +258,30 @@ describe('actions', () => {
         const actions = store.getActions();
 
         expect(actions[1]).toEqual(setError('restaurantDetail', 'error'));
+      });
+    });
+  });
+
+  describe('login', () => {
+    context('with valid credentials', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: 'tester@example.com',
+            password: 'test',
+          },
+        });
+        authorize.mockResolvedValue({
+          accessToken: 'accessToken',
+        });
+      });
+
+      it('runs setAccessToken', async () => {
+        await store.dispatch(login());
+
+        const actions = store.getActions();
+
+        expect(actions[1]).toEqual(setAccessToken('accessToken'));
       });
     });
   });
