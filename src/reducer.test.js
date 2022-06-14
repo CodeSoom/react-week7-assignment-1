@@ -8,6 +8,7 @@ import {
   selectRegion,
   selectCategory,
   changeLoginField,
+  changeReviewField,
   setAccessToken,
 } from './actions';
 
@@ -20,7 +21,14 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
-      loginFields: {},
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
       accessToken: '',
     };
 
@@ -157,6 +165,24 @@ describe('reducer', () => {
         expect(state.loginFields.email).toBe('email');
         expect(state.loginFields.password).toBe('test');
       });
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('changes a field of review', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        changeReviewField({ name: 'score', value: '5' })
+      );
+
+      expect(state.reviewFields.score).toBe('5');
     });
   });
 
