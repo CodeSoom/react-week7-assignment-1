@@ -186,12 +186,12 @@ export function login() {
         return;
       }
 
-      dispatch(setLoading('loginFields', true));
+      dispatch(setLoading('auth', true));
 
-      const { accessToken } = await authorize();
+      const { accessToken } = await authorize(email, password);
       dispatch(setAccessToken(accessToken));
     } catch (error) {
-      dispatch(setError('loginFields', error.message));
+      dispatch(setError('auth', error.message));
     }
   };
 }
