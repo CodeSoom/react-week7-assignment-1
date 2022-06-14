@@ -3,6 +3,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurantById,
+  authorize,
 } from '../services/api';
 
 export function setRegions(regions) {
@@ -81,6 +82,28 @@ export function setError(key, errorMessage) {
   };
 }
 
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: {
+      isLoading: false,
+      isError: false,
+      errorMessage: '',
+      accessToken,
+    },
+  };
+}
+
+export function setLoginFields(name, value) {
+  return {
+    type: 'setLoginFields',
+    payload: {
+      name,
+      value,
+    },
+  };
+}
+
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
@@ -151,6 +174,24 @@ export function loadRestaurantDetail(restaurantId) {
       dispatch(setRestaurantDetail(restaurantDetail));
     } catch (error) {
       dispatch(setError('restaurantDetail', error.message));
+    }
+  };
+}
+
+export function login() {
+  return async (dispatch, getState) => {
+    try {
+      const { loginFields: { email, password } } = getState();
+      if (!(email && password)) {
+        return;
+      }
+
+      dispatch(setLoading('loginFields', true));
+
+      const { accessToken } = await authorize();
+      dispatch(setAccessToken(accessToken));
+    } catch (error) {
+      dispatch(setError('loginFields', error.message));
     }
   };
 }
