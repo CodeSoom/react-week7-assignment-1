@@ -41,6 +41,9 @@ export async function authorize(email, password) {
       password,
     }),
   });
-  const data = await response.json();
-  return data;
+  if (response.status === 201) {
+    const data = await response.json();
+    return data;
+  }
+  throw new Error('Invalid email or password');
 }
