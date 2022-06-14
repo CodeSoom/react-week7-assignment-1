@@ -1,5 +1,5 @@
 import {
-  fetchRegions, fetchCategories, fetchRestaurants, fetchRestaurantById,
+  fetchRegions, fetchCategories, fetchRestaurants, fetchRestaurantById, login,
 } from './api';
 
 import REGIONS from '../../../fixtures/regions';
@@ -62,6 +62,20 @@ describe('api', () => {
       const restaurantDetail = await fetchRestaurantById(1);
 
       expect(restaurantDetail).toEqual(RESTAURANT_DETAIL);
+    });
+  });
+
+  describe('login', () => {
+    beforeEach(() => {
+      mockFetch({
+        accessToken: 'accessToken',
+      });
+    });
+
+    it('returns accessToken', async () => {
+      const data = await login('tester@example.com', 'test');
+
+      expect(data.accessToken).toEqual('accessToken');
     });
   });
 });
