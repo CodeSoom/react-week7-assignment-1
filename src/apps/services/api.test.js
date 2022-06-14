@@ -1,5 +1,9 @@
 import {
-  fetchRegions, fetchCategories, fetchRestaurants, fetchRestaurantById, login,
+  fetchRegions,
+  fetchCategories,
+  fetchRestaurants,
+  fetchRestaurantById,
+  authorize,
 } from './api';
 
 import REGIONS from '../../../fixtures/regions';
@@ -73,7 +77,7 @@ describe('api', () => {
     });
 
     it('returns accessToken', async () => {
-      const data = await login('tester@example.com', 'test');
+      const data = await authorize('tester@example.com', 'test');
 
       expect(data.accessToken).toEqual('accessToken');
     });
