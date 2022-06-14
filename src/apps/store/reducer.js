@@ -35,6 +35,7 @@ const initialState = {
     accessToken: null,
     isLoading: false,
     isError: false,
+    isLogin: false,
     errorMessage: '',
   },
 };

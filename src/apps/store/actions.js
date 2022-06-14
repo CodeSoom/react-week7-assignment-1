@@ -88,6 +88,7 @@ export function setAccessToken(accessToken) {
     payload: {
       isLoading: false,
       isError: false,
+      isLogin: true,
       errorMessage: '',
       accessToken,
     },
