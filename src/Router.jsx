@@ -5,6 +5,7 @@ import RestaurantDetail from './pages/Restaurants/Detail';
 import Home from './pages/Home';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
+import Login from './pages/Login';
 
 export default function Router() {
   const element = useRoutes([
@@ -23,6 +24,10 @@ export default function Router() {
     {
       path: '/restaurants/:id',
       element: <RestaurantDetail />,
+    },
+    {
+      path: '/login',
+      element: <Login />,
     },
     {
       path: '*',
