@@ -1,8 +1,24 @@
 import { render } from '@testing-library/react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginPage from './LoginPage';
 
+const dispatch = jest.fn();
+
 describe('LoginPage', () => {
+  beforeEach(() => {
+    dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: '',
+        password: '',
+      },
+    }));
+  });
+
   const renderLoginPage = () => render(
     <LoginPage />,
   );
