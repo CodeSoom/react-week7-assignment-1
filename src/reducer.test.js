@@ -5,6 +5,7 @@ import {
   setCategories,
   setRestaurants,
   setRestaurant,
+  setAccessToken,
   selectRegion,
   selectCategory,
   changeLoginField,
@@ -19,6 +20,7 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      accessToken: null,
       loginFields: {
         email: '',
         password: '',
@@ -92,6 +94,18 @@ describe('reducer', () => {
 
       expect(state.restaurant.id).toBe(1);
       expect(state.restaurant.name).toBe('마법사주방');
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        accessToken: null,
+      };
+
+      const state = reducer(initialState, setAccessToken('QWER'));
+
+      expect(state.accessToken).toBe('QWER');
     });
   });
 

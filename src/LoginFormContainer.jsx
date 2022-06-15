@@ -6,6 +6,7 @@ import { get } from './utils';
 
 export default function LoginFormContainer() {
   const { email, password } = useSelector(get('loginFields'));
+  const accessToken = useSelector(get('accessToken'));
 
   const dispatch = useDispatch();
 
@@ -31,6 +32,7 @@ export default function LoginFormContainer() {
         <input id="password" type="password" name="password" value={password} onChange={handleChange} />
       </div>
       <button type="submit">Log in</button>
+      <p>{accessToken}</p>
     </form>
   );
 }

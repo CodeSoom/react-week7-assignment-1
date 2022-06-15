@@ -3,6 +3,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -30,6 +31,13 @@ export function setRestaurant(restaurant) {
   return {
     type: 'setRestaurant',
     payload: { restaurant },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
   };
 }
 
@@ -97,5 +105,11 @@ export function loadRestaurant({ restaurantId }) {
 }
 
 export function login() {
-  //
+  return async (dispatch, getState) => {
+    const { loginFields: { email, password } } = getState();
+
+    const accessToken = await postLogin({ email, password });
+
+    dispatch(setAccessToken(accessToken));
+  };
 }
