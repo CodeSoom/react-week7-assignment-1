@@ -27,7 +27,7 @@ export async function fetchRestaurant({ restaurantId }) {
 }
 
 export async function postLogin({ email, password }) {
-  const url = `${BASE_URL}/session`;
+  const url = 'https://eatgo-login-api.ahastudio.com/session';
   const response = await fetch(url, {
     method: 'POST',
     headers: {
