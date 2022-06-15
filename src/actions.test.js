@@ -10,6 +10,8 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  loadReview,
+  setReviews,
 } from './actions';
 
 const middlewares = [thunk];
@@ -60,7 +62,7 @@ describe('actions', () => {
         });
       });
 
-      it('does\'nt run any actions', async () => {
+      it("does'nt run any actions", async () => {
         await store.dispatch(loadRestaurants());
 
         const actions = store.getActions();
@@ -76,7 +78,7 @@ describe('actions', () => {
         });
       });
 
-      it('does\'nt run any actions', async () => {
+      it("does'nt run any actions", async () => {
         await store.dispatch(loadRestaurants());
 
         const actions = store.getActions();
@@ -98,6 +100,22 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('loadReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginFields: { email: '', password: '' },
+      });
+    });
+
+    it('dispatches setReviews', async () => {
+      await store.dispatch(loadReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setReviews());
     });
   });
 });
