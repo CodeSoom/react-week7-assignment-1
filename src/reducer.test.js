@@ -10,6 +10,8 @@ import {
   changeLoginField,
   changeReviewField,
   setAccessToken,
+  logout,
+  setReviews,
 } from './actions';
 
 describe('reducer', () => {
@@ -140,7 +142,7 @@ describe('reducer', () => {
 
         const state = reducer(
           initialState,
-          changeLoginField({ name: 'email', value: 'test' })
+          changeLoginField({ name: 'email', value: 'test' }),
         );
 
         expect(state.loginFields.email).toBe('test');
@@ -159,7 +161,7 @@ describe('reducer', () => {
 
         const state = reducer(
           initialState,
-          changeLoginField({ name: 'password', value: 'test' })
+          changeLoginField({ name: 'password', value: 'test' }),
         );
 
         expect(state.loginFields.email).toBe('email');
@@ -179,7 +181,7 @@ describe('reducer', () => {
 
       const state = reducer(
         initialState,
-        changeReviewField({ name: 'score', value: '5' })
+        changeReviewField({ name: 'score', value: '5' }),
       );
 
       expect(state.reviewFields.score).toBe('5');
@@ -194,5 +196,45 @@ describe('reducer', () => {
     const state = reducer(initialState, setAccessToken('TOKEN'));
 
     expect(state.accessToken).toBe('TOKEN');
+  });
+
+  describe('logout', () => {
+    it('clears access token', () => {
+      const initialState = { accessToken: 'ACCESS_TOKEN' };
+
+      const state = reducer(initialState, logout());
+
+      expect(state.accessToken).toBe('');
+    });
+  });
+
+  describe('setReviews', () => {
+    it('changes reviews', () => {
+      const initialState = {
+        restaurant: {
+          reviews: [],
+        },
+      };
+
+      const reviews = [
+        {
+          id: 1,
+          name: '좋은 사람',
+          scroe: 5,
+          description: 'JMT',
+        },
+        {
+          id: 2,
+          name: '나쁜 사람',
+          score: 1,
+          description: '존노맛',
+        },
+      ];
+
+      const state = reducer(initialState, setReviews(reviews));
+
+      expect(state.restaurant.reviews.length).toBe(2);
+      expect(state.restaurant.reviews[0]).toEqual(reviews[0]);
+    });
   });
 });
