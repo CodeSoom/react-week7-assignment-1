@@ -1,6 +1,7 @@
 import { equal } from './utils';
 
 const initialState = {
+  accessToken: null,
   regions: [],
   categories: [],
   restaurants: [],
@@ -11,7 +12,10 @@ const initialState = {
     email: '',
     password: '',
   },
-  accessToken: null,
+  reviewFields: {
+    score: '',
+    description: '',
+  },
 };
 
 const reducers = {
@@ -71,6 +75,15 @@ const reducers = {
       ...state,
       loginFields: {
         ...state.loginFields,
+        [name]: value,
+      },
+    };
+  },
+  changeReviewField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      reviewFields: {
+        ...state.reviewFields,
         [name]: value,
       },
     };

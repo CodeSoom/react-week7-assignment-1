@@ -9,19 +9,27 @@ import {
   selectCategory,
   changeLoginField,
   setAccessToken,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      accessToken: null,
       regions: [],
       categories: [],
       restaurants: [],
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
-      loginFields: {},
-      accessToken: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -163,6 +171,24 @@ describe('reducer', () => {
 
       expect(state.loginFields.email).toBe('email');
       expect(state.loginFields.password).toBe('1234');
+    });
+  });
+
+  describe('changeReviewField', () => {
+    context('when email is changed', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        changeReviewField({ name: 'score', value: '5' }),
+      );
+
+      expect(state.reviewFields.score).toBe('5');
     });
   });
 
