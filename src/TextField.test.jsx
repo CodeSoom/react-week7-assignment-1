@@ -9,10 +9,10 @@ describe('TextField', () => {
 
       return render(
         <TextField
-          label='리뷰 설명'
-          name='description'
+          label="리뷰 설명"
+          name="description"
           onChange={handleChange}
-        />
+        />,
       );
     }
 
@@ -35,11 +35,11 @@ describe('TextField', () => {
 
       return render(
         <TextField
-          label='평점'
-          type='number'
-          name='score'
+          label="평점"
+          type="number"
+          name="score"
           onChange={handleChange}
-        />
+        />,
       );
     }
 
@@ -64,11 +64,11 @@ describe('TextField', () => {
 
     const { getByLabelText } = render(
       <TextField
-        label='평점'
+        label="평점"
         name={name}
         value={value}
         onChange={handleChange}
-      />
+      />,
     );
 
     expect(getByLabelText('평점').value).toBe(value);
@@ -81,7 +81,7 @@ describe('TextField', () => {
     const handleChange = jest.fn();
 
     const { getByLabelText } = render(
-      <TextField label='평점' name={name} onChange={handleChange} />
+      <TextField label="평점" name={name} onChange={handleChange} />,
     );
 
     fireEvent.change(getByLabelText('평점'), { target: { value } });

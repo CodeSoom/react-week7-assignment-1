@@ -10,22 +10,19 @@ jest.mock('react-redux');
 
 describe('LoginPage', () => {
   beforeEach(() => {
-    useSelector.mockImplementation((selector) =>
-      selector({
-        loginFields: {
-          email: '',
-          password: '',
-        },
-      })
-    );
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: '',
+        password: '',
+      },
+    }));
   });
 
-  const renderLoginPage = () =>
-    render(
-      <MemoryRouter>
-        <LoginPage />
-      </MemoryRouter>
-    );
+  const renderLoginPage = () => render(
+    <MemoryRouter>
+      <LoginPage />
+    </MemoryRouter>,
+  );
 
   it('renders Log In title', () => {
     const { container } = renderLoginPage();

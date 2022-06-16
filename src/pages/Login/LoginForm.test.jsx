@@ -17,7 +17,7 @@ describe('LoginForm', () => {
         fields={{ email, password }}
         onChange={handleChange}
         onSubmit={handleSubmit}
-      />
+      />,
     );
   }
 

@@ -19,21 +19,19 @@ describe('App', () => {
 
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation((selector) =>
-      selector({
-        regions: [{ id: 1, name: '서울' }],
-        categories: [],
-        restaurants: [],
-        restaurant: { id: 1, name: '마녀주방' },
-      })
-    );
+    useSelector.mockImplementation((selector) => selector({
+      regions: [{ id: 1, name: '서울' }],
+      categories: [],
+      restaurants: [],
+      restaurant: { id: 1, name: '마녀주방' },
+    }));
   });
 
   function renderApp({ path }) {
     return render(
       <MemoryRouter initialEntries={[path]}>
         <App />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
   }
 
