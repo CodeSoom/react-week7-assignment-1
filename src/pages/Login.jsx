@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { login, setLoginFields } from '../apps/store/actions';
+import { login, setLoginFields } from '../features/auth/authActions';
 
 import { get } from '../apps/utils';
 
