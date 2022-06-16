@@ -7,11 +7,13 @@ export default function Reviews({ reviews }) {
 
   return (
     <ul>
-      {sortedReviews.map((review) => (
-        <li key={review.id}>
-          <div>{review.name}</div>
-          <div>{review.score}</div>
-          <div>{review.description}</div>
+      {sortedReviews.map(({
+        id, name, score, description,
+      }) => (
+        <li key={id}>
+          <div>{name}</div>
+          <div>{score}</div>
+          <div>{description}</div>
         </li>
       ))}
     </ul>
