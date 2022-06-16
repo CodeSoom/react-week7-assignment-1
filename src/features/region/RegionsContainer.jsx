@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  selectRegion,
   loadRestaurants,
 } from '../../apps/store/actions';
+
+import { selectRegion } from './regionActions';
 
 import { get } from '../../apps/utils';
 
