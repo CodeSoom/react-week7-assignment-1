@@ -1,4 +1,8 @@
-import { request, loginRequest } from './request';
+import axios from 'axios';
+
+const request = axios.create({
+  baseURL: process.env.API_BASE_URL,
+});
 
 export async function fetchRestaurants({ regionName, categoryId }) {
   const { data } = await request.get(`/restaurants?region=${regionName}&category=${categoryId}`);
@@ -8,13 +12,4 @@ export async function fetchRestaurants({ regionName, categoryId }) {
 export async function fetchRestaurantById(restaurantId) {
   const { data } = await request.get(`/restaurants/${restaurantId}`);
   return data;
-}
-
-export async function authorize(email, password) {
-  const response = await loginRequest(email, password);
-  if (response.status === 201) {
-    const { data } = await response;
-    return data;
-  }
-  throw new Error('Invalid email or password');
 }

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import {
   loadRestaurantDetail,
-} from '../../apps/store/actions';
+} from './restaurantActions';
 
 import { get } from '../../apps/utils';
 

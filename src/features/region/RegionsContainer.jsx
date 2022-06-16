@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   loadRestaurants,
-} from '../../apps/store/actions';
+} from '../restaurant/restaurantActions';
 
 import { selectRegion } from './regionActions';
 

@@ -1,21 +1,11 @@
 import { regionState, regionReducers } from '../../features/region/regionReducer';
 import { categoryState, categoryReducers } from '../../features/category/categoryReducer';
+import { restaurantState, restaurantReducer } from '../../features/restaurant/restaurantReducer';
 
 const initialState = {
   ...regionState,
   ...categoryState,
-  restaurants: {
-    isLoading: false,
-    isError: false,
-    errorMessage: '',
-    data: [],
-  },
-  restaurantDetail: {
-    isLoading: false,
-    isError: false,
-    errorMessage: '',
-    data: {},
-  },
+  ...restaurantState,
   loginFields: {
     email: '',
     password: '',
@@ -32,39 +22,7 @@ const initialState = {
 const reducers = {
   ...regionReducers,
   ...categoryReducers,
-  setRestaurants(state, {
-    payload: {
-      restaurants, key, isLoading, isError, errorMessage,
-    },
-  }) {
-    return {
-      ...state,
-      [key]: {
-        ...state[key],
-        isLoading,
-        isError,
-        errorMessage,
-        data: restaurants,
-      },
-    };
-  },
-
-  setRestaurantDetail(state, {
-    payload: {
-      key, restaurantDetail, isLoading, isError, errorMessage,
-    },
-  }) {
-    return {
-      ...state,
-      [key]: {
-        ...state[key],
-        isLoading,
-        isError,
-        errorMessage,
-        data: restaurantDetail,
-      },
-    };
-  },
+  ...restaurantReducer,
 
   setLoading(state, {
     payload: {

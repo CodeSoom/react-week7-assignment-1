@@ -3,18 +3,15 @@ import mockAxios from 'jest-mock-axios';
 import {
   fetchRestaurants,
   fetchRestaurantById,
-  authorize,
-} from './api';
+} from './restaurantApi';
 
 import RESTAURANTS from '../../../fixtures/restaurants';
 import RESTAURANT_DETAIL from '../../../fixtures/restaurantDetail';
 
 jest.mock('axios');
 
-describe('api', () => {
+describe('restaurantApi', () => {
   const mockFetch = (data) => mockAxios.get.mockResolvedValue({ data });
-  const mockLogin = (data) => mockAxios.post.mockResolvedValue({ data, status: 201 });
-
   describe('fetchRestaurants', () => {
     beforeEach(() => {
       mockFetch(RESTAURANTS);
@@ -39,20 +36,6 @@ describe('api', () => {
       const restaurantDetail = await fetchRestaurantById(1);
 
       expect(restaurantDetail).toEqual(RESTAURANT_DETAIL);
-    });
-  });
-
-  describe('login', () => {
-    beforeEach(() => {
-      mockLogin({
-        accessToken: 'accessToken',
-      });
-    });
-
-    it('returns accessToken', async () => {
-      const response = await authorize('tester@example.com', 'test');
-
-      expect(response.accessToken).toEqual('accessToken');
     });
   });
 });
