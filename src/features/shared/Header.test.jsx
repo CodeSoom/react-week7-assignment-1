@@ -10,5 +10,6 @@ test('Header', () => {
       <Header />
     </MemoryRouter>
   ));
+
   expect(container).toHaveTextContent('헤더 영역');
 });

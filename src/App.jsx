@@ -1,4 +1,4 @@
-import Header from './features/header/Header';
+import Header from './features/shared/Header';
 
 import Router from './Router';
 
