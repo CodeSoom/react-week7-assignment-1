@@ -6,12 +6,7 @@ import RestaurantDetail from '../../pages/Restaurant/RestaurantDetail';
 import ReviewForm from '../../ReviewForm';
 import Reviews from '../../Reviews';
 
-import {
-  loadRestaurant,
-  changeReviewField,
-  sendReview,
-  loadReview,
-} from '../../actions';
+import { loadRestaurant, changeReviewField, sendReview } from '../../actions';
 
 import { get } from '../../utils';
 
@@ -20,7 +15,6 @@ export default function RestaurantContainer({ restaurantId }) {
 
   useEffect(() => {
     dispatch(loadRestaurant({ restaurantId }));
-    dispatch(loadReview({ restaurantId }));
   }, []);
 
   const accessToken = useSelector(get('accessToken'));
@@ -49,7 +43,7 @@ export default function RestaurantContainer({ restaurantId }) {
           onSubmit={handleSubmit}
         />
       ) : null}
-      <Reviews reviws={restaurant.reviews} />
+      <Reviews reviews={restaurant.reviews} />
     </>
   );
 }
