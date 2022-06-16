@@ -6,9 +6,8 @@ import RegionsContainer from '../../features/region/RegionsContainer';
 import CategoriesContainer from '../../features/category/CategoriesContainer';
 import RestaurantsContainer from '../../features/restaurant/RestaurantsContainer';
 
-import {
-  loadInitialData,
-} from '../../apps/store/actions';
+import { loadRegions } from '../../features/region/regionActions';
+import { loadCategories } from '../../features/category/categoryActions';
 
 // 0. 지역, 분류 목록을 얻기
 // 1. 지역 선택 - Regions <- API (0)
@@ -19,8 +18,11 @@ export default function RestaurantsPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadInitialData());
-  });
+    Promise.all([
+      dispatch(loadRegions()),
+      dispatch(loadCategories()),
+    ]);
+  }, []);
 
   return (
     <div>
