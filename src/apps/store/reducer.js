@@ -1,28 +1,23 @@
 import { regionState, regionReducers } from '../../features/region/regionReducer';
+
 import { categoryState, categoryReducers } from '../../features/category/categoryReducer';
+
 import { restaurantState, restaurantReducer } from '../../features/restaurant/restaurantReducer';
+
+import { authState, authReducer } from '../../features/auth/authReducer';
 
 const initialState = {
   ...regionState,
   ...categoryState,
   ...restaurantState,
-  loginFields: {
-    email: '',
-    password: '',
-  },
-  auth: {
-    accessToken: null,
-    isLoading: false,
-    isError: false,
-    isLogin: false,
-    errorMessage: '',
-  },
+  ...authState,
 };
 
 const reducers = {
   ...regionReducers,
   ...categoryReducers,
   ...restaurantReducer,
+  ...authReducer,
 
   setLoading(state, {
     payload: {
@@ -56,28 +51,6 @@ const reducers = {
     };
   },
 
-  setAccessToken(state, { payload: { accessToken } }) {
-    return {
-      ...state,
-      auth: {
-        ...state.auth,
-        accessToken,
-        isLoading: false,
-        isError: false,
-        errorMessage: '',
-      },
-    };
-  },
-
-  setLoginFields(state, { payload: { name, value } }) {
-    return {
-      ...state,
-      loginFields: {
-        ...state.loginFields,
-        [name]: value,
-      },
-    };
-  },
 };
 
 function defaultReducer(state) {

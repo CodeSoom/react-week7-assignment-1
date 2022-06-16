@@ -5,17 +5,17 @@ import configureStore from 'redux-mock-store';
 import {
   setAccessToken,
   login,
-} from './actions';
+} from './authActions';
 
-import { authorize } from '../services/api';
+import { authorize } from './authApi';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-jest.mock('../services/api');
-jest.mock('../../features/region/regionApi.js');
+jest.mock('./authApi');
+jest.mock('../region/regionApi');
 
-describe('actions', () => {
+describe('authActions', () => {
   let store;
 
   describe('login', () => {
