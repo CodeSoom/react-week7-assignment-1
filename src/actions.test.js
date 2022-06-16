@@ -12,6 +12,7 @@ import {
   setRestaurant,
   loadReview,
   setReviews,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -110,8 +111,25 @@ describe('actions', () => {
       });
     });
 
-    it('dispatches setReviews', async () => {
+    it('dispatchs setReviews', async () => {
       await store.dispatch(loadReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setReviews());
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: '',
+        reviewFields: { score: 5, description: 'JMT' },
+      });
+    });
+
+    it('dispatches setReview', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
 
       const actions = store.getActions();
 
