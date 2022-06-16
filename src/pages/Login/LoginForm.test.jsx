@@ -6,11 +6,6 @@ describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
 
-  beforeEach(() => {
-    handleChange.mockClear();
-    handleSubmit.mockClear();
-  });
-
   function renderLoginForm({ email, password } = {}) {
     return render(
       <LoginForm

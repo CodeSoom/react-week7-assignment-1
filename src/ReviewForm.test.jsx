@@ -6,11 +6,6 @@ describe('ReviewForm', () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
 
-  beforeEach(() => {
-    handleChange.mockClear();
-    handleSubmit.mockClear();
-  });
-
   function renderReviewForm({ score, description } = {}) {
     return render(
       <ReviewForm
