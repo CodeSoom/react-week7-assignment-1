@@ -1,36 +1,8 @@
 import {
-  fetchRegions,
-  fetchCategories,
   fetchRestaurants,
   fetchRestaurantById,
   authorize,
 } from '../services/api';
-
-export function setRegions(regions) {
-  return {
-    type: 'setRegions',
-    payload: {
-      regions,
-      key: 'regions',
-      isLoading: false,
-      isError: false,
-      errorMessage: '',
-    },
-  };
-}
-
-export function setCategories(categories) {
-  return {
-    type: 'setCategories',
-    payload: {
-      categories,
-      key: 'categories',
-      isLoading: false,
-      isError: false,
-      errorMessage: '',
-    },
-  };
-}
 
 export function setRestaurants(restaurants) {
   return {
@@ -102,38 +74,6 @@ export function setLoginFields(name, value) {
       name,
       value,
     },
-  };
-}
-
-export function selectRegion(regionId) {
-  return {
-    type: 'selectRegion',
-    payload: { regionId },
-  };
-}
-
-export function selectCategory(categoryId) {
-  return {
-    type: 'selectCategory',
-    payload: { categoryId },
-  };
-}
-
-export function loadInitialData() {
-  return async (dispatch) => {
-    try {
-      dispatch(setLoading('regions', true));
-      dispatch(setLoading('categories', true));
-
-      const regions = await fetchRegions();
-      dispatch(setRegions(regions));
-
-      const categories = await fetchCategories();
-      dispatch(setCategories(categories));
-    } catch (error) {
-      dispatch(setError('regions', error.message));
-      dispatch(setError('categories', error.message));
-    }
   };
 }
 

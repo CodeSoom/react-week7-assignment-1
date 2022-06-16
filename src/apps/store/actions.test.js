@@ -3,9 +3,6 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 
 import {
-  loadInitialData,
-  setRegions,
-  setCategories,
   loadRestaurants,
   setRestaurants,
   loadRestaurantDetail,
@@ -16,83 +13,19 @@ import {
 } from './actions';
 
 import {
-  authorize,
-  fetchCategories, fetchRegions, fetchRestaurantById, fetchRestaurants,
+  authorize, fetchRestaurantById, fetchRestaurants,
 } from '../services/api';
 
 import restaurants from '../../../fixtures/restaurants';
-import categories from '../../../fixtures/categories';
-import regions from '../../../fixtures/regions';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('../services/api');
+jest.mock('../../features/region/regionApi.js');
 
 describe('actions', () => {
   let store;
-
-  describe('loadInitialData', () => {
-    context('with fetching regions and categories', () => {
-      beforeEach(() => {
-        store = mockStore({
-          regions: {
-            isLoading: false,
-            isError: false,
-            errorMessage: '',
-            data: [],
-          },
-          categories: {
-            isLoading: false,
-            isError: false,
-            errorMessage: '',
-            data: [],
-          },
-        });
-        fetchCategories.mockResolvedValue(categories);
-        fetchRegions.mockResolvedValue(regions);
-      });
-
-      it('runs setRegions and setCategories', async () => {
-        await store.dispatch(loadInitialData());
-
-        const actions = store.getActions();
-
-        expect(actions[2]).toEqual(setRegions(regions));
-        expect(actions[3]).toEqual(setCategories(categories));
-      });
-    });
-
-    context('with error', () => {
-      beforeEach(() => {
-        store = mockStore({
-          regions: {
-            isLoading: false,
-            isError: false,
-            errorMessage: '',
-            data: [],
-          },
-          categories: {
-            isLoading: false,
-            isError: false,
-            errorMessage: '',
-            data: [],
-          },
-        });
-        fetchRegions.mockRejectedValue(new Error('error'));
-        fetchCategories.mockRejectedValue(new Error('error'));
-      });
-
-      it('runs setError', async () => {
-        await store.dispatch(loadInitialData());
-
-        const actions = store.getActions();
-
-        expect(actions[2]).toEqual(setError('regions', 'error'));
-        expect(actions[3]).toEqual(setError('categories', 'error'));
-      });
-    });
-  });
 
   describe('loadRestaurants', () => {
     context('with selectedRegion and selectedCategory', () => {

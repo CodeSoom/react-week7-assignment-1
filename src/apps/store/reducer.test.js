@@ -1,15 +1,11 @@
 import reducer from './reducer';
 
 import {
-  setRegions,
-  setCategories,
   setRestaurants,
   setRestaurantDetail,
   setLoading,
   setError,
   setAccessToken,
-  selectRegion,
-  selectCategory,
   setLoginFields,
 } from './actions';
 
@@ -107,48 +103,6 @@ describe('reducer', () => {
     });
   });
 
-  describe('setRegions', () => {
-    it('changes regions', () => {
-      const initialState = {
-        regions: {
-          isLoading: false,
-          isError: false,
-          errorMessage: '',
-          data: [],
-        },
-      };
-
-      const regions = [
-        { id: 1, name: '서울' },
-      ];
-
-      const state = reducer(initialState, setRegions(regions));
-
-      expect(state.regions.data).toEqual(regions);
-    });
-  });
-
-  describe('setCategories', () => {
-    it('changes categories', () => {
-      const initialState = {
-        categories: {
-          isLoading: false,
-          isError: false,
-          errorMessage: '',
-          data: [],
-        },
-      };
-
-      const categories = [
-        { id: 1, name: '한식' },
-      ];
-
-      const state = reducer(initialState, setCategories(categories));
-
-      expect(state.categories.data).toHaveLength(1);
-    });
-  });
-
   describe('setRestaurants', () => {
     it('changes restaurants', () => {
       const initialState = {
@@ -234,46 +188,6 @@ describe('reducer', () => {
       expect(state.restaurantDetail.isLoading).toBe(false);
       expect(state.restaurantDetail.isError).toBe(true);
       expect(state.restaurantDetail.errorMessage).toBe('에러발생');
-    });
-  });
-
-  describe('selectRegion', () => {
-    it('changes selected region', () => {
-      const initialState = {
-        regions: {
-          data: [
-            { id: 1, name: '서울' },
-          ],
-        },
-        selectedRegion: null,
-      };
-
-      const state = reducer(initialState, selectRegion(1));
-
-      expect(state.selectedRegion).toEqual({
-        id: 1,
-        name: '서울',
-      });
-    });
-  });
-
-  describe('selectCategory', () => {
-    it('changes selected category', () => {
-      const initialState = {
-        categories: {
-          data: [
-            { id: 1, name: '한식' },
-          ],
-        },
-        selectedCategory: null,
-      };
-
-      const state = reducer(initialState, selectCategory(1));
-
-      expect(state.selectedCategory).toEqual({
-        id: 1,
-        name: '한식',
-      });
     });
   });
 

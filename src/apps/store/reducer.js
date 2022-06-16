@@ -1,18 +1,9 @@
-import { equal } from '../utils';
+import { regionState, regionReducers } from '../../features/region/regionReducer';
+import { categoryState, categoryReducers } from '../../features/category/categoryReducer';
 
 const initialState = {
-  regions: {
-    isLoading: false,
-    isError: false,
-    errorMessage: '',
-    data: [],
-  },
-  categories: {
-    isLoading: false,
-    isError: false,
-    errorMessage: '',
-    data: [],
-  },
+  ...regionState,
+  ...categoryState,
   restaurants: {
     isLoading: false,
     isError: false,
@@ -25,8 +16,6 @@ const initialState = {
     errorMessage: '',
     data: {},
   },
-  selectedRegion: null,
-  selectedCategory: null,
   loginFields: {
     email: '',
     password: '',
@@ -41,41 +30,8 @@ const initialState = {
 };
 
 const reducers = {
-  setRegions(state, {
-    payload: {
-      regions, key, isLoading, isError, errorMessage,
-    },
-  }) {
-    return {
-      ...state,
-      regions,
-      [key]: {
-        ...state[key],
-        isLoading,
-        isError,
-        errorMessage,
-        data: regions,
-      },
-    };
-  },
-
-  setCategories(state, {
-    payload: {
-      categories, key, isLoading, isError, errorMessage,
-    },
-  }) {
-    return {
-      ...state,
-      [key]: {
-        ...state[key],
-        isLoading,
-        isError,
-        errorMessage,
-        data: categories,
-      },
-    };
-  },
-
+  ...regionReducers,
+  ...categoryReducers,
   setRestaurants(state, {
     payload: {
       restaurants, key, isLoading, isError, errorMessage,
@@ -162,22 +118,6 @@ const reducers = {
         ...state.loginFields,
         [name]: value,
       },
-    };
-  },
-
-  selectRegion(state, { payload: { regionId } }) {
-    const { regions } = state;
-    return {
-      ...state,
-      selectedRegion: regions.data.find(equal('id', regionId)),
-    };
-  },
-
-  selectCategory(state, { payload: { categoryId } }) {
-    const { categories } = state;
-    return {
-      ...state,
-      selectedCategory: categories.data.find(equal('id', categoryId)),
     };
   },
 };
