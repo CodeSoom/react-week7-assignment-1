@@ -9,6 +9,8 @@ import {
 import { get } from '../../apps/utils';
 
 import Detail from './Detail';
+import Loading from '../shared/Loading';
+import Error from '../shared/Error';
 
 export default function DetailContainer() {
   const { id } = useParams();
@@ -22,17 +24,9 @@ export default function DetailContainer() {
     dispatch(loadRestaurantDetail(id));
   }, [id]);
 
-  if (isLoading) return <div>로딩중...</div>;
+  if (isLoading) return <Loading />;
 
-  if (isError) {
-    return (
-      <div>
-        에러:
-        {' '}
-        {errorMessage}
-      </div>
-    );
-  }
+  if (isError) return <Error errorMessage={errorMessage} />;
 
   return (
     <>

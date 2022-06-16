@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
 
 import { get } from '../../apps/utils';
+import Error from '../shared/Error';
+import Loading from '../shared/Loading';
 
 import Restaurants from './Restaurants';
 
@@ -9,17 +11,9 @@ export default function RestaurantsContainer() {
     isLoading, isError, errorMessage, data: restaurants,
   } = useSelector(get('restaurants'));
 
-  if (isLoading) return <div>로딩중...</div>;
+  if (isLoading) return <Loading />;
 
-  if (isError) {
-    return (
-      <div>
-        에러:
-        {' '}
-        {errorMessage}
-      </div>
-    );
-  }
+  if (isError) return <Error errorMessage={errorMessage} />;
 
   return (
     <Restaurants restaurants={restaurants} />

@@ -9,6 +9,8 @@ import { selectCategory } from './categoryActions';
 import { get } from '../../apps/utils';
 
 import Categories from './Categories';
+import Loading from '../shared/Loading';
+import Error from '../shared/Error';
 
 export default function CategoriesContainer() {
   const dispatch = useDispatch();
@@ -23,17 +25,9 @@ export default function CategoriesContainer() {
     dispatch(loadRestaurants());
   }
 
-  if (isLoading) return <div>로딩중...</div>;
+  if (isLoading) return <Loading />;
 
-  if (isError) {
-    return (
-      <div>
-        에러:
-        {' '}
-        {errorMessage}
-      </div>
-    );
-  }
+  if (isError) return <Error errorMessage={errorMessage} />;
 
   return (
     <Categories
