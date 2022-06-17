@@ -78,6 +78,16 @@ describe('DetailContainer', () => {
         score: 0,
         description: '',
       },
+      reviews: {
+        isLoading: false,
+        isError: false,
+        errorMessage: '',
+        data: [
+          {
+            id: 1, name: '마법사주방', score: 5, description: '맛있어요',
+          },
+        ],
+      },
     }));
 
     const { queryByText } = render((
