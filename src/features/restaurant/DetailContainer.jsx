@@ -11,6 +11,7 @@ import { get } from '../../apps/utils';
 import Detail from './Detail';
 import Loading from '../shared/Loading';
 import Error from '../shared/Error';
+import ReviewFormContainer from '../review/ReviewFormContainer';
 
 export default function DetailContainer() {
   const { id } = useParams();
@@ -19,6 +20,8 @@ export default function DetailContainer() {
   const {
     isLoading, isError, errorMessage, data: restaurantDetail,
   } = useSelector(get('restaurantDetail'));
+
+  const { isLogin } = useSelector(get('auth'));
 
   useEffect(() => {
     dispatch(loadRestaurantDetail(id));
@@ -35,6 +38,7 @@ export default function DetailContainer() {
         address={restaurantDetail.address}
         menuItems={restaurantDetail.menuItems}
       />
+      {isLogin && <ReviewFormContainer restaurantId={id} />}
     </>
   );
 }
