@@ -21,6 +21,7 @@ export const authReducer = {
         accessToken,
         isLoading: false,
         isError: false,
+        isLogin: true,
         errorMessage: '',
       },
     };
