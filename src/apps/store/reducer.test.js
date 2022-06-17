@@ -46,6 +46,16 @@ describe('reducer', () => {
           isError: false,
           errorMessage: '',
         },
+        reviewFields: {
+          score: 0,
+          description: '',
+        },
+        reviews: {
+          isLoading: false,
+          isError: false,
+          errorMessage: '',
+          data: [],
+        },
       };
       const state = reducer();
       expect(state).toEqual(initialState);
@@ -89,6 +99,16 @@ describe('reducer', () => {
         isLoading: false,
         isError: false,
         errorMessage: '',
+      },
+      reviewFields: {
+        score: 0,
+        description: '',
+      },
+      reviews: {
+        isLoading: false,
+        isError: false,
+        errorMessage: '',
+        data: [],
       },
     };
 
