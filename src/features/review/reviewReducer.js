@@ -22,14 +22,18 @@ export const reviewReducer = {
     };
   },
 
-  setReviews(state, { payload: { score, description } }) {
+  setReviews(state, { payload: { reviews } }) {
     return {
       ...state,
+      reviewFields: {
+        score: 0,
+        description: '',
+      },
       reviews: {
         isLoading: false,
         isError: false,
         errorMessage: '',
-        data: [...state.reviews.data, { score, description }],
+        data: reviews,
       },
     };
   },
