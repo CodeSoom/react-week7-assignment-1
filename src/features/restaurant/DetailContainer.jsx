@@ -12,6 +12,7 @@ import Detail from './Detail';
 import Loading from '../shared/Loading';
 import Error from '../shared/Error';
 import ReviewFormContainer from '../review/ReviewFormContainer';
+import ReviewsContainer from '../review/ReviewsContainer';
 
 export default function DetailContainer() {
   const { id } = useParams();
@@ -39,6 +40,7 @@ export default function DetailContainer() {
         menuItems={restaurantDetail.menuItems}
       />
       {isLogin && <ReviewFormContainer restaurantId={id} />}
+      <ReviewsContainer />
     </>
   );
 }
