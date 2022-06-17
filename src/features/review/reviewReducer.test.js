@@ -4,16 +4,21 @@ import { setReviews, setReviewFields } from './reviewActions';
 
 describe('reviewReducer', () => {
   describe('setReviews', () => {
-    it('set review inside reviews array', () => {
+    it('set reviews array', () => {
       const initialState = {
+        reviewFields: {
+          score: 2,
+          description: '',
+        },
         reviews: {
-          data: [{ score: 2, description: 'test' }],
+          data: [],
         },
       };
 
-      const state = reducer(initialState, setReviews({ score: 5, description: 'test2' }));
+      const state = reducer(initialState, setReviews([{ score: 2, description: 'test' }]));
 
-      expect(state.reviews.data).toEqual([{ score: 2, description: 'test' }, { score: 5, description: 'test2' }]);
+      expect(state.reviews.data).toEqual([{ score: 2, description: 'test' }]);
+      expect(state.reviewFields.score).toBe(0);
     });
   });
 
