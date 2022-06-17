@@ -16,7 +16,8 @@ export default function ReviewFormContainer({ restaurantId }) {
     dispatch(setReviewFields(name, value));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     dispatch(postReview(restaurantId));
   };
   return (
