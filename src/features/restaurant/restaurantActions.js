@@ -1,4 +1,5 @@
 import { setError, setLoading } from '../../apps/store/actions';
+import { setReviews } from '../review/reviewActions';
 
 import { fetchRestaurantById, fetchRestaurants } from './restaurantApi';
 
@@ -64,6 +65,7 @@ export function loadRestaurantDetail(restaurantId) {
 
       const restaurantDetail = await fetchRestaurantById(restaurantId);
       dispatch(setRestaurantDetail(restaurantDetail));
+      dispatch(setReviews(restaurantDetail.reviews));
     } catch (error) {
       dispatch(setError('restaurantDetail', error.message));
     }
