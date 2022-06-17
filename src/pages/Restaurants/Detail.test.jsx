@@ -30,6 +30,13 @@ test('Detail', () => {
         ],
       },
     },
+    auth: {
+      isLogin: true,
+    },
+    reviewFields: {
+      score: 0,
+      description: '',
+    },
   }));
 
   const { queryByText } = render((

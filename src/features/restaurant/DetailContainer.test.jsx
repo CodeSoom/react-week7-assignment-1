@@ -16,6 +16,13 @@ describe('DetailContainer', () => {
         restaurantDetail: {
           isLoading: true,
         },
+        auth: {
+          isLogin: true,
+        },
+        reviewFields: {
+          score: 0,
+          description: '',
+        },
       }));
       const { queryByText } = render((
         <DetailContainer />
@@ -29,6 +36,13 @@ describe('DetailContainer', () => {
       restaurantDetail: {
         isError: true,
         errorMessage: '에러가 발생했습니다.',
+      },
+      auth: {
+        isLogin: true,
+      },
+      reviewFields: {
+        score: 0,
+        description: '',
       },
     }));
     const { queryByText } = render((
@@ -56,6 +70,13 @@ describe('DetailContainer', () => {
             },
           ],
         },
+      },
+      auth: {
+        isLogin: true,
+      },
+      reviewFields: {
+        score: 0,
+        description: '',
       },
     }));
 
