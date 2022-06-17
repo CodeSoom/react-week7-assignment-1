@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react';
 
-import Review from './Review';
+import ReviewForm from './ReviewForm';
 
-describe('Review', () => {
+describe('ReviewForm', () => {
   it('renders input controls', () => {
     const { getByLabelText, getByRole } = render((
-      <Review />
+      <ReviewForm />
     ));
 
     expect(getByLabelText('평점')).toBeInTheDocument();
