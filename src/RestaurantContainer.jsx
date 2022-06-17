@@ -9,6 +9,23 @@ import { changeReviewField, loadRestaurant, sendReview } from './actions';
 import { get } from './utils';
 import ReviewForm from './ReviewForm';
 
+function ReviewList({ reviews }) {
+  return (
+    <>
+      <h2>리뷰</h2>
+      <ul>
+        {reviews.map((item) => (
+          <li key={item.id}>
+            <div>{item.name}</div>
+            <div>{item.score}</div>
+            <div>{item.description}</div>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
@@ -37,6 +54,7 @@ export default function RestaurantContainer({ restaurantId }) {
       {accessToken ? (
         <ReviewForm onChange={handleChange} onSubmit={handleSubmit} />
       ) : null}
+      <ReviewList reviews={restaurant.reviews} />
     </>
   );
 }

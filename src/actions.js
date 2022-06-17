@@ -103,15 +103,11 @@ export function setAccessToken(accessToken) {
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
-    try {
-      const accessToken = await postLogin({ email, password });
+    const accessToken = await postLogin({ email, password });
 
-      saveItem('accessToken', accessToken);
+    saveItem('accessToken', accessToken);
 
-      dispatch(setAccessToken(accessToken));
-    } catch (e) {
-      console.error(e);
-    }
+    dispatch(setAccessToken(accessToken));
   };
 }
 

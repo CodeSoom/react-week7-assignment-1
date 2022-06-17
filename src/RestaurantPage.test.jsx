@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { render } from '@testing-library/react';
 
 import RestaurantPage from './RestaurantPage';
+import restaurantFixture from '../fixtures/restaurant';
 
 describe('RestaurantPage', () => {
   beforeEach(() => {
@@ -13,11 +14,7 @@ describe('RestaurantPage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((state) => state({
-      restaurant: {
-        id: 1,
-        name: '마법사주방',
-        address: '서울시 강남구',
-      },
+      restaurant: restaurantFixture,
       reviewFields: {
         score: '',
         description: '',

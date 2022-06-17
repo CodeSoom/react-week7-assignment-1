@@ -1,6 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import restaurantFixture from '../fixtures/restaurant';
 
 import RestaurantContainer from './RestaurantContainer';
 
@@ -32,11 +33,7 @@ describe('RestaurantContainer', () => {
   });
 
   context('with restaurant', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
+    given('restaurant', () => (restaurantFixture));
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
@@ -62,12 +59,26 @@ describe('RestaurantContainer', () => {
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
+        reviews: [{
+          id: 1, restaurantId: 1, name: '테스터', score: 5, description: '훌륭하다 훌륭하다 지구인놈들',
+        }],
       }));
       const { queryByLabelText } = renderRestaurantContainer();
 
       expect(queryByLabelText('평점')).toBeNull();
       expect(queryByLabelText('리뷰 내용')).toBeNull();
     });
+
+    // it('renders review header', () => {
+    //   given('restaurant', () => ({
+    //     id: 1,
+    //     name: '마법사주방',
+    //     address: '서울시 강남구',
+    //   }));
+    //   const { container } = renderRestaurantContainer();
+
+    //   expect(container).toHaveTextContent('리뷰');
+    // });
   });
 
   context('with logged-in', () => {
@@ -77,6 +88,9 @@ describe('RestaurantContainer', () => {
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
+        reviews: [{
+          id: 1, restaurantId: 1, name: '테스터', score: 5, description: '훌륭하다 훌륭하다 지구인놈들',
+        }],
       }));
       const { queryByLabelText } = renderRestaurantContainer();
 
@@ -89,6 +103,9 @@ describe('RestaurantContainer', () => {
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
+        reviews: [{
+          id: 1, restaurantId: 1, name: '테스터', score: 5, description: '훌륭하다 훌륭하다 지구인놈들',
+        }],
       }));
       const { getByLabelText } = renderRestaurantContainer();
 
@@ -112,6 +129,9 @@ describe('RestaurantContainer', () => {
         id: 1,
         name: '마법사주방',
         address: '서울시 강남구',
+        reviews: [{
+          id: 1, restaurantId: 1, name: '테스터', score: 5, description: '훌륭하다 훌륭하다 지구인놈들',
+        }],
       }));
       const { getByText } = renderRestaurantContainer();
 
