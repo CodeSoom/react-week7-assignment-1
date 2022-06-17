@@ -1,5 +1,7 @@
 import { setError, setLoading } from '../../apps/store/actions';
 
+import { fetchRestaurantById } from '../restaurant/restaurantApi';
+
 import { createReview } from './reviewApi';
 
 export function setReviewFields(name, value) {
@@ -12,13 +14,19 @@ export function setReviewFields(name, value) {
   };
 }
 
-export function setReviews({ score, description }) {
+export function setReviews(reviews) {
   return {
     type: 'setReviews',
     payload: {
-      score,
-      description,
+      reviews,
     },
+  };
+}
+
+export function loadReviews(id) {
+  return async (dispatch) => {
+    const data = await fetchRestaurantById(id);
+    dispatch(setReviews(data.reviews));
   };
 }
 
@@ -33,7 +41,7 @@ export function postReview(restaurantId) {
       dispatch(setLoading('reviews', true));
 
       await createReview(score, description, restaurantId, accessToken);
-      await dispatch(setReviews({ score, description }));
+      dispatch(loadReviews(restaurantId));
     } catch (error) {
       dispatch(setError('reviews', error.message));
     }
