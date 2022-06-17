@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { get } from '../../apps/utils';
 
+import { postReview, setReviewFields } from './reviewActions';
+
 import ReviewForm from './ReviewForm';
 
-export default function ReviewFormContainer() {
+export default function ReviewFormContainer({ restaurantId }) {
   const dispatch = useDispatch();
   const { score, description } = useSelector(get('reviewFields'));
 
@@ -15,8 +17,8 @@ export default function ReviewFormContainer() {
   };
 
   const handleSubmit = () => {
-    dispatch(postReview());
-  }
+    dispatch(postReview(restaurantId));
+  };
   return (
     <ReviewForm
       score={score}
