@@ -1,6 +1,7 @@
 import { setError, setLoading } from '../../apps/store/actions';
 
 import { authorize } from './authApi';
+import { removeToken, saveToken } from './authStorage';
 
 export function setAccessToken(accessToken) {
   return {
@@ -26,6 +27,8 @@ export function setLoginFields(name, value) {
 }
 
 export function logout() {
+  removeToken();
+
   return {
     type: 'logout',
   };
@@ -43,6 +46,7 @@ export function login() {
 
       const { accessToken } = await authorize(email, password);
       dispatch(setAccessToken(accessToken));
+      await saveToken(accessToken);
     } catch (error) {
       dispatch(setError('auth', error.message));
     }
