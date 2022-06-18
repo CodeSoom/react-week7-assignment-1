@@ -35,6 +35,10 @@ describe('LoginFormContainer', () => {
     it('renders Logout', () => {
       renderWithContext({ isLogin: true, isLoading: false, isError: false });
 
+      fireEvent.click(screen.getByRole('button'));
+
+      expect(dispatch).toHaveBeenCalledWith({ type: 'logout' });
+
       expect(screen.getByRole('button')).toHaveTextContent('Log out');
     });
   });
