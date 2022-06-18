@@ -7,8 +7,9 @@ import { get } from '../../apps/utils';
 import LoginForm from './LoginForm';
 import Loading from '../shared/Loading';
 import Error from '../shared/Error';
+import Logout from './Logout';
 
-export default function LoginContainer() {
+export default function LoginFormContainer() {
   const { email, password } = useSelector(get('loginFields'));
   const {
     isLogin, isLoading, isError, errorMessage,
@@ -30,10 +31,7 @@ export default function LoginContainer() {
 
   if (isError) return <Error errorMessage={errorMessage} />;
 
-  if (isLogin) {
-    return <button type="button">로그아웃</button>;
-  }
-
+  if (isLogin) return <Logout />;
   return (
     <LoginForm
       email={email}
