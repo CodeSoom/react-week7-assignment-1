@@ -1,6 +1,6 @@
 import reducer from '../../apps/store/reducer';
 
-import { setAccessToken, setLoginFields } from './authActions';
+import { logout, setAccessToken, setLoginFields } from './authActions';
 
 describe('authReducer', () => {
   describe('setAccessToken', () => {
@@ -17,6 +17,24 @@ describe('authReducer', () => {
       const state = reducer(initialState, setAccessToken('accessToken'));
 
       expect(state.auth.accessToken).toBe('accessToken');
+    });
+  });
+
+  describe('logout', () => {
+    it('initialize auth state', () => {
+      const initialState = {
+        auth: {
+          accessToken: 'accessToken',
+          isLoading: false,
+          isError: false,
+          isLogin: true,
+          errorMessage: '',
+        },
+      };
+
+      const state = reducer(initialState, logout());
+
+      expect(state.auth.accessToken).toBeNull();
     });
   });
 
