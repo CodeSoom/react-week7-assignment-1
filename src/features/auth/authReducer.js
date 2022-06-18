@@ -36,4 +36,18 @@ export const authReducer = {
       },
     };
   },
+
+  logout(state) {
+    return {
+      ...state,
+      auth: {
+        ...state.auth,
+        accessToken: null,
+        isLoading: false,
+        isError: false,
+        isLogin: false,
+        errorMessage: '',
+      },
+    };
+  },
 };
