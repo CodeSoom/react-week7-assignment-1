@@ -7,7 +7,7 @@ import { loadReviews, postReview, setReviews } from './reviewActions';
 import { createReview } from './reviewApi';
 import { fetchRestaurantById } from '../restaurant/restaurantApi';
 
-import { setLoading } from '../../apps/store/actions';
+import { setError, setLoading } from '../../apps/store/actions';
 
 import reviews from '../../../fixtures/reviews';
 
@@ -44,6 +44,27 @@ describe('reviewActions', () => {
         const actions = store.getActions();
 
         expect(actions[0]).toEqual(setLoading('reviews', true));
+      });
+    });
+    context('with Error', () => {
+      beforeEach(() => {
+        store = mockStore({
+          reviewFields: {
+            score: 5,
+            description: 'test',
+          },
+          auth: {
+            accessToken: 'accessToken',
+          },
+        });
+        createReview.mockRejectedValue(new Error('error'));
+      });
+      it('runs setError', async () => {
+        await store.dispatch(postReview(1));
+
+        const actions = store.getActions();
+
+        expect(actions[1]).toEqual(setError('reviews', 'error'));
       });
     });
   });
