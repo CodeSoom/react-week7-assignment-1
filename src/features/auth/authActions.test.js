@@ -9,6 +9,8 @@ import {
 
 import { authorize } from './authApi';
 
+import { setError } from '../../apps/store/actions';
+
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
@@ -38,6 +40,26 @@ describe('authActions', () => {
         const actions = store.getActions();
 
         expect(actions[1]).toEqual(setAccessToken('accessToken'));
+      });
+    });
+
+    context('with error', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: 'tester@example.com',
+            password: 'test',
+          },
+        });
+        authorize.mockRejectedValue(new Error('error'));
+      });
+
+      it('runs setError', async () => {
+        await store.dispatch(login());
+
+        const actions = store.getActions();
+
+        expect(actions[1]).toEqual(setError('auth', 'error'));
       });
     });
   });
