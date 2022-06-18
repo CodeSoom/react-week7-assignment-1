@@ -9,23 +9,23 @@ describe('LoginFormContainer', () => {
 
   useDispatch.mockImplementation(() => dispatch);
 
-  const mockSelector = (isLoggedIn) => {
+  const mockSelector = ({ isLogin, isLoading, isError }) => {
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
         email: '',
         password: '',
       },
       auth: {
-        isLogin: isLoggedIn,
-        isLoading: false,
-        isError: false,
+        isLogin,
+        isLoading,
+        isError,
         errorMessage: '',
       },
     }));
   };
 
-  const renderWithContext = (isLoggedIn) => {
-    mockSelector(isLoggedIn);
+  const renderWithContext = ({ isLogin, isLoading, isError }) => {
+    mockSelector({ isLogin, isLoading, isError });
     return render((
       <LoginFormContainer />
     ));
@@ -33,7 +33,7 @@ describe('LoginFormContainer', () => {
 
   context('when isLogin is true', () => {
     it('renders Logout', () => {
-      renderWithContext(true);
+      renderWithContext({ isLogin: true, isLoading: false, isError: false });
 
       expect(screen.getByRole('button')).toHaveTextContent('로그아웃');
     });
@@ -41,7 +41,7 @@ describe('LoginFormContainer', () => {
 
   context('when the form is submitted', () => {
     it('calls the dispatch function', () => {
-      renderWithContext(false);
+      renderWithContext({ isLogin: false, isLoading: false, isError: false });
 
       const loginButton = screen.getByRole('button');
 
@@ -55,7 +55,7 @@ describe('LoginFormContainer', () => {
 
   context('when textbox is changed', () => {
     it('calls the dispatch function', () => {
-      renderWithContext(false);
+      renderWithContext({ isLogin: false, isLoading: false, isError: false });
 
       fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'tester@example.com' } });
 
@@ -63,6 +63,22 @@ describe('LoginFormContainer', () => {
 
       expect(screen.getByLabelText('Email')).toBeInTheDocument();
       expect(screen.getByLabelText('Password')).toBeInTheDocument();
+    });
+  });
+
+  context('with loading', () => {
+    it('renders "로딩중..."', () => {
+      renderWithContext({ isLogin: false, isLoading: true, isError: false });
+
+      expect(screen.queryByText('로딩중...')).toBeInTheDocument();
+    });
+  });
+
+  context('with error', () => {
+    it('renders error message', () => {
+      renderWithContext({ isLogin: false, isLoading: false, isError: true });
+
+      expect(screen.queryByText('에러:')).toBeInTheDocument();
     });
   });
 });
