@@ -11,8 +11,13 @@ import { get } from '../../apps/utils';
 import Detail from './Detail';
 import Loading from '../shared/Loading';
 import Error from '../shared/Error';
+
 import ReviewFormContainer from '../review/ReviewFormContainer';
 import ReviewsContainer from '../review/ReviewsContainer';
+
+import { loadToken } from '../auth/authStorage';
+
+import { setAccessToken } from '../auth/authActions';
 
 export default function DetailContainer() {
   const { id } = useParams();
@@ -27,6 +32,13 @@ export default function DetailContainer() {
   useEffect(() => {
     dispatch(loadRestaurantDetail(id));
   }, [id]);
+
+  useEffect(() => {
+    const accessToken = loadToken();
+    if (accessToken) {
+      dispatch(setAccessToken(accessToken));
+    }
+  }, []);
 
   if (isLoading) return <Loading />;
 
