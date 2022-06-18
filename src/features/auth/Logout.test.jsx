@@ -7,5 +7,5 @@ test('Logout', () => {
     <Logout />
   ));
 
-  expect(getByRole('button')).toHaveTextContent('로그아웃');
+  expect(getByRole('button')).toHaveTextContent('Log out');
 });
