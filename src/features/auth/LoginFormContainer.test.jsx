@@ -35,7 +35,7 @@ describe('LoginFormContainer', () => {
     it('renders Logout', () => {
       renderWithContext({ isLogin: true, isLoading: false, isError: false });
 
-      expect(screen.getByRole('button')).toHaveTextContent('로그아웃');
+      expect(screen.getByRole('button')).toHaveTextContent('Log out');
     });
   });
 
@@ -49,7 +49,7 @@ describe('LoginFormContainer', () => {
 
       expect(dispatch).toBeCalled();
 
-      expect(loginButton).toHaveTextContent('Login');
+      expect(loginButton).toHaveTextContent('Log In');
     });
   });
 
