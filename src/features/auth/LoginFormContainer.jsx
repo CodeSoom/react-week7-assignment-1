@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { login, setLoginFields } from './authActions';
+import { login, logout, setLoginFields } from './authActions';
 
 import { get } from '../../apps/utils';
 
@@ -27,11 +27,16 @@ export default function LoginFormContainer() {
     dispatch(login());
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   if (isLoading) return <Loading />;
 
   if (isError) return <Error errorMessage={errorMessage} />;
 
-  if (isLogin) return <Logout />;
+  if (isLogin) return <Logout onClick={handleLogout} />;
+
   return (
     <LoginForm
       email={email}
