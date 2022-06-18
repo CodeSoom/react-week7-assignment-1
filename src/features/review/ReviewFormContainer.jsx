@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { get } from '../../apps/utils';
@@ -20,6 +19,7 @@ export default function ReviewFormContainer({ restaurantId }) {
     event.preventDefault();
     dispatch(postReview(restaurantId));
   };
+
   return (
     <ReviewForm
       score={score}
