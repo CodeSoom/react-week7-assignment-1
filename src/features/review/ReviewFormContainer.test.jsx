@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -15,14 +15,37 @@ describe('ReviewFormContainer', () => {
       description: '',
     },
   }));
-  it('renders input controls', () => {
-    const { getByLabelText, getByRole } = render((
-      <ReviewFormContainer />
-    ));
 
-    expect(getByLabelText('평점')).toBeInTheDocument();
-    expect(getByLabelText('리뷰 내용')).toBeInTheDocument();
+  context('when the form is submitted', () => {
+    it('calls the dispatch function', () => {
+      const { getByRole } = render((
+        <ReviewFormContainer />
+      ));
 
-    expect(getByRole('button')).toHaveTextContent('리뷰 남기기');
+      const submitButton = getByRole('button');
+
+      fireEvent.click(submitButton);
+
+      expect(dispatch).toBeCalled();
+
+      expect(submitButton).toHaveTextContent('리뷰 남기기');
+    });
+  });
+
+  context('when textbox is changed', () => {
+    it('calls the dispatch function', () => {
+      const { getByLabelText, getAllByRole } = render((
+        <ReviewFormContainer />
+      ));
+
+      const textbox = getAllByRole('textbox');
+
+      fireEvent.change(textbox[0], { target: { value: '5' } });
+
+      expect(dispatch).toBeCalled();
+
+      expect(getByLabelText('평점')).toBeInTheDocument();
+      expect(getByLabelText('리뷰 내용')).toBeInTheDocument();
+    });
   });
 });
