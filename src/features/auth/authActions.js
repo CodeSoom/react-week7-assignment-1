@@ -25,6 +25,12 @@ export function setLoginFields(name, value) {
   };
 }
 
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}
+
 export function login() {
   return async (dispatch, getState) => {
     try {
