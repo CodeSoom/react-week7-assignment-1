@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Login from './Login';
 
 test('Login', () => {
+  const dispatch = jest.fn();
+
+  useDispatch.mockImplementation(() => dispatch);
+
   const { container } = render((
     <Login />
   ));
