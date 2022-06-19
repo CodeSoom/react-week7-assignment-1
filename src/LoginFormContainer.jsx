@@ -38,7 +38,6 @@ export default function LoginFormContainer() {
           <p>{accessToken}</p>
         </>
       )}
-
     </>
   );
 }

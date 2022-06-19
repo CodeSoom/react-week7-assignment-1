@@ -14,11 +14,13 @@ function ReviewList({ reviews }) {
     <>
       <h2>리뷰</h2>
       <ul>
-        {reviews.map((item) => (
-          <li key={item.id}>
-            <div>{item.name}</div>
-            <div>{item.score}</div>
-            <div>{item.description}</div>
+        {reviews.map(({
+          id, name, score, description,
+        }) => (
+          <li key={id}>
+            <div>{name}</div>
+            <div>{score}</div>
+            <div>{description}</div>
           </li>
         ))}
       </ul>
