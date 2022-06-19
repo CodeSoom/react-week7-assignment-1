@@ -10,6 +10,7 @@ import {
   changeLoginField,
   setAccessToken,
   changeReviewField,
+  logout,
 } from './actions';
 
 describe('reducer', () => {
@@ -126,6 +127,16 @@ describe('reducer', () => {
         name: '한식',
       });
     });
+  });
+
+  describe('logout', () => {
+    const initialState = {
+      accessToken: 'TOKEN',
+    };
+
+    const state = reducer(initialState, logout());
+
+    expect(state.accessToken).toBe('');
   });
 
   describe('changeLoginField', () => {
