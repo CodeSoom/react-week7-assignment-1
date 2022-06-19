@@ -9,11 +9,13 @@ import {
   selectCategory,
   changeLoginField,
   setAccessToken,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      accessToken: '',
       regions: [],
       categories: [],
       restaurants: [],
@@ -24,7 +26,10 @@ describe('reducer', () => {
         email: '',
         passowrd: '',
       },
-      accessToken: '',
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -184,5 +189,23 @@ describe('reducer', () => {
     );
 
     expect(state.accessToken).toBe('Token');
+  });
+
+  describe('changeReviewField', () => {
+    it('changes review field', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        changeReviewField({ name: 'score', value: '5' }),
+      );
+
+      expect(state.reviewFields.score).toBe('5');
+    });
   });
 });
