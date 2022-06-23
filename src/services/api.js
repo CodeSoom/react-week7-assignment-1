@@ -1,5 +1,3 @@
-const BASE_URL = 'https://eatgo-customer-api.ahastudio.com';
-
 async function fetchData(url) {
   const response = await fetch(url);
   const data = await response.json();
@@ -7,27 +5,27 @@ async function fetchData(url) {
 }
 
 export async function fetchRegions() {
-  const url = `${BASE_URL}/regions`;
+  const url = `${process.env.CUSTOMER_API_SERVER}/regions`;
   return fetchData(url);
 }
 
 export async function fetchCategories() {
-  const url = `${BASE_URL}/categories`;
+  const url = `${process.env.CUSTOMER_API_SERVER}/categories`;
   return fetchData(url);
 }
 
 export async function fetchRestaurants({ regionName, categoryId }) {
-  const url = `${BASE_URL}/restaurants?region=${regionName}&category=${categoryId}`;
+  const url = `${process.env.CUSTOMER_API_SERVER}/restaurants?region=${regionName}&category=${categoryId}`;
   return fetchData(url);
 }
 
 export async function fetchRestaurant({ restaurantId }) {
-  const url = `${BASE_URL}/restaurants/${restaurantId}`;
+  const url = `${process.env.CUSTOMER_API_SERVER}/restaurants/${restaurantId}`;
   return fetchData(url);
 }
 
 export async function postLogin({ email, password }) {
-  const url = 'https://eatgo-login-api.ahastudio.com/session';
+  const url = `${process.env.AUTH_API_SERVER}/session`;
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -45,7 +43,7 @@ export async function postReview({
   score,
   description,
 }) {
-  const url = `${BASE_URL}/restaurants/${restaurantId}/reviews`;
+  const url = `${process.env.CUSTOMER_API_SERVER}/restaurants/${restaurantId}/reviews`;
 
   const response = await fetch(url, {
     method: 'POST',
