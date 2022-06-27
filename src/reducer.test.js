@@ -7,17 +7,30 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginField,
+  setAccessToken,
+  changeReviewField,
+  logout,
 } from './actions';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      accessToken: '',
       regions: [],
       categories: [],
       restaurants: [],
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        passowrd: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -123,6 +136,87 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('changeLoginField', () => {
+    context('when email is changed', () => {
+      it('changes login field', () => {
+        const initialState = {
+          loginFields: {
+            email: 'email',
+            password: 'password',
+          },
+        };
+
+        const state = reducer(
+          initialState,
+          changeLoginField({ name: 'email', value: 'test' }),
+        );
+
+        expect(state.loginFields.email).toBe('test');
+        expect(state.loginFields.password).toBe('password');
+      });
+    });
+  });
+
+  context('when password is changed', () => {
+    it('changes login field', () => {
+      const initialState = {
+        loginFields: {
+          email: 'email',
+          password: 'password',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        changeLoginField({ name: 'password', value: 'test' }),
+      );
+
+      expect(state.loginFields.email).toBe('email');
+      expect(state.loginFields.password).toBe('test');
+    });
+  });
+
+  describe('setAccessToken', () => {
+    const initialState = {
+      accessToken: '',
+    };
+
+    const state = reducer(
+      initialState,
+      setAccessToken('Token'),
+    );
+
+    expect(state.accessToken).toBe('Token');
+  });
+
+  describe('logout', () => {
+    const initialState = {
+      accessToken: 'ACCESS_TOKEN',
+    };
+
+    const state = reducer(initialState, logout());
+
+    expect(state.accessToken).toBe('');
+  });
+
+  describe('changeReviewField', () => {
+    it('changes review field', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        changeReviewField({ name: 'score', value: '5' }),
+      );
+
+      expect(state.reviewFields.score).toBe('5');
     });
   });
 });
