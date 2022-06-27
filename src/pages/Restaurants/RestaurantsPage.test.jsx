@@ -19,29 +19,21 @@ describe('RestaurantsPage', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
-    dispatch.mockClear();
-
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      regions: [
-        { id: 1, name: '서울' },
-      ],
-      categories: [
-        { id: 1, name: '한식' },
-      ],
-      restaurants: [
-        { id: 1, name: '마법사주방' },
-      ],
+      regions: [{ id: 1, name: '서울' }],
+      categories: [{ id: 1, name: '한식' }],
+      restaurants: [{ id: 1, name: '마법사주방' }],
     }));
   });
 
   function renderRestaurantsPage() {
-    return render((
+    return render(
       <MemoryRouter>
         <RestaurantsPage />
-      </MemoryRouter>
-    ));
+      </MemoryRouter>,
+    );
   }
 
   it('renders region and category select buttons', () => {

@@ -25,9 +25,7 @@ describe('RestaurantPage', () => {
     it('renders name', () => {
       const params = { id: '1' };
 
-      const { container } = render(
-        <RestaurantPage params={params} />,
-      );
+      const { container } = render(<RestaurantPage params={params} />);
 
       expect(container).toHaveTextContent('마법사주방');
     });

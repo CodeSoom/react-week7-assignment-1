@@ -2,6 +2,9 @@ name: CI
 
 on: [push, pull_request]
 
+env: CUSTOMER_API_SERVER = https://eatgo-customer-api.ahastudio.com
+  AUTH_API_SERVER = https://eatgo-login-api.ahastudio.com
+
 jobs:
   build:
     runs-on: ubuntu-latest

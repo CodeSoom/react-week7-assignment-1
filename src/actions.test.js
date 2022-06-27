@@ -10,6 +10,11 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  loadReview,
+  setReviews,
+  sendReview,
+  requestLogin,
+  setAccessToken,
 } from './actions';
 
 const middlewares = [thunk];
@@ -60,7 +65,7 @@ describe('actions', () => {
         });
       });
 
-      it('does\'nt run any actions', async () => {
+      it("does'nt run any actions", async () => {
         await store.dispatch(loadRestaurants());
 
         const actions = store.getActions();
@@ -76,7 +81,7 @@ describe('actions', () => {
         });
       });
 
-      it('does\'nt run any actions', async () => {
+      it("does'nt run any actions", async () => {
         await store.dispatch(loadRestaurants());
 
         const actions = store.getActions();
@@ -98,6 +103,53 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({ loginFields: { email: '', password: '' } });
+    });
+
+    it('dispatches setAccessToken', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken({}));
+    });
+  });
+
+  describe('loadReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginFields: { email: '', password: '' },
+      });
+    });
+
+    it('dispatchs setReviews', async () => {
+      await store.dispatch(loadReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setReviews());
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: '',
+        reviewFields: { score: 5, description: 'JMT' },
+      });
+    });
+
+    it('dispatches setReview', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setReviews());
     });
   });
 });

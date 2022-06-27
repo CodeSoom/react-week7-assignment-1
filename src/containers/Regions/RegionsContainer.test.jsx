@@ -8,7 +8,6 @@ describe('RegionsContainer', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
-    dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
@@ -21,9 +20,7 @@ describe('RegionsContainer', () => {
   });
 
   it('renders checked regions', () => {
-    const { container, getByText } = render((
-      <RegionsContainer />
-    ));
+    const { container, getByText } = render(<RegionsContainer />);
 
     expect(container).toHaveTextContent('서울(V)');
     expect(container).toHaveTextContent('부산');
