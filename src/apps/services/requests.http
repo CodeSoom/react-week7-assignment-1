@@ -1,0 +1,38 @@
+@regionName = 서울
+@categoryId = 1
+@restaurantId = 1
+
+@origin = https://eatgo-customer-api.ahastudio.com
+
+@accessToken = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjMsIm5hbWUiOiLthYzsiqTthLAifQ.3qbijgcDDeFcVviXBZ45BS8CgdtpQvaCoXTkktEsPks
+
+### GET Categories Data
+GET {{origin}}/categories
+
+### GET Regions Data
+GET {{origin}}/regions
+
+### GET Restaurants Data
+GET {{origin}}/restaurants?region={{regionName}}&category={{categoryId}}
+
+### GET Restaurant Detail Data
+GET {{origin}}/restaurants/{{restaurantId}}
+
+### POST Login
+POST https://eatgo-login-api.ahastudio.com/session
+content-type: application/json
+
+{
+  "email": "tester@example.com",
+  "password": "test"
+}
+
+### POST Create New Reviews
+POST {{origin}}/restaurants/{{restaurantId}}/reviews
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "score": 5,
+  "description": "최고에요!@#$"
+}
