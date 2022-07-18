@@ -18,6 +18,11 @@ describe('RestaurantPage', () => {
         name: '마법사주방',
         address: '서울시 강남구',
       },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+      accessToken: 'ACCESS_TOKEN',
     }));
   });
 
@@ -43,5 +48,13 @@ describe('RestaurantPage', () => {
 
       expect(container).toHaveTextContent('마법사주방');
     });
+  });
+
+  it('리뷰 작성 폼이 보여집니다.', () => {
+    const params = { id: '1' };
+    const { queryByText } = render((
+      <RestaurantPage params={params} />
+    ));
+    expect(queryByText('평점')).not.toBeNull();
   });
 });
