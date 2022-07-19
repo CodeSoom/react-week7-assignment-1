@@ -75,4 +75,12 @@ describe('App', () => {
       expect(container).toHaveTextContent('Not Found');
     });
   });
+
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
+    });
+  });
 });
