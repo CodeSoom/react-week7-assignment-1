@@ -1,5 +1,3 @@
-import { MemoryRouter } from 'react-router-dom';
-
 import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,11 +22,9 @@ describe('LoginFromContainer', () => {
     }));
   });
 
-  const renderLoginFromContainer = () => render(
-    <MemoryRouter>
-      <LoginFromContainer />
-    </MemoryRouter>,
-  );
+  const renderLoginFromContainer = () => render((
+    <LoginFromContainer />
+  ));
 
   it('input controls가 보여집니다.', () => {
     const { getByLabelText } = renderLoginFromContainer();
