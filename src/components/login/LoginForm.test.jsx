@@ -33,7 +33,7 @@ describe('<LoginForm />', () => {
     expect(button).toHaveAttribute('type', 'submit');
   });
 
-  context('with email and password values', () => {
+  context('with email and password', () => {
     const loginFields = {
       email: 'tester@example.com',
       password: 'test',
@@ -47,7 +47,7 @@ describe('<LoginForm />', () => {
     });
   });
 
-  context('without email and password values', () => {
+  context('without email and password', () => {
     const loginFields = [{
       email: undefined,
       password: undefined,
