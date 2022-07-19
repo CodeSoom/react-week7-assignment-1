@@ -1,14 +1,12 @@
-import {
-  Switch,
-  Route,
-  Link,
-} from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 
-import HomePage from './HomePage';
-import AboutPage from './AboutPage';
-import RestaurantsPage from './RestaurantsPage';
-import RestaurantPage from './RestaurantPage';
-import NotFoundPage from './NotFoundPage';
+import {
+  AboutPage,
+  HomePage,
+  NotFoundPage,
+  RestaurantPage,
+  RestaurantsPage,
+} from './pages';
 
 export default function App() {
   return (
