@@ -16,4 +16,16 @@ describe('LoginPage', () => {
 
     expect(container).toHaveTextContent('Log In');
   });
+
+  it('E-mail - input이 렌더링된다', () => {
+    const { getByLabelText } = renderLoginPage();
+
+    expect(getByLabelText('E-mail')).not.toBeNull();
+  });
+
+  it('Password - input이 렌더링된다', () => {
+    const { getByLabelText } = renderLoginPage();
+
+    expect(getByLabelText('Password')).not.toBeNull();
+  });
 });
