@@ -12,4 +12,8 @@ module.exports = {
       statements: 100,
     },
   },
+  moduleNameMapper: {
+    '@/(.*)': '<rootDir>/src/$1',
+    '@fixtures': '<rootDir>/fixtures',
+  },
 };
