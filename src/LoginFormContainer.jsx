@@ -5,12 +5,12 @@ export default function LoginFormContainer() {
     <>
       <div>
         <label htmlFor="login-email">E-mail</label>
-        <input type="button" id="login-email" />
+        <input type="email" id="login-email" />
       </div>
 
       <div>
         <label htmlFor="login-password">Password</label>
-        <input type="button" id="login-password" />
+        <input type="password" id="login-password" />
       </div>
     </>
   );
