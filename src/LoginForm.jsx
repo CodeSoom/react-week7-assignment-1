@@ -1,4 +1,4 @@
-export default function LoginForm({ onClick }) {
+export default function LoginForm({ onSubmit }) {
   return (
     <>
       <div>
@@ -13,7 +13,7 @@ export default function LoginForm({ onClick }) {
         </label>
         <input type="password" id="login-password" />
       </div>
-      <button type="button" onClick={onClick}>Log In</button>
+      <button type="button" onClick={onSubmit}>Log In</button>
     </>
   );
 }

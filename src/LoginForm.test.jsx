@@ -3,10 +3,10 @@ import { render, fireEvent } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  const handleClick = jest.fn();
+  const handleSubmit = jest.fn();
 
   const renderLoginForm = () => render(
-    <LoginForm onClick={handleClick} />,
+    <LoginForm onSubmit={handleSubmit} />,
   );
 
   it('타이틀이 보임', () => {
@@ -22,11 +22,11 @@ describe('LoginForm', () => {
     expect(getByLabelText('Password')).not.toBeNull();
   });
 
-  it('버튼이 눌리면 handleClick 호출', () => {
+  it('버튼이 눌리면 dispatch 호출', () => {
     const { getByText } = renderLoginForm();
 
     fireEvent.click(getByText('Log In'));
 
-    expect(handleClick).toBeCalled();
+    expect(handleSubmit).toBeCalled();
   });
 });

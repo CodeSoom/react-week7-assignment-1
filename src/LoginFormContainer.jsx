@@ -7,11 +7,11 @@ import LoginForm from './LoginForm';
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  function handleClick() {
+  function handleSubmit() {
     dispatch(requestLogin());
   }
 
   return (
-    <LoginForm onClick={handleClick} />
+    <LoginForm onSubmit={handleSubmit} />
   );
 }
