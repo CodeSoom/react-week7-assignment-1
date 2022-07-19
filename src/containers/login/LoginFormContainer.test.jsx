@@ -11,4 +11,13 @@ describe('<LoginFormContainer />', () => {
     expect(getByLabelText('E-mail')).toBeInTheDocument();
     expect(getByLabelText('Password')).toBeInTheDocument();
   });
+
+  it('renders submit button', () => {
+    const { getByText } = renderLoginFormContainer();
+
+    const button = getByText('Log In');
+
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveAttribute('type', 'submit');
+  });
 });
