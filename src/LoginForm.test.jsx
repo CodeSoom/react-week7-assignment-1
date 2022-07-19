@@ -22,11 +22,17 @@ describe('LoginForm', () => {
   it('input 입력 하면 handleChange 호출', () => {
     const { getByLabelText } = renderLoginForm();
 
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'test@test.com' },
-    });
+    const controls = [{ label: 'E-mail', name: 'email', value: 'test@test.com' },
+      { label: 'Password', name: 'password', value: 'test' },
+    ];
 
-    expect(handleChange).toBeCalled();
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
+
+      fireEvent.change(input, { target: { value } });
+
+      expect(handleChange).toBeCalledWith({ name, value });
+    });
   });
 
   it('버튼이 눌리면 dispatch 호출', () => {
