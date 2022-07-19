@@ -30,12 +30,6 @@ describe('RestaurantContainer', () => {
     }));
   });
 
-  it('dispatches action', () => {
-    renderRestaurantContainer();
-
-    expect(dispatch).toBeCalled();
-  });
-
   context('with restaurant', () => {
     given('restaurant', () => ({
       id: 1,
