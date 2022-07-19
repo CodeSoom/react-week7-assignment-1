@@ -10,4 +10,19 @@ describe('<LoginPage />', () => {
 
     expect(container).toHaveTextContent('Log In');
   });
+
+  it('renders input controls', () => {
+    const { getByLabelText } = renderLoginPage();
+
+    expect(getByLabelText('E-mail')).toBeInTheDocument();
+    expect(getByLabelText('Password')).toBeInTheDocument();
+  });
+
+  it('renders submit button', () => {
+    const { getByText } = renderLoginPage();
+
+    expect(getByText('Log In', {
+      selector: 'button',
+    })).toBeInTheDocument();
+  });
 });
