@@ -7,13 +7,13 @@ describe('LoginFormContainer', () => {
     <LoginFormContainer />,
   );
 
-  it('E-mail이 렌더링된다', () => {
+  it('E-mail - input이 렌더링된다', () => {
     const { getByLabelText } = renderLoginFormContainer();
 
     expect(getByLabelText('E-mail')).not.toBeNull();
   });
 
-  it('Password가 렌더링된다', () => {
+  it('Password - input이 렌더링된다', () => {
     const { getByLabelText } = renderLoginFormContainer();
 
     expect(getByLabelText('Password')).not.toBeNull();
