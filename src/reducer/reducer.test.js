@@ -10,6 +10,7 @@ import {
   changeLoginField,
   setAccessToken,
   changeReviewField,
+  logout,
 } from '../actions/actions';
 
 describe('reducer', () => {
@@ -181,6 +182,16 @@ describe('reducer', () => {
     const state = reducer(initialState, setAccessToken('TOKEN'));
 
     expect(state.accessToken).toBe('TOKEN');
+  });
+
+  describe('logout', () => {
+    const initialState = {
+      accessToken: 'ACCESS_TOKEN',
+    };
+
+    const state = reducer(initialState, logout());
+
+    expect(state.accessToken).toBe('');
   });
 
   describe('changeReviewField', () => {
