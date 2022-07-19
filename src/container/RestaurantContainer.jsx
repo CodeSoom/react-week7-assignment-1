@@ -23,6 +23,7 @@ export default function RestaurantContainer({ restaurantId }) {
 
   const restaurant = useSelector(get('restaurant'));
   const accessToken = useSelector(get('accessToken'));
+  const { score, description } = useSelector(get('reviewFields'));
 
   function handleChange({ name, value }) {
     dispatch(changeReviewField({ name, value }));
@@ -45,6 +46,8 @@ export default function RestaurantContainer({ restaurantId }) {
         <ReviewForm
           onChange={handleChange}
           onSubmit={handleSubmit}
+          score={score}
+          description={description}
         />
       ) : null}
     </>
