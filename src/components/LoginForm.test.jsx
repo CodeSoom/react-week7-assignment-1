@@ -30,13 +30,13 @@ describe('LoginForm', () => {
     {
       label: 'E-mail',
       name: 'email',
-      origin: email,
+      userInfo: email,
       value: 'tester@example.com',
     },
     {
       label: 'Password',
       name: 'password',
-      origin: password,
+      userInfo: password,
       value: 'test',
     },
   ];
@@ -45,11 +45,11 @@ describe('LoginForm', () => {
     const { getByLabelText } = renderLoginForm({ email, password });
 
     controls.forEach(({
-      label, name, value, origin,
+      label, name, value, userInfo,
     }) => {
       const input = getByLabelText(label);
 
-      expect(input.value).toBe(origin);
+      expect(input.value).toBe(userInfo);
 
       fireEvent.change(input, { target: { value } });
 
