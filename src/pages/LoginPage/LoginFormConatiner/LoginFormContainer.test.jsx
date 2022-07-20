@@ -3,8 +3,11 @@ import { fireEvent, render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { changeLoginField } from '@/store/actions';
+import { requestLogin } from '@/store/async-actions';
 
 import LoginFormContainer from './LoginFormContainer';
+
+jest.mock('@/store/async-actions');
 
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
@@ -55,5 +58,13 @@ describe('LoginFormContainer', () => {
     const { getByRole } = renderLoginFormContainer();
 
     expect(getByRole('button', { name: 'Log In' })).toBeInTheDocument();
+  });
+
+  it('dispatches requestLogin when button is clicked', () => {
+    const { getByRole } = renderLoginFormContainer();
+
+    fireEvent.click(getByRole('button', { name: 'Log In' }));
+
+    expect(dispatch).toBeCalledWith(requestLogin());
   });
 });
