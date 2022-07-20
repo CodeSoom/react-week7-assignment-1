@@ -4,12 +4,12 @@ import { useDispatch } from 'react-redux';
 import LoginFormContainer from './LoginFormContainer';
 
 describe('LoginFormContainer', () => {
-  const dispatch = jest.Fn();
+  const dispatch = jest.fn();
+
+  useDispatch.mockImplementation(() => dispatch);
 
   beforeEach(() => {
     dispatch.mockClear();
-
-    useDispatch.mockImplementation(() => dispatch);
   });
 
   const renderLoginFormContainer = () => render(
