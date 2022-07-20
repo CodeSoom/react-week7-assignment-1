@@ -62,7 +62,7 @@ describe('<LoginForm />', () => {
   });
 
   describe('change email input control', () => {
-    it('calls handleChange', () => {
+    it('listens change events', () => {
       const { getByLabelText } = renderLoginForm({ email: '', password: '' });
 
       expect(handleChange).not.toBeCalled();
@@ -75,14 +75,6 @@ describe('<LoginForm />', () => {
         name: 'email',
         value: 'tester@example.com',
       });
-    });
-  });
-
-  describe('change password input control', () => {
-    it('calls handleChange', () => {
-      const { getByLabelText } = renderLoginForm({ email: '', password: '' });
-
-      expect(handleChange).not.toBeCalled();
 
       fireEvent.change(getByLabelText('Password'), {
         target: { value: 'test' },
