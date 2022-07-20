@@ -77,7 +77,7 @@ describe('api', () => {
     });
 
     it('returns accessToken', async () => {
-      const { accessToken } = await postLogin({ email: '', password: '' });
+      const accessToken = await postLogin({ email: '', password: '' });
 
       expect(accessToken).toEqual('ACCESS_TOKEN');
     });
