@@ -2,6 +2,8 @@ import { render } from '@testing-library/react';
 
 import { useSelector } from 'react-redux';
 
+import { MemoryRouter } from 'react-router-dom';
+
 import LoginPage from './LoginPage';
 
 jest.mock('react-redux');
@@ -14,7 +16,11 @@ describe('<LoginPage />', () => {
     },
   }));
 
-  const renderLoginPage = () => render((<LoginPage />));
+  const renderLoginPage = () => render((
+    <MemoryRouter>
+      <LoginPage />
+    </MemoryRouter>
+  ));
 
   it('renders page title', () => {
     const { container } = renderLoginPage();
