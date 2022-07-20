@@ -6,8 +6,14 @@ describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
 
+  const loginFields = {
+    email: 'abc@',
+    password: 'passwo',
+  };
+
   const renderLoginForm = () => render((
     <LoginForm
+      loginFields={loginFields}
       onChange={handleChange}
       onSubmit={handleSubmit}
     />
@@ -24,6 +30,19 @@ describe('LoginForm', () => {
 
     labels.forEach((label) => {
       expect(getByLabelText(label)).toBeInTheDocument();
+    });
+  });
+
+  it('renders login fields', () => {
+    const { getByLabelText } = renderLoginForm();
+
+    const inputs = [
+      { label: 'E-mail', name: 'email' },
+      { label: 'Password', name: 'password' },
+    ];
+
+    inputs.forEach(({ label, name }) => {
+      expect(getByLabelText(label)).toHaveValue(loginFields[name]);
     });
   });
 
