@@ -85,3 +85,10 @@ export function loadRestaurant({ restaurantId }) {
     dispatch(setRestaurant(restaurant));
   };
 }
+
+export function setLoginFields({ name, value }) {
+  return {
+    type: 'setLoginFields',
+    payload: { name, value },
+  };
+}
