@@ -1,16 +1,31 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import given from 'given2';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { EMAIL, PASSWORD } from '../../../fixtures/login';
+import { setLoginFields } from '../../actions';
+
+import {
+  EMAIL,
+  PASSWORD,
+  EMAIL_INPUT,
+  PASSWORD_INPUT,
+} from '../../../fixtures/login';
 
 import LoginFormContainer from './LoginFormContainer';
 
 jest.mock('react-redux');
 
 describe('<LoginFormContainer />', () => {
+  const dispatch = jest.fn();
+
+  useDispatch.mockImplementation(() => dispatch);
+
+  beforeEach(() => {
+    dispatch.mockClear();
+  });
+
   given('loginFields', () => ({
     email: '',
     password: '',
@@ -63,6 +78,32 @@ describe('<LoginFormContainer />', () => {
 
       expect(getByLabelText('E-mail')).toHaveValue('');
       expect(getByLabelText('Password')).toHaveValue('');
+    });
+  });
+
+  describe('changes email and password', () => {
+    it('dispatch setLoginFields', () => {
+      const { getByLabelText } = renderLoginFormContainer();
+
+      expect(dispatch).not.toBeCalled();
+
+      fireEvent.change(getByLabelText(EMAIL_INPUT.label), {
+        target: { value: EMAIL_INPUT.value },
+      });
+
+      expect(dispatch).toBeCalledWith(setLoginFields({
+        name: EMAIL_INPUT.name,
+        value: EMAIL_INPUT.value,
+      }));
+
+      fireEvent.change(getByLabelText(PASSWORD_INPUT.label), {
+        target: { value: PASSWORD_INPUT.value },
+      });
+
+      expect(dispatch).toBeCalledWith(setLoginFields({
+        name: PASSWORD_INPUT.name,
+        value: PASSWORD_INPUT.value,
+      }));
     });
   });
 });
