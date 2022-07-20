@@ -7,6 +7,7 @@ export default function RestaurantDetail({ restaurant }) {
     <div>
       <h2>{name}</h2>
       <p>
+        {' '}
         주소:
         {' '}
         {address}

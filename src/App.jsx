@@ -3,6 +3,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import {
   AboutPage,
   HomePage,
+  LoginPage,
   NotFoundPage,
   RestaurantPage,
   RestaurantsPage,
@@ -19,6 +20,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
+        <Route path="/login" component={LoginPage} />
         <Route exact path="/restaurants" component={RestaurantsPage} />
         <Route path="/restaurants/:id" component={RestaurantPage} />
         <Route component={NotFoundPage} />
