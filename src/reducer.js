@@ -70,6 +70,13 @@ const reducers = {
       },
     };
   },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
+    };
+  },
 };
 
 function defaultReducer(state) {
