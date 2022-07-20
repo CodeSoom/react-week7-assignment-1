@@ -10,6 +10,8 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  setAccessToken,
+  requestLogin,
 } from './actions';
 
 const middlewares = [thunk];
@@ -98,6 +100,65 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    context('with all login fields', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: 'abc@test.com',
+            password: 'password123',
+          },
+        });
+      });
+
+      it('dispatchs setAccessToken', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setAccessToken(''));
+      });
+    });
+
+    context('without email', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: '',
+            password: 'password123',
+          },
+        });
+      });
+
+      it("doesn't run any actions", async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
+    });
+
+    context('without password', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: 'abc@test.com',
+            password: '',
+          },
+        });
+      });
+
+      it("doesn't run any actions", async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
     });
   });
 });
