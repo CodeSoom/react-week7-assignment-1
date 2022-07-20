@@ -1,19 +1,16 @@
 import { fireEvent, render } from '@testing-library/react';
-import { useDispatch } from 'react-redux';
 
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  const dispatch = jest.fn();
-
-  useDispatch.mockImplementation(() => dispatch);
+  const handleSubmit = jest.fn();
 
   beforeEach(() => {
-    dispatch.mockClear();
+    jest.clearAllMocks();
   });
 
   const renderLoginForm = () => render(
-    <LoginForm onSubmit={dispatch} />,
+    <LoginForm onSubmit={handleSubmit} />,
   );
 
   it('E-mail - input이 렌더링된다', () => {
@@ -33,6 +30,6 @@ describe('LoginForm', () => {
 
     fireEvent.click(getByText('Log In'));
 
-    expect(dispatch).toBeCalled();
+    expect(handleSubmit).toBeCalled();
   });
 });
