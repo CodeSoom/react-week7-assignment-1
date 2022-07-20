@@ -3,9 +3,10 @@ import TextField from './TextField';
 export default function ReviewForm({
   onChange,
   onSubmit,
-  score,
-  description,
+  reviewFields,
 }) {
+  const { score, description } = reviewFields;
+
   return (
     <div>
       <TextField
