@@ -27,7 +27,7 @@ describe('LoginFromContainer', () => {
     <LoginFromContainer />
   ));
 
-  context('when logged out', () => {
+  context('without accessToken', () => {
     given('accessToken', () => '');
 
     it('input controls가 보여집니다.', () => {
@@ -59,7 +59,7 @@ describe('LoginFromContainer', () => {
     });
   });
 
-  context('when logged in', () => {
+  context('with accessToken', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
 
     it('renders "Log out" button', () => {
