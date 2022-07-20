@@ -6,6 +6,11 @@ describe('ReviewForm', () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
 
+  const reviewFields = {
+    score: '',
+    desciption: '',
+  };
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -15,6 +20,7 @@ describe('ReviewForm', () => {
       <ReviewForm
         onChange={handleChange}
         onSubmit={handleSubmit}
+        reviewFields={reviewFields}
       />
     ));
   }
