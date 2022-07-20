@@ -61,7 +61,7 @@ describe('<LoginForm />', () => {
     });
   });
 
-  describe('change email input control', () => {
+  describe('changes email and password input control', () => {
     it('listens change events', () => {
       const { getByLabelText } = renderLoginForm({ email: '', password: '' });
 
