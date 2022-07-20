@@ -106,4 +106,14 @@ describe('<LoginFormContainer />', () => {
       }));
     });
   });
+
+  describe('clicks login button', () => {
+    it('dispatch requestLogin', () => {
+      const { getByText } = renderLoginFormContainer();
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalled();
+    });
+  });
 });
