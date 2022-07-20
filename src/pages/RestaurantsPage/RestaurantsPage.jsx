@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
-import { loadInitialData } from '@/store/actions';
+import { loadInitialData } from '@/store/async-actions';
 
 import RegionsContainer from './RegionsContainer';
 import CategoriesContainer from './CategoriesContainer';

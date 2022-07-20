@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectCategory, loadRestaurants } from '@/store/actions';
+import { selectCategory } from '@/store/actions';
+import { loadRestaurants } from '@/store/async-actions';
 
 import { get } from '@/utils';
 

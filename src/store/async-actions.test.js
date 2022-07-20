@@ -3,16 +3,19 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 
 import {
-  loadInitialData,
   setRegions,
   setCategories,
-  loadRestaurants,
-  loadRestaurant,
   setRestaurants,
   setRestaurant,
   setAccessToken,
-  requestLogin,
 } from './actions';
+
+import {
+  loadInitialData,
+  loadRestaurants,
+  loadRestaurant,
+  requestLogin,
+} from './async-actions';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);

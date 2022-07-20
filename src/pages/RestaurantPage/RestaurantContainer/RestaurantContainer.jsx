@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadRestaurant } from '@/store/actions';
+import { loadRestaurant } from '@/store/async-actions';
 
 import { get } from '@/utils';
 
