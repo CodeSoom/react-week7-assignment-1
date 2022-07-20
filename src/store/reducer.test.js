@@ -129,40 +129,34 @@ describe('reducer', () => {
       },
     };
 
-    context('when email is changed', () => {
-      const state = reducer(
-        initialState,
-        changeLoginField({
-          name: 'email',
-          value: 'abc@test.com',
-        }),
-      );
+    it('changes login field', () => {
+      const fields = [
+        { name: 'email', value: 'abc@test.com' },
+        { name: 'password', value: 'password123' },
+      ];
 
-      expect(state.loginFields.email).toBe('abc@test.com');
+      fields.forEach(({ name, value }) => {
+        const state = reducer(
+          initialState,
+          changeLoginField({ name, value }),
+        );
+
+        expect(state.loginFields[name]).toBe(value);
+      });
     });
 
-    context('when password is changed', () => {
-      const state = reducer(
-        initialState,
-        changeLoginField({
-          name: 'password',
-          value: 'password123',
-        }),
-      );
+    context('with invalid fields', () => {
+      it("doesn't anything", () => {
+        const state = reducer(
+          initialState,
+          changeLoginField({
+            name: 'nickname',
+            value: '코드숨',
+          }),
+        );
 
-      expect(state.loginFields.password).toBe('password123');
-    });
-
-    context('when invalid field is changed', () => {
-      const state = reducer(
-        initialState,
-        changeLoginField({
-          name: 'nickname',
-          value: '코드숨',
-        }),
-      );
-
-      expect(state).toEqual(initialState);
+        expect(state).toEqual(initialState);
+      });
     });
   });
 });
