@@ -8,6 +8,7 @@ import {
   selectRegion,
   selectCategory,
   setLoginFields,
+  setAccessToken,
 } from './actions';
 
 import { EMAIL_INPUT, PASSWORD_INPUT } from '../fixtures/login';
@@ -151,6 +152,18 @@ describe('reducer', () => {
 
         expect(state.loginFields[name]).toBe(value);
       });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
+
+      expect(state.accessToken).toBe('ACCESS_TOKEN');
     });
   });
 });
