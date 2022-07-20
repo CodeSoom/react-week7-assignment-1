@@ -11,7 +11,7 @@ describe('LoginPage', () => {
     </MemoryRouter>,
   );
 
-  it('Log In이 렌더링된다', () => {
+  it('Log In - title 이 렌더링된다', () => {
     const { container } = renderLoginPage();
 
     expect(container).toHaveTextContent('Log In');
