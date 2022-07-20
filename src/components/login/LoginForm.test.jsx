@@ -9,7 +9,7 @@ describe('<LoginForm />', () => {
     handleChange.mockClear();
   });
 
-  const renderLoginForm = ({ email = '', password = '' } = {}) => render((
+  const renderLoginForm = ({ email, password }) => render((
     <LoginForm
       email={email}
       password={password}
@@ -18,14 +18,14 @@ describe('<LoginForm />', () => {
   ));
 
   it('renders input controls', () => {
-    const { getByLabelText } = renderLoginForm();
+    const { getByLabelText } = renderLoginForm({ email: '', password: '' });
 
     expect(getByLabelText('E-mail')).toBeInTheDocument();
     expect(getByLabelText('Password')).toBeInTheDocument();
   });
 
   it('renders submit button', () => {
-    const { getByText } = renderLoginForm();
+    const { getByText } = renderLoginForm({ email: '', password: '' });
 
     const button = getByText('Log In');
 
@@ -48,30 +48,22 @@ describe('<LoginForm />', () => {
   });
 
   context('without email and password', () => {
-    const loginFields = [{
-      email: undefined,
-      password: undefined,
-    }, {
+    const loginFields = {
       email: '',
       password: '',
-    }];
+    };
 
-    loginFields.forEach(({ email, password }) => {
-      it('it renders empty email and password', () => {
-        const { getByLabelText } = renderLoginForm({
-          email,
-          password,
-        });
+    it('it renders empty email and password', () => {
+      const { getByLabelText } = renderLoginForm(loginFields);
 
-        expect(getByLabelText('E-mail')).toHaveValue('');
-        expect(getByLabelText('Password')).toHaveValue('');
-      });
+      expect(getByLabelText('E-mail')).toHaveValue('');
+      expect(getByLabelText('Password')).toHaveValue('');
     });
   });
 
   describe('change email input control', () => {
     it('calls handleChange', () => {
-      const { getByLabelText } = renderLoginForm();
+      const { getByLabelText } = renderLoginForm({ email: '', password: '' });
 
       expect(handleChange).not.toBeCalled();
 
@@ -88,7 +80,7 @@ describe('<LoginForm />', () => {
 
   describe('change password input control', () => {
     it('calls handleChange', () => {
-      const { getByLabelText } = renderLoginForm();
+      const { getByLabelText } = renderLoginForm({ email: '', password: '' });
 
       expect(handleChange).not.toBeCalled();
 
