@@ -1,4 +1,5 @@
 import {
+  ACCESS_TOKEN,
   CATEGORIES,
   REGIONS,
   RESTAURANT,
@@ -10,6 +11,7 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
 } from './api';
 
 describe('api', () => {
@@ -69,6 +71,21 @@ describe('api', () => {
       const restaurant = await fetchRestaurant({ restaurantId: 1 });
 
       expect(restaurant).toEqual(RESTAURANT);
+    });
+  });
+
+  describe('postLogin', () => {
+    beforeEach(() => {
+      mockFetch({ accessToken: ACCESS_TOKEN });
+    });
+
+    it('returns access token', async () => {
+      const accessToken = await postLogin({
+        email: 'abc@test.com',
+        password: 'password',
+      });
+
+      expect(accessToken).toBe(ACCESS_TOKEN);
     });
   });
 });
