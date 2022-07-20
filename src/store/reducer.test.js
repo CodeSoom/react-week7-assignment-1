@@ -1,3 +1,5 @@
+import { ACCESS_TOKEN } from '@fixtures';
+
 import reducer from './reducer';
 
 import {
@@ -8,6 +10,7 @@ import {
   selectRegion,
   selectCategory,
   changeLoginField,
+  setAccessToken,
 } from './actions';
 
 describe('reducer', () => {
@@ -23,6 +26,7 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
+      accessToken: '',
     };
 
     it('returns initialState', () => {
@@ -157,6 +161,21 @@ describe('reducer', () => {
 
         expect(state).toEqual(initialState);
       });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    const initialState = {
+      accessToken: '',
+    };
+
+    it('changes access token', () => {
+      const state = reducer(
+        initialState,
+        setAccessToken(ACCESS_TOKEN),
+      );
+
+      expect(state.accessToken).toBe(ACCESS_TOKEN);
     });
   });
 });
