@@ -14,7 +14,7 @@ import { get } from '../utils';
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  const { email, password } = useSelector(get('loginFields'));
+  const fields = useSelector(get('loginFields'));
   const accessToken = useSelector(get('accessToken'));
 
   function handleChange({ name, value }) {
@@ -37,7 +37,7 @@ export default function LoginFormContainer() {
         />
       ) : (
         <LoginForm
-          fields={{ email, password }}
+          fields={fields}
           onChange={handleChange}
           onSubmit={handleSubmit}
         />
