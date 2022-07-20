@@ -1,12 +1,17 @@
-export default function LoginFormContainer({ onChange }) {
+export default function LoginFormContainer({ onChange, onSubmit }) {
   const handleChange = (event) => {
     const { target: { name, value } } = event;
 
     onChange({ name, value });
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit();
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="email">E-mail</label>
         <input

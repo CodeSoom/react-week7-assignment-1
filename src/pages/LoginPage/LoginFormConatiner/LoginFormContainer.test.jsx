@@ -4,10 +4,12 @@ import LoginFormContainer from './LoginFormContainer';
 
 describe('LoginFormContainer', () => {
   const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
   const renderLoginFormContainer = () => render((
     <LoginFormContainer
       onChange={handleChange}
+      onSubmit={handleSubmit}
     />
   ));
 
@@ -44,5 +46,13 @@ describe('LoginFormContainer', () => {
     const { getByRole } = renderLoginFormContainer();
 
     expect(getByRole('button', { name: 'Log In' })).toBeInTheDocument();
+  });
+
+  it('listens submit event', () => {
+    const { getByRole } = renderLoginFormContainer();
+
+    fireEvent.click(getByRole('button', { name: 'Log In' }));
+
+    expect(handleSubmit).toBeCalled();
   });
 });
