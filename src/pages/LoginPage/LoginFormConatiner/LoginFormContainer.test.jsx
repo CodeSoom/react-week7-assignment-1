@@ -1,8 +1,17 @@
 import { render } from '@testing-library/react';
 
+import { useSelector } from 'react-redux';
+
 import LoginFormContainer from './LoginFormContainer';
 
 describe('LoginFormContainer', () => {
+  useSelector.mockImplementation((selector) => selector({
+    loginFields: {
+      email: '',
+      password: '',
+    },
+  }));
+
   const renderLoginFormContainer = () => render((
     <LoginFormContainer />
   ));
