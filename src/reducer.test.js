@@ -142,13 +142,13 @@ describe('reducer', () => {
         },
       };
 
-      [EMAIL_INPUT, PASSWORD_INPUT].forEach((input) => {
+      [EMAIL_INPUT, PASSWORD_INPUT].forEach(({ name, value }) => {
         const state = reducer(initialState, setLoginFields({
-          name: input.name,
-          value: input.value,
+          name,
+          value,
         }));
 
-        expect(state.loginFields.email).toBe(input.value);
+        expect(state.loginFields[name]).toBe(value);
       });
     });
   });
