@@ -7,7 +7,7 @@ export default function LoginForm({ fields, onSubmit, onChange }) {
   }
 
   return (
-    <>
+    <form onSubmit={onSubmit}>
       <div>
         <label htmlFor="login-email">
           E-mail
@@ -30,12 +30,9 @@ export default function LoginForm({ fields, onSubmit, onChange }) {
           onChange={handleChange}
         />
       </div>
-      <button
-        type="button"
-        onClick={onSubmit}
-      >
+      <button type="submit">
         Log In
       </button>
-    </>
+    </form>
   );
 }
