@@ -22,5 +22,12 @@ module.exports = {
     historyApiFallback: {
       index: 'index.html',
     },
+    proxy: {
+      '/login-api': {
+        target: 'https://eatgo-login-api.ahastudio.com',
+        changeOrigin: true,
+        pathRewrite: { '^/login-api': '' },
+      },
+    },
   },
 };
