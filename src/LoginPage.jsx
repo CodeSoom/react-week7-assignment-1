@@ -6,6 +6,5 @@ export default function LoginPage() {
       <h2>Log In</h2>
       <LoginFormContainer />
     </>
-
   );
 }
