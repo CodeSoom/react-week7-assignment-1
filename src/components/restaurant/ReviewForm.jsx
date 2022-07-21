@@ -1,4 +1,4 @@
-export default function ReviewForm() {
+export default function ReviewForm({ score, description }) {
   return (
     <form>
       <div>
@@ -9,6 +9,7 @@ export default function ReviewForm() {
           id="review-score"
           name="score"
           type="number"
+          value={score}
         />
       </div>
       <div>
@@ -18,7 +19,8 @@ export default function ReviewForm() {
         <input
           id="review-description"
           name="description"
-          type="number"
+          type="text"
+          value={description}
         />
       </div>
       <button type="submit">리뷰 남기기</button>
