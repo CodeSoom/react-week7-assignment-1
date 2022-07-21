@@ -1,9 +1,10 @@
-export default function LoginForm({ onChange, onSubmit }) {
+export default function LoginForm({ fields: { email, password }, onChange, onSubmit }) {
   return (
     <>
       <div>
         <label htmlFor="login-email">E-mail</label>
         <input
+          value={email}
           name="email"
           onChange={onChange}
           type="email"
@@ -14,6 +15,7 @@ export default function LoginForm({ onChange, onSubmit }) {
       <div>
         <label htmlFor="login-password">Password</label>
         <input
+          value={password}
           name="password"
           onChange={onChange}
           type="password"
