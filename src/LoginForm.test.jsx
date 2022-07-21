@@ -11,47 +11,39 @@ describe('LoginForm', () => {
     handleChange.mockClear();
   });
 
-  const renderLoginForm = ({ email, password }) => render(
+  const renderLoginForm = () => render(
     <LoginForm
-      fields={{ email, password }}
+      fields={{ email: '', password: '' }}
       onSubmit={handleSubmit}
       onChange={handleChange}
     />,
   );
 
-  const email = 'test@test.com';
-  const password = '1234';
-
   const controls = [{
     label: 'E-mail',
     name: 'email',
-    origin: email,
     value: 'test@test.com',
   },
   {
     label: 'Password',
     name: 'password',
-    origin: password,
     value: 'test',
-
   },
   ];
 
   it('타이틀이 보임', () => {
-    const { container } = renderLoginForm({});
+    const { container } = renderLoginForm();
 
     expect(container).toHaveTextContent('Log In');
   });
 
-  it('input 입력 하면 handleChange 호출', () => {
-    const { getByLabelText } = renderLoginForm({ email, password });
+  it('input 입력 하면 change event 일어남', () => {
+    const { getByLabelText } = renderLoginForm();
 
     controls.forEach(({
-      label, name, origin, value,
+      label, name, value,
     }) => {
       const input = getByLabelText(label);
-
-      expect(input.value).toBe(origin);
 
       fireEvent.change(input, { target: { value } });
 
@@ -59,8 +51,8 @@ describe('LoginForm', () => {
     });
   });
 
-  it('버튼이 눌리면 dispatch 호출', () => {
-    const { getByText } = renderLoginForm({});
+  it('버튼이 눌리면 handleSubmit 호출', () => {
+    const { getByText } = renderLoginForm();
 
     fireEvent.click(getByText('Log In'));
 
