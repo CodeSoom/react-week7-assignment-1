@@ -36,10 +36,10 @@ describe('<LoginPage />', () => {
   });
 
   it('renders submit button', () => {
-    const { getByText } = renderLoginPage();
+    const { getByRole } = renderLoginPage();
 
-    expect(getByText('Log In', {
-      selector: 'button',
+    expect(getByRole('button', {
+      name: 'Log In',
     })).toBeInTheDocument();
   });
 });
