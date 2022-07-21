@@ -1,4 +1,10 @@
-export default function ReviewForm({ score, description }) {
+export default function ReviewForm({ score, description, onChange }) {
+  function handleChange(event) {
+    const { target: { name, value } } = event;
+
+    onChange({ name, value });
+  }
+
   return (
     <form>
       <div>
@@ -10,6 +16,7 @@ export default function ReviewForm({ score, description }) {
           name="score"
           type="number"
           value={score}
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -21,6 +28,7 @@ export default function ReviewForm({ score, description }) {
           name="description"
           type="text"
           value={description}
+          onChange={handleChange}
         />
       </div>
       <button type="submit">리뷰 남기기</button>
