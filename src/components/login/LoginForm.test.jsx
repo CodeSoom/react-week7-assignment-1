@@ -94,9 +94,7 @@ describe('<LoginForm />', () => {
     it('calls handleSubmit', () => {
       const { getByText } = renderLoginForm({ email: '', password: '' });
 
-      const loginButton = getByText('Log In', {
-        selector: 'button',
-      });
+      const loginButton = getByText('Log In');
 
       fireEvent.click(loginButton);
 
