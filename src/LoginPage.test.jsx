@@ -23,9 +23,9 @@ describe('LoginPage', () => {
     expect(getByLabelText('E-mail')).toBeInTheDocument();
   });
 
-  it('Password - input이 렌더링된다', () => {
-    const { getByLabelText } = renderLoginPage();
+  it('login - button이 렌더링된다', () => {
+    const { getByRole } = renderLoginPage();
 
-    expect(getByLabelText('Password')).toBeInTheDocument();
+    expect(getByRole('button')).toHaveTextContent('Log In');
   });
 });

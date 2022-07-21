@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { useDispatch } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
@@ -31,8 +31,6 @@ describe('LoginFormContainer', () => {
   it('login - button이 렌더링된다', () => {
     const { getByText } = renderLoginFormContainer();
 
-    fireEvent.click(getByText('Log In'));
-
-    expect(dispatch).toBeCalled();
+    expect(getByText('Log In')).toBeInTheDocument();
   });
 });
