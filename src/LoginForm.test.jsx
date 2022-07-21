@@ -4,6 +4,7 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const handleSubmit = jest.fn();
+  const handleChange = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -31,5 +32,29 @@ describe('LoginForm', () => {
     fireEvent.click(getByText('Log In'));
 
     expect(handleSubmit).toBeCalled();
+  });
+
+  it('change 이벤트를 listen 한다', () => {
+    const { getByLabelText } = render((
+      <LoginForm onChange={handleChange} />
+    ));
+
+    const controls = [
+      { label: 'E-mail', name: 'email', value: 'minsuk@gmail.com' },
+      { label: 'Password', name: 'password', value: '123123' },
+    ];
+
+    controls.forEach(({ label, name, value }) => {
+      const input = getByLabelText(label);
+
+      fireEvent.change(input, {
+        target: { value },
+      });
+
+      expect(handleChange).toBeCalledWith({
+        name,
+        value,
+      });
+    });
   });
 });
