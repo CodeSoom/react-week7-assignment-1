@@ -1,12 +1,21 @@
 import { render } from '@testing-library/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
+
+jest.mock('react-redux');
 
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
+
+  useSelector.mockImplementation((selector) => selector({
+    loginFields: {
+      email: 'minsuk@naver.com',
+      password: '123123',
+    },
+  }));
 
   beforeEach(() => {
     dispatch.mockClear();
