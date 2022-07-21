@@ -3,6 +3,7 @@ export default function LoginForm({ onChange, onSubmit }) {
     const { target: { name, value } } = event;
     onChange({ name, value });
   }
+
   return (
     <>
       <div>
