@@ -2,7 +2,7 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeLoginField } from '@/store/actions';
+import { changeLoginField, setAccessToken } from '@/store/actions';
 import { requestLogin } from '@/store/async-actions';
 
 import LoginFormContainer from './LoginFormContainer';
@@ -14,12 +14,15 @@ describe('LoginFormContainer', () => {
 
   useDispatch.mockReturnValue(dispatch);
 
-  useSelector.mockImplementation((selector) => selector({
-    loginFields: {
-      email: '',
-      password: '',
-    },
-  }));
+  const mockSelector = ({ accessToken }) => {
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      accessToken,
+    }));
+  };
 
   const renderLoginFormContainer = () => render((
     <LoginFormContainer />
@@ -29,42 +32,62 @@ describe('LoginFormContainer', () => {
     jest.clearAllMocks();
   });
 
-  it('renders inputs', () => {
-    const { getByLabelText } = renderLoginFormContainer();
+  context('when logged out', () => {
+    beforeEach(() => {
+      mockSelector({ accessToken: '' });
+    });
 
-    const labels = ['E-mail', 'Password'];
+    it('renders inputs', () => {
+      const { getByLabelText } = renderLoginFormContainer();
 
-    labels.forEach((label) => {
-      expect(getByLabelText(label)).toBeInTheDocument();
+      const labels = ['E-mail', 'Password'];
+
+      labels.forEach((label) => {
+        expect(getByLabelText(label)).toBeInTheDocument();
+      });
+    });
+
+    it('dispatches changeLoginField when inputs are changed', () => {
+      const { getByLabelText } = renderLoginFormContainer();
+
+      const inputs = [
+        { label: 'E-mail', name: 'email', value: 'abc@test.com' },
+        { label: 'Password', name: 'password', value: 'password123' },
+      ];
+
+      inputs.forEach(({ label, name, value }) => {
+        fireEvent.change(getByLabelText(label), { target: { value } });
+
+        expect(dispatch).toBeCalledWith(changeLoginField({ name, value }));
+      });
+    });
+
+    it('renders login button', () => {
+      const { getByRole } = renderLoginFormContainer();
+
+      expect(getByRole('button', { name: 'Log In' })).toBeInTheDocument();
+    });
+
+    it('dispatches requestLogin when button is clicked', () => {
+      const { getByRole } = renderLoginFormContainer();
+
+      fireEvent.click(getByRole('button', { name: 'Log In' }));
+
+      expect(dispatch).toBeCalledWith(requestLogin());
     });
   });
 
-  it('dispatches changeLoginField when inputs are changed', () => {
-    const { getByLabelText } = renderLoginFormContainer();
-
-    const inputs = [
-      { label: 'E-mail', name: 'email', value: 'abc@test.com' },
-      { label: 'Password', name: 'password', value: 'password123' },
-    ];
-
-    inputs.forEach(({ label, name, value }) => {
-      fireEvent.change(getByLabelText(label), { target: { value } });
-
-      expect(dispatch).toBeCalledWith(changeLoginField({ name, value }));
+  context('when logged in', () => {
+    beforeEach(() => {
+      mockSelector({ accessToken: 'ACCESS_TOKEN' });
     });
-  });
 
-  it('renders login button', () => {
-    const { getByRole } = renderLoginFormContainer();
+    it('renders logout button', () => {
+      const { getByRole } = renderLoginFormContainer();
 
-    expect(getByRole('button', { name: 'Log In' })).toBeInTheDocument();
-  });
+      fireEvent.click(getByRole('button', { name: 'Log out' }));
 
-  it('dispatches requestLogin when button is clicked', () => {
-    const { getByRole } = renderLoginFormContainer();
-
-    fireEvent.click(getByRole('button', { name: 'Log In' }));
-
-    expect(dispatch).toBeCalledWith(requestLogin());
+      expect(dispatch).toBeCalledWith(setAccessToken(''));
+    });
   });
 });
