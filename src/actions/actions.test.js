@@ -1,3 +1,4 @@
+/* eslint-disable no-proto */
 import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
@@ -10,6 +11,8 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
+  sendReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -98,6 +101,46 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('request login', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginFields: {
+          email: 'dd@dd',
+          password: '1234',
+        },
+      });
+    });
+
+    jest.spyOn(localStorage.__proto__, 'setItem');
+    localStorage.__proto__.setItem = jest.fn();
+
+    it('dispatches setAccessToken', async () => {
+      await store.dispatch(requestLogin());
+
+      expect(localStorage.setItem).toHaveBeenCalled();
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+        reviewFields: {
+          score: '5',
+          description: '맛잇당',
+        },
+      });
+    });
+
+    it('dispatches loadRestaurant', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setRestaurant(null));
     });
   });
 });
