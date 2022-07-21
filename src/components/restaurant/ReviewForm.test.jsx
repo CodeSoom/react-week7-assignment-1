@@ -1,14 +1,21 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import ReviewForm from './ReviewForm';
 
 describe('<ReviewForm />', () => {
+  const handleChange = jest.fn();
+
   const renderReviewForm = ({ score, description }) => render((
     <ReviewForm
       score={score}
       description={description}
+      onChange={handleChange}
     />
   ));
+
+  beforeEach(() => {
+    handleChange.mockClear();
+  });
 
   it('renders score and description input controls', () => {
     const { getByLabelText } = renderReviewForm({
@@ -50,6 +57,35 @@ describe('<ReviewForm />', () => {
 
       expect(getByLabelText('평점')).toHaveDisplayValue('');
       expect(getByLabelText('리뷰 내용')).toHaveDisplayValue('');
+    });
+  });
+
+  describe('changes score and description input control', () => {
+    it('listens change event', () => {
+      const { getByLabelText } = renderReviewForm({
+        score: '',
+        description: '',
+      });
+
+      expect(handleChange).not.toBeCalled();
+
+      fireEvent.change(getByLabelText('평점'), {
+        target: { value: '5' },
+      });
+
+      expect(handleChange).toBeCalledWith({
+        name: 'score',
+        value: '5',
+      });
+
+      fireEvent.change(getByLabelText('리뷰 내용'), {
+        target: { value: 'Good!' },
+      });
+
+      expect(handleChange).toBeCalledWith({
+        name: 'description',
+        value: 'Good!',
+      });
     });
   });
 });
