@@ -4,17 +4,20 @@ import ReviewForm from './ReviewForm';
 
 describe('<ReviewForm />', () => {
   const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
 
   const renderReviewForm = ({ score, description }) => render((
     <ReviewForm
       score={score}
       description={description}
       onChange={handleChange}
+      onSubmit={handleSubmit}
     />
   ));
 
   beforeEach(() => {
     handleChange.mockClear();
+    handleSubmit.mockClear();
   });
 
   it('renders score and description input controls', () => {
@@ -86,6 +89,21 @@ describe('<ReviewForm />', () => {
         name: 'description',
         value: 'Good!',
       });
+    });
+  });
+
+  describe('click "리뷰 남기기" button', () => {
+    it('listens submit event', () => {
+      const { getByText } = renderReviewForm({
+        score: '',
+        description: '',
+      });
+
+      expect(handleSubmit).not.toBeCalled();
+
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(handleSubmit).toBeCalled();
     });
   });
 });

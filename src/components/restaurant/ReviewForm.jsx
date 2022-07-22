@@ -1,12 +1,19 @@
-export default function ReviewForm({ score, description, onChange }) {
+export default function ReviewForm({
+  score, description, onChange, onSubmit,
+}) {
   function handleChange(event) {
     const { target: { name, value } } = event;
 
     onChange({ name, value });
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    onSubmit();
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="review-score">
           평점
