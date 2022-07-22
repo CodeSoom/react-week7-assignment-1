@@ -1,8 +1,10 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import { DESCRIPTION, SCORE } from '../fixtures/review';
+
+import { setReviewFields } from './actions';
 
 import RestaurantContainer from './RestaurantContainer';
 
@@ -14,18 +16,19 @@ describe('RestaurantContainer', () => {
 
   const dispatch = jest.fn();
 
+  useDispatch.mockImplementation(() => dispatch);
+
+  useSelector.mockImplementation((selector) => selector({
+    restaurant: given.restaurant,
+    reviewFields: given.reviewFields,
+  }));
+
   function renderRestaurantContainer() {
     return render(<RestaurantContainer restaurantId="1" />);
   }
 
   beforeEach(() => {
     dispatch.mockClear();
-    useDispatch.mockImplementation(() => dispatch);
-
-    useSelector.mockImplementation((selector) => selector({
-      restaurant: given.restaurant,
-      reviewFields: given.reviewFields,
-    }));
   });
 
   it('dispatches action', () => {
@@ -81,6 +84,36 @@ describe('RestaurantContainer', () => {
 
         expect(getByLabelText('평점')).toHaveDisplayValue('');
         expect(getByLabelText('리뷰 내용')).toHaveDisplayValue('');
+      });
+    });
+
+    describe('changes input controls in review form', () => {
+      it('dispatches setReviewFields', () => {
+        const { getByLabelText } = renderRestaurantContainer();
+
+        const inputControls = [
+          {
+            name: 'score',
+            value: '5',
+            label: '평점',
+          },
+          {
+            name: 'description',
+            value: 'Good!',
+            label: '리뷰 내용',
+          },
+        ];
+
+        inputControls.forEach(({ label, name, value }) => {
+          fireEvent.change(getByLabelText(label), {
+            target: { value },
+          });
+
+          expect(dispatch).toBeCalledWith(setReviewFields({
+            name,
+            value,
+          }));
+        });
       });
     });
   });
