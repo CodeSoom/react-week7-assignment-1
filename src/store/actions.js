@@ -54,6 +54,12 @@ export function changeReviewField({ name, value }) {
   };
 }
 
+export function clearReviewFields() {
+  return {
+    type: 'clearReviewFields',
+  };
+}
+
 export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',
