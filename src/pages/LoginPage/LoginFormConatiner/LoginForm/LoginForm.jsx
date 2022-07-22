@@ -17,21 +17,21 @@ export default function LoginForm({ loginFields, onChange, onSubmit }) {
       <div>
         <label htmlFor="email">E-mail</label>
         <input
-          id="email"
           type="text"
+          id="email"
           name="email"
-          onChange={handleChange}
           value={email}
+          onChange={handleChange}
         />
       </div>
       <div>
         <label htmlFor="password">Password</label>
         <input
-          id="password"
           type="password"
+          id="password"
           name="password"
-          onChange={handleChange}
           value={password}
+          onChange={handleChange}
         />
       </div>
       <div>

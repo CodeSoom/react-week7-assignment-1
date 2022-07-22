@@ -17,21 +17,21 @@ export default function ReviewForm({ reviewFields, onChange, onSubmit }) {
       <div>
         <label htmlFor="score">평점</label>
         <input
-          id="score"
           type="number"
+          id="score"
           name="score"
-          onChange={handleChange}
           value={score}
+          onChange={handleChange}
         />
       </div>
       <div>
         <label htmlFor="description">리뷰 내용</label>
         <input
-          id="description"
           type="text"
+          id="description"
           name="description"
-          onChange={handleChange}
           value={description}
+          onChange={handleChange}
         />
       </div>
       <div>
