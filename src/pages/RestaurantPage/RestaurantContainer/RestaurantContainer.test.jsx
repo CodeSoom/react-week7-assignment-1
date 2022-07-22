@@ -2,6 +2,8 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { RESTAURANT } from '@fixtures';
+
 import RestaurantContainer from './RestaurantContainer';
 
 describe('RestaurantContainer', () => {
@@ -31,17 +33,23 @@ describe('RestaurantContainer', () => {
   });
 
   context('with restaurant', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
+    given('restaurant', () => RESTAURANT);
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
 
-      expect(container).toHaveTextContent('마법사주방');
-      expect(container).toHaveTextContent('서울시');
+      expect(container).toHaveTextContent(RESTAURANT.name);
+      expect(container).toHaveTextContent(RESTAURANT.address);
+    });
+
+    it('renders reviews', () => {
+      const { container } = renderRestaurantContainer();
+
+      RESTAURANT.reviews.forEach(({ name, score, description }) => {
+        expect(container).toHaveTextContent(name);
+        expect(container).toHaveTextContent(score);
+        expect(container).toHaveTextContent(description);
+      });
     });
   });
 
