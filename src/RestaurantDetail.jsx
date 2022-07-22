@@ -2,8 +2,9 @@ import MenuItems from './MenuItems';
 
 import ReviewForm from './components/restaurant/ReviewForm';
 
-export default function RestaurantDetail({ restaurant, onChangeReviewForm }) {
+export default function RestaurantDetail({ restaurant, onChangeReviewForm, reviewFields }) {
   const { name, address, menuItems } = restaurant;
+  const { score, description } = reviewFields;
 
   return (
     <div>
@@ -17,6 +18,8 @@ export default function RestaurantDetail({ restaurant, onChangeReviewForm }) {
       <MenuItems menuItems={menuItems} />
 
       <ReviewForm
+        score={score}
+        description={description}
         onChange={onChangeReviewForm}
       />
 
