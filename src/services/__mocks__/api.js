@@ -17,3 +17,7 @@ export async function fetchRestaurant() {
 export async function postLogin() {
   return '';
 }
+
+export async function postReview() {
+  return undefined;
+}

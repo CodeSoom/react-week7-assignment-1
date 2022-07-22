@@ -15,6 +15,7 @@ import {
   loadRestaurants,
   loadRestaurant,
   requestLogin,
+  sendReview,
 } from './async-actions';
 
 const middlewares = [thunk];
@@ -157,6 +158,59 @@ describe('actions', () => {
 
       it("doesn't run any actions", async () => {
         await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
+    });
+  });
+
+  describe('sendReview', () => {
+    const restaurantId = 6;
+
+    context('with all login fields', () => {
+      beforeEach(() => {
+        store = mockStore({
+          reviewFields: {
+            score: '9',
+            description: '정말 맛있어요!',
+          },
+        });
+      });
+    });
+
+    context('without score', () => {
+      beforeEach(() => {
+        store = mockStore({
+          reviewFields: {
+            score: '',
+            description: '정말 맛있어요!',
+          },
+        });
+      });
+
+      it("doesn't run any actions", async () => {
+        await store.dispatch(sendReview({ restaurantId }));
+
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(0);
+      });
+    });
+
+    context('without description', () => {
+      beforeEach(() => {
+        store = mockStore({
+          reviewFields: {
+            score: '9',
+            description: '',
+          },
+        });
+      });
+
+      it("doesn't run any actions", async () => {
+        await store.dispatch(sendReview({ restaurantId }));
 
         const actions = store.getActions();
 

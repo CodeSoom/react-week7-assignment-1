@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from '@/services/api';
 
 import {
@@ -61,5 +62,22 @@ export function requestLogin() {
     const accessToken = await postLogin({ email, password });
 
     dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { accessToken, reviewFields: { score, description } } = getState();
+
+    if (!score || !description) {
+      return;
+    }
+
+    await postReview({
+      accessToken,
+      restaurantId,
+      score,
+      description,
+    });
   };
 }
