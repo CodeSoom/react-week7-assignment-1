@@ -86,7 +86,7 @@ describe('api', () => {
 
   describe('postReview', () => {
     beforeEach(() => {
-      mockFetch({ result: 'success' });
+      mockFetch();
     });
 
     it('return result', async () => {
@@ -96,7 +96,8 @@ describe('api', () => {
         score: '5',
         description: '맛이써',
       });
-      expect(result).toEqual(result);
+
+      expect(result).toEqual(undefined);
     });
   });
 });
