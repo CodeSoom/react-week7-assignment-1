@@ -13,7 +13,9 @@ import {
   setRestaurant,
   requestLogin,
   sendReview,
+  setAccessToken,
 } from './actions';
+import { postLogin } from '../services/api';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -114,13 +116,14 @@ describe('actions', () => {
       });
     });
 
-    jest.spyOn(localStorage.__proto__, 'setItem');
-    localStorage.__proto__.setItem = jest.fn();
-
     it('dispatches setAccessToken', async () => {
       await store.dispatch(requestLogin());
 
-      expect(localStorage.setItem).toHaveBeenCalled();
+      const actions = store.getActions();
+
+      const accessToken = await postLogin({ email: 'dd@dd', password: '1234' });
+
+      expect(actions[0]).toEqual(setAccessToken(accessToken));
     });
   });
 
