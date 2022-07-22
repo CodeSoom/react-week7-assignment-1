@@ -71,14 +71,16 @@ describe('api', () => {
   });
 
   describe('postLogin', () => {
+    const ACCESS_TOKEN = { accessToken: 'ACCESS_TOKEN' };
+
     beforeEach(() => {
-      mockFetch({ accessToken: 'ACCESS_TOKEN' });
+      mockFetch(ACCESS_TOKEN);
     });
 
     it('returns accessToken', async () => {
       const accessToken = await postLogin({ email: 'test@test', password: '1234' });
 
-      expect(accessToken).toEqual(accessToken);
+      expect(accessToken).toEqual('ACCESS_TOKEN');
     });
   });
 
