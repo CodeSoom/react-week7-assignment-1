@@ -11,6 +11,7 @@ import {
   selectCategory,
   changeLoginField,
   setAccessToken,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -25,6 +26,10 @@ describe('reducer', () => {
       loginFields: {
         email: '',
         password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
       },
       accessToken: '',
     };
@@ -156,6 +161,45 @@ describe('reducer', () => {
           changeLoginField({
             name: 'nickname',
             value: '코드숨',
+          }),
+        );
+
+        expect(state).toEqual(initialState);
+      });
+    });
+  });
+
+  describe('changeReviewField', () => {
+    const initialState = {
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+    };
+
+    it('changes review field', () => {
+      const fields = [
+        { name: 'score', value: '9' },
+        { name: 'description', value: '정말 맛있어요!' },
+      ];
+
+      fields.forEach(({ name, value }) => {
+        const state = reducer(
+          initialState,
+          changeReviewField({ name, value }),
+        );
+
+        expect(state.reviewFields[name]).toBe(value);
+      });
+    });
+
+    context('with invalid fields', () => {
+      it("doesn't anything", () => {
+        const state = reducer(
+          initialState,
+          changeReviewField({
+            name: 'complaint',
+            value: '불편해요!',
           }),
         );
 

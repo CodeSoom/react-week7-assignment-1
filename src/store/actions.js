@@ -47,6 +47,13 @@ export function changeLoginField({ name, value }) {
   };
 }
 
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: { name, value },
+  };
+}
+
 export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',
