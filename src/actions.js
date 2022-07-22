@@ -110,3 +110,10 @@ export function requestLogin() {
     dispatch(setAccessToken(accessToken));
   };
 }
+
+export function setReviewFields({ name, value }) {
+  return {
+    type: 'setReviewFields',
+    payload: { name, value },
+  };
+}
