@@ -1,4 +1,8 @@
-import { ACCESS_TOKEN } from '@fixtures';
+import {
+  ACCESS_TOKEN,
+  RESTAURANT,
+  REVIEWS,
+} from '@fixtures';
 
 import reducer from './reducer';
 
@@ -13,6 +17,7 @@ import {
   setAccessToken,
   changeReviewField,
   clearReviewFields,
+  setReviews,
 } from './actions';
 
 describe('reducer', () => {
@@ -96,6 +101,32 @@ describe('reducer', () => {
 
       expect(state.restaurant.id).toBe(1);
       expect(state.restaurant.name).toBe('마법사주방');
+    });
+  });
+
+  describe('setReviews', () => {
+    context('with restaurant', () => {
+      const initialState = {
+        restaurant: RESTAURANT,
+      };
+
+      it('changes reviews of the restaurant', () => {
+        const state = reducer(initialState, setReviews(REVIEWS));
+
+        expect(state.restaurant.reviews).toEqual(REVIEWS);
+      });
+    });
+
+    context('without restaurant', () => {
+      const initialState = {
+        restaurant: null,
+      };
+
+      it("doesn't anything", () => {
+        const state = reducer(initialState, setReviews(REVIEWS));
+
+        expect(state).toEqual(initialState);
+      });
     });
   });
 

@@ -19,6 +19,13 @@ export function setRestaurants(restaurants) {
   };
 }
 
+export function setReviews(reviews) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
+
 export function setRestaurant(restaurant) {
   return {
     type: 'setRestaurant',

@@ -47,6 +47,22 @@ const reducers = {
     };
   },
 
+  setReviews(state, { payload: { reviews } }) {
+    const { restaurant } = state;
+
+    if (!restaurant) {
+      return state;
+    }
+
+    return {
+      ...state,
+      restaurant: {
+        ...restaurant,
+        reviews,
+      },
+    };
+  },
+
   selectRegion(state, { payload: { regionId } }) {
     const { regions } = state;
     return {
