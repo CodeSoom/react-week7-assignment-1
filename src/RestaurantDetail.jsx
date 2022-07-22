@@ -2,7 +2,9 @@ import MenuItems from './MenuItems';
 
 import ReviewForm from './components/restaurant/ReviewForm';
 
-export default function RestaurantDetail({ restaurant, onChangeReviewForm, reviewFields }) {
+export default function RestaurantDetail({
+  restaurant, onChangeReviewForm, reviewFields, onSubmitReviewForm,
+}) {
   const { name, address, menuItems } = restaurant;
   const { score, description } = reviewFields;
 
@@ -21,6 +23,7 @@ export default function RestaurantDetail({ restaurant, onChangeReviewForm, revie
         score={score}
         description={description}
         onChange={onChangeReviewForm}
+        onSubmit={onSubmitReviewForm}
       />
 
       {/* reviews */}

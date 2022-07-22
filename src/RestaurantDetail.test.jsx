@@ -6,9 +6,11 @@ import RestaurantDetail from './RestaurantDetail';
 
 describe('RestaurantDetail', () => {
   const handleChangeReviewForm = jest.fn();
+  const handleSubmitReviewForm = jest.fn();
 
   beforeEach(() => {
     handleChangeReviewForm.mockClear();
+    handleSubmitReviewForm.mockClear();
   });
 
   const restaurant = {
@@ -27,6 +29,7 @@ describe('RestaurantDetail', () => {
       reviewFields={given.reviewFields}
       restaurant={restaurant}
       onChangeReviewForm={handleChangeReviewForm}
+      onSubmitReviewForm={handleSubmitReviewForm}
     />,
   );
 
@@ -88,6 +91,18 @@ describe('RestaurantDetail', () => {
 
       expect(getByLabelText('평점')).toHaveDisplayValue('');
       expect(getByLabelText('리뷰 내용')).toHaveDisplayValue('');
+    });
+  });
+
+  describe('click "리뷰 남기기" button', () => {
+    it('listens submit event', () => {
+      const { getByText } = renderRestaurantDetail();
+
+      expect(handleSubmitReviewForm).not.toBeCalled();
+
+      fireEvent.click(getByText('리뷰 남기기'));
+
+      expect(handleSubmitReviewForm).toBeCalled();
     });
   });
 });
