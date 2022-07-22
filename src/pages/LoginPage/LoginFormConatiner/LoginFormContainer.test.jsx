@@ -87,6 +87,14 @@ describe('LoginFormContainer', () => {
 
       fireEvent.click(getByRole('button', { name: 'Log out' }));
 
+      expect(getByRole('button', { name: 'Log out' })).toBeInTheDocument();
+    });
+
+    it('dispatches setAccessToken when button is clicked', () => {
+      const { getByRole } = renderLoginFormContainer();
+
+      fireEvent.click(getByRole('button', { name: 'Log out' }));
+
       expect(dispatch).toBeCalledWith(setAccessToken(''));
     });
   });
