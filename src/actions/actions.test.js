@@ -121,7 +121,9 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      const accessToken = await postLogin({ email: 'dd@dd', password: '1234' });
+      const { email, password } = store.getState().loginFields;
+
+      const accessToken = await postLogin({ email, password });
 
       expect(actions[0]).toEqual(setAccessToken(accessToken));
     });
