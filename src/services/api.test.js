@@ -12,6 +12,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './api';
 
 describe('api', () => {
@@ -86,6 +87,23 @@ describe('api', () => {
       });
 
       expect(accessToken).toBe(ACCESS_TOKEN);
+    });
+  });
+
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch({ });
+    });
+
+    it('returns nothing', async () => {
+      const result = await postReview({
+        accessToken: 'ACCESS_TOKEN',
+        restaurantId: 6,
+        score: '9',
+        description: '정말 맛있어요!',
+      });
+
+      expect(result).toBeUndefined();
     });
   });
 });
