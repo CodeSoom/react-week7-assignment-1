@@ -9,9 +9,11 @@ import {
   selectCategory,
   setLoginFields,
   setAccessToken,
+  setReviewFields,
 } from './actions';
 
 import { EMAIL_INPUT, PASSWORD_INPUT } from '../fixtures/login';
+import { SCORE, DESCRIPTION } from '../fixtures/review';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -168,6 +170,31 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
 
       expect(state.accessToken).toBe('ACCESS_TOKEN');
+    });
+  });
+
+  describe('setReviewFields', () => {
+    it('changes reviewFields', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const fields = [
+        { name: 'score', value: SCORE },
+        { name: 'description', value: DESCRIPTION },
+      ];
+
+      fields.forEach(({ name, value }) => {
+        const state = reducer(initialState, setReviewFields({
+          name,
+          value,
+        }));
+
+        expect(state.reviewFields[name]).toBe(value);
+      });
     });
   });
 });
