@@ -25,6 +25,10 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(setReviewFields({ name, value }));
   }
 
+  function handleSubmitReviewForm() {
+    dispatch();
+  }
+
   if (!restaurant) {
     return (
       <p>Loading...</p>
@@ -37,6 +41,7 @@ export default function RestaurantContainer({ restaurantId }) {
         restaurant={restaurant}
         reviewFields={reviewFields}
         onChangeReviewForm={handleChangeReviewForm}
+        onSubmitReviewForm={handleSubmitReviewForm}
       />
     </>
   );
