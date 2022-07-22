@@ -7,7 +7,7 @@ import { loadRestaurant } from '@/store/async-actions';
 import { get } from '@/utils';
 
 import RestaurantDetail from './RestaurantDetail';
-import ReviewForm from './ReviewForm';
+import ReviewFormContainer from './ReviewFormContainer';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm reviewFields={{ score: '', description: '' }} />
+      <ReviewFormContainer restaurantId={restaurantId} />
     </>
   );
 }
