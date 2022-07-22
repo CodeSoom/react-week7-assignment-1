@@ -14,15 +14,13 @@ describe('LoginFormContainer', () => {
 
   useDispatch.mockReturnValue(dispatch);
 
-  const mockSelector = ({ accessToken }) => {
-    useSelector.mockImplementation((selector) => selector({
-      loginFields: {
-        email: '',
-        password: '',
-      },
-      accessToken,
-    }));
-  };
+  useSelector.mockImplementation((selector) => selector({
+    loginFields: {
+      email: '',
+      password: '',
+    },
+    accessToken: given.accessToken,
+  }));
 
   const renderLoginFormContainer = () => render((
     <LoginFormContainer />
@@ -34,7 +32,7 @@ describe('LoginFormContainer', () => {
 
   context('when logged out', () => {
     beforeEach(() => {
-      mockSelector({ accessToken: '' });
+      given('accessToken', () => '');
     });
 
     it('renders inputs', () => {
@@ -79,7 +77,7 @@ describe('LoginFormContainer', () => {
 
   context('when logged in', () => {
     beforeEach(() => {
-      mockSelector({ accessToken: 'ACCESS_TOKEN' });
+      given('accessToken', () => 'ACCESS_TOKEN');
     });
 
     it('renders logout button', () => {
