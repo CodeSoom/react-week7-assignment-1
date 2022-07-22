@@ -56,5 +56,4 @@ export async function postReview({
     },
     body: JSON.stringify({ score, description }),
   });
-  return { result: 'success' };
 }
