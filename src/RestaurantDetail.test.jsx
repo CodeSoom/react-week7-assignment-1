@@ -1,5 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 
+import given from 'given2';
+
 import RestaurantDetail from './RestaurantDetail';
 
 describe('RestaurantDetail', () => {
@@ -15,8 +17,14 @@ describe('RestaurantDetail', () => {
     address: '서울시 강남구',
   };
 
+  given('reviewFields', () => ({
+    score: '',
+    description: '',
+  }));
+
   const renderRestaurantDetail = () => render(
     <RestaurantDetail
+      reviewFields={given.reviewFields}
       restaurant={restaurant}
       onChangeReviewForm={handleChangeReviewForm}
     />,
@@ -52,6 +60,34 @@ describe('RestaurantDetail', () => {
       });
 
       expect(handleChangeReviewForm).toBeCalledTimes(2);
+    });
+  });
+
+  context('with review fields', () => {
+    given('reviewFields', () => ({
+      score: '5',
+      description: 'Good!',
+    }));
+
+    it('it renders current review fields', () => {
+      const { getByLabelText } = renderRestaurantDetail();
+
+      expect(getByLabelText('평점')).toHaveDisplayValue('5');
+      expect(getByLabelText('리뷰 내용')).toHaveDisplayValue('Good!');
+    });
+  });
+
+  context('without review fields', () => {
+    given('reviewFields', () => ({
+      score: '',
+      description: '',
+    }));
+
+    it('it renders empty review fields', () => {
+      const { getByLabelText } = renderRestaurantDetail();
+
+      expect(getByLabelText('평점')).toHaveDisplayValue('');
+      expect(getByLabelText('리뷰 내용')).toHaveDisplayValue('');
     });
   });
 });
