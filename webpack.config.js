@@ -23,6 +23,11 @@ module.exports = {
       index: 'index.html',
     },
     proxy: {
+      '/customer-api': {
+        target: 'https://eatgo-customer-api.ahastudio.com',
+        changeOrigin: true,
+        pathRewrite: { '^/customer-api': '' },
+      },
       '/login-api': {
         target: 'https://eatgo-login-api.ahastudio.com',
         changeOrigin: true,
