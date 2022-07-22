@@ -2,11 +2,12 @@ import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import RestaurantDetail from './RestaurantDetail';
-
 import {
+  setReviewFields,
   loadRestaurant,
 } from './actions';
+
+import RestaurantDetail from './RestaurantDetail';
 
 import { get } from './utils';
 
@@ -20,6 +21,10 @@ export default function RestaurantContainer({ restaurantId }) {
   const restaurant = useSelector(get('restaurant'));
   const reviewFields = useSelector(get('reviewFields'));
 
+  function handleChangeReviewForm({ name, value }) {
+    dispatch(setReviewFields({ name, value }));
+  }
+
   if (!restaurant) {
     return (
       <p>Loading...</p>
@@ -31,6 +36,7 @@ export default function RestaurantContainer({ restaurantId }) {
       <RestaurantDetail
         restaurant={restaurant}
         reviewFields={reviewFields}
+        onChangeReviewForm={handleChangeReviewForm}
       />
     </>
   );
