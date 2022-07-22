@@ -63,13 +63,13 @@ describe('RestaurantDetail', () => {
     });
   });
 
-  context('with review fields', () => {
+  context('with score and description', () => {
     given('reviewFields', () => ({
       score: '5',
       description: 'Good!',
     }));
 
-    it('it renders current review fields', () => {
+    it('it renders current score and description', () => {
       const { getByLabelText } = renderRestaurantDetail();
 
       expect(getByLabelText('평점')).toHaveDisplayValue('5');
@@ -77,13 +77,13 @@ describe('RestaurantDetail', () => {
     });
   });
 
-  context('without review fields', () => {
+  context('without score and description', () => {
     given('reviewFields', () => ({
       score: '',
       description: '',
     }));
 
-    it('it renders empty review fields', () => {
+    it('it renders empty score and description', () => {
       const { getByLabelText } = renderRestaurantDetail();
 
       expect(getByLabelText('평점')).toHaveDisplayValue('');
