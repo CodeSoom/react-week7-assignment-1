@@ -8,25 +8,7 @@ import { get } from '@/utils';
 
 import RestaurantDetail from './RestaurantDetail';
 import ReviewFormContainer from './ReviewFormContainer';
-
-function Reviews({ reviews = [] }) {
-  return (
-    <>
-      <h3>리뷰</h3>
-      <ul>
-        {reviews.map(({
-          id, name, score, description,
-        }) => (
-          <li key={id}>
-            <div>{name}</div>
-            <div>{score}</div>
-            <div>{description}</div>
-          </li>
-        ))}
-      </ul>
-    </>
-  );
-}
+import Reviews from './Reviews';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
