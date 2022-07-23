@@ -2,6 +2,8 @@ import { fireEvent, render } from '@testing-library/react';
 
 import given from 'given2';
 
+import RESTAURANT from '../fixtures/restaurant';
+
 import RestaurantDetail from './RestaurantDetail';
 
 describe('RestaurantDetail', () => {
@@ -13,12 +15,6 @@ describe('RestaurantDetail', () => {
     handleSubmitReviewForm.mockClear();
   });
 
-  const restaurant = {
-    id: 1,
-    name: '마법사주방',
-    address: '서울시 강남구',
-  };
-
   given('reviewFields', () => ({
     score: '',
     description: '',
@@ -27,7 +23,7 @@ describe('RestaurantDetail', () => {
   const renderRestaurantDetail = () => render(
     <RestaurantDetail
       reviewFields={given.reviewFields}
-      restaurant={restaurant}
+      restaurant={RESTAURANT}
       onChangeReviewForm={handleChangeReviewForm}
       onSubmitReviewForm={handleSubmitReviewForm}
     />,
@@ -36,8 +32,16 @@ describe('RestaurantDetail', () => {
   it('renders name and address', () => {
     const { container } = renderRestaurantDetail();
 
-    expect(container).toHaveTextContent('마법사주방');
+    expect(container).toHaveTextContent('마녀주방');
     expect(container).toHaveTextContent('서울시');
+  });
+
+  it('renders reviews', () => {
+    const { container } = renderRestaurantDetail();
+
+    expect(container).toHaveTextContent('테스터');
+    expect(container).toHaveTextContent('5');
+    expect(container).toHaveTextContent('Good!');
   });
 
   it('renders review form', () => {
