@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
+import { email, password } from '../fixtures/loginForm';
+
 jest.mock('react-redux');
 
 describe('LoginFormContainer', () => {
@@ -12,8 +14,8 @@ describe('LoginFormContainer', () => {
 
   useSelector.mockImplementation((selector) => selector({
     loginFields: {
-      email: 'minsuk@naver.com',
-      password: '123123',
+      email,
+      password,
     },
   }));
 
