@@ -136,10 +136,8 @@ export function addReview({ restaurantId }) {
       ...reviewFields,
     });
 
-    dispatch(setReviewFields({
-      name: '',
-      value: '',
-    }));
-    // dispatch 레스토랑 조회??
+    dispatch(clearReviewFields());
+
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }
