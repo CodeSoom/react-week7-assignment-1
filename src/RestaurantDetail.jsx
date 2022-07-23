@@ -9,7 +9,6 @@ export default function RestaurantDetail({
   const {
     name, address, menuItems, reviews,
   } = restaurant;
-  const { score, description } = reviewFields;
 
   return (
     <div>
@@ -23,8 +22,7 @@ export default function RestaurantDetail({
       <MenuItems menuItems={menuItems} />
 
       <ReviewForm
-        score={score}
-        description={description}
+        reviewFields={reviewFields}
         onChange={onChangeReviewForm}
         onSubmit={onSubmitReviewForm}
       />
