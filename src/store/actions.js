@@ -54,6 +54,12 @@ export function changeLoginField({ name, value }) {
   };
 }
 
+export function clearLoginFields() {
+  return {
+    type: 'clearLoginFields',
+  };
+}
+
 export function changeReviewField({ name, value }) {
   return {
     type: 'changeReviewField',

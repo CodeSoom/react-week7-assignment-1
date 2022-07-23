@@ -18,6 +18,7 @@ import {
   changeReviewField,
   clearReviewFields,
   setReviews,
+  clearLoginFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -197,6 +198,27 @@ describe('reducer', () => {
         );
 
         expect(state).toEqual(initialState);
+      });
+    });
+  });
+
+  describe('clearLoginFields', () => {
+    const initialState = {
+      loginFields: {
+        email: 'abc@test.com',
+        password: 'password',
+      },
+    };
+
+    it('clears login fields', () => {
+      const state = reducer(
+        initialState,
+        clearLoginFields(),
+      );
+
+      expect(state.loginFields).toEqual({
+        email: '',
+        password: '',
       });
     });
   });
