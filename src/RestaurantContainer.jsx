@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   setReviewFields,
   loadRestaurant,
+  addReview,
 } from './actions';
 
 import RestaurantDetail from './RestaurantDetail';
@@ -25,8 +26,8 @@ export default function RestaurantContainer({ restaurantId }) {
     dispatch(setReviewFields({ name, value }));
   }
 
-  function handleSubmitReviewForm() {
-    dispatch();
+  async function handleSubmitReviewForm() {
+    await dispatch(addReview({ restaurantId }));
   }
 
   if (!restaurant) {
