@@ -10,6 +10,7 @@ import {
   setLoginFields,
   setAccessToken,
   setReviewFields,
+  clearReviewFields,
 } from './actions';
 
 import { EMAIL_INPUT, PASSWORD_INPUT } from '../fixtures/login';
@@ -194,6 +195,23 @@ describe('reducer', () => {
         }));
 
         expect(state.reviewFields[name]).toBe(value);
+      });
+    });
+  });
+
+  describe('clearReviewFields', () => {
+    it('reset reviewFields', () => {
+      const initialState = {
+        reviewFields: {
+          score: '5',
+          description: 'Good!',
+        },
+      };
+      const state = reducer(initialState, clearReviewFields());
+
+      expect(state.reviewFields).toEqual({
+        score: '',
+        description: '',
       });
     });
   });
