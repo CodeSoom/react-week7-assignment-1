@@ -57,4 +57,12 @@ describe('LoginForm', () => {
       });
     });
   });
+
+  it('click 이벤트를 listen 한다', () => {
+    const { getByText } = renderLoginForm();
+
+    fireEvent.click(getByText('Log In'));
+
+    expect(handleSubmit).toBeCalled();
+  });
 });
