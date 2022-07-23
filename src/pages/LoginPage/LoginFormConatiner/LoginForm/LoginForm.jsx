@@ -1,3 +1,5 @@
+import { TextField } from '@/components';
+
 export default function LoginForm({ loginFields, onChange, onSubmit }) {
   const { email, password } = loginFields;
 
@@ -15,8 +17,8 @@ export default function LoginForm({ loginFields, onChange, onSubmit }) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="email">E-mail</label>
-        <input
+        <TextField
+          label="E-mail"
           type="text"
           id="email"
           name="email"
@@ -25,8 +27,8 @@ export default function LoginForm({ loginFields, onChange, onSubmit }) {
         />
       </div>
       <div>
-        <label htmlFor="password">Password</label>
-        <input
+        <TextField
+          label="Password"
           type="password"
           id="password"
           name="password"

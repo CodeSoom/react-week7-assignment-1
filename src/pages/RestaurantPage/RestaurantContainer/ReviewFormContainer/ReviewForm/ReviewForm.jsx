@@ -1,3 +1,5 @@
+import { TextField } from '@/components';
+
 export default function ReviewForm({ reviewFields, onChange, onSubmit }) {
   const { score, description } = reviewFields;
 
@@ -15,8 +17,8 @@ export default function ReviewForm({ reviewFields, onChange, onSubmit }) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="score">평점</label>
-        <input
+        <TextField
+          label="평점"
           type="number"
           id="score"
           name="score"
@@ -25,8 +27,8 @@ export default function ReviewForm({ reviewFields, onChange, onSubmit }) {
         />
       </div>
       <div>
-        <label htmlFor="description">리뷰 내용</label>
-        <input
+        <TextField
+          label="리뷰 내용"
           type="text"
           id="description"
           name="description"
