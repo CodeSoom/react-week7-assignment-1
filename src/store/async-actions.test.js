@@ -10,6 +10,7 @@ import {
   setAccessToken,
   clearReviewFields,
   setReviews,
+  clearLoginFields,
 } from './actions';
 
 import {
@@ -120,12 +121,13 @@ describe('actions', () => {
         });
       });
 
-      it('dispatchs setAccessToken', async () => {
+      it('dispatchs setAccessToken and clearLoginFields', async () => {
         await store.dispatch(requestLogin());
 
         const actions = store.getActions();
 
         expect(actions[0]).toEqual(setAccessToken(''));
+        expect(actions[1]).toEqual(clearLoginFields());
       });
     });
 

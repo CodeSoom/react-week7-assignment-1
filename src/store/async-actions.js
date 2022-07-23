@@ -8,6 +8,7 @@ import {
 } from '@/services/api';
 
 import {
+  clearLoginFields,
   clearReviewFields,
   setAccessToken,
   setCategories,
@@ -64,6 +65,7 @@ export function requestLogin() {
     const accessToken = await postLogin({ email, password });
 
     dispatch(setAccessToken(accessToken));
+    dispatch(clearLoginFields());
   };
 }
 
