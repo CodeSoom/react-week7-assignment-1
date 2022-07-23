@@ -1,5 +1,5 @@
 export default function ReviewForm({
-  score, description, onChange, onSubmit,
+  reviewFields, onChange, onSubmit,
 }) {
   function handleChange(event) {
     const { target: { name, value } } = event;
@@ -11,6 +11,8 @@ export default function ReviewForm({
     event.preventDefault();
     onSubmit();
   }
+
+  const { score, description } = reviewFields;
 
   return (
     <form onSubmit={handleSubmit}>
