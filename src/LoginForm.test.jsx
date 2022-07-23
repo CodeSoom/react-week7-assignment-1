@@ -1,5 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 
+import { email, password } from '../fixtures/loginForm';
+
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
@@ -11,7 +13,7 @@ describe('LoginForm', () => {
   });
 
   const renderLoginForm = () => render(
-    <LoginForm onSubmit={handleSubmit} />,
+    <LoginForm fields={{ email, password }} onSubmit={handleSubmit} onChange={handleChange} />,
   );
 
   it('E-mail - input이 렌더링된다', () => {
@@ -35,13 +37,11 @@ describe('LoginForm', () => {
   });
 
   it('change 이벤트를 listen 한다', () => {
-    const { getByLabelText } = render((
-      <LoginForm onChange={handleChange} />
-    ));
+    const { getByLabelText } = renderLoginForm();
 
     const controls = [
-      { label: 'E-mail', name: 'email', value: 'minsuk@gmail.com' },
-      { label: 'Password', name: 'password', value: '123123' },
+      { label: 'E-mail', name: 'email', value: email },
+      { label: 'Password', name: 'password', value: password },
     ];
 
     controls.forEach(({ label, name, value }) => {
