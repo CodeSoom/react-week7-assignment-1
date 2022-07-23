@@ -1,27 +1,21 @@
 export default function LoginForm({ fields: { email, password }, onChange, onSubmit }) {
+  const LoginInput = ({ title, name, value }) => (
+    <div>
+      <label htmlFor={`login-${name}`}>{title}</label>
+      <input
+        value={value}
+        name={name}
+        onChange={onChange}
+        type={name}
+        id={`login-${name}`}
+      />
+    </div>
+  );
+
   return (
     <>
-      <div>
-        <label htmlFor="login-email">E-mail</label>
-        <input
-          value={email}
-          name="email"
-          onChange={onChange}
-          type="email"
-          id="login-email"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="login-password">Password</label>
-        <input
-          value={password}
-          name="password"
-          onChange={onChange}
-          type="password"
-          id="login-password"
-        />
-      </div>
+      <LoginInput title="E-mail" name="email" value={email} />
+      <LoginInput title="Password" name="password" value={password} />
 
       <button onClick={onSubmit} type="button">
         Log In
