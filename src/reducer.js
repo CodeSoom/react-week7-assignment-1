@@ -93,6 +93,16 @@ const reducers = {
       },
     };
   },
+
+  clearReviewFields(state) {
+    return {
+      ...state,
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+    };
+  },
 };
 
 function defaultReducer(state) {
