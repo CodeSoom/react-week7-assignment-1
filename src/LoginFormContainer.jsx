@@ -16,7 +16,7 @@ export default function LoginFormContainer() {
     dispatch(requestLogin());
   };
 
-  const handleChange = ({ name, value }) => {
+  const handleChange = ({ target: { name, value } }) => {
     dispatch(changeLoginFields({ name, value }));
   };
 
