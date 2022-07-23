@@ -8,6 +8,8 @@ import {
   setRestaurants,
   setRestaurant,
   setAccessToken,
+  clearReviewFields,
+  setReviews,
 } from './actions';
 
 import {
@@ -169,7 +171,7 @@ describe('actions', () => {
   describe('sendReview', () => {
     const restaurantId = 6;
 
-    context('with all login fields', () => {
+    context('with all review fields', () => {
       beforeEach(() => {
         store = mockStore({
           reviewFields: {
@@ -177,6 +179,15 @@ describe('actions', () => {
             description: '정말 맛있어요!',
           },
         });
+      });
+
+      it('dispatches clearReiviewFields and setReivews', async () => {
+        await store.dispatch(sendReview({ restaurantId }));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(clearReviewFields());
+        expect(actions[1]).toEqual(setReviews());
       });
     });
 

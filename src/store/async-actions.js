@@ -8,11 +8,13 @@ import {
 } from '@/services/api';
 
 import {
+  clearReviewFields,
   setAccessToken,
   setCategories,
   setRegions,
   setRestaurant,
   setRestaurants,
+  setReviews,
 } from './actions';
 
 export function loadInitialData() {
@@ -79,5 +81,11 @@ export function sendReview({ restaurantId }) {
       score,
       description,
     });
+
+    dispatch(clearReviewFields());
+
+    const { reviews } = await fetchRestaurant({ restaurantId });
+
+    dispatch(setReviews(reviews));
   };
 }
