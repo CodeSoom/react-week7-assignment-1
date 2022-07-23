@@ -15,7 +15,6 @@ import {
   sendReview,
   setAccessToken,
 } from './actions';
-import { postLogin } from '../services/api';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -121,11 +120,7 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      const { email, password } = store.getState().loginFields;
-
-      const accessToken = await postLogin({ email, password });
-
-      expect(actions[0]).toEqual(setAccessToken(accessToken));
+      expect(actions[0]).toEqual(setAccessToken(null));
     });
   });
 
