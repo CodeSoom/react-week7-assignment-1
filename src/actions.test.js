@@ -12,6 +12,8 @@ import {
   setRestaurant,
   setAccessToken,
   requestLogin,
+  clearReviewFields,
+  addReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -117,6 +119,28 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setAccessToken(''));
+    });
+  });
+
+  describe('addReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+        reviewFields: {
+          score: '5',
+          description: 'Good!',
+        },
+      });
+    });
+
+    it('calls clearReviewFields', async () => {
+      await store.dispatch(addReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(clearReviewFields());
+      expect(actions[1]).toEqual(setRestaurant(null));
+      expect(actions[2]).toEqual(setRestaurant({}));
     });
   });
 });
