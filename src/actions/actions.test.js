@@ -136,7 +136,7 @@ describe('actions', () => {
       });
     });
 
-    it('dispatches loadRestaurant', async () => {
+    it('dispatches setReviews', async () => {
       await store.dispatch(sendReview({ restaurantId: 1 }));
 
       const actions = store.getActions();

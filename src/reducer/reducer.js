@@ -73,12 +73,34 @@ const reducers = {
     };
   },
 
+  setReviews(state, { payload: { reviews } }) {
+    const { restaurant } = state;
+
+    return {
+      ...state,
+      restaurant: {
+        ...restaurant,
+        reviews,
+      },
+    };
+  },
+
   changeReviewField(state, { payload: { name, value } }) {
     return {
       ...state,
       reviewFields: {
         ...state.reviewFields,
         [name]: value,
+      },
+    };
+  },
+
+  clearReviewFields(state) {
+    return {
+      ...state,
+      reviewFields: {
+        score: '',
+        description: '',
       },
     };
   },

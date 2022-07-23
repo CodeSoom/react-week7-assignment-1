@@ -10,9 +10,11 @@ import {
   loadRestaurant,
   changeReviewField,
   sendReview,
+  clearReviewFields,
 } from '../actions/actions';
 
 import { get } from '../utils';
+import Reviews from '../components/Reviews';
 
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
@@ -31,6 +33,8 @@ export default function RestaurantContainer({ restaurantId }) {
 
   function handleSubmit() {
     dispatch(sendReview({ restaurantId }));
+
+    dispatch(clearReviewFields());
   }
 
   if (!restaurant) {
@@ -49,6 +53,7 @@ export default function RestaurantContainer({ restaurantId }) {
           reviewFields={reviewFields}
         />
       ) : null}
+      <Reviews reviews={restaurant.reviews} />
     </>
   );
 }
