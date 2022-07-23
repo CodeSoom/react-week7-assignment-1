@@ -1,15 +1,16 @@
 import { fireEvent, render } from '@testing-library/react';
 
+import { REVIEW_FIELDS } from '../../../fixtures/review';
+
 import ReviewForm from './ReviewForm';
 
 describe('<ReviewForm />', () => {
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
 
-  const renderReviewForm = ({ score, description }) => render((
+  const renderReviewForm = (reviewFields) => render((
     <ReviewForm
-      score={score}
-      description={description}
+      reviewFields={reviewFields}
       onChange={handleChange}
       onSubmit={handleSubmit}
     />
@@ -41,10 +42,7 @@ describe('<ReviewForm />', () => {
 
   context('with score and description', () => {
     it('it renders current score and description', () => {
-      const { getByLabelText } = renderReviewForm({
-        score: '5',
-        description: 'Good!',
-      });
+      const { getByLabelText } = renderReviewForm(REVIEW_FIELDS);
 
       expect(getByLabelText('평점')).toHaveDisplayValue('5');
       expect(getByLabelText('리뷰 내용')).toHaveDisplayValue('Good!');
