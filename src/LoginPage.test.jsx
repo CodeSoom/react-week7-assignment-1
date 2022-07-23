@@ -4,8 +4,6 @@ import { render } from '@testing-library/react';
 
 import LoginPage from './LoginPage';
 
-jest.mock('react-redux');
-
 describe('LoginPage', () => {
   beforeEach(() => {
     jest.clearAllMocks();
