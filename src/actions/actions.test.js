@@ -14,6 +14,7 @@ import {
   requestLogin,
   sendReview,
   setAccessToken,
+  setReviews,
 } from './actions';
 
 const middlewares = [thunk];
@@ -140,7 +141,7 @@ describe('actions', () => {
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurant(null));
+      expect(actions[0]).toEqual(setReviews(undefined));
     });
   });
 });
