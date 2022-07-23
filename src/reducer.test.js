@@ -1,5 +1,7 @@
 import reducer from './reducer';
 
+import { email, password } from '../fixtures/loginForm';
+
 import {
   setRegions,
   setCategories,
@@ -7,6 +9,7 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginFields,
 } from './actions';
 
 describe('reducer', () => {
@@ -127,6 +130,31 @@ describe('reducer', () => {
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
+      });
+    });
+  });
+
+  describe('changeLoginFields', () => {
+    const initialState = {
+      loginFields:
+        { email: 'email', password: 'password' },
+    };
+
+    context('email이 변경될경우', () => {
+      it('email이 변경된다', () => {
+        const state = reducer(initialState, changeLoginFields({ name: 'email', value: email }));
+
+        expect(state.loginFields.email).toBe(email);
+        expect(state.loginFields.password).toBe('password');
+      });
+    });
+
+    context('password가 변경될경우', () => {
+      it('password가 변경된다', () => {
+        const state = reducer(initialState, changeLoginFields({ name: 'password', value: password }));
+
+        expect(state.loginFields.email).toBe('email');
+        expect(state.loginFields.password).toBe(password);
       });
     });
   });
