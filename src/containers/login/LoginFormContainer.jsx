@@ -5,6 +5,7 @@ import { get } from '../../utils';
 import {
   setLoginFields,
   requestLogin,
+  setAccessToken,
 } from '../../actions';
 
 import LoginForm from '../../components/login/LoginForm';
@@ -24,9 +25,16 @@ export default function LoginFormContainer() {
     dispatch(requestLogin());
   };
 
+  const handleClickLogout = () => {
+    dispatch(setAccessToken(''));
+  };
+
   if (accessToken) {
     return (
-      <button type="button">
+      <button
+        type="button"
+        onClick={handleClickLogout}
+      >
         Log out
       </button>
     );

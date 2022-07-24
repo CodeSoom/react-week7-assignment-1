@@ -4,7 +4,7 @@ import given from 'given2';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setLoginFields } from '../../actions';
+import { setAccessToken, setLoginFields } from '../../actions';
 
 import {
   EMAIL,
@@ -134,6 +134,16 @@ describe('<LoginFormContainer />', () => {
       const { getByText } = renderLoginFormContainer();
 
       expect(getByText('Log out')).toBeInTheDocument();
+    });
+
+    describe('clicks "Log out" button', () => {
+      it('dispatch setAccessToken', () => {
+        const { getByText } = renderLoginFormContainer();
+
+        fireEvent.click(getByText('Log out'));
+
+        expect(dispatch).toBeCalledWith(setAccessToken(''));
+      });
     });
   });
 
