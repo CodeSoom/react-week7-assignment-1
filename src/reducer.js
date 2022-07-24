@@ -16,6 +16,9 @@ const initialState = {
     score: '',
     description: '',
   },
+  errors: {
+    login: null,
+  },
 };
 
 const reducers = {
@@ -110,6 +113,18 @@ const reducers = {
       reviewFields: {
         score: '',
         description: '',
+      },
+    };
+  },
+
+  setError(state, { payload: { name, error } }) {
+    const { errors } = state;
+
+    return {
+      ...state,
+      errors: {
+        ...errors,
+        [name]: error,
       },
     };
   },

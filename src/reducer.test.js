@@ -12,6 +12,7 @@ import {
   clearLoginFields,
   setReviewFields,
   clearReviewFields,
+  setError,
 } from './actions';
 
 import { EMAIL_INPUT, PASSWORD_INPUT } from '../fixtures/login';
@@ -34,6 +35,9 @@ describe('reducer', () => {
       reviewFields: {
         score: '',
         description: '',
+      },
+      errors: {
+        login: null,
       },
     };
 
@@ -230,6 +234,20 @@ describe('reducer', () => {
         score: '',
         description: '',
       });
+    });
+  });
+
+  describe('setError', () => {
+    it('update errors', () => {
+      const initialState = {
+        errors: {
+          login: null,
+        },
+      };
+
+      const state = reducer(initialState, setError({ name: 'login', error: 'login error' }));
+
+      expect(state.errors.login).toBe('login error');
     });
   });
 });

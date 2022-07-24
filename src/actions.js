@@ -149,3 +149,10 @@ export function addReview({ restaurantId }) {
     dispatch(loadRestaurant({ restaurantId }));
   };
 }
+
+export function setError({ name, error }) {
+  return {
+    type: 'setError',
+    payload: { name, error },
+  };
+}
