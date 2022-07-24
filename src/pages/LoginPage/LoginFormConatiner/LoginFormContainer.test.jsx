@@ -23,6 +23,7 @@ describe('LoginFormContainer', () => {
       password: '',
     },
     accessToken: given.accessToken,
+    loginError: given.loginError,
   }));
 
   const renderLoginFormContainer = () => render((
@@ -105,6 +106,20 @@ describe('LoginFormContainer', () => {
       fireEvent.click(getByRole('button', { name: 'Log out' }));
 
       expect(clearItem).toBeCalledWith('accessToken');
+    });
+  });
+
+  context('with login error', () => {
+    const loginError = '올바르지 않은 계정입니다.';
+
+    beforeEach(() => {
+      given('loginError', () => loginError);
+    });
+
+    it('renders login error', () => {
+      const { container } = renderLoginFormContainer();
+
+      expect(container).toHaveTextContent(loginError);
     });
   });
 });
