@@ -11,10 +11,11 @@ describe('<LoginForm />', () => {
     handleSubmit.mockClear();
   });
 
-  const renderLoginForm = ({ email, password }) => render((
+  const renderLoginForm = ({ email, password, error }) => render((
     <LoginForm
       email={email}
       password={password}
+      error={error}
       onChange={handleChange}
       onSubmit={handleSubmit}
     />
@@ -99,6 +100,18 @@ describe('<LoginForm />', () => {
       fireEvent.click(loginButton);
 
       expect(handleSubmit).toBeCalled();
+    });
+  });
+
+  context('with error', () => {
+    it('renders error message', () => {
+      const { container } = renderLoginForm({
+        email: '',
+        password: '',
+        error: '로그인에 실패했습니다.',
+      });
+
+      expect(container).toHaveTextContent('로그인에 실패했습니다.');
     });
   });
 });

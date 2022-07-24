@@ -1,5 +1,5 @@
 export default function LoginForm({
-  email, password, onChange, onSubmit,
+  email, password, onChange, onSubmit, error,
 }) {
   function handleChange(event) {
     const { target: { name, value } } = event;
@@ -41,6 +41,10 @@ export default function LoginForm({
       </div>
 
       <button type="submit">Log In</button>
+
+      { error && (
+        <p>{error}</p>
+      ) }
     </form>
   );
 }
