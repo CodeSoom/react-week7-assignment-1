@@ -13,5 +13,12 @@ export default {
       score: 5,
       description: 'Good!',
     },
+    {
+      id: 13,
+      restaurantId: 6,
+      name: '테스터',
+      score: 2,
+      description: '개노맛',
+    },
   ],
 };
