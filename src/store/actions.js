@@ -79,3 +79,10 @@ export function setAccessToken(accessToken) {
     payload: { accessToken },
   };
 }
+
+export function setLoginError(loginError) {
+  return {
+    type: 'setLoginError',
+    payload: { loginError },
+  };
+}

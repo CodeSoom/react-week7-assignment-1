@@ -16,6 +16,7 @@ const initialState = {
     description: '',
   },
   accessToken: '',
+  loginError: null,
 };
 
 const reducers = {
@@ -135,6 +136,13 @@ const reducers = {
     return {
       ...state,
       accessToken,
+    };
+  },
+
+  setLoginError(state, { payload: { loginError } }) {
+    return {
+      ...state,
+      loginError,
     };
   },
 };

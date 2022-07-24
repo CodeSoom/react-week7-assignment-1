@@ -19,6 +19,7 @@ import {
   clearReviewFields,
   setReviews,
   clearLoginFields,
+  setLoginError,
 } from './actions';
 
 describe('reducer', () => {
@@ -39,6 +40,7 @@ describe('reducer', () => {
         description: '',
       },
       accessToken: '',
+      loginError: null,
     };
 
     it('returns initialState', () => {
@@ -295,6 +297,23 @@ describe('reducer', () => {
       );
 
       expect(state.accessToken).toBe(ACCESS_TOKEN);
+    });
+  });
+
+  describe('setLoginError', () => {
+    const initialState = {
+      loginError: null,
+    };
+
+    it('changes login error', () => {
+      const errorMessage = '존재하지 않는 계정입니다.';
+
+      const state = reducer(
+        initialState,
+        setLoginError(errorMessage),
+      );
+
+      expect(state.loginError).toBe(errorMessage);
     });
   });
 });
