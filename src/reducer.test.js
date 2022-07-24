@@ -1,6 +1,6 @@
 import reducer from './reducer';
 
-import { email, password } from '../fixtures/loginForm';
+import { email } from '../fixtures/loginForm';
 
 import {
   setRegions,
