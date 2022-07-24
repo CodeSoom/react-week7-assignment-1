@@ -1,6 +1,8 @@
 import { TextField } from '@/components';
 
-export default function LoginForm({ loginFields, onChange, onSubmit }) {
+export default function LoginForm({
+  loginFields, loginError, onChange, onSubmit,
+}) {
   const { email, password } = loginFields;
 
   const handleChange = (event) => {
@@ -39,6 +41,7 @@ export default function LoginForm({ loginFields, onChange, onSubmit }) {
       <div>
         <button type="submit">Log In</button>
       </div>
+      {loginError && <p>{loginError}</p>}
     </form>
   );
 }

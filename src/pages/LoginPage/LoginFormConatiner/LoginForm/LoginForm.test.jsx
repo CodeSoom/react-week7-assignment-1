@@ -11,11 +11,14 @@ describe('LoginForm', () => {
     password: 'passwo',
   };
 
+  const loginError = '올바르지 않은 계정입니다.';
+
   const renderLoginForm = () => render((
     <LoginForm
       loginFields={loginFields}
       onChange={handleChange}
       onSubmit={handleSubmit}
+      loginError={loginError}
     />
   ));
 
@@ -73,5 +76,13 @@ describe('LoginForm', () => {
     fireEvent.click(getByRole('button', { name: 'Log In' }));
 
     expect(handleSubmit).toBeCalled();
+  });
+
+  context('with login error', () => {
+    it('renders login error', () => {
+      const { container } = renderLoginForm();
+
+      expect(container).toHaveTextContent(loginError);
+    });
   });
 });
