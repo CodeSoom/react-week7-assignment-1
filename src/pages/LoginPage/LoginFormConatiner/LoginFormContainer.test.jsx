@@ -2,11 +2,14 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { clearItem } from '@/services/storage';
+
 import { changeLoginField, setAccessToken } from '@/store/actions';
 import { requestLogin } from '@/store/async-actions';
 
 import LoginFormContainer from './LoginFormContainer';
 
+jest.mock('@/services/storage');
 jest.mock('@/store/async-actions');
 
 describe('LoginFormContainer', () => {
@@ -94,6 +97,14 @@ describe('LoginFormContainer', () => {
       fireEvent.click(getByRole('button', { name: 'Log out' }));
 
       expect(dispatch).toBeCalledWith(setAccessToken(''));
+    });
+
+    it('calls clearItem with "accessToken" when button is clicked', () => {
+      const { getByRole } = renderLoginFormContainer();
+
+      fireEvent.click(getByRole('button', { name: 'Log out' }));
+
+      expect(clearItem).toBeCalledWith('accessToken');
     });
   });
 });

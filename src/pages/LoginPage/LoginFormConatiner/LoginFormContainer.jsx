@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import { clearItem } from '@/services/storage';
+
 import { changeLoginField, setAccessToken } from '@/store/actions';
 import { requestLogin } from '@/store/async-actions';
 
@@ -23,6 +25,7 @@ export default function LoginFormContainer() {
 
   const handleClickLogout = () => {
     dispatch(setAccessToken(''));
+    clearItem('accessToken');
   };
 
   if (accessToken) {
