@@ -31,9 +31,14 @@ describe('<LoginFormContainer />', () => {
     password: '',
   }));
 
+  given('errors', () => ({
+    login: null,
+  }));
+
   useSelector.mockImplementation((selector) => selector({
     loginFields: given.loginFields,
     accessToken: given.accessToken,
+    errors: given.errors,
   }));
 
   const renderLoginFormContainer = () => render((<LoginFormContainer />));
@@ -129,6 +134,18 @@ describe('<LoginFormContainer />', () => {
       const { getByText } = renderLoginFormContainer();
 
       expect(getByText('Log out')).toBeInTheDocument();
+    });
+  });
+
+  context('with login error', () => {
+    given('errors', () => ({
+      login: '로그인에 실패했습니다.',
+    }));
+
+    it('renders login error message', () => {
+      const { container } = renderLoginFormContainer();
+
+      expect(container).toHaveTextContent('로그인에 실패했습니다.');
     });
   });
 });

@@ -12,6 +12,7 @@ import LoginForm from '../../components/login/LoginForm';
 export default function LoginFormContainer() {
   const { email, password } = useSelector(get('loginFields'));
   const accessToken = useSelector(get('accessToken'));
+  const errors = useSelector(get('errors'));
 
   const dispatch = useDispatch();
 
@@ -35,6 +36,7 @@ export default function LoginFormContainer() {
     <LoginForm
       email={email}
       password={password}
+      error={errors.login}
       onChange={handleChange}
       onSubmit={handleSubmit}
     />
