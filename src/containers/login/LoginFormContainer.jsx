@@ -11,6 +11,7 @@ import LoginForm from '../../components/login/LoginForm';
 
 export default function LoginFormContainer() {
   const { email, password } = useSelector(get('loginFields'));
+  const accessToken = useSelector(get('accessToken'));
 
   const dispatch = useDispatch();
 
@@ -21,6 +22,14 @@ export default function LoginFormContainer() {
   const handleSubmit = () => {
     dispatch(requestLogin());
   };
+
+  if (accessToken) {
+    return (
+      <button type="button">
+        Log out
+      </button>
+    );
+  }
 
   return (
     <LoginForm
