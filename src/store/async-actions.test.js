@@ -2,6 +2,8 @@ import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
 
+import { postLogin } from '@/services/api';
+
 import { saveItem } from '@/services/storage';
 
 import {
@@ -13,6 +15,7 @@ import {
   clearReviewFields,
   setReviews,
   clearLoginFields,
+  setLoginError,
 } from './actions';
 
 import {
@@ -116,6 +119,8 @@ describe('actions', () => {
   describe('requestLogin', () => {
     context('with all login fields', () => {
       beforeEach(() => {
+        postLogin.mockResolvedValue('');
+
         store = mockStore({
           loginFields: {
             email: 'abc@test.com',
@@ -137,6 +142,27 @@ describe('actions', () => {
         await store.dispatch(requestLogin());
 
         expect(saveItem).toBeCalledWith('accessToken', '');
+      });
+    });
+
+    context('with invalid login fields', () => {
+      beforeEach(() => {
+        postLogin.mockRejectedValue(new Error());
+
+        store = mockStore({
+          loginFields: {
+            email: 'invalid@invalid.com',
+            password: 'password123',
+          },
+        });
+      });
+
+      it('dispatches setLoginError', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setLoginError('올바르지 않은 계정입니다.'));
       });
     });
 

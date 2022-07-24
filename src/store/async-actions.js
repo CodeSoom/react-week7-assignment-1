@@ -14,6 +14,7 @@ import {
   clearReviewFields,
   setAccessToken,
   setCategories,
+  setLoginError,
   setRegions,
   setRestaurant,
   setRestaurants,
@@ -64,12 +65,16 @@ export function requestLogin() {
       return;
     }
 
-    const accessToken = await postLogin({ email, password });
+    try {
+      const accessToken = await postLogin({ email, password });
 
-    saveItem('accessToken', accessToken);
+      saveItem('accessToken', accessToken);
 
-    dispatch(setAccessToken(accessToken));
-    dispatch(clearLoginFields());
+      dispatch(setAccessToken(accessToken));
+      dispatch(clearLoginFields());
+    } catch (e) {
+      dispatch(setLoginError('올바르지 않은 계정입니다.'));
+    }
   };
 }
 
