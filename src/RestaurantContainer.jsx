@@ -15,6 +15,8 @@ import { get } from './utils';
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
+  const { score, description } = useSelector(get('reviewFields'));
+
   const handleChange = ({ name, value }) => {
     dispatch(changeReviewField({ name, value }));
   };
@@ -34,8 +36,8 @@ export default function RestaurantContainer({ restaurantId }) {
   return (
     <>
       <RestaurantDetail restaurant={restaurant} />
-      <ReviewForm onChange={handleChange} title="평점" name="score" />
-      <ReviewForm onChange={handleChange} title="리뷰 내용" name="description" />
+      <ReviewForm value={score} onChange={handleChange} title="평점" name="score" />
+      <ReviewForm value={description} onChange={handleChange} title="리뷰 내용" name="description" />
     </>
   );
 }
