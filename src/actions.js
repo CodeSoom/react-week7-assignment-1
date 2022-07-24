@@ -102,6 +102,13 @@ export function setAccessToken(accessToken) {
   };
 }
 
+export function clearLoginFields() {
+  return {
+    type: 'clearLoginFields',
+    payload: {},
+  };
+}
+
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields } = getState();
@@ -109,6 +116,7 @@ export function requestLogin() {
     const accessToken = await postLogin(loginFields);
 
     dispatch(setAccessToken(accessToken));
+    dispatch(clearLoginFields());
   };
 }
 

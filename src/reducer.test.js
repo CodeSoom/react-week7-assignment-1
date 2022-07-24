@@ -9,6 +9,7 @@ import {
   selectCategory,
   setLoginFields,
   setAccessToken,
+  clearLoginFields,
   setReviewFields,
   clearReviewFields,
 } from './actions';
@@ -171,6 +172,22 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
 
       expect(state.accessToken).toBe('ACCESS_TOKEN');
+    });
+  });
+
+  describe('clearLoginFields', () => {
+    it('reset login fields', () => {
+      const initialState = {
+        loginFields: {
+          email: 'tester@example.com',
+          password: 'test',
+        },
+      };
+
+      const state = reducer(initialState, clearLoginFields());
+
+      expect(state.loginFields.email).toBe('');
+      expect(state.loginFields.password).toBe('');
     });
   });
 
