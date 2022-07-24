@@ -7,6 +7,8 @@ import {
   postReview,
 } from '@/services/api';
 
+import { saveItem } from '@/services/stroage';
+
 import {
   clearLoginFields,
   clearReviewFields,
@@ -63,6 +65,8 @@ export function requestLogin() {
     }
 
     const accessToken = await postLogin({ email, password });
+
+    saveItem('accessToken', accessToken);
 
     dispatch(setAccessToken(accessToken));
     dispatch(clearLoginFields());

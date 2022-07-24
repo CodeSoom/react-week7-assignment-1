@@ -2,6 +2,8 @@ import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
 
+import { saveItem } from '@/services/stroage';
+
 import {
   setRegions,
   setCategories,
@@ -25,6 +27,7 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('@/services/api');
+jest.mock('@/services/stroage');
 
 describe('actions', () => {
   let store;
@@ -128,6 +131,12 @@ describe('actions', () => {
 
         expect(actions[0]).toEqual(setAccessToken(''));
         expect(actions[1]).toEqual(clearLoginFields());
+      });
+
+      it('saves accessToken', async () => {
+        await store.dispatch(requestLogin());
+
+        expect(saveItem).toBeCalledWith('accessToken', '');
       });
     });
 
