@@ -14,6 +14,9 @@ describe('<LoginPage />', () => {
       email: '',
       password: '',
     },
+    errors: {
+      login: null,
+    },
   }));
 
   const renderLoginPage = () => render((

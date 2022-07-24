@@ -33,6 +33,9 @@ describe('App', () => {
         score: '',
         description: '',
       },
+      errors: {
+        login: null,
+      },
     }));
   });
 
