@@ -7,7 +7,7 @@ import {
   postReview,
 } from '@/services/api';
 
-import { saveItem } from '@/services/stroage';
+import { saveItem } from '@/services/storage';
 
 import {
   clearLoginFields,

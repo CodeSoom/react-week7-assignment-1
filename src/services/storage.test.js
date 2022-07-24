@@ -1,4 +1,4 @@
-import { loadItem, saveItem } from './stroage';
+import { loadItem, saveItem } from './storage';
 
 describe('storage', () => {
   describe('saveItem', () => {

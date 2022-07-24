@@ -2,7 +2,7 @@ import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
 
-import { saveItem } from '@/services/stroage';
+import { saveItem } from '@/services/storage';
 
 import {
   setRegions,
