@@ -1,4 +1,6 @@
-export default function ReviewForm({ title, name, onChange }) {
+export default function ReviewForm({
+  value, title, name, onChange,
+}) {
   const handleChange = (event) => {
     const { target } = event;
     onChange({ name: target.name, value: target.value });
@@ -9,7 +11,7 @@ export default function ReviewForm({ title, name, onChange }) {
       <label htmlFor={`review-${name}`}>
         {title}
       </label>
-      <input onChange={handleChange} type="text" id={`review-${name}`} />
+      <input value={value} name={name} onChange={handleChange} type="text" id={`review-${name}`} />
     </div>
   );
 }
