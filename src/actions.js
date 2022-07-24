@@ -7,6 +7,13 @@ import {
   postReview,
 } from './services/api';
 
+export function setError({ name, error }) {
+  return {
+    type: 'setError',
+    payload: { name, error },
+  };
+}
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -111,12 +118,19 @@ export function clearLoginFields() {
 
 export function requestLogin() {
   return async (dispatch, getState) => {
-    const { loginFields } = getState();
+    try {
+      const { loginFields } = getState();
 
-    const accessToken = await postLogin(loginFields);
+      const accessToken = await postLogin(loginFields);
 
-    dispatch(setAccessToken(accessToken));
-    dispatch(clearLoginFields());
+      dispatch(setAccessToken(accessToken));
+      dispatch(clearLoginFields());
+    } catch (error) {
+      dispatch(setError({
+        name: 'login',
+        error: '로그인에 실패했습니다.',
+      }));
+    }
   };
 }
 
@@ -147,12 +161,5 @@ export function addReview({ restaurantId }) {
     dispatch(clearReviewFields());
 
     dispatch(loadRestaurant({ restaurantId }));
-  };
-}
-
-export function setError({ name, error }) {
-  return {
-    type: 'setError',
-    payload: { name, error },
   };
 }

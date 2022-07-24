@@ -15,7 +15,10 @@ import {
   requestLogin,
   clearReviewFields,
   addReview,
+  setError,
 } from './actions';
+
+import { postLogin } from './services/api';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -107,20 +110,50 @@ describe('actions', () => {
   });
 
   describe('requestLogin', () => {
-    beforeEach(() => {
-      store = mockStore({
-        email: '',
-        password: '',
+    context('with valid email and password', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: 'tester@example.com',
+            password: 'test',
+          },
+        });
+
+        postLogin.mockResolvedValue('');
+      });
+
+      it('dispatchs setAccessToken', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setAccessToken(''));
+        expect(actions[1]).toEqual(clearLoginFields());
       });
     });
 
-    it('dispatchs setAccessToken', async () => {
-      await store.dispatch(requestLogin());
+    context('with invalid email and password', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: 'invalid@invalid.com',
+            password: 'invalid',
+          },
+        });
 
-      const actions = store.getActions();
+        postLogin.mockRejectedValue(new Error('로그인에 실패했습니다.'));
+      });
 
-      expect(actions[0]).toEqual(setAccessToken(''));
-      expect(actions[1]).toEqual(clearLoginFields());
+      it('dispatchs setError', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setError({
+          name: 'login',
+          error: '로그인에 실패했습니다.',
+        }));
+      });
     });
   });
 
