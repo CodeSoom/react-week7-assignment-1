@@ -2,22 +2,20 @@ import { render } from '@testing-library/react';
 
 import Reviews from './Reviews';
 
+import restaurant from '../../fixtures/restaurant';
+
 describe('Reviews', () => {
-  const reviews = [{
-    id: 1,
-    name: '테스터',
-    description: '맛있어요',
-    score: 5,
-  }];
+  const { reviews } = restaurant;
 
   function renderReviews() {
     return render((
       <Reviews reviews={reviews} />
     ));
   }
-  it('renders name and description', () => {
+  it('renders review', () => {
     const { container } = renderReviews();
 
-    expect(container).toHaveTextContent('맛있어요');
+    reviews.forEach(({ description }) => (
+      expect(container).toHaveTextContent(description)));
   });
 });
