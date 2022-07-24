@@ -1,6 +1,7 @@
 import reducer from './reducer';
 
 import { email } from '../fixtures/loginForm';
+import { score } from '../fixtures/reviewForm';
 
 import {
   setRegions,
@@ -11,6 +12,7 @@ import {
   selectCategory,
   changeLoginFields,
   setAccessToken,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -23,9 +25,16 @@ describe('reducer', () => {
       selectedRegion: null,
       selectedCategory: null,
 
+      accessToken: '',
+
       loginFields: {
         email: '',
         password: '',
+      },
+
+      reviewFields: {
+        score: '',
+        description: '',
       },
     };
 
@@ -139,12 +148,25 @@ describe('reducer', () => {
     it('loginFields가 변경된다', () => {
       const initialState = {
         loginFields:
-          { email: 'email', password: 'password' },
+          { email: '', password: ' ' },
       };
 
       const state = reducer(initialState, changeLoginFields({ name: 'email', value: email }));
 
       expect(state.loginFields.email).toBe(email);
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('reviewFields가 변경된다', () => {
+      const initialState = {
+        reviewFields:
+          { score: '', description: '' },
+      };
+
+      const state = reducer(initialState, changeReviewField({ name: 'score', value: score }));
+
+      expect(state.reviewFields.score).toBe(score);
     });
   });
 
