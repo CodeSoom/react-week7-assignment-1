@@ -100,3 +100,15 @@ export function setAccessToken(accessToken) {
     payload: { accessToken },
   };
 }
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    try {
+      const { loginFields: { email, password } } = getState();
+      const accessToken = await postLogin({ email, password });
+      dispatch(setAccessToken(accessToken));
+    } catch (error) {
+      console.log('토큰발급 실패!');
+    }
+  };
+}
