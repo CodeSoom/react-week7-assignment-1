@@ -149,7 +149,7 @@ describe('reducer', () => {
   });
 
   describe('setAccessToken', () => {
-    it('accessToken을 얻는다', () => {
+    it('accessToken를 변경한다', () => {
       const initialState = {
         accessToken: '',
       };
