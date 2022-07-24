@@ -149,12 +149,14 @@ describe('reducer', () => {
   });
 
   describe('setAccessToken', () => {
-    const initialState = {
-      accessToken: '',
-    };
+    it('accessToken을 얻는다', () => {
+      const initialState = {
+        accessToken: '',
+      };
 
-    const state = reducer(initialState, setAccessToken('TOKEN'));
+      const state = reducer(initialState, setAccessToken('TOKEN'));
 
-    expect(state.accessToken).toBe('TOKEN');
+      expect(state.accessToken).toBe('TOKEN');
+    });
   });
 });
