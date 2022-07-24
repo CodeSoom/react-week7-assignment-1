@@ -8,6 +8,8 @@ import RestaurantContainer from './RestaurantContainer';
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
+  useDispatch.mockImplementation(() => dispatch);
+
   function renderRestaurantContainer() {
     return render(<RestaurantContainer restaurantId="1" />);
   }
@@ -18,6 +20,9 @@ describe('RestaurantContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       restaurant: given.restaurant,
+      reviewFields: {
+        score, description,
+      },
     }));
   });
 
@@ -44,26 +49,22 @@ describe('RestaurantContainer', () => {
     it('change event를 listen 한다', () => {
       const { getByLabelText } = renderRestaurantContainer();
 
-      fireEvent.change(getByLabelText('평점'), {
-        target: {
-          value: score,
-        },
-      });
+      const contorls = [
+        { name: 'score', value: score, label: '평점' },
+        { name: 'description', value: description, label: '리뷰 내용' },
+      ];
 
-      expect(dispatch).toBeCalledWith({
-        type: 'changeReviewField',
-        payload: { name: 'score', value: score },
-      });
+      contorls.forEach(({ name, value, label }) => {
+        fireEvent.change(getByLabelText(label), {
+          target: {
+            value,
+          },
+        });
 
-      fireEvent.change(getByLabelText('리뷰 내용'), {
-        target: {
-          value: description,
-        },
-      });
-
-      expect(dispatch).toBeCalledWith({
-        type: 'changeReviewField',
-        payload: { name: 'description', value: description },
+        expect(dispatch).toBeCalledWith({
+          type: 'changeReviewField',
+          payload: { name, value },
+        });
       });
     });
   });
