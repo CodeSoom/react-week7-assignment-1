@@ -1,4 +1,10 @@
+import { useDispatch } from 'react-redux';
+
 import { Switch, Route, Link } from 'react-router-dom';
+
+import { loadItem } from './services/storage';
+
+import { setAccessToken } from './store/actions';
 
 import {
   AboutPage,
@@ -10,6 +16,12 @@ import {
 } from './pages';
 
 export default function App() {
+  const dispatch = useDispatch();
+  const accessToken = loadItem('accessToken');
+  if (accessToken) {
+    dispatch(setAccessToken(accessToken));
+  }
+
   return (
     <div>
       <header>
