@@ -13,7 +13,11 @@ describe('LoginForm', () => {
   });
 
   const renderLoginForm = () => render(
-    <LoginForm fields={{ email, password }} onSubmit={handleSubmit} onChange={handleChange} />,
+    <LoginForm
+      fields={{ email, password }}
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+    />,
   );
 
   it('E-mail - input이 렌더링된다', () => {
