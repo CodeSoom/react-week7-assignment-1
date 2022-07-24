@@ -43,5 +43,15 @@ describe('RestaurantPage', () => {
 
       expect(container).toHaveTextContent('마법사주방');
     });
+
+    it('ReviewForm이 렌더링된다', () => {
+      const param = { id: '1' };
+
+      const { queryByLabelText } = render(
+        <RestaurantPage params={param} />,
+      );
+
+      expect(queryByLabelText('평점')).toBeInTheDocument();
+    });
   });
 });
