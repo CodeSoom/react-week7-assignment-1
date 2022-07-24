@@ -1,4 +1,4 @@
-import { loadItem, saveItem } from './storage';
+import { clearItem, loadItem, saveItem } from './storage';
 
 describe('storage', () => {
   describe('saveItem', () => {
@@ -24,6 +24,14 @@ describe('storage', () => {
       const item = loadItem('newKey');
 
       expect(item).toBe('item');
+    });
+  });
+
+  describe('clearItem', () => {
+    it('calls removeItem of localStorage', () => {
+      clearItem('newKey');
+
+      expect(localStorage.removeItem).toBeCalledWith('newKey');
     });
   });
 });
