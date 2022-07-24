@@ -15,6 +15,7 @@ import RESTAURANT from '../../fixtures/restaurant';
 describe('api', () => {
   const mockFetch = (data) => {
     global.fetch = jest.fn().mockResolvedValue({
+      ok: true,
       async json() { return data; },
     });
   };
@@ -81,6 +82,16 @@ describe('api', () => {
       const accessToken = await postLogin({ email: '', password: '' });
 
       expect(accessToken).toEqual('ACCESS_TOKEN');
+    });
+
+    it('should fail', async () => {
+      global.fetch = jest.fn().mockResolvedValueOnce({
+        ok: false,
+      });
+
+      await expect(async () => {
+        await postLogin({ email: '', password: '' });
+      }).rejects.toThrow('로그인에 실패했습니다.');
     });
   });
 
