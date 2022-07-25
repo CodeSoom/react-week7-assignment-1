@@ -1,3 +1,4 @@
+/* eslint-disable no-proto */
 import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
@@ -10,12 +11,16 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  requestLogin,
+  sendReview,
+  setAccessToken,
+  setReviews,
 } from './actions';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-jest.mock('./services/api');
+jest.mock('../services/api');
 
 describe('actions', () => {
   let store;
@@ -98,6 +103,45 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('request login', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginFields: {
+          email: 'dd@dd',
+          password: '1234',
+        },
+      });
+    });
+
+    it('dispatches setAccessToken', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken(null));
+    });
+  });
+
+  describe('sendReview', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+        reviewFields: {
+          score: '5',
+          description: '맛잇당',
+        },
+      });
+    });
+
+    it('dispatches setReviews', async () => {
+      await store.dispatch(sendReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setReviews(undefined));
     });
   });
 });
