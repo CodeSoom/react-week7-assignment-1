@@ -1,5 +1,8 @@
 import reducer from './reducer';
 
+import { email } from '../fixtures/loginForm';
+import { score } from '../fixtures/reviewForm';
+
 import {
   setRegions,
   setCategories,
@@ -7,6 +10,9 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginFields,
+  setAccessToken,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -18,6 +24,18 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+
+      accessToken: '',
+
+      loginFields: {
+        email: '',
+        password: '',
+      },
+
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -123,6 +141,44 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('changeLoginFields', () => {
+    it('loginFields가 변경된다', () => {
+      const initialState = {
+        loginFields:
+          { email: '', password: ' ' },
+      };
+
+      const state = reducer(initialState, changeLoginFields({ name: 'email', value: email }));
+
+      expect(state.loginFields.email).toBe(email);
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('reviewFields가 변경된다', () => {
+      const initialState = {
+        reviewFields:
+          { score: '', description: '' },
+      };
+
+      const state = reducer(initialState, changeReviewField({ name: 'score', value: score }));
+
+      expect(state.reviewFields.score).toBe(score);
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('accessToken를 변경한다', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, setAccessToken('TOKEN'));
+
+      expect(state.accessToken).toBe('TOKEN');
     });
   });
 });
