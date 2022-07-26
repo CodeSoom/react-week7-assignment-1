@@ -13,6 +13,7 @@ import {
   setAccessToken,
   clearLoginFields,
   requestLogin,
+  requestLogout,
   clearReviewFields,
   addReview,
   setError,
@@ -154,6 +155,22 @@ describe('actions', () => {
           error: '로그인에 실패했습니다.',
         }));
       });
+    });
+  });
+
+  describe('requestLogout', () => {
+    beforeEach(() => {
+      store = mockStore({
+        accessToken: 'ACCESS_TOKEN',
+      });
+    });
+
+    it('dispatches setAccessToken', () => {
+      store.dispatch(requestLogout());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken(''));
     });
   });
 

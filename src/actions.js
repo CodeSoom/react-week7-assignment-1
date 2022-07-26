@@ -134,6 +134,12 @@ export function requestLogin() {
   };
 }
 
+export function requestLogout() {
+  return (dispatch) => {
+    dispatch(setAccessToken(''));
+  };
+}
+
 export function setReviewFields({ name, value }) {
   return {
     type: 'setReviewFields',
