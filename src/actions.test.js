@@ -110,7 +110,7 @@ describe('actions', () => {
   });
 
   describe('requestLogin', () => {
-    context('with valid email and password', () => {
+    context('with valid login fields', () => {
       beforeEach(() => {
         store = mockStore({
           loginFields: {
@@ -132,7 +132,7 @@ describe('actions', () => {
       });
     });
 
-    context('with invalid email and password', () => {
+    context('with invalid login fields', () => {
       beforeEach(() => {
         store = mockStore({
           loginFields: {
