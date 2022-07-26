@@ -21,10 +21,13 @@ import {
 
 import { postLogin } from './services/api';
 
+import { saveItem } from './storage';
+
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 jest.mock('./services/api');
+jest.mock('./storage');
 
 describe('actions', () => {
   let store;
@@ -121,12 +124,16 @@ describe('actions', () => {
         });
 
         postLogin.mockResolvedValue('');
+
+        saveItem.mockClear();
       });
 
       it('dispatchs setAccessToken', async () => {
         await store.dispatch(requestLogin());
 
         const actions = store.getActions();
+
+        expect(saveItem).toBeCalledWith('accessToken', '');
 
         expect(actions[0]).toEqual(setAccessToken(''));
         expect(actions[1]).toEqual(clearLoginFields());

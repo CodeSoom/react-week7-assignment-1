@@ -7,6 +7,8 @@ import {
   postReview,
 } from './services/api';
 
+import { saveItem } from './storage';
+
 export function setError({ name, error }) {
   return {
     type: 'setError',
@@ -122,6 +124,8 @@ export function requestLogin() {
       const { loginFields } = getState();
 
       const accessToken = await postLogin(loginFields);
+
+      saveItem('accessToken', accessToken);
 
       dispatch(setAccessToken(accessToken));
       dispatch(clearLoginFields());
