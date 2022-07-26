@@ -4,6 +4,14 @@ import {
   Link,
 } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+
+import { useEffect } from 'react';
+
+import { loadItem } from './storage';
+
+import { setAccessToken } from './actions';
+
 import HomePage from './HomePage';
 import LoginPage from './pages/login/LoginPage';
 import AboutPage from './AboutPage';
@@ -12,6 +20,16 @@ import RestaurantPage from './RestaurantPage';
 import NotFoundPage from './NotFoundPage';
 
 export default function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const accessToken = loadItem('accessToken');
+
+    if (accessToken !== null) {
+      dispatch(setAccessToken(accessToken));
+    }
+  }, []);
+
   return (
     <div>
       <header>
