@@ -7,17 +7,38 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  setLoginFields,
+  setAccessToken,
+  clearLoginFields,
+  setReviewFields,
+  clearReviewFields,
+  setError,
 } from './actions';
+
+import { EMAIL_INPUT, PASSWORD_INPUT } from '../fixtures/login';
+import { SCORE, DESCRIPTION } from '../fixtures/review';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
+      accessToken: '',
       regions: [],
       categories: [],
       restaurants: [],
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+      errors: {
+        login: null,
+      },
     };
 
     it('returns initialState', () => {
@@ -123,6 +144,110 @@ describe('reducer', () => {
         id: 1,
         name: '한식',
       });
+    });
+  });
+
+  describe('setLoginFields', () => {
+    it('changes loginFields', () => {
+      const initialState = {
+        loginFields: {
+          email: '',
+          password: '',
+        },
+      };
+
+      [EMAIL_INPUT, PASSWORD_INPUT].forEach(({ name, value }) => {
+        const state = reducer(initialState, setLoginFields({
+          name,
+          value,
+        }));
+
+        expect(state.loginFields[name]).toBe(value);
+      });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    it('changes accessToken', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, setAccessToken('ACCESS_TOKEN'));
+
+      expect(state.accessToken).toBe('ACCESS_TOKEN');
+    });
+  });
+
+  describe('clearLoginFields', () => {
+    it('reset login fields', () => {
+      const initialState = {
+        loginFields: {
+          email: 'tester@example.com',
+          password: 'test',
+        },
+      };
+
+      const state = reducer(initialState, clearLoginFields());
+
+      expect(state.loginFields.email).toBe('');
+      expect(state.loginFields.password).toBe('');
+    });
+  });
+
+  describe('setReviewFields', () => {
+    it('changes reviewFields', () => {
+      const initialState = {
+        reviewFields: {
+          score: '',
+          description: '',
+        },
+      };
+
+      const fields = [
+        { name: 'score', value: SCORE },
+        { name: 'description', value: DESCRIPTION },
+      ];
+
+      fields.forEach(({ name, value }) => {
+        const state = reducer(initialState, setReviewFields({
+          name,
+          value,
+        }));
+
+        expect(state.reviewFields[name]).toBe(value);
+      });
+    });
+  });
+
+  describe('clearReviewFields', () => {
+    it('reset reviewFields', () => {
+      const initialState = {
+        reviewFields: {
+          score: '5',
+          description: 'Good!',
+        },
+      };
+      const state = reducer(initialState, clearReviewFields());
+
+      expect(state.reviewFields).toEqual({
+        score: '',
+        description: '',
+      });
+    });
+  });
+
+  describe('setError', () => {
+    it('changes errors', () => {
+      const initialState = {
+        errors: {
+          login: null,
+        },
+      };
+
+      const state = reducer(initialState, setError({ name: 'login', error: 'login error' }));
+
+      expect(state.errors.login).toBe('login error');
     });
   });
 });

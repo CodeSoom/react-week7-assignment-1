@@ -1,7 +1,14 @@
 import MenuItems from './MenuItems';
 
-export default function RestaurantDetail({ restaurant }) {
-  const { name, address, menuItems } = restaurant;
+import ReviewForm from './components/restaurant/ReviewForm';
+import Reviews from './components/restaurant/Reviews';
+
+export default function RestaurantDetail({
+  restaurant, onChangeReviewForm, reviewFields, onSubmitReviewForm,
+}) {
+  const {
+    name, address, menuItems, reviews,
+  } = restaurant;
 
   return (
     <div>
@@ -13,6 +20,14 @@ export default function RestaurantDetail({ restaurant }) {
       </p>
       <h3>메뉴</h3>
       <MenuItems menuItems={menuItems} />
+
+      <ReviewForm
+        reviewFields={reviewFields}
+        onChange={onChangeReviewForm}
+        onSubmit={onSubmitReviewForm}
+      />
+
+      <Reviews reviews={reviews} />
     </div>
   );
 }

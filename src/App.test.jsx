@@ -6,9 +6,14 @@ import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { loadItem } from './storage';
+
+import { setAccessToken } from './actions';
+
 import App from './App';
 
 jest.mock('react-redux');
+jest.mock('./storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -25,6 +30,17 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+      errors: {
+        login: null,
+      },
     }));
   });
 
@@ -73,6 +89,40 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
+    });
+  });
+
+  context('with accessToken in localStorage', () => {
+    beforeEach(() => {
+      loadItem.mockClear();
+      loadItem.mockReturnValue('ACCESS_TOKEN');
+    });
+
+    it('dispatches setAccessToken', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).toBeCalledWith(setAccessToken('ACCESS_TOKEN'));
+    });
+  });
+
+  context('without accessToken in localStorage', () => {
+    beforeEach(() => {
+      loadItem.mockClear();
+      loadItem.mockReturnValue(null);
+    });
+
+    it('not dispatches setAccessToken', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
     });
   });
 });

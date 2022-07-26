@@ -3,7 +3,18 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
+  postReview,
 } from './services/api';
+
+import { saveItem } from './storage';
+
+export function setError({ name, error }) {
+  return {
+    type: 'setError',
+    payload: { name, error },
+  };
+}
 
 export function setRegions(regions) {
   return {
@@ -83,5 +94,82 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function setLoginFields({ name, value }) {
+  return {
+    type: 'setLoginFields',
+    payload: { name, value },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export function clearLoginFields() {
+  return {
+    type: 'clearLoginFields',
+    payload: {},
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    try {
+      const { loginFields } = getState();
+
+      const accessToken = await postLogin(loginFields);
+
+      saveItem('accessToken', accessToken);
+
+      dispatch(setAccessToken(accessToken));
+      dispatch(clearLoginFields());
+    } catch (error) {
+      dispatch(setError({
+        name: 'login',
+        error: '로그인에 실패했습니다.',
+      }));
+    }
+  };
+}
+
+export function requestLogout() {
+  return (dispatch) => {
+    dispatch(setAccessToken(''));
+  };
+}
+
+export function setReviewFields({ name, value }) {
+  return {
+    type: 'setReviewFields',
+    payload: { name, value },
+  };
+}
+
+export function clearReviewFields() {
+  return {
+    type: 'clearReviewFields',
+    payload: {},
+  };
+}
+
+export function addReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { accessToken, reviewFields } = getState();
+
+    await postReview({
+      restaurantId,
+      accessToken,
+      ...reviewFields,
+    });
+
+    dispatch(clearReviewFields());
+
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }
