@@ -238,7 +238,7 @@ describe('reducer', () => {
   });
 
   describe('setError', () => {
-    it('update errors', () => {
+    it('changes errors', () => {
       const initialState = {
         errors: {
           login: null,
