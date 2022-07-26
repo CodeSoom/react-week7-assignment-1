@@ -43,7 +43,7 @@ describe('<LoginFormContainer />', () => {
 
   const renderLoginFormContainer = () => render((<LoginFormContainer />));
 
-  context('not logged in', () => {
+  context('without login', () => {
     given('accessToken', () => '');
 
     it('renders input controls', () => {
@@ -127,7 +127,7 @@ describe('<LoginFormContainer />', () => {
     });
   });
 
-  context('is logged in', () => {
+  context('with login', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
 
     it('renders "Log out" button', () => {
