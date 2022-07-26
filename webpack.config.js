@@ -13,10 +13,26 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      '@': path.resolve(__dirname, 'src/'),
+      '@fixtures': path.resolve(__dirname, 'fixtures/'),
+    },
   },
   devServer: {
     historyApiFallback: {
       index: 'index.html',
+    },
+    proxy: {
+      '/customer-api': {
+        target: 'https://eatgo-customer-api.ahastudio.com',
+        changeOrigin: true,
+        pathRewrite: { '^/customer-api': '' },
+      },
+      '/login-api': {
+        target: 'https://eatgo-login-api.ahastudio.com',
+        changeOrigin: true,
+        pathRewrite: { '^/login-api': '' },
+      },
     },
   },
 };

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@fixtures": ["./fixtures"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
