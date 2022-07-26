@@ -72,26 +72,32 @@ describe('api', () => {
   });
 
   describe('postLogin', () => {
-    beforeEach(() => {
-      mockFetch({
-        accessToken: 'ACCESS_TOKEN',
+    context('when success', () => {
+      beforeEach(() => {
+        mockFetch({
+          accessToken: 'ACCESS_TOKEN',
+        });
+      });
+
+      it('returns accessToken', async () => {
+        const accessToken = await postLogin({ email: '', password: '' });
+
+        expect(accessToken).toEqual('ACCESS_TOKEN');
       });
     });
 
-    it('returns accessToken', async () => {
-      const accessToken = await postLogin({ email: '', password: '' });
-
-      expect(accessToken).toEqual('ACCESS_TOKEN');
-    });
-
-    it('should fail', async () => {
-      global.fetch = jest.fn().mockResolvedValueOnce({
-        ok: false,
+    context('when failed', () => {
+      beforeEach(() => {
+        global.fetch = jest.fn().mockResolvedValueOnce({
+          ok: false,
+        });
       });
 
-      await expect(async () => {
-        await postLogin({ email: '', password: '' });
-      }).rejects.toThrow('로그인에 실패했습니다.');
+      it('throws error message', async () => {
+        await expect(async () => {
+          await postLogin({ email: '', password: '' });
+        }).rejects.toThrow('로그인에 실패했습니다.');
+      });
     });
   });
 
