@@ -112,4 +112,17 @@ describe('App', () => {
       expect(dispatch).toBeCalledWith(setAccessToken('ACCESS_TOKEN'));
     });
   });
+
+  context('without accessToken in localStorage', () => {
+    beforeEach(() => {
+      loadItem.mockClear();
+      loadItem.mockReturnValue(null);
+    });
+
+    it('not dispatches setAccessToken', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
 });
