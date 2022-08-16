@@ -1,14 +1,4 @@
-import { useDispatch } from 'react-redux';
-
-import { requestLogin } from './actions';
-
-export default function LoginForm() {
-  const dispatch = useDispatch();
-
-  function handleClick() {
-    dispatch(requestLogin());
-  }
-
+export default function LoginForm({ onSubmit }) {
   return (
     <>
       <div>
@@ -19,7 +9,7 @@ export default function LoginForm() {
         <label htmlFor="loginPassword">Password</label>
         <input type="password" id="loginPassword" placeholder="패스워드를 입력해주세요" />
       </div>
-      <button type="button" onClick={handleClick}>
+      <button type="button" onClick={onSubmit}>
         Login
       </button>
     </>

@@ -2,12 +2,11 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch } from 'react-redux';
 
-import LoginFrom from './LoginFrom';
+import LoginForm from './LoginForm';
 
-jest.mock('react-redux');
-
-describe('LoginFrom', () => {
+describe('LoginForm', () => {
   const dispatch = jest.fn();
+  const handleSubmit = jest.fn();
 
   beforeEach(() => {
     useDispatch.mockImplementation(() => dispatch);
@@ -15,22 +14,13 @@ describe('LoginFrom', () => {
     dispatch.mockClear();
   });
 
-  const redersLoginFrom = () => render(<LoginFrom />);
+  const redersLoginForm = () => render(<LoginForm onSubmit={handleSubmit} />);
 
-  // 아이디, 패스워드 인풋이 보여야한다.
-  it('renders input controls', () => {
-    const { getByLabelText } = redersLoginFrom();
-
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
-  });
-
-  // 로그인 버튼 클릭 시 dispatch가 불려야 한다.
   it('renders login button', () => {
-    const { queryByText } = redersLoginFrom();
+    const { queryByText } = redersLoginForm();
 
     fireEvent.click(queryByText('Login'));
 
-    expect(dispatch).toBeCalled();
+    expect(handleSubmit).toBeCalled();
   });
 });
