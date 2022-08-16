@@ -1,10 +1,12 @@
 import { useDispatch } from 'react-redux';
 
-export default function LoginFromContainer() {
+import { requestLogin } from './actions';
+
+export default function LoginForm() {
   const dispatch = useDispatch();
 
   function handleClick() {
-    dispatch();
+    dispatch(requestLogin());
   }
 
   return (
