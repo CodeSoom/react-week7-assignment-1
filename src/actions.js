@@ -1,9 +1,4 @@
-import {
-  fetchRegions,
-  fetchCategories,
-  fetchRestaurants,
-  fetchRestaurant,
-} from './services/api';
+import { fetchRegions, fetchCategories, fetchRestaurants, fetchRestaurant } from './services/api';
 
 export function setRegions(regions) {
   return {
@@ -59,10 +54,7 @@ export function loadInitialData() {
 
 export function loadRestaurants() {
   return async (dispatch, getState) => {
-    const {
-      selectedRegion: region,
-      selectedCategory: category,
-    } = getState();
+    const { selectedRegion: region, selectedCategory: category } = getState();
 
     if (!region || !category) {
       return;
@@ -83,5 +75,11 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    // HTTP Request
   };
 }
