@@ -156,7 +156,7 @@ describe('reducer', () => {
 
       const state = reducer(initialState, clearAccessToken());
 
-      expect(state.accessToken).toBeNull;
+      expect(state.accessToken).toBeNull();
     });
   });
 
