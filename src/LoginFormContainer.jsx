@@ -4,6 +4,7 @@ import {
   changeLoginField,
   requestLogin,
 } from './actions';
+import LoginForm from './LoginForm';
 
 import { get } from './utils';
 
@@ -23,30 +24,12 @@ export default function LoginFormContainer() {
   }
 
   return (
-    <>
-      <div>
-        <label htmlFor="login-email">E-mail</label>
-        <input
-          type="email"
-          id="login-email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="login-password">Password</label>
-        <input
-          type="password"
-          id="login-password"
-          name="password"
-          value={password}
-          onChange={handleChange}
-        />
-      </div>
-      <button type="button" onClick={handleSubmit}>Log In</button>
-      <p>{accessToken}</p>
-    </>
-
+    <LoginForm
+      email={email}
+      password={password}
+      onChange={handleChange}
+      onClick={handleSubmit}
+      accessToken={accessToken}
+    />
   );
 }
