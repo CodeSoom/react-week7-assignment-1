@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, getByLabelText, render } from '@testing-library/react';
 
 import { useDispatch } from 'react-redux';
 
@@ -47,6 +47,13 @@ describe('LoginForm', () => {
 
     expect(queryByLabelText('E-mail')).not.toBeNull();
     expect(queryByLabelText('Password')).not.toBeNull();
+
+    fireEvent.change(queryByLabelText('E-mail'), { target: { value: 'new@email.com' } });
+
+    expect(dispatch).toBeCalledWith({
+      type: 'changeLoginField',
+      payload: { name: 'email', value: 'new@email.com' },
+    });
   });
 
   // 로그인 버튼 클릭 시 handleSubmit 함수가 실행되어야 한다.
