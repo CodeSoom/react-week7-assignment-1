@@ -68,6 +68,7 @@ describe('LoginFormContainer', () => {
       });
     });
 
+    // postLogin -> requestLogin으로 액션 이름 변경
     it('listens "Log In" button click for "requestLogin" action', () => {
       const { queryByRole } = render((
         <LoginFormContainer />
