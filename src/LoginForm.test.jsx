@@ -41,7 +41,8 @@ describe('LoginForm', () => {
     const { getByLabelText } = redersLoginForm();
 
     const control = [
-      { label: 'E-mail', name: 'email', value: 'tester@example.com' }
+      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
+      { label: 'Password', name: 'password', value: 'test' },
     ];
 
     control.forEach(({ label, name, value }) => {
