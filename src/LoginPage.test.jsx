@@ -19,7 +19,7 @@ describe('LoginPage', () => {
   });
 
   const renderLoginPage = () => render(
-    <MemoryRouter>
+    <MemoryRouter initialEntries={['/login']}>
       <LoginPage />
     </MemoryRouter>,
   );
