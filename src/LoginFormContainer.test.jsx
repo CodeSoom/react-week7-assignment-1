@@ -33,8 +33,8 @@ describe('LoginFormContainer', () => {
     expect(dispatch).toBeCalled();
   });
 
-  // 로그인 버튼 클릭 시 dispatch가 불려야 한다.
-  it('renders login button', () => {
+  // 인풋의 값이 리덕스의 상태와 동일해야 한다.
+  it('renders input value', () => {
     const { queryByLabelText } = rendersLoginFormContainer();
 
     // queryByLabelText("E-mail") : "E-mail"이라는 레이블을 가진 input을 찾는다
