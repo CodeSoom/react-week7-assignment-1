@@ -8,7 +8,9 @@ import {
   selectRegion,
   selectCategory,
   changeLoginField,
+  setAccessToken,
 } from './actions';
+import { container } from 'codeceptjs';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -23,6 +25,7 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
+      accessToken: '',
     };
 
     it('returns initialState', () => {
@@ -122,17 +125,46 @@ describe('reducer', () => {
   });
 
   describe('changeLoginField', () => {
-    it('changes login field text', () => {
-      const initialState = {
-        userfields: {
-          email: '',
-          password: '',
-        },
-      };
+    context('when email is change', () => {
+      it('changes login field text', () => {
+        const initialState = {
+          userfields: {
+            email: 'email',
+            password: 'password',
+          },
+        };
 
-      const state = reducer(initialState, changeLoginField({ name: 'email', value: 'test' }));
+        const state = reducer(initialState, changeLoginField({ name: 'email', value: 'test' }));
 
-      expect(state.userfields.email).toBe('test');
+        expect(state.userfields.email).toBe('test');
+        expect(state.userfields.password).toBe('password');
+      });
     });
+
+    context('when password is change', () => {
+      it('changes login field text', () => {
+        const initialState = {
+          userfields: {
+            email: 'email',
+            password: 'password',
+          },
+        };
+
+        const state = reducer(initialState, changeLoginField({ name: 'password', value: 'test' }));
+
+        expect(state.userfields.email).toBe('email');
+        expect(state.userfields.password).toBe('test');
+      });
+    });
+  });
+
+  describe('setAccessToken', () => {
+    const initialState = {
+      accessToken: '',
+    };
+
+    const state = reducer(initialState, setAccessToken('TOKEN'));
+
+    expect(state.accessToken).toBe('TOKEN');
   });
 });
