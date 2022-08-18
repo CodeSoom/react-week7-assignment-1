@@ -67,5 +67,15 @@ describe('LoginFormContainer', () => {
         });
       });
     });
+
+    it('listens "Log In" button click for "submitLogin" action', () => {
+      const { queryByRole } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.click(queryByRole('button'));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 });
