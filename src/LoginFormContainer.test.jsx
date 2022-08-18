@@ -68,7 +68,7 @@ describe('LoginFormContainer', () => {
       });
     });
 
-    it('listens "Log In" button click for "submitLogin" action', () => {
+    it('listens "Log In" button click for "requestLogin" action', () => {
       const { queryByRole } = render((
         <LoginFormContainer />
       ));

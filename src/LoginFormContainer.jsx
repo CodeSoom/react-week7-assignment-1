@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   changeLoginField,
+  requestLogin,
 } from './actions';
 
 import { get } from './utils';
@@ -14,6 +15,10 @@ export default function LoginFormContainer() {
   function handleChange(event) {
     const { target: { name, value } } = event;
     dispatch(changeLoginField({ name, value }));
+  }
+
+  function handleSubmit() {
+    dispatch(requestLogin());
   }
 
   return (
@@ -38,7 +43,7 @@ export default function LoginFormContainer() {
           onChange={handleChange}
         />
       </div>
-      <button type="button">Log In</button>
+      <button type="button" onClick={handleSubmit}>Log In</button>
     </>
 
   );
