@@ -11,6 +11,7 @@ export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
   const { email, password } = useSelector(get('loginFields'));
+  const accessToken = useSelector(get('accessToken'));
 
   function handleChange(event) {
     const { target: { name, value } } = event;
@@ -44,6 +45,7 @@ export default function LoginFormContainer() {
         />
       </div>
       <button type="button" onClick={handleSubmit}>Log In</button>
+      <p>{accessToken}</p>
     </>
 
   );
