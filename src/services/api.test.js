@@ -79,7 +79,7 @@ describe('api', () => {
     it('returns accessToken', async () => {
       const accessToken = await postLogin({ email: 'tester@example.com', password: 'test' });
 
-      expect(accessToken).toEqual(ACCESS_TOKEN);
+      expect(accessToken).toEqual('ACCESS_TOKEN');
     });
   });
 });
