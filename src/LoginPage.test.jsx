@@ -1,10 +1,23 @@
 import { MemoryRouter } from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
+
 import { render } from '@testing-library/react';
 
 import LoginPage from './LoginPage';
 
+jest.mock('react-redux');
+
 describe('LoginPage', () => {
+  beforeEach(() => {
+    useSelector.mockImplementation((selector) => selector({
+      userfields: {
+        email: 'test@email.com',
+        password: 'test',
+      },
+    }));
+  });
+
   const renderLoginPage = () => render(
     <MemoryRouter>
       <LoginPage />
