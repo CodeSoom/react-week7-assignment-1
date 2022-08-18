@@ -1,9 +1,20 @@
-export default function LoginForm({ onSubmit }) {
+export default function LoginForm({ onSubmit, onChange }) {
+  const handleChange = (e) => {
+    const { target: { name, value } } = e;
+    return onChange({ name, value });
+  };
+
   return (
     <>
       <div>
         <label htmlFor="loginEmail">E-mail</label>
-        <input type="email" id="loginEmail" placeholder="이메일을 입력해주세요" />
+        <input
+          type="email"
+          id="loginEmail"
+          placeholder="이메일을 입력해주세요"
+          name="email"
+          onChange={handleChange}
+        />
       </div>
       <div>
         <label htmlFor="loginPassword">Password</label>
