@@ -35,10 +35,10 @@ describe('LoginFormContainer', () => {
 
   // 로그인 버튼 클릭 시 dispatch가 불려야 한다.
   it('renders login button', () => {
-    const { getByLabelText } = rendersLoginFormContainer();
+    const { queryByLabelText } = rendersLoginFormContainer();
 
-    // getByLabelText("E-mail") : "E-mail"이라는 레이블을 가진 input을 찾는다
-    expect(getByLabelText('E-mail').value).toBe('test@email.com');
-    expect(getByLabelText('Password').value).toBe('test');
+    // queryByLabelText("E-mail") : "E-mail"이라는 레이블을 가진 input을 찾는다
+    expect(queryByLabelText('E-mail').value).toBe('test@email.com');
+    expect(queryByLabelText('Password').value).toBe('test');
   });
 });

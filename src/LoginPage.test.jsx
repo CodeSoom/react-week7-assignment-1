@@ -32,8 +32,8 @@ describe('LoginPage', () => {
 
   // LoginFormContainer.test에도 동일하게 작성되어 있는 코드이다. 이중으로 테스트 장치를 만든것.
   it('renders input control', () => {
-    const { getByLabelText } = renderLoginPage();
+    const { queryByLabelText } = renderLoginPage();
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
+    expect(queryByLabelText('E-mail')).not.toBeNull();
   });
 });
