@@ -6,6 +6,7 @@ import {
   setRestaurants,
   setRestaurant,
   setAccessToken,
+  clearAccessToken,
   selectRegion,
   selectCategory,
   changeLoginField,
@@ -144,6 +145,18 @@ describe('reducer', () => {
       const state = reducer(initialState, setAccessToken(accessToken));
 
       expect(state.accessToken).toBe('ACCESS_TOKEN');
+    });
+  });
+
+  describe('clearAccessToken', () => {
+    it('clears accessToken', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+      };
+
+      const state = reducer(initialState, clearAccessToken());
+
+      expect(state.accessToken).toBeNull;
     });
   });
 

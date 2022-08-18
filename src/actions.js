@@ -118,6 +118,7 @@ export function requestLogin() {
       const accessToken = await postLogin({ email, password });
 
       dispatch(setAccessToken(accessToken));
+      localStorage.setItem('accessToken', accessToken);
     } catch (error) {
       // TODO: error handling
     }

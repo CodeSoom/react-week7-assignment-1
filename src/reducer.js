@@ -76,6 +76,13 @@ const reducers = {
       },
     };
   },
+
+  clearAccessToken(state) {
+    return {
+      ...state,
+      accessToken: null,
+    };
+  },
 };
 
 function defaultReducer(state) {
