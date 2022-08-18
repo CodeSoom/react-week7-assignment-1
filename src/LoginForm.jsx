@@ -1,12 +1,12 @@
 export default function LoginForm({ onSubmit, onChange, userfields }) {
+  const { email, password } = userfields;
+
   const handleChange = (e) => {
     const {
       target: { name, value },
     } = e;
     return onChange({ name, value });
   };
-
-  const {email, password} = userfields;
 
   return (
     <>

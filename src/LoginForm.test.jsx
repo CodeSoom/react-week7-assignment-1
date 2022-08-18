@@ -15,8 +15,15 @@ describe('LoginForm', () => {
     dispatch.mockClear();
   });
 
+  const email = 'test@email.com';
+  const password = 'test';
+
   const redersLoginForm = () => render(
-    <LoginForm onSubmit={handleSubmit} onChange={handleChange} />,
+    <LoginForm
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+      usefields={{ email, password }}
+    />,
   );
 
   // 아이디, 패스워드 인풋이 보여야한다.
@@ -41,8 +48,18 @@ describe('LoginForm', () => {
     const { getByLabelText } = redersLoginForm();
 
     const control = [
-      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
-      { label: 'Password', name: 'password', value: 'test' },
+      {
+        label: 'E-mail',
+        name: 'email',
+        previous: email,
+        value: 'tester@example.com',
+      },
+      {
+        label: 'Password',
+        name: 'password',
+        previous: password,
+        value: 'test',
+      },
     ];
 
     control.forEach(({ label, name, value }) => {
@@ -53,6 +70,34 @@ describe('LoginForm', () => {
       fireEvent.change(input, { target: { name, value } });
 
       expect(handleChange).toBeCalledWith({ name, value });
+    });
+  });
+
+  // 인풋의 이전 값과 나중 값을 비교한다.
+  it('compare the previous value with the later value', () => {
+    const { getByLabelText } = redersLoginForm();
+
+    const control = [
+      {
+        label: 'E-mail',
+        name: 'email',
+        previous: email,
+        value: 'tester@example.com',
+      },
+      {
+        label: 'Password',
+        name: 'password',
+        previous: password,
+        value: 'test',
+      },
+    ];
+
+    control.forEach(({
+      label, previous,
+    }) => {
+      const input = getByLabelText(label);
+
+      expect(input.value).toBe(previous);
     });
   });
 });
