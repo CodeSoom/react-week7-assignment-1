@@ -18,17 +18,17 @@ describe('LoginForm', () => {
   const email = 'test@email.com';
   const password = 'test';
 
-  const redersLoginForm = () => render(
+  const rendersLoginForm = () => render(
     <LoginForm
       onSubmit={handleSubmit}
       onChange={handleChange}
-      usefields={{ email, password }}
+      userfields={{ email, password }}
     />,
   );
 
   // 아이디, 패스워드 인풋이 보여야한다.
   it('renders input controls', () => {
-    const { getByLabelText } = redersLoginForm();
+    const { getByLabelText } = rendersLoginForm();
 
     expect(getByLabelText('E-mail')).not.toBeNull();
     expect(getByLabelText('Password')).not.toBeNull();
@@ -36,7 +36,7 @@ describe('LoginForm', () => {
 
   // 로그인 버튼 클릭 시 handleSubmit 함수가 실행되어야 한다.
   it('renders login button', () => {
-    const { queryByText } = redersLoginForm();
+    const { queryByText } = rendersLoginForm();
 
     fireEvent.click(queryByText('Login'));
 
@@ -45,7 +45,7 @@ describe('LoginForm', () => {
 
   // 인풋에 텍스트 입력시 handlechange 이벤트가 실행되어야 한다.
   it('called handleChange', () => {
-    const { getByLabelText } = redersLoginForm();
+    const { getByLabelText } = rendersLoginForm();
 
     const control = [
       {
@@ -75,7 +75,7 @@ describe('LoginForm', () => {
 
   // 인풋의 이전 값과 나중 값을 비교한다.
   it('compare the previous value with the later value', () => {
-    const { getByLabelText } = redersLoginForm();
+    const { getByLabelText } = rendersLoginForm();
 
     const control = [
       {
