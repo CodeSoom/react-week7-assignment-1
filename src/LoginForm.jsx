@@ -1,8 +1,12 @@
-export default function LoginForm({ onSubmit, onChange }) {
+export default function LoginForm({ onSubmit, onChange, userfields }) {
   const handleChange = (e) => {
-    const { target: { name, value } } = e;
+    const {
+      target: { name, value },
+    } = e;
     return onChange({ name, value });
   };
+
+  const {email, password} = userfields;
 
   return (
     <>
@@ -14,11 +18,19 @@ export default function LoginForm({ onSubmit, onChange }) {
           placeholder="이메일을 입력해주세요"
           name="email"
           onChange={handleChange}
+          value={email}
         />
       </div>
       <div>
         <label htmlFor="loginPassword">Password</label>
-        <input type="password" id="loginPassword" placeholder="패스워드를 입력해주세요" />
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="패스워드를 입력해주세요"
+          name="password"
+          onChange={handleChange}
+          value={password}
+        />
       </div>
       <button type="button" onClick={onSubmit}>
         Login
