@@ -2,24 +2,21 @@ import { render, fireEvent } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
-const LOGIN_FIELDS = {
-  email: '',
-  password: '',
-};
-
 describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleClick = jest.fn();
 
   function renderLoginForm({
-    loginFields = LOGIN_FIELDS,
+    email = '',
+    password = '',
     onChange = handleChange,
     onClick = handleClick,
     accessToken = '',
   }) {
     return render((
       <LoginForm
-        loginFields={loginFields}
+        email={email}
+        password={password}
         onChange={onChange}
         onClick={onClick}
         accessToken={accessToken}
@@ -33,20 +30,20 @@ describe('LoginForm', () => {
     });
 
     it('renders login fields', () => {
-      const { queryByLabelText } = renderLoginForm();
+      const { queryByLabelText } = renderLoginForm({});
 
       expect(queryByLabelText('E-mail')).not.toBeNull();
       expect(queryByLabelText('Password')).not.toBeNull();
     });
 
     it('renders login button', () => {
-      const { container } = renderLoginForm();
+      const { container } = renderLoginForm({});
 
       expect(container).toContainHTML('type="button"');
     });
 
-    it('listens input change for "changeLoginField" action', () => {
-      const { queryByLabelText } = renderLoginForm();
+    it('listens input change', () => {
+      const { queryByLabelText } = renderLoginForm({});
       const controls = [
         {
           label: 'E-mail',
@@ -65,10 +62,8 @@ describe('LoginForm', () => {
       });
     });
 
-    it('listens "Log In" button click for "requestLogin" action', () => {
-      const { queryByRole } = render((
-        <LoginForm />
-      ));
+    it('listens "Log In" button click', () => {
+      const { queryByRole } = renderLoginForm({});
 
       fireEvent.click(queryByRole('button'));
 

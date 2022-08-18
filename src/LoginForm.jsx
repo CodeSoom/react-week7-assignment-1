@@ -1,27 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux';
-
-import {
-  changeLoginField,
-  requestLogin,
-} from './actions';
-
-import { get } from './utils';
-
-export default function LoginFormContainer() {
-  const dispatch = useDispatch();
-
-  const { email, password } = useSelector(get('loginFields'));
-  const accessToken = useSelector(get('accessToken'));
-
-  function handleChange(event) {
-    const { target: { name, value } } = event;
-    dispatch(changeLoginField({ name, value }));
-  }
-
-  function handleSubmit() {
-    dispatch(requestLogin());
-  }
-
+export default function LoginForm({
+  email,
+  password,
+  accessToken,
+  onChange,
+  onClick,
+}) {
   return (
     <>
       <div>
@@ -31,7 +14,7 @@ export default function LoginFormContainer() {
           id="login-email"
           name="email"
           value={email}
-          onChange={handleChange}
+          onChange={onChange}
         />
       </div>
       <div>
@@ -41,12 +24,11 @@ export default function LoginFormContainer() {
           id="login-password"
           name="password"
           value={password}
-          onChange={handleChange}
+          onChange={onChange}
         />
       </div>
-      <button type="button" onClick={handleSubmit}>Log In</button>
+      <button type="button" onClick={onClick}>Log In</button>
       <p>{accessToken}</p>
     </>
-
   );
 }
