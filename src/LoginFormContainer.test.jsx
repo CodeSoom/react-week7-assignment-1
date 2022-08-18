@@ -37,29 +37,32 @@ describe('LoginFormContainer', () => {
       expect(container).toContainHTML('type="button"');
     });
 
-    it('listens input change for "changeLoginFields" action', () => {
+    it('listens input change for "changeLoginField" action', () => {
       const { queryByLabelText } = render((
         <LoginFormContainer />
       ));
 
       const controls = [
         {
+          label: 'E-mail',
           name: 'email',
           value: 'tester@example.com',
         },
         {
+          label: 'Password',
           name: 'password',
           value: 'test',
         },
       ];
 
-      controls.forEach(({ name, value }) => {
-        fireEvent.change(queryByLabelText(name), { target: { value } });
+      controls.forEach(({ label, name, value }) => {
+        fireEvent.change(queryByLabelText(label), { target: { value } });
 
         expect(dispatch).toBeCalledWith({
-          type: 'changeLoginFields',
+          type: 'changeLoginField',
           payload: {
-            [name]: value,
+            name,
+            value,
           },
         });
       });

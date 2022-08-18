@@ -1,22 +1,20 @@
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-// import {
-//   selectCategory,
-//   loadRestaurants,
-// } from './actions';
+import {
+  changeLoginField,
+} from './actions';
 
-// import { get } from './utils';
+import { get } from './utils';
 
 export default function LoginFormContainer() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const categories = useSelector(get('categories'));
-  // const selectedCategory = useSelector(get('selectedCategory'));
+  const { email, password } = useSelector(get('loginFields'));
 
-  // function handleClick(categoryId) {
-  //   dispatch(selectCategory(categoryId));
-  //   dispatch(loadRestaurants());
-  // }
+  function handleChange(event) {
+    const { target: { name, value } } = event;
+    dispatch(changeLoginField({ name, value }));
+  }
 
   return (
     <>
@@ -26,6 +24,8 @@ export default function LoginFormContainer() {
           type="email"
           id="login-email"
           name="email"
+          value={email}
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -34,6 +34,8 @@ export default function LoginFormContainer() {
           type="password"
           id="login-password"
           name="password"
+          value={password}
+          onChange={handleChange}
         />
       </div>
       <button type="button">Log In</button>
