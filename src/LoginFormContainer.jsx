@@ -28,6 +28,15 @@ export default function LoginFormContainer() {
           name="email"
         />
       </div>
+      <div>
+        <label htmlFor="login-password">Password</label>
+        <input
+          type="password"
+          id="login-password"
+          name="password"
+        />
+      </div>
+      <button type="button">Log In</button>
     </>
 
   );

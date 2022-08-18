@@ -5,31 +5,64 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoginFormContainer from './LoginFormContainer';
 
 describe('LoginFormContainer', () => {
-  // const dispatch = jest.fn();
+  context('when logged out', () => {
+    const dispatch = jest.fn();
+    useDispatch.mockImplementation(() => dispatch);
 
-  // beforeEach(() => {
-  //   dispatch.mockClear();
-  //   useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: '',
+        password: '',
+      },
+    }));
 
-  //   useSelector.mockImplementation((selector) => selector({
-  //     categories: [
-  //       { id: 1, name: '한식' },
-  //       { id: 2, name: '양식' },
-  //     ],
-  //     selectedCategory: { id: 1, name: '한식' },
-  //   }));
-  // });
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
 
-  it('renders login form', () => {
-    const { queryByLabelText } = render((
-      <LoginFormContainer />
-    ));
+    it('renders login fields', () => {
+      const { queryByLabelText } = render((
+        <LoginFormContainer />
+      ));
 
-    expect(queryByLabelText('E-mail')).not.toBeNull();
-    expect(queryByLabelText('Password')).not.toBeNull();
+      expect(queryByLabelText('E-mail')).not.toBeNull();
+      expect(queryByLabelText('Password')).not.toBeNull();
+    });
 
-    // fireEvent.click(getByText('양식'));
+    it('renders login button', () => {
+      const { container } = render((
+        <LoginFormContainer />
+      ));
 
-    // expect(dispatch).toBeCalled();
+      expect(container).toContainHTML('type="button"');
+    });
+
+    it('listens input change for "changeLoginFields" action', () => {
+      const { queryByLabelText } = render((
+        <LoginFormContainer />
+      ));
+
+      const controls = [
+        {
+          name: 'email',
+          value: 'tester@example.com',
+        },
+        {
+          name: 'password',
+          value: 'test',
+        },
+      ];
+
+      controls.forEach(({ name, value }) => {
+        fireEvent.change(queryByLabelText(name), { target: { value } });
+
+        expect(dispatch).toBeCalledWith({
+          type: 'changeLoginFields',
+          payload: {
+            [name]: value,
+          },
+        });
+      });
+    });
   });
 });
