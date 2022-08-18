@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   changeLoginField,
   requestLogin,
+  clearAccessToken,
 } from './actions';
+
 import LoginForm from './LoginForm';
+import LogoutForm from './LogoutForm';
 
 import { get } from './utils';
 
@@ -21,6 +24,16 @@ export default function LoginFormContainer() {
 
   function handleSubmit() {
     dispatch(requestLogin());
+  }
+
+  function handleClickLogout() {
+    dispatch(clearAccessToken());
+  }
+
+  if (accessToken) {
+    return (
+      <LogoutForm onClick={handleClickLogout} />
+    );
   }
 
   return (

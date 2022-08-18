@@ -65,6 +65,12 @@ export function changeLoginField({ name, value }) {
   };
 }
 
+export function clearAccessToken() {
+  return {
+    type: 'clearAccessToken',
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();

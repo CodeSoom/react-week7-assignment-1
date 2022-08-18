@@ -5,19 +5,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoginFormContainer from './LoginFormContainer';
 
 describe('LoginFormContainer', () => {
+  jest.mock('react-redux');
+
+  const dispatch = jest.fn();
+  useDispatch.mockImplementation(() => dispatch);
+
   context('when logged out', () => {
-    const dispatch = jest.fn();
-    useDispatch.mockImplementation(() => dispatch);
-
-    useSelector.mockImplementation((selector) => selector({
-      loginFields: {
-        email: '',
-        password: '',
-      },
-    }));
-
     beforeEach(() => {
       jest.clearAllMocks();
+
+      useSelector.mockImplementation((selector) => selector({
+        loginFields: {
+          email: '',
+          password: '',
+        },
+        accessToken: null,
+      }));
     });
 
     it('renders login fields', () => {
@@ -68,8 +71,31 @@ describe('LoginFormContainer', () => {
       });
     });
 
-    // postLogin -> requestLogin으로 액션 이름 변경
     it('listens "Log In" button click for "requestLogin" action', () => {
+      const { queryByRole } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.click(queryByRole('button'));
+
+      expect(dispatch).toBeCalled();
+    });
+  });
+
+  context('when logged in', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      useSelector.mockImplementation((selector) => selector({
+        loginFields: {
+          email: '',
+          password: '',
+        },
+        accessToken: 'ACCESS_TOKEN',
+      }));
+    });
+
+    it('listens "Log out" button click for "clearAccessToken" action', () => {
       const { queryByRole } = render((
         <LoginFormContainer />
       ));

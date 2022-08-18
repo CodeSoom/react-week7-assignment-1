@@ -26,7 +26,7 @@ describe('LoginForm', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-  })
+  });
 
   context('when logged out', () => {
     it('renders login fields', () => {
@@ -68,21 +68,6 @@ describe('LoginForm', () => {
       fireEvent.click(queryByRole('button'));
 
       expect(handleClick).toBeCalled();
-    });
-  });
-
-  context('when logged in', () => {
-    it('renders login fields', () => {
-      const { queryByLabelText } = renderLoginForm({ accessToken: 'ACCESS_TOKEN' });
-
-      expect(queryByLabelText('E-mail')).toBeNull();
-      expect(queryByLabelText('Password')).toBeNull();
-    });
-
-    it('shows "log out" button', () => {
-      const { queryByText } = renderLoginForm({ accessToken: 'ACCESS_TOKEN' });
-
-      expect(queryByText('Log out')).not.toBeNull();
     });
   });
 });
