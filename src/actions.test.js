@@ -104,21 +104,23 @@ describe('actions', () => {
   });
 
   describe('requestLogin', () => {
-    beforeEach(() => {
-      store = mockStore({
-        loginFields: {
-          email: 'tester@example.com',
-          password: 'test',
-        },
+    context('with email and password', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: 'tester@example.com',
+            password: 'test',
+          },
+        });
       });
-    });
 
-    it('dispatches setAccessToken', async () => {
-      await store.dispatch(requestLogin());
+      it('dispatches setAccessToken', async () => {
+        await store.dispatch(requestLogin());
 
-      const actions = store.getActions();
+        const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken(null));
+        expect(actions[0]).toEqual(setAccessToken(null));
+      });
     });
   });
 });
