@@ -9,14 +9,29 @@ describe('LoginForm', () => {
   const handleSubmit = jest.fn();
   const handleChange = jest.fn();
 
+  const email = 'test@email.com';
+  const password = 'test';
+
+  const control = [
+    {
+      label: 'E-mail',
+      name: 'email',
+      previous: email,
+      value: 'tester@example.com',
+    },
+    {
+      label: 'Password',
+      name: 'password',
+      previous: password,
+      value: 'test',
+    },
+  ];
+
   beforeEach(() => {
     useDispatch.mockImplementation(() => dispatch);
 
     dispatch.mockClear();
   });
-
-  const email = 'test@email.com';
-  const password = 'test';
 
   const rendersLoginForm = () => render(
     <LoginForm
@@ -47,21 +62,6 @@ describe('LoginForm', () => {
   it('called handleChange', () => {
     const { getByLabelText } = rendersLoginForm();
 
-    const control = [
-      {
-        label: 'E-mail',
-        name: 'email',
-        previous: email,
-        value: 'tester@example.com',
-      },
-      {
-        label: 'Password',
-        name: 'password',
-        previous: password,
-        value: 'test',
-      },
-    ];
-
     control.forEach(({ label, name, value }) => {
       const input = getByLabelText(label);
 
@@ -76,21 +76,6 @@ describe('LoginForm', () => {
   // 인풋의 이전 값과 나중 값을 비교한다.
   it('compare the previous value with the later value', () => {
     const { getByLabelText } = rendersLoginForm();
-
-    const control = [
-      {
-        label: 'E-mail',
-        name: 'email',
-        previous: email,
-        value: 'tester@example.com',
-      },
-      {
-        label: 'Password',
-        name: 'password',
-        previous: password,
-        value: 'test',
-      },
-    ];
 
     control.forEach(({
       label, previous,
