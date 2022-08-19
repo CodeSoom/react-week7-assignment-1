@@ -27,7 +27,6 @@ export default function LoginFormContainer() {
   }
 
   function handleClickLogout() {
-    localStorage.removeItem('accessToken');
     dispatch(clearAccessToken());
     localStorage.removeItem('accessToken');
   }
