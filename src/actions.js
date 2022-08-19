@@ -35,13 +35,6 @@ export function setRestaurant(restaurant) {
   };
 }
 
-export function setReviews(reviews) {
-  return {
-    type: 'setReviews',
-    payload: { reviews },
-  };
-}
-
 export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',
