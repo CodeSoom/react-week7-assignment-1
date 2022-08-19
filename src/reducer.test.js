@@ -196,7 +196,7 @@ describe('reducer', () => {
         reviewFields: {
           score: '5',
           description: '맛없음',
-        }
+        },
       };
 
       const state = reducer(initialState, clearReviewFields());
