@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 
 import RestaurantContainer from './RestaurantContainer';
 import ReviewFormContainer from './ReviewFormContainer';
+import ReviewsContainer from './ReviewsContainer';
 
 export default function RestaurantPage({ params }) {
   const { id } = params || useParams();
@@ -10,6 +11,7 @@ export default function RestaurantPage({ params }) {
     <>
       <RestaurantContainer restaurantId={id} />
       <ReviewFormContainer restaurantId={id} />
+      <ReviewsContainer />
     </>
   );
 }
