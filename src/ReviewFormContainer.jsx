@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   changeReviewField,
   sendReview,
+  clearReviewFields,
 } from './actions';
 
 import { get } from './utils';
@@ -51,6 +52,7 @@ export default function ReviewFormContainer({ restaurantId }) {
 
   function handleSubmit() {
     dispatch(sendReview({ restaurantId }));
+    dispatch(clearReviewFields());
   }
 
   if (!accessToken) {

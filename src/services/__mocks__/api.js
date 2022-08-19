@@ -21,7 +21,3 @@ export async function postLogin() {
 export async function postReview() {
   return {};
 }
-
-export async function fetchReviews() {
-  return [];
-}

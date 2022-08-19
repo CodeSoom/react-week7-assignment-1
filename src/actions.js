@@ -35,6 +35,13 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function setReviews(reviews) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
+
 export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',
@@ -82,6 +89,12 @@ export function clearAccessToken() {
   };
 }
 
+export function clearReviewFields() {
+  return {
+    type: 'clearReviewFields',
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();
@@ -118,6 +131,7 @@ export function loadRestaurant({ restaurantId }) {
     const restaurant = await fetchRestaurant({ restaurantId });
 
     dispatch(setRestaurant(restaurant));
+    dispatch(setReviews(restaurant.reviews));
   };
 }
 
@@ -145,7 +159,8 @@ export function sendReview({ restaurantId }) {
         restaurantId, score, description, accessToken,
       });
 
-      dispatch(loadRestaurant({ restaurantId }));
+      const restaurant = await fetchRestaurant({ restaurantId });
+      dispatch(setReviews(restaurant.reviews || []));
     } catch (error) {
       // TODO: error handling
     }

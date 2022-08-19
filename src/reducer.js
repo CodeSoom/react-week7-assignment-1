@@ -16,6 +16,7 @@ const initialState = {
     score: '',
     description: '',
   },
+  reviews: [],
 };
 
 const reducers = {
@@ -44,6 +45,13 @@ const reducers = {
     return {
       ...state,
       restaurant,
+    };
+  },
+
+  setReviews(state, { payload: { reviews } }) {
+    return {
+      ...state,
+      reviews: [...reviews],
     };
   },
 
@@ -96,6 +104,16 @@ const reducers = {
     return {
       ...state,
       accessToken: null,
+    };
+  },
+
+  clearReviewFields(state) {
+    return {
+      ...state,
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
   },
 };
