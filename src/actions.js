@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
 
 export function setRegions(regions) {
@@ -34,6 +35,13 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function setReviews(reviews) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
+
 export function setAccessToken(accessToken) {
   return {
     type: 'setAccessToken',
@@ -58,6 +66,16 @@ export function selectCategory(categoryId) {
 export function changeLoginField({ name, value }) {
   return {
     type: 'changeLoginField',
+    payload: {
+      name,
+      value,
+    },
+  };
+}
+
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
     payload: {
       name,
       value,
@@ -119,6 +137,22 @@ export function requestLogin() {
 
       dispatch(setAccessToken(accessToken));
       localStorage.setItem('accessToken', accessToken);
+    } catch (error) {
+      // TODO: error handling
+    }
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const { reviewFields: { score, description }, accessToken } = getState();
+
+    try {
+      await postReview({
+        restaurantId, score, description, accessToken,
+      });
+
+      dispatch(loadRestaurant({ restaurantId }));
     } catch (error) {
       // TODO: error handling
     }

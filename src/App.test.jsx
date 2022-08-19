@@ -29,6 +29,10 @@ describe('App', () => {
         id: '',
         password: '',
       },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     }));
   });
 

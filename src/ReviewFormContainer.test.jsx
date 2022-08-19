@@ -25,7 +25,7 @@ describe('ReviewFormContainer', () => {
       useSelector.mockImplementation((selector) => selector({
         reviewFields: {
           score: '',
-          content: '',
+          description: '',
         },
         accessToken: 'ACCESS_TOKEN',
       }));
@@ -41,7 +41,7 @@ describe('ReviewFormContainer', () => {
     it('renders "리뷰 남기기" button', () => {
       const { container, queryByText } = renderReviewFormContainer();
 
-      expect(queryByText('리뷰 남긱기')).not.toBeNull();
+      expect(queryByText('리뷰 남기기')).not.toBeNull();
       expect(container).toContainHTML('type="button"');
     });
 
@@ -52,11 +52,11 @@ describe('ReviewFormContainer', () => {
         {
           label: '평점',
           name: 'score',
-          value: 5,
+          value: '5',
         },
         {
           label: '리뷰 내용',
-          name: 'content',
+          name: 'description',
           value: '맛있어~~요!',
         },
       ];
@@ -74,7 +74,7 @@ describe('ReviewFormContainer', () => {
       });
     });
 
-    it('listens "리뷰 남기기" button click for "postReview" action', () => {
+    it('listens "리뷰 남기기" button click for "sendReview" action', () => {
       const { queryByRole } = render((
         <ReviewFormContainer />
       ));
@@ -92,7 +92,7 @@ describe('ReviewFormContainer', () => {
       useSelector.mockImplementation((selector) => selector({
         reviewFields: {
           score: '',
-          content: '',
+          description: '',
         },
         accessToken: null,
       }));
@@ -108,7 +108,7 @@ describe('ReviewFormContainer', () => {
     it('does not renders "리뷰 남기기" button', () => {
       const { queryByText } = renderReviewFormContainer();
 
-      expect(queryByText('리뷰 남긱기')).toBeNull();
+      expect(queryByText('리뷰 남기기')).toBeNull();
     });
   });
 });

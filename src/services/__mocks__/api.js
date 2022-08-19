@@ -17,3 +17,11 @@ export async function fetchRestaurant() {
 export async function postLogin() {
   return null;
 }
+
+export async function postReview() {
+  return {};
+}
+
+export async function fetchReviews() {
+  return [];
+}

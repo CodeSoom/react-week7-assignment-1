@@ -10,6 +10,7 @@ import {
   selectRegion,
   selectCategory,
   changeLoginField,
+  changeReviewField,
 } from './actions';
 
 describe('reducer', () => {
@@ -25,6 +26,10 @@ describe('reducer', () => {
       loginFields: {
         email: '',
         password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
       },
     };
 
@@ -185,6 +190,37 @@ describe('reducer', () => {
 
         expect(state.loginFields).toEqual({
           ...state.loginFields,
+          [name]: value,
+        });
+      });
+    });
+  });
+
+  describe('changeReviewField', () => {
+    it('changes review field', () => {
+      const initialState = {
+        reviewFields: {
+          description: '',
+          content: '',
+        },
+      };
+
+      const controls = [
+        {
+          name: 'score',
+          value: '5',
+        },
+        {
+          name: 'description',
+          value: '맛있어~!~!',
+        },
+      ];
+
+      controls.forEach(({ name, value }) => {
+        const state = reducer(initialState, changeReviewField({ name, value }));
+
+        expect(state.reviewFields).toEqual({
+          ...state.reviewFields,
           [name]: value,
         });
       });
