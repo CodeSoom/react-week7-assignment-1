@@ -25,8 +25,8 @@ describe('LoginForm', () => {
   it('renders inputs and button', () => {
     const { getByLabelText, getByRole } = renderLoginForm({ email, password });
 
-    expect(getByLabelText('E-mail')).not.toBeNull();
-    expect(getByLabelText('Password')).not.toBeNull();
+    expect(getByLabelText('E-mail').value).toBe('tester@test.com');
+    expect(getByLabelText('Password').value).toBe('test');
     expect(getByRole('button', { name: /Log In/ })).not.toBeNull();
   });
 });

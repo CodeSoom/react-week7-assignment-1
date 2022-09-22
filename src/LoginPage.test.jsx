@@ -29,4 +29,11 @@ describe('LoginPage', () => {
 
     expect(container).toHaveTextContent('Log In');
   });
+
+  it('renders input controls', () => {
+    const { getByLabelText } = renderLoginPage();
+
+    expect(getByLabelText('E-mail').value).toBe('tester@example.com');
+    expect(getByLabelText('Password').value).toBe('1234');
+  });
 });
