@@ -3,12 +3,14 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
 import CATEGORIES from '../../fixtures/categories';
 import RESTAURANTS from '../../fixtures/restaurants';
 import RESTAURANT from '../../fixtures/restaurant';
+import ACCOUNT from '../../fixtures/account';
 
 describe('api', () => {
   const mockFetch = (data) => {
@@ -67,4 +69,17 @@ describe('api', () => {
       expect(restaurant).toEqual(RESTAURANT);
     });
   });
+
+  describe('postLogin', () => {
+    const fakeToken = 'fake';
+    beforeEach(() => {
+      mockFetch({ accessToken: fakeToken });
+    });
+
+    it('returns accessToken', async () => {
+      const accessToken = await postLogin({ ...ACCOUNT });
+
+      expect(accessToken).toBe('fake');
+    })
+  })
 });
