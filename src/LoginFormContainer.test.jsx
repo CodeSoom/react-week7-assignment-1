@@ -30,25 +30,31 @@ describe('LoginFormContainer', () => {
     expect(getByRole('button', { name: /Log In/ })).not.toBeNull();
   });
 
-  it('listens change events', () => {
-    const { getByLabelText } = render(<LoginFormContainer />);
+  context('when event occurs', () => {
+    it('changes email', () => {
+      const { getByLabelText } = render(<LoginFormContainer />);
 
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: 'new@test.com' },
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: 'new@test.com' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: { name: 'email', value: 'new@test.com' },
+      });
     });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: { name: 'email', value: 'new@test.com' },
-    });
+    it('changes password', () => {
+      const { getByLabelText } = render(<LoginFormContainer />);
 
-    fireEvent.change(getByLabelText('Password'), {
-      target: { value: '4321' },
-    });
+      fireEvent.change(getByLabelText('Password'), {
+        target: { value: '4321' },
+      });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: { name: 'password', value: '4321' },
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: { name: 'password', value: '4321' },
+      });
     });
   });
 });
