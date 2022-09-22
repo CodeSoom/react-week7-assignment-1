@@ -71,15 +71,14 @@ describe('api', () => {
   });
 
   describe('postLogin', () => {
-    const fakeToken = 'fake';
     beforeEach(() => {
-      mockFetch({ accessToken: fakeToken });
+      mockFetch({ accessToken: 'token' });
     });
 
     it('returns accessToken', async () => {
       const accessToken = await postLogin({ ...ACCOUNT });
 
-      expect(accessToken).toBe('fake');
-    })
-  })
+      expect(accessToken).toBe('token');
+    });
+  });
 });
