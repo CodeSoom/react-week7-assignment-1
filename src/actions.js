@@ -85,3 +85,19 @@ export function loadRestaurant({ restaurantId }) {
     dispatch(setRestaurant(restaurant));
   };
 }
+
+export function changeLoginField({ name, value }) {
+  return {
+    type: 'changeLoginField',
+    payload: { name, value },
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    // TODO:
+    // state = e-mail, password
+    // HTTP POST <- email, password
+    // dispatch(setAccessToken(accessToken));
+  };
+}
