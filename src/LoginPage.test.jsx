@@ -6,14 +6,16 @@ import { useSelector } from 'react-redux';
 
 import LoginPage from './LoginPage';
 
+import ACCOUNT from '../fixtures/account';
+
 jest.mock('react-redux');
 
 describe('LoginPage', () => {
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
-        email: 'tester@example.com',
-        password: '1234',
+        email: ACCOUNT.email,
+        password: ACCOUNT.password,
       },
     }));
   });
@@ -33,7 +35,7 @@ describe('LoginPage', () => {
   it('renders input controls', () => {
     const { getByLabelText } = renderLoginPage();
 
-    expect(getByLabelText('E-mail').value).toBe('tester@example.com');
+    expect(getByLabelText('E-mail').value).toBe('original@test.com');
     expect(getByLabelText('Password').value).toBe('1234');
   });
 });
