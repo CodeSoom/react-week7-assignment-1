@@ -93,11 +93,21 @@ export function changeLoginField({ name, value }) {
   };
 }
 
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
 export function requestLogin() {
   return async (dispatch, getState) => {
-    // TODO:
-    // state = e-mail, password
-    // HTTP POST <- email, password
-    // dispatch(setAccessToken(accessToken));
+    const { loginFields: { email, password } } = getState();
+    try {
+      const accessToken = await postLogin({ email, password });
+      dispatch(setAccessToken(accessToken));
+    } catch (e) {
+      // TODO: Handle error
+    }
   };
 }
