@@ -50,7 +50,7 @@ describe('LoginForm', () => {
     });
   });
 
-  it('renders \'Log In\' button', () => {
+  it('renders \'Log In\' button to listen to submit event', () => {
     const { getByText } = renderLoginForm();
 
     fireEvent.click(getByText('Log In'));
