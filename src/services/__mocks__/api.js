@@ -14,8 +14,6 @@ export async function fetchRestaurant() {
   return {};
 }
 
-export async function postLogin() {
-  return {
-    accessToken: '',
-  };
-}
+export const postLogin = jest.fn(() => ({
+  accessToken: '',
+}));

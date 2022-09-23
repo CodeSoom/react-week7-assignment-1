@@ -12,7 +12,12 @@ import {
   setRestaurant,
   setAccessToken,
   requestLogin,
+  setLoginError,
 } from './actions';
+
+import {
+  postLogin,
+} from './services/api';
 
 import ACCOUNT from '../fixtures/account';
 
@@ -106,21 +111,44 @@ describe('actions', () => {
   });
 
   describe('requestLogin', () => {
-    beforeEach(() => {
-      store = mockStore({
-        loginFields: {
-          email: ACCOUNT.email,
-          password: ACCOUNT.password,
-        },
+    context('without errors', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: ACCOUNT.email,
+            password: ACCOUNT.password,
+          },
+        });
+      });
+
+      it('dispatches requestLogin', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setAccessToken(''));
       });
     });
 
-    it('dispatches requestLogin', async () => {
-      await store.dispatch(requestLogin());
+    context('with an error', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: '',
+            password: '',
+          },
+        });
 
-      const actions = store.getActions();
+        postLogin.mockRejectedValue(new Error());
+      });
 
-      expect(actions[0]).toEqual(setAccessToken(''));
+      it('dispatches setLoginError', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setLoginError('로그인에 실패 하였습니다.'));
+      });
     });
   });
 });

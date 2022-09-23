@@ -67,6 +67,13 @@ const reducers = {
       },
     };
   },
+
+  setLoginError(state, { payload: { loginError } }) {
+    return {
+      ...state,
+      loginError,
+    };
+  },
 };
 
 function defaultReducer(state) {

@@ -101,12 +101,23 @@ export function setAccessToken(accessToken) {
   };
 }
 
+export function setLoginError(loginError) {
+  return {
+    type: 'setLoginError',
+    payload: { loginError },
+  };
+}
+
 export function requestLogin() {
   return async (dispatch, getState) => {
     const { loginFields: { email, password } } = getState();
 
-    const { accessToken } = await postLogin({ email, password });
+    try {
+      const { accessToken } = await postLogin({ email, password });
 
-    dispatch(setAccessToken(accessToken));
+      dispatch(setAccessToken(accessToken));
+    } catch (e) {
+      dispatch(setLoginError('로그인에 실패 하였습니다.'));
+    }
   };
 }
