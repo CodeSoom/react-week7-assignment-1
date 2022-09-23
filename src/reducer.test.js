@@ -7,7 +7,10 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginField,
 } from './actions';
+
+import LOGIN_FIELDS from '../fixtures/loginFields';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -122,6 +125,45 @@ describe('reducer', () => {
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
+      });
+    });
+  });
+
+  describe('changeLoginFields', () => {
+    const initialState = {
+      loginFields: {
+        eamil: '',
+        password: '',
+      },
+    };
+
+    const { email: EMAIL, password: PASSWORD } = LOGIN_FIELDS;
+
+    context('when email is chaged', () => {
+      it('changes email', () => {
+        const { loginFields: { email } } = reducer(
+          initialState,
+          changeLoginField({
+            name: 'email',
+            value: EMAIL,
+          }),
+        );
+
+        expect(email).toBe(EMAIL);
+      });
+    });
+
+    context('when password is chaged', () => {
+      it('changes password', () => {
+        const { loginFields: { password } } = reducer(
+          initialState,
+          changeLoginField({
+            name: 'password',
+            value: PASSWORD,
+          }),
+        );
+
+        expect(password).toBe(PASSWORD);
       });
     });
   });
