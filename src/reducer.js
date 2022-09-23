@@ -1,6 +1,7 @@
 import { equal } from './utils';
 
 const initialState = {
+  accessToken: '',
   regions: [],
   categories: [],
   restaurants: [],

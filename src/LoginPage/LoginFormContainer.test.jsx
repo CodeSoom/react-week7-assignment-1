@@ -14,43 +14,60 @@ describe('LoginFormContainer', () => {
   beforeEach(() => {
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation((selector) => selector({ loginFields }));
+    useSelector.mockImplementation((selector) => selector({
+      loginFields,
+      accessToken: given.accessToken,
+    }));
   });
 
   afterEach(() => {
     dispatch.mockClear();
   });
 
-  it('renders input controls', () => {
-    const { getByLabelText } = render(<LoginFormContainer />);
+  context('when logged out', () => {
+    it('renders input controls', () => {
+      const { getByLabelText } = render(<LoginFormContainer />);
 
-    expect(getByLabelText('E-mail').value).toBe(loginFields.email);
-    expect(getByLabelText('Password').value).toBe(loginFields.password);
-  });
-
-  it('listens chage events', () => {
-    const { getByLabelText } = render(<LoginFormContainer />);
-
-    const newEmail = 'new email';
-
-    fireEvent.change(getByLabelText('E-mail'), {
-      target: { value: newEmail },
+      expect(getByLabelText('E-mail').value).toBe(loginFields.email);
+      expect(getByLabelText('Password').value).toBe(loginFields.password);
     });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'changeLoginField',
-      payload: {
-        name: 'email',
-        value: newEmail,
-      },
+    it('listens chage events', () => {
+      const { getByLabelText } = render(<LoginFormContainer />);
+
+      const newEmail = 'new email';
+
+      fireEvent.change(getByLabelText('E-mail'), {
+        target: { value: newEmail },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'changeLoginField',
+        payload: {
+          name: 'email',
+          value: newEmail,
+        },
+      });
+    });
+
+    it('renders \'Log In\' button to listen to submit event', () => {
+      const { getByText } = render(<LoginFormContainer />);
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalled();
     });
   });
 
-  it('renders \'Log In\' button to listen to submit event', () => {
-    const { getByText } = render(<LoginFormContainer />);
+  context('when logged in', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
 
-    fireEvent.click(getByText('Log In'));
+    it('renders \'Log out\' button to listen to click event', () => {
+      const { getByText } = render(<LoginFormContainer />);
 
-    expect(dispatch).toBeCalled();
+      fireEvent.click(getByText('Log out'));
+
+      expect(dispatch).toBeCalledWith({ type: 'logout' });
+    });
   });
 });
