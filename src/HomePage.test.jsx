@@ -5,7 +5,7 @@ import { render } from '@testing-library/react';
 import HomePage from './HomePage';
 
 describe('HomePage', () => {
-  const links = ['About', 'Restaurants'];
+  const links = ['about', 'login', 'restaurants'];
 
   const renderHomePage = () => render(
     <MemoryRouter>
@@ -20,10 +20,12 @@ describe('HomePage', () => {
   });
 
   it('renders links', () => {
-    const { container } = renderHomePage();
+    const { getAllByRole } = renderHomePage();
 
-    links.forEach((link) => {
-      expect(container).toHaveTextContent(link);
+    const linkList = getAllByRole('link');
+
+    linkList.forEach((link, index) => {
+      expect(link.href).toContain(links[index]);
     });
   });
 });
