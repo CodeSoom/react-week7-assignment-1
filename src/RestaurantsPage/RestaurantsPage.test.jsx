@@ -1,4 +1,4 @@
-import { MemoryRouter } from 'react-router-dom';
+import { useNavigate, MemoryRouter } from 'react-router-dom';
 
 import { render, fireEvent } from '@testing-library/react';
 
@@ -6,21 +6,18 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantsPage from './RestaurantsPage';
 
-const mockPush = jest.fn();
+jest.mock('react-redux');
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useHistory() {
-    return { push: mockPush };
-  },
+  useNavigate: jest.fn(),
 }));
 
 describe('RestaurantsPage', () => {
   const dispatch = jest.fn();
+  const navigate = jest.fn();
 
   beforeEach(() => {
-    dispatch.mockClear();
-
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
@@ -34,6 +31,13 @@ describe('RestaurantsPage', () => {
         { id: 1, name: '마법사주방' },
       ],
     }));
+
+    useNavigate.mockImplementation(() => navigate);
+  });
+
+  afterEach(() => {
+    dispatch.mockClear();
+    navigate.mockClear();
   });
 
   function renderRestaurantsPage() {
@@ -59,7 +63,7 @@ describe('RestaurantsPage', () => {
 
       fireEvent.click(getByText('마법사주방'));
 
-      expect(mockPush).toBeCalledWith('/restaurants/1');
+      expect(navigate).toBeCalled();
     });
   });
 });
