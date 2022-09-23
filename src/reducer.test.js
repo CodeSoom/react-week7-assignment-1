@@ -21,6 +21,10 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
     };
 
     it('returns initialState', () => {
@@ -132,7 +136,7 @@ describe('reducer', () => {
   describe('changeLoginFields', () => {
     const initialState = {
       loginFields: {
-        eamil: '',
+        email: '',
         password: '',
       },
     };
