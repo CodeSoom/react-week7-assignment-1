@@ -41,6 +41,12 @@ export function setAccessToken(accessToken) {
   };
 }
 
+export function logout() {
+  return {
+    type: 'logout',
+  };
+}
+
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
