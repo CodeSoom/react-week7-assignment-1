@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './LoginForm';
+import LogoutForm from './LogoutForm';
 
 import {
   changeLoginField,
@@ -29,14 +30,8 @@ export default function LoginFormContainer() {
   }
 
   return accessToken
-    ? (
-      <button
-        type="button"
-        onClick={handleClick}
-      >
-        Log out
-      </button>
-    ) : (
+    ? <LogoutForm onClick={handleClick} />
+    : (
       <LoginForm
         fields={{ email, password }}
         onChange={handleChange}
