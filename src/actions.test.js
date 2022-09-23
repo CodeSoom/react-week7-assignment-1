@@ -114,11 +114,11 @@ describe('actions', () => {
         },
       });
     });
+
     it('dispatches requestLogin', async () => {
       await store.dispatch(requestLogin());
 
       const actions = store.getActions();
-      console.log('🚀 | actions', actions);
 
       expect(actions[0]).toEqual(setAccessToken(''));
     });
