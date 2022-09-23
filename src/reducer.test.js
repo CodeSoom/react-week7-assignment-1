@@ -8,6 +8,7 @@ import {
   setAccessToken,
   selectRegion,
   selectCategory,
+  logout,
   changeLoginField,
 } from './actions';
 
@@ -108,6 +109,18 @@ describe('reducer', () => {
       const { accessToken } = reducer(initialState, setAccessToken('TOKEN'));
 
       expect(accessToken).toBe('TOKEN');
+    });
+  });
+
+  describe('logout', () => {
+    it('removes access token', () => {
+      const initialState = {
+        accessToken: 'ACCESS_TOKEN',
+      };
+
+      const { accessToken } = reducer(initialState, logout());
+
+      expect(accessToken).toBe('');
     });
   });
 
