@@ -15,6 +15,7 @@ import {
 } from './actions';
 
 import loginFields from '../fixtures/loginFields';
+import loginFormControls from '../fixtures/controls';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -106,16 +107,37 @@ describe('actions', () => {
   });
 
   describe('requestLogin', () => {
-    beforeEach(() => {
-      store = mockStore({ loginFields });
+    context('when login is successful', () => {
+      const email = loginFormControls[0].value;
+      const password = loginFormControls[1].value;
+
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: { email, password },
+        });
+      });
+
+      it('dispatchs setAccessToken with \'ACCESS_TOKEN\'', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setAccessToken('ACCESS_TOKEN'));
+      });
     });
 
-    it('dispatchs postLogin', async () => {
-      await store.dispatch(requestLogin());
+    context('when login fails', () => {
+      beforeEach(() => {
+        store = mockStore({ loginFields });
+      });
 
-      const actions = store.getActions();
+      it('dispatchs setAccessToken with \'undefined\'', async () => {
+        await store.dispatch(requestLogin());
 
-      expect(actions[0]).toEqual(setAccessToken('ACCESS_TOKEN'));
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setAccessToken(undefined));
+      });
     });
   });
 });

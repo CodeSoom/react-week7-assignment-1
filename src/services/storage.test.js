@@ -17,7 +17,7 @@ describe('storage', () => {
   const storageValue = 'ACCESS_TOKEN';
 
   describe('saveItem', () => {
-    it('runs setItem in localStorage', async () => {
+    it('runs setItem in localStorage', () => {
       saveItem(storageKey, storageValue);
 
       expect(mockSetItem).toBeCalledWith(storageKey, storageValue);
@@ -25,7 +25,7 @@ describe('storage', () => {
   });
 
   describe('loadItem', () => {
-    it('runs getItem in localStorage', async () => {
+    it('runs getItem in localStorage', () => {
       loadItem(storageKey);
 
       expect(mockGetItem).toBeCalledWith(storageKey);
@@ -33,7 +33,7 @@ describe('storage', () => {
   });
 
   describe('deleteItem', () => {
-    it('runs removeItem in localStorage', async () => {
+    it('runs removeItem in localStorage', () => {
       deleteItem(storageKey);
 
       expect(mockRemoveItem).toBeCalledWith(storageKey);

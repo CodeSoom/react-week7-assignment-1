@@ -2,7 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
-import controls from '../../fixtures/controls';
+import loginFormControls from '../../fixtures/controls';
 import loginFields from '../../fixtures/loginFields';
 
 describe('LoginForm', () => {
@@ -29,7 +29,7 @@ describe('LoginForm', () => {
 
     const { getByLabelText } = renderLoginForm({ email, password });
 
-    controls.forEach(({ label, name }) => {
+    loginFormControls.forEach(({ label, name }) => {
       const value = loginFields[name];
 
       const input = getByLabelText(label);
@@ -41,7 +41,7 @@ describe('LoginForm', () => {
   it('listens chage events', () => {
     const { getByLabelText } = renderLoginForm();
 
-    controls.forEach(({ label, name, value }) => {
+    loginFormControls.forEach(({ label, name, value }) => {
       const input = getByLabelText(label);
 
       fireEvent.change(input, { target: { value } });

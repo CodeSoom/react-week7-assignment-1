@@ -1,4 +1,4 @@
-const controls = [
+const loginFormControls = [
   {
     label: 'E-mail',
     name: 'email',
@@ -10,4 +10,4 @@ const controls = [
     value: 'test',
   },
 ];
-export default controls;
+export default loginFormControls;
