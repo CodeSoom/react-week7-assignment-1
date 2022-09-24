@@ -66,17 +66,21 @@ describe('LoginFormContainer', () => {
     context('when login has not been performed yet', () => {
       given('error', () => '');
 
-      const { queryByText } = render(<LoginFormContainer />);
+      it('doesn\'t render error message', () => {
+        const { queryByText } = render(<LoginFormContainer />);
 
-      expect(queryByText(loginFields.error)).toBeNull();
+        expect(queryByText(loginFields.error)).toBeNull();
+      });
     });
 
     context('when login fails', () => {
       given('error', () => loginFields.error);
 
-      const { queryByText } = render(<LoginFormContainer />);
+      it('doesn\'t render error message', () => {
+        const { queryByText } = render(<LoginFormContainer />);
 
-      expect(queryByText(loginFields.error)).not.toBeNull();
+        expect(queryByText(loginFields.error)).not.toBeNull();
+      });
     });
   });
 

@@ -14,7 +14,7 @@ import { get } from '../utils';
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  const { email, password } = useSelector(get('loginFields'));
+  const { email, password, error } = useSelector(get('loginFields'));
   const accessToken = useSelector(get('accessToken'));
 
   function handleChange({ name, value }) {
@@ -32,10 +32,13 @@ export default function LoginFormContainer() {
   return accessToken
     ? <LogoutForm onClick={handleClick} />
     : (
-      <LoginForm
-        fields={{ email, password }}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-      />
+      <>
+        <LoginForm
+          fields={{ email, password }}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
+        {error && <p>{error}</p>}
+      </>
     );
 }
