@@ -16,7 +16,7 @@ import {
 } from './actions';
 
 import loginFields from '../fixtures/loginFields';
-import loginFormControls from '../fixtures/controls';
+import { loginFormControls } from '../fixtures/controls';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);

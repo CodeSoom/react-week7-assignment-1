@@ -2,7 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
-import loginFormControls from '../../fixtures/controls';
+import { loginFormControls } from '../../fixtures/controls';
 import loginFields from '../../fixtures/loginFields';
 
 describe('LoginForm', () => {
