@@ -46,6 +46,7 @@ describe('RestaurantContainer', () => {
 
       expect(container).toHaveTextContent('마법사주방');
       expect(container).toHaveTextContent('서울시');
+      expect(container).toHaveTextContent('리뷰');
     });
 
     context('without logged-in', () => {
