@@ -5,22 +5,12 @@ import {
 } from './storage';
 
 describe('storage', () => {
-  const setItem = jest.fn();
-  const getItem = jest.fn();
-  const removeItem = jest.fn();
+  const mockSetItem = jest.spyOn(Storage.prototype, 'setItem');
+  const mockGetItem = jest.spyOn(Storage.prototype, 'getItem');
+  const mockRemoveItem = jest.spyOn(Storage.prototype, 'removeItem');
 
   beforeEach(() => {
-    global.localStorage = {
-      setItem,
-      getItem,
-      removeItem,
-    };
-  });
-
-  afterEach(() => {
-    setItem.mockClear();
-    getItem.mockClear();
-    removeItem.mockClear();
+    jest.clearAllMocks();
   });
 
   const storageKey = 'accessToken';
@@ -30,7 +20,7 @@ describe('storage', () => {
     it('runs setItem in localStorage', async () => {
       saveItem(storageKey, storageValue);
 
-      expect(setItem).toBeCalledWith(storageKey, storageValue);
+      expect(mockSetItem).toBeCalledWith(storageKey, storageValue);
     });
   });
 
@@ -38,7 +28,7 @@ describe('storage', () => {
     it('runs getItem in localStorage', async () => {
       loadItem(storageKey);
 
-      expect(loadItem).toBeCalledWith(storageKey);
+      expect(mockGetItem).toBeCalledWith(storageKey);
     });
   });
 
@@ -46,7 +36,7 @@ describe('storage', () => {
     it('runs removeItem in localStorage', async () => {
       deleteItem(storageKey);
 
-      expect(deleteItem).toBeCalledWith(storageKey);
+      expect(mockRemoveItem).toBeCalledWith(storageKey);
     });
   });
 });
