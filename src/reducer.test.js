@@ -31,6 +31,10 @@ describe('reducer', () => {
         password: '',
         error: '',
       },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     };
 
     it('returns initialState', () => {

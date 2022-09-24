@@ -34,6 +34,10 @@ describe('App', () => {
         password: '',
         error: '',
       },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     }));
 
     given('storage', () => ({ accessToken: given.accessToken }));

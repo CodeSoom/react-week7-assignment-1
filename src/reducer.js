@@ -13,6 +13,10 @@ const initialState = {
     password: '',
     error: '',
   },
+  reviewFields: {
+    score: '',
+    description: '',
+  },
 };
 
 const reducers = {
@@ -81,6 +85,18 @@ const reducers = {
       ...state,
       loginFields: {
         ...loginFields,
+        [name]: value,
+      },
+    };
+  },
+
+  changeReviewField(state, { payload: { name, value } }) {
+    const { reviewFields } = state;
+
+    return {
+      ...state,
+      reviewFields: {
+        ...reviewFields,
         [name]: value,
       },
     };
