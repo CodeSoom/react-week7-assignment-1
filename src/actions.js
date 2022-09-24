@@ -136,3 +136,21 @@ export function requestLogin() {
     }
   };
 }
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const {
+      accessToken,
+      restaurant,
+      reviewFields: { score, description },
+    } = getState();
+
+    // await postReview({
+    //   accessToken, restaurantId, score, description,
+    // });
+
+    dispatch(setRestaurant({
+      ...restaurant,
+    }));
+  };
+}
