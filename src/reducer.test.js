@@ -10,9 +10,11 @@ import {
   selectCategory,
   logout,
   changeLoginField,
+  changeReviewField,
 } from './actions';
 
 import LOGIN_FIELDS from '../fixtures/loginFields';
+import REVIEW_FIELDS from '../fixtures/reviewFields';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -211,6 +213,39 @@ describe('reducer', () => {
         );
 
         expect(error).toBe('E-mail, Password를 확인해주세요.');
+      });
+    });
+  });
+
+  describe('changeReviewField', () => {
+    const initialState = {
+      reviewFields: {
+        score: '',
+        description: '',
+      },
+    };
+
+    const { score: SCORE, description: DECRIPTION } = REVIEW_FIELDS;
+
+    context('when review score is chaged', () => {
+      it('changes review score', () => {
+        const { reviewFields: { score } } = reducer(
+          initialState,
+          changeReviewField({ name: 'score', value: SCORE }),
+        );
+
+        expect(score).toBe(SCORE);
+      });
+    });
+
+    context('when review description is chaged', () => {
+      it('changes review description', () => {
+        const { reviewFields: { description } } = reducer(
+          initialState,
+          changeReviewField({ name: 'description', value: DECRIPTION }),
+        );
+
+        expect(description).toBe(DECRIPTION);
       });
     });
   });
