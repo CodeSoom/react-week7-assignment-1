@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
+import restaurant from '../../fixtures/restaurant';
 import { reviewFormcontrols } from '../../fixtures/controls';
 
 describe('RestaurantContainer', () => {
@@ -35,17 +36,13 @@ describe('RestaurantContainer', () => {
   });
 
   context('with restaurant', () => {
-    given('restaurant', () => ({
-      id: 1,
-      name: '마법사주방',
-      address: '서울시 강남구',
-    }));
+    given('restaurant', () => restaurant);
 
     it('renders name and address', () => {
       const { container } = renderRestaurantContainer();
 
-      expect(container).toHaveTextContent('마법사주방');
-      expect(container).toHaveTextContent('서울시');
+      expect(container).toHaveTextContent(restaurant.name);
+      expect(container).toHaveTextContent(restaurant.address);
       expect(container).toHaveTextContent('리뷰');
     });
 
