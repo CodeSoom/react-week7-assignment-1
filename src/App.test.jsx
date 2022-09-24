@@ -41,7 +41,7 @@ describe('App', () => {
     loadItem.mockImplementation((key) => given.storage[key]);
   });
 
-  function renderApp({ path }) {
+  function renderApp({ path = '/' } = {}) {
     return render(
       <MemoryRouter initialEntries={[path]}>
         <App />
