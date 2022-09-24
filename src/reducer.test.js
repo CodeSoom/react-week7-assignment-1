@@ -27,6 +27,7 @@ describe('reducer', () => {
       loginFields: {
         email: '',
         password: '',
+        error: '',
       },
     };
 
@@ -165,6 +166,7 @@ describe('reducer', () => {
       loginFields: {
         email: '',
         password: '',
+        error: '',
       },
     };
 
@@ -195,6 +197,20 @@ describe('reducer', () => {
         );
 
         expect(password).toBe(PASSWORD);
+      });
+    });
+
+    context('when login fails', () => {
+      it('changes error', () => {
+        const { loginFields: { error } } = reducer(
+          initialState,
+          changeLoginField({
+            name: 'error',
+            value: 'E-mail, Password를 확인해주세요.',
+          }),
+        );
+
+        expect(error).toBe('E-mail, Password를 확인해주세요.');
       });
     });
   });
