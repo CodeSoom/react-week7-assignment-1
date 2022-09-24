@@ -16,7 +16,10 @@ describe('LoginFormContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({
       accessToken: given.accessToken,
-      loginFields,
+      loginFields: {
+        ...loginFields,
+        error: given.error,
+      },
     }));
   });
 
@@ -58,6 +61,22 @@ describe('LoginFormContainer', () => {
       fireEvent.click(getByText('Log In'));
 
       expect(dispatch).toBeCalled();
+    });
+
+    context('when login has not been performed yet', () => {
+      given('error', () => '');
+
+      const { queryByText } = render(<LoginFormContainer />);
+
+      expect(queryByText(loginFields.error)).toBeNull();
+    });
+
+    context('when login fails', () => {
+      given('error', () => loginFields.error);
+
+      const { queryByText } = render(<LoginFormContainer />);
+
+      expect(queryByText(loginFields.error)).not.toBeNull();
     });
   });
 
