@@ -39,6 +39,10 @@ export async function postLogin({ email, password }) {
     body: JSON.stringify({ email, password }),
   });
 
+  if (!response.ok) {
+    throw new Error('Login fails');
+  }
+
   const { accessToken } = await response.json();
 
   return accessToken;
