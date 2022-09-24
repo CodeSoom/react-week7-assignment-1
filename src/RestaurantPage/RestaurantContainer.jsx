@@ -25,6 +25,8 @@ export default function RestaurantContainer({ restaurantId }) {
   const accessToken = useSelector(get('accessToken'));
   const { score, description } = useSelector(get('reviewFields'));
 
+  const reviews = restaurant && [...restaurant.reviews].reverse();
+
   function handleChange({ name, value }) {
     dispatch(changeReviewField({ name, value }));
   }
@@ -50,7 +52,7 @@ export default function RestaurantContainer({ restaurantId }) {
           onSubmit={handleSubmit}
         />
       )}
-      <Reviews reviews={[...restaurant.reviews].reverse()} />
+      <Reviews reviews={reviews} />
     </>
   );
 }
