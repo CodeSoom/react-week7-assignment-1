@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './api';
 
 import REGIONS from '../../fixtures/regions';
@@ -11,6 +12,7 @@ import CATEGORIES from '../../fixtures/categories';
 import RESTAURANTS from '../../fixtures/restaurants';
 import RESTAURANT from '../../fixtures/restaurant';
 import LOGIN_FIELDS from '../../fixtures/loginFields';
+import REVIEW_FIELDS from '../../fixtures/reviewFields';
 
 describe('api', () => {
   const mockFetch = ({ data = {}, ok = true } = {}) => {
@@ -96,6 +98,23 @@ describe('api', () => {
           expect(error.message).toBe('E-mail, Password를 확인해주세요.');
         }
       });
+    });
+  });
+
+  describe('postReview', () => {
+    beforeEach(() => {
+      mockFetch();
+    });
+
+    it('returns restaurants', async () => {
+      const response = await postReview({
+        accessToken: 'ACCESS_TOKEN',
+        restaurantId: 1,
+        score: REVIEW_FIELDS.score,
+        description: REVIEW_FIELDS.description,
+      });
+
+      expect(response.ok).toEqual(true);
     });
   });
 });
