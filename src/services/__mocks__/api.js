@@ -14,6 +14,13 @@ export async function fetchRestaurant() {
   return {};
 }
 
-export async function postLogin() {
+export async function postLogin({ email, password }) {
+  const EMAIL = 'tester@example.com';
+  const PASSWORD = 'test';
+
+  if (!(EMAIL === email && PASSWORD === password)) {
+    return undefined;
+  }
+
   return 'ACCESS_TOKEN';
 }
