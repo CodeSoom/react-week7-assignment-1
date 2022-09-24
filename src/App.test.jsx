@@ -8,7 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import { loadItem } from './services/storage';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -19,6 +22,7 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      accessToken: '',
       regions: [
         { id: 1, name: '서울' },
       ],
@@ -28,8 +32,13 @@ describe('App', () => {
       loginFields: {
         email: '',
         password: '',
+        error: '',
       },
     }));
+
+    given('storage', () => ({ accessToken: given.accessToken }));
+
+    loadItem.mockImplementation((key) => given.storage[key]);
   });
 
   function renderApp({ path }) {
@@ -85,6 +94,29 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('when logged out', () => {
+    it('doesn\'t call dispatch', () => {
+      renderApp();
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
+
+  context('when logged in', () => {
+    const accessToken = 'ACCESS_TOKEN';
+
+    given('accessToken', () => accessToken);
+
+    it('calls dispatch with \'setAccessToken\' action', () => {
+      renderApp();
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: { accessToken },
+      });
     });
   });
 });

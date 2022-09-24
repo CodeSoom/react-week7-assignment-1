@@ -7,6 +7,7 @@ import LoginFormContainer from './LoginFormContainer';
 import loginFields from '../../fixtures/loginFields';
 
 jest.mock('react-redux');
+jest.mock('../services/storage');
 
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();

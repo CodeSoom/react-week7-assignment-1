@@ -11,6 +11,8 @@ import {
 
 import { get } from '../utils';
 
+import { deleteItem } from '../services/storage';
+
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
@@ -26,6 +28,7 @@ export default function LoginFormContainer() {
   }
 
   function handleClick() {
+    deleteItem('accessToken');
     dispatch(logout());
   }
 
