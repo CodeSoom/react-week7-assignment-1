@@ -1,4 +1,7 @@
-export default function ReviewForm({ onChange, onSubmit }) {
+export default function ReviewForm({
+  fields: { score, description },
+  onChange, onSubmit,
+}) {
   function handleChange({ target: { name, value } }) {
     onChange({ name, value });
   }
@@ -19,6 +22,7 @@ export default function ReviewForm({ onChange, onSubmit }) {
           type="number"
           id="review-score"
           name="score"
+          value={score}
           onChange={handleChange}
         />
       </div>
@@ -30,6 +34,7 @@ export default function ReviewForm({ onChange, onSubmit }) {
           type="text"
           id="review-description"
           name="description"
+          value={description}
           onChange={handleChange}
         />
       </div>
