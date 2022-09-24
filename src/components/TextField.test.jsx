@@ -44,20 +44,22 @@ describe('TextField', () => {
   });
 
   context('without type', () => {
-    it('renders \'text\'input control', () => {
-      const { container } = renderTextField();
+    it('renders \'text\' input control', () => {
+      const { container } = renderTextField({
+        label: '평점',
+      });
 
       expect(container).toContainHTML('type="text"');
     });
   });
 
   it('listens change event', () => {
-    const { label, name, value } = renderTextField[1];
+    const { label, name, value } = reviewFormcontrols[1];
 
     const { getByLabelText } = renderTextField({ label, name });
 
     fireEvent.change(getByLabelText(label), { target: { value } });
 
-    expect(handleChange).toBeCalledWith({ name, value });
+    expect(handleChange).toBeCalledWith({ name, targetValue: value });
   });
 });
