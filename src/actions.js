@@ -6,6 +6,8 @@ import {
   postLogin,
 } from './services/api';
 
+import { saveItem } from './services/storage';
+
 export function setRegions(regions) {
   return {
     type: 'setRegions',
@@ -116,13 +118,13 @@ export function requestLogin() {
     try {
       const accessToken = await postLogin({ email, password });
 
-      // TODO: 로그인 성공화면 -> localStorage에 저장
-
       dispatch(setAccessToken(accessToken));
-    } catch {
+
+      saveItem('accessToken', accessToken);
+    } catch (error) {
       dispatch(changeLoginField({
         name: 'error',
-        value: 'E-mail, Password를 확인해주세요.',
+        value: error.message,
       }));
     }
   };
