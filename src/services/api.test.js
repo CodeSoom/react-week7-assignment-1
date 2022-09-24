@@ -13,15 +13,16 @@ import RESTAURANT from '../../fixtures/restaurant';
 import LOGIN_FIELDS from '../../fixtures/loginFields';
 
 describe('api', () => {
-  const mockFetch = (data) => {
+  const mockFetch = ({ data = {}, ok = true } = {}) => {
     global.fetch = jest.fn().mockResolvedValue({
+      ok,
       async json() { return data; },
     });
   };
 
   describe('fetchRegions', () => {
     beforeEach(() => {
-      mockFetch(REGIONS);
+      mockFetch({ data: REGIONS });
     });
 
     it('returns regions', async () => {
@@ -33,7 +34,7 @@ describe('api', () => {
 
   describe('fetchCategories', () => {
     beforeEach(() => {
-      mockFetch(CATEGORIES);
+      mockFetch({ data: CATEGORIES });
     });
 
     it('returns categories', async () => {
@@ -45,7 +46,7 @@ describe('api', () => {
 
   describe('fetchRestaurants', () => {
     beforeEach(() => {
-      mockFetch(RESTAURANTS);
+      mockFetch({ data: RESTAURANTS });
     });
 
     it('returns restaurants', async () => {
@@ -60,7 +61,7 @@ describe('api', () => {
 
   describe('fetchRestaurant', () => {
     beforeEach(() => {
-      mockFetch(RESTAURANT);
+      mockFetch({ data: RESTAURANT });
     });
 
     it('returns restaurants', async () => {
@@ -71,14 +72,30 @@ describe('api', () => {
   });
 
   describe('postLogin', () => {
-    beforeEach(() => {
-      mockFetch({ accessToken: 'ACCESS_TOKEN' });
+    context('when login is successful', () => {
+      beforeEach(() => {
+        mockFetch({ data: { accessToken: 'ACCESS_TOKEN' } });
+      });
+
+      it('returns access token', async () => {
+        const accessToken = await postLogin(LOGIN_FIELDS);
+
+        expect(accessToken).toEqual('ACCESS_TOKEN');
+      });
     });
 
-    it('returns access token', async () => {
-      const accessToken = await postLogin(LOGIN_FIELDS);
+    context('when login fails', () => {
+      beforeEach(() => {
+        mockFetch({ ok: false });
+      });
 
-      expect(accessToken).toEqual('ACCESS_TOKEN');
+      it('throws error', async () => {
+        try {
+          await postLogin(LOGIN_FIELDS);
+        } catch (error) {
+          expect(error.message).toBe('Login fails');
+        }
+      });
     });
   });
 });
