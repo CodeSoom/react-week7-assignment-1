@@ -12,6 +12,7 @@ import {
   setRestaurant,
   requestLogin,
   setAccessToken,
+  changeLoginField,
 } from './actions';
 
 import loginFields from '../fixtures/loginFields';
@@ -131,12 +132,15 @@ describe('actions', () => {
         store = mockStore({ loginFields });
       });
 
-      it('dispatchs setAccessToken with \'undefined\'', async () => {
+      it('throws error', async () => {
         await store.dispatch(requestLogin());
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(setAccessToken(undefined));
+        expect(actions[0]).toEqual(changeLoginField({
+          name: 'error',
+          value: 'E-mail, Password를 확인해주세요.',
+        }));
       });
     });
   });
