@@ -11,6 +11,7 @@ const initialState = {
   loginFields: {
     email: '',
     password: '',
+    error: '',
   },
 };
 
