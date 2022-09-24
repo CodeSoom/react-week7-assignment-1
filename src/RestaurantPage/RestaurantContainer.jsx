@@ -50,7 +50,7 @@ export default function RestaurantContainer({ restaurantId }) {
           onSubmit={handleSubmit}
         />
       )}
-      <Reviews reviews={restaurant.reviews} />
+      <Reviews reviews={[...restaurant.reviews].reverse()} />
     </>
   );
 }
