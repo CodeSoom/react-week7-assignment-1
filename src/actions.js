@@ -4,6 +4,7 @@ import {
   fetchRestaurants,
   fetchRestaurant,
   postLogin,
+  postReview,
 } from './services/api';
 
 import { saveItem } from './services/storage';
@@ -145,9 +146,9 @@ export function sendReview({ restaurantId }) {
       reviewFields: { score, description },
     } = getState();
 
-    // await postReview({
-    //   accessToken, restaurantId, score, description,
-    // });
+    await postReview({
+      accessToken, restaurantId, score, description,
+    });
 
     dispatch(setRestaurant({
       ...restaurant,

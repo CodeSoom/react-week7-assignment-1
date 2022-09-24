@@ -24,3 +24,7 @@ export async function postLogin({ email, password }) {
 
   return 'ACCESS_TOKEN';
 }
+
+export async function postReview() {
+  return { ok: true };
+}
