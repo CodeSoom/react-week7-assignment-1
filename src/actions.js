@@ -142,7 +142,6 @@ export function sendReview({ restaurantId }) {
   return async (dispatch, getState) => {
     const {
       accessToken,
-      restaurant,
       reviewFields: { score, description },
     } = getState();
 
@@ -150,8 +149,6 @@ export function sendReview({ restaurantId }) {
       accessToken, restaurantId, score, description,
     });
 
-    dispatch(setRestaurant({
-      ...restaurant,
-    }));
+    dispatch(loadRestaurant(restaurantId));
   };
 }
