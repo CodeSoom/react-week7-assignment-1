@@ -60,6 +60,6 @@ describe('TextField', () => {
 
     fireEvent.change(getByLabelText(label), { target: { value } });
 
-    expect(handleChange).toBeCalledWith({ name, targetValue: value });
+    expect(handleChange).toBeCalledWith({ name, value });
   });
 });

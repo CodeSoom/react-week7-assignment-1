@@ -1,10 +1,10 @@
 export default function TextField({
   label, type = 'text', name, value, onChange,
 }) {
-  const id = `input${name}`;
+  const id = `input-${name}`;
 
   function handleChange({ target: { value: targetValue } }) {
-    onChange({ name, targetValue });
+    onChange({ name, value: targetValue });
   }
 
   return (
