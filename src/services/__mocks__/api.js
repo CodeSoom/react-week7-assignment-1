@@ -19,7 +19,7 @@ export async function postLogin({ email, password }) {
   const PASSWORD = 'test';
 
   if (!(EMAIL === email && PASSWORD === password)) {
-    return undefined;
+    throw new Error('E-mail, Password를 확인해주세요.');
   }
 
   return 'ACCESS_TOKEN';

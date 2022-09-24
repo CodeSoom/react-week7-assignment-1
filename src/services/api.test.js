@@ -93,7 +93,7 @@ describe('api', () => {
         try {
           await postLogin(LOGIN_FIELDS);
         } catch (error) {
-          expect(error.message).toBe('Login fails');
+          expect(error.message).toBe('E-mail, Password를 확인해주세요.');
         }
       });
     });

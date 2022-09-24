@@ -119,8 +119,11 @@ export function requestLogin() {
       // TODO: 로그인 성공화면 -> localStorage에 저장
 
       dispatch(setAccessToken(accessToken));
-    } catch (error) {
-      // TODO: Eroor 처리
+    } catch {
+      dispatch(changeLoginField({
+        name: 'error',
+        value: 'E-mail, Password를 확인해주세요.',
+      }));
     }
   };
 }
