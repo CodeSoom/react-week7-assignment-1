@@ -16,6 +16,8 @@ import {
   sendReview,
 } from './actions';
 
+import { postLogin } from './services/api';
+
 import loginFields from '../fixtures/loginFields';
 import { loginFormControls } from '../fixtures/controls';
 import reviewFields from '../fixtures/reviewFields';
@@ -119,6 +121,8 @@ describe('actions', () => {
         store = mockStore({
           loginFields: { email, password },
         });
+
+        postLogin.mockResolvedValue('ACCESS_TOKEN');
       });
 
       it('dispatchs setAccessToken with \'ACCESS_TOKEN\'', async () => {
@@ -133,6 +137,8 @@ describe('actions', () => {
     context('when login fails', () => {
       beforeEach(() => {
         store = mockStore({ loginFields });
+
+        postLogin.mockRejectedValue(new Error('E-mail, Password를 확인해주세요.'));
       });
 
       it('throws error', async () => {

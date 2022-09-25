@@ -50,7 +50,7 @@ describe('ReviewForm', () => {
     });
   });
 
-  it('renders \'Send\' button', () => {
+  it('renders a button to add review', () => {
     const { getByText } = renderReviewForm();
 
     fireEvent.click(getByText('리뷰 남기기'));
