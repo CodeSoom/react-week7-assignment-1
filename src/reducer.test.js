@@ -106,8 +106,10 @@ describe('reducer', () => {
       expect(restaurant.address).toBe(RESTAURANT.address);
       expect(restaurant.menuItems).toEqual(RESTAURANT.menuItems);
 
+      const reverseReviews = [...RESTAURANT.reviews].reverse();
+
       restaurant.reviews.forEach((review, index) => {
-        expect(review).toEqual(RESTAURANT.reviews.reverse()[index]);
+        expect(review).toEqual(reverseReviews[index]);
       });
     });
   });
