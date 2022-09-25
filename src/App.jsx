@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import {
   Routes,
   Route,
@@ -20,11 +22,13 @@ import { loadItem } from './services/storage';
 export default function App() {
   const dispatch = useDispatch();
 
-  const accessToken = loadItem('accessToken');
+  useEffect(() => {
+    const accessToken = loadItem('accessToken');
 
-  if (accessToken) {
-    dispatch(setAccessToken(accessToken));
-  }
+    if (accessToken) {
+      dispatch(setAccessToken(accessToken));
+    }
+  });
 
   return (
     <>
