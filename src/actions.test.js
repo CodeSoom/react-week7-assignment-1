@@ -12,8 +12,10 @@ import {
   setRestaurant,
   requestLogin,
   setAccessToken,
+  logout,
   changeLoginField,
   sendReview,
+  runDeleteItem,
 } from './actions';
 
 import { postLogin } from './services/api';
@@ -166,6 +168,20 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('runDeleteItem', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('dispatchs logout', () => {
+      store.dispatch(runDeleteItem());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(logout());
     });
   });
 });
