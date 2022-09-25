@@ -6,12 +6,10 @@ import LogoutForm from './LogoutForm';
 import {
   changeLoginField,
   requestLogin,
-  logout,
+  deleteAccessToken,
 } from '../actions';
 
 import { get } from '../utils';
-
-import { deleteItem } from '../services/storage';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
@@ -28,8 +26,7 @@ export default function LoginFormContainer() {
   }
 
   function handleClick() {
-    deleteItem('accessToken');
-    dispatch(logout());
+    dispatch(deleteAccessToken());
   }
 
   return accessToken
