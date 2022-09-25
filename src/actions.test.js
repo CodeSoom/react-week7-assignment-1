@@ -15,7 +15,7 @@ import {
   logout,
   changeLoginField,
   sendReview,
-  runDeleteItem,
+  deleteAccessToken,
 } from './actions';
 
 import { postLogin } from './services/api';
@@ -171,13 +171,13 @@ describe('actions', () => {
     });
   });
 
-  describe('runDeleteItem', () => {
+  describe('deleteAccessToken', () => {
     beforeEach(() => {
       store = mockStore({});
     });
 
     it('dispatchs logout', () => {
-      store.dispatch(runDeleteItem());
+      store.dispatch(deleteAccessToken());
 
       const actions = store.getActions();
 
