@@ -26,11 +26,12 @@ describe('TextField', () => {
   }
 
   it('renders label and input control', () => {
-    const { queryByLabelText } = renderTextField({
+    const { getByLabelText } = renderTextField({
       label: '평점',
+      value: '5',
     });
 
-    expect(queryByLabelText('평점')).not.toBeNull();
+    expect(getByLabelText('평점').value).toBe('5');
   });
 
   context('with type', () => {

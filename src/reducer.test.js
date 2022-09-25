@@ -11,6 +11,8 @@ import {
   logout,
   changeLoginField,
   changeReviewField,
+  clearReviewFields,
+  setReviews,
 } from './actions';
 
 import RESTAURANT from '../fixtures/restaurant';
@@ -119,7 +121,7 @@ describe('reducer', () => {
         expect(restaurant.address).toBe(RESTAURANT.address);
         expect(restaurant.menuItems).toEqual(RESTAURANT.menuItems);
 
-        const reverseReviews = [...RESTAURANT.reviews].reverse();
+        const reverseReviews = [...RESTAURANT.reviews].sort((a, b) => b.id - a.id);
 
         restaurant.reviews.forEach((review, index) => {
           expect(review).toEqual(reverseReviews[index]);
@@ -272,6 +274,38 @@ describe('reducer', () => {
 
         expect(description).toBe(DECRIPTION);
       });
+    });
+  });
+
+  describe('clearReviewFields', () => {
+    const initialState = {
+      reviewFields: REVIEW_FIELDS,
+    };
+
+    it('clears fields of review', () => {
+      const { reviewFields: { score, description } } = reducer(
+        initialState,
+        clearReviewFields(),
+      );
+
+      expect(score).toBe('');
+      expect(description).toBe('');
+    });
+  });
+
+  describe('setReviews', () => {
+    it('changes reviews of the current restaurant', () => {
+      const REVIEWS = RESTAURANT.reviews;
+
+      const initialState = {
+        restaurant: {
+          reviews: [],
+        },
+      };
+
+      const { restaurant: { reviews } } = reducer(initialState, setReviews(REVIEWS));
+
+      expect(reviews).toHaveLength(REVIEWS.length);
     });
   });
 });

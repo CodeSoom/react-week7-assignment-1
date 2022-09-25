@@ -7,21 +7,35 @@ import restaurant from '../../fixtures/restaurant';
 describe('Reviews', () => {
   const reviews = restaurant.reviews.reverse();
 
-  it('renders title', () => {
-    const { container } = render(<Reviews reviews={reviews} />);
+  context('with reviews', () => {
+    it('renders title', () => {
+      const { container } = render(<Reviews reviews={reviews} />);
 
-    expect(container).toHaveTextContent('리뷰');
+      expect(container).toHaveTextContent('리뷰');
+    });
+
+    it('renders reviews', () => {
+      const { getAllByRole } = render(<Reviews reviews={reviews} />);
+
+      const reviewList = getAllByRole('listitem');
+
+      reviewList.forEach((review, index) => {
+        expect(review.textContent).toContain(reviews[index].name);
+        expect(review.textContent).toContain(reviews[index].score);
+        expect(review.textContent).toContain(reviews[index].description);
+      });
+    });
   });
 
-  it('renders reviews', () => {
-    const { getAllByRole } = render(<Reviews reviews={reviews} />);
+  context('without reviews', () => {
+    const noReviews = [[], null, undefined];
 
-    const reviewList = getAllByRole('listitem');
+    noReviews.forEach((noReview) => {
+      it('deoes\'t render anything', () => {
+        const { container } = render(<Reviews reviews={noReview} />);
 
-    reviewList.forEach((review, index) => {
-      expect(review.textContent).toContain(reviews[index].name);
-      expect(review.textContent).toContain(reviews[index].score);
-      expect(review.textContent).toContain(reviews[index].description);
+        expect(container.innerHTML).toBe('');
+      });
     });
   });
 });

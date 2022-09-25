@@ -38,7 +38,7 @@ describe('RestaurantContainer', () => {
   context('with restaurant', () => {
     given('restaurant', () => restaurant);
 
-    it('renders name and address', () => {
+    it('renders restaurant details', () => {
       const { container } = renderRestaurantContainer();
 
       expect(container).toHaveTextContent(restaurant.name);

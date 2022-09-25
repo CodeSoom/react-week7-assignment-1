@@ -1,5 +1,10 @@
 import { equal } from './utils';
 
+const initialReviewFields = {
+  score: '',
+  description: '',
+};
+
 const initialState = {
   accessToken: '',
   regions: [],
@@ -14,8 +19,7 @@ const initialState = {
     error: '',
   },
   reviewFields: {
-    score: '',
-    description: '',
+    ...initialReviewFields,
   },
 };
 
@@ -53,7 +57,7 @@ const reducers = {
       ...state,
       restaurant: {
         ...restaurant,
-        reviews: [...restaurant.reviews].reverse(),
+        reviews: [...restaurant.reviews].sort((a, b) => b.id - a.id),
       },
     };
   },
@@ -108,6 +112,27 @@ const reducers = {
       reviewFields: {
         ...reviewFields,
         [name]: value,
+      },
+    };
+  },
+
+  clearReviewFields(state) {
+    return {
+      ...state,
+      reviewFields: {
+        ...initialReviewFields,
+      },
+    };
+  },
+
+  setReviews(state, { payload: { reviews } }) {
+    const { restaurant } = state;
+
+    return {
+      ...state,
+      restaurant: {
+        ...restaurant,
+        reviews: [...reviews].sort((a, b) => b.id - a.id),
       },
     };
   },

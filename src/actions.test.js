@@ -14,12 +14,19 @@ import {
   setAccessToken,
   logout,
   changeLoginField,
+  setReviews,
+  loadReviews,
   sendReview,
   deleteAccessToken,
+  clearReviewFields,
 } from './actions';
 
-import { postLogin } from './services/api';
+import {
+  fetchRestaurant,
+  postLogin,
+} from './services/api';
 
+import restaurant from '../fixtures/restaurant';
 import loginFields from '../fixtures/loginFields';
 import { loginFormControls } from '../fixtures/controls';
 import reviewFields from '../fixtures/reviewFields';
@@ -102,6 +109,8 @@ describe('actions', () => {
   describe('loadRestaurant', () => {
     beforeEach(() => {
       store = mockStore({});
+
+      fetchRestaurant.mockResolvedValue({});
     });
 
     it('dispatchs setRestaurant', async () => {
@@ -156,18 +165,36 @@ describe('actions', () => {
     });
   });
 
+  describe('loadReviews', () => {
+    beforeEach(() => {
+      store = mockStore({});
+
+      fetchRestaurant.mockResolvedValue({ reviews: restaurant.reviews });
+    });
+
+    it('dispatchs setReviews', async () => {
+      await store.dispatch(loadReviews({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setReviews(restaurant.reviews));
+    });
+  });
+
   describe('sendReview', () => {
     beforeEach(() => {
       store = mockStore({ reviewFields });
+
+      fetchRestaurant.mockResolvedValue({ reviews: restaurant.reviews });
     });
 
-    it('dispatchs setRestaurant', async () => {
+    it('dispatchs setReviews & changeReviewField', async () => {
       await store.dispatch(sendReview({ restaurantId: 1 }));
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setRestaurant(null));
-      expect(actions[1]).toEqual(setRestaurant({}));
+      expect(actions[0]).toEqual(setReviews(restaurant.reviews));
+      expect(actions[1]).toEqual(clearReviewFields());
     });
   });
 

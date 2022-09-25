@@ -3,8 +3,8 @@ export default function TextField({
 }) {
   const id = `input-${name}`;
 
-  function handleChange({ target: { value: targetValue } }) {
-    onChange({ name, value: targetValue });
+  function handleChange({ target }) {
+    onChange({ name, value: target.value });
   }
 
   return (

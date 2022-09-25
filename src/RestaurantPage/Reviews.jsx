@@ -1,4 +1,8 @@
 export default function Reviews({ reviews }) {
+  if (!reviews || !reviews.length) {
+    return null;
+  }
+
   return (
     <>
       <h3>리뷰</h3>
@@ -7,12 +11,16 @@ export default function Reviews({ reviews }) {
           id, name, score, description,
         }) => (
           <li key={id}>
-            <p>{name}</p>
-            <p>
+            <div>
+              {name}
+            </div>
+            <div>
               {score}
               점
-            </p>
-            <p>{description}</p>
+            </div>
+            <div>
+              {description}
+            </div>
           </li>
         ))}
       </ul>
