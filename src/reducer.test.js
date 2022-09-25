@@ -13,6 +13,7 @@ import {
   changeReviewField,
 } from './actions';
 
+import RESTAURANT from '../fixtures/restaurant';
 import LOGIN_FIELDS from '../fixtures/loginFields';
 import REVIEW_FIELDS from '../fixtures/reviewFields';
 
@@ -98,12 +99,16 @@ describe('reducer', () => {
         restaurant: null,
       };
 
-      const restaurant = { id: 1, name: '마법사주방' };
+      const { restaurant } = reducer(initialState, setRestaurant(RESTAURANT));
 
-      const state = reducer(initialState, setRestaurant(restaurant));
+      expect(restaurant.id).toBe(RESTAURANT.id);
+      expect(restaurant.name).toBe(RESTAURANT.name);
+      expect(restaurant.address).toBe(RESTAURANT.address);
+      expect(restaurant.menuItems).toEqual(RESTAURANT.menuItems);
 
-      expect(state.restaurant.id).toBe(1);
-      expect(state.restaurant.name).toBe('마법사주방');
+      restaurant.reviews.forEach((review, index) => {
+        expect(review).toEqual(RESTAURANT.reviews.reverse()[index]);
+      });
     });
   });
 

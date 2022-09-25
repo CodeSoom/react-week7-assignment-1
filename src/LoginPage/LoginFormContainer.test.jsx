@@ -77,7 +77,7 @@ describe('LoginFormContainer', () => {
     context('when login fails', () => {
       given('error', () => loginFields.error);
 
-      it('doesn\'t render error message', () => {
+      it('renders error message', () => {
         const { queryByText } = render(<LoginFormContainer />);
 
         expect(queryByText(loginFields.error)).not.toBeNull();

@@ -104,6 +104,8 @@ describe('App', () => {
   });
 
   context('when logged out', () => {
+    given('accessToken', () => '');
+
     it('doesn\'t call dispatch', () => {
       renderApp();
 
