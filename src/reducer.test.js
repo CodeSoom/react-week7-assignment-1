@@ -94,22 +94,36 @@ describe('reducer', () => {
   });
 
   describe('setRestaurant', () => {
-    it('changes restaurant', () => {
-      const initialState = {
-        restaurant: null,
-      };
+    context('when restaurant is null', () => {
+      it('changes restaurant to be null', () => {
+        const initialState = {
+          restaurant: RESTAURANT,
+        };
 
-      const { restaurant } = reducer(initialState, setRestaurant(RESTAURANT));
+        const { restaurant } = reducer(initialState, setRestaurant(null));
 
-      expect(restaurant.id).toBe(RESTAURANT.id);
-      expect(restaurant.name).toBe(RESTAURANT.name);
-      expect(restaurant.address).toBe(RESTAURANT.address);
-      expect(restaurant.menuItems).toEqual(RESTAURANT.menuItems);
+        expect(restaurant).toBe(null);
+      });
+    });
 
-      const reverseReviews = [...RESTAURANT.reviews].reverse();
+    context('when restaurant exists', () => {
+      it('changes restaurant', () => {
+        const initialState = {
+          restaurant: null,
+        };
 
-      restaurant.reviews.forEach((review, index) => {
-        expect(review).toEqual(reverseReviews[index]);
+        const { restaurant } = reducer(initialState, setRestaurant(RESTAURANT));
+
+        expect(restaurant.id).toBe(RESTAURANT.id);
+        expect(restaurant.name).toBe(RESTAURANT.name);
+        expect(restaurant.address).toBe(RESTAURANT.address);
+        expect(restaurant.menuItems).toEqual(RESTAURANT.menuItems);
+
+        const reverseReviews = [...RESTAURANT.reviews].reverse();
+
+        restaurant.reviews.forEach((review, index) => {
+          expect(review).toEqual(reverseReviews[index]);
+        });
       });
     });
   });
