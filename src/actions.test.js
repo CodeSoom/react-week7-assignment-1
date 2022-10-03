@@ -10,7 +10,16 @@ import {
   loadRestaurant,
   setRestaurants,
   setRestaurant,
+  setAccessToken,
+  requestLogin,
+  setLoginError,
 } from './actions';
+
+import {
+  postLogin,
+} from './services/api';
+
+import ACCOUNT from '../fixtures/account';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -98,6 +107,48 @@ describe('actions', () => {
 
       expect(actions[0]).toEqual(setRestaurant(null));
       expect(actions[1]).toEqual(setRestaurant({}));
+    });
+  });
+
+  describe('requestLogin', () => {
+    context('without errors', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: ACCOUNT.email,
+            password: ACCOUNT.password,
+          },
+        });
+      });
+
+      it('dispatches requestLogin', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setAccessToken(''));
+      });
+    });
+
+    context('with an error', () => {
+      beforeEach(() => {
+        store = mockStore({
+          loginFields: {
+            email: '',
+            password: '',
+          },
+        });
+
+        postLogin.mockRejectedValue(new Error());
+      });
+
+      it('dispatches setLoginError', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setLoginError('로그인에 실패 하였습니다.'));
+      });
     });
   });
 });
