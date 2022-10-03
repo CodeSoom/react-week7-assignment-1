@@ -8,7 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import { loadItem } from './services/storage';
+
+import restaurant from '../fixtures/restaurant';
+
 jest.mock('react-redux');
+jest.mock('./services/storage');
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -19,16 +24,30 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      accessToken: '',
       regions: [
         { id: 1, name: '서울' },
       ],
       categories: [],
       restaurants: [],
-      restaurant: { id: 1, name: '마녀주방' },
+      restaurant,
+      loginFields: {
+        email: '',
+        password: '',
+        error: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
+      },
     }));
+
+    given('storage', () => ({ accessToken: given.accessToken }));
+
+    loadItem.mockImplementation((key) => given.storage[key]);
   });
 
-  function renderApp({ path }) {
+  function renderApp({ path = '/' } = {}) {
     return render(
       <MemoryRouter initialEntries={[path]}>
         <App />
@@ -64,7 +83,15 @@ describe('App', () => {
     it('renders the restaurant page', () => {
       const { container } = renderApp({ path: '/restaurants/1' });
 
-      expect(container).toHaveTextContent('마녀주방');
+      expect(container).toHaveTextContent(restaurant.name);
+    });
+  });
+
+  context('with path /login', () => {
+    it('renders the login page', () => {
+      const { container } = renderApp({ path: '/login' });
+
+      expect(container).toHaveTextContent('Log In');
     });
   });
 
@@ -73,6 +100,31 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('when logged out', () => {
+    given('accessToken', () => '');
+
+    it('doesn\'t call dispatch', () => {
+      renderApp();
+
+      expect(dispatch).not.toBeCalled();
+    });
+  });
+
+  context('when logged in', () => {
+    const accessToken = 'ACCESS_TOKEN';
+
+    given('accessToken', () => accessToken);
+
+    it('calls dispatch with \'setAccessToken\' action', () => {
+      renderApp();
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+        payload: { accessToken },
+      });
     });
   });
 });

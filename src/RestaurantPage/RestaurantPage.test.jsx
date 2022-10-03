@@ -6,6 +6,8 @@ import { render } from '@testing-library/react';
 
 import RestaurantPage from './RestaurantPage';
 
+import restaurant from '../../fixtures/restaurant';
+
 describe('RestaurantPage', () => {
   beforeEach(() => {
     const dispatch = jest.fn();
@@ -13,10 +15,10 @@ describe('RestaurantPage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((state) => state({
-      restaurant: {
-        id: 1,
-        name: '마법사주방',
-        address: '서울시 강남구',
+      restaurant,
+      reviewFields: {
+        score: '',
+        description: '',
       },
     }));
   });
@@ -29,7 +31,7 @@ describe('RestaurantPage', () => {
         <RestaurantPage params={params} />,
       );
 
-      expect(container).toHaveTextContent('마법사주방');
+      expect(container).toHaveTextContent(restaurant.name);
     });
   });
 
@@ -41,7 +43,7 @@ describe('RestaurantPage', () => {
         </MemoryRouter>,
       );
 
-      expect(container).toHaveTextContent('마법사주방');
+      expect(container).toHaveTextContent(restaurant.name);
     });
   });
 });
