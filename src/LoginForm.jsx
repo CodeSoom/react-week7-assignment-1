@@ -2,8 +2,6 @@ export default function LoginForm({ fields, onSubmit, onChange }) {
   const { email, password } = fields;
 
   function handleChange(e) {
-    e.preventDefault();
-
     const { target: { name, value } } = e;
 
     onChange({ name, value });
