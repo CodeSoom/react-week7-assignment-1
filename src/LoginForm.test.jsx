@@ -2,6 +2,8 @@ import { render, screen, fireEvent } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
+import loginControls from '../fixtures/loginControls';
+
 describe('LoginForm', () => {
   const handleSubmit = jest.fn();
   const handleChange = jest.fn();
@@ -38,12 +40,7 @@ describe('LoginForm', () => {
   it('input에 입력한 값이 잘 들어온다', () => {
     renderLoginForm();
 
-    const controls = [
-      { label: 'E-mail', name: 'email', value: 'tester@example.com' },
-      { label: 'Password', name: 'password', value: 'test' },
-    ];
-
-    controls.forEach(({ label, name, value }) => {
+    loginControls.forEach(({ label, name, value }) => {
       const input = screen.getByLabelText(label);
 
       fireEvent.change(input, {
