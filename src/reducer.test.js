@@ -7,7 +7,11 @@ import {
   setRestaurant,
   selectRegion,
   selectCategory,
+  changeLoginField,
+  setAccessToken,
 } from './actions';
+
+import LOGIN_FIELDS from '../fixtures/loginFields';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -18,6 +22,11 @@ describe('reducer', () => {
       restaurant: null,
       selectedRegion: null,
       selectedCategory: null,
+      loginFields: {
+        email: '',
+        password: '',
+      },
+      accessToken: '',
     };
 
     it('returns initialState', () => {
@@ -33,9 +42,7 @@ describe('reducer', () => {
         regions: [],
       };
 
-      const regions = [
-        { id: 1, name: '서울' },
-      ];
+      const regions = [{ id: 1, name: '서울' }];
 
       const state = reducer(initialState, setRegions(regions));
 
@@ -49,9 +56,7 @@ describe('reducer', () => {
         categories: [],
       };
 
-      const categories = [
-        { id: 1, name: '한식' },
-      ];
+      const categories = [{ id: 1, name: '한식' }];
 
       const state = reducer(initialState, setCategories(categories));
 
@@ -65,9 +70,7 @@ describe('reducer', () => {
         restaurants: [],
       };
 
-      const restaurants = [
-        { id: 1, name: '마법사주방' },
-      ];
+      const restaurants = [{ id: 1, name: '마법사주방' }];
 
       const state = reducer(initialState, setRestaurants(restaurants));
 
@@ -90,12 +93,22 @@ describe('reducer', () => {
     });
   });
 
+  describe('setAccessToken', () => {
+    it('accessToken을 가져온다', () => {
+      const initialState = {
+        accessToken: '',
+      };
+
+      const state = reducer(initialState, setAccessToken('TOKEN'));
+
+      expect(state.accessToken).toBe('TOKEN');
+    });
+  });
+
   describe('selectRegion', () => {
     it('changes selected region', () => {
       const initialState = {
-        regions: [
-          { id: 1, name: '서울' },
-        ],
+        regions: [{ id: 1, name: '서울' }],
         selectedRegion: null,
       };
 
@@ -111,9 +124,7 @@ describe('reducer', () => {
   describe('selectCategory', () => {
     it('changes selected category', () => {
       const initialState = {
-        categories: [
-          { id: 1, name: '한식' },
-        ],
+        categories: [{ id: 1, name: '한식' }],
         selectedCategory: null,
       };
 
@@ -122,6 +133,33 @@ describe('reducer', () => {
       expect(state.selectedCategory).toEqual({
         id: 1,
         name: '한식',
+      });
+    });
+  });
+
+  describe('changeLoginField', () => {
+    const initialState = {
+      loginFields: {
+        email: 'email',
+        password: 'password',
+      },
+    };
+
+    context('이메일을 입력할 시', () => {
+      it('이메일만 바뀐다', () => {
+        const state = reducer(initialState, changeLoginField(LOGIN_FIELDS[0]));
+
+        expect(state.loginFields.email).toBe('test@test');
+        expect(state.loginFields.password).toBe('password');
+      });
+    });
+
+    context('비밀번호를 입력할 시', () => {
+      it('비밀번호만 바뀐다', () => {
+        const state = reducer(initialState, changeLoginField(LOGIN_FIELDS[1]));
+
+        expect(state.loginFields.email).toBe('email');
+        expect(state.loginFields.password).toBe('1234');
       });
     });
   });
