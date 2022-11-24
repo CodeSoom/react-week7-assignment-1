@@ -121,6 +121,8 @@ export function sendReview({ restaurantId }) {
       score,
       description,
     });
+
+    dispatch(loadRestaurant({ restaurantId }));
   };
 }
 
