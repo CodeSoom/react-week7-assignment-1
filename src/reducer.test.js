@@ -11,7 +11,10 @@ import {
   changeReviewField,
   setAccessToken,
   logout,
+  setReviews,
 } from './actions';
+
+import REVIEWS from '../fixtures/reviews';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -31,7 +34,7 @@ describe('reducer', () => {
         description: '',
       },
       accessToken: '',
-
+      reviews: [],
     };
 
     it('returns initialState', () => {
@@ -197,6 +200,18 @@ describe('reducer', () => {
       const state = reducer(initialState, logout());
 
       expect(state.accessToken).toBe('');
+    });
+  });
+
+  describe('setReviews', () => {
+    it('changes reviews', () => {
+      const initialState = {
+        reviews: [],
+      };
+
+      const state = reducer(initialState, setReviews(REVIEWS));
+
+      expect(state.reviews).toBe(REVIEWS);
     });
   });
 });
