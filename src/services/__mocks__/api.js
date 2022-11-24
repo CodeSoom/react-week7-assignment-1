@@ -34,3 +34,7 @@ export async function postReview({
     description,
   };
 }
+
+export async function getReviews() {
+  return [];
+}
