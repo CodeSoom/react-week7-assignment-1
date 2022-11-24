@@ -5,6 +5,7 @@ import {
   fetchRestaurant,
   postLogin,
   postReview,
+  getReviews,
 } from './services/api';
 
 import { saveItem } from './services/storage';
@@ -78,6 +79,13 @@ export function setAccessToken(accessToken) {
   };
 }
 
+export function setReview(reviews) {
+  return {
+    type: 'setReview',
+    payload: { reviews },
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();
@@ -144,5 +152,8 @@ export function sendReview({ restaurantId }) {
       score,
       description,
     });
+
+    const review = await getReviews({ restaurantId });
+    dispatch(setReview(review));
   };
 }
