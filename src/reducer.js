@@ -93,7 +93,7 @@ const reducers = {
       accessToken: '',
     };
   },
-  setReview(state, { payload: { reviews } }) {
+  setReviews(state, { payload: { reviews } }) {
     return {
       ...state,
       reviews,

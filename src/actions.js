@@ -79,9 +79,9 @@ export function setAccessToken(accessToken) {
   };
 }
 
-export function setReview(reviews) {
+export function setReviews(reviews) {
   return {
-    type: 'setReview',
+    type: 'setReviews',
     payload: { reviews },
   };
 }
@@ -153,7 +153,7 @@ export function sendReview({ restaurantId }) {
       description,
     });
 
-    const review = await getReviews({ restaurantId });
-    dispatch(setReview(review));
+    const reviews = await getReviews({ restaurantId });
+    dispatch(setReviews(reviews));
   };
 }
