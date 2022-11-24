@@ -10,8 +10,6 @@ import { get } from './utils';
 
 import RestaurantDetail from './RestaurantDetail';
 
-import ReviewForm from './ReviewForm';
-
 export default function RestaurantContainer({ restaurantId }) {
   const dispatch = useDispatch();
 
@@ -20,6 +18,7 @@ export default function RestaurantContainer({ restaurantId }) {
   }, []);
 
   const restaurant = useSelector(get('restaurant'));
+  const reviewFields = useSelector(get('reviewFields'));
 
   const accessToken = useSelector(get('accessToken'));
 
@@ -38,18 +37,12 @@ export default function RestaurantContainer({ restaurantId }) {
   }
 
   return (
-    <>
-      <RestaurantDetail restaurant={restaurant} />
-      {
-        accessToken
-          ? (
-            <ReviewForm
-              onChange={handleChange}
-              onSubmit={handleSubmit}
-            />
-          )
-          : null
-      }
-    </>
+    <RestaurantDetail
+      restaurant={restaurant}
+      reviewFields={reviewFields}
+      onChange={handleChange}
+      onSubmit={handleSubmit}
+      accessToken={accessToken}
+    />
   );
 }
