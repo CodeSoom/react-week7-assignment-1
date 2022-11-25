@@ -211,7 +211,9 @@ describe('reducer', () => {
 
       const state = reducer(initialState, setReviews(REVIEWS));
 
-      expect(state.reviews).toBe(REVIEWS);
+      const RECENT_REVIEWS = REVIEWS.reverse();
+
+      expect(state.reviews).toStrictEqual(RECENT_REVIEWS);
     });
   });
 });
