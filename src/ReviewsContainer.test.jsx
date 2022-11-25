@@ -17,20 +17,17 @@ describe('ReviewsContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
-
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      reviews: [],
+      reviews: given.reviews,
     }));
   });
 
-  it('renders ReviewsContainer', () => {
-    renderReviewsContainer();
-  });
-
   context('without reviews', () => {
-    it('no renders reviews', () => {
+    given('reviews', () => []);
+
+    it('renders "리뷰가 없습니다!"', () => {
       const { container } = renderReviewsContainer();
 
       expect(container).toHaveTextContent('리뷰가 없습니다!');
@@ -38,11 +35,7 @@ describe('ReviewsContainer', () => {
   });
 
   context('with reviews', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        reviews: REVIEWS,
-      }));
-    });
+    given('reviews', () => REVIEWS);
 
     it('renders reviews', () => {
       const { container } = renderReviewsContainer();
