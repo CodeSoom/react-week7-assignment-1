@@ -43,12 +43,6 @@ describe('TextField', () => {
       );
     }
 
-    it('renders label and input control', () => {
-      const { queryByLabelText } = renderTextField();
-
-      expect(queryByLabelText('리뷰 내용')).not.toBeNull();
-    });
-
     it('renders "text" input control', () => {
       const { container } = renderTextField();
 
