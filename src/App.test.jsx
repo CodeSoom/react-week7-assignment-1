@@ -25,6 +25,7 @@ describe('App', () => {
       categories: [],
       restaurants: [],
       restaurant: { id: 1, name: '마녀주방' },
+      accessToken: given.accessToken,
       reviews: [],
     }));
   });
@@ -74,6 +75,21 @@ describe('App', () => {
       const { container } = renderApp({ path: '/xxx' });
 
       expect(container).toHaveTextContent('Not Found');
+    });
+  });
+
+  context('with accessToken', () => {
+     given('accessToken', () => 'ACCESS_TOKEN');
+
+    it('calls dispatch', () => {
+      render((
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>));
+
+      expect(dispatch).toBeCalledWith({
+        type: 'setAccessToken',
+      });
     });
   });
 });
