@@ -24,6 +24,7 @@ describe('RestaurantContainer', () => {
         description: '',
       },
       accessToken: given.accessToken,
+      reviews: [],
     }));
   });
 
@@ -58,6 +59,7 @@ describe('RestaurantContainer', () => {
 
     context('with logged in', () => {
       given('accessToken', () => 'ACCESS_TOKEN');
+
       it('renders review write fields', () => {
         const { queryByLabelText } = render(
           <RestaurantContainer restaurantId="1" />,
@@ -66,6 +68,7 @@ describe('RestaurantContainer', () => {
         expect(queryByLabelText('평점')).not.toBeNull();
         expect(queryByLabelText('리뷰 내용')).not.toBeNull();
       });
+
       it('listens change events', () => {
         const { getByLabelText } = render(
           <RestaurantContainer restaurantId="1" />,
@@ -87,12 +90,13 @@ describe('RestaurantContainer', () => {
           });
         });
       });
+
       it('renders "리뷰 남기기" button', () => {
-        const { getByText } = render(<RestaurantContainer restaurantId="1" />);
+        const { getByText } = renderRestaurantContainer();
 
         fireEvent.click(getByText('리뷰 남기기'));
 
-        expect(dispatch).toBeCalledTimes(2);
+        expect(dispatch).toBeCalledTimes(3);
       });
     });
   });
