@@ -79,13 +79,13 @@ describe('App', () => {
   });
 
   context('with accessToken', () => {
-     given('accessToken', () => 'ACCESS_TOKEN');
+    given('accessToken', () => 'ACCESS_TOKEN');
 
     it('calls dispatch', () => {
       render((
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>));
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>));
 
       expect(dispatch).toBeCalledWith({
         type: 'setAccessToken',
