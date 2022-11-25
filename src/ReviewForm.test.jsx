@@ -40,7 +40,8 @@ describe('ReviewForm', () => {
       expect(handleChange).toBeCalledWith({ name, value });
     });
   });
-  it('renders "Send" button', () => {
+
+  it('renders "리뷰 남기기" button', () => {
     const { getByText } = renderReviewForm();
 
     fireEvent.click(getByText('리뷰 남기기'));
