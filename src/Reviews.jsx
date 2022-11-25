@@ -1,7 +1,4 @@
 export default function Reviews({ reviews }) {
-  if (reviews.length === 0) {
-    return null;
-  }
   return (
     <ul>
       {
