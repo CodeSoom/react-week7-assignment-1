@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
+jest.mock('react-redux');
+
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();
 
