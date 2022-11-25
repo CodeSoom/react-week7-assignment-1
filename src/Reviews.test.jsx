@@ -9,7 +9,10 @@ describe('Reviews', () => {
     return render((<Reviews reviews={REVIEWS} />));
   }
 
-  it('renders Reviews', () => {
-    renderReviews();
+  it('renders reviews', () => {
+    const { container } = renderReviews();
+
+    expect(container).toHaveTextContent('3');
+    expect(container).toHaveTextContent('맛있어요');
   });
 });
