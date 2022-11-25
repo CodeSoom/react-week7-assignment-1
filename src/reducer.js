@@ -96,7 +96,7 @@ const reducers = {
   setReviews(state, { payload: { reviews } }) {
     return {
       ...state,
-      reviews,
+      reviews: [...reviews].reverse(),
     };
   },
 };
