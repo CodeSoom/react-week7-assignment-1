@@ -121,9 +121,6 @@ export function loadRestaurant({ restaurantId }) {
 
     const restaurant = await fetchRestaurant({ restaurantId });
     dispatch(setRestaurant(restaurant));
-
-    const { reviews } = await getReviews({ restaurantId });
-    dispatch(setReviews(reviews));
   };
 }
 
@@ -155,6 +152,13 @@ export function sendReview({ restaurantId }) {
       description,
     });
 
+    const { reviews } = await getReviews({ restaurantId });
+    dispatch(setReviews(reviews));
+  };
+}
+
+export function loadReviews({ restaurantId }) {
+  return async (dispatch) => {
     const { reviews } = await getReviews({ restaurantId });
     dispatch(setReviews(reviews));
   };
