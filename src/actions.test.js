@@ -13,6 +13,9 @@ import {
   requestLogin,
   setAccessToken,
   sendReview,
+  setReviews,
+  clearReviewFields,
+  loadReview,
 } from './actions';
 
 const middlewares = [thunk];
@@ -104,6 +107,20 @@ describe('actions', () => {
     });
   });
 
+  describe('loadReview', () => {
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('setReviews를 호출한다', async () => {
+      await store.dispatch(loadReview({ restaurantId: 1 }));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setReviews());
+    });
+  });
+
   describe('requestLogin', () => {
     beforeEach(() => {
       store = mockStore({
@@ -139,12 +156,13 @@ describe('actions', () => {
       });
     });
 
-    it('setRestaurant을 호출한다', async () => {
+    it('setReviews와 clearReviewFields를 호출한다', async () => {
       await store.dispatch(sendReview({ restaurantId: 1 }));
 
       const actions = store.getActions();
 
-      expect(actions[1]).toEqual(setRestaurant({}));
+      expect(actions[0]).toEqual(clearReviewFields());
+      expect(actions[1]).toEqual(setReviews());
     });
   });
 });
