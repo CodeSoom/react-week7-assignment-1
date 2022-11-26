@@ -3,7 +3,7 @@ import Reviews from './Reviews';
 import ReviewForm from './ReviewForm';
 
 export default function RestaurantDetail({
-  restaurant, onChange, onSubmit, reviewFields, accessToken,
+  restaurant, onChange, onSubmit, fields, accessToken,
 }) {
   const {
     name, address, menuItems, reviews,
@@ -23,7 +23,7 @@ export default function RestaurantDetail({
         accessToken
           ? (
             <ReviewForm
-              reviewFields={reviewFields}
+              fields={fields}
               onChange={onChange}
               onSubmit={onSubmit}
             />
