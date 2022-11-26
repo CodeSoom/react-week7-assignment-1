@@ -52,7 +52,7 @@ describe('LoginFormContainer', () => {
     it('로그인 버튼이 랜더링된다', () => {
       renderLoginFormContainer();
 
-      fireEvent.click(screen.getByText('Log in'));
+      fireEvent.click(screen.getByText('Log In'));
 
       expect(dispatch).toBeCalled();
     });
