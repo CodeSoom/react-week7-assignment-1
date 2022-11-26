@@ -9,12 +9,15 @@ import {
   selectCategory,
   changeLoginField,
   changeReviewField,
+  clearReviewFields,
   setAccessToken,
+  setReviews,
   logout,
 } from './actions';
 
 import LOGIN_FIELDS from '../fixtures/loginFields';
 import REVIEW_FIELDS from '../fixtures/reviewFields';
+import REVIEWS from '../fixtures/reviews';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -112,6 +115,22 @@ describe('reducer', () => {
     });
   });
 
+  describe('setReviews', () => {
+    it('리뷰를 가져온다', () => {
+      const initialState = {
+        restaurant: {
+          reviews: [],
+        },
+      };
+
+      const {
+        restaurant: { reviews },
+      } = reducer(initialState, setReviews(REVIEWS));
+
+      expect(reviews).toHaveLength(REVIEWS.length);
+    });
+  });
+
   describe('selectRegion', () => {
     it('changes selected region', () => {
       const initialState = {
@@ -168,6 +187,22 @@ describe('reducer', () => {
         expect(state.loginFields.email).toBe('email');
         expect(state.loginFields.password).toBe('1234');
       });
+    });
+  });
+
+  describe('clearReviewFields', () => {
+    it('review field를 지워준다', () => {
+      const initialState = {
+        reviewFields: {
+          score: '5',
+          description: 'awesome',
+        },
+      };
+
+      const state = reducer(initialState, clearReviewFields());
+
+      expect(state.reviewFields.score).toBe('');
+      expect(state.reviewFields.description).toBe('');
     });
   });
 
