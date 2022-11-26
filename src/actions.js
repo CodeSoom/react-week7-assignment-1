@@ -7,7 +7,7 @@ import {
   postReview,
 } from './services/api';
 
-import { saveItem } from './services/storage';
+import { saveItem, deleteItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -141,6 +141,8 @@ export function changeReviewField({ name, value }) {
 }
 
 export function logout() {
+  deleteItem('accessToken');
+
   return {
     type: 'logout',
   };
