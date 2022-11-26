@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   loadRestaurant, changeReviewField, sendReview,
-} from './actions';
+} from '../actions';
 
-import { get } from './utils';
+import { get } from '../utils';
 
 import RestaurantDetail from './RestaurantDetail';
 

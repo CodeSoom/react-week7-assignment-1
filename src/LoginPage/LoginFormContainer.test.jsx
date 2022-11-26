@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
-import loginControls from '../fixtures/loginControls';
+import loginControls from '../../fixtures/loginControls';
 
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();

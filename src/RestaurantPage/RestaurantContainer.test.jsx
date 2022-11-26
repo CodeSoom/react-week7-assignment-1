@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RestaurantContainer from './RestaurantContainer';
 
-import reviewControls from '../fixtures/reviewControls';
+import reviewControls from '../../fixtures/reviewControls';
 
 describe('RestaurantContainer', () => {
   const dispatch = jest.fn();

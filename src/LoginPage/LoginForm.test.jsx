@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
-import loginControls from '../fixtures/loginControls';
+import loginControls from '../../fixtures/loginControls';
 
 describe('LoginForm', () => {
   const handleSubmit = jest.fn();

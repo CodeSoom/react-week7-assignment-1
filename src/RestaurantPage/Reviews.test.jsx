@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 
 import Reviews from './Reviews';
 
-import REVIEWS from '../fixtures/reviews';
+import REVIEWS from '../../fixtures/reviews';
 
 describe('Reviews', () => {
   const renderReviews = (reviews) => render((

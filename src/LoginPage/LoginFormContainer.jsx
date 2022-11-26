@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { requestLogin, changeLoginField, logout } from './actions';
+import { requestLogin, changeLoginField, logout } from '../actions';
 
 import LoginForm from './LoginForm';
 import LogoutForm from './LogoutForm';
 
-import { get } from './utils';
+import { get } from '../utils';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();

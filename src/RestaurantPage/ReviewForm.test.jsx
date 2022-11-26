@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import ReviewForm from './ReviewForm';
-import reviewControls from '../fixtures/reviewControls';
+import reviewControls from '../../fixtures/reviewControls';
 
 describe('ReviewForm', () => {
   const handleChange = jest.fn();
