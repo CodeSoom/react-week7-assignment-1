@@ -5,11 +5,14 @@ import TextField from './TextField';
 describe('TextField', () => {
   const handleChange = jest.fn();
 
-  const renderTextField = ({ label, name, type }) => render((
+  const renderTextField = ({
+    label, name, type, value,
+  }) => render((
     <TextField
       label={label}
       name={name}
       type={type}
+      value={value}
       onChange={handleChange}
     />));
 
