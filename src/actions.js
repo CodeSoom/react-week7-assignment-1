@@ -69,6 +69,7 @@ export function changeReviewField({ name, value }) {
 export function logout() {
   return {
     type: 'logout',
+    payload: { accessToken: '' },
   };
 }
 
