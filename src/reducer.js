@@ -1,6 +1,7 @@
 import { equal } from './utils';
 
 const initialState = {
+  accessToken: '',
   regions: [],
   categories: [],
   restaurants: [],
@@ -15,7 +16,6 @@ const initialState = {
     score: '',
     description: '',
   },
-  accessToken: '',
 };
 
 const reducers = {
