@@ -8,7 +8,7 @@ import {
   getReviews,
 } from './services/api';
 
-import { saveItem } from './services/storage';
+import { saveItem, deleteItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -66,7 +66,14 @@ export function changeReviewField({ name, value }) {
   };
 }
 
+export function clearReviewFields() {
+  return {
+    type: 'clearReviewFields',
+  };
+}
+
 export function logout() {
+  deleteItem('accessToken');
   return {
     type: 'logout',
     payload: { accessToken: '' },
@@ -155,6 +162,8 @@ export function sendReview({ restaurantId }) {
 
     const { reviews } = await getReviews({ restaurantId });
     dispatch(setReviews(reviews));
+
+    dispatch(clearReviewFields());
   };
 }
 
