@@ -13,6 +13,7 @@ describe('LoginFormContainer', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
+
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
         email: 'test@test',
@@ -55,6 +56,20 @@ describe('LoginFormContainer', () => {
       fireEvent.click(screen.getByText('Log In'));
 
       expect(dispatch).toBeCalled();
+    });
+  });
+
+  context('로그인을 하였을 경우', () => {
+    given('accessToken', () => 'ACCESS_TOKEN');
+
+    it('로그아웃 페이지가 랜더링된다', () => {
+      const { container } = renderLoginFormContainer();
+
+      expect(container).toHaveTextContent('Log out');
+
+      fireEvent.click(screen.getByText('Log out'));
+
+      expect(dispatch).toBeCalledWith({ type: 'logout' });
     });
   });
 });
