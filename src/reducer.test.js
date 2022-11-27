@@ -9,6 +9,7 @@ import {
   selectCategory,
   changeLoginField,
   changeReviewField,
+  clearReviewFields,
   setAccessToken,
   logout,
   setReviews,
@@ -176,6 +177,22 @@ describe('reducer', () => {
       const state = reducer(initialState, changeReviewField({ name: 'score', value: '5' }));
 
       expect(state.reviewFields.score).toBe('5');
+    });
+  });
+
+  describe('clearReviewFields', () => {
+    it('clears fields of review', () => {
+      const initialState = {
+        reviewFields: {
+          score: '5',
+          description: '맛있어요',
+        },
+      };
+
+      const state = reducer(initialState, clearReviewFields());
+
+      expect(state.reviewFields.score).toBe('');
+      expect(state.reviewFields.description).toBe('');
     });
   });
 
