@@ -1,12 +1,17 @@
 import { equal } from './utils';
 
 const initialState = {
+  accessToken: '',
   regions: [],
   categories: [],
   restaurants: [],
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginFields: {
+    email: '',
+    password: '',
+  },
 };
 
 const reducers = {
@@ -38,6 +43,13 @@ const reducers = {
     };
   },
 
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
+    };
+  },
+
   selectRegion(state, { payload: { regionId } }) {
     const { regions } = state;
     return {
@@ -51,6 +63,16 @@ const reducers = {
     return {
       ...state,
       selectedCategory: categories.find(equal('id', categoryId)),
+    };
+  },
+
+  changeLoginField(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      loginFields: {
+        ...state.loginFields,
+        [name]: value,
+      },
     };
   },
 };
