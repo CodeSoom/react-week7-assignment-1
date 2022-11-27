@@ -37,7 +37,7 @@ describe('LoginForm', () => {
     });
   });
 
-  it('input에 입력된 값을 확인한다', () => {
+  it('Login input에 handleChange가 호출된다', () => {
     renderLoginForm();
 
     loginControls.forEach(({ label, name, value }) => {
