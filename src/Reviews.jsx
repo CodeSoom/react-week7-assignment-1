@@ -5,7 +5,10 @@ export default function Reviews({ reviews }) {
         reviews.map((review) => (
           <li key={review.id}>
             <p>{review.name}</p>
-            <p>{review.score}</p>
+            <p>
+              {review.score}
+              점
+            </p>
             <p>{review.description}</p>
           </li>
         ))
