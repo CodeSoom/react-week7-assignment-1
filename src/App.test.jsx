@@ -79,7 +79,7 @@ describe('App', () => {
     });
   });
 
-  context('로그인할 경우', () => {
+  context('로그인 할 경우', () => {
     const accessToken = 'TOKEN';
 
     beforeEach(() => {
@@ -93,6 +93,18 @@ describe('App', () => {
         type: 'setAccessToken',
         payload: { accessToken },
       });
+    });
+  });
+
+  context('로그아웃 할 경우', () => {
+    beforeEach(() => {
+      loadItem.mockImplementation(() => null);
+    });
+
+    it('dispatch를 호출하지 못한다', () => {
+      renderApp({ path: '/' });
+
+      expect(dispatch).not.toBeCalled();
     });
   });
 });
