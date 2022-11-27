@@ -8,10 +8,16 @@ import {
   selectRegion,
   selectCategory,
   changeLoginField,
+  changeReviewField,
+  clearReviewFields,
   setAccessToken,
+  setReviews,
+  logout,
 } from './actions';
 
 import LOGIN_FIELDS from '../fixtures/loginFields';
+import REVIEW_FIELDS from '../fixtures/reviewFields';
+import REVIEWS from '../fixtures/reviews';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -25,6 +31,10 @@ describe('reducer', () => {
       loginFields: {
         email: '',
         password: '',
+      },
+      reviewFields: {
+        score: '',
+        description: '',
       },
       accessToken: '',
     };
@@ -111,6 +121,22 @@ describe('reducer', () => {
     });
   });
 
+  describe('setReviews', () => {
+    it('리뷰를 가져온다', () => {
+      const initialState = {
+        restaurant: {
+          reviews: [],
+        },
+      };
+
+      const {
+        restaurant: { reviews },
+      } = reducer(initialState, setReviews(REVIEWS));
+
+      expect(reviews).toHaveLength(REVIEWS.length);
+    });
+  });
+
   describe('selectRegion', () => {
     it('changes selected region', () => {
       const initialState = {
@@ -170,6 +196,67 @@ describe('reducer', () => {
 
         expect(state.loginFields.email).toBe('email');
         expect(state.loginFields.password).toBe('1234');
+      });
+    });
+  });
+
+  describe('clearReviewFields', () => {
+    it('review field를 지운다', () => {
+      const initialState = {
+        reviewFields: {
+          score: '5',
+          description: '냠냠',
+        },
+      };
+
+      const state = reducer(initialState, clearReviewFields());
+
+      expect(state.reviewFields.score).toBe('');
+      expect(state.reviewFields.description).toBe('');
+    });
+  });
+
+  describe('logout', () => {
+    const initialState = {
+      accessToken: '',
+    };
+
+    it('accessToken을 변경한다', () => {
+      const state = reducer(initialState, logout());
+
+      expect(state.accessToken).toBe('');
+    });
+  });
+
+  describe('changeReviewField', () => {
+    const initialState = {
+      reviewFields: {
+        score: '1',
+        description: '밍밍',
+      },
+    };
+
+    context('평점을 입력할 시', () => {
+      it('평점만 바뀐다', () => {
+        const state = reducer(
+          initialState,
+          changeReviewField(REVIEW_FIELDS[0]),
+        );
+
+        expect(state.reviewFields.score).toBe('5');
+        expect(state.reviewFields.description).toBe('밍밍');
+      });
+    });
+
+    context('리뷰 내용을 입력할 시', () => {
+      it('리뷰 내용만 바뀐다', () => {
+        const state = reducer(
+          initialState,
+          changeReviewField(REVIEW_FIELDS[1]),
+        );
+
+        expect(state.reviewFields.score).toBe('1');
+        expect(state.reviewFields.description).toBe('맛나다');
       });
     });
   });
