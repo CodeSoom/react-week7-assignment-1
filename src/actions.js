@@ -3,7 +3,12 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  postLogin,
+  postReview,
+  getReviews,
 } from './services/api';
+
+import { saveItem, deleteItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -47,6 +52,48 @@ export function selectCategory(categoryId) {
   };
 }
 
+export function changeLoginField({ name, value }) {
+  return {
+    type: 'changeLoginField',
+    payload: { name, value },
+  };
+}
+
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: { name, value },
+  };
+}
+
+export function clearReviewFields() {
+  return {
+    type: 'clearReviewFields',
+  };
+}
+
+export function logout() {
+  deleteItem('accessToken');
+  return {
+    type: 'logout',
+    payload: { accessToken: '' },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export function setReviews(reviews) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
+
 export function loadInitialData() {
   return async (dispatch) => {
     const regions = await fetchRegions();
@@ -81,7 +128,48 @@ export function loadRestaurant({ restaurantId }) {
     dispatch(setRestaurant(null));
 
     const restaurant = await fetchRestaurant({ restaurantId });
-
     dispatch(setRestaurant(restaurant));
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const {
+      loginFields: { email, password },
+    } = getState();
+
+    const accessToken = await postLogin({ email, password });
+
+    saveItem('accessToken', accessToken);
+
+    dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const {
+      accessToken,
+      reviewFields: { score, description },
+    } = getState();
+
+    await postReview({
+      accessToken,
+      restaurantId,
+      score,
+      description,
+    });
+
+    const { reviews } = await getReviews({ restaurantId });
+    dispatch(setReviews(reviews));
+
+    dispatch(clearReviewFields());
+  };
+}
+
+export function loadReviews({ restaurantId }) {
+  return async (dispatch) => {
+    const { reviews } = await getReviews({ restaurantId });
+    dispatch(setReviews(reviews));
   };
 }
