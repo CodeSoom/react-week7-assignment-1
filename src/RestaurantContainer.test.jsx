@@ -15,9 +15,11 @@ describe('RestaurantContainer', () => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation((selector) => selector({
-      restaurant: given.restaurant,
-    }));
+    useSelector.mockImplementation((selector) =>
+      selector({
+        restaurant: given.restaurant,
+      })
+    );
   });
 
   it('dispatches action', () => {

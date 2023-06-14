@@ -5,8 +5,15 @@ export default function HomePage() {
     <div>
       <h2>Home</h2>
       <ul>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/restaurants">Restaurants</Link></li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/restaurants">Restaurants</Link>
+        </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
       </ul>
     </div>
   );
