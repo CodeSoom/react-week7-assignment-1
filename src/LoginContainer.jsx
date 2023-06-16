@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { get } from './utils';
-import { loadLogin, setLoginFields } from './actions';
+import { loadLogin, setLoginFields, setAccessToken } from './actions';
 
 export default function LoginContainer() {
   // onchange 함수만들기
@@ -15,16 +15,23 @@ export default function LoginContainer() {
     dispatch(setLoginFields(name, value));
   };
 
-  const handleSubmitLoginForm = (e) => {
+  const handleSubmitLogin = (e) => {
     e.preventDefault();
     dispatch(loadLogin(email, password));
+  };
+
+  const handleSubmitLogout = () => {
+    const accessToken = '';
+    dispatch(setAccessToken(accessToken));
   };
 
   if (token) {
     return (
       <>
         <div>{email}님 안녕하세요</div>
-        <button>로그아웃</button>
+        <button type="button" onClick={handleSubmitLogout}>
+          로그아웃
+        </button>
       </>
     );
   }
@@ -32,7 +39,7 @@ export default function LoginContainer() {
   return (
     <>
       <div>
-        <form onSubmit={handleSubmitLoginForm}>
+        <form onSubmit={handleSubmitLogin}>
           <div>
             <label htmlFor="login-email">E-mail</label>
             <input

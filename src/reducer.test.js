@@ -20,8 +20,8 @@ describe('reducer', () => {
       selectedRegion: null,
       selectedCategory: null,
       loginFields: {
-        email: null,
-        password: null,
+        email: '',
+        password: '',
       },
       accessToken: '',
     };

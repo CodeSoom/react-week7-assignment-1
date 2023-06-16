@@ -11,6 +11,7 @@ describe('LoginContainer', () => {
   describe('로그인이 되어있을 경우', () => {
     beforeEach(() => {
       dispatch.mockClear();
+      useDispatch.mockImplementation(() => dispatch);
       useSelector.mockImplementation((selector) =>
         selector({
           accessToken: 'something',
@@ -24,6 +25,13 @@ describe('LoginContainer', () => {
     it('사용자의 이메일이 보인다.', () => {
       const { container } = renderLoginContainer();
       expect(container).toHaveTextContent(loginFields.email);
+    });
+    describe('로그아웃 버튼 클릭 시,', () => {
+      it('로그아웃 함수가 호출된다..', () => {
+        const { getByRole, container } = renderLoginContainer();
+        fireEvent.click(getByRole('button', { type: 'button' }));
+        expect(dispatch).toBeCalled();
+      });
     });
   });
 
