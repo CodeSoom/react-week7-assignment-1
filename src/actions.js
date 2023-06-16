@@ -5,6 +5,7 @@ import {
   fetchRestaurant,
   fetchLogin,
 } from './services/api';
+import { saveItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -99,10 +100,10 @@ export function loadRestaurant({ restaurantId }) {
   };
 }
 
-export function loadLogin(email, password) {
+export function requestLogin(email, password) {
   return async (dispatch) => {
-    const accessToken = await fetchLogin({ email, password });
-    console.log(email, password);
+    const { accessToken } = await fetchLogin({ email, password });
+    saveItem('accessToken', accessToken);
     dispatch(setAccessToken(accessToken));
   };
 }

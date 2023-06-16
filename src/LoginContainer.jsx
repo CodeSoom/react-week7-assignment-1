@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { get } from './utils';
-import { loadLogin, setLoginFields, setAccessToken } from './actions';
+import { setLoginFields, setAccessToken, requestLogin } from './actions';
 import LoginForm from './LoginForm';
 import UserInfo from './UserInfo';
+import { deleteItem } from './services/storage';
 
 export default function LoginContainer() {
   const dispatch = useDispatch();
@@ -16,11 +17,12 @@ export default function LoginContainer() {
 
   const handleSubmitLogin = (e) => {
     e.preventDefault();
-    dispatch(loadLogin(email, password));
+    dispatch(requestLogin(email, password));
   };
 
   const handleSubmitLogout = () => {
     const accessToken = '';
+    deleteItem(accessToken);
     dispatch(setAccessToken(accessToken));
   };
 
