@@ -27,8 +27,8 @@ describe('LoginContainer', () => {
       expect(container).toHaveTextContent(loginFields.email);
     });
     describe('로그아웃 버튼 클릭 시,', () => {
-      it('로그아웃 함수가 호출된다..', () => {
-        const { getByRole, container } = renderLoginContainer();
+      it('로그아웃 함수가 호출된다.', () => {
+        const { getByRole } = renderLoginContainer();
         fireEvent.click(getByRole('button', { type: 'button' }));
         expect(dispatch).toBeCalled();
       });
