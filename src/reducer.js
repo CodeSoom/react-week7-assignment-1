@@ -7,6 +7,11 @@ const initialState = {
   restaurant: null,
   selectedRegion: null,
   selectedCategory: null,
+  loginFields: {
+    email: null,
+    password: null,
+  },
+  accessToken: '',
 };
 
 const reducers = {
@@ -35,6 +40,23 @@ const reducers = {
     return {
       ...state,
       restaurant,
+    };
+  },
+
+  setLoginFields(state, { payload: { name, value } }) {
+    return {
+      ...state,
+      loginFields: {
+        ...state.loginFields,
+        [name]: value,
+      },
+    };
+  },
+
+  setAccessToken(state, { payload: { accessToken } }) {
+    return {
+      ...state,
+      accessToken,
     };
   },
 
