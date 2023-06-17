@@ -3,7 +3,7 @@ export default function UserInfo({ email, onClick }) {
     <>
       <div>{email}님 안녕하세요</div>
       <button type="button" onClick={onClick}>
-        로그아웃
+        Log out
       </button>
     </>
   );

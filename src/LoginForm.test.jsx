@@ -5,7 +5,7 @@ import LoginForm from './LoginForm';
 describe('LoginContainer', () => {
   const { email, password } = loginFields;
   const onChange = jest.fn();
-  const onSubmit = jest.fn();
+  const onSubmit = jest.fn((e) => e.preventDefault());
 
   const renderLoginForm = () =>
     render(
