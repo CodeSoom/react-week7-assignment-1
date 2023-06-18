@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import loginFields from '../fixtures/loginFields';
+import loginControls from '../fixtures/loginControls';
 import UserInfo from './UserInfo';
 
-describe('LoginContainer', () => {
-  const email = loginFields.email;
+describe('UserInfo', () => {
+  const email = loginControls.email;
   const onClick = jest.fn();
 
   const renderUserInfoContainer = () =>

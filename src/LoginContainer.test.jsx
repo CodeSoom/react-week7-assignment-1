@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginContainer from './LoginContainer';
-import loginFields from '../fixtures/loginFields';
+import loginControls from '../fixtures/loginControls';
 
 describe('LoginContainer', () => {
   const dispatch = jest.fn();
@@ -15,7 +15,7 @@ describe('LoginContainer', () => {
       useSelector.mockImplementation((selector) =>
         selector({
           accessToken: given.accessToken,
-          loginFields,
+          loginFields: loginControls,
         })
       );
     });
@@ -23,7 +23,7 @@ describe('LoginContainer', () => {
     given('accessToken', () => 'ACCESS_TOKEN');
     it('사용자의 이메일이 보인다.', () => {
       const { container } = renderLoginContainer();
-      expect(container).toHaveTextContent(loginFields.email);
+      expect(container).toHaveTextContent(loginControls.email);
     });
     describe('로그아웃 버튼 클릭 시,', () => {
       it('로그아웃 함수가 호출된다.', () => {
@@ -40,11 +40,9 @@ describe('LoginContainer', () => {
   context('로그인이 안되어있을 경우', () => {
     beforeEach(() => {
       dispatch.mockClear();
-      useDispatch.mockImplementation(() => dispatch);
-      useSelector.mockImplementation((selector) => selector({ loginFields }));
+      given('accessToken', () => '');
     });
 
-    given('accessToken', () => '');
     it('인풋이 보인다.', () => {
       const { container } = renderLoginContainer();
       expect(container).toHaveTextContent('E-mail');

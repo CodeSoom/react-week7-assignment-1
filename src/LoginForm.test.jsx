@@ -1,9 +1,9 @@
 import { fireEvent, render } from '@testing-library/react';
-import loginFields from '../fixtures/loginFields';
+import loginControls from '../fixtures/loginControls';
 import LoginForm from './LoginForm';
 
 describe('LoginContainer', () => {
-  const { email, password } = loginFields;
+  const { email, password } = loginControls;
   const onChange = jest.fn();
   const onSubmit = jest.fn((e) => e.preventDefault());
 
