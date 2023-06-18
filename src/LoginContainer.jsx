@@ -8,7 +8,7 @@ import { deleteItem } from './services/storage';
 export default function LoginContainer() {
   const dispatch = useDispatch();
   const { email, password } = useSelector(get('loginFields')) || {};
-  const isLoggedin = useSelector(get('accessToken'));
+  const accessToken = useSelector(get('accessToken'));
 
   const handleChangeLoginInput = (e) => {
     const { name, value } = e.target;
@@ -17,7 +17,7 @@ export default function LoginContainer() {
 
   const handleSubmitLogin = (e) => {
     e.preventDefault();
-    dispatch(requestLogin(email, password));
+    dispatch(requestLogin());
   };
 
   const handleSubmitLogout = () => {
@@ -26,7 +26,7 @@ export default function LoginContainer() {
     dispatch(setAccessToken(accessToken));
   };
 
-  if (isLoggedin) {
+  if (accessToken) {
     return <UserInfo onClick={handleSubmitLogout} email={email} />;
   }
 

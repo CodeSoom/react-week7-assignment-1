@@ -1,14 +1,13 @@
-// session.js
 import { saveItem, deleteItem, loadItem } from './storage';
 
 export const login = (token) => {
-  saveItem('accessToken', token);
+  return saveItem('accessToken', token);
 };
 
 export const logout = () => {
-  deleteItem('accessToken');
+  return deleteItem('accessToken');
 };
 
 export const getToken = () => {
-  loadItem('accessToken');
+  return loadItem('accessToken');
 };

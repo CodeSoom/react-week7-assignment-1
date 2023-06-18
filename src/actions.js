@@ -128,8 +128,12 @@ export function loadReview({ restaurantId }) {
   };
 }
 
-export function requestLogin(email, password) {
-  return async (dispatch) => {
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const {
+      loginFields: { email, password },
+    } = getState();
+
     const { accessToken } = await fetchLogin({ email, password });
     saveItem('accessToken', accessToken);
     dispatch(setAccessToken(accessToken));

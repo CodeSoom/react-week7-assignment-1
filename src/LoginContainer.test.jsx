@@ -8,17 +8,19 @@ describe('LoginContainer', () => {
 
   const renderLoginContainer = () => render(<LoginContainer />);
 
-  describe('로그인이 되어있을 경우', () => {
+  context('로그인이 되어있을 경우', () => {
     beforeEach(() => {
       dispatch.mockClear();
       useDispatch.mockImplementation(() => dispatch);
       useSelector.mockImplementation((selector) =>
         selector({
-          accessToken: 'something',
+          accessToken: given.accessToken,
           loginFields,
         })
       );
     });
+
+    given('accessToken', () => 'ACCESS_TOKEN');
     it('사용자의 이메일이 보인다.', () => {
       const { container } = renderLoginContainer();
       expect(container).toHaveTextContent(loginFields.email);
@@ -27,17 +29,22 @@ describe('LoginContainer', () => {
       it('로그아웃 함수가 호출된다.', () => {
         const { getByRole } = renderLoginContainer();
         fireEvent.click(getByRole('button', { type: 'button' }));
-        expect(dispatch).toBeCalled();
+        expect(dispatch).toBeCalledWith({
+          type: 'setAccessToken',
+          payload: { accessToken: '' },
+        });
       });
     });
   });
 
-  describe('로그인이 안되어있을 경우', () => {
+  context('로그인이 안되어있을 경우', () => {
     beforeEach(() => {
       dispatch.mockClear();
       useDispatch.mockImplementation(() => dispatch);
       useSelector.mockImplementation((selector) => selector({ loginFields }));
     });
+
+    given('accessToken', () => '');
     it('인풋이 보인다.', () => {
       const { container } = renderLoginContainer();
       expect(container).toHaveTextContent('E-mail');
@@ -51,7 +58,10 @@ describe('LoginContainer', () => {
           fireEvent.change(getByLabelText('E-mail'), {
             target: { value: 'change' },
           });
-          expect(dispatch).toBeCalled();
+          expect(dispatch).toBeCalledWith({
+            type: 'setLoginFields',
+            payload: { name: 'email', value: 'change' },
+          });
         });
       });
 
@@ -61,7 +71,10 @@ describe('LoginContainer', () => {
           fireEvent.change(getByLabelText('Password'), {
             target: { value: 'change' },
           });
-          expect(dispatch).toBeCalled();
+          expect(dispatch).toBeCalledWith({
+            type: 'setLoginFields',
+            payload: { name: 'password', value: 'change' },
+          });
         });
       });
     });
