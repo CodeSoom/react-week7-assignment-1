@@ -1,6 +1,4 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { useDispatch, useSelector } from 'react-redux';
-import LoginContainer from './LoginContainer';
 import loginFields from '../fixtures/loginFields';
 import UserInfo from './UserInfo';
 

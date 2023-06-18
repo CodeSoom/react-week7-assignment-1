@@ -10,5 +10,5 @@ export const logout = () => {
 };
 
 export const getToken = () => {
-  return loadItem('accessToken');
+  loadItem('accessToken');
 };

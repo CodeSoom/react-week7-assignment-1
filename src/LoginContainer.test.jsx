@@ -15,10 +15,7 @@ describe('LoginContainer', () => {
       useSelector.mockImplementation((selector) =>
         selector({
           accessToken: 'something',
-          loginFields: {
-            email: loginFields.email,
-            password: loginFields.password,
-          },
+          loginFields,
         })
       );
     });
