@@ -3,7 +3,10 @@ import {
   fetchCategories,
   fetchRestaurants,
   fetchRestaurant,
+  fetchLogin,
+  postReview,
 } from './services/api';
+import { saveItem } from './services/storage';
 
 export function setRegions(regions) {
   return {
@@ -33,6 +36,29 @@ export function setRestaurant(restaurant) {
   };
 }
 
+export function setLoginFields(name, value) {
+  return {
+    type: 'setLoginFields',
+    payload: {
+      name,
+      value,
+    },
+  };
+}
+
+export function setAccessToken(accessToken) {
+  return {
+    type: 'setAccessToken',
+    payload: { accessToken },
+  };
+}
+
+export function setReviews(reviews) {
+  return {
+    type: 'setReviews',
+    payload: { reviews },
+  };
+}
 export function selectRegion(regionId) {
   return {
     type: 'selectRegion',
@@ -44,6 +70,19 @@ export function selectCategory(categoryId) {
   return {
     type: 'selectCategory',
     payload: { categoryId },
+  };
+}
+
+export function changeReviewField({ name, value }) {
+  return {
+    type: 'changeReviewField',
+    payload: { name, value },
+  };
+}
+
+export function clearReviewFields() {
+  return {
+    type: 'clearReviewFields',
   };
 }
 
@@ -59,10 +98,7 @@ export function loadInitialData() {
 
 export function loadRestaurants() {
   return async (dispatch, getState) => {
-    const {
-      selectedRegion: region,
-      selectedCategory: category,
-    } = getState();
+    const { selectedRegion: region, selectedCategory: category } = getState();
 
     if (!region || !category) {
       return;
@@ -79,9 +115,47 @@ export function loadRestaurants() {
 export function loadRestaurant({ restaurantId }) {
   return async (dispatch) => {
     dispatch(setRestaurant(null));
+    const restaurant = await fetchRestaurant({ restaurantId });
+    dispatch(setRestaurant(restaurant));
+  };
+}
 
+export function loadReview({ restaurantId }) {
+  return async (dispatch) => {
     const restaurant = await fetchRestaurant({ restaurantId });
 
-    dispatch(setRestaurant(restaurant));
+    dispatch(setReviews(restaurant.reviews));
+  };
+}
+
+export function requestLogin() {
+  return async (dispatch, getState) => {
+    const {
+      loginFields: { email, password },
+    } = getState();
+
+    const { accessToken } = await fetchLogin({ email, password });
+    saveItem('accessToken', accessToken);
+    dispatch(setAccessToken(accessToken));
+  };
+}
+
+export function sendReview({ restaurantId }) {
+  return async (dispatch, getState) => {
+    const {
+      accessToken,
+      reviewFields: { score, description },
+    } = getState();
+
+    await postReview({
+      restaurantId,
+      accessToken,
+      score,
+      description,
+    });
+
+    dispatch(loadReview({ restaurantId }));
+
+    dispatch(clearReviewFields());
   };
 }
