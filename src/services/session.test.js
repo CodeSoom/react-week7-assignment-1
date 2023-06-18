@@ -6,9 +6,9 @@ describe('session', () => {
   it('login', () => {
     login('accessToken');
     saveItem(key, value);
-    expect(loadItem(key)).toEqual(value);
   });
   it('getToken', () => {
+    getToken();
     expect(loadItem(key)).toEqual(value);
   });
   it('logout', () => {

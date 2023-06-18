@@ -1,7 +1,7 @@
 export default function LoginForm({ onChange, onSubmit, email, password }) {
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form>
         <div>
           <label htmlFor="login-email">E-mail</label>
           <input
@@ -24,7 +24,9 @@ export default function LoginForm({ onChange, onSubmit, email, password }) {
             onChange={onChange}
           />
         </div>
-        <button type="submit">Log in</button>
+        <button type="button" onClick={onSubmit}>
+          Log In
+        </button>
       </form>
     </div>
   );
