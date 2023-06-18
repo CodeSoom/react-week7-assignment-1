@@ -22,7 +22,7 @@ export default function LoginContainer() {
 
   const handleSubmitLogout = () => {
     const accessToken = '';
-    deleteItem(accessToken);
+    deleteItem('accessToken');
     dispatch(setAccessToken(accessToken));
   };
 
